@@ -1,0 +1,72 @@
+# The timer. Runs scripts/run.py, which decides by itself what is due (see TEAM.md).
+# Every 10 minutes from 12:00 to 07:59 UTC (8 AM to 3 AM Eastern in both clock seasons), hourly otherwise.
+name: run
+on:
+  schedule:
+    - cron: '*/10 0-7,12-23 * * *'
+    - cron: '0 8-11 * * *'
+  workflow_dispatch:
+  push:                       # a code or rule change runs right away
+    branches: [main]
+    paths: ['scripts/**', 'config/**', '.github/workflows/run.yml']
+permissions:
+  contents: write
+concurrency:
+  group: repo-writer          # two runs never overlap; a second one waits
+  cancel-in-progress: false
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: run
+        id: run
+        env:
+          ODDS_API_KEYS: ${{ secrets.ODDS_API_KEYS }}    # the only place the keys exist; never echoed
+        run: python scripts/run.py
+
+      - name: record guard
+        id: guard
+        run: python scripts/guard_record.py                # committed Record must be a prefix of the new one
+
+      - name: commit and push (only when something changed)
+        id: push
+        run: |
+          git config user.name "prop-check-bot"
+          git config user.email "bot@users.noreply.github.com"
+          git add -A data
+          if git diff --cached --quiet; then
+            echo "nothing changed"
+            exit 0
+          fi
+          git commit -q -m "run: $(TZ=America/New_York date '+%Y-%m-%d %-I:%M %p ET')"
+          for attempt in 1 2 3; do
+            if git pull -q --rebase origin "${GITHUB_REF_NAME}" && git push -q origin "HEAD:${GITHUB_REF_NAME}"; then
+              exit 0
+            fi
+            sleep $((attempt * 5))
+          done
+          echo "push failed after 3 tries"
+          exit 1
+
+      - name: tell the page the run failed
+        if: failure()
+        env:
+          FAILED_STEP: ${{ steps.run.outcome == 'failure' && 'run' || steps.guard.outcome == 'failure' && 'record guard' || steps.push.outcome == 'failure' && 'push' || 'setup' }}
+        run: |
+          # drop everything this run produced, then write only the failure note onto the last good state
+          git rebase --abort 2>/dev/null || true
+          git fetch -q origin "${GITHUB_REF_NAME}"
+          git reset -q --hard "origin/${GITHUB_REF_NAME}"
+          git clean -fdq data
+          python3 scripts/fail_status.py "$FAILED_STEP"
+          git config user.name "prop-check-bot"
+          git config user.email "bot@users.noreply.github.com"
+          git add data/status.json data/slate.json
+          git diff --cached --quiet || git commit -q -m "run failed: $FAILED_STEP"
+          git pull -q --rebase origin "${GITHUB_REF_NAME}" && git push -q origin "HEAD:${GITHUB_REF_NAME}"

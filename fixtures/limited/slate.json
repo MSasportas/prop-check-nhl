@@ -1,0 +1,321 @@
+{
+ "fixture": true,
+ "fixture_now": "2026-10-11T18:55:00-04:00",
+ "slate_date": "2026-10-11",
+ "generated_at": "2026-10-11T18:52:00-04:00",
+ "valid_until": "2026-10-12T05:00:00-04:00",
+ "status": {
+  "prices_state": "limited",
+  "prices_at": "2026-10-11T13:02:00-04:00",
+  "next_price_read_at": null,
+  "stats_built_at": "2026-10-11T09:12:00-04:00",
+  "stats_through": "2026-10-10",
+  "stats_state": "ok",
+  "lineups_at": "2026-10-11T18:35:00-04:00",
+  "goalies_at": null,
+  "last_run": {
+   "ok": true,
+   "at": "2026-10-11T18:52:00-04:00",
+   "failed_step": null
+  },
+  "pool": {
+   "pulls_left": 9,
+   "keys": 1,
+   "game_days_left": 1,
+   "low": true
+  },
+  "excluded_teams": [],
+  "lines_checked": 64
+ },
+ "banners": [
+  {
+   "level": "warn",
+   "text": "Hard Rock prices limited: 3 of 7 games, shots only. Odds keys nearly out."
+  }
+ ],
+ "empty": null,
+ "games": [
+  {
+   "id": "g1",
+   "away": "BOS",
+   "home": "BUF",
+   "start": "2026-10-11T17:00:00-04:00",
+   "picks": 2,
+   "excluded_reason": null
+  },
+  {
+   "id": "g2",
+   "away": "FLA",
+   "home": "TBL",
+   "start": "2026-10-11T19:10:00-04:00",
+   "picks": 0,
+   "excluded_reason": null
+  },
+  {
+   "id": "g3",
+   "away": "NYR",
+   "home": "NJD",
+   "start": "2026-10-11T19:10:00-04:00",
+   "picks": 2,
+   "excluded_reason": null
+  },
+  {
+   "id": "g4",
+   "away": "TOR",
+   "home": "MTL",
+   "start": "2026-10-11T19:10:00-04:00",
+   "picks": 2,
+   "excluded_reason": null
+  },
+  {
+   "id": "g5",
+   "away": "COL",
+   "home": "DAL",
+   "start": "2026-10-11T20:10:00-04:00",
+   "picks": 0,
+   "excluded_reason": null
+  },
+  {
+   "id": "g6",
+   "away": "EDM",
+   "home": "VAN",
+   "start": "2026-10-11T22:10:00-04:00",
+   "picks": 0,
+   "excluded_reason": null
+  },
+  {
+   "id": "g7",
+   "away": "SEA",
+   "home": "SJS",
+   "start": "2026-10-11T22:10:00-04:00",
+   "picks": 0,
+   "excluded_reason": null
+  }
+ ],
+ "picks": [
+  {
+   "id": "2026-10-11:g3:jhug",
+   "rank": 1,
+   "tier": "main",
+   "game_id": "g3",
+   "player": "J. Hughes",
+   "team": "NJD",
+   "opp": "NYR",
+   "home": true,
+   "start": "2026-10-11T19:10:00-04:00",
+   "market": "shots",
+   "bet": "Over 2.5 shots on goal",
+   "price": -135,
+   "price_at": "2026-10-11T13:02:00-04:00",
+   "first_price": -135,
+   "first_price_at": "2026-10-11T13:02:00-04:00",
+   "worst_price": -135,
+   "p": 0.631,
+   "breakeven": 0.5745,
+   "reason": "63% to clear 2.5 shots; -135 needs 57%. Projects 3.5 shots in 21 min. NYR allow 8% more shots than average.",
+   "state": "lineup",
+   "thin": false,
+   "games_used": 44,
+   "games_this_season": 3,
+   "history": [
+    {
+     "at": "2026-10-11T13:02:00-04:00",
+     "text": "Early: lineup not confirmed"
+    },
+    {
+     "at": "2026-10-11T18:35:00-04:00",
+     "text": "Lineup confirmed"
+    }
+   ],
+   "pulled": null
+  },
+  {
+   "id": "2026-10-11:g4:matt",
+   "rank": 2,
+   "tier": "main",
+   "game_id": "g4",
+   "player": "A. Matthews",
+   "team": "TOR",
+   "opp": "MTL",
+   "home": false,
+   "start": "2026-10-11T19:10:00-04:00",
+   "market": "shots",
+   "bet": "Over 3.5 shots on goal",
+   "price": -120,
+   "price_at": "2026-10-11T13:02:00-04:00",
+   "first_price": -120,
+   "first_price_at": "2026-10-11T13:02:00-04:00",
+   "worst_price": -120,
+   "p": 0.601,
+   "breakeven": 0.5455,
+   "reason": "60% to clear 3.5 shots; -120 needs 55%. Projects 4.2 shots in 21 min. MTL allow 9% more shots than average.",
+   "state": "lineup",
+   "thin": false,
+   "games_used": 52,
+   "games_this_season": 4,
+   "history": [
+    {
+     "at": "2026-10-11T13:02:00-04:00",
+     "text": "Early: lineup not confirmed"
+    },
+    {
+     "at": "2026-10-11T18:35:00-04:00",
+     "text": "Lineup confirmed"
+    }
+   ],
+   "pulled": null
+  },
+  {
+   "id": "2026-10-11:g4:demi",
+   "rank": 3,
+   "tier": "main",
+   "game_id": "g4",
+   "player": "I. Demidov",
+   "team": "MTL",
+   "opp": "TOR",
+   "home": true,
+   "start": "2026-10-11T19:10:00-04:00",
+   "market": "shots",
+   "bet": "Over 1.5 shots on goal",
+   "price": -130,
+   "price_at": "2026-10-11T13:02:00-04:00",
+   "first_price": -130,
+   "first_price_at": "2026-10-11T13:02:00-04:00",
+   "worst_price": -130,
+   "p": 0.611,
+   "breakeven": 0.5652,
+   "reason": "61% to clear 1.5 shots; -130 needs 57%. Projects 2.3 shots in 17 min. Short history: 14 games.",
+   "state": "early",
+   "thin": true,
+   "games_used": 14,
+   "games_this_season": 4,
+   "history": [
+    {
+     "at": "2026-10-11T13:02:00-04:00",
+     "text": "Early: lineup not confirmed"
+    }
+   ],
+   "pulled": null
+  },
+  {
+   "id": "2026-10-11:g3:ziba",
+   "rank": 4,
+   "tier": "main",
+   "game_id": "g3",
+   "player": "M. Zibanejad",
+   "team": "NYR",
+   "opp": "NJD",
+   "home": false,
+   "start": "2026-10-11T19:10:00-04:00",
+   "market": "shots",
+   "bet": "Under 2.5 shots on goal",
+   "price": -110,
+   "price_at": "2026-10-11T13:02:00-04:00",
+   "first_price": -110,
+   "first_price_at": "2026-10-11T13:02:00-04:00",
+   "worst_price": -110,
+   "p": 0.571,
+   "breakeven": 0.5238,
+   "reason": "57% to stay under 2.5 shots; -110 needs 52%. Projects 2.1 shots in 19 min. NJD allow 7% fewer shots than average.",
+   "state": "early",
+   "thin": false,
+   "games_used": 62,
+   "games_this_season": 3,
+   "history": [
+    {
+     "at": "2026-10-11T13:02:00-04:00",
+     "text": "Early: lineup not confirmed"
+    }
+   ],
+   "pulled": null
+  },
+  {
+   "id": "2026-10-11:g1:past",
+   "rank": 12,
+   "tier": "main",
+   "game_id": "g1",
+   "player": "D. Pastrnak",
+   "team": "BOS",
+   "opp": "BUF",
+   "home": false,
+   "start": "2026-10-11T17:00:00-04:00",
+   "market": "shots",
+   "bet": "Over 3.5 shots on goal",
+   "price": -125,
+   "price_at": "2026-10-11T13:02:00-04:00",
+   "first_price": -125,
+   "first_price_at": "2026-10-11T13:02:00-04:00",
+   "worst_price": -125,
+   "p": 0.606,
+   "breakeven": 0.5556,
+   "reason": "60% to clear 3.5 shots; -125 needs 56%. Projects 4.1 shots in 20 min. BUF allow 7% more shots than average.",
+   "state": "locked",
+   "thin": false,
+   "games_used": 60,
+   "games_this_season": 4,
+   "history": [
+    {
+     "at": "2026-10-11T13:02:00-04:00",
+     "text": "Early: lineup not confirmed"
+    },
+    {
+     "at": "2026-10-11T17:00:00-04:00",
+     "text": "Locked"
+    }
+   ],
+   "pulled": null
+  },
+  {
+   "id": "2026-10-11:g1:thom",
+   "rank": 13,
+   "tier": "main",
+   "game_id": "g1",
+   "player": "T. Thompson",
+   "team": "BUF",
+   "opp": "BOS",
+   "home": true,
+   "start": "2026-10-11T17:00:00-04:00",
+   "market": "shots",
+   "bet": "Over 2.5 shots on goal",
+   "price": -140,
+   "price_at": "2026-10-11T13:02:00-04:00",
+   "first_price": -140,
+   "first_price_at": "2026-10-11T13:02:00-04:00",
+   "worst_price": -140,
+   "p": 0.622,
+   "breakeven": 0.5833,
+   "reason": "62% to clear 2.5 shots; -140 needs 58%. Projects 3.4 shots in 19 min.",
+   "state": "locked_unconfirmed",
+   "thin": false,
+   "games_used": 54,
+   "games_this_season": 3,
+   "history": [
+    {
+     "at": "2026-10-11T13:02:00-04:00",
+     "text": "Early: lineup not confirmed"
+    },
+    {
+     "at": "2026-10-11T17:00:00-04:00",
+     "text": "Locked: lineup was not confirmed"
+    }
+   ],
+   "pulled": null
+  }
+ ],
+ "parlays": [
+  {
+   "id": "2026-10-11:parlay:jhug+matt",
+   "legs": [
+    "2026-10-11:g3:jhug",
+    "2026-10-11:g4:matt"
+   ],
+   "price": 219,
+   "price_at": "2026-10-11T13:02:00-04:00",
+   "p": 0.3792,
+   "breakeven": 0.3133,
+   "state": "lineup",
+   "pulled": null
+  }
+ ],
+ "goal_watch": []
+}

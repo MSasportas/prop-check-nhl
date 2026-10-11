@@ -1,1 +1,1083 @@
-<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Prop Check NHL</title><body style="background:#0b1118;color:#e7eef5;font:16px system-ui;padding:24px"><h1>Prop Check NHL</h1><p>Being set up. Picks are not live yet.</p></body></html>
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0b1118">
+<meta name="color-scheme" content="dark">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Prop Check">
+<title>Prop Check NHL</title>
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png">
+<link rel="apple-touch-icon" sizes="180x180" href="icons/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600&family=IBM+Plex+Sans:wght@400;500&display=swap">
+<style>
+:root{
+  --bg:#0b1118; --surface:#121b25; --raise:#18232f; --line:#22303f;
+  --fg:#e7eef5; --muted:#8a9bad; --accent:#6cc4f0; --good:#6fcf97; --warn:#f0b95c; --bad:#f0897a;
+  --display:"Barlow Condensed","Roboto Condensed","Arial Narrow","Helvetica Neue",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  --body:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  --sab:env(safe-area-inset-bottom,0px); --sat:env(safe-area-inset-top,0px);
+}
+*{box-sizing:border-box}
+html{background:var(--bg);-webkit-text-size-adjust:100%;text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--fg);font:400 14px/20px var(--body);
+  font-variant-numeric:tabular-nums;-webkit-font-smoothing:antialiased;-webkit-tap-highlight-color:transparent}
+button{font:inherit;color:inherit;background:none;border:0;padding:0;margin:0;text-align:left;cursor:pointer;
+  font-variant-numeric:inherit;-webkit-appearance:none;appearance:none}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:6px}
+.wrap{max-width:520px;margin:0 auto;padding:var(--sat) 16px calc(56px + var(--sab) + 24px)}
+.d{font-family:var(--display);font-weight:600;letter-spacing:.01em}
+.mu{color:var(--muted)}
+
+/* header */
+.hdr{display:flex;align-items:center;gap:8px;min-height:44px}
+.hdr h1{font:600 22px/24px var(--display);letter-spacing:.02em;margin:0;flex:1;min-width:0;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.hdr .date{font-size:12px;line-height:16px;color:var(--muted);white-space:nowrap}
+.ibtn{width:44px;height:44px;flex:none;display:flex;align-items:center;justify-content:center;margin-right:-10px;color:var(--muted)}
+.tag-test{font-size:11px;line-height:16px;padding:0 8px;border-bottom:1px dashed var(--warn);color:var(--warn);text-align:center}
+
+/* tappable full-width rows */
+.rowbtn{display:flex;align-items:center;gap:8px;width:100%;min-height:44px;padding:4px 0}
+.rowbtn .grow{flex:1;min-width:0}
+.chev{flex:none;color:var(--muted);display:flex}
+.statusline{font-size:12px;line-height:17px;color:var(--muted);display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;overflow:hidden}
+.strip{border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.strip .grow{font:600 18px/22px var(--display);letter-spacing:.01em}
+.strip .pos{color:var(--good)} .strip .neg{color:var(--bad)}
+
+/* banners */
+.banner{display:flex;gap:10px;padding:10px 12px;margin-top:10px;border-radius:10px;border:1px solid var(--warn);
+  background:rgba(240,185,92,.08);font-size:14px;line-height:20px}
+.banner .ic{flex:none;color:var(--warn);margin-top:1px;display:flex}
+.banner.stop{border-color:var(--bad);background:rgba(240,137,122,.08)} .banner.stop .ic{color:var(--bad)}
+.banner.info{border-color:var(--line);background:var(--surface)} .banner.info .ic{color:var(--accent)}
+.banner b{font-weight:500;color:var(--fg)}
+.banner .txt{min-width:0;flex:1;overflow-wrap:anywhere}
+.linkbtn{display:flex;align-items:center;gap:4px;min-height:44px;color:var(--accent);text-decoration:underline;text-underline-offset:3px}
+.since{margin-top:10px;font-size:13px;color:var(--accent)}
+
+/* sections */
+.sec{margin-top:14px}
+.sec-h{display:flex;align-items:baseline;gap:8px;margin:0 0 6px}
+.sec-h h2,.secbtn h2{font:600 20px/24px var(--display);letter-spacing:.02em;margin:0}
+.sec-sub{font-size:13px;color:var(--muted);margin:-4px 0 8px}
+.secbtn{display:flex;align-items:center;gap:8px;width:100%;min-height:44px}
+.secbtn h2{flex:1}
+.secbtn .chev{transition:transform .15s}
+.secbtn[aria-expanded="true"] .chev{transform:rotate(180deg)}
+.stack>*+*{margin-top:10px}
+
+/* cards */
+.card{display:block;width:100%;background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:12px;overflow:hidden}
+.card[role=button]{cursor:pointer}
+.card[aria-expanded="true"]{border-color:#35485c}
+.r1{display:flex;align-items:baseline;gap:8px}
+.rank{font:600 17px/22px var(--display);color:var(--accent);flex:none;min-width:12px}
+.name{font:600 17px/22px var(--display);letter-spacing:.01em;flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.meta{font-size:12px;line-height:16px;color:var(--muted);white-space:nowrap;flex:none}
+.r2{display:flex;align-items:flex-start;gap:8px;margin-top:2px}
+.bet{font:600 20px/24px var(--display);letter-spacing:.01em;flex:1;min-width:0;overflow-wrap:anywhere;padding-top:1px}
+.price{font:600 26px/26px var(--display);min-width:76px;text-align:right;flex:none;white-space:nowrap}
+.stamp{font-size:11px;line-height:14px;color:var(--muted);text-align:right;overflow-wrap:anywhere}
+.stamp .worse{color:var(--warn)} .stamp .better{color:var(--good)}
+.chance{font-size:13px;line-height:18px;margin-top:4px}
+.chance b{font-weight:500}
+.bar{position:relative;height:6px;border-radius:3px;background:var(--line);margin-top:4px}
+.bar i{position:absolute;left:0;top:0;bottom:0;border-radius:3px;background:rgba(108,196,240,.38)}
+.bar i.over{background:var(--accent);border-radius:0 3px 3px 0}
+.bar u{position:absolute;top:-3px;bottom:-3px;width:2px;margin-left:-1px;background:var(--fg);border-radius:1px}
+.reason{font-size:14px;line-height:20px;margin-top:6px;overflow-wrap:anywhere}
+.clamp{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;overflow:hidden}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px}
+.chip{display:inline-flex;align-items:center;gap:5px;height:24px;padding:0 9px 0 7px;border-radius:12px;font-size:12px;line-height:16px;
+  background:var(--raise);border:1px solid var(--line);color:var(--fg);max-width:100%;white-space:nowrap}
+.chip svg{flex:none}
+.chip.ok{color:var(--good);border-color:rgba(111,207,151,.45)}
+.chip.early{color:var(--warn);border-color:rgba(240,185,92,.45)}
+.chip.lock{color:var(--muted)}
+.chip.hollow{background:none;border-color:var(--muted);padding:0 9px}
+.chip.new{background:var(--accent);border-color:var(--accent);color:#06202e;font-weight:500;padding:0 9px}
+.more{margin-top:10px;padding-top:10px;border-top:1px solid var(--line);font-size:13px;line-height:19px}
+.more>div+div{margin-top:6px}
+.more .k{color:var(--muted)}
+.hist{margin:2px 0 0;padding:0;list-style:none}
+.hist li{display:flex;gap:8px}
+.hist time{flex:none;min-width:62px;color:var(--muted)}
+.note{font-size:12px;line-height:17px;color:var(--muted);margin-top:8px}
+
+/* pulled */
+.pullbar{display:flex;gap:8px;align-items:flex-start;margin:-12px -12px 10px;padding:9px 12px;background:var(--raise);
+  border-bottom:1px solid var(--line);font-size:13px;line-height:18px}
+.pullbar .ic{flex:none;display:flex;color:var(--bad);margin-top:1px}
+.pullbar b{font-weight:500;letter-spacing:.04em}
+.pullbar .why{overflow-wrap:anywhere}
+.dim{opacity:.6}
+.dim .meta,.dim .note,.dim .stamp,.dim .mu{color:var(--fg)}
+.strike{text-decoration:line-through;text-decoration-thickness:2px}
+.lastprice{flex:none;text-align:right;font-size:12px;line-height:16px;white-space:nowrap;padding-top:5px}
+.lastprice span{font:600 17px/20px var(--display)}
+
+/* parlay */
+.ptitle{font:600 17px/22px var(--display);letter-spacing:.01em}
+.leg{padding:8px 0;border-bottom:1px solid var(--line)}
+.leg .l1{display:flex;align-items:baseline;gap:8px}
+.leg .lname{font:600 17px/22px var(--display);flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.leg .lprice{font:600 20px/22px var(--display);flex:none}
+.leg .l2{font-size:12px;line-height:17px;color:var(--muted);overflow-wrap:anywhere}
+.leg .l2 .lb{color:var(--fg)}
+.psum{margin-top:8px;font-size:13px;line-height:19px}
+.psum .about{font:600 20px/24px var(--display)}
+
+/* goal watch + games */
+.list{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:2px 12px}
+.list .li{display:flex;gap:8px;align-items:baseline;padding:9px 0;border-bottom:1px solid var(--line);font-size:13px;line-height:18px}
+.list .li:last-child{border-bottom:0}
+.list .li .grow{flex:1;min-width:0;overflow-wrap:anywhere}
+.list .li .nm{font:600 16px/20px var(--display)}
+.list .li .r{flex:none;white-space:nowrap;color:var(--muted)}
+.list .li .r b{font:600 16px/20px var(--display);color:var(--fg)}
+.list .sub{display:block;font-size:12px;color:var(--warn)}
+
+/* empty + skeleton + error */
+.empty .t{font-size:16px;line-height:23px;font-weight:500}
+.empty .s{font-size:13px;line-height:19px;color:var(--muted);margin-top:4px}
+.skel{height:150px;border-radius:10px;background:var(--surface);border:1px solid var(--line);animation:pulse 1.4s ease-in-out infinite}
+.skel.sm{height:20px;width:60%;border-radius:6px}
+@keyframes pulse{50%{opacity:.55}}
+@media (prefers-reduced-motion:reduce){.skel{animation:none}.secbtn .chev{transition:none}}
+.btn{display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:0 18px;border-radius:10px;
+  border:1px solid var(--accent);color:var(--accent);font-weight:500;font-size:14px}
+.btn.wide{width:100%}
+
+/* footer */
+.foot{margin-top:28px;padding-top:6px;border-top:1px solid var(--line);font-size:12px;line-height:18px;color:var(--muted)}
+.foot p{margin:6px 0}
+
+/* bottom bar */
+.tabs{position:fixed;left:0;right:0;bottom:0;z-index:5;background:var(--bg);border-top:1px solid var(--line);padding-bottom:var(--sab)}
+.tabs .in{max-width:520px;margin:0 auto;display:flex;height:56px}
+.tab{flex:1;display:flex;align-items:center;justify-content:center;gap:8px;height:56px;color:var(--muted);
+  font:600 18px/22px var(--display);letter-spacing:.03em;position:relative}
+.tab[aria-current="page"]{color:var(--fg)}
+.tab[aria-current="page"]::before{content:"";position:absolute;top:-1px;left:22%;right:22%;height:3px;background:var(--accent);border-radius:0 0 3px 3px}
+
+/* record */
+.big{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;margin-top:6px}
+.big .wl{font:600 44px/46px var(--display)}
+.big .un{font:600 30px/34px var(--display)}
+.pos{color:var(--good)} .neg{color:var(--bad)}
+.subline{font-size:12px;line-height:17px;color:var(--muted);margin-top:2px}
+.tbl{margin-top:16px;font-size:13px;line-height:18px}
+.tr{display:grid;grid-template-columns:minmax(0,1fr) 50px 40px 46px 50px;column-gap:6px;align-items:baseline;padding:8px 0;border-bottom:1px solid var(--line)}
+.tr.th{font-size:11px;line-height:15px;color:var(--muted);padding:0 0 4px}
+.tr>*{text-align:right;white-space:nowrap}
+.tr>:first-child{text-align:left;white-space:normal;overflow-wrap:anywhere}
+.tr .span2{grid-column:span 2}
+.tr .few{grid-column:1 / -1;text-align:left;font-size:11px;line-height:15px;color:var(--muted);white-space:normal}
+.tr .num{font:600 16px/18px var(--display)}
+.tr .lbl small{display:block;font-size:11px;line-height:15px;color:var(--muted)}
+.filters{display:flex;gap:2px;margin:14px -6px 0;flex-wrap:wrap}
+.fbtn{min-height:44px;display:inline-flex;align-items:center;padding:0 6px}
+.fbtn span{display:inline-flex;align-items:center;height:32px;padding:0 14px;border-radius:16px;border:1px solid var(--line);font-size:13px;color:var(--muted)}
+.fbtn[aria-pressed="true"] span{background:var(--fg);border-color:var(--fg);color:var(--bg);font-weight:500}
+.night{margin-top:18px}
+.night h3{font:600 17px/22px var(--display);letter-spacing:.02em;margin:0 0 2px;padding-bottom:6px;border-bottom:1px solid var(--line)}
+.night h3 .mu{font:400 12px/16px var(--body);letter-spacing:0}
+.ent{display:flex;gap:6px;padding:8px 0;border-bottom:1px solid var(--line);width:100%;min-height:44px;align-items:flex-start}
+.ent .tg{flex:none;width:44px;font:600 15px/20px var(--display);letter-spacing:.03em}
+.tg.W{color:var(--good)} .tg.L{color:var(--bad)} .tg.PUSH,.tg.VOID,.tg.none{color:var(--muted)}
+.ent .bd{flex:1;min-width:0}
+.ent .e1{font-size:14px;line-height:20px;overflow-wrap:anywhere}
+.ent .e1 .pn{font-weight:500}
+.ent .e2{font-size:12px;line-height:17px;color:var(--muted);overflow-wrap:anywhere}
+.ptag{display:inline-block;font:600 12px/16px var(--display);letter-spacing:.05em;padding:0 5px;margin-right:6px;border:1px solid var(--muted);border-radius:3px;color:var(--fg);vertical-align:1px}
+.legs{padding:0 0 0 14px;border-left:2px solid var(--line);margin:0 0 4px 20px}
+.legs .ent{min-height:0}
+
+/* sheets */
+.scrim{position:fixed;inset:0;z-index:10;background:rgba(3,7,11,.66);display:flex;align-items:flex-end;justify-content:center}
+.sheet{width:100%;max-width:520px;max-height:88vh;max-height:88dvh;display:flex;flex-direction:column;background:var(--surface);
+  border:1px solid var(--line);border-bottom:0;border-radius:14px 14px 0 0}
+.sheet-h{display:flex;align-items:center;gap:8px;padding:6px 6px 6px 16px;border-bottom:1px solid var(--line);flex:none}
+.sheet-h h2{font:600 20px/24px var(--display);letter-spacing:.02em;margin:0;flex:1;min-width:0}
+.sheet-h .ibtn{margin:0}
+.sheet-b{overflow-y:auto;-webkit-overflow-scrolling:touch;padding:12px 16px calc(20px + var(--sab));overscroll-behavior:contain}
+.rules{margin:8px 0 0;padding:0 0 0 22px}
+.rules li{margin:0 0 10px;padding-left:2px;line-height:20px;overflow-wrap:anywhere}
+.rules li::marker{color:var(--muted);font-family:var(--display);font-weight:600}
+.slot{font-weight:500;color:var(--accent);white-space:nowrap}
+.slot.miss{color:var(--warn)}
+.kv{display:flex;gap:12px;padding:9px 0;border-bottom:1px solid var(--line);font-size:14px;line-height:20px}
+.kv:last-child{border-bottom:0}
+.kv .k{flex:none;width:108px;color:var(--muted);font-size:13px}
+.kv .v{flex:1;min-width:0;overflow-wrap:anywhere}
+.kv .v.bad{color:var(--bad)}
+[hidden]{display:none!important}
+</style>
+</head>
+<body>
+<div id="app" class="wrap">
+  <div class="hdr"><h1>Prop Check NHL</h1></div>
+  <p class="mu" style="font-size:13px;margin:4px 0 14px">Loading tonight's picks</p>
+  <div class="stack"><div class="skel"></div><div class="skel"></div><div class="skel"></div></div>
+</div>
+<nav id="tabs" class="tabs" aria-label="Views"></nav>
+<div id="sheetroot"></div>
+<noscript><p style="padding:16px">Prop Check NHL needs JavaScript turned on to show tonight's picks.</p></noscript>
+
+<script>
+(function () {
+'use strict';
+
+/* ---------- setup ---------- */
+var Q;
+try { Q = new URLSearchParams(location.search); } catch (e) { Q = { get: function () { return null; } }; }
+var FIX = String(Q.get('fixture') || '').replace(/[^A-Za-z0-9_-]/g, '');
+var BASE = FIX ? 'fixtures/' + FIX + '/' : 'data/';
+var NOW_Q = ms(String(Q.get('now') || '').replace(' ', '+'));
+var TZ = 'America/New_York';
+var SEEN_KEY = FIX ? 'pc_seen_fx' : 'pc_seen';
+var UI_DEF = { stale_after_min: 75, refresh_sec: 120, picks_open: 8 };
+
+var S = {
+  slate: null, record: null, rules: null,
+  loaded: false, loadErr: false, fetchFail: false, loadedAt: null, busy: false,
+  view: 'tonight', expanded: {}, open: {}, moreOpen: false, filter: 'all', legsOpen: {},
+  older: [], olderIdx: 0, olderBusy: false, olderErr: false,
+  newIds: {}, since: null, seenDone: false,
+  sheet: null, sheetFocus: null, key: '', scroll: { tonight: 0, record: 0 }
+};
+
+var app = document.getElementById('app');
+var tabsEl = document.getElementById('tabs');
+var sheetRoot = document.getElementById('sheetroot');
+
+/* ---------- tiny helpers ---------- */
+function ms(v) { if (v == null || v === '') return null; var t = Date.parse(v); return isNaN(t) ? null : t; }
+function isObj(v) { return v !== null && typeof v === 'object' && !Array.isArray(v); }
+function arr(v) { return Array.isArray(v) ? v : []; }
+function num(v) { return (typeof v === 'number' && isFinite(v)) ? v : null; }
+function str(v) { return (v == null) ? '' : String(v); }
+function now() {
+  if (NOW_Q != null) return NOW_Q;
+  if (FIX && S.slate) { var f = ms(S.slate.fixture_now); if (f != null) return f; }
+  return Date.now();
+}
+function h(tag, attrs) {
+  var e = document.createElement(tag), k, i, c;
+  if (attrs) for (k in attrs) {
+    if (!Object.prototype.hasOwnProperty.call(attrs, k) || attrs[k] == null || attrs[k] === false) continue;
+    if (k === 'class') e.className = attrs[k];
+    else if (k === 'text') e.textContent = str(attrs[k]);
+    else if (k === 'on') { for (var ev in attrs.on) e.addEventListener(ev, attrs.on[ev]); }
+    else e.setAttribute(k, attrs[k] === true ? '' : attrs[k]);
+  }
+  for (i = 2; i < arguments.length; i++) {
+    c = arguments[i];
+    if (c == null || c === false) continue;
+    if (Array.isArray(c)) { for (var j = 0; j < c.length; j++) if (c[j] != null && c[j] !== false) e.appendChild(node(c[j])); }
+    else e.appendChild(node(c));
+  }
+  return e;
+}
+function node(c) { return (typeof c === 'string' || typeof c === 'number') ? document.createTextNode(String(c)) : c; }
+function clear(e) { while (e.firstChild) e.removeChild(e.firstChild); }
+var SVGNS = 'http://www.w3.org/2000/svg';
+var ICONS = {
+  info: ['M12 3a9 9 0 1 0 0 18 9 9 0 0 0 0-18z', 'M12 11v5', 'M12 7.6v.4'],
+  warn: ['M12 4 2.8 20h18.4L12 4z', 'M12 10v4.5', 'M12 17.2v.3'],
+  stop: ['M12 3a9 9 0 1 0 0 18 9 9 0 0 0 0-18z', 'M8.8 8.8l6.4 6.4', 'M15.2 8.8l-6.4 6.4'],
+  check: ['M5 12.5l4.5 4.5L19 7.5'],
+  ring: ['M12 5a7 7 0 1 0 0 14 7 7 0 0 0 0-14z'],
+  lock: ['M6.5 11h11v8.5h-11z', 'M9 11V8a3 3 0 0 1 6 0v3'],
+  right: ['M9 5l7 7-7 7'],
+  down: ['M5 9l7 7 7-7'],
+  close: ['M6 6l12 12', 'M18 6 6 18']
+};
+function icon(name, size) {
+  var s = document.createElementNS(SVGNS, 'svg'), d = ICONS[name] || ICONS.info;
+  s.setAttribute('viewBox', '0 0 24 24'); s.setAttribute('width', size || 16); s.setAttribute('height', size || 16);
+  s.setAttribute('fill', 'none'); s.setAttribute('stroke', 'currentColor'); s.setAttribute('stroke-width', '2');
+  s.setAttribute('stroke-linecap', 'round'); s.setAttribute('stroke-linejoin', 'round'); s.setAttribute('aria-hidden', 'true');
+  for (var i = 0; i < d.length; i++) { var p = document.createElementNS(SVGNS, 'path'); p.setAttribute('d', d[i]); s.appendChild(p); }
+  return s;
+}
+
+/* ---------- formatting (always Eastern) ---------- */
+function dtf(opts) {
+  try { opts.timeZone = TZ; return new Intl.DateTimeFormat('en-US', opts); }
+  catch (e) { delete opts.timeZone; return new Intl.DateTimeFormat('en-US', opts); }
+}
+var F_TIME = dtf({ hour: 'numeric', minute: '2-digit', hour12: true });
+var F_PARTS = dtf({ weekday: 'short', month: 'short', day: 'numeric', year: 'numeric' });
+function tidy(s) { return s.replace(/[  ]/g, ' '); }
+function fTime(v) { var t = (typeof v === 'number') ? v : ms(v); return t == null ? null : tidy(F_TIME.format(new Date(t))); }
+function parts(t) {
+  var o = {}, p = F_PARTS.formatToParts(new Date(t));
+  for (var i = 0; i < p.length; i++) o[p[i].type] = p[i].value;
+  return o;
+}
+function fMD(v) { var t = (typeof v === 'number') ? v : ms(v); if (t == null) return null; var p = parts(t); return p.month + ' ' + p.day; }
+function fDay(v) { var t = (typeof v === 'number') ? v : ms(v); if (t == null) return null; var p = parts(t); return p.weekday + ' ' + p.month + ' ' + p.day; }
+function dayKey(t) { var p = parts(t); return p.year + ' ' + p.month + ' ' + p.day; }
+var WD = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'], MO = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+function plainDate(s) { /* "2026-10-11" with no clock: never shifted by a time zone */
+  var m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(str(s)); if (!m) return null;
+  var d = new Date(Date.UTC(+m[1], +m[2] - 1, +m[3]));
+  if (isNaN(d.getTime())) return null;
+  return { wd: WD[d.getUTCDay()], mo: MO[d.getUTCMonth()], day: d.getUTCDate() };
+}
+function fDateLong(s) { var d = plainDate(s); if (d) return d.wd + ' ' + d.mo + ' ' + d.day; return fDay(s) || str(s); }
+function fDateShort(s) { var d = plainDate(s); if (d) return d.mo + ' ' + d.day; return fMD(s) || str(s); }
+/* time alone when it is today (Eastern), otherwise "Oct 10 at 11:42 PM" */
+function fStamp(v) {
+  var t = ms(v); if (t == null) return null;
+  return dayKey(t) === dayKey(now()) ? fTime(t) : fMD(t) + ' at ' + fTime(t);
+}
+function odds(v) { var n = num(v); if (n == null) return '—'; n = Math.round(n); return n > 0 ? '+' + n : (n < 0 ? '-' + Math.abs(n) : '+0'); }
+function pctDown(v) { var n = num(v); return n == null ? null : Math.floor(n * 100 + 1e-6) + '%'; }
+function pctNear(v) { var n = num(v); return n == null ? null : Math.round(n * 100) + '%'; }
+function units(v, dp) {
+  var n = num(v); if (n == null) return null;
+  var s = Math.abs(n).toFixed(dp);
+  if (parseFloat(s) === 0) return s + 'u';
+  return (n > 0 ? '+' : '-') + s + 'u';
+}
+function signCls(v) { var n = num(v); return n == null || n === 0 ? '' : (n > 0 ? 'pos' : 'neg'); }
+function payout(a) { var n = num(a); if (n == null || n === 0) return null; return n > 0 ? n / 100 : 100 / Math.abs(n); }
+
+/* ---------- data access ---------- */
+function uiVal(k) {
+  var u = S.rules && isObj(S.rules.ui) ? num(S.rules.ui[k]) : null;
+  return (u != null && u > 0) ? u : UI_DEF[k];
+}
+function ruleVal(k) { return (S.rules && isObj(S.rules.values)) ? S.rules.values[k] : undefined; }
+function isFixture() { return !!FIX || (S.slate && S.slate.fixture === true) || (S.record && S.record.fixture === true) || (S.rules && S.rules.fixture === true); }
+function expired() { var v = S.slate ? ms(S.slate.valid_until) : null; return v != null && now() > v; }
+function stale() {
+  if (!S.slate || expired()) return false;
+  var g = ms(S.slate.generated_at); if (g == null) return false;
+  return now() - g > uiVal('stale_after_min') * 60000;
+}
+function gameMap() {
+  var m = {}, g = arr(S.slate && S.slate.games);
+  for (var i = 0; i < g.length; i++) if (isObj(g[i]) && g[i].id != null) m[g[i].id] = g[i];
+  return m;
+}
+function matchup(p, games) {
+  var g = games[p.game_id], away, home;
+  if (g && g.away && g.home) { away = g.away; home = g.home; }
+  else if (p.team && p.opp) { if (p.home) { away = p.opp; home = p.team; } else { away = p.team; home = p.opp; } }
+  var start = p.start || (g && g.start);
+  return { text: away ? str(away) + ' at ' + str(home) : '', start: start, time: fTime(start) };
+}
+function hasStarted(p, games) {
+  if (/^locked/.test(str(p.state))) return true;
+  var t = ms(p.start || (games[p.game_id] && games[p.game_id].start));
+  return t != null && now() >= t;
+}
+function split() { /* open / started / pulled, picks and parlays */
+  var games = gameMap(), out = { games: games, open: [], started: [], pulled: [], byId: {}, pOpen: [], pStarted: [], pPulled: [] };
+  var picks = arr(S.slate && S.slate.picks).filter(isObj), i, p;
+  for (i = 0; i < picks.length; i++) {
+    p = picks[i]; if (p.id != null) out.byId[p.id] = p;
+    if (p.pulled) out.pulled.push(p); else if (hasStarted(p, games)) out.started.push(p); else out.open.push(p);
+  }
+  var byRank = function (a, b) { var x = num(a.rank), y = num(b.rank); return (x == null ? 1e9 : x) - (y == null ? 1e9 : y); };
+  out.open.sort(byRank); out.started.sort(byRank);
+  var pars = arr(S.slate && S.slate.parlays).filter(isObj);
+  for (i = 0; i < pars.length; i++) {
+    p = pars[i];
+    if (p.pulled) { out.pPulled.push(p); continue; }
+    var st = /^locked/.test(str(p.state)), legs = arr(p.legs);
+    for (var j = 0; j < legs.length && !st; j++) { var lp = out.byId[legs[j]]; if (lp && hasStarted(lp, games)) st = true; }
+    (st ? out.pStarted : out.pOpen).push(p);
+  }
+  return out;
+}
+
+/* ---------- fetch ---------- */
+function getJSON(path) {
+  var ctl = (typeof AbortController !== 'undefined') ? new AbortController() : null;
+  var timer = ctl ? setTimeout(function () { ctl.abort(); }, 15000) : null;
+  var sep = path.indexOf('?') >= 0 ? '&' : '?';
+  return fetch(path + sep + 't=' + Date.now(), { cache: 'no-store', signal: ctl ? ctl.signal : undefined })
+    .then(function (r) { if (!r.ok) throw new Error('http ' + r.status); return r.json(); })
+    .then(function (j) { if (timer) clearTimeout(timer); if (!isObj(j)) throw new Error('shape'); return j; },
+          function (e) { if (timer) clearTimeout(timer); throw e; });
+}
+function settle(p) { return p.then(function (v) { return { ok: true, v: v }; }, function () { return { ok: false }; }); }
+function load() {
+  if (S.busy) return Promise.resolve();
+  S.busy = true;
+  return Promise.all([settle(getJSON(BASE + 'slate.json')), settle(getJSON(BASE + 'record.json')), settle(getJSON(BASE + 'rules.json'))])
+    .then(function (r) {
+      S.busy = false; S.loaded = true;
+      if (r[1].ok) S.record = r[1].v;
+      if (r[2].ok) S.rules = r[2].v;
+      if (r[0].ok) { S.slate = r[0].v; S.fetchFail = false; S.loadErr = false; S.loadedAt = now(); }
+      else if (S.slate) S.fetchFail = true;
+      else S.loadErr = true;
+      maybeRender();
+    }, function () { S.busy = false; });
+}
+var timer = null;
+function schedule() {
+  if (timer) clearTimeout(timer);
+  timer = setTimeout(function () { if (!document.hidden) load().then(schedule); else schedule(); }, uiVal('refresh_sec') * 1000);
+}
+
+/* ---------- "since you last looked" ---------- */
+function readSeen() {
+  if (S.seenDone || !S.slate || expired()) return;
+  S.seenDone = true;
+  try {
+    var raw = window.localStorage.getItem(SEEN_KEY); if (!raw) return;
+    var o = JSON.parse(raw); if (!isObj(o) || o.slate_date !== S.slate.slate_date) return;
+    var seen = {}, pulled = {}, i, d = split(), nNew = 0, nPulled = 0;
+    arr(o.seen_ids).forEach(function (x) { seen[x] = 1; }); arr(o.pulled_ids).forEach(function (x) { pulled[x] = 1; });
+    for (i = 0; i < d.open.length; i++) if (!seen[d.open[i].id] && !pulled[d.open[i].id]) { S.newIds[d.open[i].id] = 1; nNew++; }
+    for (i = 0; i < d.pulled.length; i++) if (!pulled[d.pulled[i].id]) nPulled++;
+    if (nNew || nPulled) S.since = { at: o.at, n: nNew, p: nPulled };
+  } catch (e) { /* private mode or blocked storage: the page works without it */ }
+}
+function writeSeen() {
+  try {
+    if (!S.slate || expired() || !S.slate.slate_date) return;
+    var d = split(), id = function (p) { return p.id; };
+    window.localStorage.setItem(SEEN_KEY, JSON.stringify({
+      slate_date: S.slate.slate_date, seen_ids: d.open.concat(d.started).map(id), pulled_ids: d.pulled.map(id),
+      at: new Date(now()).toISOString()
+    }));
+  } catch (e) { /* ignore */ }
+}
+
+/* ---------- render control ---------- */
+function calcKey() {
+  var d = S.slate ? split() : null;
+  return JSON.stringify([S.loaded, S.loadErr, S.fetchFail, S.slate && S.slate.generated_at, S.record && S.record.generated_at,
+    S.rules && S.rules.version, S.rules && S.rules.updated, S.slate && expired(), S.slate && stale(),
+    d ? d.started.length : 0, S.slate ? dayKey(now()) : 0]);
+}
+function maybeRender() { var k = calcKey(); if (k !== S.key) render(); }
+function render() {
+  var y = window.scrollY || 0;
+  try {
+    S.key = calcKey();
+    readSeen();
+    clear(app);
+    if (S.view === 'record') renderRecord(); else renderTonight();
+    renderTabs();
+    if (S.sheet) fillSheet();
+  } catch (err) {
+    clear(app);
+    app.appendChild(header('Prop Check NHL', null));
+    app.appendChild(h('div', { class: 'card empty', style: 'margin-top:12px' },
+      h('div', { class: 't', text: "This page didn't load right." }),
+      h('div', { class: 's', text: 'Nothing is shown rather than something wrong.' }),
+      h('div', { style: 'margin-top:12px' }, h('button', { class: 'btn', type: 'button', text: 'Try again', on: { click: function () { location.reload(); } } }))));
+    if (window.console) console.warn('render failed', err);
+  }
+  window.scrollTo(0, y);
+}
+function rerender() { render(); }
+
+/* ---------- shared pieces ---------- */
+function header(title, dateText) {
+  var hd = h('header', { class: 'hdr' },
+    h('h1', { text: title }),
+    dateText ? h('span', { class: 'date', text: dateText }) : null,
+    h('button', { class: 'ibtn', type: 'button', 'aria-label': 'How picks are made', on: { click: function () { openSheet('rules'); } } }, icon('info', 22)));
+  if (!isFixture()) return hd;
+  return h('div', null, h('div', { class: 'tag-test', text: 'Test data. Not real picks.' }), hd);
+}
+function banner(level, strong, rest, extra) {
+  var lv = level === 'stop' ? 'stop' : (level === 'info' ? 'info' : 'warn');
+  var t = h('div', { class: 'txt' }, strong ? h('b', { text: strong }) : null, (strong && rest) ? ' ' : null, rest || null, extra || null);
+  return h('div', { class: 'banner ' + lv, role: 'status' }, h('span', { class: 'ic' }, icon(lv === 'info' ? 'info' : (lv === 'stop' ? 'stop' : 'warn'), 18)), t);
+}
+function engineBanner(b) {
+  var text = str(isObj(b) ? b.text : b); if (!text) return null;
+  var m = /^(.+?[.:])\s+(.+)$/.exec(text);
+  return banner(isObj(b) ? b.level : 'warn', m ? m[1] : text, m ? m[2] : '');
+}
+function chanceBar(p, b) {
+  var pn = num(p), bn = num(b); if (pn == null) return null;
+  var pw = Math.max(0, Math.min(100, pn * 100)), bar = h('div', { class: 'bar', 'aria-hidden': 'true' });
+  var fill = h('i'); fill.style.width = pw + '%'; bar.appendChild(fill);
+  if (bn != null) {
+    var bw = Math.max(0, Math.min(100, bn * 100));
+    if (pw > bw) { var ov = h('i', { class: 'over' }); ov.style.left = bw + '%'; ov.style.width = (pw - bw) + '%'; bar.appendChild(ov); }
+    var tick = h('u'); tick.style.left = bw + '%'; bar.appendChild(tick);
+  }
+  return bar;
+}
+var STATES = {
+  early: ['early', 'ring', 'Early: lineup not confirmed'],
+  lineup: ['ok', 'check', 'Lineup confirmed'],
+  goalie: ['ok', 'check', 'Goalie confirmed'],
+  locked: ['lock', 'lock', 'Locked'],
+  locked_unconfirmed: ['lock', 'lock', 'Locked: lineup was not confirmed']
+};
+function stateChip(state) {
+  if (state == null || state === '') return null;
+  var s = STATES[state];
+  if (!s) return h('span', { class: 'chip hollow', text: str(state) });
+  return h('span', { class: 'chip ' + s[0] }, icon(s[1], 13), s[2]);
+}
+function toggleBtnKeys(fn) {
+  return { click: fn, keydown: function (e) { if (e.key === 'Enter' || e.key === ' ' || e.key === 'Spacebar') { e.preventDefault(); fn(e); } } };
+}
+
+/* ---------- pick card ---------- */
+function pickCard(p, d, opts) {
+  opts = opts || {};
+  var mu = matchup(p, d.games), id = str(p.id), isOpen = !!S.expanded[id];
+  var price = num(p.price), first = num(p.first_price);
+  var card = h('div', { class: 'card pick', role: 'button', tabindex: '0', 'aria-expanded': isOpen ? 'true' : 'false', 'data-id': id });
+  var toggle = function () { if (S.expanded[id]) delete S.expanded[id]; else S.expanded[id] = 1; rerender(); };
+  var ev = toggleBtnKeys(toggle); card.addEventListener('click', ev.click); card.addEventListener('keydown', ev.keydown);
+
+  card.appendChild(h('div', { class: 'r1' },
+    (opts.rank && num(p.rank) != null) ? h('span', { class: 'rank', text: p.rank }) : null,
+    h('span', { class: 'name', text: p.player || 'Player not named' }),
+    h('span', { class: 'meta', text: [mu.text, mu.time].filter(Boolean).join(' · ') || 'Game time not posted' })));
+  card.appendChild(h('div', { class: 'r2' },
+    h('div', { class: 'bet', text: p.bet || 'Bet not posted' }),
+    h('div', { class: 'price', text: odds(p.price) })));
+
+  var stamp = h('div', { class: 'stamp' });
+  if (price != null && first != null && price !== first) {
+    var a = payout(price), b = payout(first), word = (a != null && b != null && a < b) ? 'worse' : 'better';
+    stamp.appendChild(node('was ' + odds(first) + (fTime(p.first_price_at) ? ' at ' + fTime(p.first_price_at) : '') + ' · '));
+    stamp.appendChild(h('span', { class: word, text: 'now ' + word }));
+  } else {
+    stamp.textContent = fStamp(p.price_at) ? 'read ' + fStamp(p.price_at) : 'read time not posted';
+  }
+  card.appendChild(stamp);
+
+  var pc = pctDown(p.p), be = pctNear(p.breakeven);
+  card.appendChild(h('div', { class: 'chance' }, 'Our chance ', h('b', { text: pc || 'not posted' }), be ? ' · needs ' + be : ''));
+  var bar = chanceBar(p.p, p.breakeven); if (bar) card.appendChild(bar);
+  if (p.reason) card.appendChild(h('div', { class: 'reason' + (isOpen ? '' : ' clamp'), text: p.reason }));
+  card.appendChild(h('div', { class: 'chips' },
+    stateChip(p.state),
+    p.thin ? h('span', { class: 'chip hollow', text: 'Thin sample' }) : null,
+    (S.newIds[id] && !opts.noNew) ? h('span', { class: 'chip new', text: 'New' }) : null));
+
+  if (isOpen) {
+    var more = h('div', { class: 'more' });
+    var ph;
+    if (first != null && price != null && (first !== price || (p.first_price_at && p.price_at && p.first_price_at !== p.price_at)))
+      ph = 'First ' + odds(first) + (fTime(p.first_price_at) ? ' ' + fTime(p.first_price_at) : '') + ' · Now ' + odds(price) + (fTime(p.price_at) ? ' ' + fTime(p.price_at) : '');
+    else ph = 'Price ' + odds(price != null ? price : first) + (fTime(p.price_at || p.first_price_at) ? ' ' + fTime(p.price_at || p.first_price_at) : '') + ', one read so far';
+    more.appendChild(h('div', { text: ph }));
+    var worst = num(p.worst_price) != null ? p.worst_price : p.price;
+    more.appendChild(h('div', { text: 'Graded on the Record at ' + odds(worst) + ', the worst price shown.' }));
+    var gu = num(p.games_used), gs = num(p.games_this_season);
+    more.appendChild(h('div', { text: 'Games used: ' + (gu == null ? 'not posted' : gu) + (gs == null ? '' : ' (' + gs + ' this season)') }));
+    var hist = arr(p.history).filter(isObj);
+    if (hist.length) {
+      var ul = h('ul', { class: 'hist' });
+      hist.forEach(function (x) { ul.appendChild(h('li', null, h('time', { text: fTime(x.at) || '' }), h('span', { text: str(x.text) }))); });
+      more.appendChild(ul);
+    }
+    card.appendChild(more);
+  }
+  return card;
+}
+function pulledBar(pulled) {
+  var at = isObj(pulled) ? fTime(pulled.at) : null, why = isObj(pulled) ? str(pulled.reason) : '';
+  return h('div', { class: 'pullbar' }, h('span', { class: 'ic' }, icon('stop', 16)),
+    h('div', { class: 'why' }, h('b', { text: 'PULLED' + (at ? ' ' + at : '') }), why ? ' · ' + why : ''));
+}
+var PULL_NOTE = 'If you already bet it, it still counts on the Record under Pulled.';
+function pulledCard(p, d) {
+  var mu = matchup(p, d.games);
+  return h('div', { class: 'card', 'data-id': str(p.id) },
+    pulledBar(p.pulled),
+    h('div', { class: 'dim' },
+      h('div', { class: 'r1' }, h('span', { class: 'name', text: p.player || 'Player not named' }),
+        h('span', { class: 'meta', text: [mu.text, mu.time].filter(Boolean).join(' · ') })),
+      h('div', { class: 'r2' }, h('div', { class: 'bet strike', text: p.bet || 'Bet not posted' }),
+        h('div', { class: 'lastprice' }, 'Last price ', h('span', { text: odds(p.price) }))),
+      h('div', { class: 'note', text: PULL_NOTE })));
+}
+
+/* ---------- parlay card ---------- */
+function legRows(par, d, struck) {
+  return arr(par.legs).map(function (lid) {
+    var p = d.byId[lid];
+    if (!p) return h('div', { class: 'leg' }, h('div', { class: 'l2', text: 'Leg not available' }));
+    var mu = matchup(p, d.games);
+    return h('div', { class: 'leg' },
+      h('div', { class: 'l1' }, h('span', { class: 'lname', text: p.player || 'Player not named' }), h('span', { class: 'lprice', text: odds(p.price) })),
+      h('div', { class: 'l2' }, h('span', { class: 'lb' + (struck ? ' strike' : ''), text: p.bet || 'Bet not posted' }),
+        (mu.text ? ' · ' + mu.text : '') + (mu.time ? ' ' + mu.time : '')));
+  });
+}
+function parlayCard(par, d, n) {
+  var legs = arr(par.legs), at = fStamp(par.price_at);
+  var pc = pctDown(par.p), be = pctNear(par.breakeven);
+  return h('div', { class: 'card', 'data-id': str(par.id) },
+    h('div', { class: 'ptitle', text: 'Parlay' + (n ? ' ' + n : '') + ' · ' + legs.length + ' legs' }),
+    legRows(par, d, false),
+    h('div', { class: 'psum' },
+      h('div', null, h('span', { class: 'about', text: 'about ' + odds(par.price) }), ' from leg prices' + (at ? ' at ' + at : '')),
+      h('div', { text: 'Chance about ' + (pc || 'not posted') + (be ? ' · needs ' + be : '') })),
+    h('div', { class: 'chips' }, stateChip(par.state)),
+    h('div', { class: 'note', text: "Each leg is in a different game. Hard Rock's parlay price may differ slightly." }));
+}
+function pulledParlayCard(par, d) {
+  var legs = arr(par.legs);
+  return h('div', { class: 'card', 'data-id': str(par.id) },
+    pulledBar(par.pulled),
+    h('div', { class: 'dim' },
+      h('div', { class: 'ptitle', text: 'Parlay · ' + legs.length + ' legs · was about ' + odds(par.price) }),
+      legRows(par, d, true),
+      h('div', { class: 'note', text: PULL_NOTE })));
+}
+
+/* ---------- Tonight ---------- */
+function statusText(st, exp) {
+  var out = [];
+  if (exp) out.push('Prices not read yet');
+  else if (st.prices_state === 'pool_empty' || st.prices_state === 'feed_down') out.push('No prices today');
+  else out.push(fStamp(st.prices_at) ? 'Prices ' + fStamp(st.prices_at) : 'Prices not read yet');
+  if (!exp) {
+    if (st.lineups_state === 'failed') out.push('Lineups not checked');
+    else out.push(fStamp(st.lineups_at) ? 'Lineups ' + fStamp(st.lineups_at) : 'Lineups not checked yet');
+    if (fStamp(st.goalies_at)) out.push('Goalies ' + fStamp(st.goalies_at));
+  }
+  if (st.stats_through) out.push((st.stats_state === 'behind' ? 'Stats behind, through ' : 'Stats ') + fDateShort(st.stats_through));
+  else out.push(st.stats_state === 'behind' ? 'Stats behind' : 'Stats not built yet');
+  var pool = isObj(st.pool) ? st.pool : {};
+  if (num(pool.pulls_left) != null) out.push(pool.pulls_left + ' pulls left');
+  return out.join(' · ');
+}
+function recordStripText() {
+  var hd = S.record && isObj(S.record.summary) && isObj(S.record.summary.headline) ? S.record.summary.headline : null;
+  if (!S.record) return { t: 'Record not loaded' };
+  if (!hd || !((num(hd.w) || 0) + (num(hd.l) || 0))) return { t: 'Record: no graded picks yet' };
+  return { t: 'Record ' + (num(hd.w) || 0) + '-' + (num(hd.l) || 0), u: units(hd.units, 1), c: signCls(hd.units) };
+}
+function sectionToggle(key, title, body) {
+  var open = !!S.open[key];
+  var btn = h('button', { class: 'secbtn', type: 'button', 'aria-expanded': open ? 'true' : 'false',
+    on: { click: function () { S.open[key] = !S.open[key]; rerender(); } } },
+    h('h2', { text: title }), h('span', { class: 'chev' }, icon('down', 18)));
+  return h('section', { class: 'sec' }, btn, open ? body() : null);
+}
+function renderTonight() {
+  if (!S.loaded) {
+    app.appendChild(h('div', { class: 'hdr' }, h('h1', { text: 'Prop Check NHL' })));
+    app.appendChild(h('p', { class: 'mu', style: 'font-size:13px;margin:4px 0 14px', text: "Loading tonight's picks" }));
+    app.appendChild(h('div', { class: 'stack' }, h('div', { class: 'skel' }), h('div', { class: 'skel' }), h('div', { class: 'skel' })));
+    return;
+  }
+  if (!S.slate) {
+    app.appendChild(header('Prop Check NHL', null));
+    app.appendChild(h('div', { class: 'card empty', style: 'margin-top:12px' },
+      h('div', { class: 't', text: "Can't load the picks. Check your connection." }),
+      h('div', { style: 'margin-top:12px' }, h('button', { class: 'btn', type: 'button', text: 'Try again',
+        on: { click: function () { S.loaded = false; S.loadErr = false; render(); load().then(schedule); } } }))));
+    app.appendChild(footer());
+    return;
+  }
+  var sl = S.slate, st = isObj(sl.status) ? sl.status : {}, exp = expired(), d = split();
+
+  app.appendChild(header('Prop Check NHL', exp ? fDay(now()) : (sl.slate_date ? fDateLong(sl.slate_date) : fDay(now()))));
+  app.appendChild(h('button', { class: 'rowbtn', type: 'button', 'aria-label': 'Update status', on: { click: function () { openSheet('status'); } } },
+    h('span', { class: 'grow statusline', text: statusText(st, exp) }), h('span', { class: 'chev' }, icon('right', 16))));
+  var rs = recordStripText();
+  app.appendChild(h('button', { class: 'rowbtn strip', type: 'button', on: { click: function () { go('record'); } } },
+    h('span', { class: 'grow' }, rs.t, rs.u ? ' · ' : null, rs.u ? h('span', { class: rs.c, text: rs.u }) : null),
+    h('span', { class: 'chev' }, icon('right', 16))));
+
+  /* banners: the page's own clock truths first, then the engine's finished sentences */
+  if (exp) {
+    var last = ms(sl.generated_at);
+    app.appendChild(banner('warn', "Today's picks aren't in yet.",
+      last != null ? 'Last update was ' + fMD(last) + ' at ' + fTime(last) + '.' : 'No update time on file.',
+      h('button', { class: 'linkbtn', type: 'button', on: { click: function () { go('record'); } } }, "Last night's results are in the Record.", icon('right', 14))));
+  } else if (stale()) {
+    app.appendChild(banner('stop', 'Updates have stopped.', 'Last update ' + fStamp(sl.generated_at) + '. Prices and picks below may be out of date.'));
+  }
+  if (S.fetchFail) app.appendChild(banner('warn', "Can't reach the picks right now.", 'Showing what loaded at ' + (fTime(S.loadedAt) || 'an earlier time') + '.'));
+  if (!exp) arr(sl.banners).forEach(function (b) { var e = engineBanner(b); if (e) app.appendChild(e); });
+  if (exp) { app.appendChild(footer()); return; }
+
+  if (S.since) {
+    var bits = []; if (S.since.n) bits.push(S.since.n + ' new'); if (S.since.p) bits.push(S.since.p + ' pulled');
+    app.appendChild(h('div', { class: 'since', text: 'Since ' + (fStamp(S.since.at) || 'your last look') + ': ' + bits.join(', ') }));
+  }
+
+  /* Picks */
+  var emp = isObj(sl.empty) ? sl.empty : null, showEmpty = d.open.length === 0;
+  var sec = h('section', { class: 'sec', id: 'picks' }, h('div', { class: 'sec-h' }, h('h2', { text: 'Picks (' + d.open.length + ')' })));
+  if (showEmpty) {
+    var t, s2 = null;
+    if (emp && emp.text) { t = str(emp.text); s2 = emp.sub ? str(emp.sub) : null; }
+    else if (d.started.length || d.pStarted.length) {
+      var gs = arr(sl.games).filter(isObj), all = gs.length > 0 && gs.every(function (g) { var x = ms(g.start); return x != null && now() >= x; });
+      t = all ? "Every game has started. Tonight's picks are under Started." : "No open picks right now. Tonight's earlier picks are under Started.";
+    } else if (d.pulled.length) t = 'No open picks right now.';
+    else t = 'No picks posted.';
+    sec.appendChild(h('div', { class: 'card empty' }, h('div', { class: 't', text: t }), s2 ? h('div', { class: 's', text: s2 }) : null));
+  } else {
+    var lim = Math.round(uiVal('picks_open')), stack = h('div', { class: 'stack' });
+    d.open.forEach(function (p, i) { if (i < lim || S.moreOpen) stack.appendChild(pickCard(p, d, { rank: true })); });
+    sec.appendChild(stack);
+    if (d.open.length > lim) sec.appendChild(h('button', { class: 'btn wide', type: 'button', style: 'margin-top:10px',
+      'aria-expanded': S.moreOpen ? 'true' : 'false', text: S.moreOpen ? 'Show fewer' : 'More (' + (d.open.length - lim) + ')',
+      on: { click: function () { S.moreOpen = !S.moreOpen; rerender(); } } }));
+  }
+  app.appendChild(sec);
+
+  /* Parlays */
+  if (!showEmpty) {
+    var ps = h('section', { class: 'sec', id: 'parlays' }, h('div', { class: 'sec-h' }, h('h2', { text: 'Parlays (' + d.pOpen.length + ')' })));
+    if (d.pOpen.length) { var pst = h('div', { class: 'stack' }); d.pOpen.forEach(function (p, i) { pst.appendChild(parlayCard(p, d, i + 1)); }); ps.appendChild(pst); }
+    else ps.appendChild(h('div', { class: 'card empty' }, h('div', { class: 's', style: 'margin:0;color:var(--fg)', text: 'No parlay tonight.' })));
+    app.appendChild(ps);
+  }
+
+  /* Goal watch */
+  var gw = arr(sl.goal_watch).filter(isObj);
+  if (gw.length) {
+    var gl = h('div', { class: 'list' });
+    gw.forEach(function (g) {
+      gl.appendChild(h('div', { class: 'li' }, h('span', { class: 'grow nm', text: g.player || 'Player not named' }),
+        h('span', { class: 'r' }, 'Hard Rock ', h('b', { text: odds(g.price) })), h('span', { class: 'r' }, 'fair ', h('b', { text: odds(g.fair_price) }))));
+    });
+    app.appendChild(h('section', { class: 'sec', id: 'goalwatch' }, h('div', { class: 'sec-h' }, h('h2', { text: 'Goal watch' })),
+      h('div', { class: 'sec-sub', text: 'Not picks. Price is short of fair.' }), gl));
+  }
+
+  /* Pulled today: always open */
+  var nPulled = d.pulled.length + d.pPulled.length;
+  if (nPulled) {
+    var pl = h('div', { class: 'stack' });
+    d.pulled.forEach(function (p) { pl.appendChild(pulledCard(p, d)); });
+    d.pPulled.forEach(function (p) { pl.appendChild(pulledParlayCard(p, d)); });
+    app.appendChild(h('section', { class: 'sec', id: 'pulled' }, h('div', { class: 'sec-h' }, h('h2', { text: 'Pulled today (' + nPulled + ')' })), pl));
+  }
+
+  /* Started */
+  var nStarted = d.started.length + d.pStarted.length;
+  if (nStarted) app.appendChild(sectionToggle('started', 'Started (' + nStarted + ')', function () {
+    var x = h('div', { class: 'stack' });
+    d.started.forEach(function (p) { x.appendChild(pickCard(p, d, { rank: false, noNew: true })); });
+    d.pStarted.forEach(function (p) { x.appendChild(parlayCard(p, d, 0)); });
+    return x;
+  }));
+
+  /* Games tonight */
+  var games = arr(sl.games).filter(isObj);
+  if (games.length) app.appendChild(sectionToggle('games', 'Games tonight (' + games.length + ')', function () {
+    var x = h('div', { class: 'list' });
+    games.forEach(function (g) {
+      var n = num(g.picks), bits = [(g.away && g.home) ? str(g.away) + ' at ' + str(g.home) : 'Game', fTime(g.start) || 'time not posted'];
+      if (n != null) bits.push(n + (n === 1 ? ' pick' : ' picks'));
+      x.appendChild(h('div', { class: 'li' }, h('span', { class: 'grow' }, bits.join(' · '),
+        g.excluded_reason ? h('span', { class: 'sub', text: 'not covered: ' + str(g.excluded_reason) }) : null)));
+    });
+    return x;
+  }));
+
+  app.appendChild(footer());
+}
+function footer() {
+  var v = S.rules ? S.rules.version : null;
+  return h('footer', { class: 'foot' },
+    h('button', { class: 'linkbtn', type: 'button', on: { click: function () { openSheet('rules'); } } }, 'How picks are made'),
+    h('p', { text: (v != null ? 'Rules v' + v + '. ' : '') + 'All times Eastern.' }),
+    h('p', { text: 'For adults 21+. Picks are estimates, not guarantees. Bet only what you can afford to lose. Gambling problem? Call 1-888-ADMIT-IT.' }));
+}
+
+/* ---------- Record ---------- */
+var ROW_LABEL = { shots: 'Shots on goal', points: 'Points', saves: 'Saves', goals: 'Anytime goal', parlays: 'Parlays', pulled: 'Pulled' };
+function sampleN(r) { var n = num(r.n); return n != null ? n : (num(r.w) || 0) + (num(r.l) || 0); }
+function renderRecord() {
+  app.appendChild(header('The Record', null));
+  if (!S.loaded) { app.appendChild(h('div', { class: 'stack' }, h('div', { class: 'skel sm' }), h('div', { class: 'skel' }))); return; }
+  if (!S.record) {
+    app.appendChild(h('div', { class: 'card empty', style: 'margin-top:12px' },
+      h('div', { class: 't', text: "Can't load the Record. Check your connection." }),
+      h('div', { style: 'margin-top:12px' }, h('button', { class: 'btn', type: 'button', text: 'Try again', on: { click: function () { load().then(function () { render(); }); } } }))));
+    app.appendChild(footer()); return;
+  }
+  var sum = isObj(S.record.summary) ? S.record.summary : {}, hd = isObj(sum.headline) ? sum.headline : {};
+  var minS = num(ruleVal('min_sample')), stake = ruleVal('stake'), n = sampleN(hd);
+  var few = function (k) { return minS == null || k < minS; };
+  var fewTag = 'Too few to judge' + (minS != null ? ' (under ' + minS + ')' : '');
+
+  if (!n) {
+    app.appendChild(h('div', { class: 'card empty', style: 'margin-top:8px' },
+      h('div', { class: 't', text: 'No graded picks yet. Results post once each game is final.' })));
+  } else {
+    app.appendChild(h('div', { class: 'big' }, h('span', { class: 'wl', text: (num(hd.w) || 0) + '-' + (num(hd.l) || 0) }),
+      h('span', { class: 'un ' + signCls(hd.units), text: units(hd.units, 1) || '' })));
+    var sub = ['Singles'];
+    if (num(hd.push)) sub.push(hd.push + ' push'); if (num(hd.void)) sub.push(hd.void + ' void');
+    sub.push((stake != null ? stake + ' unit each, ' : '') + 'at the posted price');
+    app.appendChild(h('div', { class: 'subline', text: sub.join(' · ') }));
+    if (few(n)) {
+      app.appendChild(h('div', { class: 'chance', style: 'margin-top:10px' }, 'Hit ', h('b', { text: (num(hd.w) || 0) + ' of ' + n })));
+      app.appendChild(h('div', { class: 'subline', text: fewTag }));
+    } else {
+      app.appendChild(h('div', { class: 'chance', style: 'margin-top:10px' }, 'Hit ', h('b', { text: pctNear(hd.hit_rate) || 'not posted' }),
+        pctNear(hd.needed) ? ' · needed ' + pctNear(hd.needed) : ''));
+      var bar = chanceBar(hd.hit_rate, hd.needed); if (bar) app.appendChild(bar);
+    }
+    var rows = arr(sum.rows).filter(function (r) { return isObj(r) && ((num(r.w) || 0) + (num(r.l) || 0) + (num(r.push) || 0) + (num(r.void) || 0)) > 0; });
+    if (rows.length) {
+      var tbl = h('div', { class: 'tbl', role: 'table', 'aria-label': 'Record by market' });
+      tbl.appendChild(h('div', { class: 'tr th', role: 'row' }, h('span', { role: 'columnheader', text: '' }), h('span', { role: 'columnheader', text: 'W-L' }),
+        h('span', { role: 'columnheader', text: 'Hit' }), h('span', { role: 'columnheader', text: 'Needed' }), h('span', { role: 'columnheader', text: 'Units' })));
+      rows.forEach(function (r) {
+        var k = sampleN(r), u = num(r.units), lab;
+        if (r.key === 'pulled') lab = h('span', { class: 'lbl', role: 'cell' }, 'Pulled', h('small', { text: '(not counted above)' }));
+        else lab = h('span', { class: 'lbl', role: 'cell', text: r.label || ROW_LABEL[r.key] || str(r.key) || 'Other' });
+        var tr = h('div', { class: 'tr', role: 'row' }, lab, h('span', { class: 'num', role: 'cell', text: (num(r.w) || 0) + '-' + (num(r.l) || 0) }));
+        if (!k) tr.appendChild(h('span', { class: 'span2 mu', role: 'cell', text: '—' }));
+        else if (few(k)) tr.appendChild(h('span', { class: 'span2', role: 'cell', text: (num(r.w) || 0) + ' of ' + k }));
+        else { tr.appendChild(h('span', { role: 'cell', text: pctNear(r.hit_rate) || '—' })); tr.appendChild(h('span', { role: 'cell', text: pctNear(r.needed) || '—' })); }
+        tr.appendChild(h('span', { class: 'num ' + signCls(u), role: 'cell', text: u == null ? '—' : (units(u, 1) || '').replace(/u$/, '') }));
+        if (k && few(k)) tr.appendChild(h('span', { class: 'few', text: fewTag }));
+        tbl.appendChild(tr);
+      });
+      app.appendChild(tbl);
+    }
+    app.appendChild(h('p', { class: 'note', text: 'Graded at the worst price shown. Push and void are 0 units and left out of hit rate.' }));
+  }
+
+  /* list */
+  var fl = h('div', { class: 'filters', role: 'group', 'aria-label': 'Show' });
+  [['all', 'All'], ['singles', 'Singles'], ['parlays', 'Parlays'], ['pulled', 'Pulled']].forEach(function (f) {
+    fl.appendChild(h('button', { class: 'fbtn', type: 'button', 'aria-pressed': S.filter === f[0] ? 'true' : 'false',
+      on: { click: function () { S.filter = f[0]; rerender(); } } }, h('span', { text: f[1] })));
+  });
+  app.appendChild(fl);
+
+  var seen = {}, nights = [];
+  arr(S.record.nights).concat(S.older).forEach(function (nt) { if (isObj(nt) && !seen[nt.date]) { seen[nt.date] = 1; nights.push(nt); } });
+  nights.sort(function (a, b) { return str(a.date) < str(b.date) ? 1 : (str(a.date) > str(b.date) ? -1 : 0); });
+  var shown = 0;
+  nights.forEach(function (nt) {
+    var ents = arr(nt.entries).filter(isObj).filter(function (e) {
+      if (S.filter === 'singles') return e.kind !== 'parlay' && !e.pulled;
+      if (S.filter === 'parlays') return e.kind === 'parlay' && !e.pulled;
+      if (S.filter === 'pulled') return !!e.pulled;
+      return true;
+    });
+    if (!ents.length) return;
+    shown++;
+    var wl = (num(nt.w) || 0) + (num(nt.l) || 0), tail;
+    if (nt.graded) tail = (num(nt.w) || 0) + '-' + (num(nt.l) || 0) + (units(nt.units, 1) ? ' · ' + units(nt.units, 1) : '');
+    else if (wl) tail = (num(nt.w) || 0) + '-' + (num(nt.l) || 0) + (units(nt.units, 1) ? ' · ' + units(nt.units, 1) : '') + ' so far';
+    else tail = null;
+    var sec = h('section', { class: 'night' }, h('h3', null, fDateLong(nt.date) + (tail ? ' · ' + tail : ''),
+      nt.graded ? null : h('span', { class: 'mu', text: (tail ? ' · ' : ' · ') + 'results post once each game is final' })));
+    ents.forEach(function (e) { entryRow(e, nt, false).forEach(function (x) { sec.appendChild(x); }); });
+    app.appendChild(sec);
+  });
+  if (!shown) app.appendChild(h('p', { class: 'mu', style: 'margin-top:16px', text: nights.length ? 'Nothing under this filter yet.' : 'No nights on the Record yet.' }));
+
+  var older = arr(S.record.older);
+  if (S.olderIdx < older.length) {
+    app.appendChild(h('button', { class: 'btn wide', type: 'button', style: 'margin-top:18px', text: S.olderBusy ? 'Loading' : 'Show older', on: { click: loadOlder } }));
+    if (S.olderErr) app.appendChild(h('p', { class: 'note', style: 'color:var(--warn)', text: "Couldn't load older results. Try again." }));
+  }
+  app.appendChild(footer());
+}
+function entryRow(e, nt, isLeg) {
+  var res = e.result == null ? null : str(e.result), tagText = res || '–';
+  var known = { W: 1, L: 1, PUSH: 1, VOID: 1 };
+  var tag = h('span', { class: 'tg ' + (res && known[res] ? res : 'none'), text: tagText });
+  if (!res) tag.setAttribute('aria-label', 'Awaiting result');
+  var key = str(nt.date) + '|' + str(e.id), l1, l2 = [];
+  var ptag = e.pulled ? h('span', { class: 'ptag', text: 'PULLED' }) : null;
+  if (e.kind === 'parlay') {
+    var legs = arr(e.legs).filter(isObj);
+    l1 = h('div', { class: 'e1' }, ptag, h('span', { class: 'pn', text: 'Parlay' }), ' · ' + legs.length + ' legs · ' + odds(e.price) +
+      (res ? ' · ' + (units(e.units, 2) || '') : ''));
+    if (e.pulled) l2.push('pulled' + (fTime(e.pulled.at) ? ' ' + fTime(e.pulled.at) : '') + (e.pulled.reason ? ': ' + str(e.pulled.reason) : ''));
+    if (!res) l2.push('Awaiting result');
+    var open = !!S.legsOpen[key];
+    var btn = h('button', { class: 'ent', type: 'button', 'aria-expanded': open ? 'true' : 'false',
+      on: { click: function () { S.legsOpen[key] = !S.legsOpen[key]; rerender(); } } },
+      tag, h('div', { class: 'bd' }, l1, l2.length ? h('div', { class: 'e2', text: l2.join(' · ') }) : null),
+      h('span', { class: 'chev', style: open ? 'transform:rotate(180deg)' : null }, icon('down', 16)));
+    var out = [btn];
+    if (open) { var box = h('div', { class: 'legs' }); legs.forEach(function (lg) { entryRow(lg, nt, true).forEach(function (x) { box.appendChild(x); }); }); out.push(box); }
+    return out;
+  }
+  l1 = h('div', { class: 'e1' }, ptag, h('span', { class: 'pn', text: e.player || 'Player not named' }), ' ' + (e.bet || ''));
+  l2.push(odds(e.price));
+  if (e.pulled) l2.push('pulled' + (fTime(e.pulled.at) ? ' ' + fTime(e.pulled.at) : '') + (e.pulled.reason ? ': ' + str(e.pulled.reason) : ''));
+  if (!res) l2.push('Awaiting result');
+  else { if (e.actual) l2.push(str(e.actual)); if (!isLeg && units(e.units, 2)) l2.push(units(e.units, 2)); }
+  return [h('div', { class: 'ent' }, tag, h('div', { class: 'bd' }, l1, h('div', { class: 'e2', text: l2.join(' · ') })))];
+}
+function loadOlder() {
+  if (S.olderBusy || !S.record) return;
+  var list = arr(S.record.older), path = list[S.olderIdx]; if (!path) return;
+  path = str(path).replace(/^\/+/, '');
+  S.olderBusy = true; S.olderErr = false; rerender();
+  getJSON(BASE + path).then(function (j) {
+    S.olderBusy = false; S.olderIdx++; S.older = S.older.concat(arr(j.nights)); rerender();
+  }, function () { S.olderBusy = false; S.olderErr = true; rerender(); });
+}
+
+/* ---------- tabs + routing ---------- */
+function renderTabs() {
+  clear(tabsEl);
+  var mk = function (v, label) {
+    return h('button', { class: 'tab', type: 'button', 'aria-current': S.view === v ? 'page' : null, text: label, on: { click: function () { go(v); } } });
+  };
+  tabsEl.appendChild(h('div', { class: 'in' }, mk('tonight', 'Tonight'), mk('record', 'Record')));
+}
+function viewFromHash() { return location.hash === '#record' ? 'record' : 'tonight'; }
+function go(v) {
+  if (v === S.view) { window.scrollTo(0, 0); return; }
+  try {
+    if (v === 'record') history.pushState(null, '', location.pathname + location.search + '#record');
+    else history.pushState(null, '', location.pathname + location.search);
+  } catch (e) { location.hash = v === 'record' ? '#record' : ''; }
+  route();
+}
+function route() {
+  var v = viewFromHash();
+  if (v !== S.view) {
+    S.scroll[S.view] = window.scrollY || 0; S.view = v; render(); window.scrollTo(0, S.scroll[v] || 0);
+  }
+}
+
+/* ---------- sheets ---------- */
+function openSheet(name) {
+  S.sheetFocus = document.activeElement; S.sheet = name;
+  try { history.pushState({ sheet: name }, '', location.href); } catch (e) { /* ignore */ }
+  fillSheet();
+  var c = sheetRoot.querySelector('.ibtn'); if (c) c.focus();
+}
+function closeSheet(fromPop) {
+  if (!S.sheet) return;
+  if (!fromPop && history.state && history.state.sheet) { history.back(); return; }
+  S.sheet = null; clear(sheetRoot); document.body.style.overflow = '';
+  if (S.sheetFocus && document.contains(S.sheetFocus) && S.sheetFocus.focus) S.sheetFocus.focus();
+}
+function fillSheet() {
+  var prevScroll = 0, old = sheetRoot.querySelector('.sheet-b'); if (old) prevScroll = old.scrollTop;
+  clear(sheetRoot);
+  var title = S.sheet === 'rules' ? 'How picks are made' : 'Update status';
+  var body = h('div', { class: 'sheet-b' });
+  if (S.sheet === 'rules') rulesBody(body); else statusBody(body);
+  var sheet = h('div', { class: 'sheet', role: 'dialog', 'aria-modal': 'true', 'aria-label': title },
+    h('div', { class: 'sheet-h' }, h('h2', { text: title }),
+      h('button', { class: 'ibtn', type: 'button', 'aria-label': 'Close', on: { click: function () { closeSheet(false); } } }, icon('close', 22))), body);
+  var scrim = h('div', { class: 'scrim', on: { click: function (e) { if (e.target === scrim) closeSheet(false); } } }, sheet);
+  sheetRoot.appendChild(scrim); document.body.style.overflow = 'hidden'; body.scrollTop = prevScroll;
+}
+function slot(key, kind) {
+  var v = ruleVal(key), n = num(v), t = null;
+  if (kind === 'text') { if (v != null && v !== '') t = str(v); }
+  else if (n != null) {
+    if (kind === 'price') t = odds(n);
+    else if (kind === 'pct') t = (Math.round(n * 1000) / 10) + '%';
+    else if (kind === 'pts') t = String(Math.round(n * 1000) / 10);
+    else t = String(n);
+  }
+  return t == null ? h('span', { class: 'slot miss', text: '[missing]' }) : h('span', { class: 'slot', text: t });
+}
+/* Sentences live here; every number comes from rules.json. "{key|kind}" kinds: price, pct, pts (0.02 -> 2), num, text. */
+var RULES = [
+  'Every pick needs a real Hard Rock price of {price_gate|price} or better, and no longer than {max_price|price}.',
+  "Our chance blends our model ({model_weight|pct}) with Hard Rock's own price ({market_weight|pct}).",
+  'Before blending, we take {uncertainty|pts} points off our model on every pick, {under_penalty|pts} more on unders, and {thin_over_penalty|pts} more on overs with a thin sample.',
+  "We only pick when our chance is at least {min_p|pct} and beats the price's break-even by {margin_confirmed|pts} points ({margin_early|pts} when the lineup isn't confirmed).",
+  'Thin sample means under {thin_rows|num} games of history, or under {thin_team_games|num} with his team. Under {min_history|num} games of history means no pick.',
+  "If our model sits more than {news_gap|pts} points above what Hard Rock's price implies, we wait for the lineup. More than {too_good|pts} points and we pass, because the book likely knows something.",
+  'No more than {max_per_player|num} per player and {max_per_game|num} per game on any night.',
+  'Parlays are two or three legs, one leg per game, up to {parlay_cap|num} a night. Each leg needs a chance of {parlay_leg_min_p|pct} or better; the parlay needs {parlay_min_p_2|pct} for two legs and {parlay_min_p_3|pct} for three.',
+  'A pick is pulled if the player is out of the lineup, the price goes past {price_gate|price}, the line is gone, our chance falls to less than {pull_margin|pts} points over break-even, or the price moves {drift_pull|pts} points against us before the lineup is confirmed.',
+  "Results come from the NHL boxscore once each game is final. Overtime counts, shootouts don't. Graded at the worst price shown, {stake|num} unit each.",
+  'We need {min_sample|num} graded picks in a market before judging it. A market that is losing badly after {pause_legs|num} picks switches itself off, and no other rule changes before {change_legs|num}.'
+];
+function rulesBody(body) {
+  var v = S.rules ? S.rules.version : null, up = S.rules ? S.rules.updated : null;
+  var head = h('div', { class: 'mu', style: 'font-size:12px' });
+  head.appendChild(node('Rules v')); head.appendChild(v != null ? node(str(v)) : h('span', { class: 'slot miss', text: '[missing]' }));
+  head.appendChild(node(' · changed ')); head.appendChild(up ? node(fDateShort(up)) : h('span', { class: 'slot miss', text: '[missing]' }));
+  body.appendChild(head);
+  if (!S.rules) body.appendChild(h('p', { style: 'color:var(--warn)', text: "The rule numbers didn't load, so they show as [missing] below." }));
+  var ol = h('ol', { class: 'rules' });
+  RULES.forEach(function (s) {
+    var li = h('li'), re = /\{([a-z0-9_]+)\|([a-z]+)\}/g, last = 0, m;
+    while ((m = re.exec(s))) { if (m.index > last) li.appendChild(node(s.slice(last, m.index))); li.appendChild(slot(m[1], m[2])); last = re.lastIndex; }
+    if (last < s.length) li.appendChild(node(s.slice(last)));
+    ol.appendChild(li);
+  });
+  body.appendChild(ol);
+  body.appendChild(h('p', { class: 'note', text: 'All times Eastern. Picks are estimates, not guarantees.' }));
+}
+function statusBody(body) {
+  var sl = S.slate || {}, st = isObj(sl.status) ? sl.status : {}, exp = expired(), pool = isObj(st.pool) ? st.pool : {};
+  var row = function (v, bad) { body.appendChild(h('div', { class: 'kv' }, h('span', { class: 'v' + (bad ? ' bad' : ''), text: v }))); };
+  var pa = fStamp(st.prices_at), pt;
+  switch (st.prices_state) {
+    case 'ok': pt = pa ? 'Hard Rock prices read at ' + pa : 'Prices not read yet'; break;
+    case 'not_yet': pt = 'Prices not read yet today'; break;
+    case 'limited': pt = (pa ? 'Hard Rock prices read at ' + pa + '. ' : '') + 'Limited today: fewer games or markets than usual.'; break;
+    case 'pool_empty': pt = 'No Hard Rock prices today. The odds pulls ran out.'; break;
+    case 'feed_down': pt = 'No Hard Rock prices today. The odds feed did not answer.'; break;
+    default: pt = (pa ? 'Hard Rock prices read at ' + pa : 'Prices not read yet') + (st.prices_state ? ' (' + str(st.prices_state) + ')' : '');
+  }
+  if (exp) pt = 'Prices not read yet today. Last read ' + (pa || 'not on file') + '.';
+  row(pt, st.prices_state === 'pool_empty' || st.prices_state === 'feed_down');
+  row(fStamp(st.next_price_read_at) ? 'Next price read ' + fStamp(st.next_price_read_at) : 'No further price read scheduled');
+  row(st.lineups_state === 'failed' ? 'Lineups not checked. The lineup source did not answer, so picks stay Early.'
+    : (fStamp(st.lineups_at) ? 'Lineups checked at ' + fStamp(st.lineups_at) : 'Lineups not checked yet'));
+  if (fStamp(st.goalies_at)) row('Goalies checked at ' + fStamp(st.goalies_at));
+  row((st.stats_state === 'behind' ? 'Stats are behind. ' : '') + (st.stats_through ? 'Stats through games of ' + fDateShort(st.stats_through) : 'Stats not built yet') +
+    (fStamp(st.stats_built_at) ? ', built ' + fStamp(st.stats_built_at) : ''), st.stats_state === 'behind');
+  if (num(st.lines_checked) != null) row('Checked ' + st.lines_checked + ' Hard Rock lines');
+  var pl = [];
+  if (num(pool.pulls_left) != null) pl.push(pool.pulls_left + ' odds pulls left');
+  if (num(pool.game_days_left) != null) pl.push('About ' + pool.game_days_left + ' game ' + (pool.game_days_left === 1 ? 'day' : 'days') + ' of pulls left');
+  var nk = Array.isArray(pool.keys) ? pool.keys.length : num(pool.keys);
+  if (nk != null) pl.push(nk + (nk === 1 ? ' odds key' : ' odds keys') + ' in use');
+  row(pl.length ? pl.join('. ') + '.' : 'Odds pulls left: not reported', pool.low === true);
+  row(fStamp(sl.generated_at) ? 'Last update ' + fStamp(sl.generated_at) : 'Last update time not on file', stale() || exp);
+  var lr = isObj(st.last_run) ? st.last_run : null;
+  if (lr && lr.ok === false) row('The last update failed' + (fStamp(lr.at) ? ' at ' + fStamp(lr.at) : '') + (lr.failed_step ? ' (' + str(lr.failed_step) + ')' : '') + '.', true);
+  var ex = arr(st.excluded_teams).filter(isObj);
+  if (ex.length) row('Not covered tonight: ' + ex.map(function (x) { return str(x.team) + (x.reason ? ' (' + str(x.reason) + ')' : ''); }).join(', '));
+  if (S.fetchFail) row("Can't reach the picks right now. Showing what loaded at " + (fTime(S.loadedAt) || 'an earlier time') + '.', true);
+  body.appendChild(h('p', { class: 'note', text: 'This page checks for updates about every ' + Math.round(uiVal('refresh_sec') / 60) + ' minutes while it is open. All times Eastern.' }));
+}
+
+/* ---------- wiring ---------- */
+window.addEventListener('popstate', function () { if (S.sheet) closeSheet(true); route(); });
+window.addEventListener('hashchange', route);
+document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && S.sheet) closeSheet(false); });
+document.addEventListener('visibilitychange', function () {
+  if (document.hidden) writeSeen(); else load().then(schedule);
+});
+window.addEventListener('pagehide', writeSeen);
+setInterval(function () { if (S.loaded && !document.hidden) maybeRender(); }, 30000);
+
+S.view = viewFromHash();
+renderTabs();
+load().then(schedule);
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,19 @@
+{
+ "fixture": true,
+ "generated_at": "2026-10-11T18:52:00-04:00",
+ "summary": {
+  "headline": {
+   "w": 0,
+   "l": 0,
+   "push": 0,
+   "void": 0,
+   "units": 0.0,
+   "hit_rate": null,
+   "needed": null,
+   "n": 0
+  },
+  "rows": []
+ },
+ "nights": [],
+ "older": []
+}
