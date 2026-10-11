@@ -1,15 +1,15 @@
 {
  "ok": true,
  "slate_date": "2026-10-11",
- "started_at": "2026-10-11T19:22:48-04:00",
- "finished_at": "2026-10-11T19:22:54-04:00",
- "last_ok_at": "2026-10-11T19:22:48-04:00",
+ "started_at": "2026-10-11T19:28:41-04:00",
+ "finished_at": "2026-10-11T19:28:41-04:00",
+ "last_ok_at": "2026-10-11T19:28:41-04:00",
  "failed_step": null,
  "steps": [
   {
    "step": "rules",
-   "status": "ok",
-   "note": "rules.json written"
+   "status": "skipped",
+   "note": "unchanged"
   },
   {
    "step": "schedule",
@@ -18,13 +18,13 @@
   },
   {
    "step": "stats",
-   "status": "ok",
-   "note": "2 window(s) read"
+   "status": "skipped",
+   "note": "nothing new"
   },
   {
    "step": "odds",
-   "status": "skipped",
-   "note": "no odds keys set"
+   "status": "ok",
+   "note": "no pull due"
   },
   {
    "step": "lineups",
@@ -48,21 +48,38 @@
   },
   {
    "step": "record",
-   "status": "ok",
-   "note": "record.json"
+   "status": "skipped",
+   "note": "unchanged"
   }
  ],
  "sources": {
   "nhl_web": "ok",
   "nhl_stats": "ok",
-  "odds": "not tried",
+  "odds": "ok",
   "dailyfaceoff": "not tried"
  },
- "keys": [],
- "pool_total": null,
- "allowance": null,
- "tier": null,
- "budget_today": null,
+ "keys": [
+  {
+   "n": 1,
+   "left": 347
+  },
+  {
+   "n": 2,
+   "left": 109
+  },
+  {
+   "n": 3,
+   "left": 500
+  },
+  {
+   "n": 4,
+   "left": 500
+  }
+ ],
+ "pool_total": 1456,
+ "allowance": 10.1818,
+ "tier": 4,
+ "budget_today": 30,
  "budget_used_today": 0,
  "prices_state": "not_yet",
  "prices_at": null,

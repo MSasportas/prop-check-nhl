@@ -1,13 +1,26 @@
 {
  "date": "2026-10-11",
- "plan": null,
- "events": {},
- "events_at": null,
+ "plan": {
+  "allowance": 10.1818,
+  "tier": 4,
+  "budget_today": 30,
+  "pool_at_plan": 1456,
+  "games_left": 143,
+  "games_today": 3,
+  "key_count": 4,
+  "made_at": "2026-10-11T19:28:41-04:00"
+ },
+ "events": {
+  "2026020084": "12a90ee4a941f857d0fc417663fb00c1",
+  "2026020085": "a3bbd0dafd4fc9789cb6c3292aad999b",
+  "2026020086": "a49ddd8a44071e340299ae7f22b4f359"
+ },
+ "events_at": "2026-10-11T19:28:41-04:00",
  "unknown_teams": [],
  "done": {},
  "stage": null,
  "skipped": {},
  "last_fail_at": null,
  "fail_note": null,
- "key_count": null
+ "key_count": 4
 }

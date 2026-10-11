@@ -1,6 +1,6 @@
 {
  "slate_date": "2026-10-11",
- "generated_at": "2026-10-11T19:22:48-04:00",
+ "generated_at": "2026-10-11T19:28:41-04:00",
  "valid_until": "2026-10-12T05:00:00-04:00",
  "status": {
   "prices_state": "not_yet",
@@ -14,26 +14,21 @@
   "stats_state": "ok",
   "last_run": {
    "ok": true,
-   "at": "2026-10-11T19:22:48-04:00",
+   "at": "2026-10-11T19:28:41-04:00",
    "failed_step": null
   },
   "pool": {
-   "pulls_left": null,
-   "keys": 0,
-   "game_days_left": null,
+   "pulls_left": 1456,
+   "keys": 4,
+   "game_days_left": 21,
    "low": false
   },
   "excluded_teams": [],
   "lines_checked": 0,
   "lines_failed": 0,
-  "tier": null
+  "tier": 4
  },
- "banners": [
-  {
-   "level": "warn",
-   "text": "Hard Rock prices are not connected: no odds keys are set."
-  }
- ],
+ "banners": [],
  "empty": {
   "code": "all_started",
   "text": "Every game has started.",
