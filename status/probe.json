@@ -1,0 +1,45 @@
+{
+ "ranAt": "2026-10-11T22:23:54+00:00",
+ "event": "push",
+ "runId": "38180256014",
+ "keys": [
+  {
+   "n": 1,
+   "status": 200,
+   "left": "114",
+   "used": "386"
+  }
+ ],
+ "hosts": {
+  "nhl_web": {
+   "status": 200,
+   "bytes": 96554,
+   "nextData": false
+  },
+  "nhl_stats": {
+   "status": 200,
+   "bytes": 6664,
+   "nextData": false
+  },
+  "dailyfaceoff_goalies": {
+   "status": 200,
+   "bytes": 120173,
+   "nextData": true
+  },
+  "dailyfaceoff_lines": {
+   "status": 200,
+   "bytes": 250120,
+   "nextData": true
+  },
+  "pages": {
+   "status": 404,
+   "bytes": 0,
+   "nextData": false
+  },
+  "pages_root": {
+   "status": 200,
+   "bytes": 1825,
+   "nextData": false
+  }
+ }
+}
