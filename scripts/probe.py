@@ -34,3 +34,20 @@ out["hosts"] = hosts
 os.makedirs("status", exist_ok=True)
 json.dump(out, open("status/probe.json", "w"), indent=1)
 print(json.dumps({k: v for k, v in out.items()}, indent=1))
+
+# One-off: save a trimmed structure sample of Daily Faceoff pages so the parser can be written and tested.
+import re
+def trim(x, depth=0):
+    if isinstance(x, dict): return {k: trim(v, depth + 1) for k, v in list(x.items())[:60]}
+    if isinstance(x, list): return [trim(v, depth + 1) for v in x[:(40 if depth < 4 else 4)]]
+    if isinstance(x, str): return x[:160]
+    return x
+for name, url in {"df_goalies": "https://www.dailyfaceoff.com/starting-goalies",
+                  "df_lines": "https://www.dailyfaceoff.com/teams/philadelphia-flyers/line-combinations"}.items():
+    st, h, body = get(url)
+    m = re.search(rb'<script id="__NEXT_DATA__"[^>]*>(.*?)</script>', body, re.S)
+    if m:
+        try:
+            json.dump(trim(json.loads(m.group(1)).get("props", {}).get("pageProps", {})), open("status/%s_sample.json" % name, "w"), indent=1)
+        except Exception as e:
+            print(name, "parse failed", type(e).__name__)
