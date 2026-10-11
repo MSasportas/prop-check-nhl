@@ -1,0 +1,464 @@
+{
+ "data": [
+  {
+   "homeTeamId": 30,
+   "homeTeamName": "Washington Capitals",
+   "homeTeamSlug": "washington-capitals",
+   "homeTeamFantasydataId": 15,
+   "homeTeamLogoSvg": "https://api.dailyfaceoff.com/uploads/team/logo_svg/30/washington_capitals.svg",
+   "homeGoalieId": 28990,
+   "homeGoalieLegacyId": null,
+   "homeGoalieFantasydataId": 30003973,
+   "homeGoaliePuckpediaUrlId": "logan-thompson",
+   "homeGoalieSlug": "28990-logan-thompson",
+   "homeGoalieName": "Logan Thompson",
+   "homeGoalieRating": null,
+   "homeGoaliePositionRank": null,
+   "homeGoaliePositionRankColor": null,
+   "homeGoalieFantasydataFaceUrl": "https://bctn-data.s3.amazonaws.com/headshots/nhl/200x200/3/39865351-af7a-419c-8db6-5b270c2dd3ec.jpg",
+   "homeGoalieHeadshotUrl": "https://api.dailyfaceoff.com/uploads/player/headshot/28990/Thompson-Logan_WSH-Dec-2024_.png",
+   "homeGoalieWins": 3,
+   "homeGoalieLosses": 0,
+   "homeGoalieOvertimeLosses": 0,
+   "homeGoalieShutouts": 0,
+   "homeGoalieSavePercentage": "0.929",
+   "homeGoalieGoalsAgainstAvg": "1.99",
+   "homeGoalieFantasySalary": null,
+   "homeGoalieCapHit": 5850000,
+   "homeGoalieContractLength": 6,
+   "homeGoalieContractExpiryYear": 2031,
+   "homeGoalieContractExpiresAs": "UFA",
+   "homeNewsStrengthId": 2,
+   "homeNewsStrengthName": "Confirmed",
+   "homeNewsDetails": "Thompson will start Sunday vs. the Kraken. ",
+   "homeNewsFantasyDetails": "",
+   "homeNewsSourceName": "Sammi Silber",
+   "homeNewsSourceUrl": "https://x.com/sammisilber/status/2109355312360853747",
+   "homeNewsCreatedAt": "2026-10-11T18:49:23.841Z",
+   "awayTeamId": 779,
+   "awayTeamName": "Seattle Kraken",
+   "awayTeamSlug": "seattle-kraken",
+   "awayTeamFantasydataId": 36,
+   "awayTeamLogoSvg": "https://api.dailyfaceoff.com/uploads/team/logo_svg/779/seattle_kraken.svg",
+   "awayGoalieId": 23589,
+   "awayGoalieLegacyId": null,
+   "awayGoalieFantasydataId": 30004419,
+   "awayGoaliePuckpediaUrlId": "joel-daccord",
+   "awayGoalieSlug": "23589-joey-daccord",
+   "awayGoalieName": "Joey Daccord",
+   "awayGoalieRating": 69.77874200534711,
+   "awayGoaliePositionRank": null,
+   "awayGoaliePositionRankColor": null,
+   "awayGoalieFantasydataFaceUrl": "https://bctn-data.s3.amazonaws.com/headshots/nhl/200x200/c/cd985f0a-3d12-45f9-9b97-cc448388e19e.jpg",
+   "awayGoalieHeadshotUrl": "https://api.dailyfaceoff.com/uploads/player/headshot/23589/Daccord-Joey_SEA-Oct2024_.png",
+   "awayGoalieWins": 2,
+   "awayGoalieLosses": 1,
+   "awayGoalieOvertimeLosses": 0,
+   "awayGoalieShutouts": 0,
+   "awayGoalieSavePercentage": "0.911",
+   "awayGoalieGoalsAgainstAvg": "2.63",
+   "awayGoalieFantasySalary": null,
+   "awayGoalieCapHit": 5000000,
+   "awayGoalieContractLength": 5,
+   "awayGoalieContractExpiryYear": 2030
+  },
+  {
+   "homeTeamId": 20,
+   "homeTeamName": "New York Rangers",
+   "homeTeamSlug": "new-york-rangers",
+   "homeTeamFantasydataId": 12,
+   "homeTeamLogoSvg": "https://api.dailyfaceoff.com/uploads/team/logo_svg/20/new-york-rangers.svg",
+   "homeGoalieId": 32794,
+   "homeGoalieLegacyId": null,
+   "homeGoalieFantasydataId": 30004896,
+   "homeGoaliePuckpediaUrlId": "dylan-garand",
+   "homeGoalieSlug": "32794-dylan-garand",
+   "homeGoalieName": "Dylan Garand",
+   "homeGoalieRating": null,
+   "homeGoaliePositionRank": null,
+   "homeGoaliePositionRankColor": null,
+   "homeGoalieFantasydataFaceUrl": "https://bctn-data.s3.amazonaws.com/headshots/nhl/200x200/e/e57f671c-6bc0-4532-b072-5aaa1e0a269f.jpg",
+   "homeGoalieHeadshotUrl": "https://api.dailyfaceoff.com/uploads/player/headshot/32794/Garand-Dylan_NYR-2026_.png",
+   "homeGoalieWins": 1,
+   "homeGoalieLosses": 1,
+   "homeGoalieOvertimeLosses": 0,
+   "homeGoalieShutouts": 1,
+   "homeGoalieSavePercentage": "0.971",
+   "homeGoalieGoalsAgainstAvg": "0.67",
+   "homeGoalieFantasySalary": null,
+   "homeGoalieCapHit": 875000,
+   "homeGoalieContractLength": 2,
+   "homeGoalieContractExpiryYear": 2028,
+   "homeGoalieContractExpiresAs": "RFA",
+   "homeNewsStrengthId": 2,
+   "homeNewsStrengthName": "Confirmed",
+   "homeNewsDetails": "Garand will start vs. Vancouver on Sunday.",
+   "homeNewsFantasyDetails": "",
+   "homeNewsSourceName": "Peter Baugh",
+   "homeNewsSourceUrl": "https://x.com/peter_baugh/status/2109291323560022225?s=46",
+   "homeNewsCreatedAt": "2026-10-11T15:20:38.859Z",
+   "awayTeamId": 29,
+   "awayTeamName": "Vancouver Canucks",
+   "awayTeamSlug": "vancouver-canucks",
+   "awayTeamFantasydataId": 28,
+   "awayTeamLogoSvg": "https://api.dailyfaceoff.com/uploads/team/logo_svg/29/vancouver-canucks.svg",
+   "awayGoalieId": 4757,
+   "awayGoalieLegacyId": null,
+   "awayGoalieFantasydataId": 30004058,
+   "awayGoaliePuckpediaUrlId": "kevin-lankinen",
+   "awayGoalieSlug": "4757-kevin-lankinen",
+   "awayGoalieName": "Kevin Lankinen",
+   "awayGoalieRating": null,
+   "awayGoaliePositionRank": null,
+   "awayGoaliePositionRankColor": null,
+   "awayGoalieFantasydataFaceUrl": "https://bctn-data.s3.amazonaws.com/headshots/nhl/200x200/3/3567510e-daff-48ba-8789-58a042a16ad8.jpg",
+   "awayGoalieHeadshotUrl": "https://api.dailyfaceoff.com/uploads/player/headshot/4757/Lankinen-Kevin_VAN-2024_.png",
+   "awayGoalieWins": 1,
+   "awayGoalieLosses": 4,
+   "awayGoalieOvertimeLosses": 0,
+   "awayGoalieShutouts": 0,
+   "awayGoalieSavePercentage": "0.783",
+   "awayGoalieGoalsAgainstAvg": "7.15",
+   "awayGoalieFantasySalary": null,
+   "awayGoalieCapHit": 4500000,
+   "awayGoalieContractLength": 5,
+   "awayGoalieContractExpiryYear": 2030
+  },
+  {
+   "homeTeamId": 22,
+   "homeTeamName": "Philadelphia Flyers",
+   "homeTeamSlug": "philadelphia-flyers",
+   "homeTeamFantasydataId": 13,
+   "homeTeamLogoSvg": "https://api.dailyfaceoff.com/uploads/team/logo_svg/22/philadelphia-flyers.svg",
+   "homeGoalieId": 27288,
+   "homeGoalieLegacyId": null,
+   "homeGoalieFantasydataId": 30003192,
+   "homeGoaliePuckpediaUrlId": "joseph-woll",
+   "homeGoalieSlug": "27288-joseph-woll",
+   "homeGoalieName": "Joseph Woll",
+   "homeGoalieRating": null,
+   "homeGoaliePositionRank": null,
+   "homeGoaliePositionRankColor": null,
+   "homeGoalieFantasydataFaceUrl": "https://bctn-data.s3.amazonaws.com/headshots/nhl/200x200/8/85efc3a4-760a-4b24-bbcf-3757f512666b.jpg",
+   "homeGoalieHeadshotUrl": "https://api.dailyfaceoff.com/uploads/player/headshot/27288/Woll-Joseph_PHI-2026_.png",
+   "homeGoalieWins": 0,
+   "homeGoalieLosses": 1,
+   "homeGoalieOvertimeLosses": 2,
+   "homeGoalieShutouts": 0,
+   "homeGoalieSavePercentage": "0.927",
+   "homeGoalieGoalsAgainstAvg": "2.61",
+   "homeGoalieFantasySalary": null,
+   "homeGoalieCapHit": 3666667,
+   "homeGoalieContractLength": 3,
+   "homeGoalieContractExpiryYear": 2028,
+   "homeGoalieContractExpiresAs": "UFA",
+   "homeNewsStrengthId": null,
+   "homeNewsStrengthName": null,
+   "homeNewsDetails": null,
+   "homeNewsFantasyDetails": null,
+   "homeNewsSourceName": null,
+   "homeNewsSourceUrl": null,
+   "homeNewsCreatedAt": null,
+   "awayTeamId": 6,
+   "awayTeamName": "Carolina Hurricanes",
+   "awayTeamSlug": "carolina-hurricanes",
+   "awayTeamFantasydataId": 9,
+   "awayTeamLogoSvg": "https://api.dailyfaceoff.com/uploads/team/logo_svg/6/carolina-hurricanes.svg",
+   "awayGoalieId": 30486,
+   "awayGoalieLegacyId": null,
+   "awayGoalieFantasydataId": 30004953,
+   "awayGoaliePuckpediaUrlId": "pyotr-kochetkov",
+   "awayGoalieSlug": "30486-pytor-kochetkov",
+   "awayGoalieName": "Pyotr Kochetkov",
+   "awayGoalieRating": null,
+   "awayGoaliePositionRank": null,
+   "awayGoaliePositionRankColor": null,
+   "awayGoalieFantasydataFaceUrl": "https://bctn-data.s3.amazonaws.com/headshots/nhl/200x200/7/73f0991a-46b7-4ccc-895a-5ca4251effc3.jpg",
+   "awayGoalieHeadshotUrl": "https://api.dailyfaceoff.com/uploads/player/headshot/30486/Kochetkov-Pyotr_CAR-2024__12.39.31_PM.png",
+   "awayGoalieWins": 2,
+   "awayGoalieLosses": 0,
+   "awayGoalieOvertimeLosses": 0,
+   "awayGoalieShutouts": 0,
+   "awayGoalieSavePercentage": "0.895",
+   "awayGoalieGoalsAgainstAvg": "1.95",
+   "awayGoalieFantasySalary": null,
+   "awayGoalieCapHit": 2000000,
+   "awayGoalieContractLength": 4,
+   "awayGoalieContractExpiryYear": 2027
+  }
+ ],
+ "date": "2026-10-11",
+ "specificDate": false,
+ "toolkitPosts": [
+  {
+   "node": {
+    "id": "cG9zdDozMDkzMjk=",
+    "databaseId": 309329,
+    "title": "Waiver Wire Wednesday: Week 2 Fantasy Hockey Pickups",
+    "excerpt": "<p>On this week&#8217;s edition of the DFO Fantasy Show, Brock Seguin and Beebs Bondy gave their favourite waiver wire pickups from five different ownership tie",
+    "slug": "waiver-wire-wednesday-week-2-fantasy-hockey-pickups",
+    "author": {
+     "node": {
+      "name": "Brock Seguin",
+      "slug": "brock-seguin"
+     }
+    },
+    "categories": {
+     "edges": [
+      {
+       "node": {
+        "name": "Daily Toolkit",
+        "slug": "daily-toolkit"
+       }
+      },
+      {
+       "node": {
+        "name": "Season Long Fantasy",
+        "slug": "season-long-fantasy"
+       }
+      },
+      {
+       "node": {
+        "name": "Fantasy",
+        "slug": "fantasy-hockey"
+       }
+      }
+     ]
+    },
+    "featuredImage": {
+     "node": {
+      "altText": "",
+      "mediaItemUrl": "https://publish.dailyfaceoff.com/wp-content/uploads/2026/10/Quinn-JackBUF-2026.png",
+      "mediaDetails": {
+       "height": 1200,
+       "width": 1856
+      }
+     }
+    }
+   }
+  },
+  {
+   "node": {
+    "id": "cG9zdDozMDg2NzY=",
+    "databaseId": 308676,
+    "title": "What We Learned in Week 1 of Fantasy Hockey",
+    "excerpt": "<p>After six days of category-filling performances, exciting surprises, and team-altering disappointments, we\u2019ve compiled a quick list of fantasy nuggets from a",
+    "slug": "what-we-learned-in-week-1-of-fantasy-hockey",
+    "author": {
+     "node": {
+      "name": "Michael Bondy",
+      "slug": "beebsbondy"
+     }
+    },
+    "categories": {
+     "edges": [
+      {
+       "node": {
+        "name": "Daily Toolkit",
+        "slug": "daily-toolkit"
+       }
+      },
+      {
+       "node": {
+        "name": "Season Long Fantasy",
+        "slug": "season-long-fantasy"
+       }
+      },
+      {
+       "node": {
+        "name": "Fantasy",
+        "slug": "fantasy-hockey"
+       }
+      }
+     ]
+    },
+    "featuredImage": {
+     "node": {
+      "altText": "",
+      "mediaItemUrl": "https://publish.dailyfaceoff.com/wp-content/uploads/2026/10/Bouchard-Podkolzin.png",
+      "mediaDetails": {
+       "height": 1200,
+       "width": 1856
+      }
+     }
+    }
+   }
+  },
+  {
+   "node": {
+    "id": "cG9zdDozMDg1Njk=",
+    "databaseId": 308569,
+    "title": "Fantasy Hockey 2026-27: Weekly Strength of Schedule and Streaming Targets \u2014 Week 2",
+    "excerpt": "<p>Welcome to Week 2 of the Daily Faceoff Fantasy Strength of Schedule, your weekly guide to which teams&#8217; schedules are worth streaming and which ones to ",
+    "slug": "fantasy-hockey-2026-27-weekly-strength-of-schedule-and-streaming-targets-week-2",
+    "author": {
+     "node": {
+      "name": "Brock Seguin",
+      "slug": "brock-seguin"
+     }
+    },
+    "categories": {
+     "edges": [
+      {
+       "node": {
+        "name": "Fantasy",
+        "slug": "fantasy-hockey"
+       }
+      }
+     ]
+    },
+    "featuredImage": {
+     "node": {
+      "altText": "",
+      "mediaItemUrl": "https://publish.dailyfaceoff.com/wp-content/uploads/2026/07/2026-01-31T233821Z_1878340793_MT1USATODAY28130429_RTRMADP_3_NHL-WINNIPEG-JETS-AT-FLORIDA-PANTHERS-sc",
+      "mediaDetails": {
+       "height": 1706,
+       "width": 2560
+      }
+     }
+    }
+   }
+  },
+  {
+   "node": {
+    "id": "cG9zdDozMDgzOTU=",
+    "databaseId": 308395,
+    "title": "Scouting Report: Breaking down top 2027 NHL Draft prospect Landon DuPont\u2019s NCAA debut",
+    "excerpt": "<p>DuPont registered a pair of assists in a lopsided win in Ann Arbor.</p>\n",
+    "slug": "scouting-report-breaking-down-top-2027-nhl-draft-prospect-landon-dupont-ncaa-debut-michigan",
+    "author": {
+     "node": {
+      "name": "Steven Ellis",
+      "slug": "stevenellis"
+     }
+    },
+    "categories": {
+     "edges": [
+      {
+       "node": {
+        "name": "Fantasy",
+        "slug": "fantasy-hockey"
+       }
+      }
+     ]
+    },
+    "featuredImage": {
+     "node": {
+      "altText": "",
+      "mediaItemUrl": "https://publish.dailyfaceoff.com/wp-content/uploads/2026/10/Screenshot-2026-10-02-at-7.47.57-PM.png",
+      "mediaDetails": {
+       "height": 754,
+       "width": 1048
+      }
+     }
+    }
+   }
+  },
+  {
+   "node": {
+    "id": "cG9zdDozMDcwNTg=",
+    "databaseId": 307058,
+    "title": "THE ULTIMATE 2026-27 FANTASY HOCKEY CHEAT SHEET",
+    "excerpt": "<p>The DFO Fantasy Hockey Draft Kit has everything you need to prepare for your draft, but when you&#8217;re actually on the clock, you don&#8217;t have time to",
+    "slug": "the-ultimate-2026-27-fantasy-hockey-cheat-sheet",
+    "author": {
+     "node": {
+      "name": "Brock Seguin",
+      "slug": "brock-seguin"
+     }
+    },
+    "categories": {
+     "edges": [
+      {
+       "node": {
+        "name": "Draft Kit Featured",
+        "slug": "draft-kit-featured"
+       }
+      },
+      {
+       "node": {
+        "name": "featured3",
+        "slug": "featured3"
+       }
+      },
+      {
+       "node": {
+        "name": "Fantasy Draft Kit",
+        "slug": "fantasy-draft-kit"
+       }
+      },
+      {
+       "node": {
+        "name": "Season Long Fantasy",
+        "slug": "season-long-fantasy"
+       }
+      }
+     ]
+    },
+    "featuredImage": {
+     "node": {
+      "altText": "",
+      "mediaItemUrl": "https://publish.dailyfaceoff.com/wp-content/uploads/2026/09/DFO-FantasyDraft_template_26-V2-rev.png",
+      "mediaDetails": {
+       "height": 1200,
+       "width": 1856
+      }
+     }
+    }
+   }
+  },
+  {
+   "node": {
+    "id": "cG9zdDozMDc1Nzg=",
+    "databaseId": 307578,
+    "title": "Fantasy Hockey 2026-27: Weekly Strength of Schedule and Streaming Targets \u2014 Week 1",
+    "excerpt": "<p>The dust of the preseason has settled and it&#8217;s time to drop the puck on the 2026-27 NHL season. If your fantasy hockey teams look anything like mine, y",
+    "slug": "fantasy-hockey-2026-27-weekly-strength-of-schedule-and-streaming-targets-week-1",
+    "author": {
+     "node": {
+      "name": "Brock Seguin",
+      "slug": "brock-seguin"
+     }
+    },
+    "categories": {
+     "edges": [
+      {
+       "node": {
+        "name": "Daily Toolkit",
+        "slug": "daily-toolkit"
+       }
+      },
+      {
+       "node": {
+        "name": "Season Long Fantasy",
+        "slug": "season-long-fantasy"
+       }
+      },
+      {
+       "node": {
+        "name": "Fantasy",
+        "slug": "fantasy-hockey"
+       }
+      }
+     ]
+    },
+    "featuredImage": {
+     "node": {
+      "altText": "",
+      "mediaItemUrl": "https://publish.dailyfaceoff.com/wp-content/uploads/2026/09/Barbashev-IvanVGK-2026.png",
+      "mediaDetails": {
+       "height": 1200,
+       "width": 1856
+      }
+     }
+    }
+   }
+  }
+ ],
+ "stubData": {
+  "metaTitle": "NHL Starting Goalies",
+  "metaDescription": "The most up-to-date NHL Starting Goalies for the most passionate hockey fans.",
+  "jsonLdSnippet": null,
+  "content": "\n<h2>Starting Goalies &#038; NHL Betting Strategy</h2>\n\n<div>Knowing who the starting goalies are tonight can make or break the success of your NHL bets. The go"
+ }
+}
