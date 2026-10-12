@@ -1,22 +1,22 @@
 {
  "slate_date": "2026-10-12",
- "generated_at": "2026-10-12T15:40:00-04:00",
- "status_at": "2026-10-12T15:40:00-04:00",
+ "generated_at": "2026-10-12T16:00:01-04:00",
+ "status_at": "2026-10-12T16:00:01-04:00",
  "valid_until": "2026-10-13T05:00:00-04:00",
  "status": {
   "prices_state": "ok",
   "prices_at": "2026-10-12T12:20:01-04:00",
-  "next_price_read_at": "2026-10-12T18:15:00-04:00",
+  "next_price_read_at": "2026-10-12T17:30:00-04:00",
   "stats_built_at": "2026-10-12T15:40:00-04:00",
   "stats_through": "2026-10-11",
-  "lineups_at": "2026-10-12T12:40:00-04:00",
+  "lineups_at": "2026-10-12T16:00:01-04:00",
   "goalies_at": null,
-  "lineups_note": "2 of 2 team line pages are dated today.",
+  "lineups_note": "4 of 4 team line pages are dated today.",
   "lineups_state": "ok",
   "stats_state": "ok",
   "last_run": {
    "ok": true,
-   "at": "2026-10-12T15:40:00-04:00",
+   "at": "2026-10-12T16:00:01-04:00",
    "failed_step": null
   },
   "pool": {
@@ -53,7 +53,7 @@
  "empty": {
   "code": "none_qualified",
   "text": "No open picks right now.",
-  "sub": "Checked 100 lines at 12:20 PM. Today's earlier pick is under Started. Next price check at 6:15 PM."
+  "sub": "Checked 100 lines at 12:20 PM. Today's earlier pick is under Started. Next price check at 5:30 PM."
  },
  "games": [
   {
