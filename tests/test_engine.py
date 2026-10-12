@@ -16,6 +16,38 @@ UPD = "2026-10-11T17:00:00Z"          # feed last_update used for the 1:02 PM pu
 UPD_C = "2026-10-11T22:10:00Z"        # ... and for the 6:16 PM re-price
 
 
+class EmptyText(unittest.TestCase):
+    """none_qualified must not say "no picks tonight" while a pick sits under Started or more prices are coming."""
+
+    def run_empty(self, picks, games, nxt, now="2026-10-12T13:45:00-04:00"):
+        from types import SimpleNamespace
+        inp = SimpleNamespace(facts={}, now=common.parse_iso(now))
+        status = {"stats_state": "ok", "prices_state": "ok", "prices_at": "2026-10-12T13:02:00-04:00",
+                  "next_price_read_at": nxt}
+        return engine._empty(inp, status, picks, games, {"counts": {"checked": 40}})
+
+    GAMES = [{"id": "g1", "started": True}, {"id": "g2", "started": False}, {"id": "g3", "started": False}]
+
+    def test_started_pick_and_pending_check(self):
+        e = self.run_empty([{"game_id": "g1", "pulled": False}], self.GAMES, "2026-10-12T18:15:00-04:00")
+        self.assertEqual(e["code"], "none_qualified")
+        self.assertEqual(e["text"], "No open picks right now.")
+        self.assertEqual(e["sub"], "Checked 40 lines at 1:02 PM. Today's earlier pick is under Started. "
+                                   "Next price check at 6:15 PM.")
+
+    def test_two_started_picks_no_check_left(self):
+        picks = [{"game_id": "g1", "pulled": False}, {"game_id": "g1", "pulled": False},
+                 {"game_id": "g1", "pulled": True}]
+        e = self.run_empty(picks, self.GAMES, "2026-10-12T13:00:00-04:00")       # already past: ignored
+        self.assertEqual(e["text"], "No open picks right now.")
+        self.assertEqual(e["sub"], "Checked 40 lines at 1:02 PM. Today's earlier picks are under Started.")
+
+    def test_nothing_posted_nothing_coming(self):
+        e = self.run_empty([{"game_id": "g1", "pulled": True}], self.GAMES, None)
+        self.assertEqual(e["text"], "No picks tonight. Nothing cleared the bar at Hard Rock's prices.")
+        self.assertEqual(e["sub"], "Checked 40 lines at 1:02 PM.")
+
+
 class EdgeArithmetic(unittest.TestCase):
     """Price -125 on our side, -105 on the other.
        b     = 125/225            = 0.555556
@@ -178,8 +210,8 @@ class Day(unittest.TestCase):
         sl = s.at("13:02")
         self.assertEqual(sl["picks"], [])
         self.assertEqual(sl["empty"]["code"], "none_qualified")
-        self.assertEqual(sl["empty"]["text"], "No picks tonight. Nothing cleared the bar at Hard Rock's prices.")
-        self.assertEqual(sl["empty"]["sub"], "Checked 4 lines at 1:02 PM.")
+        self.assertEqual(sl["empty"]["text"], "No open picks right now.")     # the 6:15 PM re-price is still coming
+        self.assertEqual(sl["empty"]["sub"], "Checked 4 lines at 1:02 PM. Next price check at 6:15 PM.")
         # 6:20 PM: lineups confirm -> the 0.17 gap becomes a pick ("Lineup confirmed"); the 0.25 gap never does
         s.set_lineup("CAR", "2026-10-11T21:00:00Z")
         s.set_lineup("PHI", "2026-10-11T21:00:00Z")

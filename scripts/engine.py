@@ -765,9 +765,26 @@ def _empty(inp, status, picks, games, extra):
     if ps == "limited" and not status["prices_at"]:
         return {"code": "pool_low", "text": "No Hard Rock prices today, so no picks.",
                 "sub": "Too few odds pulls are left for today's games."}
-    sub = None
+    parts = []
     if status["prices_at"]:
         n = extra["counts"]["checked"]
-        sub = "Checked %d line%s at %s." % (n, "" if n == 1 else "s", common.fmt_time(common.parse_iso(status["prices_at"])))
-    return {"code": "none_qualified", "text": "No picks tonight. Nothing cleared the bar at Hard Rock's prices.",
-            "sub": sub}
+        parts.append("Checked %d line%s at %s." % (n, "" if n == 1 else "s",
+                                                 common.fmt_time(common.parse_iso(status["prices_at"]))))
+    started_ids = {g["id"] for g in games if g["started"]}
+    shown_started = [p for p in picks if not p["pulled"] and p["game_id"] in started_ids]
+    nxt = None
+    if status.get("next_price_read_at"):
+        try:
+            nxt = common.parse_iso(status["next_price_read_at"])
+        except (TypeError, ValueError):
+            nxt = None
+        if nxt is not None and nxt <= inp.now:
+            nxt = None
+    if shown_started:
+        parts.append("Today's earlier pick is under Started." if len(shown_started) == 1
+                     else "Today's earlier picks are under Started.")
+    if nxt:
+        parts.append("Next price check at %s." % common.fmt_time(nxt))
+    text = "No open picks right now." if (nxt or shown_started) else \
+        "No picks tonight. Nothing cleared the bar at Hard Rock's prices."
+    return {"code": "none_qualified", "text": text, "sub": " ".join(parts) or None}

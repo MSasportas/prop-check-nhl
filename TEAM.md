@@ -69,7 +69,7 @@ price history exists; our own odds log, `data/odds/`, is building that).
   is out or refused; a refused key is "unknown", not empty. Page warns when the pool is low.
 - **Files:** `index.html` (page; reads `data/slate.json`, `data/record.json`, `data/rules.json`), `data/odds/<date>.json`
   (every price pulled), `data/state/` (stats store, schedule, credits ledger), `fixtures/` (QA pages: `?fixture=NAME`,
-  `?now=ISO`), `tests/` (`python -m unittest discover -s tests`, 174 tests; `tests/replay_day.py` replays a day).
+  `?now=ISO`), `tests/` (`python -m unittest discover -s tests`, 185 tests; `tests/replay_day.py` replays a day).
 - **Debug:** `python scripts/run.py --explain` shows why each line did or didn't qualify. Test env vars: `PC_NOW`,
   `PC_DATA_DIR`, `PC_ODDS_FIXTURE_DIR`, `PC_LINEUP_FIXTURE_DIR`, `PC_NHL_FIXTURE_DIR`. Never test against the live data/.
 
@@ -101,6 +101,8 @@ price history exists; our own odds log, `data/odds/`, is building that).
    old Record, i.e. within one ~50 min run).
 9. If a cycle pulled prices but its push failed, that cycle's credits are spent again next cycle. Rare.
 10. Regular season only; playoffs say "Only regular-season games are covered."
+11. Empty-state sub can promise "Next price check at …" when no keys are set or all are used up (`next_price_read_at`
+    still set in run.py). Harmless while keys exist; Builder to clear it for `no_keys`/`all_used_up`. (QA note 2026-10-12)
 
 ## 8. Rule-change log
 | Date | Change | Why | Sample |
@@ -110,6 +112,7 @@ price history exists; our own odds log, `data/odds/`, is building that).
 | 2026-10-11 | v1.0 set (section 4) | First build: Sharp standard from the DS backtest (2024-25 fit, 2025-26 out of sample) and one live Hard Rock pull | Backtest only; 0 graded live legs |
 
 ## 9. Session log (newest first, one line each)
+- 2026-10-12 1:45 PM daily check: chain alive (link 4, 3 min old), all steps ok, pull A ran 10 AM (3 games), keys 1,445, tier 4, no unmatched names/excluded teams; nothing to grade (CAR@PHI had no picks; first pick FLA@BUF Vilmanis U1.5 shots locked). Fixed: page said "No picks tonight" while a pick was under Started and evening prices were still due → now "No open picks right now." + earlier-pick and next-check lines. Builder → QA PASS at 380px. 185 tests.
 - 2026-10-12: QA round 2 (fresh QA) PASS WITH FIXES (0 blockers, 2 majors: Record history guard, refused keys) → fixed → QA recheck SHIP. First real pull 10:00 AM: 3 games, 96 lines, 6 credits, 0 picks (closest: Kaprizov U3.5 shots -150 at +2.2 pts, needs +3 early / +2 confirmed). Scheduled: daily check 1:43 PM ET, weekly team review Sundays 10:47 AM ET.
 - 2026-10-11: First build. Probe confirmed timer, secret, Pages, Daily Faceoff from the runner. Team set the standard,
   built engine + page + timer; QA round 1 FAIL (2 blockers, 3 majors) → fixed → QA PASS. Cron unreliable → chain.
