@@ -1,10 +1,10 @@
 {
  "ok": true,
  "slate_date": "2026-10-12",
- "started_at": "2026-10-12T15:20:01-04:00",
- "status_at": "2026-10-12T15:20:01-04:00",
- "finished_at": "2026-10-12T15:20:01-04:00",
- "last_ok_at": "2026-10-12T15:20:01-04:00",
+ "started_at": "2026-10-12T15:40:00-04:00",
+ "status_at": "2026-10-12T15:40:00-04:00",
+ "finished_at": "2026-10-12T15:40:02-04:00",
+ "last_ok_at": "2026-10-12T15:40:00-04:00",
  "failed_step": null,
  "steps": [
   {
@@ -19,8 +19,8 @@
   },
   {
    "step": "stats",
-   "status": "skipped",
-   "note": "nothing new"
+   "status": "ok",
+   "note": "1 window(s) read, 2 team-games still missing"
   },
   {
    "step": "lineups",
@@ -88,7 +88,16 @@
  "unmatched_names": [],
  "unknown_teams": [],
  "lineup_unmatched_names": [],
- "excluded_teams": [],
+ "excluded_teams": [
+  {
+   "team": "BUF",
+   "reason": "stats behind"
+  },
+  {
+   "team": "FLA",
+   "reason": "stats behind"
+  }
+ ],
  "stats_through": "2026-10-11",
  "lineups_at": "2026-10-12T12:40:00-04:00",
  "lineups_note": "2 of 2 team line pages are dated today.",
@@ -97,10 +106,10 @@
  "odds_notes": [],
  "runner": {
   "event": "workflow_dispatch",
-  "run_id": "38292454947",
-  "iteration": 5,
-  "chain_link": 1,
+  "run_id": "38298058523",
+  "iteration": 2,
+  "chain_link": 2,
   "chain_started_at": "2026-10-12T13:50:14-04:00",
-  "run_started_at": "2026-10-12T14:40:11-04:00"
+  "run_started_at": "2026-10-12T15:30:15-04:00"
  }
 }

@@ -1,13 +1,13 @@
 {
  "slate_date": "2026-10-12",
- "generated_at": "2026-10-12T15:20:01-04:00",
- "status_at": "2026-10-12T15:20:01-04:00",
+ "generated_at": "2026-10-12T15:40:00-04:00",
+ "status_at": "2026-10-12T15:40:00-04:00",
  "valid_until": "2026-10-13T05:00:00-04:00",
  "status": {
   "prices_state": "ok",
   "prices_at": "2026-10-12T12:20:01-04:00",
   "next_price_read_at": "2026-10-12T18:15:00-04:00",
-  "stats_built_at": "2026-10-11T22:36:03-04:00",
+  "stats_built_at": "2026-10-12T15:40:00-04:00",
   "stats_through": "2026-10-11",
   "lineups_at": "2026-10-12T12:40:00-04:00",
   "goalies_at": null,
@@ -16,7 +16,7 @@
   "stats_state": "ok",
   "last_run": {
    "ok": true,
-   "at": "2026-10-12T15:20:01-04:00",
+   "at": "2026-10-12T15:40:00-04:00",
    "failed_step": null
   },
   "pool": {
@@ -26,12 +26,25 @@
    "days_left": 20,
    "low": false
   },
-  "excluded_teams": [],
+  "excluded_teams": [
+   {
+    "team": "BUF",
+    "reason": "stats behind"
+   },
+   {
+    "team": "FLA",
+    "reason": "stats behind"
+   }
+  ],
   "lines_checked": 100,
   "lines_failed": 5,
   "tier": 4
  },
  "banners": [
+  {
+   "level": "warn",
+   "text": "Not covered tonight: BUF, FLA (stats behind)."
+  },
   {
    "level": "info",
    "text": "5 Hard Rock lines skipped: the two sides did not add up or the price was old."
@@ -50,8 +63,11 @@
    "start": "2026-10-12T13:00:00-04:00",
    "started": true,
    "picks": 1,
-   "excluded_reason": null,
-   "excluded_teams": []
+   "excluded_reason": "stats behind",
+   "excluded_teams": [
+    "FLA",
+    "BUF"
+   ]
   },
   {
    "id": 2026020088,
