@@ -1,7 +1,7 @@
 {
  "slate_date": "2026-10-12",
- "generated_at": "2026-10-12T13:40:01-04:00",
- "status_at": "2026-10-12T13:40:01-04:00",
+ "generated_at": "2026-10-12T13:50:00-04:00",
+ "status_at": "2026-10-12T13:50:00-04:00",
  "valid_until": "2026-10-13T05:00:00-04:00",
  "status": {
   "prices_state": "ok",
@@ -16,7 +16,7 @@
   "stats_state": "ok",
   "last_run": {
    "ok": true,
-   "at": "2026-10-12T13:40:01-04:00",
+   "at": "2026-10-12T13:50:00-04:00",
    "failed_step": null
   },
   "pool": {
@@ -39,8 +39,8 @@
  ],
  "empty": {
   "code": "none_qualified",
-  "text": "No picks tonight. Nothing cleared the bar at Hard Rock's prices.",
-  "sub": "Checked 100 lines at 12:20 PM."
+  "text": "No open picks right now.",
+  "sub": "Checked 100 lines at 12:20 PM. Today's earlier pick is under Started. Next price check at 6:15 PM."
  },
  "games": [
   {
