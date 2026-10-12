@@ -1,10 +1,10 @@
 {
  "ok": true,
  "slate_date": "2026-10-12",
- "started_at": "2026-10-12T17:10:00-04:00",
- "status_at": "2026-10-12T17:10:00-04:00",
- "finished_at": "2026-10-12T17:10:01-04:00",
- "last_ok_at": "2026-10-12T17:10:00-04:00",
+ "started_at": "2026-10-12T17:30:00-04:00",
+ "status_at": "2026-10-12T17:30:00-04:00",
+ "finished_at": "2026-10-12T17:30:03-04:00",
+ "last_ok_at": "2026-10-12T17:30:00-04:00",
  "failed_step": null,
  "steps": [
   {
@@ -25,17 +25,17 @@
   {
    "step": "lineups",
    "status": "ok",
-   "note": "2 of 2 team pages read"
+   "note": "4 of 4 team pages read"
   },
   {
    "step": "odds",
    "status": "ok",
-   "note": "no pull due"
+   "note": "1 game(s) priced"
   },
   {
    "step": "engine",
    "status": "ok",
-   "note": "no change"
+   "note": "2 new event(s), 2 newly shown"
   },
   {
    "step": "grade",
@@ -45,12 +45,12 @@
   {
    "step": "slate",
    "status": "ok",
-   "note": "1 open pick(s)"
+   "note": "2 open pick(s)"
   },
   {
    "step": "record",
-   "status": "skipped",
-   "note": "unchanged"
+   "status": "ok",
+   "note": "record.json"
   }
  ],
  "sources": {
@@ -62,7 +62,7 @@
  "keys": [
   {
    "n": 1,
-   "left": 336
+   "left": 332
   },
   {
    "n": 2,
@@ -77,30 +77,30 @@
    "left": 500
   }
  ],
- "pool_total": 1445,
+ "pool_total": 1441,
  "allowance": 10.4,
  "tier": 4,
  "budget_today": 31,
- "budget_used_today": 11,
+ "budget_used_today": 15,
  "prices_state": "ok",
- "prices_at": "2026-10-12T12:20:01-04:00",
- "next_price_read_at": "2026-10-12T17:30:00-04:00",
+ "prices_at": "2026-10-12T17:30:00-04:00",
+ "next_price_read_at": "2026-10-12T18:15:00-04:00",
  "unmatched_names": [],
  "unknown_teams": [],
  "lineup_unmatched_names": [],
  "excluded_teams": [],
  "stats_through": "2026-10-12",
- "lineups_at": "2026-10-12T17:10:00-04:00",
+ "lineups_at": "2026-10-12T17:30:00-04:00",
  "lineups_note": "6 of 6 team line pages are dated today.",
  "games_today": 3,
- "record_events": 5,
+ "record_events": 7,
  "odds_notes": [],
  "runner": {
   "event": "workflow_dispatch",
-  "run_id": "38303533247",
-  "iteration": 6,
-  "chain_link": 3,
+  "run_id": "38308910449",
+  "iteration": 3,
+  "chain_link": 4,
   "chain_started_at": "2026-10-12T13:50:14-04:00",
-  "run_started_at": "2026-10-12T16:20:16-04:00"
+  "run_started_at": "2026-10-12T17:10:13-04:00"
  }
 }

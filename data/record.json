@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-10-12T17:00:01-04:00",
+ "generated_at": "2026-10-12T17:30:00-04:00",
  "summary": {
   "headline": {
    "w": 1,
@@ -83,6 +83,89 @@
      "units": null,
      "pulled": null,
      "legs": []
+    },
+    {
+     "id": "2026-10-12:2026020088:8477998:shots:1.5:under",
+     "kind": "single",
+     "player": "W. Foegele",
+     "bet": "Under 1.5 shots on goal",
+     "market": "shots",
+     "team": "OTT",
+     "game": "OTT at NJD",
+     "price": -110,
+     "first_price": -110,
+     "last_price": -110,
+     "prices": [
+      {
+       "price": -110,
+       "at": "2026-10-12T17:30:00-04:00"
+      }
+     ],
+     "result": null,
+     "actual": null,
+     "units": null,
+     "pulled": null,
+     "legs": []
+    },
+    {
+     "id": "2026-10-12:P:f975b0532f",
+     "kind": "parlay",
+     "player": "Parlay",
+     "bet": "2 legs",
+     "price": 218,
+     "first_price": 218,
+     "result": null,
+     "actual": null,
+     "units": null,
+     "pulled": null,
+     "legs": [
+      {
+       "id": "2026-10-12:2026020088:8477998:shots:1.5:under",
+       "kind": "single",
+       "player": "W. Foegele",
+       "bet": "Under 1.5 shots on goal",
+       "market": "shots",
+       "team": "OTT",
+       "game": "OTT at NJD",
+       "price": -110,
+       "first_price": -110,
+       "last_price": -110,
+       "prices": [
+        {
+         "price": -110,
+         "at": "2026-10-12T17:30:00-04:00"
+        }
+       ],
+       "result": null,
+       "actual": null,
+       "units": null,
+       "pulled": null,
+       "legs": []
+      },
+      {
+       "id": "2026-10-12:2026020089:8478864:shots:3.5:under",
+       "kind": "single",
+       "player": "K. Kaprizov",
+       "bet": "Under 3.5 shots on goal",
+       "market": "shots",
+       "team": "MIN",
+       "game": "VGK at MIN",
+       "price": -150,
+       "first_price": -150,
+       "last_price": -150,
+       "prices": [
+        {
+         "price": -150,
+         "at": "2026-10-12T10:00:01-04:00"
+        }
+       ],
+       "result": null,
+       "actual": null,
+       "units": null,
+       "pulled": null,
+       "legs": []
+      }
+     ]
     }
    ]
   }
