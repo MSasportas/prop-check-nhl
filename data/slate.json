@@ -1,7 +1,7 @@
 {
  "slate_date": "2026-10-12",
- "generated_at": "2026-10-12T12:40:00-04:00",
- "status_at": "2026-10-12T12:40:00-04:00",
+ "generated_at": "2026-10-12T13:00:00-04:00",
+ "status_at": "2026-10-12T13:00:00-04:00",
  "valid_until": "2026-10-13T05:00:00-04:00",
  "status": {
   "prices_state": "ok",
@@ -16,7 +16,7 @@
   "stats_state": "ok",
   "last_run": {
    "ok": true,
-   "at": "2026-10-12T12:40:00-04:00",
+   "at": "2026-10-12T13:00:00-04:00",
    "failed_step": null
   },
   "pool": {
@@ -37,14 +37,18 @@
    "text": "5 Hard Rock lines skipped: the two sides did not add up or the price was old."
   }
  ],
- "empty": null,
+ "empty": {
+  "code": "none_qualified",
+  "text": "No picks tonight. Nothing cleared the bar at Hard Rock's prices.",
+  "sub": "Checked 100 lines at 12:20 PM."
+ },
  "games": [
   {
    "id": 2026020087,
    "away": "FLA",
    "home": "BUF",
    "start": "2026-10-12T13:00:00-04:00",
-   "started": false,
+   "started": true,
    "picks": 1,
    "excluded_reason": null,
    "excluded_teams": []
@@ -81,11 +85,15 @@
    "breakeven": 0.5556,
    "p_pct": 59,
    "breakeven_pct": 56,
-   "state": "lineup",
+   "state": "locked",
    "history": [
     {
      "at": "2026-10-12T11:30:00-04:00",
      "text": "Lineup confirmed"
+    },
+    {
+     "at": "2026-10-12T13:00:00-04:00",
+     "text": "Locked"
     }
    ],
    "prices": [
@@ -100,7 +108,7 @@
    ],
    "pulled": null,
    "graded": null,
-   "rank": 1,
+   "rank": null,
    "tier": "main",
    "game_id": 2026020087,
    "player": "S. Vilmanis",
@@ -121,31 +129,6 @@
   }
  ],
  "parlays": [],
- "goal_watch": [
-  {
-   "player": "T. Thompson",
-   "team": "BUF",
-   "price": 125,
-   "fair_price": 173,
-   "p": 0.3667,
-   "text": "36% to score; +125 needs 44%. Fair price +173. Not a pick."
-  },
-  {
-   "player": "M. Tkachuk",
-   "team": "FLA",
-   "price": 175,
-   "fair_price": 216,
-   "p": 0.3163,
-   "text": "31% to score; +175 needs 36%. Fair price +216. Not a pick."
-  },
-  {
-   "player": "S. Bennett",
-   "team": "FLA",
-   "price": 250,
-   "fair_price": 288,
-   "p": 0.258,
-   "text": "25% to score; +250 needs 29%. Fair price +288. Not a pick."
-  }
- ],
- "goal_watch_note": "Not picks. Our model is weakest on goals."
+ "goal_watch": [],
+ "goal_watch_note": null
 }
