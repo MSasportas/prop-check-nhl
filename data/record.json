@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-10-12T16:10:00-04:00",
+ "generated_at": "2026-10-12T17:00:01-04:00",
  "summary": {
   "headline": {
    "w": 1,
@@ -29,7 +29,7 @@
  "nights": [
   {
    "date": "2026-10-12",
-   "graded": true,
+   "graded": false,
    "w": 1,
    "l": 0,
    "units": 0.77,
@@ -58,6 +58,29 @@
      "result": "W",
      "actual": "had 0",
      "units": 0.7692,
+     "pulled": null,
+     "legs": []
+    },
+    {
+     "id": "2026-10-12:2026020089:8478864:shots:3.5:under",
+     "kind": "single",
+     "player": "K. Kaprizov",
+     "bet": "Under 3.5 shots on goal",
+     "market": "shots",
+     "team": "MIN",
+     "game": "VGK at MIN",
+     "price": -150,
+     "first_price": -150,
+     "last_price": -150,
+     "prices": [
+      {
+       "price": -150,
+       "at": "2026-10-12T10:00:01-04:00"
+      }
+     ],
+     "result": null,
+     "actual": null,
+     "units": null,
      "pulled": null,
      "legs": []
     }
