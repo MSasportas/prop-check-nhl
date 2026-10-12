@@ -26,6 +26,8 @@
   "parlay_min_p_2": 0.34,
   "parlay_min_p_3": 0.2,
   "parlay_cap": 3,
+  "parlay_min_legs": 2,
+  "parlay_max_legs": 3,
   "parlay_leg_min_price": -200,
   "parlay_leg_max_price": 100,
   "parlay_edge": 0.03,

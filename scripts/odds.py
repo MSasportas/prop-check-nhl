@@ -25,6 +25,7 @@ import teams
 
 API = "https://api.the-odds-api.com/v4/sports/icehockey_nhl"
 SOURCE = {"ok": 0, "failed": 0}
+KEYS_REFUSED_TEXT = "Hard Rock prices are off: the odds keys were refused. New keys are needed."
 
 
 # ---------------------------------------------------------------- price arithmetic
@@ -93,8 +94,14 @@ class Pool:
                 left = None                                # keys refill on the 1st: forget last month's count
             if self.fixture and left is None:
                 left = start[i]
-            self.state.append({"n": i + 1, "left": left, "status": "ok" if left != 0 else "empty",
-                               "checked_at": s.get("checked_at") if left is not None else None, "month": month})
+            status = "ok" if left != 0 else "empty"
+            # a key the feed refused (401, not "used up") stays refused this month until it answers again: it is
+            # not used for pulls, but the free events call asks it every run (see unknown()), so it recovers
+            if s.get("status") == "invalid" and s.get("month") == month and not self.fixture:
+                status = "invalid"
+            self.state.append({"n": i + 1, "left": left, "status": status,
+                               "checked_at": s.get("checked_at") if left is not None or status == "invalid" else None,
+                               "month": month})
 
     # -- facts
     def count(self):
@@ -113,6 +120,11 @@ class Pool:
     def all_used_up(self):
         """True only when EVERY key has reported 0 left."""
         return bool(self.state) and all(s["left"] == 0 for s in self.state)
+
+    def all_refused(self):
+        """True when no key can be used because the feed refused them: every key is refused (401) or used up,
+        and at least one is refused."""
+        return keys_refused(self.state, len(self.state))
 
     def total_left(self):
         """Credits on keys that have reported a number (refused keys are left out, not counted as 0)."""
@@ -194,7 +206,7 @@ class Client:
             self.errors.append("odds feed did not answer (%s)" % (r.error or r.status))
             SOURCE["failed"] += 1
             return None, 0
-        self.errors.append("no odds key with credits left")
+        self.errors.append("every odds key was refused" if self.pool.all_refused() else "no odds key with credits left")
         return None, 0
 
     # -- fixtures
@@ -283,6 +295,16 @@ def _markets_returned(js, books):
         for m in b.get("markets", []) or []:
             keys.add(m.get("key"))
     return len(keys)
+
+
+def keys_refused(key_state, key_count):
+    """From the ledger's key list: every key is refused (status invalid) or used up (0 left), at least one is
+    refused, and the ledger covers every key in use. Then no price can be read until new keys are added."""
+    ks = list(key_state or [])
+    if not ks or (key_count and len(ks) != key_count):
+        return False
+    return all(k.get("status") == "invalid" or k.get("left") == 0 for k in ks) and \
+        any(k.get("status") == "invalid" for k in ks)
 
 
 # ---------------------------------------------------------------- the plan (pure functions, easy to test)
@@ -623,8 +645,11 @@ def run_pulls(now, slate, games, sched_left, cfg, rosters_for, live_markets, sta
     res["plan"] = plan
     if plan is None:
         day["keys_unread_at"] = common.iso(now)
-        res.update(status="failed" if client.errors else "skipped",
-                   note="could not read the odds keys yet")
+        if pool.all_refused():                             # a known state, not a run failure (the page says it)
+            res.update(status="skipped", note="every odds key was refused")
+        else:
+            res.update(status="failed" if client.errors else "skipped",
+                       note="could not read the odds keys yet")
         _finish(day, pool, res, sched_left, cfg, write=not dry_run)
         return res
 
@@ -695,6 +720,8 @@ def run_pulls(now, slate, games, sched_left, cfg, rosters_for, live_markets, sta
         day["last_fail_at"], day["fail_note"] = None, None
     if failed_games:
         res["status"] = "failed" if not res["fetched_now"] else "ok"
+        if pool.all_refused():                             # a known state, not a run failure (the page says it)
+            res.update(status="skipped", note="every odds key was refused")
     if not res["note"]:
         bits = []
         if res["fetched_now"]:
@@ -724,12 +751,32 @@ def _finish(day, pool, res, sched_left, cfg, write=True):
         common.write_json(day_path(), day)
 
 
+def used_at(view):
+    """When the newest price read that the engine actually USES was made: a read that returned the market,
+    was not stale and has at least one line passing the feed checks. None when there is none."""
+    best = None
+    for gv in (view or {}).values():
+        for mv in gv.values():
+            if mv.get("gone") or mv.get("stale") or not any(p.get("ok") for p in mv.get("pairs", {}).values()):
+                continue
+            best = mv["at"] if best is None else max(best, mv["at"])
+    return best
+
+
+def days_to_reset(slate):
+    """Days from the slate date up to the 1st of next month, when the keys refill (Oct 31 -> 1)."""
+    d = datetime.fromisoformat(slate).date()
+    first = (d.replace(day=1) + timedelta(days=32)).replace(day=1)
+    return (first - d).days
+
+
 def pool_summary(pool_left, key_count, plan, sched_days, cfg, spent=(), slate=None):
     """What the page shows about the key pool.
     pulls_left      credits on keys that have reported a number (None until one has)
     game_days_left  game days the pool covers at the basic cost (2 credits a game)
     days_left       pool / average daily spend at the current tier (recent game days; today's budget until
-                    there is a history), rounded down. None when it cannot be worked out.
+                    there is a history), rounded down, and never more than the days left before the keys
+                    refill on the 1st. None when it cannot be worked out.
     low             the allowance is under ops.pool_low_allowance"""
     if pool_left is None:
         return {"pulls_left": None, "keys": key_count, "game_days_left": None, "days_left": None, "low": False}
@@ -747,5 +794,7 @@ def pool_summary(pool_left, key_count, plan, sched_days, cfg, spent=(), slate=No
     recent = [c for d, c in sorted(by_day.items())[-7:] if c > 0]
     avg = (sum(recent) / float(len(recent))) if recent else float((plan or {}).get("budget_today") or 0)
     days_left = int(math.floor(pool_left / avg + 1e-9)) if avg > 0 else None
+    if days_left is not None and slate:
+        days_left = min(days_left, days_to_reset(slate))      # the keys refill on the 1st: never "more" than that
     low = bool(plan) and plan["allowance"] < cfg["ops"]["pool_low_allowance"]
     return {"pulls_left": pool_left, "keys": key_count, "game_days_left": days, "days_left": days_left, "low": low}

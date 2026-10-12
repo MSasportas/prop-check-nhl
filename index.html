@@ -679,6 +679,7 @@ function pulledParlayCard(par, d) {
 function statusText(st, exp) {
   var out = [];
   if (exp) out.push('Prices not read yet');
+  else if (st.prices_state === 'keys_refused') out.push('Prices off: odds keys refused');
   else if (st.prices_state === 'pool_empty' || st.prices_state === 'feed_down') out.push('No prices today');
   else out.push(fStamp(st.prices_at) ? 'Prices ' + fStamp(st.prices_at) : 'Prices not read yet');
   if (!exp) {
@@ -756,7 +757,7 @@ function renderTonight() {
     var last = ms(sl.generated_at);
     app.appendChild(banner('warn', "Today's picks aren't in yet.",
       last != null ? 'Last update was ' + fMD(last) + ' at ' + fTime(last) + '.' : 'No update time on file.',
-      h('button', { class: 'linkbtn', type: 'button', on: { click: function () { go('record'); } } }, "Last night's results are in the Record.", icon('right', 14))));
+      h('button', { class: 'linkbtn', type: 'button', on: { click: function () { go('record'); } } }, "Last night's picks are in the Record.", icon('right', 14))));
   } else if (stale()) {
     app.appendChild(banner('stop', 'Updates have stopped.', 'Last update ' + fStamp(sl.generated_at) + '. Prices and picks below may be out of date.'));
   }
@@ -796,7 +797,8 @@ function renderTonight() {
   if (!showEmpty) {
     var ps = h('section', { class: 'sec', id: 'parlays' }, h('div', { class: 'sec-h' }, h('h2', { text: 'Parlays (' + d.pOpen.length + ')' })));
     if (d.pOpen.length) { var pst = h('div', { class: 'stack' }); d.pOpen.forEach(function (p, i) { pst.appendChild(parlayCard(p, d, i + 1)); }); ps.appendChild(pst); }
-    else ps.appendChild(h('div', { class: 'card empty' }, h('div', { class: 's', style: 'margin:0;color:var(--fg)', text: 'No parlay tonight.' })));
+    else ps.appendChild(h('div', { class: 'card empty' }, h('div', { class: 's', style: 'margin:0;color:var(--fg)',
+      text: d.pStarted.length ? 'No open parlay right now. ' + (d.pStarted.length === 1 ? "Tonight's parlay is" : "Tonight's parlays are") + ' under Started.' : 'No parlay tonight.' })));
     app.appendChild(ps);
   }
 
@@ -1057,8 +1059,8 @@ var RULES = [
   'Thin sample means under {thin_rows|num} games of history, or under {thin_team_games|num} with his team. Under {min_history|num} games of history means no pick.',
   "If our model sits more than {news_gap|pts} points above what Hard Rock's price implies, we wait for the lineup. More than {too_good|pts} points and we pass, because the book likely knows something.",
   'No more than {max_per_player|num} per player and {max_per_game|num} per game on any night.',
-  "Parlays are two or three legs, one leg per game, up to {parlay_cap|num} a night. Every leg needs our chance of at least {parlay_leg_min_p|pct} and a price from {parlay_leg_min_price|price} to {parlay_leg_max_price|price}. The combined chance must be at least {parlay_min_p_2|pct} for 2 legs or {parlay_min_p_3|pct} for 3, and beat the parlay's break-even by {parlay_edge|pts} points.",
-  'A pick is pulled if the player is out of the lineup, the price goes past {price_gate|price}, the line is gone, our chance falls to less than {pull_margin|pts} points over break-even, or the price moves {drift_pull|pts} points against us before the lineup is confirmed.',
+  "Parlays are {parlay_min_legs|num} or {parlay_max_legs|num} legs, one leg per game, up to {parlay_cap|num} a night. Every leg needs our chance of at least {parlay_leg_min_p|pct} and a price from {parlay_leg_min_price|price} to {parlay_leg_max_price|price}. The combined chance must be at least {parlay_min_p_2|pct} for 2 legs or {parlay_min_p_3|pct} for 3, and beat the parlay's break-even by {parlay_edge|pts} points.",
+  'A pick is pulled if the player is out of the lineup, the price goes past {price_gate|price} or past {max_price|price}, the line is gone, our chance falls to less than {pull_margin|pts} points over break-even, or the price moves {drift_pull|pts} points against us before the lineup is confirmed.',
   "Results come from the NHL boxscore once each game is final. Overtime counts, shootouts don't. Graded at the worst price shown, {stake|num} unit each.",
   'We need {min_sample|num} graded picks in a market before judging it. A market that is losing badly after {pause_legs|num} picks switches itself off, and no other rule changes before {change_legs|num}.'
 ];
@@ -1089,10 +1091,11 @@ function statusBody(body) {
     case 'limited': pt = (pa ? 'Hard Rock prices read at ' + pa + '. ' : '') + 'Limited today: fewer games or markets than usual.'; break;
     case 'pool_empty': pt = 'No Hard Rock prices today. The odds pulls ran out.'; break;
     case 'feed_down': pt = 'No Hard Rock prices today. The odds feed did not answer.'; break;
+    case 'keys_refused': pt = 'Hard Rock prices are off: the odds keys were refused. New keys are needed.' + (pa ? ' Last read ' + pa + '.' : ''); break;
     default: pt = (pa ? 'Hard Rock prices read at ' + pa : 'Prices not read yet') + (st.prices_state ? ' (' + str(st.prices_state) + ')' : '');
   }
   if (exp) pt = 'Prices not read yet today. Last read ' + (pa || 'not on file') + '.';
-  row(pt, st.prices_state === 'pool_empty' || st.prices_state === 'feed_down');
+  row(pt, st.prices_state === 'pool_empty' || st.prices_state === 'feed_down' || st.prices_state === 'keys_refused');
   row(fStamp(st.next_price_read_at) ? 'Next price read ' + fStamp(st.next_price_read_at) : 'No further price read scheduled');
   var lt = lineupShort(st);
   if (st.lineups_state === 'failed') lt = "Lineups couldn't be checked, so picks stay Early.";

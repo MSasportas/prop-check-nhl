@@ -1,0 +1,107 @@
+{
+ "fixture": true,
+ "fixture_now": "2026-10-11T18:55:00-04:00",
+ "slate_date": "2026-10-11",
+ "generated_at": "2026-10-11T18:52:00-04:00",
+ "status_at": "2026-10-11T18:52:00-04:00",
+ "valid_until": "2026-10-12T05:00:00-04:00",
+ "status": {
+  "prices_state": "keys_refused",
+  "prices_at": null,
+  "next_price_read_at": null,
+  "stats_built_at": "2026-10-11T09:12:00-04:00",
+  "stats_through": "2026-10-10",
+  "stats_state": "ok",
+  "lineups_at": null,
+  "goalies_at": null,
+  "lineups_state": "not_yet",
+  "lineups_note": null,
+  "last_run": {
+   "ok": true,
+   "at": "2026-10-11T18:52:00-04:00",
+   "failed_step": null
+  },
+  "pool": {
+   "pulls_left": null,
+   "keys": 2,
+   "game_days_left": null,
+   "days_left": null,
+   "low": false
+  },
+  "excluded_teams": [],
+  "lines_checked": 0
+ },
+ "banners": [
+  {
+   "level": "stop",
+   "text": "Hard Rock prices are off: the odds keys were refused. New keys are needed."
+  }
+ ],
+ "empty": {
+  "code": "keys_refused",
+  "text": "No Hard Rock prices today, so no picks.",
+  "sub": "Hard Rock prices are off: the odds keys were refused. New keys are needed."
+ },
+ "games": [
+  {
+   "id": "g1",
+   "away": "BOS",
+   "home": "BUF",
+   "start": "2026-10-11T17:00:00-04:00",
+   "picks": 0,
+   "excluded_reason": null
+  },
+  {
+   "id": "g2",
+   "away": "FLA",
+   "home": "TBL",
+   "start": "2026-10-11T19:10:00-04:00",
+   "picks": 0,
+   "excluded_reason": null
+  },
+  {
+   "id": "g3",
+   "away": "NYR",
+   "home": "NJD",
+   "start": "2026-10-11T19:10:00-04:00",
+   "picks": 0,
+   "excluded_reason": null
+  },
+  {
+   "id": "g4",
+   "away": "TOR",
+   "home": "MTL",
+   "start": "2026-10-11T19:10:00-04:00",
+   "picks": 0,
+   "excluded_reason": null
+  },
+  {
+   "id": "g5",
+   "away": "COL",
+   "home": "DAL",
+   "start": "2026-10-11T20:10:00-04:00",
+   "picks": 0,
+   "excluded_reason": null
+  },
+  {
+   "id": "g6",
+   "away": "EDM",
+   "home": "VAN",
+   "start": "2026-10-11T22:10:00-04:00",
+   "picks": 0,
+   "excluded_reason": null
+  },
+  {
+   "id": "g7",
+   "away": "SEA",
+   "home": "SJS",
+   "start": "2026-10-11T22:10:00-04:00",
+   "picks": 0,
+   "excluded_reason": null
+  }
+ ],
+ "picks": [],
+ "parlays": [],
+ "goal_watch": [],
+ "goal_watch_note": null
+}

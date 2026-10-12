@@ -46,8 +46,9 @@ STEPS = ["rules", "schedule", "stats", "odds", "lineups", "engine", "grade", "sl
 
 
 class Run:
-    def __init__(self, cfg, now, only=None, dry_run=False):
+    def __init__(self, cfg, now, only=None, dry_run=False, readonly=False):
         self.cfg, self.now, self.only, self.dry_run = cfg, now, only, dry_run
+        self.readonly = readonly     # --explain: read files only, keep anything fetched in memory, write nothing
         self.slate = common.slate_date(now, cfg["ops"]["rollover_hour"])
         self.steps = []
         self.season = None
@@ -145,7 +146,7 @@ class Run:
         ppl = saved["teams"].get(team)
         if ppl is None:
             ppl = nhl.roster(team)
-            if ppl:
+            if ppl and not self.readonly:
                 saved["teams"][team] = ppl
                 common.write_json(path, saved, pretty=False)
         ppl = list(ppl or [])
@@ -251,7 +252,10 @@ class Run:
         plan = day.get("plan")
         doc = getattr(self, "odds_doc", None) or common.read_json(odds.odds_path(self.slate)) or {}
         fetches = [f for f in doc.get("fetches", []) if f.get("book") and f.get("markets")]
-        prices_at = max((f["at"] for f in fetches), default=None)
+        # "Prices checked at": only a read the engine actually uses (not a stale or failed one)
+        view = getattr(self, "view", None)
+        used = odds.used_at(view if view is not None else odds.build_view(doc, cfg))
+        prices_at = common.iso(used) if used else None
         keys = odds.load_keys()
         led = common.read_json(odds.ledger_path(), {}) or {}
         key_state = led.get("keys", [])
@@ -263,6 +267,8 @@ class Run:
         pool_left = sum(k["left"] for k in reported) if pool_known else None
         all_used_up = bool(key_state) and len(key_state) == len(keys or key_state) and \
             all(k.get("left") == 0 for k in key_state)
+        # every key refused by the feed (or refused + used up): nothing will be read until new keys are added
+        refused = not no_keys and not all_used_up and odds.keys_refused(key_state, len(keys or key_state))
         keys_unread = not no_keys and plan is None
         left_games, sched_days = sched.games_left_this_month(self.cache, self.slate) if self.cache else (0, [])
         banners, sub = [], None
@@ -272,7 +278,9 @@ class Run:
 
         # prices_state. "pool_empty" (the page says the pulls ran out) only when EVERY key reported 0 left.
         budget_zero = bool(plan) and plan["budget_today"] == 0
-        if fetches:
+        if refused:
+            ps = "keys_refused"                             # before everything else: no more reads can happen
+        elif fetches:
             ps = "limited" if (plan and plan["tier"] <= 1) or day.get("skipped") else "ok"
         elif no_keys:
             ps = "not_yet"
@@ -287,6 +295,10 @@ class Run:
         else:
             ps = "not_yet"
 
+        # pull A (or a later pull) failed and no price read in use came after it
+        fail_at = common.parse_iso(day.get("last_fail_at")) if day.get("last_fail_at") else None
+        pull_failed = bool(fail_at and times and fail_at >= times["A"] and not (used and used >= fail_at))
+
         # the pool banner (Sharp standard section 2 table)
         if self.games:
             n_all = len(self.games)
@@ -296,6 +308,9 @@ class Run:
                 sub = "No odds keys are set, so prices cannot be read."
             elif all_used_up:
                 banners.append({"level": "stop", "text": "No Hard Rock prices today, odds keys are used up. No picks."})
+            elif refused:
+                banners.append({"level": "stop", "text": odds.KEYS_REFUSED_TEXT})
+                sub = odds.KEYS_REFUSED_TEXT
             elif plan is None:
                 text = "Hard Rock prices couldn't be read yet; trying again."
                 if open_games:
@@ -309,6 +324,8 @@ class Run:
                 else:
                     banners.append({"level": "warn", "text": "Hard Rock prices limited: %d of %d games, shots only. "
                                                               "Odds keys nearly out." % (n, n_all)})
+            elif plan["tier"] in (1, 2) and pull_failed:
+                pass                                        # pull A failed and nothing was read since: no promise
             elif plan["tier"] == 1:
                 banners.append({"level": "warn", "text": "Shots only today. One price check at %s. Odds keys low." % a_time})
             elif plan["tier"] == 2:
@@ -325,7 +342,8 @@ class Run:
         fetched = odds.fetched_map(day)
         budget_ok = bool(plan) and plan["budget_today"] - sum(e["cost"] for e in led.get("spent", [])
                                                               if e["date"] == self.slate) > 0
-        nxt = odds.next_read_at(now, self.games, plan["tier"], v, fetched, self.started, budget_ok) if plan else None
+        nxt = odds.next_read_at(now, self.games, plan["tier"], v, fetched, self.started, budget_ok) \
+            if plan and not refused else None
 
         # lineups
         ls = self.lineup_state or lineups.load(self.slate)
@@ -347,7 +365,7 @@ class Run:
                 banners.append({"level": "warn", "text": "Lineups couldn't be checked, so picks stay Early."})
 
         pool = odds.pool_summary(pool_left, len(key_state), plan, sched_days, cfg, led.get("spent", []), self.slate)
-        if pool["low"] and not all_used_up and pool["days_left"] is not None:
+        if pool["low"] and not all_used_up and not refused and pool["days_left"] is not None:
             n = pool["days_left"]
             banners.append({"level": "warn", "text": "Odds pulls are running low: about %d day%s left. Fewer price checks "
                                                      "until more keys are added." % (n, "" if n == 1 else "s")})
@@ -598,7 +616,7 @@ def main(argv):
     if "--dry-run" in argv:
         return dry_run_main()
     if "--explain" in argv:
-        r = Run(common.load_config(), common.now())
+        r = Run(common.load_config(), common.now(), readonly=True)
         rows = engine.explain(r.build_inputs())
         print("%-22s %-4s %-6s %4s %-5s %6s | %6s %6s %6s %6s %6s %7s %7s | %-7s %s" % (
             "player", "team", "market", "line", "side", "price", "model", "adj", "fair", "p", "b", "margin", "gap",

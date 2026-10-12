@@ -388,11 +388,14 @@ def evaluate(inp, paused=(), block_new=False):
         mv = (inp.view.get(sh["game_id"]) or {}).get(sh["market"])
         last_read = common.parse_iso(it["prices"][-1]["at"])
         price, price_at, other = record.last_price(it), last_read, None
-        if mv is not None and mv["at"] > last_read:
+        pair = None if mv is None or mv.get("gone") else mv["pairs"].get((sh["player_id"], sh["line"]))
+        bad_pair = pair is not None and pair.get(sh["side"]) is not None and not pair.get("ok")
+        if mv is not None and mv["at"] > last_read and bad_pair:
+            pass                        # m12: the newest read of this line failed the feed checks: keep the last good price
+        elif mv is not None and mv["at"] > last_read:
             if mv.get("gone"):
                 new.append({"t": "pulled", "id": i, "at": at, "code": "market_gone", "reason": PULL_TEXT["market_gone"]})
                 continue
-            pair = mv["pairs"].get((sh["player_id"], sh["line"]))
             if pair is None or pair.get(sh["side"]) is None:
                 moved = sorted(l for (pid, l), p in mv["pairs"].items()
                                if pid == sh["player_id"] and l != sh["line"] and p.get(sh["side"]) is not None)
@@ -405,8 +408,7 @@ def evaluate(inp, paused=(), block_new=False):
             price, price_at = pair[sh["side"]], mv["at"]
             other = pair["under" if sh["side"] == "over" else "over"]
         elif mv is not None and not mv.get("gone"):
-            pair = mv["pairs"].get((sh["player_id"], sh["line"]))
-            if pair:
+            if pair and pair.get("ok"):
                 other = pair["under" if sh["side"] == "over" else "over"]
                 price_at = max(price_at, mv["at"]) if pair.get(sh["side"]) == price else price_at
         m = inp.model(sh["player_id"], sh["team"], sh["opp"], sh["home"], sh["market"], sh["line"])
@@ -622,7 +624,11 @@ def goal_watch(inp):
                 continue
             home = team == g["home"]
             m = inp.model(pid, team, g["away"] if home else g["home"], home, "goals", 0.5)
-            if m is None or inp.player(pid, team)["n"] < v["min_history"]:
+            if m is None or inp.player(pid, team)["n"] < v["min_history"] or m["p_over"] <= 0:
+                continue
+            # Goal watch shows only where Hard Rock's price is SHORT of our fair price (pays less than fair).
+            # A row where Hard Rock pays more than fair would read like a value bet nobody vetted: never shown.
+            if odds.decimal(pair["over"]) >= 1.0 / m["p_over"] - EPS:
                 continue
             rows.append({"player": inp.display_name(pid, pair["name"]), "team": team, "price": pair["over"],
                          "fair_price": odds.american(1.0 / m["p_over"]), "p": round(m["p_over"], 4),
@@ -745,6 +751,10 @@ def _empty(inp, status, picks, games, extra):
         return {"code": "all_started", "text": "Every game has started.",
                 "sub": "Tonight's picks are under Started." if shown else "No picks were posted tonight."}
     ps = status["prices_state"]
+    if ps == "keys_refused":
+        text = "No picks tonight. Nothing cleared the bar at Hard Rock's prices." if status["prices_at"] else \
+            "No Hard Rock prices today, so no picks."
+        return {"code": "keys_refused", "text": text, "sub": odds.KEYS_REFUSED_TEXT}
     if ps == "pool_empty":
         return {"code": "pool_empty", "text": "No Hard Rock prices today, so no picks.", "sub": "The odds pulls ran out."}
     if ps == "feed_down":

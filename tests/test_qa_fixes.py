@@ -83,8 +83,14 @@ class B1KeysRefused(unittest.TestCase):
         self.recover()
 
     def test_401(self):
+        # QA round 2 (M2): every key refused with a plain 401 is no longer "trying again": it is keys_refused
         self.mode = "401"
-        self.check_unread(self.s.at("13:02"))
+        sl = self.s.at("13:02")
+        self.assertEqual(self.s.status()["keys"], [{"n": 1, "left": None}, {"n": 2, "left": None}])
+        self.assertIsNone(common.read_json(self.s.path("state", "odds_day.json"))["plan"], "no plan from unread keys")
+        self.assertEqual(sl["status"]["prices_state"], "keys_refused")
+        self.assertIn(odds.KEYS_REFUSED_TEXT, [b["text"] for b in sl["banners"]])
+        self.assertEqual(sl["empty"]["sub"], odds.KEYS_REFUSED_TEXT)
         self.recover()
 
     def test_used_up_only_when_every_key_says_zero(self):

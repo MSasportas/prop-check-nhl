@@ -138,6 +138,68 @@ class Cycle(unittest.TestCase):
         self.assertTrue(json.loads(self.origin_file("data/status.json"))["ok"])
         self.assertEqual(self.origin_file("data/record/events.jsonl"), good)
 
+    # ---- QA round 2, M1: the Record's history on origin
+    def two_good_lines(self):
+        ev = test_record_grade.shown("x", slate="2026-10-01", at="2026-10-01T13:02:00-04:00",
+                                     start="2026-10-01T19:00:00-04:00")
+        gr = {"t": "graded", "id": "x", "at": "2026-10-01T23:00:00-04:00", "result": "W", "actual": 3,
+              "actual_text": "had 3", "price": -120, "units": 0.8333}
+        lines = os.path.join(self.tmp, "lines.jsonl")
+        with open(lines, "w") as f:
+            for e in (ev, gr):
+                f.write(json.dumps(e, separators=(",", ":"), sort_keys=True) + "\n")
+        r = self.cycle("09:00", CYCLE_RUN_CMD="%s scripts/run.py && cat %s >> data/record/events.jsonl"
+                       % (sys.executable, lines))
+        self.assertEqual(r.returncode, 0, r.stdout + r.stderr)
+        self.assertIn("RECORD HISTORY: ok", r.stdout)
+        return self.origin_file("data/record/events.jsonl")
+
+    def outside_edit(self, cwd=None):
+        cwd = cwd or self.other
+        return ("cd %s && git pull -q --rebase origin main && sed -i 's/had 3/had 2/' data/record/events.jsonl && "
+                "git commit -qam 'edited outside the timer' && git push -q origin main" % cwd)
+
+    def test_record_edited_on_origin_stops_the_cycle_and_nothing_is_pushed(self):
+        self.two_good_lines()
+        subprocess.run(["bash", "-c", self.outside_edit()], env=self.env, check=True, capture_output=True)
+        top = self.git(self.origin, "rev-parse", "main")
+        r = self.cycle("09:10")
+        self.assertEqual(r.returncode, 1)
+        self.assertIn("RECORD HISTORY: FAILED: a committed Record line was changed", r.stdout)
+        self.assertIn("FAILED at: record history", r.stdout)
+        self.assertEqual(self.git(self.origin, "rev-parse", "main"), top, "nothing pushed, not even a failure note")
+        r = self.cycle("09:20")                                   # and it stays stopped
+        self.assertEqual(r.returncode, 1)
+        self.assertEqual(self.git(self.origin, "rev-parse", "main"), top)
+
+    def test_record_edited_on_origin_during_the_run_is_caught_before_the_push(self):
+        self.two_good_lines()
+        cmd = "%s scripts/run.py && (%s)" % (sys.executable, self.outside_edit())
+        r = self.cycle("09:21", CYCLE_RUN_CMD=cmd)                # heartbeat due: the runner has a commit to push
+        self.assertEqual(r.returncode, 1, r.stdout + r.stderr)
+        out = r.stdout
+        self.assertLess(out.index("RECORD HISTORY: ok"), out.index("RECORD HISTORY: FAILED"), out)   # caught at push
+        self.assertEqual(self.subjects()[0], "edited outside the timer", "the runner pushed nothing on top")
+
+    def test_force_pushed_rewrite_is_caught_by_the_same_runner(self):
+        good = self.two_good_lines()
+        # someone rewrites history so it is consistent with itself: the edited lines appear as if first written
+        cmd = ("cd %s && git fetch -q origin && git reset -q --hard origin/main~1 && "
+               "git show origin/main:data/record/events.jsonl | sed 's/had 3/had 2/' > data/record/events.jsonl && "
+               "git add -A && git commit -qm 'rewritten' && git push -q -f origin HEAD:main" % self.other)
+        subprocess.run(["bash", "-c", cmd], env=self.env, check=True, capture_output=True)
+        self.assertNotEqual(self.origin_file("data/record/events.jsonl"), good)
+        top = self.git(self.origin, "rev-parse", "main")
+        r = self.cycle("09:10")
+        self.assertEqual(r.returncode, 1, r.stdout + r.stderr)
+        self.assertIn("history was rewritten", r.stdout)
+        self.assertEqual(self.git(self.origin, "rev-parse", "main"), top)
+
+    def test_workflow_checks_out_full_history(self):
+        with open(os.path.join(REPO, ".github", "workflows", "run.yml")) as f:
+            wf = f.read()
+        self.assertIn("fetch-depth: 0", wf)
+
     def test_run_crash_and_run_timeout_publish_a_failure(self):
         self.cycle("09:00")
         r = self.cycle("09:10", CYCLE_RUN_CMD="echo half > data/slate.json; exit 3")

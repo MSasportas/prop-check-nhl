@@ -33,6 +33,8 @@ jobs:
     timeout-minutes: 65
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0        # full history: scripts/guard_record.py --history walks every Record version
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'

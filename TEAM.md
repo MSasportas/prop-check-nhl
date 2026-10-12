@@ -59,14 +59,17 @@ price history exists; our own odds log, `data/odds/`, is building that).
   Chats can't see Actions history, Secrets or the live link; the public Actions page can be read with WebFetch:
   https://github.com/MSasportas/prop-check-nhl/actions
 - **Restart a dead chain:** push any commit touching `scripts/`, `config/` or `.github/workflows/`.
-- **Record guard:** `scripts/guard_record.py` blocks any commit where the committed `data/record/events.jsonl` is not an
-  exact prefix of the new one. `python scripts/run.py --rebuild-record` regenerates the derived Record views.
-  Only the timer writes `data/record/`. No chat ever edits it.
+- **Record guard:** every cycle runs `scripts/guard_record.py --history` after pulling and again just before pushing:
+  every committed version of `data/record/events.jsonl` must be a byte-exact prefix of the next. If not, the cycle
+  pushes NOTHING and the page soon says "Updates have stopped". Repair: a fix commit on top does not clear it (the
+  edited version stays in history); only a force-push that removes the bad commit(s) does, restoring the last good
+  log. `python scripts/run.py --rebuild-record` regenerates the derived Record views. Only the timer writes
+  `data/record/`. No chat ever edits it.
 - **Odds keys:** GitHub secret `ODDS_API_KEYS` (comma-separated). Never in the repo, page or logs. Rotates when a key
   is out or refused; a refused key is "unknown", not empty. Page warns when the pool is low.
 - **Files:** `index.html` (page; reads `data/slate.json`, `data/record.json`, `data/rules.json`), `data/odds/<date>.json`
   (every price pulled), `data/state/` (stats store, schedule, credits ledger), `fixtures/` (QA pages: `?fixture=NAME`,
-  `?now=ISO`), `tests/` (`python -m unittest discover -s tests`, 148 tests; `tests/replay_day.py` replays a day).
+  `?now=ISO`), `tests/` (`python -m unittest discover -s tests`, 174 tests; `tests/replay_day.py` replays a day).
 - **Debug:** `python scripts/run.py --explain` shows why each line did or didn't qualify. Test env vars: `PC_NOW`,
   `PC_DATA_DIR`, `PC_ODDS_FIXTURE_DIR`, `PC_LINEUP_FIXTURE_DIR`, `PC_NHL_FIXTURE_DIR`. Never test against the live data/.
 
@@ -92,10 +95,10 @@ price history exists; our own odds log, `data/odds/`, is building that).
 5. No verified free injury source; no free opponent-adjusted ranks (model uses raw opponent shots/goals allowed).
 6. The NHL schedule time is used for lock (it can be ~10 min before actual puck drop): conservative.
 7. Name matching: exact, or last name + first initial; unmatched names are listed in `status.json` and skipped.
-8. QA minors open: R1 "Odds: about N days left" can exceed days until the 1st (cap it); R2 rules sheet omits the
-   +120 pull and types "two or three legs"; R3 permanently refused keys never escalate on the page; R4 null-price
-   pick renders as "—"; R5 guard can't catch an edited Record pushed from outside the chain (process rule above);
-   R6 chain recovery depends on the cron.
+8. QA minors open: R4 null-price pick renders as "—"; R6 chain recovery depends on the cron. Fixed 2026-10-12
+   (QA round 2): R1 days left capped at the 1st; R2 rules sheet; R3 refused keys show "keys_refused"; R5 cycle runs
+   `guard_record.py --history` after each pull (a force-pushed rewrite is caught only by a runner that saw the
+   old Record, i.e. within one ~50 min run).
 9. If a cycle pulled prices but its push failed, that cycle's credits are spent again next cycle. Rare.
 10. Regular season only; playoffs say "Only regular-season games are covered."
 

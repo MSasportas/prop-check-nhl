@@ -41,7 +41,7 @@ RULES = {
         "thin_over_penalty": 0.04, "thin_rows": 20, "thin_team_games": 10, "min_history": 10,
         "news_gap": 0.15, "too_good": 0.20, "pull_margin": 0.0, "drift_pull": 0.04,
         "max_per_player": 1, "max_per_game": 3, "parlay_leg_min_p": 0.58, "parlay_min_p_2": 0.34,
-        "parlay_min_p_3": 0.20, "parlay_cap": 3, "parlay_leg_min_price": -200, "parlay_leg_max_price": 100, "parlay_edge": 0.03, "stake": 1, "min_sample": 30, "pause_legs": 50,
+        "parlay_min_p_3": 0.20, "parlay_cap": 3, "parlay_min_legs": 2, "parlay_max_legs": 3, "parlay_leg_min_price": -200, "parlay_leg_max_price": 100, "parlay_edge": 0.03, "stake": 1, "min_sample": 30, "pause_legs": 50,
         "change_legs": 150,
     },
     "ui": {"stale_after_min": 75, "refresh_sec": 120, "picks_open": 8},
@@ -449,6 +449,14 @@ def build():
     s = empty_slate("feed_down", "No Hard Rock prices today, so no picks. The odds feed did not answer.")
     s["status"].update(prices_state="feed_down", prices_at=None, lineups_at=None, lines_checked=0)
     out["feeddown"] = (s, rec)
+
+    refused = "Hard Rock prices are off: the odds keys were refused. New keys are needed."
+    s = empty_slate("keys_refused", "No Hard Rock prices today, so no picks.", refused)
+    s["status"].update(prices_state="keys_refused", prices_at=None, next_price_read_at=None, lineups_at=None,
+                       lines_checked=0)
+    s["status"]["pool"] = {"pulls_left": None, "keys": 2, "game_days_left": None, "days_left": None, "low": False}
+    s["banners"] = [{"level": "stop", "text": refused}]
+    out["keysrefused"] = (s, rec)
 
     s = empty_slate("stats_behind", "Stats are behind, so no picks until they catch up.")
     s["status"].update(stats_state="behind", stats_through="2026-10-08")
