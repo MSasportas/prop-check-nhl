@@ -214,11 +214,14 @@ class Schedule(unittest.TestCase):
         sp = ["shots", "points"]
         done = {1: [("A", "13:02", sp, sp)], 2: [("A", "13:02", sp, sp)]}
         self.assertEqual(self.due("17:29", 3, done), [])
-        self.assertEqual(self.due("17:30", 3, done), [("B", 1, sp), ("B", 2, sp)])
+        # B is per game: 90 minutes before EACH game's puck (game 1 at 7 PM -> 5:30; game 2 at 10 PM -> 8:30)
+        self.assertEqual(self.due("17:30", 3, done), [("B", 1, sp)])
+        self.assertEqual(self.due("20:29", 3, {1: done[1] + [("B", "17:31", sp, sp)], 2: done[2]}), [])
+        self.assertEqual(self.due("20:30", 3, {1: done[1] + [("B", "17:31", sp, sp)], 2: done[2]}), [("B", 2, sp)])
         self.assertEqual(self.due("17:30", 2, done), [])
         self.assertEqual(self.due("17:30", 4, done)[0], ("B", 1, ["shots", "points", "goals", "saves"]))
-        # B missed and A missed: B replaces A (one read, not two)
-        self.assertEqual(self.due("17:45", 3), [("B", 1, sp), ("B", 2, sp)])
+        # B missed and A missed: B replaces A (one read, not two); game 2's B is not due yet, so it gets A
+        self.assertEqual(self.due("17:45", 3), [("B", 1, sp), ("A", 2, sp)])
 
     def test_c_only_markets_with_a_live_pick(self):
         sp = ["shots", "points"]

@@ -373,6 +373,7 @@ def due_pulls(now, games, tier, v, fetched, live_markets, started, retry_min=30)
         left = (start - now).total_seconds() / 60.0
         done = fetched.get(g["id"], [])
         c_due = start - timedelta(minutes=v["pull_c_min"])
+        b_due = start - timedelta(minutes=v["pull_b_min"])     # B is per game: pull_b_min before ITS puck
 
         def need(markets, due_at):
             got, last_try = set(), None
@@ -388,8 +389,8 @@ def due_pulls(now, games, tier, v, fetched, live_markets, started, retry_min=30)
 
         choice = None
         b_markets = markets_for(tier, "B")
-        if b_markets and now >= t["B"] and left >= v["pull_latest_min"]:
-            m = need(b_markets, t["B"])
+        if b_markets and now >= b_due and left >= v["pull_latest_min"]:
+            m = need(b_markets, b_due)
             if m:
                 choice = ("B", m)
         if choice is None and tier >= 2 and now >= c_due and left >= v["pull_c_latest_min"]:
@@ -419,8 +420,9 @@ def next_read_at(now, games, tier, v, fetched, started, has_budget=True):
         done = fetched.get(g["id"], [])
         if not done and start - timedelta(minutes=v["pull_latest_min"]) >= now:
             cands.append(max(t["A"], now))
-        if markets_for(tier, "B") and t["B"] > now and start - timedelta(minutes=v["pull_latest_min"]) >= t["B"]:
-            cands.append(t["B"])
+        b_due = start - timedelta(minutes=v["pull_b_min"])
+        if markets_for(tier, "B") and b_due > now and start - timedelta(minutes=v["pull_latest_min"]) >= b_due:
+            cands.append(b_due)
         c = start - timedelta(minutes=v["pull_c_min"])
         if tier >= 2 and c > now:
             cands.append(c)

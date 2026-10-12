@@ -42,7 +42,7 @@ price history exists; our own odds log, `data/odds/`, is building that).
 | Parlays | One leg per game; legs chance ≥ 0.58, price -200 to +100; combined ≥ 0.34 (2 legs) / 0.20 (3); beat parlay break-even by 0.03; up to 3 a night, a leg in at most 2. Price = product of leg prices ("about") |
 | Pulls | Out per Daily Faceoff; price past -200 or past +120; line or market gone; chance − break-even < 0; market moved 4+ points against an unconfirmed pick. Parlay with a pulled leg is pulled |
 | Grading | When the NHL marks the game OFF. Regulation + OT count, shootout never. No ice time = void; whole-number tie = push. Graded at the worst price shown; parlays at their worst shown snapshot. Flat 1 unit |
-| Odds pulls | Allowance = credits left / games left before keys reset on the 1st. Tiers (credits per game): <1 shots only for the games the budget covers; 1-2 shots all games once; 2-4 shots + points once (1 PM, or 3h before first puck) plus a re-check 45 min before each game holding a pick; 4-7 adds a second pull 90 min before first puck; 7+ adds goals + saves (Goal watch). Unspent credits roll over |
+| Odds pulls | Allowance = credits left / games left before keys reset on the 1st. Tiers (credits per game): <1 shots only for the games the budget covers; 1-2 shots all games once; 2-4 shots + points once (1 PM, or 3h before first puck) plus a re-check 45 min before each game holding a pick; 4-7 adds a second pull 90 min before EACH game's puck; 7+ adds goals + saves (Goal watch). Unspent credits roll over |
 | Safety | A market pauses itself at 50 graded legs if its hit rate is 13+ points under its average break-even or it's at -10 units. No other value changes before 150 graded legs in that market; one change at a time |
 
 ## 5. How it runs
@@ -105,6 +105,7 @@ price history exists; our own odds log, `data/odds/`, is building that).
 ## 8. Rule-change log
 | Date | Change | Why | Sample |
 |---|---|---|---|
+| 2026-10-12 | Pull B now 90 min before each game (was: before the first game, for all games) | Evening games were priced only in the morning until 45 min before puck; picks that appear after lineups confirm would show hours-old prices. Same credits | Ops timing, no graded sample needed |
 | 2026-10-11 | v1.0 set (section 4) | First build: Sharp standard from the DS backtest (2024-25 fit, 2025-26 out of sample) and one live Hard Rock pull | Backtest only; 0 graded live legs |
 
 ## 9. Session log (newest first, one line each)
