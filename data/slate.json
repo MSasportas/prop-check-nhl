@@ -1,7 +1,7 @@
 {
  "slate_date": "2026-10-12",
- "generated_at": "2026-10-12T18:50:11-04:00",
- "status_at": "2026-10-12T18:50:11-04:00",
+ "generated_at": "2026-10-12T19:00:00-04:00",
+ "status_at": "2026-10-12T19:00:00-04:00",
  "valid_until": "2026-10-13T05:00:00-04:00",
  "status": {
   "prices_state": "ok",
@@ -16,7 +16,7 @@
   "stats_state": "ok",
   "last_run": {
    "ok": true,
-   "at": "2026-10-12T18:50:11-04:00",
+   "at": "2026-10-12T19:00:00-04:00",
    "failed_step": null
   },
   "pool": {
@@ -54,7 +54,7 @@
    "away": "OTT",
    "home": "NJD",
    "start": "2026-10-12T19:00:00-04:00",
-   "started": false,
+   "started": true,
    "picks": 1,
    "excluded_reason": null,
    "excluded_teams": []
@@ -71,50 +71,6 @@
   }
  ],
  "picks": [
-  {
-   "id": "2026-10-12:2026020088:8477998:shots:1.5:under",
-   "price": -110,
-   "first_price": -110,
-   "first_price_at": "2026-10-12T17:30:00-04:00",
-   "worst_price": -110,
-   "p": 0.5849,
-   "breakeven": 0.5238,
-   "p_pct": 58,
-   "breakeven_pct": 52,
-   "state": "lineup",
-   "history": [
-    {
-     "at": "2026-10-12T17:30:00-04:00",
-     "text": "Lineup confirmed"
-    }
-   ],
-   "prices": [
-    {
-     "at": "2026-10-12T17:30:00-04:00",
-     "price": -110
-    }
-   ],
-   "pulled": null,
-   "graded": null,
-   "rank": 1,
-   "tier": "main",
-   "game_id": 2026020088,
-   "player": "W. Foegele",
-   "player_id": 8477998,
-   "team": "OTT",
-   "opp": "NJD",
-   "home": false,
-   "start": "2026-10-12T19:00:00-04:00",
-   "market": "shots",
-   "line": 1.5,
-   "side": "under",
-   "bet": "Under 1.5 shots on goal",
-   "price_at": "2026-10-12T18:20:01-04:00",
-   "reason": "58% to stay under 1.5 shots; -110 needs 52%. Projects 1.2 shots in 12 min. NJD allow 3% fewer shots than average.",
-   "thin": false,
-   "games_used": 73,
-   "games_this_season": 5
-  },
   {
    "id": "2026-10-12:2026020089:8478864:shots:3.5:under",
    "price": -145,
@@ -144,7 +100,7 @@
    ],
    "pulled": null,
    "graded": null,
-   "rank": 2,
+   "rank": 1,
    "tier": "main",
    "game_id": 2026020089,
    "player": "K. Kaprizov",
@@ -218,6 +174,54 @@
    "thin": false,
    "games_used": 24,
    "games_this_season": 5
+  },
+  {
+   "id": "2026-10-12:2026020088:8477998:shots:1.5:under",
+   "price": -110,
+   "first_price": -110,
+   "first_price_at": "2026-10-12T17:30:00-04:00",
+   "worst_price": -110,
+   "p": 0.5849,
+   "breakeven": 0.5238,
+   "p_pct": 58,
+   "breakeven_pct": 52,
+   "state": "locked",
+   "history": [
+    {
+     "at": "2026-10-12T17:30:00-04:00",
+     "text": "Lineup confirmed"
+    },
+    {
+     "at": "2026-10-12T19:00:00-04:00",
+     "text": "Locked"
+    }
+   ],
+   "prices": [
+    {
+     "at": "2026-10-12T17:30:00-04:00",
+     "price": -110
+    }
+   ],
+   "pulled": null,
+   "graded": null,
+   "rank": null,
+   "tier": "main",
+   "game_id": 2026020088,
+   "player": "W. Foegele",
+   "player_id": 8477998,
+   "team": "OTT",
+   "opp": "NJD",
+   "home": false,
+   "start": "2026-10-12T19:00:00-04:00",
+   "market": "shots",
+   "line": 1.5,
+   "side": "under",
+   "bet": "Under 1.5 shots on goal",
+   "price_at": "2026-10-12T17:30:00-04:00",
+   "reason": "58% to stay under 1.5 shots; -110 needs 52%. Projects 1.2 shots in 12 min. NJD allow 3% fewer shots than average.",
+   "thin": false,
+   "games_used": 73,
+   "games_this_season": 5
   }
  ],
  "parlays": [
@@ -231,11 +235,15 @@
    "breakeven": 0.31,
    "p_pct": 36,
    "breakeven_pct": 31,
-   "state": "lineup",
+   "state": "locked",
    "history": [
     {
      "at": "2026-10-12T17:30:00-04:00",
      "text": "Lineup confirmed"
+    },
+    {
+     "at": "2026-10-12T19:00:00-04:00",
+     "text": "Locked"
     }
    ],
    "prices": [
