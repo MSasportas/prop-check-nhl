@@ -396,10 +396,28 @@ class Run:
             "stats_through": self.stats_through, "lineups_at": facts["lineups_at"], "lineups_note": facts["lineups_note"],
             "games_today": len(self.games), "record_events": len(self.events) if self.events is not None else None,
             "odds_notes": sorted(set((self.odds_res or {}).get("errors", [])))[:6],
+            "runner": runner_info(),
         }
         if old and _essence(old) == _essence(st) and not self._heartbeat_due(old.get("finished_at")):
             return
         common.write_json(path, st)
+
+
+def runner_info():
+    """Who ran this (set by scripts/loop.sh on GitHub). Lets a chat see from the repo that the timer is alive.
+    Not news by itself: a change here alone never causes a commit (see _essence)."""
+    env = os.environ
+    if not env.get("PC_RUNNER_RUN_ID") and not env.get("PC_RUNNER_EVENT"):
+        return {"event": "local", "run_id": None, "iteration": None, "chain_link": None, "chain_started_at": None}
+    def num(k):
+        try:
+            return int(env.get(k, ""))
+        except ValueError:
+            return None
+    return {"event": env.get("PC_RUNNER_EVENT"), "run_id": env.get("PC_RUNNER_RUN_ID"),
+            "iteration": num("PC_RUNNER_ITERATION"), "chain_link": num("PC_RUNNER_LINK"),
+            "chain_started_at": env.get("PC_RUNNER_CHAIN_STARTED") or None,
+            "run_started_at": env.get("PC_RUNNER_RUN_STARTED") or None}
 
 
 def _essence(doc):
@@ -407,7 +425,7 @@ def _essence(doc):
     d = common.dumps(doc, False)
     import json
     d = json.loads(d)
-    for k in ("generated_at", "started_at", "finished_at", "last_ok_at"):
+    for k in ("generated_at", "started_at", "finished_at", "last_ok_at", "runner"):
         d.pop(k, None)
     if isinstance(d.get("steps"), list):                    # a step that merely had nothing to do is not news
         d["steps"] = [(s["step"], s["note"]) for s in d["steps"] if s["status"] == "failed"]

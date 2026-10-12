@@ -47,6 +47,13 @@ def main(argv):
     now = datetime.fromisoformat(raw.replace("Z", "+00:00")).astimezone(ET) if raw else datetime.now(ET)
     now = now.replace(microsecond=0)
     st = read(os.path.join(DATA, "status.json")) or {}
+    env = os.environ
+    if env.get("PC_RUNNER_RUN_ID") or env.get("PC_RUNNER_EVENT"):
+        num = lambda k: int(env[k]) if env.get(k, "").isdigit() else None
+        st["runner"] = {"event": env.get("PC_RUNNER_EVENT"), "run_id": env.get("PC_RUNNER_RUN_ID"),
+                        "iteration": num("PC_RUNNER_ITERATION"), "chain_link": num("PC_RUNNER_LINK"),
+                        "chain_started_at": env.get("PC_RUNNER_CHAIN_STARTED") or None,
+                        "run_started_at": env.get("PC_RUNNER_RUN_STARTED") or None}
     st.update({"ok": False, "failed_step": step, "failed_at": now.isoformat(),
                "note": "The run stopped before finishing. Files from the last good run are still in place."})
     write(os.path.join(DATA, "status.json"), st)
