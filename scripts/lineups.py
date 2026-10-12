@@ -12,6 +12,7 @@ not checked": picks stay Early and the page says so. Nothing here can stop a run
 State: data/state/lineups.json. With PC_LINEUP_FIXTURE_DIR set, pages are read from <dir>/<slug>.json
 (the page's pageProps) or <dir>/<slug>.html, never the network.
 """
+import time
 import json
 import os
 import re
@@ -108,6 +109,8 @@ def check(now, slate, games, started, ops, people_for):
         st = {"date": slate, "teams": {}, "last_ok_at": None, "last_try_at": None}
     st.setdefault("teams", {})
     tried = okn = recent = 0
+    t0 = time.monotonic()
+    cap = ops.get("lineup_cycle_cap_s", 90)
     for g in games:
         if started.get(g["id"]):
             continue
@@ -122,6 +125,10 @@ def check(now, slate, games, started, ops, people_for):
                 continue
             tried += 1
             rec["tried_at"] = common.iso(now)
+            if time.monotonic() - t0 > cap:                # cycle time cap: do not starve the odds step
+                rec["last_error"] = "not reached (time cap)"
+                st["teams"][team] = rec
+                continue
             slug = teams.df_slug(team)
             people = people_for(team)
             props = fetch_page(slug) if slug and people else None

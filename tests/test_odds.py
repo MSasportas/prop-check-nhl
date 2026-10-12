@@ -146,8 +146,9 @@ class Plan(unittest.TestCase):
     def test_markets_by_tier(self):
         self.assertEqual(odds.markets_for(0, "A"), ["shots"])
         self.assertEqual(odds.markets_for(1, "A"), ["shots"])
-        self.assertEqual(odds.markets_for(2, "A"), ["shots", "points"])
-        self.assertEqual(odds.markets_for(2, "B"), [])
+        self.assertEqual(odds.markets_for(2, "A"), ["shots"])           # A is shots only at every tier
+        self.assertEqual(odds.markets_for(4, "A"), ["shots"])
+        self.assertEqual(odds.markets_for(2, "B"), ["points"])
         self.assertEqual(odds.markets_for(3, "B"), ["shots", "points"])
         self.assertEqual(odds.markets_for(4, "B"), ["shots", "points", "goals", "saves"])
         self.assertEqual(odds.markets_for(1, "C", {"shots"}), [])
@@ -181,13 +182,13 @@ class Schedule(unittest.TestCase):
         self.games = [{"id": 1, "date": "2026-10-11", "start": "2026-10-11T19:00:00-04:00"},
                       {"id": 2, "date": "2026-10-11", "start": "2026-10-11T22:00:00-04:00"}]
 
-    def due(self, hhmm, tier, fetched=None, live=None, started=None):
+    def due(self, hhmm, tier, fetched=None, live=None, started=None, lineups_ok=None):
         now = common.parse_iso("2026-10-11T%s:00-04:00" % hhmm)
         f = {}
         for gid, items in (fetched or {}).items():
             f[gid] = [{"pull": p, "at": common.parse_iso("2026-10-11T%s:00-04:00" % t), "markets": m, "returned": r}
                       for p, t, m, r in items]
-        out = odds.due_pulls(now, self.games, tier, V, f, live or {}, started or {})
+        out = odds.due_pulls(now, self.games, tier, V, f, live or {}, started or {}, lineups_ok=lineups_ok)
         return [(d["pull"], d["game"]["id"], d["markets"]) for d in out]
 
     def test_before_a_nothing(self):
@@ -195,11 +196,12 @@ class Schedule(unittest.TestCase):
         self.assertEqual(self.due("09:00", 4), [])
 
     def test_a_all_games(self):
-        self.assertEqual(self.due("13:00", 2), [("A", 1, ["shots", "points"]), ("A", 2, ["shots", "points"])])
+        for tier in (1, 2, 3, 4):                                  # A is shots only, never points
+            self.assertEqual(self.due("13:00", tier), [("A", 1, ["shots"]), ("A", 2, ["shots"])])
         self.assertEqual(self.due("13:00", 1), [("A", 1, ["shots"]), ("A", 2, ["shots"])])
 
     def test_a_done_is_not_repeated(self):
-        sp = ["shots", "points"]
+        sp = ["shots"]
         self.assertEqual(self.due("13:10", 2, {1: [("A", "13:02", sp, sp)], 2: [("A", "13:02", sp, sp)]}), [])
 
     def test_late_cron(self):
@@ -210,22 +212,103 @@ class Schedule(unittest.TestCase):
         self.assertEqual(self.due("19:05", 1, started={1: True}), [("A", 2, ["shots"])])
         self.assertEqual(self.due("21:41", 1, started={1: True}), [])
 
-    def test_b_only_at_tier_3_and_up(self):
-        sp = ["shots", "points"]
-        done = {1: [("A", "13:02", sp, sp)], 2: [("A", "13:02", sp, sp)]}
-        self.assertEqual(self.due("17:29", 3, done), [])
+    def test_b_waits_for_lineups_and_the_window(self):
+        sh, sp = ["shots"], ["shots", "points"]
+        done = {1: [("A", "13:02", sh, sh)], 2: [("A", "13:02", sh, sh)]}
+        ok = {1: True, 2: True}
+        self.assertEqual(self.due("17:29", 3, done, lineups_ok=ok), [])                  # before the window
         # B is per game: 90 minutes before EACH game's puck (game 1 at 7 PM -> 5:30; game 2 at 10 PM -> 8:30)
-        self.assertEqual(self.due("17:30", 3, done), [("B", 1, sp)])
-        self.assertEqual(self.due("20:29", 3, {1: done[1] + [("B", "17:31", sp, sp)], 2: done[2]}), [])
-        self.assertEqual(self.due("20:30", 3, {1: done[1] + [("B", "17:31", sp, sp)], 2: done[2]}), [("B", 2, sp)])
-        self.assertEqual(self.due("17:30", 2, done), [])
-        self.assertEqual(self.due("17:30", 4, done)[0], ("B", 1, ["shots", "points", "goals", "saves"]))
-        # B missed and A missed: B replaces A (one read, not two); game 2's B is not due yet, so it gets A
-        self.assertEqual(self.due("17:45", 3), [("B", 1, sp), ("A", 2, sp)])
+        self.assertEqual(self.due("17:30", 3, done, lineups_ok=ok), [("B", 1, sp)])
+        b1 = done[1] + [("B", "17:31", sp, sp)]
+        self.assertEqual(self.due("20:29", 3, {1: b1, 2: done[2]}, lineups_ok=ok), [])
+        self.assertEqual(self.due("20:30", 3, {1: b1, 2: done[2]}, lineups_ok=ok), [("B", 2, sp)])
+        self.assertEqual(self.due("17:30", 2, done, lineups_ok=ok), [("B", 1, ["points"])])    # tier 2: points once
+        self.assertEqual(self.due("17:30", 4, done, lineups_ok=ok)[0], ("B", 1, ["shots", "points", "goals", "saves"]))
+        self.assertEqual(self.due("17:30", 1, done, lineups_ok=ok), [])                  # lower tiers: no B
+        self.assertEqual(self.due("17:30", 0, done, lineups_ok=ok), [])
+
+    def test_points_not_pulled_before_lineups_confirm(self):
+        sh = ["shots"]
+        done = {1: [("A", "13:02", sh, sh)], 2: [("A", "13:02", sh, sh)]}
+        for tier in (2, 3, 4):
+            for hhmm in ("17:30", "17:50", "18:14"):                                     # inside B window, before 45 min
+                self.assertEqual(self.due(hhmm, tier, done, lineups_ok={1: False, 2: False}), [], (tier, hhmm))
+                self.assertEqual(self.due(hhmm, tier, done), [], (tier, hhmm))              # no lineup info at all
+        # one team confirmed is not enough
+        self.assertEqual(self.due("17:40", 3, done, lineups_ok={1: False}), [])
+        # confirmed late inside the window: pulled on the very next cycle
+        self.assertEqual(self.due("17:52", 3, done, lineups_ok={1: True}), [("B", 1, ["shots", "points"])])
+
+    def test_fallback_points_at_45_minutes_when_lineups_never_confirm(self):
+        sh = ["shots"]
+        done = {1: [("A", "13:02", sh, sh)], 2: [("A", "13:02", sh, sh)]}
+        self.assertEqual(self.due("18:14", 4, done), [])
+        self.assertEqual(self.due("18:15", 4, done), [("B", 1, ["points"])])             # no goals/saves, no shots again
+        self.assertEqual(self.due("18:15", 2, done), [("B", 1, ["points"])])
+        self.assertEqual(self.due("18:15", 1, done), [])                                 # lower tiers never get points
+        # with a live pick the 45 minute read is one combined read, not two
+        self.assertEqual(self.due("18:15", 3, done, live={1: {"shots"}}), [("B", 1, ["points", "shots"])])
+        # last chance is 20 minutes before puck; after that nothing
+        self.assertEqual(self.due("18:40", 3, done), [("B", 1, ["points"])])
+        self.assertEqual(self.due("18:41", 3, done), [])
+        # once the points came back the fallback is not repeated
+        got = {1: done[1] + [("B", "18:16", ["points"], ["points"])], 2: done[2]}
+        self.assertEqual(self.due("18:30", 3, got), [])
+
+    def test_malformed_lineups_state_is_unconfirmed(self):
+        for bad in (None, [], {"teams": []}, {"teams": {"A": 1, "B": None}}, {"teams": {"A": {"page": "x"}}},
+                    {"teams": {"A": {"page": []}}}):
+            g = [dict(x, away="A", home="B") for x in self.games]
+            self.assertEqual(odds.lineups_confirmed(bad, g), {1: False, 2: False})
+
+    def test_late_confirmation_after_fallback_allows_the_rest(self):
+        sh = ["shots"]
+        done = {1: [("A", "13:02", sh, sh), ("B", "18:16", ["points"], ["points"])], 2: [("A", "13:02", sh, sh)]}
+        self.assertEqual(self.due("18:30", 4, done, lineups_ok={1: True}), [("B", 1, ["shots", "goals", "saves"])])
+        self.assertEqual(self.due("18:41", 4, done, lineups_ok={1: True}), [])
+
+    def test_started_games_never_pulled(self):
+        sh = ["shots"]
+        done = {1: [("A", "13:02", sh, sh)], 2: [("A", "13:02", sh, sh)]}
+        self.assertEqual(self.due("19:05", 4, done, lineups_ok={1: True, 2: True}, started={1: True}), [])
+        self.assertEqual(self.due("18:30", 4, done, lineups_ok={1: True}, started={1: True}), [])
+
+    def test_credits_per_game_lower_than_before(self):
+        def old(tier):                       # the pre-2026-10-12 shape: A (shots+points from tier 2) then B
+            a = 1 if tier <= 1 else 2
+            b = {3: 2, 4: 4}.get(tier, 0)
+            return a + b
+        def new(tier):
+            return len(odds.markets_for(tier, "A")) + len(odds.markets_for(tier, "B"))
+        self.assertLess(new(3), old(3))
+        self.assertLess(new(4), old(4))
+        self.assertLessEqual(new(2), old(2))
+        self.assertEqual(new(1), old(1))
+        # a game whose lineups never confirm and has no live pick costs shots + points (fallback) at most
+        self.assertEqual(len(odds.markets_for(4, "A")) + len(["points"]), 2)
+        self.assertLess(2, old(4))
+
+    def test_next_read_time_follows_the_rules(self):
+        sh = ["shots"]
+        g = self.games
+        f = lambda items: {gid: [{"pull": p, "at": common.parse_iso("2026-10-11T%s:00-04:00" % t), "markets": sh,
+                                  "returned": r} for p, t, r in its] for gid, its in items.items()}
+        done = f({1: [("A", "13:02", sh)], 2: [("A", "13:02", sh)]})
+        nr = lambda hhmm, ok=None, tier=3, fetched=None: odds.next_read_at(
+            common.parse_iso("2026-10-11T%s:00-04:00" % hhmm), g, tier, V, fetched if fetched is not None else done, {},
+            True, lineups_ok=ok)
+        iso = lambda t: common.parse_iso("2026-10-11T%s:00-04:00" % t)
+        self.assertEqual(nr("14:00"), iso("18:15"))                                      # no lineup info: fallback time
+        self.assertEqual(nr("17:40", ok={1: True}), iso("17:40"))                        # confirmed: next cycle
+        self.assertEqual(nr("17:40", ok={}), iso("18:15"))                               # unconfirmed: the 45 min fallback
+        self.assertEqual(nr("14:00", ok={}), iso("18:15"))                               # never the 90 min time
+        self.assertEqual(nr("14:00", ok={1: True}), iso("17:30"))                        # confirmed already: B time
+        self.assertEqual(nr("18:20", ok={}, tier=3, fetched=f({1: [("A", "13:02", sh), ("B", "18:16", ["points"])],
+                                                               2: [("A", "13:02", sh)]})), iso("21:15"))
 
     def test_c_only_markets_with_a_live_pick(self):
-        sp = ["shots", "points"]
-        done = {1: [("A", "13:02", sp, sp)], 2: [("A", "13:02", sp, sp)]}
+        sh, sp = ["shots"], ["shots", "points"]
+        done = {1: [("A", "13:02", sh, sh), ("B", "17:35", ["points"], ["points"])], 2: [("A", "13:02", sh, sh)]}
         self.assertEqual(self.due("18:14", 2, done, {1: {"shots"}}), [])
         self.assertEqual(self.due("18:15", 2, done, {1: {"shots"}}), [("C", 1, ["shots"])])
         self.assertEqual(self.due("18:15", 2, done, {}), [])                       # no live pick: nothing to re-price
@@ -237,9 +320,9 @@ class Schedule(unittest.TestCase):
 
     def test_unposted_market_is_asked_again_for_free(self):
         # A at 1:02 PM returned shots but points were not posted yet
-        done = {1: [("A", "13:02", ["shots", "points"], ["shots"])], 2: [("A", "13:02", ["shots", "points"], [])]}
+        done = {1: [("A", "13:02", ["shots"], ["shots"])], 2: [("A", "13:02", ["shots"], [])]}
         self.assertEqual(self.due("13:12", 2, done), [])                           # asked 10 minutes ago: wait
-        self.assertEqual(self.due("13:32", 2, done), [("A", 1, ["points"]), ("A", 2, ["shots", "points"])])
+        self.assertEqual(self.due("13:32", 2, done), [("A", 2, ["shots"])])
 
 
 class KeyRotation(unittest.TestCase):
@@ -337,14 +420,14 @@ class Pulls(unittest.TestCase):
         s.set_odds("VAN", "NYR", self.lines("VAN", "NYR"), "2026-10-11T17:00:00Z")
         sl = s.at("13:02")
         doc = common.read_json(s.path("odds", "2026-10-11.json"))
-        self.assertEqual([(f["pull"], f["away"], f["cost"]) for f in doc["fetches"]], [("A", "CAR", 2), ("A", "VAN", 2)])
-        self.assertEqual(s.status()["budget_used_today"], 4)
-        self.assertEqual(s.status()["keys"], [{"n": 1, "left": 8}])
+        self.assertEqual([(f["pull"], f["away"], f["cost"]) for f in doc["fetches"]], [("A", "CAR", 1), ("A", "VAN", 1)])
+        self.assertEqual(s.status()["budget_used_today"], 2)
+        self.assertEqual(s.status()["keys"], [{"n": 1, "left": 10}])
         self.assertEqual(sl["status"]["prices_state"], "ok")
-        self.assertEqual(sl["status"]["pool"]["pulls_left"], 8)
+        self.assertEqual(sl["status"]["pool"]["pulls_left"], 10)
         before = s.tree()
         s.at("13:12")                                          # nothing due: no second read, no spend
-        self.assertEqual(s.status()["budget_used_today"], 4)
+        self.assertEqual(s.status()["budget_used_today"], 2)
         self.assertEqual(s.tree()["odds/2026-10-11.json"], before["odds/2026-10-11.json"])
 
     def test_failure_midway_keeps_old_prices_and_never_pays_twice(self):
@@ -354,13 +437,13 @@ class Pulls(unittest.TestCase):
         s.drop_odds("VAN", "NYR")                              # the feed will not answer for VAN at NYR
         s.at("13:02")
         self.assertFalse(os.path.exists(s.path("odds", "2026-10-11.json")), "a half pull must not be published")
-        self.assertEqual(s.status()["budget_used_today"], 2)
+        self.assertEqual(s.status()["budget_used_today"], 1)
         self.assertEqual(s.slate()["status"]["prices_state"], "feed_down")
         s.set_odds("VAN", "NYR", self.lines("VAN", "NYR"), "2026-10-11T17:00:00Z")
         s.at("13:12")                                          # retry: only the missing game is fetched
         doc = common.read_json(s.path("odds", "2026-10-11.json"))
         self.assertEqual(sorted((f["away"], f["at"][11:16]) for f in doc["fetches"]), [("CAR", "13:02"), ("VAN", "13:12")])
-        self.assertEqual(s.status()["budget_used_today"], 4)
+        self.assertEqual(s.status()["budget_used_today"], 2)
         self.assertEqual(s.slate()["status"]["prices_state"], "ok")
 
     def test_a_game_that_keeps_failing_does_not_hold_the_others_hostage(self):
@@ -374,7 +457,7 @@ class Pulls(unittest.TestCase):
         s.at("13:32")                                          # held 30 minutes (limit 25): publish what we have
         doc = common.read_json(s.path("odds", "2026-10-11.json"))
         self.assertEqual([f["away"] for f in doc["fetches"]], ["CAR"])
-        self.assertEqual(s.status()["budget_used_today"], 2)
+        self.assertEqual(s.status()["budget_used_today"], 1)
 
     def test_small_pool_prices_the_earliest_games_only(self):
         s2 = Sim(pool=3)                                       # 3 credits / 4 games = 0.75 -> tier 0, budget 1

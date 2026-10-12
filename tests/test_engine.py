@@ -529,7 +529,7 @@ class TopTier(unittest.TestCase):
             sl = s.at("13:02")
             self.assertEqual(sl["goal_watch"], [])                    # not before pull B
             self.assertEqual(sl["banners"], [])                       # no pool banner at this tier
-            self.assertEqual(sl["status"]["next_price_read_at"], "2026-10-11T17:30:00-04:00")
+            self.assertEqual(sl["status"]["next_price_read_at"], "2026-10-11T18:15:00-04:00")   # unconfirmed: fallback time
             goals = [("player_goals", world.name_of(t, i), 0.5, price, None)
                      for t, i, price in (("CAR", 0, 150), ("CAR", 1, 140), ("PHI", 0, 160), ("PHI", 2, 170), ("PHI", 13, 900))]
             s.set_odds("CAR", "PHI", [s.line("CAR", 1, "shots", 2.5, 0.14)] + goals, "2026-10-11T21:25:00Z")

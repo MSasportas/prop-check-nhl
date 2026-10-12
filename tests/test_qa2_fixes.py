@@ -213,7 +213,9 @@ class KeysRefused(unittest.TestCase):
         self.modes = ["ok", "ok"]
         sl = self.s.at("13:02")                              # plan made, pull A read prices
         self.assertEqual(sl["status"]["prices_state"], "ok")
-        self.modes = ["401", "401"]                          # keys revoked; pull B (tier 4) is due at 5:30 PM
+        for t in ("CAR", "PHI", "VAN", "NYR"):
+            self.s.set_lineup(t, "2026-10-11T20:00:00Z")
+        self.modes = ["401", "401"]                          # keys revoked; pull B (points) is due at 5:30 PM
         sl = self.s.at("17:31")
         self.assert_refused(sl, priced=True)
         self.assertIsNotNone(sl["status"]["prices_at"], "the earlier read is still the last read")
@@ -223,6 +225,8 @@ class KeysRefused(unittest.TestCase):
     def test_refused_state_survives_a_run_with_no_pull(self):
         self.modes = ["ok", "ok"]
         self.s.at("13:02")
+        for t in ("CAR", "PHI", "VAN", "NYR"):
+            self.s.set_lineup(t, "2026-10-11T20:00:00Z")
         self.modes = ["401", "401"]
         self.s.at("17:31")
         led = common.read_json(self.s.path("state", "credits.json"))
@@ -256,18 +260,19 @@ class Minors2(unittest.TestCase):
         s = self.s
         s.at("09:00")
         sl = s.slate()
-        self.assertTrue(any("and again before each game" in b["text"] for b in sl["banners"]), sl["banners"])
+        self.assertTrue(any("Live picks are re-checked before the game" in b["text"] for b in sl["banners"]), sl["banners"])
         for _, away, home, _ in world.GAMES:
             s.drop_odds(away, home)                          # pull A gets no answer
         sl = s.at("13:02")
         self.assertEqual(sl["status"]["prices_state"], "feed_down")
         texts = [b["text"] for b in sl["banners"]]
-        self.assertFalse(any("and again before each game" in t or "One price check" in t for t in texts), texts)
+        self.assertFalse(any("Points are read once" in t or "One price check" in t for t in texts), texts)
         self.assertTrue(any(t.startswith("The odds feed did not answer at 1:02 PM") for t in texts), texts)
         s.set_odds("CAR", "PHI", [s.line("CAR", 1, "shots", 2.5, 0.14)], UPD)
         s.set_odds("VAN", "NYR", [s.line("VAN", 1, "shots", 2.5, 0.14)], UPD)
         sl = s.at("13:12")                                   # the retry reads prices: the promise is back
-        self.assertIn("Prices checked at 1:12 PM, and again before each game for live picks.",
+        self.assertIn("Prices checked at 1:12 PM (shots). Points are read once each game's lineups are confirmed, about 90 min before puck, "
+            "or 45 min before if lineups are not confirmed. Live picks are re-checked before the game.",
                       [b["text"] for b in sl["banners"]])
 
     def test_m3_days_left_capped_at_the_reset(self):
@@ -315,6 +320,7 @@ class GoalWatchShortOnly(unittest.TestCase):
             s.set_odds("CAR", "PHI", [s.line("CAR", 1, "shots", 2.5, 0.14)], UPD)
             s.at("13:02")
             s.set_lineup("CAR", "2026-10-11T20:00:00Z")
+            s.set_lineup("PHI", "2026-10-11T20:00:00Z")
             s.clock("17:31")
             fair = {i: 1.0 / s.inputs().model(world.pid_of("CAR", i), "CAR", "PHI", False, "goals", 0.5)["p_over"]
                     for i in (0, 1, 2)}

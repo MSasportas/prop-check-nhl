@@ -184,6 +184,7 @@ class M1GoalWatchNote(unittest.TestCase):
             goals = [("player_goals", world.name_of("CAR", i), 0.5, 150, None) for i in (0, 1, 2)]
             s.set_odds("CAR", "PHI", [s.line("CAR", 1, "shots", 2.5, 0.14)] + goals, "2026-10-11T21:25:00Z")
             s.set_lineup("CAR", "2026-10-11T20:00:00Z")
+            s.set_lineup("PHI", "2026-10-11T20:00:00Z")
             sl = s.at("17:31")
             self.assertEqual(sl["goal_watch_note"], "Not picks. Our model is weakest on goals.")
             self.assertNotIn("short of fair", json.dumps(sl))

@@ -247,7 +247,7 @@ class Modes(unittest.TestCase):
         g = sl["games"][0]
         self.assertEqual(sorted(g), ["away", "excluded_reason", "excluded_teams", "home", "id", "picks", "start", "started"])
         self.assertEqual((g["away"], g["home"], g["picks"]), ("CAR", "PHI", 2))
-        self.assertEqual(sl["status"]["next_price_read_at"], "2026-10-11T18:15:00-04:00")   # pull C for the 7 PM game
+        self.assertEqual(sl["status"]["next_price_read_at"], "2026-10-11T18:15:00-04:00")   # lineups unconfirmed: the 45 minute fallback for the 7 PM game
 
 
 class NeverLeaksAKey(unittest.TestCase):

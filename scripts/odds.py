@@ -324,8 +324,10 @@ def tier_of(allowance, v):
 def markets_for(tier, pull, live_markets=()):
     """Which markets a pull asks for at a tier. [] = this pull does not run at this tier."""
     if pull == "A":
-        return ["shots"] if tier <= 1 else ["shots", "points"]
+        return ["shots"]                                   # cheapest market only; points wait for confirmed lineups
     if pull == "B":
+        if tier == 2:
+            return ["points"]
         if tier == 3:
             return ["shots", "points"]
         if tier >= 4:
@@ -352,7 +354,20 @@ def pull_times(slate, games, v):
     return {"A": a, "B": first - timedelta(minutes=v["pull_b_min"]), "first": first}
 
 
-def due_pulls(now, games, tier, v, fetched, live_markets, started, retry_min=30):
+def lineups_confirmed(state, games):
+    """{game_id: True} for games whose both teams have a Daily Faceoff page dated today (data/state/lineups.json)."""
+    teams = (state or {}).get("teams") if isinstance(state, dict) else None
+    teams = teams if isinstance(teams, dict) else {}
+
+    def ok(t):
+        rec = teams.get(t)
+        page = rec.get("page") if isinstance(rec, dict) else None
+        return isinstance(page, dict) and page.get("today") is True
+    
+    return {g["id"]: ok(g["away"]) and ok(g["home"]) for g in games}
+
+
+def due_pulls(now, games, tier, v, fetched, live_markets, started, retry_min=30, lineups_ok=None):
     """Decide, from what is on disk, which pull each game needs right now.
 
     games: today's games. fetched: {game_id: [dict(pull, at (datetime), markets asked, returned)]} for every
@@ -361,7 +376,11 @@ def due_pulls(now, games, tier, v, fetched, live_markets, started, retry_min=30)
     A pull is "done" for a game once every market it wants has been RETURNED by a read made at or after the
     pull's due time. A market the book has not posted yet costs nothing to ask for, so it is asked again
     (at most every `retry_min` minutes) until the pull's window closes.
+    lineups_ok: {game_id: bool}, both teams' lineups confirmed. Pull B (points, goals, saves) needs it; if it is
+    still False at pull_c_min before puck, B falls back to points only so Daily Faceoff being down does not
+    kill points picks. Pull A is shots only.
     Returns a list of dict(pull, game, markets) in puck-time order, one per game at most."""
+    lineups_ok = lineups_ok or {}
     if not games:
         return []
     t = pull_times(games[0]["date"], games, v)
@@ -376,13 +395,15 @@ def due_pulls(now, games, tier, v, fetched, live_markets, started, retry_min=30)
         b_due = start - timedelta(minutes=v["pull_b_min"])     # B is per game: pull_b_min before ITS puck
 
         def need(markets, due_at):
-            got, last_try = set(), None
+            got = set()
             for f in done:
                 if f["at"] >= due_at:
                     got |= set(f["returned"])
-                    if set(markets) & set(f["markets"]):
-                        last_try = f["at"] if last_try is None else max(last_try, f["at"])
             missing = [m for m in markets if m not in got]
+            last_try = None
+            for f in done:                                 # only asks that included a still-missing market count
+                if f["at"] >= due_at and set(missing) & set(f["markets"]):
+                    last_try = f["at"] if last_try is None else max(last_try, f["at"])
             if missing and last_try is not None and (now - last_try).total_seconds() / 60.0 < retry_min:
                 return []                                  # asked recently and it was not posted: wait
             return missing
@@ -390,7 +411,12 @@ def due_pulls(now, games, tier, v, fetched, live_markets, started, retry_min=30)
         choice = None
         b_markets = markets_for(tier, "B")
         if b_markets and now >= b_due and left >= v["pull_latest_min"]:
-            m = need(b_markets, b_due)
+            if not lineups_ok.get(g["id"]):
+                b_markets = ["points"] if left <= v["pull_c_min"] else []     # fallback at the 45 minute mark
+            m = need(b_markets, b_due) if b_markets else []
+            if m and now >= c_due and tier >= 2 and left >= v["pull_c_latest_min"]:
+                # B and C fall due together (45 minute mark): one read for both, not two
+                m = m + [x for x in need(markets_for(tier, "C", live_markets.get(g["id"], ())), c_due) if x not in m]
             if m:
                 choice = ("B", m)
         if choice is None and tier >= 2 and now >= c_due and left >= v["pull_c_latest_min"]:
@@ -406,7 +432,7 @@ def due_pulls(now, games, tier, v, fetched, live_markets, started, retry_min=30)
     return out
 
 
-def next_read_at(now, games, tier, v, fetched, started, has_budget=True):
+def next_read_at(now, games, tier, v, fetched, started, has_budget=True, lineups_ok=None):
     """The next time a price read is expected (for the status sheet). None when none is coming."""
     if not games or not has_budget:
         return None
@@ -421,9 +447,20 @@ def next_read_at(now, games, tier, v, fetched, started, has_budget=True):
         if not done and start - timedelta(minutes=v["pull_latest_min"]) >= now:
             cands.append(max(t["A"], now))
         b_due = start - timedelta(minutes=v["pull_b_min"])
-        if markets_for(tier, "B") and b_due > now and start - timedelta(minutes=v["pull_latest_min"]) >= b_due:
-            cands.append(b_due)
         c = start - timedelta(minutes=v["pull_c_min"])
+        bm = markets_for(tier, "B")
+        if bm and start - timedelta(minutes=v["pull_latest_min"]) >= max(b_due, now):
+            got = set()
+            for f in done:
+                if f["at"] >= b_due:
+                    got |= set(f["returned"])
+            if set(bm) - got:
+                if (lineups_ok or {}).get(g["id"]):
+                    cands.append(max(b_due, now))
+                elif c > now:                              # unconfirmed: the guaranteed read is the 45 minute fallback
+                    cands.append(c)
+                elif "points" not in got:
+                    cands.append(now)
         if tier >= 2 and c > now:
             cands.append(c)
     return min(cands) if cands else None
@@ -585,7 +622,7 @@ def fetched_map(day):
     return out
 
 
-def run_pulls(now, slate, games, sched_left, cfg, rosters_for, live_markets, started, dry_run=False):
+def run_pulls(now, slate, games, sched_left, cfg, rosters_for, live_markets, started, dry_run=False, lineups_ok=None):
     """The whole odds step. Returns a result dict for status.json and the engine.
 
     games: today's regular-season games. sched_left: (games left this month, game days list).
@@ -657,7 +694,7 @@ def run_pulls(now, slate, games, sched_left, cfg, rosters_for, live_markets, sta
 
     # 3. which pulls are due
     due = due_pulls(now, games, plan["tier"], v, fetched_map(day), live_markets, started,
-                    ops.get("empty_retry_min", 30))
+                    ops.get("empty_retry_min", 30), lineups_ok=lineups_ok)
     key_of = {name: m["feed_key"] for name, m in ops["markets"].items()}
     stage = day.get("stage") or {"since": None, "fetches": []}
     failed_games, no_budget = [], []

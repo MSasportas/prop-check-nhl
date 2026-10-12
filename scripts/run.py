@@ -42,7 +42,7 @@ import record      # noqa: E402
 import sched       # noqa: E402
 import stats       # noqa: E402
 
-STEPS = ["rules", "schedule", "stats", "odds", "lineups", "engine", "grade", "slate", "record", "status"]
+STEPS = ["rules", "schedule", "stats", "lineups", "odds", "engine", "grade", "slate", "record", "status"]
 
 
 class Run:
@@ -182,7 +182,8 @@ class Run:
                 live.setdefault(it["shown"]["game_id"], set()).add(it["shown"]["market"])
         left = sched.games_left_this_month(self.cache, self.slate)
         self.odds_res = odds.run_pulls(self.now, self.slate, self.games, left, self.cfg, self.matcher_for,
-                                       live, self.started, dry_run=self.dry_run)
+                                       live, self.started, dry_run=self.dry_run,
+                                       lineups_ok=odds.lineups_confirmed(self.lineup_state or lineups.load(self.slate), self.games))
         return {"status": self.odds_res["status"], "note": self.odds_res["note"]}
 
     def do_lineups(self):
@@ -328,9 +329,11 @@ class Run:
                 pass                                        # pull A failed and nothing was read since: no promise
             elif plan["tier"] == 1:
                 banners.append({"level": "warn", "text": "Shots only today. One price check at %s. Odds keys low." % a_time})
-            elif plan["tier"] == 2:
+            elif plan["tier"] == 2 and open_games:
                 verb = "Prices checked at" if prices_at else "Prices are checked at"
-                banners.append({"level": "info", "text": "%s %s, and again before each game for live picks." % (verb, a_time)})
+                banners.append({"level": "info", "text": "%s %s (shots). Points are read once each game's lineups are confirmed, "
+                                                 "about 90 min before puck, or 45 min before if lineups are not confirmed. "
+                                                 "Live picks are re-checked before the game." % (verb, a_time)})
             if sub is None and not fetches and times:
                 if now < times["A"]:
                     sub = "First read is due at %s." % common.fmt_time(times["A"])
@@ -342,7 +345,9 @@ class Run:
         fetched = odds.fetched_map(day)
         budget_ok = bool(plan) and plan["budget_today"] - sum(e["cost"] for e in led.get("spent", [])
                                                               if e["date"] == self.slate) > 0
-        nxt = odds.next_read_at(now, self.games, plan["tier"], v, fetched, self.started, budget_ok) \
+        ls_now = self.lineup_state or lineups.load(self.slate)
+        nxt = odds.next_read_at(now, self.games, plan["tier"], v, fetched, self.started, budget_ok,
+                                lineups_ok=odds.lineups_confirmed(ls_now, self.games)) \
             if plan and not refused else None
 
         # lineups
@@ -514,8 +519,8 @@ def run(only=None, dry_run=False):
     r.step("rules", r.do_rules)
     r.step("schedule", r.do_schedule)
     r.step("stats", r.do_stats)
+    r.step("lineups", r.do_lineups)                         # before odds: pull B waits on confirmed lineups
     r.step("odds", r.do_odds)
-    r.step("lineups", r.do_lineups)
     # m8: a pick enters the Record in the same commit that first shows it. Events are appended by the engine and
     # grade steps; if slate.json is then NOT written, this run's events are rolled back to the exact bytes the
     # log had before (never touching committed lines) and the next run makes them again.

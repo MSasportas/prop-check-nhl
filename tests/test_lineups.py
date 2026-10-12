@@ -142,3 +142,25 @@ class Degrade(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class TimeCap(unittest.TestCase):
+    def test_cap_marks_unreached_teams_and_skips_fetching(self):
+        import time as _t
+        import lineups
+        import common
+        import helpers
+        ops = dict(helpers.cfg()["ops"], lineup_cycle_cap_s=-1)
+        games = [{"id": 1, "away": "CAR", "home": "PHI", "start": "2026-10-11T19:00:00-04:00", "date": "2026-10-11"}]
+        s = helpers.Sim(pool=12)
+        try:
+            calls = []
+            real = lineups.fetch_page
+            lineups.fetch_page = lambda slug: calls.append(slug)
+            res = lineups.check(common.parse_iso("2026-10-11T17:30:00-04:00"), "2026-10-11", games, {}, ops, lambda t: [])
+            lineups.fetch_page = real
+        finally:
+            s.close()
+        self.assertEqual(calls, [])
+        self.assertEqual(sorted(res["state"]["teams"]), ["CAR", "PHI"])
+        self.assertTrue(all(r.get("tried_at") for r in res["state"]["teams"].values()))
