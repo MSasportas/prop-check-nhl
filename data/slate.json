@@ -1,6 +1,7 @@
 {
  "slate_date": "2026-10-11",
- "generated_at": "2026-10-11T23:02:39-04:00",
+ "generated_at": "2026-10-11T23:30:00-04:00",
+ "status_at": "2026-10-11T23:30:00-04:00",
  "valid_until": "2026-10-12T05:00:00-04:00",
  "status": {
   "prices_state": "not_yet",
@@ -11,16 +12,18 @@
   "lineups_at": null,
   "goalies_at": null,
   "lineups_note": null,
+  "lineups_state": "not_yet",
   "stats_state": "ok",
   "last_run": {
    "ok": true,
-   "at": "2026-10-11T23:02:39-04:00",
+   "at": "2026-10-11T23:30:00-04:00",
    "failed_step": null
   },
   "pool": {
    "pulls_left": 1456,
    "keys": 4,
    "game_days_left": 21,
+   "days_left": 48,
    "low": false
   },
   "excluded_teams": [],
@@ -68,5 +71,6 @@
  ],
  "picks": [],
  "parlays": [],
- "goal_watch": []
+ "goal_watch": [],
+ "goal_watch_note": null
 }
