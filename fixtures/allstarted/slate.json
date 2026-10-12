@@ -3,6 +3,7 @@
  "fixture_now": "2026-10-11T22:40:00-04:00",
  "slate_date": "2026-10-11",
  "generated_at": "2026-10-11T22:32:00-04:00",
+ "status_at": "2026-10-11T18:52:00-04:00",
  "valid_until": "2026-10-12T05:00:00-04:00",
  "status": {
   "prices_state": "ok",
@@ -13,6 +14,8 @@
   "stats_state": "ok",
   "lineups_at": "2026-10-11T21:40:00-04:00",
   "goalies_at": null,
+  "lineups_state": "ok",
+  "lineups_note": "14 of 14 team line pages are dated today.",
   "last_run": {
    "ok": true,
    "at": "2026-10-11T22:32:00-04:00",
@@ -22,6 +25,7 @@
    "pulls_left": 412,
    "keys": 3,
    "game_days_left": 6,
+   "days_left": 21,
    "low": false
   },
   "excluded_teams": [],
@@ -111,7 +115,10 @@
    "worst_price": -145,
    "p": 0.664,
    "breakeven": 0.5918,
+   "p_pct": 66,
+   "breakeven_pct": 59,
    "reason": "66% to clear 3.5 shots; -145 needs 59%. Projects 4.4 shots in 22 min. DAL allow 6% more shots than average.",
+   "graded": null,
    "state": "locked",
    "thin": false,
    "games_used": 61,
@@ -151,7 +158,14 @@
    "worst_price": -160,
    "p": 0.692,
    "breakeven": 0.6154,
+   "p_pct": 69,
+   "breakeven_pct": 62,
    "reason": "69% to clear 0.5 points; -160 needs 62%. Projects 1.1 points in 20 min. TBL allow 4% more goals than average.",
+   "graded": {
+    "result": "W",
+    "actual": "had 2",
+    "units": 0.63
+   },
    "state": "locked_unconfirmed",
    "thin": false,
    "games_used": 58,
@@ -187,7 +201,10 @@
    "worst_price": -135,
    "p": 0.631,
    "breakeven": 0.5745,
+   "p_pct": 63,
+   "breakeven_pct": 57,
    "reason": "63% to clear 2.5 shots; -135 needs 57%. Projects 3.5 shots in 21 min. NYR allow 8% more shots than average.",
+   "graded": null,
    "state": "locked",
    "thin": false,
    "games_used": 44,
@@ -227,7 +244,10 @@
    "worst_price": -150,
    "p": 0.652,
    "breakeven": 0.6,
+   "p_pct": 65,
+   "breakeven_pct": 60,
    "reason": "65% to clear 0.5 points; -150 needs 60%. Projects 1.0 points in 25 min. DAL allow 3% more goals than average.",
+   "graded": null,
    "state": "locked",
    "thin": false,
    "games_used": 60,
@@ -267,7 +287,10 @@
    "worst_price": -120,
    "p": 0.601,
    "breakeven": 0.5455,
+   "p_pct": 60,
+   "breakeven_pct": 55,
    "reason": "60% to clear 3.5 shots; -120 needs 55%. Projects 4.2 shots in 21 min. MTL allow 9% more shots than average.",
+   "graded": null,
    "state": "locked",
    "thin": false,
    "games_used": 52,
@@ -307,7 +330,14 @@
    "worst_price": -190,
    "p": 0.701,
    "breakeven": 0.6552,
+   "p_pct": 70,
+   "breakeven_pct": 66,
    "reason": "70% to clear 0.5 points; -190 needs 66%. Projects 1.3 points in 21 min.",
+   "graded": {
+    "result": "VOID",
+    "actual": "did not play",
+    "units": 0.0
+   },
    "state": "locked_unconfirmed",
    "thin": false,
    "games_used": 59,
@@ -343,7 +373,10 @@
    "worst_price": -200,
    "p": 0.712,
    "breakeven": 0.6667,
+   "p_pct": 71,
+   "breakeven_pct": 67,
    "reason": "71% to clear 0.5 points; -200 needs 67%. Projects 1.4 points in 22 min. VAN allow 5% more goals than average.",
+   "graded": null,
    "state": "locked_unconfirmed",
    "thin": false,
    "games_used": 55,
@@ -379,7 +412,10 @@
    "worst_price": -130,
    "p": 0.611,
    "breakeven": 0.5652,
+   "p_pct": 61,
+   "breakeven_pct": 57,
    "reason": "61% to clear 1.5 shots; -130 needs 57%. Projects 2.3 shots in 17 min. Short history: 14 games.",
+   "graded": null,
    "state": "locked_unconfirmed",
    "thin": true,
    "games_used": 14,
@@ -415,7 +451,10 @@
    "worst_price": -115,
    "p": 0.583,
    "breakeven": 0.5349,
+   "p_pct": 58,
+   "breakeven_pct": 53,
    "reason": "58% to clear 2.5 shots; -115 needs 53%. Projects 3.1 shots in 25 min. EDM allow 4% more shots than average.",
+   "graded": null,
    "state": "locked_unconfirmed",
    "thin": false,
    "games_used": 57,
@@ -451,7 +490,10 @@
    "worst_price": -110,
    "p": 0.571,
    "breakeven": 0.5238,
+   "p_pct": 57,
+   "breakeven_pct": 52,
    "reason": "57% to stay under 2.5 shots; -110 needs 52%. Projects 2.1 shots in 19 min. NJD allow 7% fewer shots than average.",
+   "graded": null,
    "state": "locked_unconfirmed",
    "thin": false,
    "games_used": 62,
@@ -487,7 +529,10 @@
    "worst_price": 105,
    "p": 0.562,
    "breakeven": 0.4878,
+   "p_pct": 56,
+   "breakeven_pct": 49,
    "reason": "56% to stay under 3.5 shots; +105 needs 49%. Projects 2.9 shots in 20 min. SEA allow 5% fewer shots than average.",
+   "graded": null,
    "state": "locked_unconfirmed",
    "thin": false,
    "games_used": 49,
@@ -523,7 +568,14 @@
    "worst_price": -125,
    "p": 0.606,
    "breakeven": 0.5556,
+   "p_pct": 60,
+   "breakeven_pct": 56,
    "reason": "60% to clear 3.5 shots; -125 needs 56%. Projects 4.1 shots in 20 min. BUF allow 7% more shots than average.",
+   "graded": {
+    "result": "W",
+    "actual": "had 5",
+    "units": 0.8
+   },
    "state": "locked",
    "thin": false,
    "games_used": 60,
@@ -563,7 +615,14 @@
    "worst_price": -140,
    "p": 0.622,
    "breakeven": 0.5833,
+   "p_pct": 62,
+   "breakeven_pct": 58,
    "reason": "62% to clear 2.5 shots; -140 needs 58%. Projects 3.4 shots in 19 min.",
+   "graded": {
+    "result": "L",
+    "actual": "had 1",
+    "units": -1.0
+   },
    "state": "locked_unconfirmed",
    "thin": false,
    "games_used": 54,
@@ -587,6 +646,26 @@
  ],
  "parlays": [
   {
+   "id": "2026-10-11:parlay:past+rein",
+   "legs": [
+    "2026-10-11:g1:past",
+    "2026-10-11:g2:rein"
+   ],
+   "price": 193,
+   "price_at": "2026-10-11T17:02:00-04:00",
+   "p": 0.4194,
+   "breakeven": 0.3419,
+   "state": "locked",
+   "pulled": null,
+   "graded": {
+    "result": "W",
+    "actual": "2 of 2 legs hit",
+    "units": 1.93
+   },
+   "p_pct": 41,
+   "breakeven_pct": 34
+  },
+  {
    "id": "2026-10-11:parlay:mack+jhug",
    "legs": [
     "2026-10-11:g5:mack",
@@ -597,7 +676,10 @@
    "p": 0.419,
    "breakeven": 0.34,
    "state": "locked",
-   "pulled": null
+   "pulled": null,
+   "graded": null,
+   "p_pct": 41,
+   "breakeven_pct": 34
   },
   {
    "id": "2026-10-11:parlay:maka+matt",
@@ -610,7 +692,10 @@
    "p": 0.3919,
    "breakeven": 0.3273,
    "state": "locked",
-   "pulled": null
+   "pulled": null,
+   "graded": null,
+   "p_pct": 39,
+   "breakeven_pct": 33
   },
   {
    "id": "2026-10-11:parlay:mack+jhug+rein",
@@ -624,8 +709,12 @@
    "p": 0.2899,
    "breakeven": 0.2092,
    "state": "locked",
-   "pulled": null
+   "pulled": null,
+   "graded": null,
+   "p_pct": 28,
+   "breakeven_pct": 21
   }
  ],
- "goal_watch": []
+ "goal_watch": [],
+ "goal_watch_note": "Not picks. Our model is weakest on goals."
 }

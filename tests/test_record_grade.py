@@ -40,8 +40,8 @@ class Units(unittest.TestCase):
         self.assertEqual(record.single_units("VOID", -145), 0.0)
 
     def test_parlay(self):
-        # two winners at -120 and +100: 1.8333 x 2.0 = 3.6667 -> +267, wins 2.6667 units
-        self.assertEqual(record.grade_parlay([("W", -120), ("W", 100)]), ("W", 267, 2.6667))
+        # two winners at -120 and +100: 1.8333 x 2.0 = 3.6667 -> +267; units at that price: 2.67
+        self.assertEqual(record.grade_parlay([("W", -120), ("W", 100)]), ("W", 267, 2.67))
         self.assertEqual(record.grade_parlay([("W", -120), ("L", 100)]), ("L", 267, -1.0))
         # a void leg drops out: the parlay is graded on what is left
         self.assertEqual(record.grade_parlay([("W", -120), ("VOID", 100)]), ("W", -120, 0.8333))

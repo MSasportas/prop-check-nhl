@@ -100,13 +100,23 @@ class Pool:
     def count(self):
         return len(self.keys)
 
+    # A key's number is UNKNOWN (left is None) until the feed reports it. A refused (401) or rate-limited (429)
+    # key stays unknown; it is never counted as 0. Only a feed answer saying "used up" (or 0 left) means 0.
+    def unknown(self):
+        """How many keys have not reported what they have left."""
+        return sum(1 for s in self.state if s["left"] is None or s["status"] == "invalid")
+
     def known(self):
-        """True once every key has told us what it has left (a refused key counts as nothing left)."""
-        return bool(self.state) and all(s["left"] is not None or s["status"] in ("invalid", "limited")
-                                        for s in self.state)
+        """True once at least one key has reported a number."""
+        return any(s["left"] is not None and s["status"] != "invalid" for s in self.state)
+
+    def all_used_up(self):
+        """True only when EVERY key has reported 0 left."""
+        return bool(self.state) and all(s["left"] == 0 for s in self.state)
 
     def total_left(self):
-        return sum(s["left"] or 0 for s in self.state if s["status"] not in ("invalid", "limited"))
+        """Credits on keys that have reported a number (refused keys are left out, not counted as 0)."""
+        return sum(s["left"] for s in self.state if s["left"] is not None and s["status"] != "invalid")
 
     def public(self):
         return [{"n": s["n"], "left": s["left"]} for s in self.state]
@@ -170,9 +180,9 @@ class Client:
                 body = r.text().upper()
                 st = self.pool.state[i]
                 if "OUT_OF_USAGE" in body or "QUOTA" in body or "USAGE" in body:
-                    st["left"], st["status"] = 0, "empty"
+                    st["left"], st["status"] = 0, "empty"  # the feed says this key is used up
                 elif r.status == 401:
-                    st["status"] = "invalid"
+                    st["status"] = "invalid"               # refused: its number is unknown, not 0
                 else:
                     st["status"] = "limited"               # 429 rate limit: skip this key for this run
                 st["checked_at"] = common.iso(self.pool.now)
@@ -208,9 +218,9 @@ class Client:
         return False
 
     # -- public
-    def refresh_keys(self):
+    def refresh_keys(self, only_unknown=False):
         """Ask the free events endpoint once per key so we know what each key has left.
-        Returns the events list (or None if nothing answered)."""
+        only_unknown: ask only keys whose number we do not know yet. Returns the events list (or None)."""
         if self.pool.fixture:
             ev = self._fixture_json("events.json")
             SOURCE["ok" if ev is not None else "failed"] += 1
@@ -219,6 +229,9 @@ class Client:
             return ev
         events = None
         for i in range(self.pool.count()):
+            st = self.pool.state[i]
+            if only_unknown and st["left"] is not None and st["status"] != "invalid":
+                continue
             q = urllib.parse.urlencode({"apiKey": self.pool.keys[i], "dateFormat": "iso"})
             r = common.http_get("%s/events?%s" % (API, q), timeout=30)
             st = self.pool.state[i]
@@ -571,13 +584,16 @@ def run_pulls(now, slate, games, sched_left, cfg, rosters_for, live_markets, sta
         return res
 
     # 1. know the pool and today's events (free). Once a day, and again if a key was added or a game has no event.
-    need_events = day.get("events_at") is None or day.get("key_count") != pool.count() or not pool.known()
+    need_events = day.get("events_at") is None or day.get("key_count") != pool.count()
+    only_unknown = False
+    if not need_events and pool.unknown():
+        need_events, only_unknown = True, True             # a key has not reported yet: ask it again (free)
     missing_event = any(str(g["id"]) not in day["events"] and not started.get(g["id"]) for g in games)
     last_ev = common.parse_iso(day.get("events_at"))
     if missing_event and (last_ev is None or now - last_ev >= timedelta(minutes=30) or now < last_ev):
         need_events = True
     if need_events and not dry_run:
-        events = client.refresh_keys()
+        events = client.refresh_keys(only_unknown=only_unknown and not missing_event)
         if events is not None:
             matched, unknown = match_events(events, games, ops["event_match_hours"])
             day["events"].update(matched)
@@ -587,16 +603,26 @@ def run_pulls(now, slate, games, sched_left, cfg, rosters_for, live_markets, sta
         else:
             day["last_fail_at"], day["fail_note"] = common.iso(now), "The odds feed did not answer."
 
-    # 2. the plan for today (fixed once made; re-made only if the number of keys changed)
-    if (day.get("plan") is None or day["plan"].get("key_count") != pool.count()) and pool.known():
+    # 2. the plan for today. Made only once a key has reported a number. Fixed once made, except that it is
+    #    re-made when the number of keys changes, when it was made on 0 credits and a key now reports credits,
+    #    or when a key that had not reported (refused, rate-limited) now has.
+    old = day.get("plan")
+    replan = old is None or old.get("key_count") != pool.count() or \
+        (old.get("pool_at_plan", 0) == 0 and pool.total_left() > 0) or \
+        old.get("unknown_keys", 0) > pool.unknown()
+    if replan and pool.known():
         spent = pool.spent_on(slate)
         plan = make_plan(pool.total_left() + spent, sched_left[0], len(games), v)
         plan["key_count"] = pool.count()
+        plan["unknown_keys"] = pool.unknown()
         plan["made_at"] = common.iso(now)
+        if old is not None:
+            plan["replaced"] = old.get("made_at")
         day["plan"] = plan
     plan = day.get("plan")
     res["plan"] = plan
     if plan is None:
+        day["keys_unread_at"] = common.iso(now)
         res.update(status="failed" if client.errors else "skipped",
                    note="could not read the odds keys yet")
         _finish(day, pool, res, sched_left, cfg, write=not dry_run)
@@ -690,6 +716,7 @@ def run_pulls(now, slate, games, sched_left, cfg, rosters_for, live_markets, sta
 def _finish(day, pool, res, sched_left, cfg, write=True):
     res["keys"] = pool.public()
     res["pool_left"] = pool.total_left() if pool.known() else None
+    res["all_used_up"] = pool.all_used_up()
     res["spent_today"] = pool.spent_on(day["date"])
     res["day"] = day
     if write:
@@ -697,10 +724,15 @@ def _finish(day, pool, res, sched_left, cfg, write=True):
         common.write_json(day_path(), day)
 
 
-def pool_summary(pool_left, key_count, plan, sched_days, cfg):
-    """What the page shows about the key pool: pulls left and roughly how many game days that covers."""
+def pool_summary(pool_left, key_count, plan, sched_days, cfg, spent=(), slate=None):
+    """What the page shows about the key pool.
+    pulls_left      credits on keys that have reported a number (None until one has)
+    game_days_left  game days the pool covers at the basic cost (2 credits a game)
+    days_left       pool / average daily spend at the current tier (recent game days; today's budget until
+                    there is a history), rounded down. None when it cannot be worked out.
+    low             the allowance is under ops.pool_low_allowance"""
     if pool_left is None:
-        return {"pulls_left": None, "keys": key_count, "game_days_left": None, "low": False}
+        return {"pulls_left": None, "keys": key_count, "game_days_left": None, "days_left": None, "low": False}
     per_game = cfg["ops"]["basic_cost_per_game"]
     left, days = pool_left, 0
     for _, n in sched_days:
@@ -708,5 +740,12 @@ def pool_summary(pool_left, key_count, plan, sched_days, cfg):
             break
         left -= per_game * n
         days += 1
+    by_day = {}
+    for e in spent or ():
+        if slate is None or e["date"] < slate:
+            by_day[e["date"]] = by_day.get(e["date"], 0) + e["cost"]
+    recent = [c for d, c in sorted(by_day.items())[-7:] if c > 0]
+    avg = (sum(recent) / float(len(recent))) if recent else float((plan or {}).get("budget_today") or 0)
+    days_left = int(math.floor(pool_left / avg + 1e-9)) if avg > 0 else None
     low = bool(plan) and plan["allowance"] < cfg["ops"]["pool_low_allowance"]
-    return {"pulls_left": pool_left, "keys": key_count, "game_days_left": days, "low": low}
+    return {"pulls_left": pool_left, "keys": key_count, "game_days_left": days, "days_left": days_left, "low": low}

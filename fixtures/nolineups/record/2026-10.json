@@ -1,0 +1,469 @@
+{
+ "fixture": true,
+ "nights": [
+  {
+   "date": "2026-10-05",
+   "graded": true,
+   "w": 3,
+   "l": 2,
+   "units": 0.79,
+   "entries": [
+    {
+     "id": "2026-10-05:r0",
+     "kind": "single",
+     "player": "N. Kucherov",
+     "bet": "Over 0.5 points",
+     "price": -190,
+     "first_price": -180,
+     "result": "L",
+     "actual": "had 0",
+     "units": -1.0,
+     "pulled": null,
+     "legs": []
+    },
+    {
+     "id": "2026-10-05:r1",
+     "kind": "single",
+     "player": "T. Stutzle",
+     "bet": "Under 2.5 shots on goal",
+     "price": 105,
+     "first_price": 105,
+     "result": "W",
+     "actual": "had 1",
+     "units": 1.05,
+     "pulled": null,
+     "legs": []
+    },
+    {
+     "id": "2026-10-05:r2",
+     "kind": "single",
+     "player": "A. Matthews",
+     "bet": "Over 3.5 shots on goal",
+     "price": 100,
+     "first_price": 100,
+     "result": "W",
+     "actual": "had 5",
+     "units": 1.0,
+     "pulled": null,
+     "legs": []
+    },
+    {
+     "id": "2026-10-05:r3",
+     "kind": "single",
+     "player": "K. Kaprizov",
+     "bet": "Over 2.5 shots on goal",
+     "price": -135,
+     "first_price": -135,
+     "result": "W",
+     "actual": "had 4",
+     "units": 0.74,
+     "pulled": null,
+     "legs": []
+    },
+    {
+     "id": "2026-10-05:r4",
+     "kind": "single",
+     "player": "S. Reinhart",
+     "bet": "Over 0.5 points",
+     "price": -190,
+     "first_price": -180,
+     "result": "L",
+     "actual": "had 0",
+     "units": -1.0,
+     "pulled": null,
+     "legs": []
+    },
+    {
+     "id": "2026-10-05:p1",
+     "kind": "parlay",
+     "player": null,
+     "bet": null,
+     "price": 213,
+     "first_price": 213,
+     "result": "L",
+     "actual": null,
+     "units": -1.0,
+     "pulled": null,
+     "legs": [
+      {
+       "id": "2026-10-05:r0",
+       "kind": "single",
+       "player": "N. Kucherov",
+       "bet": "Over 0.5 points",
+       "price": -190,
+       "first_price": -180,
+       "result": "L",
+       "actual": "had 0",
+       "units": null,
+       "pulled": null,
+       "legs": []
+      },
+      {
+       "id": "2026-10-05:r1",
+       "kind": "single",
+       "player": "T. Stutzle",
+       "bet": "Under 2.5 shots on goal",
+       "price": 105,
+       "first_price": 105,
+       "result": "W",
+       "actual": "had 1",
+       "units": null,
+       "pulled": null,
+       "legs": []
+      }
+     ]
+    },
+    {
+     "id": "2026-10-05:p2",
+     "kind": "parlay",
+     "player": null,
+     "bet": null,
+     "price": 431,
+     "first_price": 431,
+     "result": "L",
+     "actual": null,
+     "units": -1.0,
+     "pulled": null,
+     "legs": [
+      {
+       "id": "2026-10-05:r2",
+       "kind": "single",
+       "player": "A. Matthews",
+       "bet": "Over 3.5 shots on goal",
+       "price": 100,
+       "first_price": 100,
+       "result": "W",
+       "actual": "had 5",
+       "units": null,
+       "pulled": null,
+       "legs": []
+      },
+      {
+       "id": "2026-10-05:r3",
+       "kind": "single",
+       "player": "K. Kaprizov",
+       "bet": "Over 2.5 shots on goal",
+       "price": -135,
+       "first_price": -135,
+       "result": "W",
+       "actual": "had 4",
+       "units": null,
+       "pulled": null,
+       "legs": []
+      },
+      {
+       "id": "2026-10-05:r4",
+       "kind": "single",
+       "player": "S. Reinhart",
+       "bet": "Over 0.5 points",
+       "price": -190,
+       "first_price": -180,
+       "result": "L",
+       "actual": "had 0",
+       "units": null,
+       "pulled": null,
+       "legs": []
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "date": "2026-10-04",
+   "graded": true,
+   "w": 3,
+   "l": 1,
+   "units": 1.16,
+   "entries": [
+    {
+     "id": "2026-10-04:r0",
+     "kind": "single",
+     "player": "C. Makar",
+     "bet": "Over 0.5 points",
+     "price": -150,
+     "first_price": -140,
+     "result": "W",
+     "actual": "had 1",
+     "units": 0.67,
+     "pulled": null,
+     "legs": []
+    },
+    {
+     "id": "2026-10-04:r1",
+     "kind": "single",
+     "player": "J. Eichel",
+     "bet": "Over 0.5 points",
+     "price": -125,
+     "first_price": -125,
+     "result": "L",
+     "actual": "had 0",
+     "units": -1.0,
+     "pulled": null,
+     "legs": []
+    },
+    {
+     "id": "2026-10-04:r2",
+     "kind": "single",
+     "player": "J. Hughes",
+     "bet": "Over 2.5 shots on goal",
+     "price": -115,
+     "first_price": -115,
+     "result": "W",
+     "actual": "had 3",
+     "units": 0.87,
+     "pulled": null,
+     "legs": []
+    },
+    {
+     "id": "2026-10-04:r3",
+     "kind": "single",
+     "player": "D. Pastrnak",
+     "bet": "Over 3.5 shots on goal",
+     "price": -160,
+     "first_price": -160,
+     "result": "W",
+     "actual": "had 5",
+     "units": 0.62,
+     "pulled": null,
+     "legs": []
+    },
+    {
+     "id": "2026-10-04:r20",
+     "kind": "single",
+     "player": "K. Kaprizov",
+     "bet": "Over 2.5 shots on goal",
+     "price": -150,
+     "first_price": -140,
+     "result": "L",
+     "actual": "had 1",
+     "units": -1.0,
+     "pulled": {
+      "at": "2026-10-04T18:41:00-04:00",
+      "reason": "Scratched from the lineup"
+     },
+     "legs": []
+    },
+    {
+     "id": "2026-10-04:p1",
+     "kind": "parlay",
+     "player": null,
+     "bet": null,
+     "price": 200,
+     "first_price": 200,
+     "result": "L",
+     "actual": null,
+     "units": -1.0,
+     "pulled": null,
+     "legs": [
+      {
+       "id": "2026-10-04:r0",
+       "kind": "single",
+       "player": "C. Makar",
+       "bet": "Over 0.5 points",
+       "price": -150,
+       "first_price": -140,
+       "result": "W",
+       "actual": "had 1",
+       "units": null,
+       "pulled": null,
+       "legs": []
+      },
+      {
+       "id": "2026-10-04:r1",
+       "kind": "single",
+       "player": "J. Eichel",
+       "bet": "Over 0.5 points",
+       "price": -125,
+       "first_price": -125,
+       "result": "L",
+       "actual": "had 0",
+       "units": null,
+       "pulled": null,
+       "legs": []
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "date": "2026-10-03",
+   "graded": true,
+   "w": 3,
+   "l": 2,
+   "units": 0.09,
+   "entries": [
+    {
+     "id": "2026-10-03:r0",
+     "kind": "single",
+     "player": "A. Matthews",
+     "bet": "Over 3.5 shots on goal",
+     "price": -120,
+     "first_price": -110,
+     "result": "L",
+     "actual": "had 3",
+     "units": -1.0,
+     "pulled": null,
+     "legs": []
+    },
+    {
+     "id": "2026-10-03:r1",
+     "kind": "single",
+     "player": "K. Kaprizov",
+     "bet": "Over 2.5 shots on goal",
+     "price": -110,
+     "first_price": -110,
+     "result": "L",
+     "actual": "had 1",
+     "units": -1.0,
+     "pulled": null,
+     "legs": []
+    },
+    {
+     "id": "2026-10-03:r2",
+     "kind": "single",
+     "player": "S. Reinhart",
+     "bet": "Over 0.5 points",
+     "price": -175,
+     "first_price": -175,
+     "result": "W",
+     "actual": "had 1",
+     "units": 0.57,
+     "pulled": null,
+     "legs": []
+    },
+    {
+     "id": "2026-10-03:r3",
+     "kind": "single",
+     "player": "M. Zibanejad",
+     "bet": "Under 2.5 shots on goal",
+     "price": -145,
+     "first_price": -145,
+     "result": "W",
+     "actual": "had 2",
+     "units": 0.69,
+     "pulled": null,
+     "legs": []
+    },
+    {
+     "id": "2026-10-03:r4",
+     "kind": "single",
+     "player": "B. Point",
+     "bet": "Over 2.5 shots on goal",
+     "price": -120,
+     "first_price": -110,
+     "result": "W",
+     "actual": "had 3",
+     "units": 0.83,
+     "pulled": null,
+     "legs": []
+    },
+    {
+     "id": "2026-10-03:r5",
+     "kind": "single",
+     "player": "C. Makar",
+     "bet": "Over 1 points",
+     "price": -110,
+     "first_price": -110,
+     "result": "PUSH",
+     "actual": "had 1",
+     "units": 0.0,
+     "pulled": null,
+     "legs": []
+    },
+    {
+     "id": "2026-10-03:p1",
+     "kind": "parlay",
+     "player": null,
+     "bet": null,
+     "price": 250,
+     "first_price": 250,
+     "result": "L",
+     "actual": null,
+     "units": -1.0,
+     "pulled": null,
+     "legs": [
+      {
+       "id": "2026-10-03:r0",
+       "kind": "single",
+       "player": "A. Matthews",
+       "bet": "Over 3.5 shots on goal",
+       "price": -120,
+       "first_price": -110,
+       "result": "L",
+       "actual": "had 3",
+       "units": null,
+       "pulled": null,
+       "legs": []
+      },
+      {
+       "id": "2026-10-03:r1",
+       "kind": "single",
+       "player": "K. Kaprizov",
+       "bet": "Over 2.5 shots on goal",
+       "price": -110,
+       "first_price": -110,
+       "result": "L",
+       "actual": "had 1",
+       "units": null,
+       "pulled": null,
+       "legs": []
+      }
+     ]
+    },
+    {
+     "id": "2026-10-03:p2",
+     "kind": "parlay",
+     "player": null,
+     "bet": null,
+     "price": 387,
+     "first_price": 387,
+     "result": "W",
+     "actual": null,
+     "units": 3.87,
+     "pulled": null,
+     "legs": [
+      {
+       "id": "2026-10-03:r2",
+       "kind": "single",
+       "player": "S. Reinhart",
+       "bet": "Over 0.5 points",
+       "price": -175,
+       "first_price": -175,
+       "result": "W",
+       "actual": "had 1",
+       "units": null,
+       "pulled": null,
+       "legs": []
+      },
+      {
+       "id": "2026-10-03:r3",
+       "kind": "single",
+       "player": "M. Zibanejad",
+       "bet": "Under 2.5 shots on goal",
+       "price": -145,
+       "first_price": -145,
+       "result": "W",
+       "actual": "had 2",
+       "units": null,
+       "pulled": null,
+       "legs": []
+      },
+      {
+       "id": "2026-10-03:r4",
+       "kind": "single",
+       "player": "B. Point",
+       "bet": "Over 2.5 shots on goal",
+       "price": -120,
+       "first_price": -110,
+       "result": "W",
+       "actual": "had 3",
+       "units": null,
+       "pulled": null,
+       "legs": []
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

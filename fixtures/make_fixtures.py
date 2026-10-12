@@ -41,7 +41,7 @@ RULES = {
         "thin_over_penalty": 0.04, "thin_rows": 20, "thin_team_games": 10, "min_history": 10,
         "news_gap": 0.15, "too_good": 0.20, "pull_margin": 0.0, "drift_pull": 0.04,
         "max_per_player": 1, "max_per_game": 3, "parlay_leg_min_p": 0.58, "parlay_min_p_2": 0.34,
-        "parlay_min_p_3": 0.20, "parlay_cap": 3, "stake": 1, "min_sample": 30, "pause_legs": 50,
+        "parlay_min_p_3": 0.20, "parlay_cap": 3, "parlay_leg_min_price": -200, "parlay_leg_max_price": 100, "parlay_edge": 0.03, "stake": 1, "min_sample": 30, "pause_legs": 50,
         "change_legs": 150,
     },
     "ui": {"stale_after_min": 75, "refresh_sec": 120, "picks_open": 8},
@@ -87,6 +87,16 @@ STATE_TEXT = {"early": "Early: lineup not confirmed", "lineup": "Lineup confirme
               "locked_unconfirmed": "Locked: lineup was not confirmed"}
 
 
+def pct_floor(p):
+    return int(p * 100 + 1e-6)
+
+
+def reason_for(p, verb, tail):
+    price = p["price"]
+    return "%d%% %s; %s needs %d%%. %s" % (pct_floor(p["p"]), verb, ("+%d" % price) if price > 0 else str(price),
+                                         round(p["breakeven"] * 100), tail)
+
+
 def make_pick(row, rank):
     key, gid, player, team, market, bet, price, p, state, thin, gu, gs, verb, tail = row
     g = GAME[gid]
@@ -102,12 +112,30 @@ def make_pick(row, rank):
         "player": player, "team": team, "opp": g[1] if home else g[2], "home": home, "start": t(g[3]),
         "market": market, "bet": bet,
         "price": price, "price_at": t("17:02"), "first_price": price, "first_price_at": t("13:02"),
-        "worst_price": price, "p": p, "breakeven": b,
-        "reason": "%d%% %s; %s needs %d%%. %s" % (int(p * 100 + 1e-6), verb, ("+%d" % price) if price > 0 else str(price),
-                                                  round(b * 100), tail),
+        "worst_price": price, "p": p, "breakeven": b, "p_pct": pct_floor(p), "breakeven_pct": round(b * 100),
+        "reason": None, "graded": None,
         "state": state, "thin": thin, "games_used": gu, "games_this_season": gs,
         "history": hist, "pulled": None,
+        "_verb": verb, "_tail": tail,
     }
+
+
+def finish(slate):
+    """Recompute every pick's reason from its final price and p, and drop helper keys."""
+    for p in slate["picks"]:
+        p["breakeven"] = be(p["price"])
+        p["p_pct"], p["breakeven_pct"] = pct_floor(p["p"]), round(p["breakeven"] * 100)
+        p["reason"] = reason_for(p, p.pop("_verb"), p.pop("_tail"))
+    for par in slate["parlays"]:
+        par["p_pct"], par["breakeven_pct"] = pct_floor(par["p"]), round(par["breakeven"] * 100)
+    st = slate["status"]
+    if st.get("lineups_at") is None and st.get("lineups_state") == "ok":
+        st["lineups_state"], st["lineups_note"] = "not_yet", None
+    pool = st.get("pool") or {}
+    if pool.get("days_left") is None and pool.get("game_days_left") is not None:
+        pool["days_left"] = pool["game_days_left"]
+    slate.setdefault("status_at", slate["generated_at"])
+    return slate
 
 
 def make_parlay(n, legs, picks, state):
@@ -118,7 +146,8 @@ def make_parlay(n, legs, picks, state):
         d *= dec(by[k]["price"])
         pp *= by[k]["p"]
     return {"id": "%s:parlay:%s" % (D, "+".join(legs)), "legs": [by[k]["id"] for k in legs], "price": american(d),
-            "price_at": t("17:02"), "p": round(pp, 4), "breakeven": round(1 / d, 4), "state": state, "pulled": None}
+            "price_at": t("17:02"), "p": round(pp, 4), "breakeven": round(1 / d, 4), "state": state, "pulled": None,
+            "graded": None}
 
 
 def base_slate():
@@ -131,13 +160,15 @@ def base_slate():
         "fixture_now": t("18:55"),
         "slate_date": D,
         "generated_at": t("18:52"),
+        "status_at": t("18:52"),
         "valid_until": "2026-10-12T05:00:00-04:00",
         "status": {
             "prices_state": "ok", "prices_at": t("17:02"), "next_price_read_at": t("19:25"),
             "stats_built_at": t("09:12"), "stats_through": "2026-10-10", "stats_state": "ok",
-            "lineups_at": t("18:35"), "goalies_at": None,
+            "lineups_at": t("18:35"), "goalies_at": None, "lineups_state": "ok",
+            "lineups_note": "14 of 14 team line pages are dated today.",
             "last_run": {"ok": True, "at": t("18:52"), "failed_step": None},
-            "pool": {"pulls_left": 412, "keys": 3, "game_days_left": 6, "low": False},
+            "pool": {"pulls_left": 412, "keys": 3, "game_days_left": 6, "days_left": 21, "low": False},
             "excluded_teams": [], "lines_checked": 212,
         },
         "banners": [],
@@ -153,6 +184,7 @@ def base_slate():
             {"player": "L. Draisaitl", "team": "EDM", "price": 125, "fair_price": 150},
             {"player": "S. Reinhart", "team": "FLA", "price": 170, "fair_price": 195},
         ],
+        "goal_watch_note": "Not picks. Our model is weakest on goals.",
     }
 
 
@@ -181,6 +213,7 @@ def empty_slate(code, text, sub=None):
     s = base_slate()
     s["picks"], s["parlays"], s["goal_watch"] = [], [], []
     s["empty"] = {"code": code, "text": text, "sub": sub}
+    s["goal_watch_note"] = None
     for g in s["games"]:
         g["picks"] = 0
     return s
@@ -242,14 +275,15 @@ def parlay(date, i, legs, pulled=None):
         dl = 1.0
         for l in live:
             dl *= dec(l["price"])
-        u = round(dl - 1, 2) if res == "W" else -1.0
+        gp = american(dl)                       # graded price: push/void legs drop out
+        u = round(dec(gp) - 1, 2) if res == "W" else -1.0
     ll = []
     for l in legs:
         c = copy.deepcopy(l)
         c["units"] = None
         ll.append(c)
-    return {"id": "%s:p%d" % (date, i), "kind": "parlay", "player": None, "bet": None, "price": american(d),
-            "first_price": american(d), "result": res, "actual": None, "units": u, "pulled": pulled, "legs": ll}
+    return {"id": "%s:p%d" % (date, i), "kind": "parlay", "player": None, "bet": None,
+            "price": gp if graded else american(d), "first_price": american(d), "result": res, "actual": None, "units": u, "pulled": pulled, "legs": ll}
 
 
 def night(rng, date, pattern, graded=True, with_pulled=False, with_parlays=True):
@@ -372,14 +406,14 @@ def build():
     j.update(first_price=-150, first_price_at=t("10:31"), price=-135, worst_price=-150, breakeven=be(-135))
     a = find(s, "matt")
     a["pulled"] = {"at": t("17:02"), "reason": "Hard Rock moved the line to 4.5"}
-    s["parlays"][1]["pulled"] = {"at": t("17:02"), "reason": "Matthews leg pulled"}
+    s["parlays"][1]["pulled"] = {"at": t("17:02"), "reason": "Matthews leg pulled", "legs": [a["id"]]}
     rerank(s)
     out["moved"] = (s, rec)
 
     s = base_slate()
     find(s, "maka")["pulled"] = {"at": t("18:41"), "reason": "Scratched from the lineup"}
     find(s, "maka")["history"].append({"at": t("18:41"), "text": "Pulled: Scratched from the lineup"})
-    s["parlays"][1]["pulled"] = {"at": t("18:41"), "reason": "Makar leg pulled"}
+    s["parlays"][1]["pulled"] = {"at": t("18:41"), "reason": "Makar leg pulled", "legs": [find(s, "maka")["id"]]}
     new = make_pick(("drai", "g6", "L. Draisaitl", "EDM", "points", "Over 0.5 points", -185, 0.695, "early", False, 57, 4,
                      "to clear 0.5 points", "Projects 1.3 points in 21 min. VAN allow 5% more goals than average."), 0)
     new["first_price_at"] = new["price_at"] = t("18:50")
@@ -409,7 +443,7 @@ def build():
 
     s = empty_slate("pool_empty", "No Hard Rock prices today, so no picks. The odds pulls ran out.")
     s["status"].update(prices_state="pool_empty", prices_at=None, next_price_read_at=None, lineups_at=None, lines_checked=0)
-    s["status"]["pool"] = {"pulls_left": 0, "keys": 1, "game_days_left": 0, "low": True}
+    s["status"]["pool"] = {"pulls_left": 0, "keys": 1, "game_days_left": 0, "days_left": 0, "low": True}
     out["poolempty"] = (s, rec)
 
     s = empty_slate("feed_down", "No Hard Rock prices today, so no picks. The odds feed did not answer.")
@@ -431,7 +465,28 @@ def build():
     s["fixture_now"], s["generated_at"] = t("22:40"), t("22:32")
     s["status"].update(lineups_at=t("21:40"), next_price_read_at=None)
     s["status"]["last_run"]["at"] = t("22:32")
+    # BOS at BUF (5:00 PM) and FLA at TBL (7:10 PM) are final: those picks carry results
+    find(s, "past")["graded"] = {"result": "W", "actual": "had 5", "units": 0.8}
+    find(s, "thom")["graded"] = {"result": "L", "actual": "had 1", "units": -1.0}
+    find(s, "rein")["graded"] = {"result": "W", "actual": "had 2", "units": 0.63}
+    find(s, "kuch")["graded"] = {"result": "VOID", "actual": "did not play", "units": 0.0}
+    gp = make_parlay(4, ["past", "rein"], s["picks"], "locked")
+    gp["graded"] = {"result": "W", "actual": "2 of 2 legs hit", "units": round(dec(gp["price"]) - 1, 2)}
+    s["parlays"].insert(0, gp)
     out["allstarted"] = (s, rec)
+
+    # lineup source down: picks stay Early, page says so
+    s = base_slate()
+    for p in s["picks"]:
+        if not p["state"].startswith("locked"):
+            p["state"] = "early"
+            p["history"] = p["history"][:1]
+    for par in s["parlays"]:
+        par["state"] = "early"
+    s["status"].update(lineups_at=None, lineups_state="failed",
+                       lineups_note="Lineups not checked: Daily Faceoff did not answer.")
+    s["banners"] = [{"level": "warn", "text": "Lineups couldn't be checked, so picks stay Early."}]
+    out["nolineups"] = (s, rec)
 
     s = base_slate()
     s["generated_at"] = t("15:10")
@@ -458,7 +513,7 @@ def build():
     s["goal_watch"] = []
     s["banners"] = [{"level": "warn", "text": "Hard Rock prices limited: 3 of 7 games, shots only. Odds keys nearly out."}]
     s["status"].update(prices_state="limited", prices_at=t("13:02"), next_price_read_at=None, lines_checked=64)
-    s["status"]["pool"] = {"pulls_left": 9, "keys": 1, "game_days_left": 1, "low": True}
+    s["status"]["pool"] = {"pulls_left": 9, "keys": 1, "game_days_left": 1, "days_left": 1, "low": True}
     for p in s["picks"]:
         p["price_at"] = t("13:02")
     s["parlays"][0]["price_at"] = t("13:02")
@@ -466,8 +521,8 @@ def build():
     out["limited"] = (s, rec)
 
     s = base_slate()
-    s["fixture_now"], s["generated_at"] = t("16:10"), t("15:10")
-    s["banners"] = [{"level": "stop", "text": "The last update failed at 4:02 PM (odds pull). Showing 3:10 PM data."}]
+    s["fixture_now"], s["generated_at"], s["status_at"] = t("16:10"), t("15:10"), t("16:02")
+    s["banners"] = [{"level": "warn", "text": "Part of the last update failed at 4:02 PM (odds pull). Some of what is below may be older."}]
     s["status"].update(prices_at=t("13:02"), lineups_at=None, next_price_read_at=t("17:40"))
     s["status"]["last_run"] = {"ok": False, "at": t("16:02"), "failed_step": "odds pull"}
     for p in s["picks"]:
@@ -479,8 +534,8 @@ def build():
     out["failed"] = (s, rec)
 
     s = base_slate()
-    s["banners"] = [{"level": "warn", "text": "Odds pulls are running low: 38 left, about 2 game days. Fewer price checks until more keys are added."}]
-    s["status"]["pool"] = {"pulls_left": 38, "keys": 1, "game_days_left": 2, "low": True}
+    s["banners"] = [{"level": "warn", "text": "Odds pulls are running low: about 2 days left. Fewer price checks until more keys are added."}]
+    s["status"]["pool"] = {"pulls_left": 38, "keys": 1, "game_days_left": 2, "days_left": 2, "low": True}
     out["lowpool"] = (s, rec)
 
     s = base_slate()
@@ -488,6 +543,7 @@ def build():
     s["parlays"] = [make_parlay(1, ["jhug", "matt"], s["picks"], "lineup")]
     s["banners"] = [{"level": "warn", "text": "Not covered tonight: DAL, COL (stats behind)."}]
     s["status"]["excluded_teams"] = [{"team": "DAL", "reason": "stats behind"}, {"team": "COL", "reason": "stats behind"}]
+    s["status"].update(lineups_state="partial", lineups_note="12 of 14 team line pages are dated today.")
     rerank(s)
     for g in s["games"]:
         if g["id"] == "g5":
@@ -500,7 +556,8 @@ def build():
     m.update(player="J. Vanderbilt-Kowalski", price=1000, first_price=1000, worst_price=1000, breakeven=be(1000))
     r = find(s, "rein")
     r.update(player="A. Konstantinopoulos-Wright", bet="Over 12.5 power play shots on goal in regulation", state="warmups",
-             first_price=-135, first_price_at=t("10:31"))
+             first_price=-135, first_price_at=t("10:31"), _verb="to clear 12.5 power play shots",
+             _tail="Projects 13.4 power play shots in 24 min. TBL allow 4% more shots than average.")
     s["goal_watch"][0]["player"] = "J. Vanderbilt-Kowalski"
     s["goal_watch"][0]["price"] = 1000
     s["goal_watch"][0]["fair_price"] = 1250
@@ -520,7 +577,10 @@ def main():
     older = older_files()
     for name, (slate, rec) in fx.items():
         d = os.path.join(HERE, name)
-        write(os.path.join(d, "slate.json"), slate)
+        if not slate.get("_finished"):
+            finish(slate)
+            slate["_finished"] = True
+        write(os.path.join(d, "slate.json"), {k: v for k, v in slate.items() if k != "_finished"})
         write(os.path.join(d, "record.json"), rec)
         write(os.path.join(d, "rules.json"), RULES)
         for rel in rec.get("older", []):

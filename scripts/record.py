@@ -88,7 +88,10 @@ def fold(events):
                 continue                                    # a second "shown" for the same id is ignored
             body = e.get("pick") or e.get("parlay") or {}
             items[i] = {"id": i, "kind": e.get("kind", "single"), "slate": e.get("slate"), "shown_at": e["at"],
-                        "shown": body, "prices": [{"at": body.get("price_at") or e["at"], "price": body.get("price")}],
+                        "shown": body,
+                        "prices": [{"at": body.get("price_at") or e["at"], "price": body.get("price"),
+                                    "legs": body.get("leg_prices")}],
+                        "p_pct": body.get("p_pct"), "breakeven_pct": body.get("breakeven_pct"),
                         "p": body.get("p"), "breakeven": body.get("breakeven"), "reason": body.get("reason"),
                         "fair": body.get("fair"),
                         "state": body.get("state"), "states": [{"at": e["at"], "state": body.get("state")}],
@@ -98,12 +101,12 @@ def fold(events):
         if it is None:
             continue
         if t == "price":
-            it["prices"].append({"at": e.get("price_at") or e["at"], "price": e["price"]})
-            for k in ("p", "breakeven", "reason", "fair"):
+            it["prices"].append({"at": e.get("price_at") or e["at"], "price": e["price"], "legs": e.get("leg_prices")})
+            for k in ("p", "breakeven", "reason", "fair", "p_pct", "breakeven_pct"):
                 if e.get(k) is not None:
                     it[k] = e[k]
         elif t == "update":
-            for k in ("p", "breakeven", "reason", "fair"):
+            for k in ("p", "breakeven", "reason", "fair", "p_pct", "breakeven_pct"):
                 if e.get(k) is not None:
                     it[k] = e[k]
         elif t == "state":
@@ -128,6 +131,13 @@ def fold(events):
 def worst_price(item):
     """The lowest-paying price ever shown for this pick."""
     return min((p["price"] for p in item["prices"] if p["price"] is not None), key=odds.decimal)
+
+
+def parlay_snapshot(item):
+    """The parlay price snapshot it is graded at: the WORST parlay price shown (lowest payout), with the leg
+    prices it was made of. None for a parlay recorded before snapshots were stored."""
+    snaps = [p for p in item["prices"] if p.get("legs") and p["price"] is not None]
+    return min(snaps, key=lambda p: odds.decimal(p["price"])) if snaps else None
 
 
 def first_price(item):
@@ -166,7 +176,7 @@ def grade_parlay(legs, stake=1):
     price = odds.american(dec)
     if any(r == "L" for r, _ in alive):
         return "L", price, -float(stake)
-    return "W", price, round((dec - 1.0) * stake, 4)
+    return "W", price, round((odds.decimal(price) - 1.0) * stake, 4)    # paid at the price as shown (whole number)
 
 
 # ---------------------------------------------------------------- views for the page

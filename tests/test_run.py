@@ -226,13 +226,13 @@ class Modes(unittest.TestCase):
 
     def test_slate_shape(self):
         sl = open_day(self.s)
-        self.assertEqual(sorted(sl), ["banners", "empty", "games", "generated_at", "goal_watch", "parlays", "picks",
-                                      "slate_date", "status", "valid_until"])
+        self.assertEqual(sorted(sl), ["banners", "empty", "games", "generated_at", "goal_watch", "goal_watch_note",
+                                      "parlays", "picks", "slate_date", "status", "status_at", "valid_until"])
         self.assertEqual(sl["valid_until"], "2026-10-12T05:00:00-04:00")
         for k in ("prices_state", "prices_at", "next_price_read_at", "stats_built_at", "stats_through", "lineups_at",
                   "goalies_at", "stats_state", "last_run", "pool", "excluded_teams", "lines_checked"):
             self.assertIn(k, sl["status"], k)
-        self.assertEqual(sorted(sl["status"]["pool"]), ["game_days_left", "keys", "low", "pulls_left"])
+        self.assertEqual(sorted(sl["status"]["pool"]), ["days_left", "game_days_left", "keys", "low", "pulls_left"])
         self.assertEqual(sl["status"]["stats_through"], "2026-10-08")
         self.assertIsNone(sl["status"]["goalies_at"])
         p = sl["picks"][0]

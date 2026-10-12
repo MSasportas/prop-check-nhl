@@ -257,21 +257,31 @@ class Run:
         key_state = led.get("keys", [])
         fixture = bool(odds.fixture_dir())
         no_keys = not keys and not fixture
-        pool_known = any(k.get("left") is not None for k in key_state)
-        pool_left = sum(k.get("left") or 0 for k in key_state) if pool_known else None
+        # a key's number is unknown until the feed reports it; a refused key is unknown, never 0
+        reported = [k for k in key_state if k.get("left") is not None and k.get("status") != "invalid"]
+        pool_known = bool(reported)
+        pool_left = sum(k["left"] for k in reported) if pool_known else None
+        all_used_up = bool(key_state) and len(key_state) == len(keys or key_state) and \
+            all(k.get("left") == 0 for k in key_state)
+        keys_unread = not no_keys and plan is None
         left_games, sched_days = sched.games_left_this_month(self.cache, self.slate) if self.cache else (0, [])
         banners, sub = [], None
         open_games = [g for g in self.games if not self.started.get(g["id"])]
         times = odds.pull_times(self.slate, self.games, v) if self.games else None
         priced = {f["game_id"] for f in fetches}
 
-        # prices_state
+        # prices_state. "pool_empty" (the page says the pulls ran out) only when EVERY key reported 0 left.
+        budget_zero = bool(plan) and plan["budget_today"] == 0
         if fetches:
             ps = "limited" if (plan and plan["tier"] <= 1) or day.get("skipped") else "ok"
         elif no_keys:
             ps = "not_yet"
-        elif pool_known and (pool_left == 0 or (plan and plan["budget_today"] == 0)):
+        elif all_used_up:
             ps = "pool_empty"
+        elif keys_unread:
+            ps = "not_yet"                                  # no key has reported yet: we keep trying
+        elif budget_zero:
+            ps = "limited"                                  # credits left, but too few for today's games
         elif day.get("last_fail_at") and times and now >= times["A"]:
             ps = "feed_down"
         else:
@@ -284,12 +294,18 @@ class Run:
             if no_keys:
                 banners.append({"level": "warn", "text": "Hard Rock prices are not connected: no odds keys are set."})
                 sub = "No odds keys are set, so prices cannot be read."
+            elif all_used_up:
+                banners.append({"level": "stop", "text": "No Hard Rock prices today, odds keys are used up. No picks."})
             elif plan is None:
-                sub = "Waiting to reach the odds feed."
+                text = "Hard Rock prices couldn't be read yet; trying again."
+                if open_games:
+                    banners.append({"level": "warn", "text": text})
+                sub = text
             elif plan["tier"] == 0:
                 n = len(priced) if fetches else min(plan["budget_today"], n_all)
                 if plan["budget_today"] == 0 and not fetches:
-                    banners.append({"level": "stop", "text": "No Hard Rock prices today, odds keys are used up. No picks."})
+                    banners.append({"level": "stop", "text": "No Hard Rock prices today: too few odds pulls are left "
+                                                             "for today's games. No picks."})
                 else:
                     banners.append({"level": "warn", "text": "Hard Rock prices limited: %d of %d games, shots only. "
                                                               "Odds keys nearly out." % (n, n_all)})
@@ -321,6 +337,21 @@ class Run:
             today_pages = sum(1 for t in ls["teams"].values() if (t.get("page") or {}).get("today"))
             lineup_note = "%d of %d team line pages are dated today." % (today_pages, len(ls["teams"]))
 
+        lineups_state = self.lineups_state(ls)
+        window = timedelta(minutes=cfg["ops"]["lineup_window_min"])
+        soon = [g for g in open_games if common.parse_iso(g["start"]) - now <= window]
+        if lineups_state in ("failed", "partial") and soon:
+            unread = {t for t, rec in ls.get("teams", {}).items()
+                      if rec.get("last_error") and not (rec.get("page") or {}).get("today")}
+            if any(g["away"] in unread or g["home"] in unread for g in soon):
+                banners.append({"level": "warn", "text": "Lineups couldn't be checked, so picks stay Early."})
+
+        pool = odds.pool_summary(pool_left, len(key_state), plan, sched_days, cfg, led.get("spent", []), self.slate)
+        if pool["low"] and not all_used_up and pool["days_left"] is not None:
+            n = pool["days_left"]
+            banners.append({"level": "warn", "text": "Odds pulls are running low: about %d day%s left. Fewer price checks "
+                                                     "until more keys are added." % (n, "" if n == 1 else "s")})
+
         if not last_run["ok"]:
             banners.insert(0, {"level": "warn", "text": "Part of the last update failed at %s (%s). Some of what is below may be older."
                                                         % (common.fmt_time(now), last_run["failed_step"])})
@@ -330,7 +361,8 @@ class Run:
             "stats_built_at": self.stats_built_at, "stats_through": self.stats_through,
             "stats_state": "behind" if (self.stats_missing or self.too_far_behind()) else "ok",
             "stats_missing": self.stats_missing, "lineups_at": lineups_at, "lineups_note": lineup_note,
-            "last_run": last_run, "pool": odds.pool_summary(pool_left, len(key_state), plan, sched_days, cfg),
+            "lineups_state": lineups_state,
+            "last_run": last_run, "pool": pool,
             "banners": banners, "not_yet_sub": sub, "other_games": self.other_games,
             "paused": getattr(self, "paused", {}),
             # for status.json only
@@ -340,6 +372,18 @@ class Run:
             "_lineup_unmatched": sorted({n for t in ls.get("teams", {}).values()
                                          for n in (t.get("page") or {}).get("unmatched", [])}),
         }
+
+    def lineups_state(self, ls):
+        """ok | not_yet | failed | partial, from the teams in today's games that we have tried."""
+        teams_today = {t for g in self.games for t in (g["away"], g["home"])}
+        tried = {t: rec for t, rec in (ls.get("teams") or {}).items() if t in teams_today and rec.get("tried_at")}
+        if not tried:
+            return "not_yet"
+        read = [t for t, rec in tried.items() if rec.get("page")]
+        failed = [t for t, rec in tried.items() if rec.get("last_error") and not rec.get("page")]
+        if not read:
+            return "failed"
+        return "partial" if failed else "ok"
 
     def do_slate(self, facts):
         if self.inp is None or self.extra is None:
@@ -381,6 +425,7 @@ class Run:
         plan = facts.get("_plan") or {}
         st = {
             "ok": failed is None, "slate_date": self.slate, "started_at": common.iso(started_at),
+            "status_at": common.iso(self.now),
             "finished_at": common.iso(common.now() if not os.environ.get("PC_NOW") else self.now),
             "last_ok_at": common.iso(self.now) if failed is None else old.get("last_ok_at"),
             "failed_step": failed, "steps": self.steps, "sources": reached,
@@ -425,7 +470,7 @@ def _essence(doc):
     d = common.dumps(doc, False)
     import json
     d = json.loads(d)
-    for k in ("generated_at", "started_at", "finished_at", "last_ok_at", "runner"):
+    for k in ("generated_at", "status_at", "started_at", "finished_at", "last_ok_at", "runner"):
         d.pop(k, None)
     if isinstance(d.get("steps"), list):                    # a step that merely had nothing to do is not news
         d["steps"] = [(s["step"], s["note"]) for s in d["steps"] if s["status"] == "failed"]
@@ -453,6 +498,10 @@ def run(only=None, dry_run=False):
     r.step("stats", r.do_stats)
     r.step("odds", r.do_odds)
     r.step("lineups", r.do_lineups)
+    # m8: a pick enters the Record in the same commit that first shows it. Events are appended by the engine and
+    # grade steps; if slate.json is then NOT written, this run's events are rolled back to the exact bytes the
+    # log had before (never touching committed lines) and the next run makes them again.
+    record_before = record.read_raw() if r.wants("slate") else None
     r.step("engine", r.do_engine)
     r.step("grade", r.do_grade)
     failed = r.failed_step()
@@ -466,6 +515,11 @@ def run(only=None, dry_run=False):
         r.steps.append({"step": "facts", "status": "failed", "note": common.short_err(e)})
     if facts is not None:
         r.step("slate", lambda: r.do_slate(facts))
+    if record_before is not None and not r.wrote_slate and record.read_raw() != record_before:
+        common.write_bytes(record.events_path(), record_before)
+        r.events = record.parse(record_before)
+        r.steps.append({"step": "record", "status": "failed",
+                        "note": "page not updated, so this run's Record events were taken back"})
     if not r.wrote_slate and r.failed_step() and r.wants("slate"):
         _mark_slate_failed(now, r.failed_step())            # old slate stays, with the truth on top
     r.step("record", r.do_record)
@@ -490,6 +544,7 @@ def _mark_slate_failed(now, step):
         return
     mark = "The last update failed"
     sl["status"]["last_run"] = {"ok": False, "at": common.iso(now), "failed_step": step}
+    sl["status_at"] = common.iso(now)                       # the page re-renders; generated_at (data age) stays
     shown = common.fmt_time(common.parse_iso(sl["generated_at"])) if sl.get("generated_at") else "earlier"
     sl["banners"] = [{"level": "stop", "text": "%s at %s (%s). Showing %s data." % (mark, common.fmt_time(now), step, shown)}] + \
                     [b for b in sl.get("banners", []) if not str(b.get("text", "")).startswith(mark)]

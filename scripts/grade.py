@@ -133,7 +133,11 @@ def grade(events, now, cfg, sched_games):
         legs = [items.get(l) for l in it["shown"]["legs"]]
         if any(l is None or l["graded"] is None for l in legs):
             continue
-        res, price, units = record.grade_parlay([(l["graded"]["result"], l["graded"]["price"]) for l in legs], stake)
+        # graded at the worst parlay price SHOWN; each leg at its price in that same snapshot, so a void or
+        # push leg drops out of a price that was really on the page
+        snap = record.parlay_snapshot(it)
+        leg_price = lambda l: snap["legs"][l["id"]] if snap and l["id"] in snap["legs"] else l["graded"]["price"]
+        res, price, units = record.grade_parlay([(l["graded"]["result"], leg_price(l)) for l in legs], stake)
         hits = sum(1 for l in legs if l["graded"]["result"] == "W")
         counted = sum(1 for l in legs if l["graded"]["result"] in ("W", "L"))
         pre = []

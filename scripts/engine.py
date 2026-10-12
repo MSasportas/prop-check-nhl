@@ -35,6 +35,7 @@ STATE_LABEL = {"early": "Early: lineup not confirmed", "lineup": "Lineup confirm
 PULL_TEXT = {
     "out": "Scratched from the lineup",
     "gate": "Price moved past %s",
+    "max_price": "Price moved past %s",
     "line_moved": "Hard Rock moved the line to %s",
     "line_gone": "Hard Rock took this line down",
     "market_gone": "Hard Rock took this market down",
@@ -119,11 +120,17 @@ def pct_round(x):
     return int(math.floor(x * 100 + 0.5))
 
 
+def pcts(e):
+    """The two whole percents the card and the reason sentence both show: chance rounded down,
+    break-even rounded to nearest. Computed once from the unrounded numbers and stored with the pick."""
+    return pct_floor(e["p"]), pct_round(e["b"])
+
+
 def reason_text(market, side, line, price, e, mu, etoi, opp, opp_f, thin, n, cfg):
     short = cfg["ops"]["markets"][market]["short"]
     verb = "to clear" if side == "over" else "to stay under"
     s = "%d%% %s %s %s; %s needs %d%%. Projects %.1f %s in %d min." % (
-        pct_floor(e["p"]), verb, fmt_line(line), short, common.fmt_price(price), pct_round(e["b"]),
+        pcts(e)[0], verb, fmt_line(line), short, common.fmt_price(price), pcts(e)[1],
         mu, short, int(round(etoi / 60.0)))
     x = int(round(abs(opp_f - 1.0) * 100))
     if abs(opp_f - 1.0) >= 0.02:                            # the opponent clause is dropped under 2%
@@ -416,6 +423,8 @@ def evaluate(inp, paused=(), block_new=False):
         code = None
         if odds.decimal(price) < odds.decimal(v["price_gate"]) - EPS:
             code, text = "gate", PULL_TEXT["gate"] % common.fmt_price(v["price_gate"])
+        elif odds.decimal(price) > odds.decimal(v["max_price"]) + EPS:
+            code, text = "max_price", PULL_TEXT["max_price"] % common.fmt_price(v["max_price"])
         elif e["margin"] < v["pull_margin"] - EPS:
             code, text = "margin", PULL_TEXT["margin"]
         elif not conf and odds.break_even(record.first_price(it)) - e["b"] >= v["drift_pull"] - EPS:
@@ -425,13 +434,14 @@ def evaluate(inp, paused=(), block_new=False):
             continue
         reason = sh["reason"] if m is None else reason_text(
             sh["market"], sh["side"], sh["line"], price, e, m["mu"], m["etoi"], sh["opp"], m["opp_f"], thin, pv["n"], inp.cfg)
+        p_pct, b_pct = pcts(e) if m is not None else (it.get("p_pct"), it.get("breakeven_pct"))
         if price != record.last_price(it):
             new.append({"t": "price", "id": i, "at": at, "price": price, "price_at": common.iso(price_at),
                         "p": round(e["p"], 4), "breakeven": round(e["b"], 4), "fair": round(e["fair"], 4),
-                        "reason": reason})
-        elif round(e["p"], 4) != it["p"] or reason != it["reason"]:
+                        "p_pct": p_pct, "breakeven_pct": b_pct, "reason": reason})
+        elif round(e["p"], 4) != it["p"] or reason != it["reason"] or p_pct != it.get("p_pct"):
             new.append({"t": "update", "id": i, "at": at, "p": round(e["p"], 4), "breakeven": round(e["b"], 4),
-                        "fair": round(e["fair"], 4), "reason": reason})
+                        "fair": round(e["fair"], 4), "p_pct": p_pct, "breakeven_pct": b_pct, "reason": reason})
         if state != it["state"]:
             new.append({"t": "state", "id": i, "at": at, "state": state})
         live[i] = {"p": e["p"], "b": e["b"], "conf": conf, "price": price, "price_at": price_at,
@@ -465,7 +475,7 @@ def evaluate(inp, paused=(), block_new=False):
             "side": c["side"], "bet": bet_text(c["side"], c["line"], c["market"], inp.cfg),
             "price": c["price"], "price_at": common.iso(c["price_at"]),
             "p": round(e["p"], 4), "breakeven": round(e["b"], 4), "fair": round(e["fair"], 4),
-            "model": round(e["model"], 4),
+            "p_pct": pcts(e)[0], "breakeven_pct": pcts(e)[1], "model": round(e["model"], 4),
             "reason": reason_text(c["market"], c["side"], c["line"], c["price"], e, m["mu"], m["etoi"], c["opp"],
                                   m["opp_f"], pv["thin"], pv["n"], inp.cfg),
             "state": "lineup" if c["conf"] else "early", "thin": pv["thin"],
@@ -486,7 +496,8 @@ def _parlay_numbers(leg_ids, live):
         p *= live[l]["p"]
         b *= live[l]["b"]
     return {"price": odds.american(dec), "p": p, "b": b,
-            "price_at": min(live[l]["price_at"] for l in leg_ids),
+            "legs": {l: live[l]["price"] for l in leg_ids},          # the snapshot this parlay price is made of
+            "price_at": max(live[l]["price_at"] for l in leg_ids),   # "from leg prices at": the newest of them
             "state": "lineup" if all(live[l]["conf"] for l in leg_ids) else "early"}
 
 
@@ -509,9 +520,10 @@ def _parlays(inp, items, live, at):
             new.append({"t": "locked", "id": i, "at": at, "state": st})
             continue
         n = _parlay_numbers(legs, live)
-        if n["price"] != record.last_price(it):
+        # a new snapshot whenever ANY leg's price changed (even if the rounded parlay price did not)
+        if n["legs"] != it["prices"][-1].get("legs") or n["price"] != record.last_price(it):
             new.append({"t": "price", "id": i, "at": at, "price": n["price"], "price_at": common.iso(n["price_at"]),
-                        "p": round(n["p"], 4), "breakeven": round(n["b"], 4)})
+                        "leg_prices": n["legs"], "p": round(n["p"], 4), "breakeven": round(n["b"], 4)})
         elif round(n["p"], 4) != it["p"]:
             new.append({"t": "update", "id": i, "at": at, "p": round(n["p"], 4), "breakeven": round(n["b"], 4)})
         if n["state"] != it["state"]:
@@ -554,6 +566,7 @@ def _parlays(inp, items, live, at):
         _, combo, n, pid_ = found
         legs = sorted(combo, key=lambda l: rank_key(live[l]["p"], live[l]["b"], live[l]["conf"]) + (l,))
         body = {"id": pid_, "legs": legs, "n": len(legs), "price": n["price"], "price_at": common.iso(n["price_at"]),
+                "leg_prices": n["legs"],
                 "p": round(n["p"], 4), "breakeven": round(n["b"], 4), "state": n["state"],
                 "leg_text": ["%s %s %s" % (today[l]["shown"]["player"], today[l]["shown"]["bet"],
                                            common.fmt_price(live[l]["price"])) for l in legs]}
@@ -640,7 +653,8 @@ def build_slate(inp, events, extra):
         base = {"id": i, "price": record.last_price(it), "first_price": record.first_price(it),
                 "first_price_at": it["prices"][0]["at"], "worst_price": record.worst_price(it),
                 "p": it["p"], "breakeven": it["breakeven"],
-                "p_pct": pct_floor(it["p"]), "breakeven_pct": pct_round(it["breakeven"]),
+                "p_pct": it["p_pct"] if it.get("p_pct") is not None else pct_floor(it["p"]),
+                "breakeven_pct": it["breakeven_pct"] if it.get("breakeven_pct") is not None else pct_round(it["breakeven"]),
                 "state": it["state"], "history": hist,
                 "prices": [{"at": p["at"], "price": p["price"]} for p in it["prices"]],
                 "pulled": {"at": it["pulled"]["at"], "reason": it["pulled"]["reason"]} if it["pulled"] else None,
@@ -657,7 +671,11 @@ def build_slate(inp, events, extra):
                 "games_this_season": sh["games_this_season"]})
             picks.append(base)
         else:
-            base.update({"legs": sh["legs"], "n": len(sh["legs"]), "price_at": it["prices"][-1]["at"]})
+            open_legs = record.is_open(it) and all(l in live for l in sh["legs"])
+            base.update({"legs": sh["legs"], "n": len(sh["legs"]),
+                         "price_at": common.iso(max(live[l]["price_at"] for l in sh["legs"])) if open_legs
+                         else it["prices"][-1]["at"],
+                         "leg_prices": it["prices"][-1].get("legs")})
             parlays.append(base)
     order = {"open": 0, "pulled": 1, "locked": 2}
     bucket = lambda p: "pulled" if p["pulled"] else ("open" if p["state"] in ("early", "lineup") and not p["graded"] else "locked")
@@ -678,7 +696,7 @@ def build_slate(inp, events, extra):
         "prices_state": f.get("prices_state", "not_yet"), "prices_at": f.get("prices_at"),
         "next_price_read_at": f.get("next_price_read_at"), "stats_built_at": f.get("stats_built_at"),
         "stats_through": f.get("stats_through"), "lineups_at": f.get("lineups_at"), "goalies_at": None,
-        "lineups_note": f.get("lineups_note"),
+        "lineups_note": f.get("lineups_note"), "lineups_state": f.get("lineups_state", "not_yet"),
         "stats_state": f.get("stats_state", "ok"),
         "last_run": f.get("last_run", {"ok": True, "at": common.iso(now), "failed_step": None}),
         "pool": f.get("pool", {"pulls_left": None, "keys": 0, "game_days_left": None, "low": False}),
@@ -706,9 +724,12 @@ def build_slate(inp, events, extra):
         empty = _empty(inp, status, picks, games, extra)
     tomorrow5 = (common.parse_iso(inp.slate + "T00:00:00").replace(tzinfo=common.ET) + timedelta(days=1)).replace(
         hour=cfg["ops"]["rollover_hour"])
-    return {"slate_date": inp.slate, "generated_at": common.iso(now), "valid_until": common.iso(tomorrow5),
+    gw = goal_watch(inp)
+    return {"slate_date": inp.slate, "generated_at": common.iso(now), "status_at": common.iso(now),
+            "valid_until": common.iso(tomorrow5),
             "status": status, "banners": banners, "empty": empty, "games": games, "picks": picks,
-            "parlays": parlays, "goal_watch": goal_watch(inp)}
+            "parlays": parlays, "goal_watch": gw,
+            "goal_watch_note": "Not picks. Our model is weakest on goals." if gw else None}
 
 
 def _empty(inp, status, picks, games, extra):
@@ -731,6 +752,9 @@ def _empty(inp, status, picks, games, extra):
                 "sub": "The odds feed did not answer."}
     if ps == "not_yet":
         return {"code": "not_yet", "text": "No prices read yet today.", "sub": f.get("not_yet_sub")}
+    if ps == "limited" and not status["prices_at"]:
+        return {"code": "pool_low", "text": "No Hard Rock prices today, so no picks.",
+                "sub": "Too few odds pulls are left for today's games."}
     sub = None
     if status["prices_at"]:
         n = extra["counts"]["checked"]

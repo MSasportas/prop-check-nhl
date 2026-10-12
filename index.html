@@ -31,7 +31,7 @@ body{margin:0;background:var(--bg);color:var(--fg);font:400 14px/20px var(--body
 button{font:inherit;color:inherit;background:none;border:0;padding:0;margin:0;text-align:left;cursor:pointer;
   font-variant-numeric:inherit;-webkit-appearance:none;appearance:none}
 :focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:6px}
-.wrap{max-width:520px;margin:0 auto;padding:var(--sat) 16px calc(56px + var(--sab) + 24px)}
+.wrap{max-width:520px;margin:0 auto;padding:var(--sat) 16px calc(52px + var(--sab) + 24px)}
 .d{font-family:var(--display);font-weight:600;letter-spacing:.01em}
 .mu{color:var(--muted)}
 
@@ -48,6 +48,7 @@ button{font:inherit;color:inherit;background:none;border:0;padding:0;margin:0;te
 .rowbtn .grow{flex:1;min-width:0}
 .chev{flex:none;color:var(--muted);display:flex}
 .statusline{font-size:12px;line-height:17px;color:var(--muted);display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;overflow:hidden}
+.statusline .lowpool{color:var(--warn);font-weight:500}
 .strip{border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
 .strip .grow{font:600 18px/22px var(--display);letter-spacing:.01em}
 .strip .pos{color:var(--good)} .strip .neg{color:var(--bad)}
@@ -64,7 +65,7 @@ button{font:inherit;color:inherit;background:none;border:0;padding:0;margin:0;te
 .since{margin-top:10px;font-size:13px;color:var(--accent)}
 
 /* sections */
-.sec{margin-top:14px}
+.sec{margin-top:12px}
 .sec-h{display:flex;align-items:baseline;gap:8px;margin:0 0 6px}
 .sec-h h2,.secbtn h2{font:600 20px/24px var(--display);letter-spacing:.02em;margin:0}
 .sec-sub{font-size:13px;color:var(--muted);margin:-4px 0 8px}
@@ -72,10 +73,10 @@ button{font:inherit;color:inherit;background:none;border:0;padding:0;margin:0;te
 .secbtn h2{flex:1}
 .secbtn .chev{transition:transform .15s}
 .secbtn[aria-expanded="true"] .chev{transform:rotate(180deg)}
-.stack>*+*{margin-top:10px}
+.stack>*+*{margin-top:8px}
 
 /* cards */
-.card{display:block;width:100%;background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:12px;overflow:hidden}
+.card{display:block;width:100%;background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:10px 12px;overflow:hidden}
 .card[role=button]{cursor:pointer}
 .card[aria-expanded="true"]{border-color:#35485c}
 .r1{display:flex;align-items:baseline;gap:8px}
@@ -111,9 +112,11 @@ button{font:inherit;color:inherit;background:none;border:0;padding:0;margin:0;te
 .hist li{display:flex;gap:8px}
 .hist time{flex:none;min-width:62px;color:var(--muted)}
 .note{font-size:12px;line-height:17px;color:var(--muted);margin-top:8px}
+.result{display:flex;align-items:baseline;gap:2px;margin:-2px 0 4px;font-size:14px;line-height:20px}
+.result .tg{font:600 18px/20px var(--display);letter-spacing:.03em}
 
 /* pulled */
-.pullbar{display:flex;gap:8px;align-items:flex-start;margin:-12px -12px 10px;padding:9px 12px;background:var(--raise);
+.pullbar{display:flex;gap:8px;align-items:flex-start;margin:-10px -12px 10px;padding:9px 12px;background:var(--raise);
   border-bottom:1px solid var(--line);font-size:13px;line-height:18px}
 .pullbar .ic{flex:none;display:flex;color:var(--bad);margin-top:1px}
 .pullbar b{font-weight:500;letter-spacing:.04em}
@@ -132,6 +135,7 @@ button{font:inherit;color:inherit;background:none;border:0;padding:0;margin:0;te
 .leg .lprice{font:600 20px/22px var(--display);flex:none}
 .leg .l2{font-size:12px;line-height:17px;color:var(--muted);overflow-wrap:anywhere}
 .leg .l2 .lb{color:var(--fg)}
+.leg .l2 .lpulled{color:var(--fg);font-weight:500}
 .psum{margin-top:8px;font-size:13px;line-height:19px}
 .psum .about{font:600 20px/24px var(--display)}
 
@@ -162,8 +166,8 @@ button{font:inherit;color:inherit;background:none;border:0;padding:0;margin:0;te
 
 /* bottom bar */
 .tabs{position:fixed;left:0;right:0;bottom:0;z-index:5;background:var(--bg);border-top:1px solid var(--line);padding-bottom:var(--sab)}
-.tabs .in{max-width:520px;margin:0 auto;display:flex;height:56px}
-.tab{flex:1;display:flex;align-items:center;justify-content:center;gap:8px;height:56px;color:var(--muted);
+.tabs .in{max-width:520px;margin:0 auto;display:flex;height:52px}
+.tab{flex:1;display:flex;align-items:center;justify-content:center;gap:8px;height:52px;color:var(--muted);
   font:600 18px/22px var(--display);letter-spacing:.03em;position:relative}
 .tab[aria-current="page"]{color:var(--fg)}
 .tab[aria-current="page"]::before{content:"";position:absolute;top:-1px;left:22%;right:22%;height:3px;background:var(--accent);border-radius:0 0 3px 3px}
@@ -247,7 +251,7 @@ var SEEN_KEY = FIX ? 'pc_seen_fx' : 'pc_seen';
 var UI_DEF = { stale_after_min: 75, refresh_sec: 120, picks_open: 8 };
 
 var S = {
-  slate: null, record: null, rules: null,
+  slate: null, record: null, rules: null, recordErr: null,
   loaded: false, loadErr: false, fetchFail: false, loadedAt: null, busy: false,
   view: 'tonight', expanded: {}, open: {}, moreOpen: false, filter: 'all', legsOpen: {},
   older: [], olderIdx: 0, olderBusy: false, olderErr: false,
@@ -344,6 +348,10 @@ function fStamp(v) {
 function odds(v) { var n = num(v); if (n == null) return '—'; n = Math.round(n); return n > 0 ? '+' + n : (n < 0 ? '-' + Math.abs(n) : '+0'); }
 function pctDown(v) { var n = num(v); return n == null ? null : Math.floor(n * 100 + 1e-6) + '%'; }
 function pctNear(v) { var n = num(v); return n == null ? null : Math.round(n * 100) + '%'; }
+function pctGiven(v) { var n = num(v); return n == null ? null : Math.round(n) + '%'; }
+/* the engine's own whole percents win; rounding p (down) and breakeven (nearest) is only the fallback */
+function pctP(o) { return pctGiven(o.p_pct) || pctDown(o.p); }
+function pctB(o) { return pctGiven(o.breakeven_pct) || pctNear(o.breakeven); }
 function units(v, dp) {
   var n = num(v); if (n == null) return null;
   var s = Math.abs(n).toFixed(dp);
@@ -379,7 +387,7 @@ function matchup(p, games) {
   return { text: away ? str(away) + ' at ' + str(home) : '', start: start, time: fTime(start) };
 }
 function hasStarted(p, games) {
-  if (/^locked/.test(str(p.state))) return true;
+  if (/^locked/.test(str(p.state)) || isObj(p.graded)) return true;
   var t = ms(p.start || (games[p.game_id] && games[p.game_id].start));
   return t != null && now() >= t;
 }
@@ -396,7 +404,7 @@ function split() { /* open / started / pulled, picks and parlays */
   for (i = 0; i < pars.length; i++) {
     p = pars[i];
     if (p.pulled) { out.pPulled.push(p); continue; }
-    var st = /^locked/.test(str(p.state)), legs = arr(p.legs);
+    var st = /^locked/.test(str(p.state)) || isObj(p.graded), legs = arr(p.legs);
     for (var j = 0; j < legs.length && !st; j++) { var lp = out.byId[legs[j]]; if (lp && hasStarted(lp, games)) st = true; }
     (st ? out.pStarted : out.pOpen).push(p);
   }
@@ -409,29 +417,35 @@ function getJSON(path) {
   var timer = ctl ? setTimeout(function () { ctl.abort(); }, 15000) : null;
   var sep = path.indexOf('?') >= 0 ? '&' : '?';
   return fetch(path + sep + 't=' + Date.now(), { cache: 'no-store', signal: ctl ? ctl.signal : undefined })
-    .then(function (r) { if (!r.ok) throw new Error('http ' + r.status); return r.json(); })
-    .then(function (j) { if (timer) clearTimeout(timer); if (!isObj(j)) throw new Error('shape'); return j; },
-          function (e) { if (timer) clearTimeout(timer); throw e; });
+    .then(function (r) {
+      if (!r.ok) throw fileErr('http ' + r.status);
+      return r.text().then(function (t) { try { return JSON.parse(t); } catch (e) { throw fileErr('parse'); } });
+    }, function (e) { var x = new Error('net'); x.kind = 'net'; throw x; })
+    .then(function (j) { if (timer) clearTimeout(timer); if (!isObj(j)) throw fileErr('shape'); return j; },
+          function (e) { if (timer) clearTimeout(timer); if (!e || !e.kind) { var x = new Error('net'); x.kind = 'net'; throw x; } throw e; });
 }
-function settle(p) { return p.then(function (v) { return { ok: true, v: v }; }, function () { return { ok: false }; }); }
+/* 'file' = the network answered but the file was missing or unreadable; 'net' = the request itself failed */
+function fileErr(m) { var e = new Error(m); e.kind = 'file'; return e; }
+function settle(p) { return p.then(function (v) { return { ok: true, v: v }; }, function (e) { return { ok: false, kind: (e && e.kind) || 'net' }; }); }
 function load() {
   if (S.busy) return Promise.resolve();
   S.busy = true;
   return Promise.all([settle(getJSON(BASE + 'slate.json')), settle(getJSON(BASE + 'record.json')), settle(getJSON(BASE + 'rules.json'))])
     .then(function (r) {
       S.busy = false; S.loaded = true;
-      if (r[1].ok) S.record = r[1].v;
+      if (r[1].ok) { S.record = r[1].v; S.recordErr = null; } else if (!S.record) S.recordErr = r[1].kind;
       if (r[2].ok) S.rules = r[2].v;
       if (r[0].ok) { S.slate = r[0].v; S.fetchFail = false; S.loadErr = false; S.loadedAt = now(); }
-      else if (S.slate) S.fetchFail = true;
-      else S.loadErr = true;
+      else if (S.slate) S.fetchFail = r[0].kind;
+      else S.loadErr = r[0].kind;
       maybeRender();
     }, function () { S.busy = false; });
 }
 var timer = null;
 function schedule() {
   if (timer) clearTimeout(timer);
-  timer = setTimeout(function () { if (!document.hidden) load().then(schedule); else schedule(); }, uiVal('refresh_sec') * 1000);
+  var wait = (S.slate && !S.fetchFail) ? uiVal('refresh_sec') : Math.min(30, uiVal('refresh_sec'));  /* retry sooner while something is failing */
+  timer = setTimeout(function () { if (!document.hidden) load().then(schedule); else schedule(); }, wait * 1000);
 }
 
 /* ---------- "since you last looked" ---------- */
@@ -443,6 +457,7 @@ function readSeen() {
     var o = JSON.parse(raw); if (!isObj(o) || o.slate_date !== S.slate.slate_date) return;
     var seen = {}, pulled = {}, i, d = split(), nNew = 0, nPulled = 0;
     arr(o.seen_ids).forEach(function (x) { seen[x] = 1; }); arr(o.pulled_ids).forEach(function (x) { pulled[x] = 1; });
+    d.pulled = d.pulled.concat(d.pPulled);
     for (i = 0; i < d.open.length; i++) if (!seen[d.open[i].id] && !pulled[d.open[i].id]) { S.newIds[d.open[i].id] = 1; nNew++; }
     for (i = 0; i < d.pulled.length; i++) if (!pulled[d.pulled[i].id]) nPulled++;
     if (nNew || nPulled) S.since = { at: o.at, n: nNew, p: nPulled };
@@ -453,7 +468,7 @@ function writeSeen() {
     if (!S.slate || expired() || !S.slate.slate_date) return;
     var d = split(), id = function (p) { return p.id; };
     window.localStorage.setItem(SEEN_KEY, JSON.stringify({
-      slate_date: S.slate.slate_date, seen_ids: d.open.concat(d.started).map(id), pulled_ids: d.pulled.map(id),
+      slate_date: S.slate.slate_date, seen_ids: d.open.concat(d.started, d.pOpen, d.pStarted).map(id), pulled_ids: d.pulled.concat(d.pPulled).map(id),
       at: new Date(now()).toISOString()
     }));
   } catch (e) { /* ignore */ }
@@ -462,7 +477,7 @@ function writeSeen() {
 /* ---------- render control ---------- */
 function calcKey() {
   var d = S.slate ? split() : null;
-  return JSON.stringify([S.loaded, S.loadErr, S.fetchFail, S.slate && S.slate.generated_at, S.record && S.record.generated_at,
+  return JSON.stringify([S.loaded, S.loadErr, S.fetchFail, S.recordErr, S.slate && S.slate.generated_at, S.slate && S.slate.status_at, S.record && S.record.generated_at,
     S.rules && S.rules.version, S.rules && S.rules.updated, S.slate && expired(), S.slate && stale(),
     d ? d.started.length : 0, S.slate ? dayKey(now()) : 0]);
 }
@@ -532,6 +547,13 @@ function stateChip(state) {
   if (!s) return h('span', { class: 'chip hollow', text: str(state) });
   return h('span', { class: 'chip ' + s[0] }, icon(s[1], 13), s[2]);
 }
+var RESULT = { W: ['Hit', 'W'], L: ['Miss', 'L'], PUSH: ['Push', 'PUSH'], VOID: ['Void', 'VOID'] };
+function resultLine(g) {
+  if (!isObj(g) || g.result == null) return null;
+  var r = RESULT[str(g.result)], word = r ? r[0] : str(g.result);
+  var act = g.actual == null ? '' : str(g.actual);
+  return h('div', { class: 'result' }, h('span', { class: 'tg ' + (r ? r[1] : 'none'), text: word }), act ? h('span', { text: ' \u00b7 ' + act }) : null);
+}
 function toggleBtnKeys(fn) {
   return { click: fn, keydown: function (e) { if (e.key === 'Enter' || e.key === ' ' || e.key === 'Spacebar') { e.preventDefault(); fn(e); } } };
 }
@@ -563,7 +585,7 @@ function pickCard(p, d, opts) {
   }
   card.appendChild(stamp);
 
-  var pc = pctDown(p.p), be = pctNear(p.breakeven);
+  var pc = pctP(p), be = pctB(p);
   card.appendChild(h('div', { class: 'chance' }, 'Our chance ', h('b', { text: pc || 'not posted' }), be ? ' · needs ' + be : ''));
   var bar = chanceBar(p.p, p.breakeven); if (bar) card.appendChild(bar);
   if (p.reason) card.appendChild(h('div', { class: 'reason' + (isOpen ? '' : ' clamp'), text: p.reason }));
@@ -571,6 +593,7 @@ function pickCard(p, d, opts) {
     stateChip(p.state),
     p.thin ? h('span', { class: 'chip hollow', text: 'Thin sample' }) : null,
     (S.newIds[id] && !opts.noNew) ? h('span', { class: 'chip new', text: 'New' }) : null));
+  var res = resultLine(p.graded); if (res) card.insertBefore(res, card.firstChild);
 
   if (isOpen) {
     var more = h('div', { class: 'more' });
@@ -607,27 +630,31 @@ function pulledCard(p, d) {
       h('div', { class: 'r1' }, h('span', { class: 'name', text: p.player || 'Player not named' }),
         h('span', { class: 'meta', text: [mu.text, mu.time].filter(Boolean).join(' · ') })),
       h('div', { class: 'r2' }, h('div', { class: 'bet strike', text: p.bet || 'Bet not posted' }),
-        h('div', { class: 'lastprice' }, 'Last price ', h('span', { text: odds(p.price) }))),
+        h('div', { class: 'lastprice' }, 'Last price shown ', h('span', { text: odds(p.price) }))),
+      resultLine(p.graded),
       h('div', { class: 'note', text: PULL_NOTE })));
 }
 
 /* ---------- parlay card ---------- */
 function legRows(par, d, struck) {
   return arr(par.legs).map(function (lid) {
+    var strike = typeof struck === 'function' ? struck(lid) : !!struck;
     var p = d.byId[lid];
     if (!p) return h('div', { class: 'leg' }, h('div', { class: 'l2', text: 'Leg not available' }));
     var mu = matchup(p, d.games);
     return h('div', { class: 'leg' },
       h('div', { class: 'l1' }, h('span', { class: 'lname', text: p.player || 'Player not named' }), h('span', { class: 'lprice', text: odds(p.price) })),
-      h('div', { class: 'l2' }, h('span', { class: 'lb' + (struck ? ' strike' : ''), text: p.bet || 'Bet not posted' }),
+      h('div', { class: 'l2' }, h('span', { class: 'lb' + (strike ? ' strike' : ''), text: p.bet || 'Bet not posted' }),
+        strike ? h('span', { class: 'lpulled', text: ' \u00b7 pulled' }) : null,
         (mu.text ? ' · ' + mu.text : '') + (mu.time ? ' ' + mu.time : '')));
   });
 }
 function parlayCard(par, d, n) {
   var legs = arr(par.legs), at = fStamp(par.price_at);
-  var pc = pctDown(par.p), be = pctNear(par.breakeven);
+  var pc = pctP(par), be = pctB(par);
   return h('div', { class: 'card', 'data-id': str(par.id) },
-    h('div', { class: 'ptitle', text: 'Parlay' + (n ? ' ' + n : '') + ' · ' + legs.length + ' legs' }),
+    resultLine(par.graded),
+    h('div', { class: 'ptitle', text: 'Parlay' + (n ? ' ' + n : '') + ' \u00b7 ' + legs.length + ' legs' }),
     legRows(par, d, false),
     h('div', { class: 'psum' },
       h('div', null, h('span', { class: 'about', text: 'about ' + odds(par.price) }), ' from leg prices' + (at ? ' at ' + at : '')),
@@ -636,12 +663,15 @@ function parlayCard(par, d, n) {
     h('div', { class: 'note', text: "Each leg is in a different game. Hard Rock's parlay price may differ slightly." }));
 }
 function pulledParlayCard(par, d) {
-  var legs = arr(par.legs);
+  var legs = arr(par.legs), named = isObj(par.pulled) && Array.isArray(par.pulled.legs) ? par.pulled.legs.map(str) : null;
+  /* strike only the leg(s) that caused the pull: the engine's pulled.legs, else legs whose own pick is pulled */
+  var culprit = function (lid) { if (named) return named.indexOf(str(lid)) >= 0; var lp = d.byId[lid]; return !!(lp && lp.pulled); };
   return h('div', { class: 'card', 'data-id': str(par.id) },
     pulledBar(par.pulled),
     h('div', { class: 'dim' },
       h('div', { class: 'ptitle', text: 'Parlay · ' + legs.length + ' legs · was about ' + odds(par.price) }),
-      legRows(par, d, true),
+      legRows(par, d, culprit),
+      resultLine(par.graded),
       h('div', { class: 'note', text: PULL_NOTE })));
 }
 
@@ -652,15 +682,35 @@ function statusText(st, exp) {
   else if (st.prices_state === 'pool_empty' || st.prices_state === 'feed_down') out.push('No prices today');
   else out.push(fStamp(st.prices_at) ? 'Prices ' + fStamp(st.prices_at) : 'Prices not read yet');
   if (!exp) {
-    if (st.lineups_state === 'failed') out.push('Lineups not checked');
-    else out.push(fStamp(st.lineups_at) ? 'Lineups ' + fStamp(st.lineups_at) : 'Lineups not checked yet');
+    out.push(lineupShort(st));
     if (fStamp(st.goalies_at)) out.push('Goalies ' + fStamp(st.goalies_at));
   }
   if (st.stats_through) out.push((st.stats_state === 'behind' ? 'Stats behind, through ' : 'Stats ') + fDateShort(st.stats_through));
   else out.push(st.stats_state === 'behind' ? 'Stats behind' : 'Stats not built yet');
-  var pool = isObj(st.pool) ? st.pool : {};
-  if (num(pool.pulls_left) != null) out.push(pool.pulls_left + ' pulls left');
-  return out.join(' · ');
+  return { text: out.join(' \u00b7 '), odds: oddsShort(st) };
+}
+function lineupShort(st) {
+  var at = fStamp(st.lineups_at);
+  switch (st.lineups_state) {
+    case 'failed': return "Lineups couldn't be checked";
+    case 'partial': return 'Lineups partly checked' + (at ? ' ' + at : '');
+    case 'not_yet': return 'Lineups not checked yet';
+    case 'ok': return at ? 'Lineups ' + at : 'Lineups checked';
+    default: return at ? 'Lineups ' + at : 'Lineups not checked yet';
+  }
+}
+function poolDays(pool) { var n = num(pool.days_left); return n != null ? n : num(pool.game_days_left); }
+function oddsShort(st) {
+  var pool = isObj(st.pool) ? st.pool : {}, n = poolDays(pool);
+  if (n == null) return null;
+  n = Math.max(0, Math.floor(n));
+  var t = 'about ' + n + (n === 1 ? ' day' : ' days') + ' left';
+  return pool.low === true ? { low: true, text: 'Odds low: ' + t, days: t } : { low: false, text: 'Odds: ' + t, days: t };
+}
+function statusLineEl(s) {
+  var el = h('span', { class: 'grow statusline' }, s.text);
+  if (s.odds) { el.appendChild(node(' \u00b7 ')); el.appendChild(h('span', { class: s.odds.low ? 'lowpool' : null, text: s.odds.text.replace(/ /g, '\u00a0') })); }
+  return el;
 }
 function recordStripText() {
   var hd = S.record && isObj(S.record.summary) && isObj(S.record.summary.headline) ? S.record.summary.headline : null;
@@ -685,7 +735,7 @@ function renderTonight() {
   if (!S.slate) {
     app.appendChild(header('Prop Check NHL', null));
     app.appendChild(h('div', { class: 'card empty', style: 'margin-top:12px' },
-      h('div', { class: 't', text: "Can't load the picks. Check your connection." }),
+      h('div', { class: 't', text: S.loadErr === 'file' ? "The picks file couldn't be read. Trying again." : "Can't load the picks. Check your connection." }),
       h('div', { style: 'margin-top:12px' }, h('button', { class: 'btn', type: 'button', text: 'Try again',
         on: { click: function () { S.loaded = false; S.loadErr = false; render(); load().then(schedule); } } }))));
     app.appendChild(footer());
@@ -695,7 +745,7 @@ function renderTonight() {
 
   app.appendChild(header('Prop Check NHL', exp ? fDay(now()) : (sl.slate_date ? fDateLong(sl.slate_date) : fDay(now()))));
   app.appendChild(h('button', { class: 'rowbtn', type: 'button', 'aria-label': 'Update status', on: { click: function () { openSheet('status'); } } },
-    h('span', { class: 'grow statusline', text: statusText(st, exp) }), h('span', { class: 'chev' }, icon('right', 16))));
+    statusLineEl(statusText(st, exp)), h('span', { class: 'chev' }, icon('right', 16))));
   var rs = recordStripText();
   app.appendChild(h('button', { class: 'rowbtn strip', type: 'button', on: { click: function () { go('record'); } } },
     h('span', { class: 'grow' }, rs.t, rs.u ? ' · ' : null, rs.u ? h('span', { class: rs.c, text: rs.u }) : null),
@@ -710,7 +760,8 @@ function renderTonight() {
   } else if (stale()) {
     app.appendChild(banner('stop', 'Updates have stopped.', 'Last update ' + fStamp(sl.generated_at) + '. Prices and picks below may be out of date.'));
   }
-  if (S.fetchFail) app.appendChild(banner('warn', "Can't reach the picks right now.", 'Showing what loaded at ' + (fTime(S.loadedAt) || 'an earlier time') + '.'));
+  if (S.fetchFail === 'file') app.appendChild(banner('warn', "The picks file couldn't be read.", 'Trying again. Showing what loaded at ' + (fTime(S.loadedAt) || 'an earlier time') + '.'));
+  else if (S.fetchFail) app.appendChild(banner('warn', "Can't reach the picks right now.", 'Showing what loaded at ' + (fTime(S.loadedAt) || 'an earlier time') + '.'));
   if (!exp) arr(sl.banners).forEach(function (b) { var e = engineBanner(b); if (e) app.appendChild(e); });
   if (exp) { app.appendChild(footer()); return; }
 
@@ -758,7 +809,7 @@ function renderTonight() {
         h('span', { class: 'r' }, 'Hard Rock ', h('b', { text: odds(g.price) })), h('span', { class: 'r' }, 'fair ', h('b', { text: odds(g.fair_price) }))));
     });
     app.appendChild(h('section', { class: 'sec', id: 'goalwatch' }, h('div', { class: 'sec-h' }, h('h2', { text: 'Goal watch' })),
-      h('div', { class: 'sec-sub', text: 'Not picks. Price is short of fair.' }), gl));
+      h('div', { class: 'sec-sub', text: sl.goal_watch_note ? str(sl.goal_watch_note) : 'Not picks.' }), gl));
   }
 
   /* Pulled today: always open */
@@ -810,7 +861,7 @@ function renderRecord() {
   if (!S.loaded) { app.appendChild(h('div', { class: 'stack' }, h('div', { class: 'skel sm' }), h('div', { class: 'skel' }))); return; }
   if (!S.record) {
     app.appendChild(h('div', { class: 'card empty', style: 'margin-top:12px' },
-      h('div', { class: 't', text: "Can't load the Record. Check your connection." }),
+      h('div', { class: 't', text: S.recordErr === 'file' ? "The Record file couldn't be read. Trying again." : "Can't load the Record. Check your connection." }),
       h('div', { style: 'margin-top:12px' }, h('button', { class: 'btn', type: 'button', text: 'Try again', on: { click: function () { load().then(function () { render(); }); } } }))));
     app.appendChild(footer()); return;
   }
@@ -1006,7 +1057,7 @@ var RULES = [
   'Thin sample means under {thin_rows|num} games of history, or under {thin_team_games|num} with his team. Under {min_history|num} games of history means no pick.',
   "If our model sits more than {news_gap|pts} points above what Hard Rock's price implies, we wait for the lineup. More than {too_good|pts} points and we pass, because the book likely knows something.",
   'No more than {max_per_player|num} per player and {max_per_game|num} per game on any night.',
-  'Parlays are two or three legs, one leg per game, up to {parlay_cap|num} a night. Each leg needs a chance of {parlay_leg_min_p|pct} or better; the parlay needs {parlay_min_p_2|pct} for two legs and {parlay_min_p_3|pct} for three.',
+  "Parlays are two or three legs, one leg per game, up to {parlay_cap|num} a night. Every leg needs our chance of at least {parlay_leg_min_p|pct} and a price from {parlay_leg_min_price|price} to {parlay_leg_max_price|price}. The combined chance must be at least {parlay_min_p_2|pct} for 2 legs or {parlay_min_p_3|pct} for 3, and beat the parlay's break-even by {parlay_edge|pts} points.",
   'A pick is pulled if the player is out of the lineup, the price goes past {price_gate|price}, the line is gone, our chance falls to less than {pull_margin|pts} points over break-even, or the price moves {drift_pull|pts} points against us before the lineup is confirmed.',
   "Results come from the NHL boxscore once each game is final. Overtime counts, shootouts don't. Graded at the worst price shown, {stake|num} unit each.",
   'We need {min_sample|num} graded picks in a market before judging it. A market that is losing badly after {pause_legs|num} picks switches itself off, and no other rule changes before {change_legs|num}.'
@@ -1043,24 +1094,27 @@ function statusBody(body) {
   if (exp) pt = 'Prices not read yet today. Last read ' + (pa || 'not on file') + '.';
   row(pt, st.prices_state === 'pool_empty' || st.prices_state === 'feed_down');
   row(fStamp(st.next_price_read_at) ? 'Next price read ' + fStamp(st.next_price_read_at) : 'No further price read scheduled');
-  row(st.lineups_state === 'failed' ? 'Lineups not checked. The lineup source did not answer, so picks stay Early.'
-    : (fStamp(st.lineups_at) ? 'Lineups checked at ' + fStamp(st.lineups_at) : 'Lineups not checked yet'));
+  var lt = lineupShort(st);
+  if (st.lineups_state === 'failed') lt = "Lineups couldn't be checked, so picks stay Early.";
+  else if (st.lineups_state === 'partial') lt = 'Lineups partly checked' + (fStamp(st.lineups_at) ? ' at ' + fStamp(st.lineups_at) : '') + '. Picks for teams not checked stay Early.';
+  else if (fStamp(st.lineups_at)) lt = 'Lineups checked at ' + fStamp(st.lineups_at);
+  row(lt, st.lineups_state === 'failed');
+  if (st.lineups_note) row(str(st.lineups_note));
   if (fStamp(st.goalies_at)) row('Goalies checked at ' + fStamp(st.goalies_at));
   row((st.stats_state === 'behind' ? 'Stats are behind. ' : '') + (st.stats_through ? 'Stats through games of ' + fDateShort(st.stats_through) : 'Stats not built yet') +
     (fStamp(st.stats_built_at) ? ', built ' + fStamp(st.stats_built_at) : ''), st.stats_state === 'behind');
   if (num(st.lines_checked) != null) row('Checked ' + st.lines_checked + ' Hard Rock lines');
-  var pl = [];
-  if (num(pool.pulls_left) != null) pl.push(pool.pulls_left + ' odds pulls left');
-  if (num(pool.game_days_left) != null) pl.push('About ' + pool.game_days_left + ' game ' + (pool.game_days_left === 1 ? 'day' : 'days') + ' of pulls left');
+  var pl = [], od = oddsShort(st);
+  if (od) pl.push((od.low ? 'Odds running low: ' : 'Odds: ') + od.days + ' at the current pace');
   var nk = Array.isArray(pool.keys) ? pool.keys.length : num(pool.keys);
   if (nk != null) pl.push(nk + (nk === 1 ? ' odds key' : ' odds keys') + ' in use');
-  row(pl.length ? pl.join('. ') + '.' : 'Odds pulls left: not reported', pool.low === true);
+  row(pl.length ? pl.join('. ') + '.' : 'Odds left: not reported', pool.low === true);
   row(fStamp(sl.generated_at) ? 'Last update ' + fStamp(sl.generated_at) : 'Last update time not on file', stale() || exp);
   var lr = isObj(st.last_run) ? st.last_run : null;
   if (lr && lr.ok === false) row('The last update failed' + (fStamp(lr.at) ? ' at ' + fStamp(lr.at) : '') + (lr.failed_step ? ' (' + str(lr.failed_step) + ')' : '') + '.', true);
   var ex = arr(st.excluded_teams).filter(isObj);
   if (ex.length) row('Not covered tonight: ' + ex.map(function (x) { return str(x.team) + (x.reason ? ' (' + str(x.reason) + ')' : ''); }).join(', '));
-  if (S.fetchFail) row("Can't reach the picks right now. Showing what loaded at " + (fTime(S.loadedAt) || 'an earlier time') + '.', true);
+  if (S.fetchFail) row((S.fetchFail === 'file' ? "The picks file couldn't be read. Trying again." : "Can't reach the picks right now.") + ' Showing what loaded at ' + (fTime(S.loadedAt) || 'an earlier time') + '.', true);
   body.appendChild(h('p', { class: 'note', text: 'This page checks for updates about every ' + Math.round(uiVal('refresh_sec') / 60) + ' minutes while it is open. All times Eastern.' }));
 }
 

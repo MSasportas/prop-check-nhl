@@ -54,12 +54,14 @@ def main(argv):
                         "iteration": num("PC_RUNNER_ITERATION"), "chain_link": num("PC_RUNNER_LINK"),
                         "chain_started_at": env.get("PC_RUNNER_CHAIN_STARTED") or None,
                         "run_started_at": env.get("PC_RUNNER_RUN_STARTED") or None}
+    st["status_at"] = now.isoformat()
     st.update({"ok": False, "failed_step": step, "failed_at": now.isoformat(),
                "note": "The run stopped before finishing. Files from the last good run are still in place."})
     write(os.path.join(DATA, "status.json"), st)
     sl = read(os.path.join(DATA, "slate.json"))
     if isinstance(sl, dict) and "status" in sl:
         sl["status"]["last_run"] = {"ok": False, "at": now.isoformat(), "failed_step": step}
+        sl["status_at"] = now.isoformat()                  # tells the page to re-render; generated_at is untouched
         try:
             shown = clock(datetime.fromisoformat(sl["generated_at"]).astimezone(ET))
         except Exception:
