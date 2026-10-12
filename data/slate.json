@@ -1,12 +1,12 @@
 {
  "slate_date": "2026-10-12",
- "generated_at": "2026-10-12T12:10:01-04:00",
- "status_at": "2026-10-12T12:10:01-04:00",
+ "generated_at": "2026-10-12T12:20:01-04:00",
+ "status_at": "2026-10-12T12:20:01-04:00",
  "valid_until": "2026-10-13T05:00:00-04:00",
  "status": {
   "prices_state": "ok",
-  "prices_at": "2026-10-12T11:30:00-04:00",
-  "next_price_read_at": "2026-10-12T12:15:00-04:00",
+  "prices_at": "2026-10-12T12:20:01-04:00",
+  "next_price_read_at": "2026-10-12T17:30:00-04:00",
   "stats_built_at": "2026-10-11T22:36:03-04:00",
   "stats_through": "2026-10-11",
   "lineups_at": "2026-10-12T12:10:01-04:00",
@@ -16,25 +16,25 @@
   "stats_state": "ok",
   "last_run": {
    "ok": true,
-   "at": "2026-10-12T12:10:01-04:00",
+   "at": "2026-10-12T12:20:01-04:00",
    "failed_step": null
   },
   "pool": {
-   "pulls_left": 1446,
+   "pulls_left": 1445,
    "keys": 4,
    "game_days_left": 20,
    "days_left": 20,
    "low": false
   },
   "excluded_teams": [],
-  "lines_checked": 98,
-  "lines_failed": 4,
+  "lines_checked": 100,
+  "lines_failed": 5,
   "tier": 4
  },
  "banners": [
   {
    "level": "info",
-   "text": "4 Hard Rock lines skipped: the two sides did not add up or the price was old."
+   "text": "5 Hard Rock lines skipped: the two sides did not add up or the price was old."
   }
  ],
  "empty": null,
@@ -73,14 +73,14 @@
  "picks": [
   {
    "id": "2026-10-12:2026020087:8483771:shots:1.5:under",
-   "price": -130,
+   "price": -125,
    "first_price": -130,
    "first_price_at": "2026-10-12T11:30:00-04:00",
    "worst_price": -130,
-   "p": 0.604,
-   "breakeven": 0.5652,
-   "p_pct": 60,
-   "breakeven_pct": 57,
+   "p": 0.5998,
+   "breakeven": 0.5556,
+   "p_pct": 59,
+   "breakeven_pct": 56,
    "state": "lineup",
    "history": [
     {
@@ -92,6 +92,10 @@
     {
      "at": "2026-10-12T11:30:00-04:00",
      "price": -130
+    },
+    {
+     "at": "2026-10-12T12:20:01-04:00",
+     "price": -125
     }
    ],
    "pulled": null,
@@ -109,8 +113,8 @@
    "line": 1.5,
    "side": "under",
    "bet": "Under 1.5 shots on goal",
-   "price_at": "2026-10-12T11:30:00-04:00",
-   "reason": "60% to stay under 1.5 shots; -130 needs 57%. Projects 1.2 shots in 12 min.",
+   "price_at": "2026-10-12T12:20:01-04:00",
+   "reason": "59% to stay under 1.5 shots; -125 needs 56%. Projects 1.2 shots in 12 min.",
    "thin": false,
    "games_used": 24,
    "games_this_season": 5
