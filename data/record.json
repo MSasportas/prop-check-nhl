@@ -1,5 +1,5 @@
 {
- "generated_at": null,
+ "generated_at": "2026-10-12T11:30:00-04:00",
  "summary": {
   "headline": {
    "w": 0,
@@ -13,6 +13,39 @@
   },
   "rows": []
  },
- "nights": [],
+ "nights": [
+  {
+   "date": "2026-10-12",
+   "graded": false,
+   "w": 0,
+   "l": 0,
+   "units": 0,
+   "entries": [
+    {
+     "id": "2026-10-12:2026020087:8483771:shots:1.5:under",
+     "kind": "single",
+     "player": "S. Vilmanis",
+     "bet": "Under 1.5 shots on goal",
+     "market": "shots",
+     "team": "FLA",
+     "game": "FLA at BUF",
+     "price": -130,
+     "first_price": -130,
+     "last_price": -130,
+     "prices": [
+      {
+       "price": -130,
+       "at": "2026-10-12T11:30:00-04:00"
+      }
+     ],
+     "result": null,
+     "actual": null,
+     "units": null,
+     "pulled": null,
+     "legs": []
+    }
+   ]
+  }
+ ],
  "older": []
 }

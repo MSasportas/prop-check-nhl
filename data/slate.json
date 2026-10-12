@@ -1,33 +1,33 @@
 {
  "slate_date": "2026-10-12",
- "generated_at": "2026-10-12T11:10:00-04:00",
- "status_at": "2026-10-12T11:10:00-04:00",
+ "generated_at": "2026-10-12T11:30:00-04:00",
+ "status_at": "2026-10-12T11:30:00-04:00",
  "valid_until": "2026-10-13T05:00:00-04:00",
  "status": {
   "prices_state": "ok",
-  "prices_at": "2026-10-12T10:00:01-04:00",
-  "next_price_read_at": "2026-10-12T11:30:00-04:00",
+  "prices_at": "2026-10-12T11:30:00-04:00",
+  "next_price_read_at": "2026-10-12T12:15:00-04:00",
   "stats_built_at": "2026-10-11T22:36:03-04:00",
   "stats_through": "2026-10-11",
-  "lineups_at": "2026-10-12T11:10:00-04:00",
+  "lineups_at": "2026-10-12T11:30:00-04:00",
   "goalies_at": null,
   "lineups_note": "2 of 2 team line pages are dated today.",
   "lineups_state": "ok",
   "stats_state": "ok",
   "last_run": {
    "ok": true,
-   "at": "2026-10-12T11:10:00-04:00",
+   "at": "2026-10-12T11:30:00-04:00",
    "failed_step": null
   },
   "pool": {
-   "pulls_left": 1450,
+   "pulls_left": 1446,
    "keys": 4,
    "game_days_left": 20,
    "days_left": 20,
    "low": false
   },
   "excluded_teams": [],
-  "lines_checked": 96,
+  "lines_checked": 98,
   "lines_failed": 4,
   "tier": 4
  },
@@ -37,11 +37,7 @@
    "text": "4 Hard Rock lines skipped: the two sides did not add up or the price was old."
   }
  ],
- "empty": {
-  "code": "none_qualified",
-  "text": "No picks tonight. Nothing cleared the bar at Hard Rock's prices.",
-  "sub": "Checked 96 lines at 10:00 AM."
- },
+ "empty": null,
  "games": [
   {
    "id": 2026020087,
@@ -49,7 +45,7 @@
    "home": "BUF",
    "start": "2026-10-12T13:00:00-04:00",
    "started": false,
-   "picks": 0,
+   "picks": 1,
    "excluded_reason": null,
    "excluded_teams": []
   },
@@ -74,8 +70,78 @@
    "excluded_teams": []
   }
  ],
- "picks": [],
+ "picks": [
+  {
+   "id": "2026-10-12:2026020087:8483771:shots:1.5:under",
+   "price": -130,
+   "first_price": -130,
+   "first_price_at": "2026-10-12T11:30:00-04:00",
+   "worst_price": -130,
+   "p": 0.604,
+   "breakeven": 0.5652,
+   "p_pct": 60,
+   "breakeven_pct": 57,
+   "state": "lineup",
+   "history": [
+    {
+     "at": "2026-10-12T11:30:00-04:00",
+     "text": "Lineup confirmed"
+    }
+   ],
+   "prices": [
+    {
+     "at": "2026-10-12T11:30:00-04:00",
+     "price": -130
+    }
+   ],
+   "pulled": null,
+   "graded": null,
+   "rank": 1,
+   "tier": "main",
+   "game_id": 2026020087,
+   "player": "S. Vilmanis",
+   "player_id": 8483771,
+   "team": "FLA",
+   "opp": "BUF",
+   "home": false,
+   "start": "2026-10-12T13:00:00-04:00",
+   "market": "shots",
+   "line": 1.5,
+   "side": "under",
+   "bet": "Under 1.5 shots on goal",
+   "price_at": "2026-10-12T11:30:00-04:00",
+   "reason": "60% to stay under 1.5 shots; -130 needs 57%. Projects 1.2 shots in 12 min.",
+   "thin": false,
+   "games_used": 24,
+   "games_this_season": 5
+  }
+ ],
  "parlays": [],
- "goal_watch": [],
- "goal_watch_note": null
+ "goal_watch": [
+  {
+   "player": "T. Thompson",
+   "team": "BUF",
+   "price": 125,
+   "fair_price": 173,
+   "p": 0.3667,
+   "text": "36% to score; +125 needs 44%. Fair price +173. Not a pick."
+  },
+  {
+   "player": "M. Tkachuk",
+   "team": "FLA",
+   "price": 175,
+   "fair_price": 216,
+   "p": 0.3163,
+   "text": "31% to score; +175 needs 36%. Fair price +216. Not a pick."
+  },
+  {
+   "player": "S. Bennett",
+   "team": "FLA",
+   "price": 250,
+   "fair_price": 288,
+   "p": 0.258,
+   "text": "25% to score; +250 needs 29%. Fair price +288. Not a pick."
+  }
+ ],
+ "goal_watch_note": "Not picks. Our model is weakest on goals."
 }
