@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-10-12T17:30:00-04:00",
+ "generated_at": "2026-10-12T18:30:02-04:00",
  "summary": {
   "headline": {
    "w": 1,
@@ -71,11 +71,15 @@
      "game": "VGK at MIN",
      "price": -150,
      "first_price": -150,
-     "last_price": -150,
+     "last_price": -145,
      "prices": [
       {
        "price": -150,
        "at": "2026-10-12T10:00:01-04:00"
+      },
+      {
+       "price": -145,
+       "at": "2026-10-12T18:30:02-04:00"
       }
      ],
      "result": null,
@@ -112,7 +116,7 @@
      "kind": "parlay",
      "player": "Parlay",
      "bet": "2 legs",
-     "price": 218,
+     "price": 223,
      "first_price": 218,
      "result": null,
      "actual": null,
@@ -152,11 +156,15 @@
        "game": "VGK at MIN",
        "price": -150,
        "first_price": -150,
-       "last_price": -150,
+       "last_price": -145,
        "prices": [
         {
          "price": -150,
          "at": "2026-10-12T10:00:01-04:00"
+        },
+        {
+         "price": -145,
+         "at": "2026-10-12T18:30:02-04:00"
         }
        ],
        "result": null,

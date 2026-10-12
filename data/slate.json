@@ -1,40 +1,40 @@
 {
  "slate_date": "2026-10-12",
- "generated_at": "2026-10-12T18:20:01-04:00",
- "status_at": "2026-10-12T18:20:01-04:00",
+ "generated_at": "2026-10-12T18:30:02-04:00",
+ "status_at": "2026-10-12T18:30:02-04:00",
  "valid_until": "2026-10-13T05:00:00-04:00",
  "status": {
   "prices_state": "ok",
-  "prices_at": "2026-10-12T18:20:01-04:00",
-  "next_price_read_at": "2026-10-12T18:30:00-04:00",
+  "prices_at": "2026-10-12T18:30:02-04:00",
+  "next_price_read_at": "2026-10-12T19:15:00-04:00",
   "stats_built_at": "2026-10-12T16:20:01-04:00",
   "stats_through": "2026-10-12",
-  "lineups_at": "2026-10-12T18:10:01-04:00",
+  "lineups_at": "2026-10-12T18:30:02-04:00",
   "goalies_at": null,
   "lineups_note": "6 of 6 team line pages are dated today.",
   "lineups_state": "ok",
   "stats_state": "ok",
   "last_run": {
    "ok": true,
-   "at": "2026-10-12T18:20:01-04:00",
+   "at": "2026-10-12T18:30:02-04:00",
    "failed_step": null
   },
   "pool": {
-   "pulls_left": 1440,
+   "pulls_left": 1436,
    "keys": 4,
    "game_days_left": 20,
    "days_left": 20,
    "low": false
   },
   "excluded_teams": [],
-  "lines_checked": 101,
-  "lines_failed": 7,
+  "lines_checked": 102,
+  "lines_failed": 8,
   "tier": 4
  },
  "banners": [
   {
    "level": "info",
-   "text": "7 Hard Rock lines skipped: the two sides did not add up or the price was old."
+   "text": "8 Hard Rock lines skipped: the two sides did not add up or the price was old."
   }
  ],
  "empty": null,
@@ -117,14 +117,14 @@
   },
   {
    "id": "2026-10-12:2026020089:8478864:shots:3.5:under",
-   "price": -150,
+   "price": -145,
    "first_price": -150,
    "first_price_at": "2026-10-12T10:00:01-04:00",
    "worst_price": -150,
-   "p": 0.6219,
-   "breakeven": 0.6,
+   "p": 0.6206,
+   "breakeven": 0.5918,
    "p_pct": 62,
-   "breakeven_pct": 60,
+   "breakeven_pct": 59,
    "state": "lineup",
    "history": [
     {
@@ -136,6 +136,10 @@
     {
      "at": "2026-10-12T10:00:01-04:00",
      "price": -150
+    },
+    {
+     "at": "2026-10-12T18:30:02-04:00",
+     "price": -145
     }
    ],
    "pulled": null,
@@ -153,8 +157,8 @@
    "line": 3.5,
    "side": "under",
    "bet": "Under 3.5 shots on goal",
-   "price_at": "2026-10-12T10:00:01-04:00",
-   "reason": "62% to stay under 3.5 shots; -150 needs 60%. Projects 2.7 shots in 21 min. VGK allow 10% fewer shots than average.",
+   "price_at": "2026-10-12T18:30:02-04:00",
+   "reason": "62% to stay under 3.5 shots; -145 needs 59%. Projects 2.7 shots in 21 min. VGK allow 10% fewer shots than average.",
    "thin": false,
    "games_used": 83,
    "games_this_season": 5
@@ -219,12 +223,12 @@
  "parlays": [
   {
    "id": "2026-10-12:P:f975b0532f",
-   "price": 218,
+   "price": 223,
    "first_price": 218,
    "first_price_at": "2026-10-12T17:30:00-04:00",
    "worst_price": 218,
-   "p": 0.3637,
-   "breakeven": 0.3143,
+   "p": 0.363,
+   "breakeven": 0.31,
    "p_pct": 36,
    "breakeven_pct": 31,
    "state": "lineup",
@@ -238,6 +242,10 @@
     {
      "at": "2026-10-12T17:30:00-04:00",
      "price": 218
+    },
+    {
+     "at": "2026-10-12T18:30:02-04:00",
+     "price": 223
     }
    ],
    "pulled": null,
@@ -247,37 +255,37 @@
     "2026-10-12:2026020089:8478864:shots:3.5:under"
    ],
    "n": 2,
-   "price_at": "2026-10-12T18:20:01-04:00",
+   "price_at": "2026-10-12T18:30:02-04:00",
    "leg_prices": {
     "2026-10-12:2026020088:8477998:shots:1.5:under": -110,
-    "2026-10-12:2026020089:8478864:shots:3.5:under": -150
+    "2026-10-12:2026020089:8478864:shots:3.5:under": -145
    }
   }
  ],
  "goal_watch": [
   {
-   "player": "D. Batherson",
-   "team": "OTT",
-   "price": 195,
-   "fair_price": 214,
-   "p": 0.319,
-   "text": "31% to score; +195 needs 34%. Fair price +214. Not a pick."
+   "player": "K. Kaprizov",
+   "team": "MIN",
+   "price": 110,
+   "fair_price": 155,
+   "p": 0.3923,
+   "text": "39% to score; +110 needs 48%. Fair price +155. Not a pick."
   },
   {
-   "player": "J. Hughes",
-   "team": "NJD",
-   "price": 130,
-   "fair_price": 233,
-   "p": 0.3003,
-   "text": "30% to score; +130 needs 43%. Fair price +233. Not a pick."
+   "player": "M. Boldy",
+   "team": "MIN",
+   "price": 125,
+   "fair_price": 194,
+   "p": 0.3405,
+   "text": "34% to score; +125 needs 44%. Fair price +194. Not a pick."
   },
   {
-   "player": "D. Cozens",
-   "team": "OTT",
-   "price": 250,
-   "fair_price": 274,
-   "p": 0.2674,
-   "text": "26% to score; +250 needs 29%. Fair price +274. Not a pick."
+   "player": "M. Stone",
+   "team": "VGK",
+   "price": 165,
+   "fair_price": 213,
+   "p": 0.3199,
+   "text": "31% to score; +165 needs 38%. Fair price +213. Not a pick."
   }
  ],
  "goal_watch_note": "Not picks. Our model is weakest on goals."
