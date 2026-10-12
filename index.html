@@ -83,6 +83,7 @@ button{font:inherit;color:inherit;background:none;border:0;padding:0;margin:0;te
 .rank{font:600 17px/22px var(--display);color:var(--accent);flex:none;min-width:12px}
 .name{font:600 17px/22px var(--display);letter-spacing:.01em;flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .meta{font-size:12px;line-height:16px;color:var(--muted);white-space:nowrap;flex:none}
+.own{color:var(--fg);font-weight:600}
 .r2{display:flex;align-items:flex-start;gap:8px;margin-top:2px}
 .bet{font:600 20px/24px var(--display);letter-spacing:.01em;flex:1;min-width:0;overflow-wrap:anywhere;padding-top:1px}
 .price{font:600 26px/26px var(--display);min-width:76px;text-align:right;flex:none;white-space:nowrap}
@@ -384,7 +385,21 @@ function matchup(p, games) {
   if (g && g.away && g.home) { away = g.away; home = g.home; }
   else if (p.team && p.opp) { if (p.home) { away = p.opp; home = p.team; } else { away = p.team; home = p.opp; } }
   var start = p.start || (g && g.start);
-  return { text: away ? str(away) + ' at ' + str(home) : '', start: start, time: fTime(start) };
+  return { text: away ? str(away) + ' at ' + str(home) : '', start: start, time: fTime(start),
+           away: away, home: home, own: p.team };
+}
+/* The matchup as nodes: the player's own team is set in the main text colour, the opponent stays muted. */
+function muNodes(mu, withTime) {
+  var out = [];
+  if (mu.away) {
+    var own = str(mu.own);
+    [str(mu.away), str(mu.home)].forEach(function (t, i) {
+      if (i) out.push(' at ');
+      out.push(t && t === own ? h('span', { class: 'own', title: 'His team', text: t }) : t);
+    });
+  }
+  if (withTime && mu.time) out.push((out.length ? ' · ' : '') + mu.time);
+  return out;
 }
 function hasStarted(p, games) {
   if (/^locked/.test(str(p.state)) || isObj(p.graded)) return true;
@@ -570,7 +585,7 @@ function pickCard(p, d, opts) {
   card.appendChild(h('div', { class: 'r1' },
     (opts.rank && num(p.rank) != null) ? h('span', { class: 'rank', text: p.rank }) : null,
     h('span', { class: 'name', text: p.player || 'Player not named' }),
-    h('span', { class: 'meta', text: [mu.text, mu.time].filter(Boolean).join(' · ') || 'Game time not posted' })));
+    h('span', { class: 'meta' }, muNodes(mu, true).length ? muNodes(mu, true) : 'Game time not posted')));
   card.appendChild(h('div', { class: 'r2' },
     h('div', { class: 'bet', text: p.bet || 'Bet not posted' }),
     h('div', { class: 'price', text: odds(p.price) })));
@@ -628,7 +643,7 @@ function pulledCard(p, d) {
     pulledBar(p.pulled),
     h('div', { class: 'dim' },
       h('div', { class: 'r1' }, h('span', { class: 'name', text: p.player || 'Player not named' }),
-        h('span', { class: 'meta', text: [mu.text, mu.time].filter(Boolean).join(' · ') })),
+        h('span', { class: 'meta' }, muNodes(mu, true))),
       h('div', { class: 'r2' }, h('div', { class: 'bet strike', text: p.bet || 'Bet not posted' }),
         h('div', { class: 'lastprice' }, 'Last price shown ', h('span', { text: odds(p.price) }))),
       resultLine(p.graded),
@@ -646,7 +661,7 @@ function legRows(par, d, struck) {
       h('div', { class: 'l1' }, h('span', { class: 'lname', text: p.player || 'Player not named' }), h('span', { class: 'lprice', text: odds(p.price) })),
       h('div', { class: 'l2' }, h('span', { class: 'lb' + (strike ? ' strike' : ''), text: p.bet || 'Bet not posted' }),
         strike ? h('span', { class: 'lpulled', text: ' \u00b7 pulled' }) : null,
-        (mu.text ? ' · ' + mu.text : '') + (mu.time ? ' ' + mu.time : '')));
+        mu.text ? ' · ' : '', muNodes(mu, false), mu.time ? ' ' + mu.time : ''));
   });
 }
 function parlayCard(par, d, n) {
