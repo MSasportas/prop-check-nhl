@@ -76,7 +76,7 @@ price history exists; our own odds log, `data/odds/`, is building that).
 ## 6. Reviews (scheduled tasks; each reads this file first and updates it last)
 - **Daily check, 1:43 PM ET:** is the chain alive, did pull A run, any failed steps, unmatched names, excluded teams,
   grading done for last night; fix what's broken; no rule changes.
-- **Weekly team review, Mondays 10:47 AM ET:** full team (Sharp, Data Scientist, UX, Builder, QA) on the Record and
+- **Weekly team review, Sundays 10:47 AM ET:** full team (Sharp, Data Scientist, UX, Builder, QA) on the Record and
   the odds log: pick volume, closing-price check, calibration by bucket; ship agreed fixes through QA; log changes.
 
 ## 7. Known gaps and risks
@@ -108,6 +108,7 @@ price history exists; our own odds log, `data/odds/`, is building that).
 | 2026-10-11 | v1.0 set (section 4) | First build: Sharp standard from the DS backtest (2024-25 fit, 2025-26 out of sample) and one live Hard Rock pull | Backtest only; 0 graded live legs |
 
 ## 9. Session log (newest first, one line each)
+- 2026-10-12: QA round 2 (fresh QA) PASS WITH FIXES (0 blockers, 2 majors: Record history guard, refused keys) → fixed → QA recheck SHIP. First real pull 10:00 AM: 3 games, 96 lines, 6 credits, 0 picks (closest: Kaprizov U3.5 shots -150 at +2.2 pts, needs +3 early / +2 confirmed). Scheduled: daily check 1:43 PM ET, weekly team review Sundays 10:47 AM ET.
 - 2026-10-11: First build. Probe confirmed timer, secret, Pages, Daily Faceoff from the runner. Team set the standard,
   built engine + page + timer; QA round 1 FAIL (2 blockers, 3 majors) → fixed → QA PASS. Cron unreliable → chain.
   4 odds keys in pool (1,456 credits). Live Record empty; first real pull due Oct 12 ~10:00 AM (FLA@BUF 1 PM).
