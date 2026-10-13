@@ -1,7 +1,7 @@
 {
  "slate_date": "2026-10-13",
- "generated_at": "2026-10-13T16:40:14-04:00",
- "status_at": "2026-10-13T16:40:14-04:00",
+ "generated_at": "2026-10-13T16:50:00-04:00",
+ "status_at": "2026-10-13T16:50:00-04:00",
  "valid_until": "2026-10-14T05:00:00-04:00",
  "status": {
   "prices_state": "ok",
@@ -9,14 +9,14 @@
   "next_price_read_at": "2026-10-13T17:00:00-04:00",
   "stats_built_at": "2026-10-12T23:30:01-04:00",
   "stats_through": "2026-10-12",
-  "lineups_at": "2026-10-13T16:40:14-04:00",
+  "lineups_at": "2026-10-13T16:50:00-04:00",
   "goalies_at": null,
-  "lineups_note": "11 of 14 team line pages are dated today.",
+  "lineups_note": "13 of 16 team line pages are dated today.",
   "lineups_state": "ok",
   "stats_state": "ok",
   "last_run": {
    "ok": true,
-   "at": "2026-10-13T16:40:14-04:00",
+   "at": "2026-10-13T16:50:00-04:00",
    "failed_step": null
   },
   "pool": {
@@ -37,11 +37,7 @@
    "text": "26 Hard Rock lines skipped: the two sides did not add up or the price was old."
   }
  ],
- "empty": {
-  "code": "none_qualified",
-  "text": "No open picks right now.",
-  "sub": "Checked 261 lines at 4:40 PM. Next price check at 5:00 PM."
- },
+ "empty": null,
  "games": [
   {
    "id": 2026020090,
@@ -119,7 +115,7 @@
    "home": "NYI",
    "start": "2026-10-13T19:45:00-04:00",
    "started": false,
-   "picks": 0,
+   "picks": 1,
    "excluded_reason": null,
    "excluded_teams": []
   },
@@ -204,7 +200,52 @@
    "excluded_teams": []
   }
  ],
- "picks": [],
+ "picks": [
+  {
+   "id": "2026-10-13:2026020097:8477506:shots:1.5:under",
+   "price": -130,
+   "first_price": -130,
+   "first_price_at": "2026-10-13T13:00:01-04:00",
+   "worst_price": -130,
+   "p": 0.6192,
+   "breakeven": 0.5652,
+   "p_pct": 61,
+   "breakeven_pct": 57,
+   "state": "lineup",
+   "history": [
+    {
+     "at": "2026-10-13T16:50:00-04:00",
+     "text": "Lineup confirmed"
+    }
+   ],
+   "prices": [
+    {
+     "at": "2026-10-13T13:00:01-04:00",
+     "price": -130
+    }
+   ],
+   "pulled": null,
+   "graded": null,
+   "rank": 1,
+   "tier": "main",
+   "game_id": 2026020097,
+   "player": "R. Pulock",
+   "player_id": 8477506,
+   "team": "NYI",
+   "opp": "VAN",
+   "home": true,
+   "start": "2026-10-13T19:45:00-04:00",
+   "market": "shots",
+   "line": 1.5,
+   "side": "under",
+   "bet": "Under 1.5 shots on goal",
+   "price_at": "2026-10-13T13:00:01-04:00",
+   "reason": "61% to stay under 1.5 shots; -130 needs 57%. Projects 1.1 shots in 19 min. VAN allow 6% more shots than average.",
+   "thin": false,
+   "games_used": 81,
+   "games_this_season": 5
+  }
+ ],
  "parlays": [],
  "goal_watch": [
   {
