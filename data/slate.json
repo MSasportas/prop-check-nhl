@@ -1,40 +1,40 @@
 {
  "slate_date": "2026-10-13",
- "generated_at": "2026-10-13T16:50:00-04:00",
- "status_at": "2026-10-13T16:50:00-04:00",
+ "generated_at": "2026-10-13T17:00:01-04:00",
+ "status_at": "2026-10-13T17:00:01-04:00",
  "valid_until": "2026-10-14T05:00:00-04:00",
  "status": {
   "prices_state": "ok",
-  "prices_at": "2026-10-13T16:40:00-04:00",
-  "next_price_read_at": "2026-10-13T17:00:00-04:00",
+  "prices_at": "2026-10-13T17:00:01-04:00",
+  "next_price_read_at": "2026-10-13T17:15:00-04:00",
   "stats_built_at": "2026-10-12T23:30:01-04:00",
   "stats_through": "2026-10-12",
-  "lineups_at": "2026-10-13T16:50:00-04:00",
+  "lineups_at": "2026-10-13T17:00:01-04:00",
   "goalies_at": null,
-  "lineups_note": "13 of 16 team line pages are dated today.",
+  "lineups_note": "14 of 18 team line pages are dated today.",
   "lineups_state": "ok",
   "stats_state": "ok",
   "last_run": {
    "ok": true,
-   "at": "2026-10-13T16:50:00-04:00",
+   "at": "2026-10-13T17:00:01-04:00",
    "failed_step": null
   },
   "pool": {
-   "pulls_left": 1373,
+   "pulls_left": 1369,
    "keys": 4,
    "game_days_left": 19,
    "days_left": 19,
    "low": false
   },
   "excluded_teams": [],
-  "lines_checked": 261,
-  "lines_failed": 26,
+  "lines_checked": 276,
+  "lines_failed": 28,
   "tier": 4
  },
  "banners": [
   {
    "level": "info",
-   "text": "26 Hard Rock lines skipped: the two sides did not add up or the price was old."
+   "text": "28 Hard Rock lines skipped: the two sides did not add up or the price was old."
   }
  ],
  "empty": null,
@@ -65,7 +65,7 @@
    "home": "MTL",
    "start": "2026-10-13T18:30:00-04:00",
    "started": false,
-   "picks": 0,
+   "picks": 1,
    "excluded_reason": null,
    "excluded_teams": []
   },
@@ -244,10 +244,99 @@
    "thin": false,
    "games_used": 81,
    "games_this_season": 5
+  },
+  {
+   "id": "2026-10-13:2026020092:8480865:shots:2.5:under",
+   "price": -170,
+   "first_price": -170,
+   "first_price_at": "2026-10-13T17:00:01-04:00",
+   "worst_price": -170,
+   "p": 0.6547,
+   "breakeven": 0.6296,
+   "p_pct": 65,
+   "breakeven_pct": 63,
+   "state": "lineup",
+   "history": [
+    {
+     "at": "2026-10-13T17:00:01-04:00",
+     "text": "Lineup confirmed"
+    }
+   ],
+   "prices": [
+    {
+     "at": "2026-10-13T17:00:01-04:00",
+     "price": -170
+    }
+   ],
+   "pulled": null,
+   "graded": null,
+   "rank": 2,
+   "tier": "main",
+   "game_id": 2026020092,
+   "player": "N. Dobson",
+   "player_id": 8480865,
+   "team": "MTL",
+   "opp": "BUF",
+   "home": true,
+   "start": "2026-10-13T18:30:00-04:00",
+   "market": "shots",
+   "line": 2.5,
+   "side": "under",
+   "bet": "Under 2.5 shots on goal",
+   "price_at": "2026-10-13T17:00:01-04:00",
+   "reason": "65% to stay under 2.5 shots; -170 needs 63%. Projects 1.7 shots in 21 min.",
+   "thin": false,
+   "games_used": 85,
+   "games_this_season": 5
   }
  ],
- "parlays": [],
+ "parlays": [
+  {
+   "id": "2026-10-13:P:e3dbb149ce",
+   "price": 181,
+   "first_price": 181,
+   "first_price_at": "2026-10-13T17:00:01-04:00",
+   "worst_price": 181,
+   "p": 0.4054,
+   "breakeven": 0.3559,
+   "p_pct": 40,
+   "breakeven_pct": 36,
+   "state": "lineup",
+   "history": [
+    {
+     "at": "2026-10-13T17:00:01-04:00",
+     "text": "Lineup confirmed"
+    }
+   ],
+   "prices": [
+    {
+     "at": "2026-10-13T17:00:01-04:00",
+     "price": 181
+    }
+   ],
+   "pulled": null,
+   "graded": null,
+   "legs": [
+    "2026-10-13:2026020097:8477506:shots:1.5:under",
+    "2026-10-13:2026020092:8480865:shots:2.5:under"
+   ],
+   "n": 2,
+   "price_at": "2026-10-13T17:00:01-04:00",
+   "leg_prices": {
+    "2026-10-13:2026020097:8477506:shots:1.5:under": -130,
+    "2026-10-13:2026020092:8480865:shots:2.5:under": -170
+   }
+  }
+ ],
  "goal_watch": [
+  {
+   "player": "C. Caufield",
+   "team": "MTL",
+   "price": 105,
+   "fair_price": 136,
+   "p": 0.4238,
+   "text": "42% to score; +105 needs 49%. Fair price +136. Not a pick."
+  },
   {
    "player": "A. DeBrincat",
    "team": "DET",
@@ -257,20 +346,12 @@
    "text": "36% to score; +120 needs 45%. Fair price +171. Not a pick."
   },
   {
-   "player": "D. Larkin",
-   "team": "DET",
-   "price": 160,
-   "fair_price": 202,
-   "p": 0.3316,
-   "text": "33% to score; +160 needs 38%. Fair price +202. Not a pick."
-  },
-  {
-   "player": "J. Hughes",
-   "team": "NJD",
-   "price": 150,
-   "fair_price": 209,
-   "p": 0.3234,
-   "text": "32% to score; +150 needs 40%. Fair price +209. Not a pick."
+   "player": "T. Thompson",
+   "team": "BUF",
+   "price": 125,
+   "fair_price": 182,
+   "p": 0.3551,
+   "text": "35% to score; +125 needs 44%. Fair price +182. Not a pick."
   }
  ],
  "goal_watch_note": "Not picks. Our model is weakest on goals."
