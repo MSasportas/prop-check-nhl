@@ -1,10 +1,10 @@
 {
  "ok": true,
  "slate_date": "2026-10-13",
- "started_at": "2026-10-13T18:50:01-04:00",
- "status_at": "2026-10-13T18:50:01-04:00",
- "finished_at": "2026-10-13T18:50:03-04:00",
- "last_ok_at": "2026-10-13T18:50:01-04:00",
+ "started_at": "2026-10-13T19:00:00-04:00",
+ "status_at": "2026-10-13T19:00:00-04:00",
+ "finished_at": "2026-10-13T19:00:01-04:00",
+ "last_ok_at": "2026-10-13T19:00:00-04:00",
  "failed_step": null,
  "steps": [
   {
@@ -24,13 +24,13 @@
   },
   {
    "step": "lineups",
-   "status": "ok",
-   "note": "20 of 20 team pages read"
+   "status": "skipped",
+   "note": "checked in the last 20 minutes"
   },
   {
    "step": "odds",
    "status": "ok",
-   "note": "1 game(s) priced"
+   "note": "2 game(s) priced"
   },
   {
    "step": "engine",
@@ -62,7 +62,7 @@
  "keys": [
   {
    "n": 1,
-   "left": 286
+   "left": 281
   },
   {
    "n": 2,
@@ -77,14 +77,14 @@
    "left": 458
   }
  ],
- "pool_total": 1353,
+ "pool_total": 1348,
  "allowance": 10.1679,
  "tier": 4,
  "budget_today": 162,
- "budget_used_today": 40,
+ "budget_used_today": 45,
  "prices_state": "ok",
- "prices_at": "2026-10-13T18:50:01-04:00",
- "next_price_read_at": "2026-10-13T19:00:00-04:00",
+ "prices_at": "2026-10-13T19:00:00-04:00",
+ "next_price_read_at": "2026-10-13T19:15:00-04:00",
  "unmatched_names": [
   "Dennis Gilbert",
   "Elias Pettersson",
@@ -113,7 +113,7 @@
  "runner": {
   "event": "workflow_dispatch",
   "run_id": "38477082589",
-  "iteration": 4,
+  "iteration": 5,
   "chain_link": 37,
   "chain_started_at": "2026-10-12T13:50:14-04:00",
   "run_started_at": "2026-10-13T18:20:18-04:00"

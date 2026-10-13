@@ -1,12 +1,12 @@
 {
  "slate_date": "2026-10-13",
- "generated_at": "2026-10-13T18:50:01-04:00",
- "status_at": "2026-10-13T18:50:01-04:00",
+ "generated_at": "2026-10-13T19:00:00-04:00",
+ "status_at": "2026-10-13T19:00:00-04:00",
  "valid_until": "2026-10-14T05:00:00-04:00",
  "status": {
   "prices_state": "ok",
-  "prices_at": "2026-10-13T18:50:01-04:00",
-  "next_price_read_at": "2026-10-13T19:00:00-04:00",
+  "prices_at": "2026-10-13T19:00:00-04:00",
+  "next_price_read_at": "2026-10-13T19:15:00-04:00",
   "stats_built_at": "2026-10-12T23:30:01-04:00",
   "stats_through": "2026-10-12",
   "lineups_at": "2026-10-13T18:50:01-04:00",
@@ -16,25 +16,25 @@
   "stats_state": "ok",
   "last_run": {
    "ok": true,
-   "at": "2026-10-13T18:50:01-04:00",
+   "at": "2026-10-13T19:00:00-04:00",
    "failed_step": null
   },
   "pool": {
-   "pulls_left": 1353,
+   "pulls_left": 1348,
    "keys": 4,
    "game_days_left": 19,
    "days_left": 19,
    "low": false
   },
   "excluded_teams": [],
-  "lines_checked": 396,
-  "lines_failed": 29,
+  "lines_checked": 414,
+  "lines_failed": 31,
   "tier": 4
  },
  "banners": [
   {
    "level": "info",
-   "text": "29 Hard Rock lines skipped: the two sides did not add up or the price was old."
+   "text": "31 Hard Rock lines skipped: the two sides did not add up or the price was old."
   }
  ],
  "empty": null,
@@ -84,7 +84,7 @@
    "away": "SEA",
    "home": "PHI",
    "start": "2026-10-13T19:00:00-04:00",
-   "started": false,
+   "started": true,
    "picks": 0,
    "excluded_reason": null,
    "excluded_teams": []
@@ -287,7 +287,7 @@
    "line": 1.5,
    "side": "under",
    "bet": "Under 1.5 shots on goal",
-   "price_at": "2026-10-13T18:20:01-04:00",
+   "price_at": "2026-10-13T19:00:00-04:00",
    "reason": "64% to stay under 1.5 shots; -165 needs 62%. Projects 1.1 shots in 19 min. VAN allow 6% more shots than average.",
    "thin": false,
    "games_used": 81,
@@ -421,7 +421,7 @@
     "2026-10-13:2026020097:8477506:shots:1.5:under"
    ],
    "n": 2,
-   "price_at": "2026-10-13T18:20:01-04:00",
+   "price_at": "2026-10-13T19:00:00-04:00",
    "leg_prices": {
     "2026-10-13:2026020097:8477506:shots:1.5:under": -165,
     "2026-10-13:2026020099:8482765:shots:1.5:under": -115
@@ -560,6 +560,14 @@
  ],
  "goal_watch": [
   {
+   "player": "N. MacKinnon",
+   "team": "COL",
+   "price": 100,
+   "fair_price": 155,
+   "p": 0.3925,
+   "text": "39% to score; +100 needs 50%. Fair price +155. Not a pick."
+  },
+  {
    "player": "B. Horvat",
    "team": "NYI",
    "price": 105,
@@ -568,20 +576,12 @@
    "text": "38% to score; +105 needs 49%. Fair price +157. Not a pick."
   },
   {
-   "player": "B. McMann",
-   "team": "SEA",
-   "price": 200,
-   "fair_price": 233,
-   "p": 0.3,
-   "text": "29% to score; +200 needs 33%. Fair price +233. Not a pick."
-  },
-  {
-   "player": "T. Foerster",
-   "team": "PHI",
-   "price": 225,
-   "fair_price": 248,
-   "p": 0.2876,
-   "text": "28% to score; +225 needs 31%. Fair price +248. Not a pick."
+   "player": "J. Robertson",
+   "team": "DAL",
+   "price": 120,
+   "fair_price": 199,
+   "p": 0.3344,
+   "text": "33% to score; +120 needs 45%. Fair price +199. Not a pick."
   }
  ],
  "goal_watch_note": "Not picks. Our model is weakest on goals."
