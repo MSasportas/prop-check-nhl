@@ -1,10 +1,10 @@
 {
  "ok": true,
  "slate_date": "2026-10-13",
- "started_at": "2026-10-13T16:00:00-04:00",
- "status_at": "2026-10-13T16:00:00-04:00",
- "finished_at": "2026-10-13T16:00:02-04:00",
- "last_ok_at": "2026-10-13T16:00:00-04:00",
+ "started_at": "2026-10-13T16:10:01-04:00",
+ "status_at": "2026-10-13T16:10:01-04:00",
+ "finished_at": "2026-10-13T16:10:05-04:00",
+ "last_ok_at": "2026-10-13T16:10:01-04:00",
  "failed_step": null,
  "steps": [
   {
@@ -25,7 +25,7 @@
   {
    "step": "lineups",
    "status": "ok",
-   "note": "2 of 2 team pages read"
+   "note": "6 of 6 team pages read"
   },
   {
    "step": "odds",
@@ -91,6 +91,7 @@
  ],
  "unknown_teams": [],
  "lineup_unmatched_names": [
+  "Cooper Black",
   "Dennis Gilbert",
   "Jack Studnicka",
   "Justin Holl",
@@ -98,7 +99,7 @@
  ],
  "excluded_teams": [],
  "stats_through": "2026-10-12",
- "lineups_at": "2026-10-13T16:00:00-04:00",
+ "lineups_at": "2026-10-13T16:10:01-04:00",
  "lineups_note": "8 of 10 team line pages are dated today.",
  "games_today": 16,
  "record_events": 15,
@@ -106,7 +107,7 @@
  "runner": {
   "event": "workflow_dispatch",
   "run_id": "38457985612",
-  "iteration": 2,
+  "iteration": 3,
   "chain_link": 34,
   "chain_started_at": "2026-10-12T13:50:14-04:00",
   "run_started_at": "2026-10-13T15:50:14-04:00"
