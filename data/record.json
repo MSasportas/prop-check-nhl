@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-10-13T18:30:01-04:00",
+ "generated_at": "2026-10-13T19:10:01-04:00",
  "summary": {
   "headline": {
    "w": 2,
@@ -120,6 +120,29 @@
      "legs": []
     },
     {
+     "id": "2026-10-13:2026020096:8477998:shots:1.5:under",
+     "kind": "single",
+     "player": "W. Foegele",
+     "bet": "Under 1.5 shots on goal",
+     "market": "shots",
+     "team": "OTT",
+     "game": "STL at OTT",
+     "price": -110,
+     "first_price": -110,
+     "last_price": -110,
+     "prices": [
+      {
+       "price": -110,
+       "at": "2026-10-13T13:00:01-04:00"
+      }
+     ],
+     "result": null,
+     "actual": null,
+     "units": null,
+     "pulled": null,
+     "legs": []
+    },
+    {
      "id": "2026-10-13:2026020091:8482660:points:0.5:under",
      "kind": "single",
      "player": "K. Johnson",
@@ -134,6 +157,29 @@
       {
        "price": -140,
        "at": "2026-10-13T17:30:01-04:00"
+      }
+     ],
+     "result": null,
+     "actual": null,
+     "units": null,
+     "pulled": null,
+     "legs": []
+    },
+    {
+     "id": "2026-10-13:2026020095:8482201:shots:1.5:under",
+     "kind": "single",
+     "player": "G. Goncalves",
+     "bet": "Under 1.5 shots on goal",
+     "market": "shots",
+     "team": "TBL",
+     "game": "TBL at NYR",
+     "price": -130,
+     "first_price": -130,
+     "last_price": -130,
+     "prices": [
+      {
+       "price": -130,
+       "at": "2026-10-13T13:00:01-04:00"
       }
      ],
      "result": null,
@@ -379,6 +425,93 @@
        "prices": [
         {
          "price": -115,
+         "at": "2026-10-13T13:00:01-04:00"
+        }
+       ],
+       "result": null,
+       "actual": null,
+       "units": null,
+       "pulled": null,
+       "legs": []
+      },
+      {
+       "id": "2026-10-13:2026020097:8477506:shots:1.5:under",
+       "kind": "single",
+       "player": "R. Pulock",
+       "bet": "Under 1.5 shots on goal",
+       "market": "shots",
+       "team": "NYI",
+       "game": "VAN at NYI",
+       "price": -165,
+       "first_price": -130,
+       "last_price": -165,
+       "prices": [
+        {
+         "price": -130,
+         "at": "2026-10-13T13:00:01-04:00"
+        },
+        {
+         "price": -165,
+         "at": "2026-10-13T18:20:01-04:00"
+        }
+       ],
+       "result": null,
+       "actual": null,
+       "units": null,
+       "pulled": null,
+       "legs": []
+      }
+     ]
+    },
+    {
+     "id": "2026-10-13:P:164b234fc0",
+     "kind": "parlay",
+     "player": "Parlay",
+     "bet": "3 legs",
+     "price": 431,
+     "first_price": 431,
+     "result": null,
+     "actual": null,
+     "units": null,
+     "pulled": null,
+     "legs": [
+      {
+       "id": "2026-10-13:2026020099:8482765:shots:1.5:under",
+       "kind": "single",
+       "player": "I. Rosen",
+       "bet": "Under 1.5 shots on goal",
+       "market": "shots",
+       "team": "WPG",
+       "game": "MIN at WPG",
+       "price": -115,
+       "first_price": -115,
+       "last_price": -115,
+       "prices": [
+        {
+         "price": -115,
+         "at": "2026-10-13T13:00:01-04:00"
+        }
+       ],
+       "result": null,
+       "actual": null,
+       "units": null,
+       "pulled": null,
+       "legs": []
+      },
+      {
+       "id": "2026-10-13:2026020095:8482201:shots:1.5:under",
+       "kind": "single",
+       "player": "G. Goncalves",
+       "bet": "Under 1.5 shots on goal",
+       "market": "shots",
+       "team": "TBL",
+       "game": "TBL at NYR",
+       "price": -130,
+       "first_price": -130,
+       "last_price": -130,
+       "prices": [
+        {
+         "price": -130,
          "at": "2026-10-13T13:00:01-04:00"
         }
        ],

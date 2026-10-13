@@ -1,7 +1,7 @@
 {
  "slate_date": "2026-10-13",
- "generated_at": "2026-10-13T19:00:00-04:00",
- "status_at": "2026-10-13T19:00:00-04:00",
+ "generated_at": "2026-10-13T19:10:01-04:00",
+ "status_at": "2026-10-13T19:10:01-04:00",
  "valid_until": "2026-10-14T05:00:00-04:00",
  "status": {
   "prices_state": "ok",
@@ -9,14 +9,14 @@
   "next_price_read_at": "2026-10-13T19:15:00-04:00",
   "stats_built_at": "2026-10-12T23:30:01-04:00",
   "stats_through": "2026-10-12",
-  "lineups_at": "2026-10-13T18:50:01-04:00",
+  "lineups_at": "2026-10-13T19:10:01-04:00",
   "goalies_at": null,
-  "lineups_note": "20 of 28 team line pages are dated today.",
+  "lineups_note": "22 of 28 team line pages are dated today.",
   "lineups_state": "ok",
   "stats_state": "ok",
   "last_run": {
    "ok": true,
-   "at": "2026-10-13T19:00:00-04:00",
+   "at": "2026-10-13T19:10:01-04:00",
    "failed_step": null
   },
   "pool": {
@@ -95,7 +95,7 @@
    "home": "NYR",
    "start": "2026-10-13T19:15:00-04:00",
    "started": false,
-   "picks": 0,
+   "picks": 1,
    "excluded_reason": null,
    "excluded_teams": []
   },
@@ -105,7 +105,7 @@
    "home": "OTT",
    "start": "2026-10-13T19:30:00-04:00",
    "started": false,
-   "picks": 0,
+   "picks": 1,
    "excluded_reason": null,
    "excluded_teams": []
   },
@@ -246,6 +246,94 @@
    "games_this_season": 5
   },
   {
+   "id": "2026-10-13:2026020096:8477998:shots:1.5:under",
+   "price": -110,
+   "first_price": -110,
+   "first_price_at": "2026-10-13T13:00:01-04:00",
+   "worst_price": -110,
+   "p": 0.565,
+   "breakeven": 0.5238,
+   "p_pct": 56,
+   "breakeven_pct": 52,
+   "state": "lineup",
+   "history": [
+    {
+     "at": "2026-10-13T19:10:01-04:00",
+     "text": "Lineup confirmed"
+    }
+   ],
+   "prices": [
+    {
+     "at": "2026-10-13T13:00:01-04:00",
+     "price": -110
+    }
+   ],
+   "pulled": null,
+   "graded": null,
+   "rank": 2,
+   "tier": "main",
+   "game_id": 2026020096,
+   "player": "W. Foegele",
+   "player_id": 8477998,
+   "team": "OTT",
+   "opp": "STL",
+   "home": true,
+   "start": "2026-10-13T19:30:00-04:00",
+   "market": "shots",
+   "line": 1.5,
+   "side": "under",
+   "bet": "Under 1.5 shots on goal",
+   "price_at": "2026-10-13T13:00:01-04:00",
+   "reason": "56% to stay under 1.5 shots; -110 needs 52%. Projects 1.2 shots in 12 min.",
+   "thin": false,
+   "games_used": 74,
+   "games_this_season": 6
+  },
+  {
+   "id": "2026-10-13:2026020095:8482201:shots:1.5:under",
+   "price": -130,
+   "first_price": -130,
+   "first_price_at": "2026-10-13T13:00:01-04:00",
+   "worst_price": -130,
+   "p": 0.5892,
+   "breakeven": 0.5652,
+   "p_pct": 58,
+   "breakeven_pct": 57,
+   "state": "lineup",
+   "history": [
+    {
+     "at": "2026-10-13T19:10:01-04:00",
+     "text": "Lineup confirmed"
+    }
+   ],
+   "prices": [
+    {
+     "at": "2026-10-13T13:00:01-04:00",
+     "price": -130
+    }
+   ],
+   "pulled": null,
+   "graded": null,
+   "rank": 3,
+   "tier": "main",
+   "game_id": 2026020095,
+   "player": "G. Goncalves",
+   "player_id": 8482201,
+   "team": "TBL",
+   "opp": "NYR",
+   "home": false,
+   "start": "2026-10-13T19:15:00-04:00",
+   "market": "shots",
+   "line": 1.5,
+   "side": "under",
+   "bet": "Under 1.5 shots on goal",
+   "price_at": "2026-10-13T13:00:01-04:00",
+   "reason": "58% to stay under 1.5 shots; -130 needs 57%. Projects 1.2 shots in 16 min.",
+   "thin": false,
+   "games_used": 79,
+   "games_this_season": 5
+  },
+  {
    "id": "2026-10-13:2026020097:8477506:shots:1.5:under",
    "price": -165,
    "first_price": -130,
@@ -274,7 +362,7 @@
    ],
    "pulled": null,
    "graded": null,
-   "rank": 2,
+   "rank": 4,
    "tier": "main",
    "game_id": 2026020097,
    "player": "R. Pulock",
@@ -425,6 +513,44 @@
    "leg_prices": {
     "2026-10-13:2026020097:8477506:shots:1.5:under": -165,
     "2026-10-13:2026020099:8482765:shots:1.5:under": -115
+   }
+  },
+  {
+   "id": "2026-10-13:P:164b234fc0",
+   "price": 431,
+   "first_price": 431,
+   "first_price_at": "2026-10-13T19:00:00-04:00",
+   "worst_price": 431,
+   "p": 0.2221,
+   "breakeven": 0.1882,
+   "p_pct": 22,
+   "breakeven_pct": 19,
+   "state": "lineup",
+   "history": [
+    {
+     "at": "2026-10-13T19:10:01-04:00",
+     "text": "Lineup confirmed"
+    }
+   ],
+   "prices": [
+    {
+     "at": "2026-10-13T19:00:00-04:00",
+     "price": 431
+    }
+   ],
+   "pulled": null,
+   "graded": null,
+   "legs": [
+    "2026-10-13:2026020099:8482765:shots:1.5:under",
+    "2026-10-13:2026020095:8482201:shots:1.5:under",
+    "2026-10-13:2026020097:8477506:shots:1.5:under"
+   ],
+   "n": 3,
+   "price_at": "2026-10-13T19:00:00-04:00",
+   "leg_prices": {
+    "2026-10-13:2026020099:8482765:shots:1.5:under": -115,
+    "2026-10-13:2026020095:8482201:shots:1.5:under": -130,
+    "2026-10-13:2026020097:8477506:shots:1.5:under": -165
    }
   },
   {
