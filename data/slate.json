@@ -1,26 +1,26 @@
 {
  "slate_date": "2026-10-13",
- "generated_at": "2026-10-13T17:40:01-04:00",
- "status_at": "2026-10-13T17:40:01-04:00",
+ "generated_at": "2026-10-13T17:50:00-04:00",
+ "status_at": "2026-10-13T17:50:00-04:00",
  "valid_until": "2026-10-14T05:00:00-04:00",
  "status": {
   "prices_state": "ok",
-  "prices_at": "2026-10-13T17:30:01-04:00",
-  "next_price_read_at": "2026-10-13T17:45:00-04:00",
+  "prices_at": "2026-10-13T17:50:00-04:00",
+  "next_price_read_at": "2026-10-13T18:00:00-04:00",
   "stats_built_at": "2026-10-12T23:30:01-04:00",
   "stats_through": "2026-10-12",
-  "lineups_at": "2026-10-13T17:40:01-04:00",
+  "lineups_at": "2026-10-13T17:50:00-04:00",
   "goalies_at": null,
-  "lineups_note": "17 of 22 team line pages are dated today.",
+  "lineups_note": "17 of 24 team line pages are dated today.",
   "lineups_state": "ok",
   "stats_state": "ok",
   "last_run": {
    "ok": true,
-   "at": "2026-10-13T17:40:01-04:00",
+   "at": "2026-10-13T17:50:00-04:00",
    "failed_step": null
   },
   "pool": {
-   "pulls_left": 1360,
+   "pulls_left": 1359,
    "keys": 4,
    "game_days_left": 19,
    "days_left": 19,
@@ -371,7 +371,7 @@
    "line": 2.5,
    "side": "under",
    "bet": "Under 2.5 shots on goal",
-   "price_at": "2026-10-13T17:00:01-04:00",
+   "price_at": "2026-10-13T17:50:00-04:00",
    "reason": "65% to stay under 2.5 shots; -170 needs 63%. Projects 1.7 shots in 21 min.",
    "thin": false,
    "games_used": 85,
@@ -409,7 +409,7 @@
     "2026-10-13:2026020092:8480865:shots:2.5:under"
    ],
    "n": 2,
-   "price_at": "2026-10-13T17:00:01-04:00",
+   "price_at": "2026-10-13T17:50:00-04:00",
    "leg_prices": {
     "2026-10-13:2026020092:8480865:shots:2.5:under": -170,
     "2026-10-13:2026020097:8477506:shots:1.5:under": -130
@@ -482,7 +482,7 @@
     "2026-10-13:2026020092:8480865:shots:2.5:under"
    ],
    "n": 3,
-   "price_at": "2026-10-13T17:00:01-04:00",
+   "price_at": "2026-10-13T17:50:00-04:00",
    "leg_prices": {
     "2026-10-13:2026020092:8480865:shots:2.5:under": -170,
     "2026-10-13:2026020097:8477506:shots:1.5:under": -130,
