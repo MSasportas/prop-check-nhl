@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-10-13T17:00:01-04:00",
+ "generated_at": "2026-10-13T17:20:00-04:00",
  "summary": {
   "headline": {
    "w": 2,
@@ -93,6 +93,29 @@
      "legs": []
     },
     {
+     "id": "2026-10-13:2026020099:8482765:shots:1.5:under",
+     "kind": "single",
+     "player": "I. Rosen",
+     "bet": "Under 1.5 shots on goal",
+     "market": "shots",
+     "team": "WPG",
+     "game": "MIN at WPG",
+     "price": -115,
+     "first_price": -115,
+     "last_price": -115,
+     "prices": [
+      {
+       "price": -115,
+       "at": "2026-10-13T13:00:01-04:00"
+      }
+     ],
+     "result": null,
+     "actual": null,
+     "units": null,
+     "pulled": null,
+     "legs": []
+    },
+    {
      "id": "2026-10-13:P:e3dbb149ce",
      "kind": "parlay",
      "player": "Parlay",
@@ -118,6 +141,89 @@
        "prices": [
         {
          "price": -130,
+         "at": "2026-10-13T13:00:01-04:00"
+        }
+       ],
+       "result": null,
+       "actual": null,
+       "units": null,
+       "pulled": null,
+       "legs": []
+      },
+      {
+       "id": "2026-10-13:2026020092:8480865:shots:2.5:under",
+       "kind": "single",
+       "player": "N. Dobson",
+       "bet": "Under 2.5 shots on goal",
+       "market": "shots",
+       "team": "MTL",
+       "game": "BUF at MTL",
+       "price": -170,
+       "first_price": -170,
+       "last_price": -170,
+       "prices": [
+        {
+         "price": -170,
+         "at": "2026-10-13T17:00:01-04:00"
+        }
+       ],
+       "result": null,
+       "actual": null,
+       "units": null,
+       "pulled": null,
+       "legs": []
+      }
+     ]
+    },
+    {
+     "id": "2026-10-13:P:3740257370",
+     "kind": "parlay",
+     "player": "Parlay",
+     "bet": "3 legs",
+     "price": 425,
+     "first_price": 425,
+     "result": null,
+     "actual": null,
+     "units": null,
+     "pulled": null,
+     "legs": [
+      {
+       "id": "2026-10-13:2026020097:8477506:shots:1.5:under",
+       "kind": "single",
+       "player": "R. Pulock",
+       "bet": "Under 1.5 shots on goal",
+       "market": "shots",
+       "team": "NYI",
+       "game": "VAN at NYI",
+       "price": -130,
+       "first_price": -130,
+       "last_price": -130,
+       "prices": [
+        {
+         "price": -130,
+         "at": "2026-10-13T13:00:01-04:00"
+        }
+       ],
+       "result": null,
+       "actual": null,
+       "units": null,
+       "pulled": null,
+       "legs": []
+      },
+      {
+       "id": "2026-10-13:2026020099:8482765:shots:1.5:under",
+       "kind": "single",
+       "player": "I. Rosen",
+       "bet": "Under 1.5 shots on goal",
+       "market": "shots",
+       "team": "WPG",
+       "game": "MIN at WPG",
+       "price": -115,
+       "first_price": -115,
+       "last_price": -115,
+       "prices": [
+        {
+         "price": -115,
          "at": "2026-10-13T13:00:01-04:00"
         }
        ],

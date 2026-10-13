@@ -1,10 +1,10 @@
 {
  "ok": true,
  "slate_date": "2026-10-13",
- "started_at": "2026-10-13T17:10:00-04:00",
- "status_at": "2026-10-13T17:10:00-04:00",
- "finished_at": "2026-10-13T17:10:01-04:00",
- "last_ok_at": "2026-10-13T17:10:00-04:00",
+ "started_at": "2026-10-13T17:20:00-04:00",
+ "status_at": "2026-10-13T17:20:00-04:00",
+ "finished_at": "2026-10-13T17:20:01-04:00",
+ "last_ok_at": "2026-10-13T17:20:00-04:00",
  "failed_step": null,
  "steps": [
   {
@@ -25,17 +25,17 @@
   {
    "step": "lineups",
    "status": "ok",
-   "note": "10 of 10 team pages read"
+   "note": "2 of 2 team pages read"
   },
   {
    "step": "odds",
    "status": "ok",
-   "note": "no pull due"
+   "note": "1 game(s) priced"
   },
   {
    "step": "engine",
    "status": "ok",
-   "note": "no change"
+   "note": "2 new event(s), 2 newly shown"
   },
   {
    "step": "grade",
@@ -45,12 +45,12 @@
   {
    "step": "slate",
    "status": "ok",
-   "note": "2 open pick(s)"
+   "note": "3 open pick(s)"
   },
   {
    "step": "record",
-   "status": "skipped",
-   "note": "unchanged"
+   "status": "ok",
+   "note": "record.json"
   }
  ],
  "sources": {
@@ -62,7 +62,7 @@
  "keys": [
   {
    "n": 1,
-   "left": 302
+   "left": 298
   },
   {
    "n": 2,
@@ -77,14 +77,14 @@
    "left": 458
   }
  ],
- "pool_total": 1369,
+ "pool_total": 1365,
  "allowance": 10.1679,
  "tier": 4,
  "budget_today": 162,
- "budget_used_today": 24,
+ "budget_used_today": 28,
  "prices_state": "ok",
- "prices_at": "2026-10-13T17:00:01-04:00",
- "next_price_read_at": "2026-10-13T17:15:00-04:00",
+ "prices_at": "2026-10-13T17:20:00-04:00",
+ "next_price_read_at": "2026-10-13T17:30:00-04:00",
  "unmatched_names": [
   "Dennis Gilbert",
   "Elias Pettersson",
@@ -103,15 +103,15 @@
  ],
  "excluded_teams": [],
  "stats_through": "2026-10-12",
- "lineups_at": "2026-10-13T17:10:00-04:00",
- "lineups_note": "14 of 18 team line pages are dated today.",
+ "lineups_at": "2026-10-13T17:20:00-04:00",
+ "lineups_note": "15 of 20 team line pages are dated today.",
  "games_today": 16,
- "record_events": 18,
+ "record_events": 20,
  "odds_notes": [],
  "runner": {
   "event": "workflow_dispatch",
   "run_id": "38464642151",
-  "iteration": 4,
+  "iteration": 5,
   "chain_link": 35,
   "chain_started_at": "2026-10-12T13:50:14-04:00",
   "run_started_at": "2026-10-13T16:40:13-04:00"

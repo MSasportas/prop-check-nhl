@@ -1,40 +1,40 @@
 {
  "slate_date": "2026-10-13",
- "generated_at": "2026-10-13T17:10:00-04:00",
- "status_at": "2026-10-13T17:10:00-04:00",
+ "generated_at": "2026-10-13T17:20:00-04:00",
+ "status_at": "2026-10-13T17:20:00-04:00",
  "valid_until": "2026-10-14T05:00:00-04:00",
  "status": {
   "prices_state": "ok",
-  "prices_at": "2026-10-13T17:00:01-04:00",
-  "next_price_read_at": "2026-10-13T17:15:00-04:00",
+  "prices_at": "2026-10-13T17:20:00-04:00",
+  "next_price_read_at": "2026-10-13T17:30:00-04:00",
   "stats_built_at": "2026-10-12T23:30:01-04:00",
   "stats_through": "2026-10-12",
-  "lineups_at": "2026-10-13T17:10:00-04:00",
+  "lineups_at": "2026-10-13T17:20:00-04:00",
   "goalies_at": null,
-  "lineups_note": "14 of 18 team line pages are dated today.",
+  "lineups_note": "15 of 20 team line pages are dated today.",
   "lineups_state": "ok",
   "stats_state": "ok",
   "last_run": {
    "ok": true,
-   "at": "2026-10-13T17:10:00-04:00",
+   "at": "2026-10-13T17:20:00-04:00",
    "failed_step": null
   },
   "pool": {
-   "pulls_left": 1369,
+   "pulls_left": 1365,
    "keys": 4,
    "game_days_left": 19,
    "days_left": 19,
    "low": false
   },
   "excluded_teams": [],
-  "lines_checked": 276,
-  "lines_failed": 28,
+  "lines_checked": 299,
+  "lines_failed": 27,
   "tier": 4
  },
  "banners": [
   {
    "level": "info",
-   "text": "28 Hard Rock lines skipped: the two sides did not add up or the price was old."
+   "text": "27 Hard Rock lines skipped: the two sides did not add up or the price was old."
   }
  ],
  "empty": null,
@@ -135,7 +135,7 @@
    "home": "WPG",
    "start": "2026-10-13T20:15:00-04:00",
    "started": false,
-   "picks": 0,
+   "picks": 1,
    "excluded_reason": null,
    "excluded_teams": []
   },
@@ -246,6 +246,50 @@
    "games_this_season": 5
   },
   {
+   "id": "2026-10-13:2026020099:8482765:shots:1.5:under",
+   "price": -115,
+   "first_price": -115,
+   "first_price_at": "2026-10-13T13:00:01-04:00",
+   "worst_price": -115,
+   "p": 0.5847,
+   "breakeven": 0.5349,
+   "p_pct": 58,
+   "breakeven_pct": 53,
+   "state": "lineup",
+   "history": [
+    {
+     "at": "2026-10-13T17:20:00-04:00",
+     "text": "Lineup confirmed"
+    }
+   ],
+   "prices": [
+    {
+     "at": "2026-10-13T13:00:01-04:00",
+     "price": -115
+    }
+   ],
+   "pulled": null,
+   "graded": null,
+   "rank": 2,
+   "tier": "main",
+   "game_id": 2026020099,
+   "player": "I. Rosen",
+   "player_id": 8482765,
+   "team": "WPG",
+   "opp": "MIN",
+   "home": true,
+   "start": "2026-10-13T20:15:00-04:00",
+   "market": "shots",
+   "line": 1.5,
+   "side": "under",
+   "bet": "Under 1.5 shots on goal",
+   "price_at": "2026-10-13T13:00:01-04:00",
+   "reason": "58% to stay under 1.5 shots; -115 needs 53%. Projects 1.2 shots in 12 min. MIN allow 2% more shots than average.",
+   "thin": false,
+   "games_used": 42,
+   "games_this_season": 5
+  },
+  {
    "id": "2026-10-13:2026020092:8480865:shots:2.5:under",
    "price": -170,
    "first_price": -170,
@@ -270,7 +314,7 @@
    ],
    "pulled": null,
    "graded": null,
-   "rank": 2,
+   "rank": 3,
    "tier": "main",
    "game_id": 2026020092,
    "player": "N. Dobson",
@@ -325,6 +369,44 @@
    "leg_prices": {
     "2026-10-13:2026020092:8480865:shots:2.5:under": -170,
     "2026-10-13:2026020097:8477506:shots:1.5:under": -130
+   }
+  },
+  {
+   "id": "2026-10-13:P:3740257370",
+   "price": 425,
+   "first_price": 425,
+   "first_price_at": "2026-10-13T17:00:01-04:00",
+   "worst_price": 425,
+   "p": 0.237,
+   "breakeven": 0.1904,
+   "p_pct": 23,
+   "breakeven_pct": 19,
+   "state": "lineup",
+   "history": [
+    {
+     "at": "2026-10-13T17:20:00-04:00",
+     "text": "Lineup confirmed"
+    }
+   ],
+   "prices": [
+    {
+     "at": "2026-10-13T17:00:01-04:00",
+     "price": 425
+    }
+   ],
+   "pulled": null,
+   "graded": null,
+   "legs": [
+    "2026-10-13:2026020097:8477506:shots:1.5:under",
+    "2026-10-13:2026020099:8482765:shots:1.5:under",
+    "2026-10-13:2026020092:8480865:shots:2.5:under"
+   ],
+   "n": 3,
+   "price_at": "2026-10-13T17:00:01-04:00",
+   "leg_prices": {
+    "2026-10-13:2026020097:8477506:shots:1.5:under": -130,
+    "2026-10-13:2026020099:8482765:shots:1.5:under": -115,
+    "2026-10-13:2026020092:8480865:shots:2.5:under": -170
    }
   }
  ],
