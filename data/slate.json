@@ -1,12 +1,12 @@
 {
  "slate_date": "2026-10-13",
- "generated_at": "2026-10-13T19:10:19-04:00",
- "status_at": "2026-10-13T19:10:19-04:00",
+ "generated_at": "2026-10-13T19:20:01-04:00",
+ "status_at": "2026-10-13T19:20:01-04:00",
  "valid_until": "2026-10-14T05:00:00-04:00",
  "status": {
   "prices_state": "ok",
-  "prices_at": "2026-10-13T19:10:19-04:00",
-  "next_price_read_at": "2026-10-13T19:15:00-04:00",
+  "prices_at": "2026-10-13T19:20:01-04:00",
+  "next_price_read_at": "2026-10-13T19:30:00-04:00",
   "stats_built_at": "2026-10-12T23:30:01-04:00",
   "stats_through": "2026-10-12",
   "lineups_at": "2026-10-13T19:10:01-04:00",
@@ -16,18 +16,18 @@
   "stats_state": "ok",
   "last_run": {
    "ok": true,
-   "at": "2026-10-13T19:10:19-04:00",
+   "at": "2026-10-13T19:20:01-04:00",
    "failed_step": null
   },
   "pool": {
-   "pulls_left": 1347,
+   "pulls_left": 1346,
    "keys": 4,
    "game_days_left": 19,
    "days_left": 19,
    "low": false
   },
   "excluded_teams": [],
-  "lines_checked": 413,
+  "lines_checked": 429,
   "lines_failed": 33,
   "tier": 4
  },
@@ -94,7 +94,7 @@
    "away": "TBL",
    "home": "NYR",
    "start": "2026-10-13T19:15:00-04:00",
-   "started": false,
+   "started": true,
    "picks": 1,
    "excluded_reason": null,
    "excluded_teams": []
@@ -290,50 +290,6 @@
    "games_this_season": 6
   },
   {
-   "id": "2026-10-13:2026020095:8482201:shots:1.5:under",
-   "price": -130,
-   "first_price": -130,
-   "first_price_at": "2026-10-13T13:00:01-04:00",
-   "worst_price": -130,
-   "p": 0.5892,
-   "breakeven": 0.5652,
-   "p_pct": 58,
-   "breakeven_pct": 57,
-   "state": "lineup",
-   "history": [
-    {
-     "at": "2026-10-13T19:10:01-04:00",
-     "text": "Lineup confirmed"
-    }
-   ],
-   "prices": [
-    {
-     "at": "2026-10-13T13:00:01-04:00",
-     "price": -130
-    }
-   ],
-   "pulled": null,
-   "graded": null,
-   "rank": 3,
-   "tier": "main",
-   "game_id": 2026020095,
-   "player": "G. Goncalves",
-   "player_id": 8482201,
-   "team": "TBL",
-   "opp": "NYR",
-   "home": false,
-   "start": "2026-10-13T19:15:00-04:00",
-   "market": "shots",
-   "line": 1.5,
-   "side": "under",
-   "bet": "Under 1.5 shots on goal",
-   "price_at": "2026-10-13T13:00:01-04:00",
-   "reason": "58% to stay under 1.5 shots; -130 needs 57%. Projects 1.2 shots in 16 min.",
-   "thin": false,
-   "games_used": 79,
-   "games_this_season": 5
-  },
-  {
    "id": "2026-10-13:2026020097:8477506:shots:1.5:under",
    "price": -165,
    "first_price": -130,
@@ -362,7 +318,7 @@
    ],
    "pulled": null,
    "graded": null,
-   "rank": 4,
+   "rank": 3,
    "tier": "main",
    "game_id": 2026020097,
    "player": "R. Pulock",
@@ -476,6 +432,54 @@
    "thin": false,
    "games_used": 85,
    "games_this_season": 5
+  },
+  {
+   "id": "2026-10-13:2026020095:8482201:shots:1.5:under",
+   "price": -130,
+   "first_price": -130,
+   "first_price_at": "2026-10-13T13:00:01-04:00",
+   "worst_price": -130,
+   "p": 0.5892,
+   "breakeven": 0.5652,
+   "p_pct": 58,
+   "breakeven_pct": 57,
+   "state": "locked",
+   "history": [
+    {
+     "at": "2026-10-13T19:10:01-04:00",
+     "text": "Lineup confirmed"
+    },
+    {
+     "at": "2026-10-13T19:20:01-04:00",
+     "text": "Locked"
+    }
+   ],
+   "prices": [
+    {
+     "at": "2026-10-13T13:00:01-04:00",
+     "price": -130
+    }
+   ],
+   "pulled": null,
+   "graded": null,
+   "rank": null,
+   "tier": "main",
+   "game_id": 2026020095,
+   "player": "G. Goncalves",
+   "player_id": 8482201,
+   "team": "TBL",
+   "opp": "NYR",
+   "home": false,
+   "start": "2026-10-13T19:15:00-04:00",
+   "market": "shots",
+   "line": 1.5,
+   "side": "under",
+   "bet": "Under 1.5 shots on goal",
+   "price_at": "2026-10-13T13:00:01-04:00",
+   "reason": "58% to stay under 1.5 shots; -130 needs 57%. Projects 1.2 shots in 16 min.",
+   "thin": false,
+   "games_used": 79,
+   "games_this_season": 5
   }
  ],
  "parlays": [
@@ -511,44 +515,6 @@
    "n": 2,
    "price_at": "2026-10-13T19:00:00-04:00",
    "leg_prices": {
-    "2026-10-13:2026020097:8477506:shots:1.5:under": -165,
-    "2026-10-13:2026020099:8482765:shots:1.5:under": -115
-   }
-  },
-  {
-   "id": "2026-10-13:P:164b234fc0",
-   "price": 431,
-   "first_price": 431,
-   "first_price_at": "2026-10-13T19:00:00-04:00",
-   "worst_price": 431,
-   "p": 0.2221,
-   "breakeven": 0.1882,
-   "p_pct": 22,
-   "breakeven_pct": 19,
-   "state": "lineup",
-   "history": [
-    {
-     "at": "2026-10-13T19:10:01-04:00",
-     "text": "Lineup confirmed"
-    }
-   ],
-   "prices": [
-    {
-     "at": "2026-10-13T19:00:00-04:00",
-     "price": 431
-    }
-   ],
-   "pulled": null,
-   "graded": null,
-   "legs": [
-    "2026-10-13:2026020099:8482765:shots:1.5:under",
-    "2026-10-13:2026020095:8482201:shots:1.5:under",
-    "2026-10-13:2026020097:8477506:shots:1.5:under"
-   ],
-   "n": 3,
-   "price_at": "2026-10-13T19:00:00-04:00",
-   "leg_prices": {
-    "2026-10-13:2026020095:8482201:shots:1.5:under": -130,
     "2026-10-13:2026020097:8477506:shots:1.5:under": -165,
     "2026-10-13:2026020099:8482765:shots:1.5:under": -115
    }
@@ -635,6 +601,48 @@
    "price_at": "2026-10-13T18:20:01-04:00",
    "leg_prices": {
     "2026-10-13:2026020092:8480865:shots:2.5:under": -170,
+    "2026-10-13:2026020097:8477506:shots:1.5:under": -165,
+    "2026-10-13:2026020099:8482765:shots:1.5:under": -115
+   }
+  },
+  {
+   "id": "2026-10-13:P:164b234fc0",
+   "price": 431,
+   "first_price": 431,
+   "first_price_at": "2026-10-13T19:00:00-04:00",
+   "worst_price": 431,
+   "p": 0.2221,
+   "breakeven": 0.1882,
+   "p_pct": 22,
+   "breakeven_pct": 19,
+   "state": "locked",
+   "history": [
+    {
+     "at": "2026-10-13T19:10:01-04:00",
+     "text": "Lineup confirmed"
+    },
+    {
+     "at": "2026-10-13T19:20:01-04:00",
+     "text": "Locked"
+    }
+   ],
+   "prices": [
+    {
+     "at": "2026-10-13T19:00:00-04:00",
+     "price": 431
+    }
+   ],
+   "pulled": null,
+   "graded": null,
+   "legs": [
+    "2026-10-13:2026020099:8482765:shots:1.5:under",
+    "2026-10-13:2026020095:8482201:shots:1.5:under",
+    "2026-10-13:2026020097:8477506:shots:1.5:under"
+   ],
+   "n": 3,
+   "price_at": "2026-10-13T19:00:00-04:00",
+   "leg_prices": {
+    "2026-10-13:2026020095:8482201:shots:1.5:under": -130,
     "2026-10-13:2026020097:8477506:shots:1.5:under": -165,
     "2026-10-13:2026020099:8482765:shots:1.5:under": -115
    }
