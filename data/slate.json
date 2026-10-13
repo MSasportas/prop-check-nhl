@@ -1,40 +1,40 @@
 {
  "slate_date": "2026-10-13",
- "generated_at": "2026-10-13T18:20:01-04:00",
- "status_at": "2026-10-13T18:20:01-04:00",
+ "generated_at": "2026-10-13T18:30:01-04:00",
+ "status_at": "2026-10-13T18:30:01-04:00",
  "valid_until": "2026-10-14T05:00:00-04:00",
  "status": {
   "prices_state": "ok",
-  "prices_at": "2026-10-13T18:20:01-04:00",
-  "next_price_read_at": "2026-10-13T18:30:00-04:00",
+  "prices_at": "2026-10-13T18:30:01-04:00",
+  "next_price_read_at": "2026-10-13T18:45:00-04:00",
   "stats_built_at": "2026-10-12T23:30:01-04:00",
   "stats_through": "2026-10-12",
-  "lineups_at": "2026-10-13T18:20:01-04:00",
+  "lineups_at": "2026-10-13T18:30:01-04:00",
   "goalies_at": null,
   "lineups_note": "19 of 26 team line pages are dated today.",
   "lineups_state": "ok",
   "stats_state": "ok",
   "last_run": {
    "ok": true,
-   "at": "2026-10-13T18:20:01-04:00",
+   "at": "2026-10-13T18:30:01-04:00",
    "failed_step": null
   },
   "pool": {
-   "pulls_left": 1355,
+   "pulls_left": 1354,
    "keys": 4,
    "game_days_left": 19,
    "days_left": 19,
    "low": false
   },
   "excluded_teams": [],
-  "lines_checked": 357,
-  "lines_failed": 28,
+  "lines_checked": 376,
+  "lines_failed": 29,
   "tier": 4
  },
  "banners": [
   {
    "level": "info",
-   "text": "28 Hard Rock lines skipped: the two sides did not add up or the price was old."
+   "text": "29 Hard Rock lines skipped: the two sides did not add up or the price was old."
   }
  ],
  "empty": null,
@@ -64,7 +64,7 @@
    "away": "BUF",
    "home": "MTL",
    "start": "2026-10-13T18:30:00-04:00",
-   "started": false,
+   "started": true,
    "picks": 1,
    "excluded_reason": null,
    "excluded_teams": []
@@ -246,50 +246,6 @@
    "games_this_season": 5
   },
   {
-   "id": "2026-10-13:2026020092:8480865:shots:2.5:under",
-   "price": -170,
-   "first_price": -170,
-   "first_price_at": "2026-10-13T17:00:01-04:00",
-   "worst_price": -170,
-   "p": 0.6547,
-   "breakeven": 0.6296,
-   "p_pct": 65,
-   "breakeven_pct": 63,
-   "state": "lineup",
-   "history": [
-    {
-     "at": "2026-10-13T17:00:01-04:00",
-     "text": "Lineup confirmed"
-    }
-   ],
-   "prices": [
-    {
-     "at": "2026-10-13T17:00:01-04:00",
-     "price": -170
-    }
-   ],
-   "pulled": null,
-   "graded": null,
-   "rank": 2,
-   "tier": "main",
-   "game_id": 2026020092,
-   "player": "N. Dobson",
-   "player_id": 8480865,
-   "team": "MTL",
-   "opp": "BUF",
-   "home": true,
-   "start": "2026-10-13T18:30:00-04:00",
-   "market": "shots",
-   "line": 2.5,
-   "side": "under",
-   "bet": "Under 2.5 shots on goal",
-   "price_at": "2026-10-13T17:50:00-04:00",
-   "reason": "65% to stay under 2.5 shots; -170 needs 63%. Projects 1.7 shots in 21 min.",
-   "thin": false,
-   "games_used": 85,
-   "games_this_season": 5
-  },
-  {
    "id": "2026-10-13:2026020097:8477506:shots:1.5:under",
    "price": -165,
    "first_price": -130,
@@ -318,7 +274,7 @@
    ],
    "pulled": null,
    "graded": null,
-   "rank": 3,
+   "rank": 2,
    "tier": "main",
    "game_id": 2026020097,
    "player": "R. Pulock",
@@ -384,89 +340,91 @@
    "thin": false,
    "games_used": 80,
    "games_this_season": 4
+  },
+  {
+   "id": "2026-10-13:2026020092:8480865:shots:2.5:under",
+   "price": -170,
+   "first_price": -170,
+   "first_price_at": "2026-10-13T17:00:01-04:00",
+   "worst_price": -170,
+   "p": 0.6547,
+   "breakeven": 0.6296,
+   "p_pct": 65,
+   "breakeven_pct": 63,
+   "state": "locked",
+   "history": [
+    {
+     "at": "2026-10-13T17:00:01-04:00",
+     "text": "Lineup confirmed"
+    },
+    {
+     "at": "2026-10-13T18:30:01-04:00",
+     "text": "Locked"
+    }
+   ],
+   "prices": [
+    {
+     "at": "2026-10-13T17:00:01-04:00",
+     "price": -170
+    }
+   ],
+   "pulled": null,
+   "graded": null,
+   "rank": null,
+   "tier": "main",
+   "game_id": 2026020092,
+   "player": "N. Dobson",
+   "player_id": 8480865,
+   "team": "MTL",
+   "opp": "BUF",
+   "home": true,
+   "start": "2026-10-13T18:30:00-04:00",
+   "market": "shots",
+   "line": 2.5,
+   "side": "under",
+   "bet": "Under 2.5 shots on goal",
+   "price_at": "2026-10-13T17:00:01-04:00",
+   "reason": "65% to stay under 2.5 shots; -170 needs 63%. Projects 1.7 shots in 21 min.",
+   "thin": false,
+   "games_used": 85,
+   "games_this_season": 5
   }
  ],
  "parlays": [
   {
-   "id": "2026-10-13:P:3740257370",
-   "price": 377,
-   "first_price": 425,
-   "first_price_at": "2026-10-13T17:00:01-04:00",
-   "worst_price": 377,
-   "p": 0.2468,
-   "breakeven": 0.2097,
-   "p_pct": 24,
-   "breakeven_pct": 21,
+   "id": "2026-10-13:P:bb1aa4b278",
+   "price": 200,
+   "first_price": 200,
+   "first_price_at": "2026-10-13T18:20:01-04:00",
+   "worst_price": 200,
+   "p": 0.3771,
+   "breakeven": 0.333,
+   "p_pct": 37,
+   "breakeven_pct": 33,
    "state": "lineup",
    "history": [
     {
-     "at": "2026-10-13T17:20:00-04:00",
+     "at": "2026-10-13T18:30:01-04:00",
      "text": "Lineup confirmed"
     }
    ],
    "prices": [
     {
-     "at": "2026-10-13T17:00:01-04:00",
-     "price": 425
-    },
-    {
      "at": "2026-10-13T18:20:01-04:00",
-     "price": 377
+     "price": 200
     }
    ],
    "pulled": null,
    "graded": null,
    "legs": [
-    "2026-10-13:2026020097:8477506:shots:1.5:under",
     "2026-10-13:2026020099:8482765:shots:1.5:under",
-    "2026-10-13:2026020092:8480865:shots:2.5:under"
-   ],
-   "n": 3,
-   "price_at": "2026-10-13T18:20:01-04:00",
-   "leg_prices": {
-    "2026-10-13:2026020097:8477506:shots:1.5:under": -165,
-    "2026-10-13:2026020099:8482765:shots:1.5:under": -115,
-    "2026-10-13:2026020092:8480865:shots:2.5:under": -170
-   }
-  },
-  {
-   "id": "2026-10-13:P:e3dbb149ce",
-   "price": 155,
-   "first_price": 181,
-   "first_price_at": "2026-10-13T17:00:01-04:00",
-   "worst_price": 155,
-   "p": 0.4222,
-   "breakeven": 0.392,
-   "p_pct": 42,
-   "breakeven_pct": 39,
-   "state": "lineup",
-   "history": [
-    {
-     "at": "2026-10-13T17:00:01-04:00",
-     "text": "Lineup confirmed"
-    }
-   ],
-   "prices": [
-    {
-     "at": "2026-10-13T17:00:01-04:00",
-     "price": 181
-    },
-    {
-     "at": "2026-10-13T18:20:01-04:00",
-     "price": 155
-    }
-   ],
-   "pulled": null,
-   "graded": null,
-   "legs": [
-    "2026-10-13:2026020097:8477506:shots:1.5:under",
-    "2026-10-13:2026020092:8480865:shots:2.5:under"
+    "2026-10-13:2026020097:8477506:shots:1.5:under"
    ],
    "n": 2,
    "price_at": "2026-10-13T18:20:01-04:00",
    "leg_prices": {
-    "2026-10-13:2026020097:8477506:shots:1.5:under": -165,
-    "2026-10-13:2026020092:8480865:shots:2.5:under": -170
+    "2026-10-13:2026020099:8482765:shots:1.5:under": -115,
+    "2026-10-13:2026020097:8477506:shots:1.5:under": -165
    }
   },
   {
@@ -508,17 +466,99 @@
     "2026-10-13:2026020091:8482660:points:0.5:under": -140,
     "2026-10-13:2026020099:8482765:shots:1.5:under": -115
    }
+  },
+  {
+   "id": "2026-10-13:P:3740257370",
+   "price": 377,
+   "first_price": 425,
+   "first_price_at": "2026-10-13T17:00:01-04:00",
+   "worst_price": 377,
+   "p": 0.2468,
+   "breakeven": 0.2097,
+   "p_pct": 24,
+   "breakeven_pct": 21,
+   "state": "locked",
+   "history": [
+    {
+     "at": "2026-10-13T17:20:00-04:00",
+     "text": "Lineup confirmed"
+    },
+    {
+     "at": "2026-10-13T18:30:01-04:00",
+     "text": "Locked"
+    }
+   ],
+   "prices": [
+    {
+     "at": "2026-10-13T17:00:01-04:00",
+     "price": 425
+    },
+    {
+     "at": "2026-10-13T18:20:01-04:00",
+     "price": 377
+    }
+   ],
+   "pulled": null,
+   "graded": null,
+   "legs": [
+    "2026-10-13:2026020097:8477506:shots:1.5:under",
+    "2026-10-13:2026020099:8482765:shots:1.5:under",
+    "2026-10-13:2026020092:8480865:shots:2.5:under"
+   ],
+   "n": 3,
+   "price_at": "2026-10-13T18:20:01-04:00",
+   "leg_prices": {
+    "2026-10-13:2026020092:8480865:shots:2.5:under": -170,
+    "2026-10-13:2026020097:8477506:shots:1.5:under": -165,
+    "2026-10-13:2026020099:8482765:shots:1.5:under": -115
+   }
+  },
+  {
+   "id": "2026-10-13:P:e3dbb149ce",
+   "price": 155,
+   "first_price": 181,
+   "first_price_at": "2026-10-13T17:00:01-04:00",
+   "worst_price": 155,
+   "p": 0.4222,
+   "breakeven": 0.392,
+   "p_pct": 42,
+   "breakeven_pct": 39,
+   "state": "locked",
+   "history": [
+    {
+     "at": "2026-10-13T17:00:01-04:00",
+     "text": "Lineup confirmed"
+    },
+    {
+     "at": "2026-10-13T18:30:01-04:00",
+     "text": "Locked"
+    }
+   ],
+   "prices": [
+    {
+     "at": "2026-10-13T17:00:01-04:00",
+     "price": 181
+    },
+    {
+     "at": "2026-10-13T18:20:01-04:00",
+     "price": 155
+    }
+   ],
+   "pulled": null,
+   "graded": null,
+   "legs": [
+    "2026-10-13:2026020097:8477506:shots:1.5:under",
+    "2026-10-13:2026020092:8480865:shots:2.5:under"
+   ],
+   "n": 2,
+   "price_at": "2026-10-13T18:20:01-04:00",
+   "leg_prices": {
+    "2026-10-13:2026020092:8480865:shots:2.5:under": -170,
+    "2026-10-13:2026020097:8477506:shots:1.5:under": -165
+   }
   }
  ],
  "goal_watch": [
-  {
-   "player": "C. Caufield",
-   "team": "MTL",
-   "price": 105,
-   "fair_price": 136,
-   "p": 0.4238,
-   "text": "42% to score; +105 needs 49%. Fair price +136. Not a pick."
-  },
   {
    "player": "B. Horvat",
    "team": "NYI",
@@ -528,12 +568,20 @@
    "text": "38% to score; +105 needs 49%. Fair price +157. Not a pick."
   },
   {
-   "player": "T. Thompson",
-   "team": "BUF",
-   "price": 125,
-   "fair_price": 182,
-   "p": 0.3551,
-   "text": "35% to score; +125 needs 44%. Fair price +182. Not a pick."
+   "player": "A. Svechnikov",
+   "team": "CAR",
+   "price": 150,
+   "fair_price": 226,
+   "p": 0.3071,
+   "text": "30% to score; +150 needs 40%. Fair price +226. Not a pick."
+  },
+  {
+   "player": "B. McMann",
+   "team": "SEA",
+   "price": 200,
+   "fair_price": 233,
+   "p": 0.3,
+   "text": "29% to score; +200 needs 33%. Fair price +233. Not a pick."
   }
  ],
  "goal_watch_note": "Not picks. Our model is weakest on goals."
