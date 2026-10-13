@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-10-13T19:20:01-04:00",
+ "generated_at": "2026-10-13T19:30:00-04:00",
  "summary": {
   "headline": {
    "w": 2,
@@ -133,6 +133,29 @@
      "prices": [
       {
        "price": -110,
+       "at": "2026-10-13T13:00:01-04:00"
+      }
+     ],
+     "result": null,
+     "actual": null,
+     "units": null,
+     "pulled": null,
+     "legs": []
+    },
+    {
+     "id": "2026-10-13:2026020104:8481617:shots:2.5:under",
+     "kind": "single",
+     "player": "V. Podkolzin",
+     "bet": "Under 2.5 shots on goal",
+     "market": "shots",
+     "team": "EDM",
+     "game": "EDM at LAK",
+     "price": -120,
+     "first_price": -120,
+     "last_price": -120,
+     "prices": [
+      {
+       "price": -120,
        "at": "2026-10-13T13:00:01-04:00"
       }
      ],

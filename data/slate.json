@@ -1,40 +1,40 @@
 {
  "slate_date": "2026-10-13",
- "generated_at": "2026-10-13T19:20:01-04:00",
- "status_at": "2026-10-13T19:20:01-04:00",
+ "generated_at": "2026-10-13T19:30:00-04:00",
+ "status_at": "2026-10-13T19:30:00-04:00",
  "valid_until": "2026-10-14T05:00:00-04:00",
  "status": {
   "prices_state": "ok",
-  "prices_at": "2026-10-13T19:20:01-04:00",
-  "next_price_read_at": "2026-10-13T19:30:00-04:00",
+  "prices_at": "2026-10-13T19:30:00-04:00",
+  "next_price_read_at": "2026-10-13T19:45:00-04:00",
   "stats_built_at": "2026-10-12T23:30:01-04:00",
   "stats_through": "2026-10-12",
-  "lineups_at": "2026-10-13T19:10:01-04:00",
+  "lineups_at": "2026-10-13T19:30:00-04:00",
   "goalies_at": null,
-  "lineups_note": "22 of 28 team line pages are dated today.",
+  "lineups_note": "23 of 30 team line pages are dated today.",
   "lineups_state": "ok",
   "stats_state": "ok",
   "last_run": {
    "ok": true,
-   "at": "2026-10-13T19:20:01-04:00",
+   "at": "2026-10-13T19:30:00-04:00",
    "failed_step": null
   },
   "pool": {
-   "pulls_left": 1346,
+   "pulls_left": 1344,
    "keys": 4,
    "game_days_left": 19,
    "days_left": 19,
    "low": false
   },
   "excluded_teams": [],
-  "lines_checked": 429,
-  "lines_failed": 33,
+  "lines_checked": 444,
+  "lines_failed": 35,
   "tier": 4
  },
  "banners": [
   {
    "level": "info",
-   "text": "33 Hard Rock lines skipped: the two sides did not add up or the price was old."
+   "text": "35 Hard Rock lines skipped: the two sides did not add up or the price was old."
   }
  ],
  "empty": null,
@@ -104,7 +104,7 @@
    "away": "STL",
    "home": "OTT",
    "start": "2026-10-13T19:30:00-04:00",
-   "started": false,
+   "started": true,
    "picks": 1,
    "excluded_reason": null,
    "excluded_teams": []
@@ -185,7 +185,7 @@
    "home": "LAK",
    "start": "2026-10-13T22:30:00-04:00",
    "started": false,
-   "picks": 0,
+   "picks": 1,
    "excluded_reason": null,
    "excluded_teams": []
   },
@@ -239,55 +239,55 @@
    "line": 1.5,
    "side": "under",
    "bet": "Under 1.5 shots on goal",
-   "price_at": "2026-10-13T13:00:01-04:00",
+   "price_at": "2026-10-13T19:30:00-04:00",
    "reason": "58% to stay under 1.5 shots; -115 needs 53%. Projects 1.2 shots in 12 min. MIN allow 2% more shots than average.",
    "thin": false,
    "games_used": 42,
    "games_this_season": 5
   },
   {
-   "id": "2026-10-13:2026020096:8477998:shots:1.5:under",
-   "price": -110,
-   "first_price": -110,
+   "id": "2026-10-13:2026020104:8481617:shots:2.5:under",
+   "price": -120,
+   "first_price": -120,
    "first_price_at": "2026-10-13T13:00:01-04:00",
-   "worst_price": -110,
-   "p": 0.565,
-   "breakeven": 0.5238,
+   "worst_price": -120,
+   "p": 0.5678,
+   "breakeven": 0.5455,
    "p_pct": 56,
-   "breakeven_pct": 52,
+   "breakeven_pct": 55,
    "state": "lineup",
    "history": [
     {
-     "at": "2026-10-13T19:10:01-04:00",
+     "at": "2026-10-13T19:30:00-04:00",
      "text": "Lineup confirmed"
     }
    ],
    "prices": [
     {
      "at": "2026-10-13T13:00:01-04:00",
-     "price": -110
+     "price": -120
     }
    ],
    "pulled": null,
    "graded": null,
    "rank": 2,
    "tier": "main",
-   "game_id": 2026020096,
-   "player": "W. Foegele",
-   "player_id": 8477998,
-   "team": "OTT",
-   "opp": "STL",
-   "home": true,
-   "start": "2026-10-13T19:30:00-04:00",
+   "game_id": 2026020104,
+   "player": "V. Podkolzin",
+   "player_id": 8481617,
+   "team": "EDM",
+   "opp": "LAK",
+   "home": false,
+   "start": "2026-10-13T22:30:00-04:00",
    "market": "shots",
-   "line": 1.5,
+   "line": 2.5,
    "side": "under",
-   "bet": "Under 1.5 shots on goal",
+   "bet": "Under 2.5 shots on goal",
    "price_at": "2026-10-13T13:00:01-04:00",
-   "reason": "56% to stay under 1.5 shots; -110 needs 52%. Projects 1.2 shots in 12 min.",
+   "reason": "56% to stay under 2.5 shots; -120 needs 55%. Projects 2.1 shots in 18 min.",
    "thin": false,
-   "games_used": 74,
-   "games_this_season": 6
+   "games_used": 87,
+   "games_this_season": 5
   },
   {
    "id": "2026-10-13:2026020097:8477506:shots:1.5:under",
@@ -480,6 +480,54 @@
    "thin": false,
    "games_used": 79,
    "games_this_season": 5
+  },
+  {
+   "id": "2026-10-13:2026020096:8477998:shots:1.5:under",
+   "price": -110,
+   "first_price": -110,
+   "first_price_at": "2026-10-13T13:00:01-04:00",
+   "worst_price": -110,
+   "p": 0.565,
+   "breakeven": 0.5238,
+   "p_pct": 56,
+   "breakeven_pct": 52,
+   "state": "locked",
+   "history": [
+    {
+     "at": "2026-10-13T19:10:01-04:00",
+     "text": "Lineup confirmed"
+    },
+    {
+     "at": "2026-10-13T19:30:00-04:00",
+     "text": "Locked"
+    }
+   ],
+   "prices": [
+    {
+     "at": "2026-10-13T13:00:01-04:00",
+     "price": -110
+    }
+   ],
+   "pulled": null,
+   "graded": null,
+   "rank": null,
+   "tier": "main",
+   "game_id": 2026020096,
+   "player": "W. Foegele",
+   "player_id": 8477998,
+   "team": "OTT",
+   "opp": "STL",
+   "home": true,
+   "start": "2026-10-13T19:30:00-04:00",
+   "market": "shots",
+   "line": 1.5,
+   "side": "under",
+   "bet": "Under 1.5 shots on goal",
+   "price_at": "2026-10-13T13:00:01-04:00",
+   "reason": "56% to stay under 1.5 shots; -110 needs 52%. Projects 1.2 shots in 12 min.",
+   "thin": false,
+   "games_used": 74,
+   "games_this_season": 6
   }
  ],
  "parlays": [
@@ -513,7 +561,7 @@
     "2026-10-13:2026020097:8477506:shots:1.5:under"
    ],
    "n": 2,
-   "price_at": "2026-10-13T19:00:00-04:00",
+   "price_at": "2026-10-13T19:30:00-04:00",
    "leg_prices": {
     "2026-10-13:2026020097:8477506:shots:1.5:under": -165,
     "2026-10-13:2026020099:8482765:shots:1.5:under": -115
