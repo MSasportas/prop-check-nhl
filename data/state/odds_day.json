@@ -76,6 +76,18 @@
      "shots"
     ],
     "cost": 1
+   },
+   {
+    "game_id": 2026020091,
+    "pull": "B",
+    "at": "2026-10-13T17:30:01-04:00",
+    "markets": [
+     "points"
+    ],
+    "returned": [
+     "points"
+    ],
+    "cost": 1
    }
   ],
   "2026020092": [
@@ -154,6 +166,24 @@
      "shots"
     ],
     "cost": 1
+   },
+   {
+    "game_id": 2026020094,
+    "pull": "B",
+    "at": "2026-10-13T17:30:01-04:00",
+    "markets": [
+     "goals",
+     "points",
+     "saves",
+     "shots"
+    ],
+    "returned": [
+     "goals",
+     "points",
+     "saves",
+     "shots"
+    ],
+    "cost": 4
    }
   ],
   "2026020095": [
