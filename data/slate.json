@@ -1,7 +1,7 @@
 {
  "slate_date": "2026-10-12",
- "generated_at": "2026-10-12T19:40:09-04:00",
- "status_at": "2026-10-12T19:40:09-04:00",
+ "generated_at": "2026-10-12T20:00:00-04:00",
+ "status_at": "2026-10-12T20:00:00-04:00",
  "valid_until": "2026-10-13T05:00:00-04:00",
  "status": {
   "prices_state": "ok",
@@ -16,7 +16,7 @@
   "stats_state": "ok",
   "last_run": {
    "ok": true,
-   "at": "2026-10-12T19:40:09-04:00",
+   "at": "2026-10-12T20:00:00-04:00",
    "failed_step": null
   },
   "pool": {
@@ -37,7 +37,11 @@
    "text": "8 Hard Rock lines skipped: the two sides did not add up or the price was old."
   }
  ],
- "empty": null,
+ "empty": {
+  "code": "all_started",
+  "text": "Every game has started.",
+  "sub": "Tonight's picks are under Started."
+ },
  "games": [
   {
    "id": 2026020087,
@@ -64,61 +68,13 @@
    "away": "VGK",
    "home": "MIN",
    "start": "2026-10-12T20:00:00-04:00",
-   "started": false,
+   "started": true,
    "picks": 1,
    "excluded_reason": null,
    "excluded_teams": []
   }
  ],
  "picks": [
-  {
-   "id": "2026-10-12:2026020089:8478864:shots:3.5:under",
-   "price": -145,
-   "first_price": -150,
-   "first_price_at": "2026-10-12T10:00:01-04:00",
-   "worst_price": -150,
-   "p": 0.6206,
-   "breakeven": 0.5918,
-   "p_pct": 62,
-   "breakeven_pct": 59,
-   "state": "lineup",
-   "history": [
-    {
-     "at": "2026-10-12T17:00:01-04:00",
-     "text": "Lineup confirmed"
-    }
-   ],
-   "prices": [
-    {
-     "at": "2026-10-12T10:00:01-04:00",
-     "price": -150
-    },
-    {
-     "at": "2026-10-12T18:30:02-04:00",
-     "price": -145
-    }
-   ],
-   "pulled": null,
-   "graded": null,
-   "rank": 1,
-   "tier": "main",
-   "game_id": 2026020089,
-   "player": "K. Kaprizov",
-   "player_id": 8478864,
-   "team": "MIN",
-   "opp": "VGK",
-   "home": true,
-   "start": "2026-10-12T20:00:00-04:00",
-   "market": "shots",
-   "line": 3.5,
-   "side": "under",
-   "bet": "Under 3.5 shots on goal",
-   "price_at": "2026-10-12T19:20:01-04:00",
-   "reason": "62% to stay under 3.5 shots; -145 needs 59%. Projects 2.7 shots in 21 min. VGK allow 10% fewer shots than average.",
-   "thin": false,
-   "games_used": 83,
-   "games_this_season": 5
-  },
   {
    "id": "2026-10-12:2026020087:8483771:shots:1.5:under",
    "price": -125,
@@ -222,6 +178,58 @@
    "thin": false,
    "games_used": 73,
    "games_this_season": 5
+  },
+  {
+   "id": "2026-10-12:2026020089:8478864:shots:3.5:under",
+   "price": -145,
+   "first_price": -150,
+   "first_price_at": "2026-10-12T10:00:01-04:00",
+   "worst_price": -150,
+   "p": 0.6206,
+   "breakeven": 0.5918,
+   "p_pct": 62,
+   "breakeven_pct": 59,
+   "state": "locked",
+   "history": [
+    {
+     "at": "2026-10-12T17:00:01-04:00",
+     "text": "Lineup confirmed"
+    },
+    {
+     "at": "2026-10-12T20:00:00-04:00",
+     "text": "Locked"
+    }
+   ],
+   "prices": [
+    {
+     "at": "2026-10-12T10:00:01-04:00",
+     "price": -150
+    },
+    {
+     "at": "2026-10-12T18:30:02-04:00",
+     "price": -145
+    }
+   ],
+   "pulled": null,
+   "graded": null,
+   "rank": null,
+   "tier": "main",
+   "game_id": 2026020089,
+   "player": "K. Kaprizov",
+   "player_id": 8478864,
+   "team": "MIN",
+   "opp": "VGK",
+   "home": true,
+   "start": "2026-10-12T20:00:00-04:00",
+   "market": "shots",
+   "line": 3.5,
+   "side": "under",
+   "bet": "Under 3.5 shots on goal",
+   "price_at": "2026-10-12T18:30:02-04:00",
+   "reason": "62% to stay under 3.5 shots; -145 needs 59%. Projects 2.7 shots in 21 min. VGK allow 10% fewer shots than average.",
+   "thin": false,
+   "games_used": 83,
+   "games_this_season": 5
   }
  ],
  "parlays": [
@@ -270,31 +278,6 @@
    }
   }
  ],
- "goal_watch": [
-  {
-   "player": "K. Kaprizov",
-   "team": "MIN",
-   "price": 110,
-   "fair_price": 155,
-   "p": 0.3923,
-   "text": "39% to score; +110 needs 48%. Fair price +155. Not a pick."
-  },
-  {
-   "player": "M. Boldy",
-   "team": "MIN",
-   "price": 125,
-   "fair_price": 194,
-   "p": 0.3405,
-   "text": "34% to score; +125 needs 44%. Fair price +194. Not a pick."
-  },
-  {
-   "player": "M. Stone",
-   "team": "VGK",
-   "price": 165,
-   "fair_price": 213,
-   "p": 0.3199,
-   "text": "31% to score; +165 needs 38%. Fair price +213. Not a pick."
-  }
- ],
- "goal_watch_note": "Not picks. Our model is weakest on goals."
+ "goal_watch": [],
+ "goal_watch_note": null
 }
