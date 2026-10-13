@@ -37,6 +37,7 @@ import grade       # noqa: E402
 import lineups     # noqa: E402
 import names       # noqa: E402
 import nhl         # noqa: E402
+import notify      # noqa: E402
 import odds        # noqa: E402
 import record      # noqa: E402
 import sched       # noqa: E402
@@ -554,6 +555,11 @@ def run(only=None, dry_run=False):
     except Exception as e:
         common.log("status write failed: %s" % common.short_err(e))
         raise
+    if only is None and not dry_run:
+        try:
+            notify.notify()                                 # Discord; never raises, 5 s timeout per post
+        except Exception:
+            pass
     for s in r.steps:
         common.log("%-9s %-8s %s" % (s["step"], s["status"], s["note"]))
     return r

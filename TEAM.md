@@ -67,9 +67,20 @@ price history exists; our own odds log, `data/odds/`, is building that).
   `data/record/`. No chat ever edits it.
 - **Odds keys:** GitHub secret `ODDS_API_KEYS` (comma-separated). Never in the repo, page or logs. Rotates when a key
   is out or refused; a refused key is "unknown", not empty. Page warns when the pool is low.
+- **Discord notifications:** `scripts/notify.py`, called at the end of `run.py` (never fails or slows a run: 5 s
+  timeout, one retry, whole run capped at 14 s). Webhook = GitHub secret `DISCORD_WEBHOOK` (the script reads it from env `DISCORD_WEBHOOK_URL`), passed to the loop step
+  in `run.yml` like `ODDS_API_KEYS`; env only, scrubbed from stdout/files, never in state; unset or empty = does
+  nothing. Sends only: NEW PICKS (one batched message per cycle, 8 lines then "+N more"; parlays included; each pick
+  once, a price move or Early -> Lineup confirmed never repeats), PULLED (only picks already notified, before puck),
+  ACTION NEEDED (keys refused, pool low/empty: the page's sentence, once per ET day each), a one-time hello. Never
+  no-pick nights, heartbeats, grading, errors. Quiet 12:30-8:00 AM ET (held items go out at 8 if still ahead). Max 6
+  messages per ET day. State `data/state/notified.json` (ids and timestamps only; marked only after a 2xx; 429/5xx =
+  retry next cycle). Tests: `PC_DISCORD_FIXTURE_URL` posts to a local server; in `PC_NOW`/`PC_DATA_DIR` mode nothing
+  ever reaches Discord without it. Matt adds the secret: repo Settings > Secrets and variables > Actions > New
+  repository secret, name `DISCORD_WEBHOOK`, value = the Discord channel webhook URL.
 - **Files:** `index.html` (page; reads `data/slate.json`, `data/record.json`, `data/rules.json`), `data/odds/<date>.json`
   (every price pulled), `data/state/` (stats store, schedule, credits ledger), `fixtures/` (QA pages: `?fixture=NAME`,
-  `?now=ISO`), `tests/` (`python -m unittest discover -s tests`, 185 tests; `tests/replay_day.py` replays a day).
+  `?now=ISO`), `tests/` (`python -m unittest discover -s tests`, 205 tests; `tests/replay_day.py` replays a day).
 - **Debug:** `python scripts/run.py --explain` shows why each line did or didn't qualify. Test env vars: `PC_NOW`,
   `PC_DATA_DIR`, `PC_ODDS_FIXTURE_DIR`, `PC_LINEUP_FIXTURE_DIR`, `PC_NHL_FIXTURE_DIR`. Never test against the live data/.
 
@@ -100,8 +111,11 @@ price history exists; our own odds log, `data/odds/`, is building that).
    `guard_record.py --history` after each pull (a force-pushed rewrite is caught only by a runner that saw the
    old Record, i.e. within one ~50 min run).
 9. If a cycle pulled prices but its push failed, that cycle's credits are spent again next cycle. Rare.
-10. Regular season only; playoffs say "Only regular-season games are covered."
-11. Empty-state sub can promise "Next price check at …" when no keys are set or all are used up (`next_price_read_at`
+10. Discord: `notified.json` lives in the repo, so a cycle that fails after sending (run/push failure resets data/ to
+   origin) can re-send that cycle's batch once. Rare, accepted. A webhook deleted in Discord gives 404: silently
+   retried each cycle, no alert. Quiet hours also hold hello and action messages.
+11. Regular season only; playoffs say "Only regular-season games are covered."
+12. Empty-state sub can promise "Next price check at …" when no keys are set or all are used up (`next_price_read_at`
     still set in run.py). Harmless while keys exist; Builder to clear it for `no_keys`/`all_used_up`. (QA note 2026-10-12)
 
 ## 8. Rule-change log
