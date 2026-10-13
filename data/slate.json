@@ -1,33 +1,33 @@
 {
  "slate_date": "2026-10-13",
- "generated_at": "2026-10-13T18:30:01-04:00",
- "status_at": "2026-10-13T18:30:01-04:00",
+ "generated_at": "2026-10-13T18:50:01-04:00",
+ "status_at": "2026-10-13T18:50:01-04:00",
  "valid_until": "2026-10-14T05:00:00-04:00",
  "status": {
   "prices_state": "ok",
-  "prices_at": "2026-10-13T18:30:01-04:00",
-  "next_price_read_at": "2026-10-13T18:45:00-04:00",
+  "prices_at": "2026-10-13T18:50:01-04:00",
+  "next_price_read_at": "2026-10-13T19:00:00-04:00",
   "stats_built_at": "2026-10-12T23:30:01-04:00",
   "stats_through": "2026-10-12",
-  "lineups_at": "2026-10-13T18:30:01-04:00",
+  "lineups_at": "2026-10-13T18:50:01-04:00",
   "goalies_at": null,
-  "lineups_note": "19 of 26 team line pages are dated today.",
+  "lineups_note": "20 of 28 team line pages are dated today.",
   "lineups_state": "ok",
   "stats_state": "ok",
   "last_run": {
    "ok": true,
-   "at": "2026-10-13T18:30:01-04:00",
+   "at": "2026-10-13T18:50:01-04:00",
    "failed_step": null
   },
   "pool": {
-   "pulls_left": 1354,
+   "pulls_left": 1353,
    "keys": 4,
    "game_days_left": 19,
    "days_left": 19,
    "low": false
   },
   "excluded_teams": [],
-  "lines_checked": 376,
+  "lines_checked": 396,
   "lines_failed": 29,
   "tier": 4
  },
@@ -74,7 +74,7 @@
    "away": "WSH",
    "home": "CAR",
    "start": "2026-10-13T18:45:00-04:00",
-   "started": false,
+   "started": true,
    "picks": 0,
    "excluded_reason": null,
    "excluded_teams": []
@@ -423,8 +423,8 @@
    "n": 2,
    "price_at": "2026-10-13T18:20:01-04:00",
    "leg_prices": {
-    "2026-10-13:2026020099:8482765:shots:1.5:under": -115,
-    "2026-10-13:2026020097:8477506:shots:1.5:under": -165
+    "2026-10-13:2026020097:8477506:shots:1.5:under": -165,
+    "2026-10-13:2026020099:8482765:shots:1.5:under": -115
    }
   },
   {
@@ -568,20 +568,20 @@
    "text": "38% to score; +105 needs 49%. Fair price +157. Not a pick."
   },
   {
-   "player": "A. Svechnikov",
-   "team": "CAR",
-   "price": 150,
-   "fair_price": 226,
-   "p": 0.3071,
-   "text": "30% to score; +150 needs 40%. Fair price +226. Not a pick."
-  },
-  {
    "player": "B. McMann",
    "team": "SEA",
    "price": 200,
    "fair_price": 233,
    "p": 0.3,
    "text": "29% to score; +200 needs 33%. Fair price +233. Not a pick."
+  },
+  {
+   "player": "T. Foerster",
+   "team": "PHI",
+   "price": 225,
+   "fair_price": 248,
+   "p": 0.2876,
+   "text": "28% to score; +225 needs 31%. Fair price +248. Not a pick."
   }
  ],
  "goal_watch_note": "Not picks. Our model is weakest on goals."

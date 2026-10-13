@@ -1,10 +1,10 @@
 {
  "ok": true,
  "slate_date": "2026-10-13",
- "started_at": "2026-10-13T18:30:01-04:00",
- "status_at": "2026-10-13T18:30:01-04:00",
- "finished_at": "2026-10-13T18:30:08-04:00",
- "last_ok_at": "2026-10-13T18:30:01-04:00",
+ "started_at": "2026-10-13T18:50:01-04:00",
+ "status_at": "2026-10-13T18:50:01-04:00",
+ "finished_at": "2026-10-13T18:50:03-04:00",
+ "last_ok_at": "2026-10-13T18:50:01-04:00",
  "failed_step": null,
  "steps": [
   {
@@ -25,7 +25,7 @@
   {
    "step": "lineups",
    "status": "ok",
-   "note": "2 of 2 team pages read"
+   "note": "20 of 20 team pages read"
   },
   {
    "step": "odds",
@@ -35,7 +35,7 @@
   {
    "step": "engine",
    "status": "ok",
-   "note": "4 new event(s), 1 newly shown"
+   "note": "no change"
   },
   {
    "step": "grade",
@@ -49,8 +49,8 @@
   },
   {
    "step": "record",
-   "status": "ok",
-   "note": "record.json"
+   "status": "skipped",
+   "note": "unchanged"
   }
  ],
  "sources": {
@@ -62,7 +62,7 @@
  "keys": [
   {
    "n": 1,
-   "left": 287
+   "left": 286
   },
   {
    "n": 2,
@@ -77,14 +77,14 @@
    "left": 458
   }
  ],
- "pool_total": 1354,
+ "pool_total": 1353,
  "allowance": 10.1679,
  "tier": 4,
  "budget_today": 162,
- "budget_used_today": 39,
+ "budget_used_today": 40,
  "prices_state": "ok",
- "prices_at": "2026-10-13T18:30:01-04:00",
- "next_price_read_at": "2026-10-13T18:45:00-04:00",
+ "prices_at": "2026-10-13T18:50:01-04:00",
+ "next_price_read_at": "2026-10-13T19:00:00-04:00",
  "unmatched_names": [
   "Dennis Gilbert",
   "Elias Pettersson",
@@ -100,19 +100,20 @@
   "Jorian Donovan",
   "Justin Holl",
   "Owen Beck",
+  "Roger McQueen",
   "Spencer Martin"
  ],
  "excluded_teams": [],
  "stats_through": "2026-10-12",
- "lineups_at": "2026-10-13T18:30:01-04:00",
- "lineups_note": "19 of 26 team line pages are dated today.",
+ "lineups_at": "2026-10-13T18:50:01-04:00",
+ "lineups_note": "20 of 28 team line pages are dated today.",
  "games_today": 16,
  "record_events": 31,
  "odds_notes": [],
  "runner": {
   "event": "workflow_dispatch",
   "run_id": "38477082589",
-  "iteration": 2,
+  "iteration": 4,
   "chain_link": 37,
   "chain_started_at": "2026-10-12T13:50:14-04:00",
   "run_started_at": "2026-10-13T18:20:18-04:00"
