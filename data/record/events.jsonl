@@ -36,3 +36,5 @@
 {"at":"2026-10-13T19:20:01-04:00","id":"2026-10-13:P:164b234fc0","state":"locked","t":"locked"}
 {"at":"2026-10-13T19:30:00-04:00","id":"2026-10-13:2026020096:8477998:shots:1.5:under","state":"locked","t":"locked"}
 {"at":"2026-10-13T19:30:00-04:00","id":"2026-10-13:2026020104:8481617:shots:2.5:under","kind":"single","pick":{"bet":"Under 2.5 shots on goal","breakeven":0.5455,"breakeven_pct":55,"fair":0.5101,"game_id":2026020104,"games_this_season":5,"games_used":87,"home":false,"id":"2026-10-13:2026020104:8481617:shots:2.5:under","line":2.5,"market":"shots","model":0.6413,"opp":"LAK","p":0.5678,"p_pct":56,"player":"V. Podkolzin","player_id":8481617,"price":-120,"price_at":"2026-10-13T13:00:01-04:00","rank":2,"reason":"56% to stay under 2.5 shots; -120 needs 55%. Projects 2.1 shots in 18 min.","side":"under","start":"2026-10-13T22:30:00-04:00","state":"lineup","team":"EDM","thin":false,"tier":"main"},"slate":"2026-10-13","t":"shown"}
+{"at":"2026-10-13T19:50:00-04:00","id":"2026-10-13:2026020097:8477506:shots:1.5:under","state":"locked","t":"locked"}
+{"at":"2026-10-13T19:50:00-04:00","id":"2026-10-13:P:bb1aa4b278","state":"locked","t":"locked"}

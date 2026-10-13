@@ -1,22 +1,22 @@
 {
  "slate_date": "2026-10-13",
- "generated_at": "2026-10-13T19:40:01-04:00",
- "status_at": "2026-10-13T19:40:01-04:00",
+ "generated_at": "2026-10-13T19:50:00-04:00",
+ "status_at": "2026-10-13T19:50:00-04:00",
  "valid_until": "2026-10-14T05:00:00-04:00",
  "status": {
   "prices_state": "ok",
   "prices_at": "2026-10-13T19:30:00-04:00",
-  "next_price_read_at": "2026-10-13T19:45:00-04:00",
+  "next_price_read_at": "2026-10-13T20:00:00-04:00",
   "stats_built_at": "2026-10-12T23:30:01-04:00",
   "stats_through": "2026-10-12",
-  "lineups_at": "2026-10-13T19:40:01-04:00",
+  "lineups_at": "2026-10-13T19:50:00-04:00",
   "goalies_at": null,
   "lineups_note": "24 of 30 team line pages are dated today.",
   "lineups_state": "ok",
   "stats_state": "ok",
   "last_run": {
    "ok": true,
-   "at": "2026-10-13T19:40:01-04:00",
+   "at": "2026-10-13T19:50:00-04:00",
    "failed_step": null
   },
   "pool": {
@@ -114,7 +114,7 @@
    "away": "VAN",
    "home": "NYI",
    "start": "2026-10-13T19:45:00-04:00",
-   "started": false,
+   "started": true,
    "picks": 1,
    "excluded_reason": null,
    "excluded_teams": []
@@ -287,54 +287,6 @@
    "reason": "56% to stay under 2.5 shots; -120 needs 55%. Projects 2.1 shots in 18 min.",
    "thin": false,
    "games_used": 87,
-   "games_this_season": 5
-  },
-  {
-   "id": "2026-10-13:2026020097:8477506:shots:1.5:under",
-   "price": -165,
-   "first_price": -130,
-   "first_price_at": "2026-10-13T13:00:01-04:00",
-   "worst_price": -165,
-   "p": 0.6449,
-   "breakeven": 0.6226,
-   "p_pct": 64,
-   "breakeven_pct": 62,
-   "state": "lineup",
-   "history": [
-    {
-     "at": "2026-10-13T16:50:00-04:00",
-     "text": "Lineup confirmed"
-    }
-   ],
-   "prices": [
-    {
-     "at": "2026-10-13T13:00:01-04:00",
-     "price": -130
-    },
-    {
-     "at": "2026-10-13T18:20:01-04:00",
-     "price": -165
-    }
-   ],
-   "pulled": null,
-   "graded": null,
-   "rank": 3,
-   "tier": "main",
-   "game_id": 2026020097,
-   "player": "R. Pulock",
-   "player_id": 8477506,
-   "team": "NYI",
-   "opp": "VAN",
-   "home": true,
-   "start": "2026-10-13T19:45:00-04:00",
-   "market": "shots",
-   "line": 1.5,
-   "side": "under",
-   "bet": "Under 1.5 shots on goal",
-   "price_at": "2026-10-13T19:00:00-04:00",
-   "reason": "64% to stay under 1.5 shots; -165 needs 62%. Projects 1.1 shots in 19 min. VAN allow 6% more shots than average.",
-   "thin": false,
-   "games_used": 81,
    "games_this_season": 5
   },
   {
@@ -528,45 +480,61 @@
    "thin": false,
    "games_used": 74,
    "games_this_season": 6
-  }
- ],
- "parlays": [
+  },
   {
-   "id": "2026-10-13:P:bb1aa4b278",
-   "price": 200,
-   "first_price": 200,
-   "first_price_at": "2026-10-13T18:20:01-04:00",
-   "worst_price": 200,
-   "p": 0.3771,
-   "breakeven": 0.333,
-   "p_pct": 37,
-   "breakeven_pct": 33,
-   "state": "lineup",
+   "id": "2026-10-13:2026020097:8477506:shots:1.5:under",
+   "price": -165,
+   "first_price": -130,
+   "first_price_at": "2026-10-13T13:00:01-04:00",
+   "worst_price": -165,
+   "p": 0.6449,
+   "breakeven": 0.6226,
+   "p_pct": 64,
+   "breakeven_pct": 62,
+   "state": "locked",
    "history": [
     {
-     "at": "2026-10-13T18:30:01-04:00",
+     "at": "2026-10-13T16:50:00-04:00",
      "text": "Lineup confirmed"
+    },
+    {
+     "at": "2026-10-13T19:50:00-04:00",
+     "text": "Locked"
     }
    ],
    "prices": [
     {
+     "at": "2026-10-13T13:00:01-04:00",
+     "price": -130
+    },
+    {
      "at": "2026-10-13T18:20:01-04:00",
-     "price": 200
+     "price": -165
     }
    ],
    "pulled": null,
    "graded": null,
-   "legs": [
-    "2026-10-13:2026020099:8482765:shots:1.5:under",
-    "2026-10-13:2026020097:8477506:shots:1.5:under"
-   ],
-   "n": 2,
-   "price_at": "2026-10-13T19:30:00-04:00",
-   "leg_prices": {
-    "2026-10-13:2026020097:8477506:shots:1.5:under": -165,
-    "2026-10-13:2026020099:8482765:shots:1.5:under": -115
-   }
-  },
+   "rank": null,
+   "tier": "main",
+   "game_id": 2026020097,
+   "player": "R. Pulock",
+   "player_id": 8477506,
+   "team": "NYI",
+   "opp": "VAN",
+   "home": true,
+   "start": "2026-10-13T19:45:00-04:00",
+   "market": "shots",
+   "line": 1.5,
+   "side": "under",
+   "bet": "Under 1.5 shots on goal",
+   "price_at": "2026-10-13T18:20:01-04:00",
+   "reason": "64% to stay under 1.5 shots; -165 needs 62%. Projects 1.1 shots in 19 min. VAN allow 6% more shots than average.",
+   "thin": false,
+   "games_used": 81,
+   "games_this_season": 5
+  }
+ ],
+ "parlays": [
   {
    "id": "2026-10-13:P:1e1c4b3b45",
    "price": 220,
@@ -604,6 +572,46 @@
    "price_at": "2026-10-13T17:30:01-04:00",
    "leg_prices": {
     "2026-10-13:2026020091:8482660:points:0.5:under": -140,
+    "2026-10-13:2026020099:8482765:shots:1.5:under": -115
+   }
+  },
+  {
+   "id": "2026-10-13:P:bb1aa4b278",
+   "price": 200,
+   "first_price": 200,
+   "first_price_at": "2026-10-13T18:20:01-04:00",
+   "worst_price": 200,
+   "p": 0.3771,
+   "breakeven": 0.333,
+   "p_pct": 37,
+   "breakeven_pct": 33,
+   "state": "locked",
+   "history": [
+    {
+     "at": "2026-10-13T18:30:01-04:00",
+     "text": "Lineup confirmed"
+    },
+    {
+     "at": "2026-10-13T19:50:00-04:00",
+     "text": "Locked"
+    }
+   ],
+   "prices": [
+    {
+     "at": "2026-10-13T18:20:01-04:00",
+     "price": 200
+    }
+   ],
+   "pulled": null,
+   "graded": null,
+   "legs": [
+    "2026-10-13:2026020099:8482765:shots:1.5:under",
+    "2026-10-13:2026020097:8477506:shots:1.5:under"
+   ],
+   "n": 2,
+   "price_at": "2026-10-13T18:20:01-04:00",
+   "leg_prices": {
+    "2026-10-13:2026020097:8477506:shots:1.5:under": -165,
     "2026-10-13:2026020099:8482765:shots:1.5:under": -115
    }
   },
@@ -750,20 +758,20 @@
    "text": "39% to score; +100 needs 50%. Fair price +155. Not a pick."
   },
   {
-   "player": "B. Horvat",
-   "team": "NYI",
-   "price": 105,
-   "fair_price": 157,
-   "p": 0.389,
-   "text": "38% to score; +105 needs 49%. Fair price +157. Not a pick."
-  },
-  {
    "player": "J. Robertson",
    "team": "DAL",
    "price": 120,
    "fair_price": 199,
    "p": 0.3344,
    "text": "33% to score; +120 needs 45%. Fair price +199. Not a pick."
+  },
+  {
+   "player": "W. Johnston",
+   "team": "DAL",
+   "price": 145,
+   "fair_price": 208,
+   "p": 0.325,
+   "text": "32% to score; +145 needs 41%. Fair price +208. Not a pick."
   }
  ],
  "goal_watch_note": "Not picks. Our model is weakest on goals."
