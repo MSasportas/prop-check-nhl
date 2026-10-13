@@ -1,7 +1,7 @@
 {
  "slate_date": "2026-10-12",
- "generated_at": "2026-10-12T23:10:00-04:00",
- "status_at": "2026-10-12T23:10:00-04:00",
+ "generated_at": "2026-10-12T23:20:00-04:00",
+ "status_at": "2026-10-12T23:20:00-04:00",
  "valid_until": "2026-10-13T05:00:00-04:00",
  "status": {
   "prices_state": "ok",
@@ -16,7 +16,7 @@
   "stats_state": "ok",
   "last_run": {
    "ok": true,
-   "at": "2026-10-12T23:10:00-04:00",
+   "at": "2026-10-12T23:20:00-04:00",
    "failed_step": null
   },
   "pool": {
@@ -231,7 +231,11 @@
     }
    ],
    "pulled": null,
-   "graded": null,
+   "graded": {
+    "result": "L",
+    "actual": "had 4",
+    "units": -1.0
+   },
    "rank": null,
    "tier": "main",
    "game_id": 2026020089,
@@ -285,7 +289,11 @@
     }
    ],
    "pulled": null,
-   "graded": null,
+   "graded": {
+    "result": "L",
+    "actual": "1 of 2 legs hit",
+    "units": -1.0
+   },
    "legs": [
     "2026-10-12:2026020088:8477998:shots:1.5:under",
     "2026-10-12:2026020089:8478864:shots:3.5:under"

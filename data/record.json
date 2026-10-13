@@ -1,38 +1,50 @@
 {
- "generated_at": "2026-10-12T22:10:01-04:00",
+ "generated_at": "2026-10-12T23:20:00-04:00",
  "summary": {
   "headline": {
    "w": 2,
-   "l": 0,
+   "l": 1,
    "push": 0,
    "void": 0,
-   "units": 1.68,
-   "hit_rate": 1.0,
-   "needed": 0.5445,
-   "n": 2
+   "units": 0.68,
+   "hit_rate": 0.6667,
+   "needed": 0.563,
+   "n": 3
   },
   "rows": [
    {
     "key": "shots",
     "label": "Shots on goal",
     "w": 2,
-    "l": 0,
+    "l": 1,
     "push": 0,
     "void": 0,
-    "units": 1.68,
-    "hit_rate": 1.0,
-    "needed": 0.5445,
-    "n": 2
+    "units": 0.68,
+    "hit_rate": 0.6667,
+    "needed": 0.563,
+    "n": 3
+   },
+   {
+    "key": "parlays",
+    "label": "Parlays",
+    "w": 0,
+    "l": 1,
+    "push": 0,
+    "void": 0,
+    "units": -1.0,
+    "hit_rate": 0.0,
+    "needed": 0.3145,
+    "n": 1
    }
   ]
  },
  "nights": [
   {
    "date": "2026-10-12",
-   "graded": false,
+   "graded": true,
    "w": 2,
-   "l": 0,
-   "units": 1.68,
+   "l": 1,
+   "units": 0.68,
    "entries": [
     {
      "id": "2026-10-12:2026020087:8483771:shots:1.5:under",
@@ -82,9 +94,9 @@
        "at": "2026-10-12T18:30:02-04:00"
       }
      ],
-     "result": null,
-     "actual": null,
-     "units": null,
+     "result": "L",
+     "actual": "had 4",
+     "units": -1.0,
      "pulled": null,
      "legs": []
     },
@@ -116,11 +128,11 @@
      "kind": "parlay",
      "player": "Parlay",
      "bet": "2 legs",
-     "price": 223,
+     "price": 218,
      "first_price": 218,
-     "result": null,
-     "actual": null,
-     "units": null,
+     "result": "L",
+     "actual": "1 of 2 legs hit",
+     "units": -1.0,
      "pulled": null,
      "legs": [
       {
@@ -167,9 +179,9 @@
          "at": "2026-10-12T18:30:02-04:00"
         }
        ],
-       "result": null,
-       "actual": null,
-       "units": null,
+       "result": "L",
+       "actual": "had 4",
+       "units": -1.0,
        "pulled": null,
        "legs": []
       }
