@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-10-13T17:30:01-04:00",
+ "generated_at": "2026-10-13T18:20:01-04:00",
  "summary": {
   "headline": {
    "w": 2,
@@ -54,13 +54,17 @@
      "market": "shots",
      "team": "NYI",
      "game": "VAN at NYI",
-     "price": -130,
+     "price": -165,
      "first_price": -130,
-     "last_price": -130,
+     "last_price": -165,
      "prices": [
       {
        "price": -130,
        "at": "2026-10-13T13:00:01-04:00"
+      },
+      {
+       "price": -165,
+       "at": "2026-10-13T18:20:01-04:00"
       }
      ],
      "result": null,
@@ -143,7 +147,7 @@
      "kind": "parlay",
      "player": "Parlay",
      "bet": "2 legs",
-     "price": 181,
+     "price": 155,
      "first_price": 181,
      "result": null,
      "actual": null,
@@ -158,13 +162,17 @@
        "market": "shots",
        "team": "NYI",
        "game": "VAN at NYI",
-       "price": -130,
+       "price": -165,
        "first_price": -130,
-       "last_price": -130,
+       "last_price": -165,
        "prices": [
         {
          "price": -130,
          "at": "2026-10-13T13:00:01-04:00"
+        },
+        {
+         "price": -165,
+         "at": "2026-10-13T18:20:01-04:00"
         }
        ],
        "result": null,
@@ -203,7 +211,7 @@
      "kind": "parlay",
      "player": "Parlay",
      "bet": "3 legs",
-     "price": 425,
+     "price": 377,
      "first_price": 425,
      "result": null,
      "actual": null,
@@ -218,13 +226,17 @@
        "market": "shots",
        "team": "NYI",
        "game": "VAN at NYI",
-       "price": -130,
+       "price": -165,
        "first_price": -130,
-       "last_price": -130,
+       "last_price": -165,
        "prices": [
         {
          "price": -130,
          "at": "2026-10-13T13:00:01-04:00"
+        },
+        {
+         "price": -165,
+         "at": "2026-10-13T18:20:01-04:00"
         }
        ],
        "result": null,
