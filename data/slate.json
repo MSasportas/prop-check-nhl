@@ -1,22 +1,22 @@
 {
  "slate_date": "2026-10-13",
- "generated_at": "2026-10-13T17:50:00-04:00",
- "status_at": "2026-10-13T17:50:00-04:00",
+ "generated_at": "2026-10-13T18:00:01-04:00",
+ "status_at": "2026-10-13T18:00:01-04:00",
  "valid_until": "2026-10-14T05:00:00-04:00",
  "status": {
   "prices_state": "ok",
   "prices_at": "2026-10-13T17:50:00-04:00",
-  "next_price_read_at": "2026-10-13T18:00:00-04:00",
+  "next_price_read_at": "2026-10-13T18:15:00-04:00",
   "stats_built_at": "2026-10-12T23:30:01-04:00",
   "stats_through": "2026-10-12",
-  "lineups_at": "2026-10-13T17:50:00-04:00",
+  "lineups_at": "2026-10-13T18:00:01-04:00",
   "goalies_at": null,
-  "lineups_note": "17 of 24 team line pages are dated today.",
+  "lineups_note": "19 of 26 team line pages are dated today.",
   "lineups_state": "ok",
   "stats_state": "ok",
   "last_run": {
    "ok": true,
-   "at": "2026-10-13T17:50:00-04:00",
+   "at": "2026-10-13T18:00:01-04:00",
    "failed_step": null
   },
   "pool": {
@@ -44,7 +44,7 @@
    "away": "NJD",
    "home": "DET",
    "start": "2026-10-13T18:00:00-04:00",
-   "started": false,
+   "started": true,
    "picks": 0,
    "excluded_reason": null,
    "excluded_teams": []
@@ -500,20 +500,20 @@
    "text": "42% to score; +105 needs 49%. Fair price +136. Not a pick."
   },
   {
-   "player": "A. DeBrincat",
-   "team": "DET",
-   "price": 120,
-   "fair_price": 171,
-   "p": 0.3687,
-   "text": "36% to score; +120 needs 45%. Fair price +171. Not a pick."
-  },
-  {
    "player": "T. Thompson",
    "team": "BUF",
    "price": 125,
    "fair_price": 182,
    "p": 0.3551,
    "text": "35% to score; +125 needs 44%. Fair price +182. Not a pick."
+  },
+  {
+   "player": "A. Svechnikov",
+   "team": "CAR",
+   "price": 150,
+   "fair_price": 226,
+   "p": 0.3071,
+   "text": "30% to score; +150 needs 40%. Fair price +226. Not a pick."
   }
  ],
  "goal_watch_note": "Not picks. Our model is weakest on goals."
