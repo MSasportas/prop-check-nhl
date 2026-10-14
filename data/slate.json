@@ -1,7 +1,7 @@
 {
  "slate_date": "2026-10-13",
- "generated_at": "2026-10-13T22:40:00-04:00",
- "status_at": "2026-10-13T22:40:00-04:00",
+ "generated_at": "2026-10-13T23:00:00-04:00",
+ "status_at": "2026-10-13T23:00:00-04:00",
  "valid_until": "2026-10-14T05:00:00-04:00",
  "status": {
   "prices_state": "ok",
@@ -16,7 +16,7 @@
   "stats_state": "ok",
   "last_run": {
    "ok": true,
-   "at": "2026-10-13T22:40:00-04:00",
+   "at": "2026-10-13T23:00:00-04:00",
    "failed_step": null
   },
   "pool": {
@@ -32,6 +32,10 @@
     "reason": "stats behind"
    },
    {
+    "team": "MIN",
+    "reason": "stats behind"
+   },
+   {
     "team": "NYI",
     "reason": "stats behind"
    },
@@ -42,6 +46,10 @@
    {
     "team": "VAN",
     "reason": "stats behind"
+   },
+   {
+    "team": "WPG",
+    "reason": "stats behind"
    }
   ],
   "lines_checked": 525,
@@ -51,7 +59,7 @@
  "banners": [
   {
    "level": "warn",
-   "text": "Not covered tonight: CHI, NYI, PIT, VAN (stats behind)."
+   "text": "Not covered tonight: CHI, MIN, NYI, PIT, VAN, WPG (stats behind)."
   },
   {
    "level": "info",
@@ -59,9 +67,9 @@
   }
  ],
  "empty": {
-  "code": "none_qualified",
-  "text": "No open picks right now.",
-  "sub": "Checked 525 lines at 10:20 PM. Today's earlier picks are under Started."
+  "code": "all_started",
+  "text": "Every game has started.",
+  "sub": "Tonight's picks are under Started."
  },
  "games": [
   {
@@ -167,8 +175,11 @@
    "start": "2026-10-13T20:15:00-04:00",
    "started": true,
    "picks": 1,
-   "excluded_reason": null,
-   "excluded_teams": []
+   "excluded_reason": "stats behind",
+   "excluded_teams": [
+    "MIN",
+    "WPG"
+   ]
   },
   {
    "id": 2026020100,
@@ -225,7 +236,7 @@
    "away": "BOS",
    "home": "SJS",
    "start": "2026-10-13T23:00:00-04:00",
-   "started": false,
+   "started": true,
    "picks": 0,
    "excluded_reason": null,
    "excluded_teams": []
