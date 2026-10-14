@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-10-13T19:50:00-04:00",
+ "generated_at": "2026-10-13T20:20:00-04:00",
  "summary": {
   "headline": {
    "w": 2,
@@ -65,6 +65,29 @@
       {
        "price": -165,
        "at": "2026-10-13T18:20:01-04:00"
+      }
+     ],
+     "result": null,
+     "actual": null,
+     "units": null,
+     "pulled": null,
+     "legs": []
+    },
+    {
+     "id": "2026-10-13:2026020102:8477939:points:0.5:over",
+     "kind": "single",
+     "player": "W. Nylander",
+     "bet": "Over 0.5 points",
+     "market": "points",
+     "team": "TOR",
+     "game": "TOR at UTA",
+     "price": -160,
+     "first_price": -160,
+     "last_price": -160,
+     "prices": [
+      {
+       "price": -160,
+       "at": "2026-10-13T20:20:00-04:00"
       }
      ],
      "result": null,
