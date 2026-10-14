@@ -1,28 +1,28 @@
 {
- "generated_at": "2026-10-13T22:40:00-04:00",
+ "generated_at": "2026-10-13T23:10:00-04:00",
  "summary": {
   "headline": {
-   "w": 5,
+   "w": 6,
    "l": 2,
    "push": 0,
    "void": 0,
-   "units": 1.94,
-   "hit_rate": 0.7143,
-   "needed": 0.5701,
-   "n": 7
+   "units": 2.55,
+   "hit_rate": 0.75,
+   "needed": 0.5767,
+   "n": 8
   },
   "rows": [
    {
     "key": "shots",
     "label": "Shots on goal",
-    "w": 5,
+    "w": 6,
     "l": 1,
     "push": 0,
     "void": 0,
-    "units": 2.94,
-    "hit_rate": 0.8333,
-    "needed": 0.5679,
-    "n": 6
+    "units": 3.55,
+    "hit_rate": 0.8571,
+    "needed": 0.5758,
+    "n": 7
    },
    {
     "key": "points",
@@ -39,14 +39,14 @@
    {
     "key": "parlays",
     "label": "Parlays",
-    "w": 0,
+    "w": 1,
     "l": 1,
     "push": 0,
     "void": 0,
-    "units": -1.0,
-    "hit_rate": 0.0,
-    "needed": 0.3145,
-    "n": 1
+    "units": 0.55,
+    "hit_rate": 0.5,
+    "needed": 0.3533,
+    "n": 2
    }
   ]
  },
@@ -54,9 +54,9 @@
   {
    "date": "2026-10-13",
    "graded": false,
-   "w": 3,
+   "w": 4,
    "l": 1,
-   "units": 1.27,
+   "units": 1.87,
    "entries": [
     {
      "id": "2026-10-13:2026020097:8477506:shots:1.5:under",
@@ -79,9 +79,9 @@
        "at": "2026-10-13T18:20:01-04:00"
       }
      ],
-     "result": null,
-     "actual": null,
-     "units": null,
+     "result": "W",
+     "actual": "had 0",
+     "units": 0.6061,
      "pulled": null,
      "legs": []
     },
@@ -303,9 +303,9 @@
      "bet": "2 legs",
      "price": 155,
      "first_price": 181,
-     "result": null,
-     "actual": null,
-     "units": null,
+     "result": "W",
+     "actual": "2 of 2 legs hit",
+     "units": 1.55,
      "pulled": null,
      "legs": [
       {
@@ -329,9 +329,9 @@
          "at": "2026-10-13T18:20:01-04:00"
         }
        ],
-       "result": null,
-       "actual": null,
-       "units": null,
+       "result": "W",
+       "actual": "had 0",
+       "units": 0.6061,
        "pulled": null,
        "legs": []
       },
@@ -393,9 +393,9 @@
          "at": "2026-10-13T18:20:01-04:00"
         }
        ],
-       "result": null,
-       "actual": null,
-       "units": null,
+       "result": "W",
+       "actual": "had 0",
+       "units": 0.6061,
        "pulled": null,
        "legs": []
       },
@@ -563,9 +563,9 @@
          "at": "2026-10-13T18:20:01-04:00"
         }
        ],
-       "result": null,
-       "actual": null,
-       "units": null,
+       "result": "W",
+       "actual": "had 0",
+       "units": 0.6061,
        "pulled": null,
        "legs": []
       }
@@ -650,9 +650,9 @@
          "at": "2026-10-13T18:20:01-04:00"
         }
        ],
-       "result": null,
-       "actual": null,
-       "units": null,
+       "result": "W",
+       "actual": "had 0",
+       "units": 0.6061,
        "pulled": null,
        "legs": []
       }

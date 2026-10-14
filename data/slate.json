@@ -1,13 +1,13 @@
 {
  "slate_date": "2026-10-13",
- "generated_at": "2026-10-13T23:00:00-04:00",
- "status_at": "2026-10-13T23:00:00-04:00",
+ "generated_at": "2026-10-13T23:10:00-04:00",
+ "status_at": "2026-10-13T23:10:00-04:00",
  "valid_until": "2026-10-14T05:00:00-04:00",
  "status": {
   "prices_state": "ok",
   "prices_at": "2026-10-13T22:20:00-04:00",
   "next_price_read_at": null,
-  "stats_built_at": "2026-10-13T22:40:00-04:00",
+  "stats_built_at": "2026-10-13T23:10:00-04:00",
   "stats_through": "2026-10-12",
   "lineups_at": "2026-10-13T22:30:14-04:00",
   "goalies_at": null,
@@ -16,7 +16,7 @@
   "stats_state": "ok",
   "last_run": {
    "ok": true,
-   "at": "2026-10-13T23:00:00-04:00",
+   "at": "2026-10-13T23:10:00-04:00",
    "failed_step": null
   },
   "pool": {
@@ -28,23 +28,7 @@
   },
   "excluded_teams": [
    {
-    "team": "CHI",
-    "reason": "stats behind"
-   },
-   {
     "team": "MIN",
-    "reason": "stats behind"
-   },
-   {
-    "team": "NYI",
-    "reason": "stats behind"
-   },
-   {
-    "team": "PIT",
-    "reason": "stats behind"
-   },
-   {
-    "team": "VAN",
     "reason": "stats behind"
    },
    {
@@ -59,7 +43,7 @@
  "banners": [
   {
    "level": "warn",
-   "text": "Not covered tonight: CHI, MIN, NYI, PIT, VAN, WPG (stats behind)."
+   "text": "Not covered tonight: MIN, WPG (stats behind)."
   },
   {
    "level": "info",
@@ -149,11 +133,8 @@
    "start": "2026-10-13T19:45:00-04:00",
    "started": true,
    "picks": 1,
-   "excluded_reason": "stats behind",
-   "excluded_teams": [
-    "VAN",
-    "NYI"
-   ]
+   "excluded_reason": null,
+   "excluded_teams": []
   },
   {
    "id": 2026020098,
@@ -162,11 +143,8 @@
    "start": "2026-10-13T20:00:00-04:00",
    "started": true,
    "picks": 0,
-   "excluded_reason": "stats behind",
-   "excluded_teams": [
-    "PIT",
-    "CHI"
-   ]
+   "excluded_reason": null,
+   "excluded_teams": []
   },
   {
    "id": 2026020099,
@@ -483,7 +461,11 @@
     }
    ],
    "pulled": null,
-   "graded": null,
+   "graded": {
+    "result": "W",
+    "actual": "had 0",
+    "units": 0.6061
+   },
    "rank": null,
    "tier": "main",
    "game_id": 2026020097,
@@ -989,7 +971,11 @@
     }
    ],
    "pulled": null,
-   "graded": null,
+   "graded": {
+    "result": "W",
+    "actual": "2 of 2 legs hit",
+    "units": 1.55
+   },
    "legs": [
     "2026-10-13:2026020097:8477506:shots:1.5:under",
     "2026-10-13:2026020092:8480865:shots:2.5:under"

@@ -53,3 +53,5 @@
 {"actual":1,"actual_text":"had 1","at":"2026-10-13T22:20:00-04:00","id":"2026-10-13:2026020095:8482201:shots:1.5:under","price":-130,"result":"W","t":"graded","units":0.7692}
 {"at":"2026-10-13T22:30:00-04:00","id":"2026-10-13:2026020104:8481617:shots:2.5:under","state":"locked","t":"locked"}
 {"actual":1,"actual_text":"had 1","at":"2026-10-13T22:40:00-04:00","id":"2026-10-13:2026020096:8477998:shots:1.5:under","price":-110,"result":"W","t":"graded","units":0.9091}
+{"actual":0,"actual_text":"had 0","at":"2026-10-13T23:10:00-04:00","id":"2026-10-13:2026020097:8477506:shots:1.5:under","price":-165,"result":"W","t":"graded","units":0.6061}
+{"actual":2,"actual_text":"2 of 2 legs hit","at":"2026-10-13T23:10:00-04:00","id":"2026-10-13:P:e3dbb149ce","legs":[{"id":"2026-10-13:2026020097:8477506:shots:1.5:under","result":"W"},{"id":"2026-10-13:2026020092:8480865:shots:2.5:under","result":"W"}],"price":155,"result":"W","t":"graded","units":1.55}
