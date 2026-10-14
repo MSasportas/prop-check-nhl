@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-10-13T20:20:00-04:00",
+ "generated_at": "2026-10-13T20:30:00-04:00",
  "summary": {
   "headline": {
    "w": 2,
@@ -88,6 +88,29 @@
       {
        "price": -160,
        "at": "2026-10-13T20:20:00-04:00"
+      }
+     ],
+     "result": null,
+     "actual": null,
+     "units": null,
+     "pulled": null,
+     "legs": []
+    },
+    {
+     "id": "2026-10-13:2026020101:8476869:shots:1.5:under",
+     "kind": "single",
+     "player": "B. Skjei",
+     "bet": "Under 1.5 shots on goal",
+     "market": "shots",
+     "team": "NSH",
+     "game": "VGK at NSH",
+     "price": -155,
+     "first_price": -155,
+     "last_price": -155,
+     "prices": [
+      {
+       "price": -155,
+       "at": "2026-10-13T13:00:01-04:00"
       }
      ],
      "result": null,
@@ -226,6 +249,29 @@
       {
        "price": -130,
        "at": "2026-10-13T13:00:01-04:00"
+      }
+     ],
+     "result": null,
+     "actual": null,
+     "units": null,
+     "pulled": null,
+     "legs": []
+    },
+    {
+     "id": "2026-10-13:2026020101:8476539:points:0.5:under",
+     "kind": "single",
+     "player": "J. Marchessault",
+     "bet": "Under 0.5 points",
+     "market": "points",
+     "team": "NSH",
+     "game": "VGK at NSH",
+     "price": -115,
+     "first_price": -115,
+     "last_price": -115,
+     "prices": [
+      {
+       "price": -115,
+       "at": "2026-10-13T20:00:00-04:00"
       }
      ],
      "result": null,
@@ -586,6 +632,66 @@
         {
          "price": -165,
          "at": "2026-10-13T18:20:01-04:00"
+        }
+       ],
+       "result": null,
+       "actual": null,
+       "units": null,
+       "pulled": null,
+       "legs": []
+      }
+     ]
+    },
+    {
+     "id": "2026-10-13:P:de5aa0a28c",
+     "kind": "parlay",
+     "player": "Parlay",
+     "bet": "2 legs",
+     "price": 167,
+     "first_price": 167,
+     "result": null,
+     "actual": null,
+     "units": null,
+     "pulled": null,
+     "legs": [
+      {
+       "id": "2026-10-13:2026020101:8476869:shots:1.5:under",
+       "kind": "single",
+       "player": "B. Skjei",
+       "bet": "Under 1.5 shots on goal",
+       "market": "shots",
+       "team": "NSH",
+       "game": "VGK at NSH",
+       "price": -155,
+       "first_price": -155,
+       "last_price": -155,
+       "prices": [
+        {
+         "price": -155,
+         "at": "2026-10-13T13:00:01-04:00"
+        }
+       ],
+       "result": null,
+       "actual": null,
+       "units": null,
+       "pulled": null,
+       "legs": []
+      },
+      {
+       "id": "2026-10-13:2026020102:8477939:points:0.5:over",
+       "kind": "single",
+       "player": "W. Nylander",
+       "bet": "Over 0.5 points",
+       "market": "points",
+       "team": "TOR",
+       "game": "TOR at UTA",
+       "price": -160,
+       "first_price": -160,
+       "last_price": -160,
+       "prices": [
+        {
+         "price": -160,
+         "at": "2026-10-13T20:20:00-04:00"
         }
        ],
        "result": null,

@@ -1,7 +1,7 @@
 {
  "slate_date": "2026-10-13",
- "generated_at": "2026-10-13T20:20:00-04:00",
- "status_at": "2026-10-13T20:20:00-04:00",
+ "generated_at": "2026-10-13T20:30:00-04:00",
+ "status_at": "2026-10-13T20:30:00-04:00",
  "valid_until": "2026-10-14T05:00:00-04:00",
  "status": {
   "prices_state": "ok",
@@ -9,14 +9,14 @@
   "next_price_read_at": "2026-10-13T21:00:00-04:00",
   "stats_built_at": "2026-10-12T23:30:01-04:00",
   "stats_through": "2026-10-12",
-  "lineups_at": "2026-10-13T20:20:00-04:00",
+  "lineups_at": "2026-10-13T20:30:00-04:00",
   "goalies_at": null,
-  "lineups_note": "25 of 32 team line pages are dated today.",
+  "lineups_note": "26 of 32 team line pages are dated today.",
   "lineups_state": "ok",
   "stats_state": "ok",
   "last_run": {
    "ok": true,
-   "at": "2026-10-13T20:20:00-04:00",
+   "at": "2026-10-13T20:30:00-04:00",
    "failed_step": null
   },
   "pool": {
@@ -144,7 +144,7 @@
    "away": "COL",
    "home": "DAL",
    "start": "2026-10-13T20:30:00-04:00",
-   "started": false,
+   "started": true,
    "picks": 0,
    "excluded_reason": null,
    "excluded_teams": []
@@ -155,7 +155,7 @@
    "home": "NSH",
    "start": "2026-10-13T20:45:00-04:00",
    "started": false,
-   "picks": 0,
+   "picks": 2,
    "excluded_reason": null,
    "excluded_teams": []
   },
@@ -202,6 +202,50 @@
  ],
  "picks": [
   {
+   "id": "2026-10-13:2026020101:8476869:shots:1.5:under",
+   "price": -155,
+   "first_price": -155,
+   "first_price_at": "2026-10-13T13:00:01-04:00",
+   "worst_price": -155,
+   "p": 0.6461,
+   "breakeven": 0.6078,
+   "p_pct": 64,
+   "breakeven_pct": 61,
+   "state": "lineup",
+   "history": [
+    {
+     "at": "2026-10-13T20:30:00-04:00",
+     "text": "Lineup confirmed"
+    }
+   ],
+   "prices": [
+    {
+     "at": "2026-10-13T13:00:01-04:00",
+     "price": -155
+    }
+   ],
+   "pulled": null,
+   "graded": null,
+   "rank": 1,
+   "tier": "main",
+   "game_id": 2026020101,
+   "player": "B. Skjei",
+   "player_id": 8476869,
+   "team": "NSH",
+   "opp": "VGK",
+   "home": true,
+   "start": "2026-10-13T20:45:00-04:00",
+   "market": "shots",
+   "line": 1.5,
+   "side": "under",
+   "bet": "Under 1.5 shots on goal",
+   "price_at": "2026-10-13T13:00:01-04:00",
+   "reason": "64% to stay under 1.5 shots; -155 needs 61%. Projects 1.0 shots in 21 min. VGK allow 10% fewer shots than average.",
+   "thin": false,
+   "games_used": 87,
+   "games_this_season": 5
+  },
+  {
    "id": "2026-10-13:2026020102:8477939:points:0.5:over",
    "price": -160,
    "first_price": -160,
@@ -226,7 +270,7 @@
    ],
    "pulled": null,
    "graded": null,
-   "rank": 1,
+   "rank": 2,
    "tier": "main",
    "game_id": 2026020102,
    "player": "W. Nylander",
@@ -244,6 +288,50 @@
    "thin": false,
    "games_used": 71,
    "games_this_season": 6
+  },
+  {
+   "id": "2026-10-13:2026020101:8476539:points:0.5:under",
+   "price": -115,
+   "first_price": -115,
+   "first_price_at": "2026-10-13T20:00:00-04:00",
+   "worst_price": -115,
+   "p": 0.5623,
+   "breakeven": 0.5349,
+   "p_pct": 56,
+   "breakeven_pct": 53,
+   "state": "lineup",
+   "history": [
+    {
+     "at": "2026-10-13T20:30:00-04:00",
+     "text": "Lineup confirmed"
+    }
+   ],
+   "prices": [
+    {
+     "at": "2026-10-13T20:00:00-04:00",
+     "price": -115
+    }
+   ],
+   "pulled": null,
+   "graded": null,
+   "rank": 3,
+   "tier": "main",
+   "game_id": 2026020101,
+   "player": "J. Marchessault",
+   "player_id": 8476539,
+   "team": "NSH",
+   "opp": "VGK",
+   "home": true,
+   "start": "2026-10-13T20:45:00-04:00",
+   "market": "points",
+   "line": 0.5,
+   "side": "under",
+   "bet": "Under 0.5 points",
+   "price_at": "2026-10-13T20:00:00-04:00",
+   "reason": "56% to stay under 0.5 points; -115 needs 53%. Projects 0.5 points in 17 min. VGK allow 7% fewer goals than average.",
+   "thin": false,
+   "games_used": 67,
+   "games_this_season": 5
   },
   {
    "id": "2026-10-13:2026020104:8481617:shots:2.5:under",
@@ -270,7 +358,7 @@
    ],
    "pulled": null,
    "graded": null,
-   "rank": 2,
+   "rank": 4,
    "tier": "main",
    "game_id": 2026020104,
    "player": "V. Podkolzin",
@@ -584,6 +672,42 @@
  ],
  "parlays": [
   {
+   "id": "2026-10-13:P:de5aa0a28c",
+   "price": 167,
+   "first_price": 167,
+   "first_price_at": "2026-10-13T20:20:00-04:00",
+   "worst_price": 167,
+   "p": 0.4172,
+   "breakeven": 0.3741,
+   "p_pct": 41,
+   "breakeven_pct": 37,
+   "state": "lineup",
+   "history": [
+    {
+     "at": "2026-10-13T20:30:00-04:00",
+     "text": "Lineup confirmed"
+    }
+   ],
+   "prices": [
+    {
+     "at": "2026-10-13T20:20:00-04:00",
+     "price": 167
+    }
+   ],
+   "pulled": null,
+   "graded": null,
+   "legs": [
+    "2026-10-13:2026020101:8476869:shots:1.5:under",
+    "2026-10-13:2026020102:8477939:points:0.5:over"
+   ],
+   "n": 2,
+   "price_at": "2026-10-13T20:20:00-04:00",
+   "leg_prices": {
+    "2026-10-13:2026020101:8476869:shots:1.5:under": -155,
+    "2026-10-13:2026020102:8477939:points:0.5:over": -160
+   }
+  },
+  {
    "id": "2026-10-13:P:1e1c4b3b45",
    "price": 220,
    "first_price": 220,
@@ -796,31 +920,6 @@
    }
   }
  ],
- "goal_watch": [
-  {
-   "player": "N. MacKinnon",
-   "team": "COL",
-   "price": 100,
-   "fair_price": 155,
-   "p": 0.3925,
-   "text": "39% to score; +100 needs 50%. Fair price +155. Not a pick."
-  },
-  {
-   "player": "J. Robertson",
-   "team": "DAL",
-   "price": 120,
-   "fair_price": 199,
-   "p": 0.3344,
-   "text": "33% to score; +120 needs 45%. Fair price +199. Not a pick."
-  },
-  {
-   "player": "W. Johnston",
-   "team": "DAL",
-   "price": 145,
-   "fair_price": 208,
-   "p": 0.325,
-   "text": "32% to score; +145 needs 41%. Fair price +208. Not a pick."
-  }
- ],
- "goal_watch_note": "Not picks. Our model is weakest on goals."
+ "goal_watch": [],
+ "goal_watch_note": null
 }
