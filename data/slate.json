@@ -1,13 +1,13 @@
 {
  "slate_date": "2026-10-13",
- "generated_at": "2026-10-13T22:20:00-04:00",
- "status_at": "2026-10-13T22:20:00-04:00",
+ "generated_at": "2026-10-13T22:30:00-04:00",
+ "status_at": "2026-10-13T22:30:00-04:00",
  "valid_until": "2026-10-14T05:00:00-04:00",
  "status": {
   "prices_state": "ok",
   "prices_at": "2026-10-13T22:20:00-04:00",
   "next_price_read_at": null,
-  "stats_built_at": "2026-10-13T22:10:01-04:00",
+  "stats_built_at": "2026-10-13T22:30:00-04:00",
   "stats_through": "2026-10-12",
   "lineups_at": "2026-10-13T22:10:01-04:00",
   "goalies_at": null,
@@ -16,7 +16,7 @@
   "stats_state": "ok",
   "last_run": {
    "ok": true,
-   "at": "2026-10-13T22:20:00-04:00",
+   "at": "2026-10-13T22:30:00-04:00",
    "failed_step": null
   },
   "pool": {
@@ -28,7 +28,7 @@
   },
   "excluded_teams": [
    {
-    "team": "NYR",
+    "team": "NYI",
     "reason": "stats behind"
    },
    {
@@ -36,19 +36,11 @@
     "reason": "stats behind"
    },
    {
-    "team": "PHI",
-    "reason": "stats behind"
-   },
-   {
-    "team": "SEA",
-    "reason": "stats behind"
-   },
-   {
     "team": "STL",
     "reason": "stats behind"
    },
    {
-    "team": "TBL",
+    "team": "VAN",
     "reason": "stats behind"
    }
   ],
@@ -59,14 +51,18 @@
  "banners": [
   {
    "level": "warn",
-   "text": "Not covered tonight: NYR, OTT, PHI, SEA, STL, TBL (stats behind)."
+   "text": "Not covered tonight: NYI, OTT, STL, VAN (stats behind)."
   },
   {
    "level": "info",
    "text": "38 Hard Rock lines skipped: the two sides did not add up or the price was old."
   }
  ],
- "empty": null,
+ "empty": {
+  "code": "none_qualified",
+  "text": "No open picks right now.",
+  "sub": "Checked 525 lines at 10:20 PM. Today's earlier picks are under Started."
+ },
  "games": [
   {
    "id": 2026020090,
@@ -115,11 +111,8 @@
    "start": "2026-10-13T19:00:00-04:00",
    "started": true,
    "picks": 0,
-   "excluded_reason": "stats behind",
-   "excluded_teams": [
-    "SEA",
-    "PHI"
-   ]
+   "excluded_reason": null,
+   "excluded_teams": []
   },
   {
    "id": 2026020095,
@@ -128,11 +121,8 @@
    "start": "2026-10-13T19:15:00-04:00",
    "started": true,
    "picks": 1,
-   "excluded_reason": "stats behind",
-   "excluded_teams": [
-    "TBL",
-    "NYR"
-   ]
+   "excluded_reason": null,
+   "excluded_teams": []
   },
   {
    "id": 2026020096,
@@ -154,8 +144,11 @@
    "start": "2026-10-13T19:45:00-04:00",
    "started": true,
    "picks": 1,
-   "excluded_reason": null,
-   "excluded_teams": []
+   "excluded_reason": "stats behind",
+   "excluded_teams": [
+    "VAN",
+    "NYI"
+   ]
   },
   {
    "id": 2026020098,
@@ -222,7 +215,7 @@
    "away": "EDM",
    "home": "LAK",
    "start": "2026-10-13T22:30:00-04:00",
-   "started": false,
+   "started": true,
    "picks": 1,
    "excluded_reason": null,
    "excluded_teams": []
@@ -239,54 +232,6 @@
   }
  ],
  "picks": [
-  {
-   "id": "2026-10-13:2026020104:8481617:shots:2.5:under",
-   "price": -135,
-   "first_price": -120,
-   "first_price_at": "2026-10-13T13:00:01-04:00",
-   "worst_price": -135,
-   "p": 0.5776,
-   "breakeven": 0.5745,
-   "p_pct": 57,
-   "breakeven_pct": 57,
-   "state": "lineup",
-   "history": [
-    {
-     "at": "2026-10-13T19:30:00-04:00",
-     "text": "Lineup confirmed"
-    }
-   ],
-   "prices": [
-    {
-     "at": "2026-10-13T13:00:01-04:00",
-     "price": -120
-    },
-    {
-     "at": "2026-10-13T21:50:00-04:00",
-     "price": -135
-    }
-   ],
-   "pulled": null,
-   "graded": null,
-   "rank": 1,
-   "tier": "main",
-   "game_id": 2026020104,
-   "player": "V. Podkolzin",
-   "player_id": 8481617,
-   "team": "EDM",
-   "opp": "LAK",
-   "home": false,
-   "start": "2026-10-13T22:30:00-04:00",
-   "market": "shots",
-   "line": 2.5,
-   "side": "under",
-   "bet": "Under 2.5 shots on goal",
-   "price_at": "2026-10-13T21:50:00-04:00",
-   "reason": "57% to stay under 2.5 shots; -135 needs 57%. Projects 2.1 shots in 18 min.",
-   "thin": false,
-   "games_used": 87,
-   "games_this_season": 5
-  },
   {
    "id": "2026-10-13:2026020091:8482660:points:0.5:under",
    "price": -140,
@@ -734,6 +679,58 @@
    "thin": false,
    "games_used": 71,
    "games_this_season": 6
+  },
+  {
+   "id": "2026-10-13:2026020104:8481617:shots:2.5:under",
+   "price": -135,
+   "first_price": -120,
+   "first_price_at": "2026-10-13T13:00:01-04:00",
+   "worst_price": -135,
+   "p": 0.5776,
+   "breakeven": 0.5745,
+   "p_pct": 57,
+   "breakeven_pct": 57,
+   "state": "locked",
+   "history": [
+    {
+     "at": "2026-10-13T19:30:00-04:00",
+     "text": "Lineup confirmed"
+    },
+    {
+     "at": "2026-10-13T22:30:00-04:00",
+     "text": "Locked"
+    }
+   ],
+   "prices": [
+    {
+     "at": "2026-10-13T13:00:01-04:00",
+     "price": -120
+    },
+    {
+     "at": "2026-10-13T21:50:00-04:00",
+     "price": -135
+    }
+   ],
+   "pulled": null,
+   "graded": null,
+   "rank": null,
+   "tier": "main",
+   "game_id": 2026020104,
+   "player": "V. Podkolzin",
+   "player_id": 8481617,
+   "team": "EDM",
+   "opp": "LAK",
+   "home": false,
+   "start": "2026-10-13T22:30:00-04:00",
+   "market": "shots",
+   "line": 2.5,
+   "side": "under",
+   "bet": "Under 2.5 shots on goal",
+   "price_at": "2026-10-13T21:50:00-04:00",
+   "reason": "57% to stay under 2.5 shots; -135 needs 57%. Projects 2.1 shots in 18 min.",
+   "thin": false,
+   "games_used": 87,
+   "games_this_season": 5
   }
  ],
  "parlays": [
