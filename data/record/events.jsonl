@@ -48,3 +48,5 @@
 {"at":"2026-10-13T20:50:00-04:00","id":"2026-10-13:P:de5aa0a28c","state":"locked","t":"locked"}
 {"at":"2026-10-13T21:00:00-04:00","id":"2026-10-13:2026020102:8477939:points:0.5:over","state":"locked","t":"locked"}
 {"actual":2,"actual_text":"had 2","at":"2026-10-13T21:40:01-04:00","id":"2026-10-13:2026020092:8480865:shots:2.5:under","price":-170,"result":"W","t":"graded","units":0.5882}
+{"at":"2026-10-13T21:50:00-04:00","breakeven":0.5745,"breakeven_pct":57,"fair":0.5347,"id":"2026-10-13:2026020104:8481617:shots:2.5:under","p":0.5776,"p_pct":57,"price":-135,"price_at":"2026-10-13T21:50:00-04:00","reason":"57% to stay under 2.5 shots; -135 needs 57%. Projects 2.1 shots in 18 min.","t":"price"}
+{"actual":1,"actual_text":"had 1","at":"2026-10-13T21:50:00-04:00","id":"2026-10-13:2026020091:8482660:points:0.5:under","price":-140,"result":"L","t":"graded","units":-1.0}
