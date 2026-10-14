@@ -1,10 +1,10 @@
 {
  "ok": true,
  "slate_date": "2026-10-13",
- "started_at": "2026-10-13T23:20:01-04:00",
- "status_at": "2026-10-13T23:20:01-04:00",
- "finished_at": "2026-10-13T23:20:02-04:00",
- "last_ok_at": "2026-10-13T23:20:01-04:00",
+ "started_at": "2026-10-13T23:30:01-04:00",
+ "status_at": "2026-10-13T23:30:01-04:00",
+ "finished_at": "2026-10-13T23:30:02-04:00",
+ "last_ok_at": "2026-10-13T23:30:01-04:00",
  "failed_step": null,
  "steps": [
   {
@@ -39,8 +39,8 @@
   },
   {
    "step": "grade",
-   "status": "ok",
-   "note": "5 graded"
+   "status": "skipped",
+   "note": "nothing to grade"
   },
   {
    "step": "slate",
@@ -49,8 +49,8 @@
   },
   {
    "step": "record",
-   "status": "ok",
-   "note": "record.json"
+   "status": "skipped",
+   "note": "unchanged"
   }
  ],
  "sources": {
@@ -106,7 +106,11 @@
  ],
  "excluded_teams": [
   {
-   "team": "MIN",
+   "team": "COL",
+   "reason": "stats behind"
+  },
+  {
+   "team": "DAL",
    "reason": "stats behind"
   },
   {
@@ -115,10 +119,6 @@
   },
   {
    "team": "VGK",
-   "reason": "stats behind"
-  },
-  {
-   "team": "WPG",
    "reason": "stats behind"
   }
  ],
@@ -130,10 +130,10 @@
  "odds_notes": [],
  "runner": {
   "event": "workflow_dispatch",
-  "run_id": "38501350780",
-  "iteration": 6,
-  "chain_link": 42,
+  "run_id": "38505705970",
+  "iteration": 2,
+  "chain_link": 43,
   "chain_started_at": "2026-10-12T13:50:14-04:00",
-  "run_started_at": "2026-10-13T22:30:13-04:00"
+  "run_started_at": "2026-10-13T23:20:13-04:00"
  }
 }
