@@ -1,10 +1,10 @@
 {
  "ok": true,
  "slate_date": "2026-10-13",
- "started_at": "2026-10-13T23:10:00-04:00",
- "status_at": "2026-10-13T23:10:00-04:00",
- "finished_at": "2026-10-13T23:10:02-04:00",
- "last_ok_at": "2026-10-13T23:10:00-04:00",
+ "started_at": "2026-10-13T23:20:01-04:00",
+ "status_at": "2026-10-13T23:20:01-04:00",
+ "finished_at": "2026-10-13T23:20:02-04:00",
+ "last_ok_at": "2026-10-13T23:20:01-04:00",
  "failed_step": null,
  "steps": [
   {
@@ -20,7 +20,7 @@
   {
    "step": "stats",
    "status": "ok",
-   "note": "1 window(s) read, 2 team-games still missing"
+   "note": "1 window(s) read, 4 team-games still missing"
   },
   {
    "step": "lineups",
@@ -40,7 +40,7 @@
   {
    "step": "grade",
    "status": "ok",
-   "note": "2 graded"
+   "note": "5 graded"
   },
   {
    "step": "slate",
@@ -110,6 +110,14 @@
    "reason": "stats behind"
   },
   {
+   "team": "NSH",
+   "reason": "stats behind"
+  },
+  {
+   "team": "VGK",
+   "reason": "stats behind"
+  },
+  {
    "team": "WPG",
    "reason": "stats behind"
   }
@@ -118,12 +126,12 @@
  "lineups_at": "2026-10-13T22:30:14-04:00",
  "lineups_note": "28 of 32 team line pages are dated today.",
  "games_today": 16,
- "record_events": 57,
+ "record_events": 62,
  "odds_notes": [],
  "runner": {
   "event": "workflow_dispatch",
   "run_id": "38501350780",
-  "iteration": 5,
+  "iteration": 6,
   "chain_link": 42,
   "chain_started_at": "2026-10-12T13:50:14-04:00",
   "run_started_at": "2026-10-13T22:30:13-04:00"

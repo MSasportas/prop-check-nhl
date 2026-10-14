@@ -1,28 +1,28 @@
 {
- "generated_at": "2026-10-13T23:10:00-04:00",
+ "generated_at": "2026-10-13T23:20:01-04:00",
  "summary": {
   "headline": {
    "w": 6,
-   "l": 2,
+   "l": 3,
    "push": 0,
    "void": 0,
-   "units": 2.55,
-   "hit_rate": 0.75,
-   "needed": 0.5767,
-   "n": 8
+   "units": 1.55,
+   "hit_rate": 0.6667,
+   "needed": 0.5721,
+   "n": 9
   },
   "rows": [
    {
     "key": "shots",
     "label": "Shots on goal",
     "w": 6,
-    "l": 1,
+    "l": 2,
     "push": 0,
     "void": 0,
-    "units": 3.55,
-    "hit_rate": 0.8571,
-    "needed": 0.5758,
-    "n": 7
+    "units": 2.55,
+    "hit_rate": 0.75,
+    "needed": 0.5707,
+    "n": 8
    },
    {
     "key": "points",
@@ -40,13 +40,13 @@
     "key": "parlays",
     "label": "Parlays",
     "w": 1,
-    "l": 1,
+    "l": 5,
     "push": 0,
     "void": 0,
-    "units": 0.55,
-    "hit_rate": 0.5,
-    "needed": 0.3533,
-    "n": 2
+    "units": -3.45,
+    "hit_rate": 0.1667,
+    "needed": 0.2917,
+    "n": 6
    }
   ]
  },
@@ -55,8 +55,8 @@
    "date": "2026-10-13",
    "graded": false,
    "w": 4,
-   "l": 1,
-   "units": 1.87,
+   "l": 2,
+   "units": 0.87,
    "entries": [
     {
      "id": "2026-10-13:2026020097:8477506:shots:1.5:under",
@@ -171,9 +171,9 @@
        "at": "2026-10-13T13:00:01-04:00"
       }
      ],
-     "result": null,
-     "actual": null,
-     "units": null,
+     "result": "L",
+     "actual": "had 2",
+     "units": -1.0,
      "pulled": null,
      "legs": []
     },
@@ -367,9 +367,9 @@
      "bet": "3 legs",
      "price": 377,
      "first_price": 425,
-     "result": null,
-     "actual": null,
-     "units": null,
+     "result": "L",
+     "actual": "2 of 3 legs hit",
+     "units": -1.0,
      "pulled": null,
      "legs": [
       {
@@ -416,9 +416,9 @@
          "at": "2026-10-13T13:00:01-04:00"
         }
        ],
-       "result": null,
-       "actual": null,
-       "units": null,
+       "result": "L",
+       "actual": "had 2",
+       "units": -1.0,
        "pulled": null,
        "legs": []
       },
@@ -454,9 +454,9 @@
      "bet": "2 legs",
      "price": 220,
      "first_price": 220,
-     "result": null,
-     "actual": null,
-     "units": null,
+     "result": "L",
+     "actual": "0 of 2 legs hit",
+     "units": -1.0,
      "pulled": null,
      "legs": [
       {
@@ -476,9 +476,9 @@
          "at": "2026-10-13T13:00:01-04:00"
         }
        ],
-       "result": null,
-       "actual": null,
-       "units": null,
+       "result": "L",
+       "actual": "had 2",
+       "units": -1.0,
        "pulled": null,
        "legs": []
       },
@@ -514,9 +514,9 @@
      "bet": "2 legs",
      "price": 200,
      "first_price": 200,
-     "result": null,
-     "actual": null,
-     "units": null,
+     "result": "L",
+     "actual": "1 of 2 legs hit",
+     "units": -1.0,
      "pulled": null,
      "legs": [
       {
@@ -536,9 +536,9 @@
          "at": "2026-10-13T13:00:01-04:00"
         }
        ],
-       "result": null,
-       "actual": null,
-       "units": null,
+       "result": "L",
+       "actual": "had 2",
+       "units": -1.0,
        "pulled": null,
        "legs": []
       },
@@ -578,9 +578,9 @@
      "bet": "3 legs",
      "price": 431,
      "first_price": 431,
-     "result": null,
-     "actual": null,
-     "units": null,
+     "result": "L",
+     "actual": "2 of 3 legs hit",
+     "units": -1.0,
      "pulled": null,
      "legs": [
       {
@@ -600,9 +600,9 @@
          "at": "2026-10-13T13:00:01-04:00"
         }
        ],
-       "result": null,
-       "actual": null,
-       "units": null,
+       "result": "L",
+       "actual": "had 2",
+       "units": -1.0,
        "pulled": null,
        "legs": []
       },

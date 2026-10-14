@@ -1,7 +1,7 @@
 {
  "slate_date": "2026-10-13",
- "generated_at": "2026-10-13T23:10:00-04:00",
- "status_at": "2026-10-13T23:10:00-04:00",
+ "generated_at": "2026-10-13T23:20:01-04:00",
+ "status_at": "2026-10-13T23:20:01-04:00",
  "valid_until": "2026-10-14T05:00:00-04:00",
  "status": {
   "prices_state": "ok",
@@ -16,7 +16,7 @@
   "stats_state": "ok",
   "last_run": {
    "ok": true,
-   "at": "2026-10-13T23:10:00-04:00",
+   "at": "2026-10-13T23:20:01-04:00",
    "failed_step": null
   },
   "pool": {
@@ -32,6 +32,14 @@
     "reason": "stats behind"
    },
    {
+    "team": "NSH",
+    "reason": "stats behind"
+   },
+   {
+    "team": "VGK",
+    "reason": "stats behind"
+   },
+   {
     "team": "WPG",
     "reason": "stats behind"
    }
@@ -43,7 +51,7 @@
  "banners": [
   {
    "level": "warn",
-   "text": "Not covered tonight: MIN, WPG (stats behind)."
+   "text": "Not covered tonight: MIN, NSH, VGK, WPG (stats behind)."
   },
   {
    "level": "info",
@@ -176,8 +184,11 @@
    "start": "2026-10-13T20:45:00-04:00",
    "started": true,
    "picks": 2,
-   "excluded_reason": null,
-   "excluded_teams": []
+   "excluded_reason": "stats behind",
+   "excluded_teams": [
+    "VGK",
+    "NSH"
+   ]
   },
   {
    "id": 2026020102,
@@ -513,7 +524,11 @@
     }
    ],
    "pulled": null,
-   "graded": null,
+   "graded": {
+    "result": "L",
+    "actual": "had 2",
+    "units": -1.0
+   },
    "rank": null,
    "tier": "main",
    "game_id": 2026020099,
@@ -759,7 +774,11 @@
     }
    ],
    "pulled": null,
-   "graded": null,
+   "graded": {
+    "result": "L",
+    "actual": "0 of 2 legs hit",
+    "units": -1.0
+   },
    "legs": [
     "2026-10-13:2026020099:8482765:shots:1.5:under",
     "2026-10-13:2026020091:8482660:points:0.5:under"
@@ -799,7 +818,11 @@
     }
    ],
    "pulled": null,
-   "graded": null,
+   "graded": {
+    "result": "L",
+    "actual": "1 of 2 legs hit",
+    "units": -1.0
+   },
    "legs": [
     "2026-10-13:2026020099:8482765:shots:1.5:under",
     "2026-10-13:2026020097:8477506:shots:1.5:under"
@@ -883,7 +906,11 @@
     }
    ],
    "pulled": null,
-   "graded": null,
+   "graded": {
+    "result": "L",
+    "actual": "2 of 3 legs hit",
+    "units": -1.0
+   },
    "legs": [
     "2026-10-13:2026020097:8477506:shots:1.5:under",
     "2026-10-13:2026020099:8482765:shots:1.5:under",
@@ -925,7 +952,11 @@
     }
    ],
    "pulled": null,
-   "graded": null,
+   "graded": {
+    "result": "L",
+    "actual": "2 of 3 legs hit",
+    "units": -1.0
+   },
    "legs": [
     "2026-10-13:2026020099:8482765:shots:1.5:under",
     "2026-10-13:2026020095:8482201:shots:1.5:under",
