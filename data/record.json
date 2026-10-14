@@ -1,28 +1,28 @@
 {
- "generated_at": "2026-10-13T21:00:00-04:00",
+ "generated_at": "2026-10-13T21:40:01-04:00",
  "summary": {
   "headline": {
-   "w": 2,
+   "w": 3,
    "l": 1,
    "push": 0,
    "void": 0,
-   "units": 0.68,
-   "hit_rate": 0.6667,
-   "needed": 0.563,
-   "n": 3
+   "units": 1.27,
+   "hit_rate": 0.75,
+   "needed": 0.5797,
+   "n": 4
   },
   "rows": [
    {
     "key": "shots",
     "label": "Shots on goal",
-    "w": 2,
+    "w": 3,
     "l": 1,
     "push": 0,
     "void": 0,
-    "units": 0.68,
-    "hit_rate": 0.6667,
-    "needed": 0.563,
-    "n": 3
+    "units": 1.27,
+    "hit_rate": 0.75,
+    "needed": 0.5797,
+    "n": 4
    },
    {
     "key": "parlays",
@@ -42,9 +42,9 @@
   {
    "date": "2026-10-13",
    "graded": false,
-   "w": 0,
+   "w": 1,
    "l": 0,
-   "units": 0,
+   "units": 0.59,
    "entries": [
     {
      "id": "2026-10-13:2026020097:8477506:shots:1.5:under",
@@ -136,9 +136,9 @@
        "at": "2026-10-13T17:00:01-04:00"
       }
      ],
-     "result": null,
-     "actual": null,
-     "units": null,
+     "result": "W",
+     "actual": "had 2",
+     "units": 0.5882,
      "pulled": null,
      "legs": []
     },
@@ -336,9 +336,9 @@
          "at": "2026-10-13T17:00:01-04:00"
         }
        ],
-       "result": null,
-       "actual": null,
-       "units": null,
+       "result": "W",
+       "actual": "had 2",
+       "units": 0.5882,
        "pulled": null,
        "legs": []
       }
@@ -423,9 +423,9 @@
          "at": "2026-10-13T17:00:01-04:00"
         }
        ],
-       "result": null,
-       "actual": null,
-       "units": null,
+       "result": "W",
+       "actual": "had 2",
+       "units": 0.5882,
        "pulled": null,
        "legs": []
       }
