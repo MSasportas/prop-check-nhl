@@ -1,10 +1,10 @@
 {
  "ok": true,
  "slate_date": "2026-10-13",
- "started_at": "2026-10-14T01:20:01-04:00",
- "status_at": "2026-10-14T01:20:01-04:00",
- "finished_at": "2026-10-14T01:20:03-04:00",
- "last_ok_at": "2026-10-14T01:20:01-04:00",
+ "started_at": "2026-10-14T01:50:00-04:00",
+ "status_at": "2026-10-14T01:50:00-04:00",
+ "finished_at": "2026-10-14T01:50:01-04:00",
+ "last_ok_at": "2026-10-14T01:50:00-04:00",
  "failed_step": null,
  "steps": [
   {
@@ -19,8 +19,8 @@
   },
   {
    "step": "stats",
-   "status": "ok",
-   "note": "1 window(s) read, 2 team-games still missing"
+   "status": "skipped",
+   "note": "waiting to retry"
   },
   {
    "step": "lineups",
@@ -39,8 +39,8 @@
   },
   {
    "step": "grade",
-   "status": "skipped",
-   "note": "nothing to grade"
+   "status": "ok",
+   "note": "1 graded"
   },
   {
    "step": "slate",
@@ -49,8 +49,8 @@
   },
   {
    "step": "record",
-   "status": "skipped",
-   "note": "unchanged"
+   "status": "ok",
+   "note": "record.json"
   }
  ],
  "sources": {
@@ -106,11 +106,19 @@
  ],
  "excluded_teams": [
   {
+   "team": "BOS",
+   "reason": "stats behind"
+  },
+  {
    "team": "EDM",
    "reason": "stats behind"
   },
   {
    "team": "LAK",
+   "reason": "stats behind"
+  },
+  {
+   "team": "SJS",
    "reason": "stats behind"
   }
  ],
@@ -118,12 +126,12 @@
  "lineups_at": "2026-10-13T22:30:14-04:00",
  "lineups_note": "28 of 32 team line pages are dated today.",
  "games_today": 16,
- "record_events": 66,
+ "record_events": 67,
  "odds_notes": [],
  "runner": {
   "event": "workflow_dispatch",
   "run_id": "38514300444",
-  "iteration": 3,
+  "iteration": 6,
   "chain_link": 45,
   "chain_started_at": "2026-10-12T13:50:14-04:00",
   "run_started_at": "2026-10-14T01:00:15-04:00"
