@@ -1,12 +1,12 @@
 {
  "slate_date": "2026-10-14",
- "generated_at": "2026-10-14T18:50:01-04:00",
- "status_at": "2026-10-14T18:50:01-04:00",
+ "generated_at": "2026-10-14T19:00:01-04:00",
+ "status_at": "2026-10-14T19:00:01-04:00",
  "valid_until": "2026-10-15T05:00:00-04:00",
  "status": {
   "prices_state": "ok",
-  "prices_at": "2026-10-14T18:00:01-04:00",
-  "next_price_read_at": "2026-10-14T19:00:00-04:00",
+  "prices_at": "2026-10-14T19:00:01-04:00",
+  "next_price_read_at": "2026-10-14T19:45:00-04:00",
   "stats_built_at": "2026-10-14T02:30:00-04:00",
   "stats_through": "2026-10-13",
   "lineups_at": "2026-10-14T18:50:01-04:00",
@@ -16,31 +16,31 @@
   "stats_state": "ok",
   "last_run": {
    "ok": true,
-   "at": "2026-10-14T18:50:01-04:00",
+   "at": "2026-10-14T19:00:01-04:00",
    "failed_step": null
   },
   "pool": {
-   "pulls_left": 1332,
+   "pulls_left": 1328,
    "keys": 4,
    "game_days_left": 18,
    "days_left": 18,
    "low": false
   },
   "excluded_teams": [],
-  "lines_checked": 47,
-  "lines_failed": 3,
+  "lines_checked": 64,
+  "lines_failed": 6,
   "tier": 4
  },
  "banners": [
   {
    "level": "info",
-   "text": "3 Hard Rock lines skipped: the two sides did not add up or the price was old."
+   "text": "6 Hard Rock lines skipped: the two sides did not add up or the price was old."
   }
  ],
  "empty": {
   "code": "none_qualified",
   "text": "No open picks right now.",
-  "sub": "Checked 47 lines at 6:00 PM. Next price check at 7:00 PM."
+  "sub": "Checked 64 lines at 7:00 PM. Next price check at 7:45 PM."
  },
  "games": [
   {
@@ -76,20 +76,20 @@
    "text": "42% to score; +115 needs 47%. Fair price +134. Not a pick."
   },
   {
-   "player": "A. Tuch",
-   "team": "WSH",
-   "price": 190,
-   "fair_price": 211,
-   "p": 0.3218,
-   "text": "32% to score; +190 needs 34%. Fair price +211. Not a pick."
+   "player": "N. MacKinnon",
+   "team": "COL",
+   "price": -105,
+   "fair_price": 158,
+   "p": 0.3869,
+   "text": "38% to score; -105 needs 51%. Fair price +158. Not a pick."
   },
   {
-   "player": "N. Suzuki",
-   "team": "MTL",
-   "price": 190,
-   "fair_price": 235,
-   "p": 0.2981,
-   "text": "29% to score; +190 needs 34%. Fair price +235. Not a pick."
+   "player": "J. Robertson",
+   "team": "DAL",
+   "price": 140,
+   "fair_price": 200,
+   "p": 0.3335,
+   "text": "33% to score; +140 needs 42%. Fair price +200. Not a pick."
   }
  ],
  "goal_watch_note": "Not picks. Our model is weakest on goals."
