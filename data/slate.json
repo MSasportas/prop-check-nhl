@@ -1,12 +1,12 @@
 {
  "slate_date": "2026-10-14",
- "generated_at": "2026-10-14T19:40:00-04:00",
- "status_at": "2026-10-14T19:40:00-04:00",
+ "generated_at": "2026-10-14T19:50:00-04:00",
+ "status_at": "2026-10-14T19:50:00-04:00",
  "valid_until": "2026-10-15T05:00:00-04:00",
  "status": {
   "prices_state": "ok",
   "prices_at": "2026-10-14T19:00:01-04:00",
-  "next_price_read_at": "2026-10-14T19:45:00-04:00",
+  "next_price_read_at": null,
   "stats_built_at": "2026-10-14T02:30:00-04:00",
   "stats_through": "2026-10-13",
   "lineups_at": "2026-10-14T19:40:00-04:00",
@@ -16,7 +16,7 @@
   "stats_state": "ok",
   "last_run": {
    "ok": true,
-   "at": "2026-10-14T19:40:00-04:00",
+   "at": "2026-10-14T19:50:00-04:00",
    "failed_step": null
   },
   "pool": {
@@ -39,8 +39,8 @@
  ],
  "empty": {
   "code": "none_qualified",
-  "text": "No open picks right now.",
-  "sub": "Checked 64 lines at 7:00 PM. Next price check at 7:45 PM."
+  "text": "No picks tonight. Nothing cleared the bar at Hard Rock's prices.",
+  "sub": "Checked 64 lines at 7:00 PM."
  },
  "games": [
   {

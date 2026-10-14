@@ -1,10 +1,10 @@
 {
  "ok": true,
  "slate_date": "2026-10-14",
- "started_at": "2026-10-14T19:40:00-04:00",
- "status_at": "2026-10-14T19:40:00-04:00",
- "finished_at": "2026-10-14T19:40:01-04:00",
- "last_ok_at": "2026-10-14T19:40:00-04:00",
+ "started_at": "2026-10-14T19:50:00-04:00",
+ "status_at": "2026-10-14T19:50:00-04:00",
+ "finished_at": "2026-10-14T19:50:00-04:00",
+ "last_ok_at": "2026-10-14T19:50:00-04:00",
  "failed_step": null,
  "steps": [
   {
@@ -24,8 +24,8 @@
   },
   {
    "step": "lineups",
-   "status": "ok",
-   "note": "2 of 2 team pages read"
+   "status": "skipped",
+   "note": "checked in the last 20 minutes"
   },
   {
    "step": "odds",
@@ -84,7 +84,7 @@
  "budget_used_today": 10,
  "prices_state": "ok",
  "prices_at": "2026-10-14T19:00:01-04:00",
- "next_price_read_at": "2026-10-14T19:45:00-04:00",
+ "next_price_read_at": null,
  "unmatched_names": [],
  "unknown_teams": [],
  "lineup_unmatched_names": [
@@ -100,7 +100,7 @@
  "runner": {
   "event": "workflow_dispatch",
   "run_id": "38652384276",
-  "iteration": 4,
+  "iteration": 5,
   "chain_link": 70,
   "chain_started_at": "2026-10-12T13:50:14-04:00",
   "run_started_at": "2026-10-14T19:10:10-04:00"
