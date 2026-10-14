@@ -1,12 +1,12 @@
 {
  "slate_date": "2026-10-13",
- "generated_at": "2026-10-13T20:50:00-04:00",
- "status_at": "2026-10-13T20:50:00-04:00",
+ "generated_at": "2026-10-13T21:00:00-04:00",
+ "status_at": "2026-10-13T21:00:00-04:00",
  "valid_until": "2026-10-14T05:00:00-04:00",
  "status": {
   "prices_state": "ok",
-  "prices_at": "2026-10-13T20:20:00-04:00",
-  "next_price_read_at": "2026-10-13T21:00:00-04:00",
+  "prices_at": "2026-10-13T21:00:00-04:00",
+  "next_price_read_at": "2026-10-13T21:45:00-04:00",
   "stats_built_at": "2026-10-13T20:40:01-04:00",
   "stats_through": "2026-10-12",
   "lineups_at": "2026-10-13T20:50:00-04:00",
@@ -16,11 +16,11 @@
   "stats_state": "ok",
   "last_run": {
    "ok": true,
-   "at": "2026-10-13T20:50:00-04:00",
+   "at": "2026-10-13T21:00:00-04:00",
    "failed_step": null
   },
   "pool": {
-   "pulls_left": 1342,
+   "pulls_left": 1341,
    "keys": 4,
    "game_days_left": 19,
    "days_left": 19,
@@ -36,7 +36,7 @@
     "reason": "stats behind"
    }
   ],
-  "lines_checked": 478,
+  "lines_checked": 491,
   "lines_failed": 35,
   "tier": 4
  },
@@ -180,7 +180,7 @@
    "away": "TOR",
    "home": "UTA",
    "start": "2026-10-13T21:00:00-04:00",
-   "started": false,
+   "started": true,
    "picks": 1,
    "excluded_reason": null,
    "excluded_teams": []
@@ -218,50 +218,6 @@
  ],
  "picks": [
   {
-   "id": "2026-10-13:2026020102:8477939:points:0.5:over",
-   "price": -160,
-   "first_price": -160,
-   "first_price_at": "2026-10-13T20:20:00-04:00",
-   "worst_price": -160,
-   "p": 0.6458,
-   "breakeven": 0.6154,
-   "p_pct": 64,
-   "breakeven_pct": 62,
-   "state": "lineup",
-   "history": [
-    {
-     "at": "2026-10-13T20:20:00-04:00",
-     "text": "Lineup confirmed"
-    }
-   ],
-   "prices": [
-    {
-     "at": "2026-10-13T20:20:00-04:00",
-     "price": -160
-    }
-   ],
-   "pulled": null,
-   "graded": null,
-   "rank": 1,
-   "tier": "main",
-   "game_id": 2026020102,
-   "player": "W. Nylander",
-   "player_id": 8477939,
-   "team": "TOR",
-   "opp": "UTA",
-   "home": false,
-   "start": "2026-10-13T21:00:00-04:00",
-   "market": "points",
-   "line": 0.5,
-   "side": "over",
-   "bet": "Over 0.5 points",
-   "price_at": "2026-10-13T20:20:00-04:00",
-   "reason": "64% to clear 0.5 points; -160 needs 62%. Projects 1.2 points in 20 min.",
-   "thin": false,
-   "games_used": 71,
-   "games_this_season": 6
-  },
-  {
    "id": "2026-10-13:2026020104:8481617:shots:2.5:under",
    "price": -120,
    "first_price": -120,
@@ -286,7 +242,7 @@
    ],
    "pulled": null,
    "graded": null,
-   "rank": 2,
+   "rank": 1,
    "tier": "main",
    "game_id": 2026020104,
    "player": "V. Podkolzin",
@@ -692,6 +648,54 @@
    "thin": false,
    "games_used": 87,
    "games_this_season": 5
+  },
+  {
+   "id": "2026-10-13:2026020102:8477939:points:0.5:over",
+   "price": -160,
+   "first_price": -160,
+   "first_price_at": "2026-10-13T20:20:00-04:00",
+   "worst_price": -160,
+   "p": 0.6458,
+   "breakeven": 0.6154,
+   "p_pct": 64,
+   "breakeven_pct": 62,
+   "state": "locked",
+   "history": [
+    {
+     "at": "2026-10-13T20:20:00-04:00",
+     "text": "Lineup confirmed"
+    },
+    {
+     "at": "2026-10-13T21:00:00-04:00",
+     "text": "Locked"
+    }
+   ],
+   "prices": [
+    {
+     "at": "2026-10-13T20:20:00-04:00",
+     "price": -160
+    }
+   ],
+   "pulled": null,
+   "graded": null,
+   "rank": null,
+   "tier": "main",
+   "game_id": 2026020102,
+   "player": "W. Nylander",
+   "player_id": 8477939,
+   "team": "TOR",
+   "opp": "UTA",
+   "home": false,
+   "start": "2026-10-13T21:00:00-04:00",
+   "market": "points",
+   "line": 0.5,
+   "side": "over",
+   "bet": "Over 0.5 points",
+   "price_at": "2026-10-13T20:20:00-04:00",
+   "reason": "64% to clear 0.5 points; -160 needs 62%. Projects 1.2 points in 20 min.",
+   "thin": false,
+   "games_used": 71,
+   "games_this_season": 6
   }
  ],
  "parlays": [
