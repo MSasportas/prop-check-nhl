@@ -1,10 +1,10 @@
 {
  "ok": true,
  "slate_date": "2026-10-13",
- "started_at": "2026-10-14T02:10:00-04:00",
- "status_at": "2026-10-14T02:10:00-04:00",
- "finished_at": "2026-10-14T02:10:02-04:00",
- "last_ok_at": "2026-10-14T02:10:00-04:00",
+ "started_at": "2026-10-14T02:30:00-04:00",
+ "status_at": "2026-10-14T02:30:00-04:00",
+ "finished_at": "2026-10-14T02:30:01-04:00",
+ "last_ok_at": "2026-10-14T02:30:00-04:00",
  "failed_step": null,
  "steps": [
   {
@@ -20,7 +20,7 @@
   {
    "step": "stats",
    "status": "ok",
-   "note": "1 window(s) read, 2 team-games still missing"
+   "note": "1 window(s) read"
   },
   {
    "step": "lineups",
@@ -104,17 +104,8 @@
   "Roger McQueen",
   "Spencer Martin"
  ],
- "excluded_teams": [
-  {
-   "team": "BOS",
-   "reason": "stats behind"
-  },
-  {
-   "team": "SJS",
-   "reason": "stats behind"
-  }
- ],
- "stats_through": "2026-10-12",
+ "excluded_teams": [],
+ "stats_through": "2026-10-13",
  "lineups_at": "2026-10-13T22:30:14-04:00",
  "lineups_note": "28 of 32 team line pages are dated today.",
  "games_today": 16,
@@ -123,7 +114,7 @@
  "runner": {
   "event": "workflow_dispatch",
   "run_id": "38518768479",
-  "iteration": 3,
+  "iteration": 5,
   "chain_link": 46,
   "chain_started_at": "2026-10-12T13:50:14-04:00",
   "run_started_at": "2026-10-14T01:50:15-04:00"

@@ -1,14 +1,14 @@
 {
  "slate_date": "2026-10-13",
- "generated_at": "2026-10-14T02:10:00-04:00",
- "status_at": "2026-10-14T02:10:00-04:00",
+ "generated_at": "2026-10-14T02:30:00-04:00",
+ "status_at": "2026-10-14T02:30:00-04:00",
  "valid_until": "2026-10-14T05:00:00-04:00",
  "status": {
   "prices_state": "ok",
   "prices_at": "2026-10-13T22:20:00-04:00",
   "next_price_read_at": null,
-  "stats_built_at": "2026-10-14T02:10:00-04:00",
-  "stats_through": "2026-10-12",
+  "stats_built_at": "2026-10-14T02:30:00-04:00",
+  "stats_through": "2026-10-13",
   "lineups_at": "2026-10-13T22:30:14-04:00",
   "goalies_at": null,
   "lineups_note": "28 of 32 team line pages are dated today.",
@@ -16,7 +16,7 @@
   "stats_state": "ok",
   "last_run": {
    "ok": true,
-   "at": "2026-10-14T02:10:00-04:00",
+   "at": "2026-10-14T02:30:00-04:00",
    "failed_step": null
   },
   "pool": {
@@ -26,25 +26,12 @@
    "days_left": 19,
    "low": false
   },
-  "excluded_teams": [
-   {
-    "team": "BOS",
-    "reason": "stats behind"
-   },
-   {
-    "team": "SJS",
-    "reason": "stats behind"
-   }
-  ],
+  "excluded_teams": [],
   "lines_checked": 525,
   "lines_failed": 38,
   "tier": 4
  },
  "banners": [
-  {
-   "level": "warn",
-   "text": "Not covered tonight: BOS, SJS (stats behind)."
-  },
   {
    "level": "info",
    "text": "38 Hard Rock lines skipped: the two sides did not add up or the price was old."
@@ -213,11 +200,8 @@
    "start": "2026-10-13T23:00:00-04:00",
    "started": true,
    "picks": 0,
-   "excluded_reason": "stats behind",
-   "excluded_teams": [
-    "BOS",
-    "SJS"
-   ]
+   "excluded_reason": null,
+   "excluded_teams": []
   }
  ],
  "picks": [
