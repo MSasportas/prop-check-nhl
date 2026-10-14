@@ -1,15 +1,15 @@
 {
- "generated_at": "2026-10-14T00:00:00-04:00",
+ "generated_at": "2026-10-14T00:10:00-04:00",
  "summary": {
   "headline": {
-   "w": 7,
+   "w": 8,
    "l": 4,
    "push": 0,
    "void": 0,
-   "units": 1.42,
-   "hit_rate": 0.6364,
-   "needed": 0.5719,
-   "n": 11
+   "units": 2.05,
+   "hit_rate": 0.6667,
+   "needed": 0.5756,
+   "n": 12
   },
   "rows": [
    {
@@ -27,26 +27,26 @@
    {
     "key": "points",
     "label": "Points",
-    "w": 1,
+    "w": 2,
     "l": 1,
     "push": 0,
     "void": 0,
-    "units": -0.13,
-    "hit_rate": 0.5,
-    "needed": 0.5591,
-    "n": 2
+    "units": 0.49,
+    "hit_rate": 0.6667,
+    "needed": 0.5779,
+    "n": 3
    },
    {
     "key": "parlays",
     "label": "Parlays",
     "w": 1,
-    "l": 5,
+    "l": 6,
     "push": 0,
     "void": 0,
-    "units": -3.45,
-    "hit_rate": 0.1667,
-    "needed": 0.2917,
-    "n": 6
+    "units": -4.45,
+    "hit_rate": 0.1429,
+    "needed": 0.3036,
+    "n": 7
    }
   ]
  },
@@ -54,9 +54,9 @@
   {
    "date": "2026-10-13",
    "graded": false,
-   "w": 5,
+   "w": 6,
    "l": 3,
-   "units": 0.74,
+   "units": 1.37,
    "entries": [
     {
      "id": "2026-10-13:2026020097:8477506:shots:1.5:under",
@@ -102,9 +102,9 @@
        "at": "2026-10-13T20:20:00-04:00"
       }
      ],
-     "result": null,
-     "actual": null,
-     "units": null,
+     "result": "W",
+     "actual": "had 1",
+     "units": 0.625,
      "pulled": null,
      "legs": []
     },
@@ -665,9 +665,9 @@
      "bet": "2 legs",
      "price": 167,
      "first_price": 167,
-     "result": null,
-     "actual": null,
-     "units": null,
+     "result": "L",
+     "actual": "1 of 2 legs hit",
+     "units": -1.0,
      "pulled": null,
      "legs": [
       {
@@ -710,9 +710,9 @@
          "at": "2026-10-13T20:20:00-04:00"
         }
        ],
-       "result": null,
-       "actual": null,
-       "units": null,
+       "result": "W",
+       "actual": "had 1",
+       "units": 0.625,
        "pulled": null,
        "legs": []
       }
