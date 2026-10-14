@@ -1,13 +1,13 @@
 {
  "slate_date": "2026-10-13",
- "generated_at": "2026-10-14T00:50:01-04:00",
- "status_at": "2026-10-14T00:50:01-04:00",
+ "generated_at": "2026-10-14T01:20:01-04:00",
+ "status_at": "2026-10-14T01:20:01-04:00",
  "valid_until": "2026-10-14T05:00:00-04:00",
  "status": {
   "prices_state": "ok",
   "prices_at": "2026-10-13T22:20:00-04:00",
   "next_price_read_at": null,
-  "stats_built_at": "2026-10-14T00:30:00-04:00",
+  "stats_built_at": "2026-10-14T01:20:01-04:00",
   "stats_through": "2026-10-12",
   "lineups_at": "2026-10-13T22:30:14-04:00",
   "goalies_at": null,
@@ -16,7 +16,7 @@
   "stats_state": "ok",
   "last_run": {
    "ok": true,
-   "at": "2026-10-14T00:50:01-04:00",
+   "at": "2026-10-14T01:20:01-04:00",
    "failed_step": null
   },
   "pool": {
@@ -28,11 +28,11 @@
   },
   "excluded_teams": [
    {
-    "team": "ANA",
+    "team": "EDM",
     "reason": "stats behind"
    },
    {
-    "team": "CGY",
+    "team": "LAK",
     "reason": "stats behind"
    }
   ],
@@ -43,7 +43,7 @@
  "banners": [
   {
    "level": "warn",
-   "text": "Not covered tonight: ANA, CGY (stats behind)."
+   "text": "Not covered tonight: EDM, LAK (stats behind)."
   },
   {
    "level": "info",
@@ -193,11 +193,8 @@
    "start": "2026-10-13T21:45:00-04:00",
    "started": true,
    "picks": 0,
-   "excluded_reason": "stats behind",
-   "excluded_teams": [
-    "CGY",
-    "ANA"
-   ]
+   "excluded_reason": null,
+   "excluded_teams": []
   },
   {
    "id": 2026020104,
@@ -206,8 +203,11 @@
    "start": "2026-10-13T22:30:00-04:00",
    "started": true,
    "picks": 1,
-   "excluded_reason": null,
-   "excluded_teams": []
+   "excluded_reason": "stats behind",
+   "excluded_teams": [
+    "EDM",
+    "LAK"
+   ]
   },
   {
    "id": 2026020105,

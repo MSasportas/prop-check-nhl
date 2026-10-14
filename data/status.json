@@ -1,10 +1,10 @@
 {
  "ok": true,
  "slate_date": "2026-10-13",
- "started_at": "2026-10-14T01:00:01-04:00",
- "status_at": "2026-10-14T01:00:01-04:00",
- "finished_at": "2026-10-14T01:00:02-04:00",
- "last_ok_at": "2026-10-14T01:00:01-04:00",
+ "started_at": "2026-10-14T01:20:01-04:00",
+ "status_at": "2026-10-14T01:20:01-04:00",
+ "finished_at": "2026-10-14T01:20:03-04:00",
+ "last_ok_at": "2026-10-14T01:20:01-04:00",
  "failed_step": null,
  "steps": [
   {
@@ -44,8 +44,8 @@
   },
   {
    "step": "slate",
-   "status": "skipped",
-   "note": "unchanged"
+   "status": "ok",
+   "note": "0 open pick(s)"
   },
   {
    "step": "record",
@@ -106,11 +106,11 @@
  ],
  "excluded_teams": [
   {
-   "team": "ANA",
+   "team": "EDM",
    "reason": "stats behind"
   },
   {
-   "team": "CGY",
+   "team": "LAK",
    "reason": "stats behind"
   }
  ],
@@ -122,10 +122,10 @@
  "odds_notes": [],
  "runner": {
   "event": "workflow_dispatch",
-  "run_id": "38509993711",
-  "iteration": 6,
-  "chain_link": 44,
+  "run_id": "38514300444",
+  "iteration": 3,
+  "chain_link": 45,
   "chain_started_at": "2026-10-12T13:50:14-04:00",
-  "run_started_at": "2026-10-14T00:10:14-04:00"
+  "run_started_at": "2026-10-14T01:00:15-04:00"
  }
 }
