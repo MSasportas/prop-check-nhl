@@ -1,12 +1,12 @@
 {
  "slate_date": "2026-10-15",
- "generated_at": "2026-10-15T18:00:01-04:00",
- "status_at": "2026-10-15T18:00:01-04:00",
+ "generated_at": "2026-10-15T18:20:00-04:00",
+ "status_at": "2026-10-15T18:20:00-04:00",
  "valid_until": "2026-10-16T05:00:00-04:00",
  "status": {
   "prices_state": "ok",
-  "prices_at": "2026-10-15T17:30:01-04:00",
-  "next_price_read_at": "2026-10-15T18:15:00-04:00",
+  "prices_at": "2026-10-15T18:20:00-04:00",
+  "next_price_read_at": "2026-10-15T18:30:00-04:00",
   "stats_built_at": "2026-10-15T00:10:17-04:00",
   "stats_through": "2026-10-14",
   "lineups_at": "2026-10-15T18:00:01-04:00",
@@ -16,25 +16,25 @@
   "stats_state": "ok",
   "last_run": {
    "ok": true,
-   "at": "2026-10-15T18:00:01-04:00",
+   "at": "2026-10-15T18:20:00-04:00",
    "failed_step": null
   },
   "pool": {
-   "pulls_left": 1309,
+   "pulls_left": 1304,
    "keys": 4,
    "game_days_left": 17,
    "days_left": 17,
    "low": false
   },
   "excluded_teams": [],
-  "lines_checked": 207,
-  "lines_failed": 22,
+  "lines_checked": 256,
+  "lines_failed": 26,
   "tier": 4
  },
  "banners": [
   {
    "level": "info",
-   "text": "22 Hard Rock lines skipped: the two sides did not add up or the price was old."
+   "text": "26 Hard Rock lines skipped: the two sides did not add up or the price was old."
   }
  ],
  "empty": null,
@@ -85,7 +85,7 @@
    "home": "NJD",
    "start": "2026-10-15T19:00:00-04:00",
    "started": false,
-   "picks": 0,
+   "picks": 1,
    "excluded_reason": null,
    "excluded_teams": []
   },
@@ -152,6 +152,50 @@
  ],
  "picks": [
   {
+   "id": "2026-10-15:2026020113:8482684:points:0.5:under",
+   "price": -110,
+   "first_price": -110,
+   "first_price_at": "2026-10-15T18:20:00-04:00",
+   "worst_price": -110,
+   "p": 0.563,
+   "breakeven": 0.5238,
+   "p_pct": 56,
+   "breakeven_pct": 52,
+   "state": "lineup",
+   "history": [
+    {
+     "at": "2026-10-15T18:20:00-04:00",
+     "text": "Lineup confirmed"
+    }
+   ],
+   "prices": [
+    {
+     "at": "2026-10-15T18:20:00-04:00",
+     "price": -110
+    }
+   ],
+   "pulled": null,
+   "graded": null,
+   "rank": 1,
+   "tier": "main",
+   "game_id": 2026020113,
+   "player": "L. Hughes",
+   "player_id": 8482684,
+   "team": "NJD",
+   "opp": "NYR",
+   "home": true,
+   "start": "2026-10-15T19:00:00-04:00",
+   "market": "points",
+   "line": 0.5,
+   "side": "under",
+   "bet": "Under 0.5 points",
+   "price_at": "2026-10-15T18:20:00-04:00",
+   "reason": "56% to stay under 0.5 points; -110 needs 52%. Projects 0.4 points in 23 min. NYR allow 6% fewer goals than average.",
+   "thin": false,
+   "games_used": 74,
+   "games_this_season": 6
+  },
+  {
    "id": "2026-10-15:2026020109:8484759:points:0.5:under",
    "price": -155,
    "first_price": -155,
@@ -176,7 +220,7 @@
    ],
    "pulled": null,
    "graded": null,
-   "rank": 1,
+   "rank": 2,
    "tier": "main",
    "game_id": 2026020109,
    "player": "C. Yakemchuk",
@@ -189,7 +233,7 @@
    "line": 0.5,
    "side": "under",
    "bet": "Under 0.5 points",
-   "price_at": "2026-10-15T17:30:01-04:00",
+   "price_at": "2026-10-15T18:20:00-04:00",
    "reason": "63% to stay under 0.5 points; -155 needs 61%. Projects 0.3 points in 18 min. NYI allow 3% fewer goals than average. Short history: 11 games.",
    "thin": true,
    "games_used": 11,
@@ -220,7 +264,7 @@
    ],
    "pulled": null,
    "graded": null,
-   "rank": 2,
+   "rank": 3,
    "tier": "main",
    "game_id": 2026020109,
    "player": "M. Schaefer",
@@ -233,7 +277,7 @@
    "line": 3.5,
    "side": "under",
    "bet": "Under 3.5 shots on goal",
-   "price_at": "2026-10-15T17:30:01-04:00",
+   "price_at": "2026-10-15T18:20:00-04:00",
    "reason": "66% to stay under 3.5 shots; -180 needs 64%. Projects 2.5 shots in 25 min. OTT allow 8% fewer shots than average.",
    "thin": false,
    "games_used": 88,

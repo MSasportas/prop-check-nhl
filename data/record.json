@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-10-15T17:30:01-04:00",
+ "generated_at": "2026-10-15T18:20:00-04:00",
  "summary": {
   "headline": {
    "w": 8,
@@ -73,6 +73,29 @@
       {
        "price": -155,
        "at": "2026-10-15T17:30:01-04:00"
+      }
+     ],
+     "result": null,
+     "actual": null,
+     "units": null,
+     "pulled": null,
+     "legs": []
+    },
+    {
+     "id": "2026-10-15:2026020113:8482684:points:0.5:under",
+     "kind": "single",
+     "player": "L. Hughes",
+     "bet": "Under 0.5 points",
+     "market": "points",
+     "team": "NJD",
+     "game": "NYR at NJD",
+     "price": -110,
+     "first_price": -110,
+     "last_price": -110,
+     "prices": [
+      {
+       "price": -110,
+       "at": "2026-10-15T18:20:00-04:00"
       }
      ],
      "result": null,
