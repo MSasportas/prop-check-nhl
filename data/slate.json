@@ -1,12 +1,12 @@
 {
  "slate_date": "2026-10-15",
- "generated_at": "2026-10-15T19:20:00-04:00",
- "status_at": "2026-10-15T19:20:00-04:00",
+ "generated_at": "2026-10-15T19:30:00-04:00",
+ "status_at": "2026-10-15T19:30:00-04:00",
  "valid_until": "2026-10-16T05:00:00-04:00",
  "status": {
   "prices_state": "ok",
-  "prices_at": "2026-10-15T19:20:00-04:00",
-  "next_price_read_at": "2026-10-15T19:30:00-04:00",
+  "prices_at": "2026-10-15T19:30:00-04:00",
+  "next_price_read_at": "2026-10-15T20:15:00-04:00",
   "stats_built_at": "2026-10-15T00:10:17-04:00",
   "stats_through": "2026-10-14",
   "lineups_at": "2026-10-15T19:20:00-04:00",
@@ -16,31 +16,31 @@
   "stats_state": "ok",
   "last_run": {
    "ok": true,
-   "at": "2026-10-15T19:20:00-04:00",
+   "at": "2026-10-15T19:30:00-04:00",
    "failed_step": null
   },
   "pool": {
-   "pulls_left": 1294,
+   "pulls_left": 1290,
    "keys": 4,
    "game_days_left": 17,
    "days_left": 17,
    "low": false
   },
   "excluded_teams": [],
-  "lines_checked": 316,
-  "lines_failed": 34,
+  "lines_checked": 333,
+  "lines_failed": 37,
   "tier": 4
  },
  "banners": [
   {
    "level": "info",
-   "text": "34 Hard Rock lines skipped: the two sides did not add up or the price was old."
+   "text": "37 Hard Rock lines skipped: the two sides did not add up or the price was old."
   }
  ],
  "empty": {
   "code": "none_qualified",
   "text": "No open picks right now.",
-  "sub": "Checked 316 lines at 7:20 PM. Today's earlier picks are under Started. Next price check at 7:30 PM."
+  "sub": "Checked 333 lines at 7:30 PM. Today's earlier picks are under Started. Next price check at 8:15 PM."
  },
  "games": [
   {
@@ -98,7 +98,7 @@
    "away": "PHI",
    "home": "DET",
    "start": "2026-10-15T19:30:00-04:00",
-   "started": false,
+   "started": true,
    "picks": 0,
    "excluded_reason": null,
    "excluded_teams": []
@@ -303,6 +303,14 @@
  "parlays": [],
  "goal_watch": [
   {
+   "player": "C. McDavid",
+   "team": "EDM",
+   "price": -110,
+   "fair_price": 144,
+   "p": 0.41,
+   "text": "40% to score; -110 needs 52%. Fair price +144. Not a pick."
+  },
+  {
    "player": "K. Connor",
    "team": "WPG",
    "price": 105,
@@ -317,14 +325,6 @@
    "fair_price": 149,
    "p": 0.4019,
    "text": "40% to score; +105 needs 49%. Fair price +149. Not a pick."
-  },
-  {
-   "player": "M. Boldy",
-   "team": "MIN",
-   "price": 120,
-   "fair_price": 186,
-   "p": 0.3501,
-   "text": "35% to score; +120 needs 45%. Fair price +186. Not a pick."
   }
  ],
  "goal_watch_note": "Not picks. Our model is weakest on goals."
