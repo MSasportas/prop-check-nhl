@@ -1,10 +1,10 @@
 {
  "ok": true,
  "slate_date": "2026-10-14",
- "started_at": "2026-10-15T00:00:01-04:00",
- "status_at": "2026-10-15T00:00:01-04:00",
- "finished_at": "2026-10-15T00:00:02-04:00",
- "last_ok_at": "2026-10-15T00:00:01-04:00",
+ "started_at": "2026-10-15T00:10:17-04:00",
+ "status_at": "2026-10-15T00:10:17-04:00",
+ "finished_at": "2026-10-15T00:10:18-04:00",
+ "last_ok_at": "2026-10-15T00:10:17-04:00",
  "failed_step": null,
  "steps": [
   {
@@ -20,7 +20,7 @@
   {
    "step": "stats",
    "status": "ok",
-   "note": "1 window(s) read, 2 team-games still missing"
+   "note": "1 window(s) read"
   },
   {
    "step": "lineups",
@@ -44,8 +44,8 @@
   },
   {
    "step": "slate",
-   "status": "skipped",
-   "note": "unchanged"
+   "status": "ok",
+   "note": "0 open pick(s)"
   },
   {
    "step": "record",
@@ -90,17 +90,8 @@
  "lineup_unmatched_names": [
   "Gavin Brindley"
  ],
- "excluded_teams": [
-  {
-   "team": "COL",
-   "reason": "stats behind"
-  },
-  {
-   "team": "DAL",
-   "reason": "stats behind"
-  }
- ],
- "stats_through": "2026-10-13",
+ "excluded_teams": [],
+ "stats_through": "2026-10-14",
  "lineups_at": "2026-10-14T20:20:00-04:00",
  "lineups_note": "4 of 4 team line pages are dated today.",
  "games_today": 2,
@@ -108,10 +99,10 @@
  "odds_notes": [],
  "runner": {
   "event": "workflow_dispatch",
-  "run_id": "38675712251",
-  "iteration": 5,
-  "chain_link": 4,
+  "run_id": "38680037177",
+  "iteration": 1,
+  "chain_link": 5,
   "chain_started_at": "2026-10-14T20:00:13-04:00",
-  "run_started_at": "2026-10-14T23:20:15-04:00"
+  "run_started_at": "2026-10-15T00:10:16-04:00"
  }
 }

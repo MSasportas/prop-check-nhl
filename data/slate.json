@@ -1,22 +1,22 @@
 {
  "slate_date": "2026-10-14",
- "generated_at": "2026-10-15T00:10:00-04:00",
- "status_at": "2026-10-15T00:10:00-04:00",
+ "generated_at": "2026-10-15T00:10:17-04:00",
+ "status_at": "2026-10-15T00:10:17-04:00",
  "valid_until": "2026-10-15T05:00:00-04:00",
  "status": {
   "prices_state": "ok",
   "prices_at": "2026-10-14T19:00:01-04:00",
   "next_price_read_at": null,
-  "stats_built_at": "2026-10-14T23:30:00-04:00",
-  "stats_through": "2026-10-13",
+  "stats_built_at": "2026-10-15T00:10:17-04:00",
+  "stats_through": "2026-10-14",
   "lineups_at": "2026-10-14T20:20:00-04:00",
   "goalies_at": null,
   "lineups_note": "4 of 4 team line pages are dated today.",
   "lineups_state": "ok",
-  "stats_state": "behind",
+  "stats_state": "ok",
   "last_run": {
    "ok": true,
-   "at": "2026-10-15T00:10:00-04:00",
+   "at": "2026-10-15T00:10:17-04:00",
    "failed_step": null
   },
   "pool": {
@@ -26,34 +26,21 @@
    "days_left": 18,
    "low": false
   },
-  "excluded_teams": [
-   {
-    "team": "COL",
-    "reason": "stats behind"
-   },
-   {
-    "team": "DAL",
-    "reason": "stats behind"
-   }
-  ],
+  "excluded_teams": [],
   "lines_checked": 64,
   "lines_failed": 6,
   "tier": 4
  },
  "banners": [
   {
-   "level": "warn",
-   "text": "Not covered tonight: COL, DAL (stats behind)."
-  },
-  {
    "level": "info",
    "text": "6 Hard Rock lines skipped: the two sides did not add up or the price was old."
   }
  ],
  "empty": {
-  "code": "stats_behind",
-  "text": "Stats are behind, so no picks until they catch up.",
-  "sub": null
+  "code": "all_started",
+  "text": "Every game has started.",
+  "sub": "No picks were posted tonight."
  },
  "games": [
   {
@@ -73,11 +60,8 @@
    "start": "2026-10-14T20:30:00-04:00",
    "started": true,
    "picks": 0,
-   "excluded_reason": "stats behind",
-   "excluded_teams": [
-    "DAL",
-    "COL"
-   ]
+   "excluded_reason": null,
+   "excluded_teams": []
   }
  ],
  "picks": [],
