@@ -1,64 +1,149 @@
 {
- "slate_date": "2026-10-14",
- "generated_at": "2026-10-15T04:30:01-04:00",
- "status_at": "2026-10-15T04:30:01-04:00",
- "valid_until": "2026-10-15T05:00:00-04:00",
+ "slate_date": "2026-10-15",
+ "generated_at": "2026-10-15T05:00:00-04:00",
+ "status_at": "2026-10-15T05:00:00-04:00",
+ "valid_until": "2026-10-16T05:00:00-04:00",
  "status": {
-  "prices_state": "ok",
-  "prices_at": "2026-10-14T19:00:01-04:00",
-  "next_price_read_at": null,
+  "prices_state": "not_yet",
+  "prices_at": null,
+  "next_price_read_at": "2026-10-15T13:00:00-04:00",
   "stats_built_at": "2026-10-15T00:10:17-04:00",
   "stats_through": "2026-10-14",
-  "lineups_at": "2026-10-14T20:20:00-04:00",
+  "lineups_at": null,
   "goalies_at": null,
-  "lineups_note": "4 of 4 team line pages are dated today.",
-  "lineups_state": "ok",
+  "lineups_note": null,
+  "lineups_state": "not_yet",
   "stats_state": "ok",
   "last_run": {
    "ok": true,
-   "at": "2026-10-15T04:30:01-04:00",
+   "at": "2026-10-15T05:00:00-04:00",
    "failed_step": null
   },
   "pool": {
    "pulls_left": 1328,
    "keys": 4,
-   "game_days_left": 18,
-   "days_left": 18,
+   "game_days_left": 17,
+   "days_left": 17,
    "low": false
   },
   "excluded_teams": [],
-  "lines_checked": 64,
-  "lines_failed": 6,
+  "lines_checked": 0,
+  "lines_failed": 0,
   "tier": 4
  },
- "banners": [
-  {
-   "level": "info",
-   "text": "6 Hard Rock lines skipped: the two sides did not add up or the price was old."
-  }
- ],
+ "banners": [],
  "empty": {
-  "code": "all_started",
-  "text": "Every game has started.",
-  "sub": "No picks were posted tonight."
+  "code": "not_yet",
+  "text": "No prices read yet today.",
+  "sub": "First read is due at 1:00 PM."
  },
  "games": [
   {
-   "id": 2026020106,
-   "away": "MTL",
-   "home": "WSH",
-   "start": "2026-10-14T19:30:00-04:00",
-   "started": true,
+   "id": 2026020108,
+   "away": "BUF",
+   "home": "TOR",
+   "start": "2026-10-15T19:00:00-04:00",
+   "started": false,
    "picks": 0,
    "excluded_reason": null,
    "excluded_teams": []
   },
   {
-   "id": 2026020107,
-   "away": "DAL",
-   "home": "COL",
-   "start": "2026-10-14T20:30:00-04:00",
-   "started": true,
+   "id": 2026020109,
+   "away": "NYI",
+   "home": "OTT",
+   "start": "2026-10-15T19:00:00-04:00",
+   "started": false,
+   "picks": 0,
+   "excluded_reason": null,
+   "excluded_teams": []
+  },
+  {
+   "id": 2026020111,
+   "away": "SEA",
+   "home": "TBL",
+   "start": "2026-10-15T19:00:00-04:00",
+   "started": false,
+   "picks": 0,
+   "excluded_reason": null,
+   "excluded_teams": []
+  },
+  {
+   "id": 2026020112,
+   "away": "VAN",
+   "home": "FLA",
+   "start": "2026-10-15T19:00:00-04:00",
+   "started": false,
+   "picks": 0,
+   "excluded_reason": null,
+   "excluded_teams": []
+  },
+  {
+   "id": 2026020113,
+   "away": "NYR",
+   "home": "NJD",
+   "start": "2026-10-15T19:00:00-04:00",
+   "started": false,
+   "picks": 0,
+   "excluded_reason": null,
+   "excluded_teams": []
+  },
+  {
+   "id": 2026020110,
+   "away": "PHI",
+   "home": "DET",
+   "start": "2026-10-15T19:30:00-04:00",
+   "started": false,
+   "picks": 0,
+   "excluded_reason": null,
+   "excluded_teams": []
+  },
+  {
+   "id": 2026020114,
+   "away": "WPG",
+   "home": "CHI",
+   "start": "2026-10-15T20:00:00-04:00",
+   "started": false,
+   "picks": 0,
+   "excluded_reason": null,
+   "excluded_teams": []
+  },
+  {
+   "id": 2026020115,
+   "away": "SJS",
+   "home": "NSH",
+   "start": "2026-10-15T20:00:00-04:00",
+   "started": false,
+   "picks": 0,
+   "excluded_reason": null,
+   "excluded_teams": []
+  },
+  {
+   "id": 2026020116,
+   "away": "STL",
+   "home": "MIN",
+   "start": "2026-10-15T20:00:00-04:00",
+   "started": false,
+   "picks": 0,
+   "excluded_reason": null,
+   "excluded_teams": []
+  },
+  {
+   "id": 2026020117,
+   "away": "UTA",
+   "home": "EDM",
+   "start": "2026-10-15T21:00:00-04:00",
+   "started": false,
+   "picks": 0,
+   "excluded_reason": null,
+   "excluded_teams": []
+  },
+  {
+   "id": 2026020118,
+   "away": "CGY",
+   "home": "VGK",
+   "start": "2026-10-15T22:00:00-04:00",
+   "started": false,
    "picks": 0,
    "excluded_reason": null,
    "excluded_teams": []
