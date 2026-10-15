@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-10-14T01:50:00-04:00",
+ "generated_at": "2026-10-15T17:30:01-04:00",
  "summary": {
   "headline": {
    "w": 8,
@@ -51,6 +51,61 @@
   ]
  },
  "nights": [
+  {
+   "date": "2026-10-15",
+   "graded": false,
+   "w": 0,
+   "l": 0,
+   "units": 0,
+   "entries": [
+    {
+     "id": "2026-10-15:2026020109:8484759:points:0.5:under",
+     "kind": "single",
+     "player": "C. Yakemchuk",
+     "bet": "Under 0.5 points",
+     "market": "points",
+     "team": "OTT",
+     "game": "NYI at OTT",
+     "price": -155,
+     "first_price": -155,
+     "last_price": -155,
+     "prices": [
+      {
+       "price": -155,
+       "at": "2026-10-15T17:30:01-04:00"
+      }
+     ],
+     "result": null,
+     "actual": null,
+     "units": null,
+     "pulled": null,
+     "legs": []
+    },
+    {
+     "id": "2026-10-15:2026020109:8485366:shots:3.5:under",
+     "kind": "single",
+     "player": "M. Schaefer",
+     "bet": "Under 3.5 shots on goal",
+     "market": "shots",
+     "team": "NYI",
+     "game": "NYI at OTT",
+     "price": -180,
+     "first_price": -180,
+     "last_price": -180,
+     "prices": [
+      {
+       "price": -180,
+       "at": "2026-10-15T17:30:01-04:00"
+      }
+     ],
+     "result": null,
+     "actual": null,
+     "units": null,
+     "pulled": null,
+     "legs": []
+    }
+   ]
+  },
   {
    "date": "2026-10-13",
    "graded": true,

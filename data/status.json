@@ -1,10 +1,10 @@
 {
  "ok": true,
  "slate_date": "2026-10-15",
- "started_at": "2026-10-15T17:20:01-04:00",
- "status_at": "2026-10-15T17:20:01-04:00",
- "finished_at": "2026-10-15T17:20:04-04:00",
- "last_ok_at": "2026-10-15T17:20:01-04:00",
+ "started_at": "2026-10-15T17:30:01-04:00",
+ "status_at": "2026-10-15T17:30:01-04:00",
+ "finished_at": "2026-10-15T17:30:08-04:00",
+ "last_ok_at": "2026-10-15T17:30:01-04:00",
  "failed_step": null,
  "steps": [
   {
@@ -25,17 +25,17 @@
   {
    "step": "lineups",
    "status": "ok",
-   "note": "16 of 16 team pages read"
+   "note": "2 of 2 team pages read"
   },
   {
    "step": "odds",
    "status": "ok",
-   "note": "no pull due"
+   "note": "2 game(s) priced"
   },
   {
    "step": "engine",
    "status": "ok",
-   "note": "no change"
+   "note": "2 new event(s), 2 newly shown"
   },
   {
    "step": "grade",
@@ -45,12 +45,12 @@
   {
    "step": "slate",
    "status": "ok",
-   "note": "0 open pick(s)"
+   "note": "2 open pick(s)"
   },
   {
    "step": "record",
-   "status": "skipped",
-   "note": "unchanged"
+   "status": "ok",
+   "note": "record.json"
   }
  ],
  "sources": {
@@ -62,7 +62,7 @@
  "keys": [
   {
    "n": 1,
-   "left": 250
+   "left": 242
   },
   {
    "n": 2,
@@ -77,15 +77,16 @@
    "left": 458
   }
  ],
- "pool_total": 1317,
+ "pool_total": 1309,
  "allowance": 11.1597,
  "tier": 4,
  "budget_today": 122,
- "budget_used_today": 11,
+ "budget_used_today": 19,
  "prices_state": "ok",
- "prices_at": "2026-10-15T13:00:01-04:00",
- "next_price_read_at": "2026-10-15T17:30:00-04:00",
+ "prices_at": "2026-10-15T17:30:01-04:00",
+ "next_price_read_at": "2026-10-15T18:15:00-04:00",
  "unmatched_names": [
+  "Artem Zub",
   "Elias Pettersson"
  ],
  "unknown_teams": [],
@@ -96,15 +97,15 @@
  ],
  "excluded_teams": [],
  "stats_through": "2026-10-14",
- "lineups_at": "2026-10-15T17:20:01-04:00",
+ "lineups_at": "2026-10-15T17:30:01-04:00",
  "lineups_note": "13 of 18 team line pages are dated today.",
  "games_today": 11,
- "record_events": 67,
+ "record_events": 69,
  "odds_notes": [],
  "runner": {
   "event": "workflow_dispatch",
   "run_id": "38803802773",
-  "iteration": 5,
+  "iteration": 6,
   "chain_link": 28,
   "chain_started_at": "2026-10-14T20:00:13-04:00",
   "run_started_at": "2026-10-15T16:40:15-04:00"
