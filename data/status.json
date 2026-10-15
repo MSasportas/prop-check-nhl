@@ -1,10 +1,10 @@
 {
  "ok": true,
  "slate_date": "2026-10-14",
- "started_at": "2026-10-14T22:20:00-04:00",
- "status_at": "2026-10-14T22:20:00-04:00",
- "finished_at": "2026-10-14T22:20:00-04:00",
- "last_ok_at": "2026-10-14T22:20:00-04:00",
+ "started_at": "2026-10-14T22:30:00-04:00",
+ "status_at": "2026-10-14T22:30:00-04:00",
+ "finished_at": "2026-10-14T22:30:01-04:00",
+ "last_ok_at": "2026-10-14T22:30:00-04:00",
  "failed_step": null,
  "steps": [
   {
@@ -19,8 +19,8 @@
   },
   {
    "step": "stats",
-   "status": "skipped",
-   "note": "nothing new"
+   "status": "ok",
+   "note": "1 window(s) read, 2 team-games still missing"
   },
   {
    "step": "lineups",
@@ -90,7 +90,16 @@
  "lineup_unmatched_names": [
   "Gavin Brindley"
  ],
- "excluded_teams": [],
+ "excluded_teams": [
+  {
+   "team": "MTL",
+   "reason": "stats behind"
+  },
+  {
+   "team": "WSH",
+   "reason": "stats behind"
+  }
+ ],
  "stats_through": "2026-10-13",
  "lineups_at": "2026-10-14T20:20:00-04:00",
  "lineups_note": "4 of 4 team line pages are dated today.",
@@ -100,7 +109,7 @@
  "runner": {
   "event": "workflow_dispatch",
   "run_id": "38666883534",
-  "iteration": 5,
+  "iteration": 6,
   "chain_link": 2,
   "chain_started_at": "2026-10-14T20:00:13-04:00",
   "run_started_at": "2026-10-14T21:40:11-04:00"
