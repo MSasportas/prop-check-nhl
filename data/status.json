@@ -1,10 +1,10 @@
 {
  "ok": true,
  "slate_date": "2026-10-15",
- "started_at": "2026-10-15T18:50:01-04:00",
- "status_at": "2026-10-15T18:50:01-04:00",
- "finished_at": "2026-10-15T18:50:04-04:00",
- "last_ok_at": "2026-10-15T18:50:01-04:00",
+ "started_at": "2026-10-15T19:00:00-04:00",
+ "status_at": "2026-10-15T19:00:00-04:00",
+ "finished_at": "2026-10-15T19:00:01-04:00",
+ "last_ok_at": "2026-10-15T19:00:00-04:00",
  "failed_step": null,
  "steps": [
   {
@@ -25,17 +25,17 @@
   {
    "step": "lineups",
    "status": "ok",
-   "note": "20 of 20 team pages read"
+   "note": "2 of 2 team pages read"
   },
   {
    "step": "odds",
    "status": "ok",
-   "note": "1 game(s) priced"
+   "note": "no pull due"
   },
   {
    "step": "engine",
    "status": "ok",
-   "note": "no change"
+   "note": "3 new event(s), 0 newly shown"
   },
   {
    "step": "grade",
@@ -45,12 +45,12 @@
   {
    "step": "slate",
    "status": "ok",
-   "note": "3 open pick(s)"
+   "note": "0 open pick(s)"
   },
   {
    "step": "record",
-   "status": "skipped",
-   "note": "unchanged"
+   "status": "ok",
+   "note": "record.json"
   }
  ],
  "sources": {
@@ -97,15 +97,15 @@
  ],
  "excluded_teams": [],
  "stats_through": "2026-10-14",
- "lineups_at": "2026-10-15T18:50:01-04:00",
- "lineups_note": "17 of 20 team line pages are dated today.",
+ "lineups_at": "2026-10-15T19:00:00-04:00",
+ "lineups_note": "19 of 22 team line pages are dated today.",
  "games_today": 11,
- "record_events": 70,
+ "record_events": 73,
  "odds_notes": [],
  "runner": {
   "event": "workflow_dispatch",
   "run_id": "38816379024",
-  "iteration": 4,
+  "iteration": 5,
   "chain_link": 30,
   "chain_started_at": "2026-10-14T20:00:13-04:00",
   "run_started_at": "2026-10-15T18:20:14-04:00"
