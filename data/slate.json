@@ -1,7 +1,7 @@
 {
  "slate_date": "2026-10-14",
- "generated_at": "2026-10-14T20:20:00-04:00",
- "status_at": "2026-10-14T20:20:00-04:00",
+ "generated_at": "2026-10-14T20:30:01-04:00",
+ "status_at": "2026-10-14T20:30:01-04:00",
  "valid_until": "2026-10-15T05:00:00-04:00",
  "status": {
   "prices_state": "ok",
@@ -16,7 +16,7 @@
   "stats_state": "ok",
   "last_run": {
    "ok": true,
-   "at": "2026-10-14T20:20:00-04:00",
+   "at": "2026-10-14T20:30:01-04:00",
    "failed_step": null
   },
   "pool": {
@@ -38,9 +38,9 @@
   }
  ],
  "empty": {
-  "code": "none_qualified",
-  "text": "No picks tonight. Nothing cleared the bar at Hard Rock's prices.",
-  "sub": "Checked 64 lines at 7:00 PM."
+  "code": "all_started",
+  "text": "Every game has started.",
+  "sub": "No picks were posted tonight."
  },
  "games": [
   {
@@ -58,7 +58,7 @@
    "away": "DAL",
    "home": "COL",
    "start": "2026-10-14T20:30:00-04:00",
-   "started": false,
+   "started": true,
    "picks": 0,
    "excluded_reason": null,
    "excluded_teams": []
@@ -66,31 +66,6 @@
  ],
  "picks": [],
  "parlays": [],
- "goal_watch": [
-  {
-   "player": "N. MacKinnon",
-   "team": "COL",
-   "price": -105,
-   "fair_price": 158,
-   "p": 0.3869,
-   "text": "38% to score; -105 needs 51%. Fair price +158. Not a pick."
-  },
-  {
-   "player": "J. Robertson",
-   "team": "DAL",
-   "price": 140,
-   "fair_price": 200,
-   "p": 0.3335,
-   "text": "33% to score; +140 needs 42%. Fair price +200. Not a pick."
-  },
-  {
-   "player": "M. Necas",
-   "team": "COL",
-   "price": 150,
-   "fair_price": 202,
-   "p": 0.3315,
-   "text": "33% to score; +150 needs 40%. Fair price +202. Not a pick."
-  }
- ],
- "goal_watch_note": "Not picks. Our model is weakest on goals."
+ "goal_watch": [],
+ "goal_watch_note": null
 }
