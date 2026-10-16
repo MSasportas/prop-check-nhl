@@ -1,7 +1,7 @@
 {
  "slate_date": "2026-10-15",
- "generated_at": "2026-10-16T00:30:01-04:00",
- "status_at": "2026-10-16T00:30:01-04:00",
+ "generated_at": "2026-10-16T00:50:01-04:00",
+ "status_at": "2026-10-16T00:50:01-04:00",
  "valid_until": "2026-10-16T05:00:00-04:00",
  "status": {
   "prices_state": "ok",
@@ -16,7 +16,7 @@
   "stats_state": "behind",
   "last_run": {
    "ok": true,
-   "at": "2026-10-16T00:30:01-04:00",
+   "at": "2026-10-16T00:50:01-04:00",
    "failed_step": null
   },
   "pool": {
@@ -29,6 +29,10 @@
   "excluded_teams": [
    {
     "team": "BUF",
+    "reason": "stats behind"
+   },
+   {
+    "team": "CGY",
     "reason": "stats behind"
    },
    {
@@ -96,6 +100,10 @@
     "reason": "stats behind"
    },
    {
+    "team": "VGK",
+    "reason": "stats behind"
+   },
+   {
     "team": "WPG",
     "reason": "stats behind"
    }
@@ -107,7 +115,7 @@
  "banners": [
   {
    "level": "warn",
-   "text": "Not covered tonight: BUF, CHI, DET, EDM, FLA, MIN, NSH, NYI, OTT, PHI, SEA, SJS, STL, TBL, TOR, UTA, VAN, WPG (stats behind)."
+   "text": "Not covered tonight: BUF, CGY, CHI, DET, EDM, FLA, MIN, NSH, NYI, OTT, PHI, SEA, SJS, STL, TBL, TOR, UTA, VAN, VGK, WPG (stats behind)."
   },
   {
    "level": "info",
@@ -254,8 +262,11 @@
    "start": "2026-10-15T22:00:00-04:00",
    "started": true,
    "picks": 0,
-   "excluded_reason": null,
-   "excluded_teams": []
+   "excluded_reason": "stats behind",
+   "excluded_teams": [
+    "CGY",
+    "VGK"
+   ]
   }
  ],
  "picks": [
