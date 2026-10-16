@@ -1,12 +1,12 @@
 {
  "slate_date": "2026-10-15",
- "generated_at": "2026-10-15T21:10:01-04:00",
- "status_at": "2026-10-15T21:10:01-04:00",
+ "generated_at": "2026-10-15T21:20:01-04:00",
+ "status_at": "2026-10-15T21:20:01-04:00",
  "valid_until": "2026-10-16T05:00:00-04:00",
  "status": {
   "prices_state": "ok",
   "prices_at": "2026-10-15T20:30:00-04:00",
-  "next_price_read_at": "2026-10-15T21:15:00-04:00",
+  "next_price_read_at": null,
   "stats_built_at": "2026-10-15T00:10:17-04:00",
   "stats_through": "2026-10-14",
   "lineups_at": "2026-10-15T21:10:01-04:00",
@@ -16,7 +16,7 @@
   "stats_state": "ok",
   "last_run": {
    "ok": true,
-   "at": "2026-10-15T21:10:01-04:00",
+   "at": "2026-10-15T21:20:01-04:00",
    "failed_step": null
   },
   "pool": {
@@ -40,7 +40,7 @@
  "empty": {
   "code": "none_qualified",
   "text": "No open picks right now.",
-  "sub": "Checked 351 lines at 8:30 PM. Today's earlier picks are under Started. Next price check at 9:15 PM."
+  "sub": "Checked 351 lines at 8:30 PM. Today's earlier picks are under Started."
  },
  "games": [
   {
