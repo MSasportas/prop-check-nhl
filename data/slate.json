@@ -1,7 +1,7 @@
 {
  "slate_date": "2026-10-15",
- "generated_at": "2026-10-15T19:40:00-04:00",
- "status_at": "2026-10-15T19:40:00-04:00",
+ "generated_at": "2026-10-15T20:00:01-04:00",
+ "status_at": "2026-10-15T20:00:01-04:00",
  "valid_until": "2026-10-16T05:00:00-04:00",
  "status": {
   "prices_state": "ok",
@@ -9,14 +9,14 @@
   "next_price_read_at": "2026-10-15T20:15:00-04:00",
   "stats_built_at": "2026-10-15T00:10:17-04:00",
   "stats_through": "2026-10-14",
-  "lineups_at": "2026-10-15T19:40:00-04:00",
+  "lineups_at": "2026-10-15T20:00:01-04:00",
   "goalies_at": null,
   "lineups_note": "20 of 22 team line pages are dated today.",
   "lineups_state": "ok",
   "stats_state": "ok",
   "last_run": {
    "ok": true,
-   "at": "2026-10-15T19:40:00-04:00",
+   "at": "2026-10-15T20:00:01-04:00",
    "failed_step": null
   },
   "pool": {
@@ -108,7 +108,7 @@
    "away": "WPG",
    "home": "CHI",
    "start": "2026-10-15T20:00:00-04:00",
-   "started": false,
+   "started": true,
    "picks": 0,
    "excluded_reason": null,
    "excluded_teams": []
@@ -118,7 +118,7 @@
    "away": "SJS",
    "home": "NSH",
    "start": "2026-10-15T20:00:00-04:00",
-   "started": false,
+   "started": true,
    "picks": 0,
    "excluded_reason": null,
    "excluded_teams": []
@@ -128,7 +128,7 @@
    "away": "STL",
    "home": "MIN",
    "start": "2026-10-15T20:00:00-04:00",
-   "started": false,
+   "started": true,
    "picks": 0,
    "excluded_reason": null,
    "excluded_teams": []
@@ -311,20 +311,20 @@
    "text": "40% to score; -110 needs 52%. Fair price +144. Not a pick."
   },
   {
-   "player": "K. Connor",
-   "team": "WPG",
-   "price": 105,
-   "fair_price": 147,
-   "p": 0.4052,
-   "text": "40% to score; +105 needs 49%. Fair price +147. Not a pick."
+   "player": "D. Guenther",
+   "team": "UTA",
+   "price": 135,
+   "fair_price": 176,
+   "p": 0.3618,
+   "text": "36% to score; +135 needs 43%. Fair price +176. Not a pick."
   },
   {
-   "player": "K. Kaprizov",
-   "team": "MIN",
-   "price": 105,
-   "fair_price": 149,
-   "p": 0.4019,
-   "text": "40% to score; +105 needs 49%. Fair price +149. Not a pick."
+   "player": "L. Draisaitl",
+   "team": "EDM",
+   "price": 120,
+   "fair_price": 177,
+   "p": 0.3615,
+   "text": "36% to score; +120 needs 45%. Fair price +177. Not a pick."
   }
  ],
  "goal_watch_note": "Not picks. Our model is weakest on goals."
