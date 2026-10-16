@@ -1,7 +1,7 @@
 {
  "slate_date": "2026-10-15",
- "generated_at": "2026-10-15T21:50:00-04:00",
- "status_at": "2026-10-15T21:50:00-04:00",
+ "generated_at": "2026-10-15T22:00:00-04:00",
+ "status_at": "2026-10-15T22:00:00-04:00",
  "valid_until": "2026-10-16T05:00:00-04:00",
  "status": {
   "prices_state": "ok",
@@ -16,7 +16,7 @@
   "stats_state": "ok",
   "last_run": {
    "ok": true,
-   "at": "2026-10-15T21:50:00-04:00",
+   "at": "2026-10-15T22:00:00-04:00",
    "failed_step": null
   },
   "pool": {
@@ -28,6 +28,10 @@
   },
   "excluded_teams": [
    {
+    "team": "BUF",
+    "reason": "stats behind"
+   },
+   {
     "team": "FLA",
     "reason": "stats behind"
    },
@@ -36,7 +40,27 @@
     "reason": "stats behind"
    },
    {
+    "team": "NYI",
+    "reason": "stats behind"
+   },
+   {
     "team": "NYR",
+    "reason": "stats behind"
+   },
+   {
+    "team": "OTT",
+    "reason": "stats behind"
+   },
+   {
+    "team": "SEA",
+    "reason": "stats behind"
+   },
+   {
+    "team": "TBL",
+    "reason": "stats behind"
+   },
+   {
+    "team": "TOR",
     "reason": "stats behind"
    },
    {
@@ -51,7 +75,7 @@
  "banners": [
   {
    "level": "warn",
-   "text": "Not covered tonight: FLA, NJD, NYR, VAN (stats behind)."
+   "text": "Not covered tonight: BUF, FLA, NJD, NYI, NYR, OTT, SEA, TBL, TOR, VAN (stats behind)."
   },
   {
    "level": "info",
@@ -59,9 +83,9 @@
   }
  ],
  "empty": {
-  "code": "none_qualified",
-  "text": "No open picks right now.",
-  "sub": "Checked 351 lines at 8:30 PM. Today's earlier picks are under Started."
+  "code": "all_started",
+  "text": "Every game has started.",
+  "sub": "Tonight's picks are under Started."
  },
  "games": [
   {
@@ -71,8 +95,11 @@
    "start": "2026-10-15T19:00:00-04:00",
    "started": true,
    "picks": 0,
-   "excluded_reason": null,
-   "excluded_teams": []
+   "excluded_reason": "stats behind",
+   "excluded_teams": [
+    "BUF",
+    "TOR"
+   ]
   },
   {
    "id": 2026020109,
@@ -81,8 +108,11 @@
    "start": "2026-10-15T19:00:00-04:00",
    "started": true,
    "picks": 2,
-   "excluded_reason": null,
-   "excluded_teams": []
+   "excluded_reason": "stats behind",
+   "excluded_teams": [
+    "NYI",
+    "OTT"
+   ]
   },
   {
    "id": 2026020111,
@@ -91,8 +121,11 @@
    "start": "2026-10-15T19:00:00-04:00",
    "started": true,
    "picks": 0,
-   "excluded_reason": null,
-   "excluded_teams": []
+   "excluded_reason": "stats behind",
+   "excluded_teams": [
+    "SEA",
+    "TBL"
+   ]
   },
   {
    "id": 2026020112,
@@ -175,7 +208,7 @@
    "away": "CGY",
    "home": "VGK",
    "start": "2026-10-15T22:00:00-04:00",
-   "started": false,
+   "started": true,
    "picks": 0,
    "excluded_reason": null,
    "excluded_teams": []
@@ -328,31 +361,6 @@
   }
  ],
  "parlays": [],
- "goal_watch": [
-  {
-   "player": "M. Stone",
-   "team": "VGK",
-   "price": 150,
-   "fair_price": 191,
-   "p": 0.344,
-   "text": "34% to score; +150 needs 40%. Fair price +191. Not a pick."
-  },
-  {
-   "player": "J. Eichel",
-   "team": "VGK",
-   "price": 130,
-   "fair_price": 230,
-   "p": 0.3029,
-   "text": "30% to score; +130 needs 43%. Fair price +230. Not a pick."
-  },
-  {
-   "player": "M. Marner",
-   "team": "VGK",
-   "price": 150,
-   "fair_price": 279,
-   "p": 0.2641,
-   "text": "26% to score; +150 needs 40%. Fair price +279. Not a pick."
-  }
- ],
- "goal_watch_note": "Not picks. Our model is weakest on goals."
+ "goal_watch": [],
+ "goal_watch_note": null
 }

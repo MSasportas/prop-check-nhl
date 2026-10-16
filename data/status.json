@@ -1,10 +1,10 @@
 {
  "ok": true,
  "slate_date": "2026-10-15",
- "started_at": "2026-10-15T21:50:00-04:00",
- "status_at": "2026-10-15T21:50:00-04:00",
- "finished_at": "2026-10-15T21:50:01-04:00",
- "last_ok_at": "2026-10-15T21:50:00-04:00",
+ "started_at": "2026-10-15T22:00:00-04:00",
+ "status_at": "2026-10-15T22:00:00-04:00",
+ "finished_at": "2026-10-15T22:00:02-04:00",
+ "last_ok_at": "2026-10-15T22:00:00-04:00",
  "failed_step": null,
  "steps": [
   {
@@ -20,12 +20,12 @@
   {
    "step": "stats",
    "status": "ok",
-   "note": "1 window(s) read, 4 team-games still missing"
+   "note": "1 window(s) read, 10 team-games still missing"
   },
   {
    "step": "lineups",
    "status": "skipped",
-   "note": "checked in the last 20 minutes"
+   "note": "no game close enough"
   },
   {
    "step": "odds",
@@ -97,6 +97,10 @@
  ],
  "excluded_teams": [
   {
+   "team": "BUF",
+   "reason": "stats behind"
+  },
+  {
    "team": "FLA",
    "reason": "stats behind"
   },
@@ -105,7 +109,27 @@
    "reason": "stats behind"
   },
   {
+   "team": "NYI",
+   "reason": "stats behind"
+  },
+  {
    "team": "NYR",
+   "reason": "stats behind"
+  },
+  {
+   "team": "OTT",
+   "reason": "stats behind"
+  },
+  {
+   "team": "SEA",
+   "reason": "stats behind"
+  },
+  {
+   "team": "TBL",
+   "reason": "stats behind"
+  },
+  {
+   "team": "TOR",
    "reason": "stats behind"
   },
   {
@@ -122,7 +146,7 @@
  "runner": {
   "event": "workflow_dispatch",
   "run_id": "38836348855",
-  "iteration": 2,
+  "iteration": 3,
   "chain_link": 34,
   "chain_started_at": "2026-10-14T20:00:13-04:00",
   "run_started_at": "2026-10-15T21:40:13-04:00"
