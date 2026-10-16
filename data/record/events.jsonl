@@ -72,3 +72,5 @@
 {"at":"2026-10-15T19:00:00-04:00","id":"2026-10-15:2026020109:8485366:shots:3.5:under","state":"locked","t":"locked"}
 {"at":"2026-10-15T19:00:00-04:00","id":"2026-10-15:2026020113:8482684:points:0.5:under","state":"locked","t":"locked"}
 {"actual":2,"actual_text":"had 2","at":"2026-10-16T04:00:01-04:00","id":"2026-10-15:2026020113:8482684:points:0.5:under","price":-110,"result":"L","t":"graded","units":-1.0}
+{"actual":0,"actual_text":"had 0","at":"2026-10-16T05:00:01-04:00","id":"2026-10-15:2026020109:8484759:points:0.5:under","price":-155,"result":"W","t":"graded","units":0.6452}
+{"actual":3,"actual_text":"had 3","at":"2026-10-16T05:00:01-04:00","id":"2026-10-15:2026020109:8485366:shots:3.5:under","price":-180,"result":"W","t":"graded","units":0.5556}

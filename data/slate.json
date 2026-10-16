@@ -1,424 +1,65 @@
 {
- "slate_date": "2026-10-15",
- "generated_at": "2026-10-16T04:30:01-04:00",
- "status_at": "2026-10-16T04:30:01-04:00",
- "valid_until": "2026-10-16T05:00:00-04:00",
+ "slate_date": "2026-10-16",
+ "generated_at": "2026-10-16T05:00:01-04:00",
+ "status_at": "2026-10-16T05:00:01-04:00",
+ "valid_until": "2026-10-17T05:00:00-04:00",
  "status": {
-  "prices_state": "ok",
-  "prices_at": "2026-10-15T20:30:00-04:00",
-  "next_price_read_at": null,
-  "stats_built_at": "2026-10-15T22:30:00-04:00",
+  "prices_state": "not_yet",
+  "prices_at": null,
+  "next_price_read_at": "2026-10-16T13:00:00-04:00",
+  "stats_built_at": "2026-10-16T05:00:01-04:00",
   "stats_through": "2026-10-14",
-  "lineups_at": "2026-10-15T21:40:00-04:00",
+  "lineups_at": null,
   "goalies_at": null,
-  "lineups_note": "20 of 22 team line pages are dated today.",
-  "lineups_state": "ok",
-  "stats_state": "behind",
+  "lineups_note": null,
+  "lineups_state": "not_yet",
+  "stats_state": "ok",
   "last_run": {
    "ok": true,
-   "at": "2026-10-16T04:30:01-04:00",
+   "at": "2026-10-16T05:00:01-04:00",
    "failed_step": null
   },
   "pool": {
    "pulls_left": 1286,
    "keys": 4,
-   "game_days_left": 17,
-   "days_left": 17,
+   "game_days_left": 16,
+   "days_left": 16,
    "low": false
   },
-  "excluded_teams": [
-   {
-    "team": "BUF",
-    "reason": "stats behind"
-   },
-   {
-    "team": "CGY",
-    "reason": "stats behind"
-   },
-   {
-    "team": "CHI",
-    "reason": "stats behind"
-   },
-   {
-    "team": "DET",
-    "reason": "stats behind"
-   },
-   {
-    "team": "EDM",
-    "reason": "stats behind"
-   },
-   {
-    "team": "FLA",
-    "reason": "stats behind"
-   },
-   {
-    "team": "MIN",
-    "reason": "stats behind"
-   },
-   {
-    "team": "NSH",
-    "reason": "stats behind"
-   },
-   {
-    "team": "NYI",
-    "reason": "stats behind"
-   },
-   {
-    "team": "OTT",
-    "reason": "stats behind"
-   },
-   {
-    "team": "PHI",
-    "reason": "stats behind"
-   },
-   {
-    "team": "SEA",
-    "reason": "stats behind"
-   },
-   {
-    "team": "SJS",
-    "reason": "stats behind"
-   },
-   {
-    "team": "STL",
-    "reason": "stats behind"
-   },
-   {
-    "team": "TBL",
-    "reason": "stats behind"
-   },
-   {
-    "team": "TOR",
-    "reason": "stats behind"
-   },
-   {
-    "team": "UTA",
-    "reason": "stats behind"
-   },
-   {
-    "team": "VAN",
-    "reason": "stats behind"
-   },
-   {
-    "team": "VGK",
-    "reason": "stats behind"
-   },
-   {
-    "team": "WPG",
-    "reason": "stats behind"
-   }
-  ],
-  "lines_checked": 351,
-  "lines_failed": 39,
+  "excluded_teams": [],
+  "lines_checked": 0,
+  "lines_failed": 0,
   "tier": 4
  },
- "banners": [
-  {
-   "level": "warn",
-   "text": "Not covered tonight: BUF, CGY, CHI, DET, EDM, FLA, MIN, NSH, NYI, OTT, PHI, SEA, SJS, STL, TBL, TOR, UTA, VAN, VGK, WPG (stats behind)."
-  },
-  {
-   "level": "info",
-   "text": "39 Hard Rock lines skipped: the two sides did not add up or the price was old."
-  }
- ],
+ "banners": [],
  "empty": {
-  "code": "stats_behind",
-  "text": "Stats are behind, so no picks until they catch up.",
-  "sub": null
+  "code": "not_yet",
+  "text": "No prices read yet today.",
+  "sub": "First read is due at 1:00 PM."
  },
  "games": [
   {
-   "id": 2026020108,
-   "away": "BUF",
-   "home": "TOR",
-   "start": "2026-10-15T19:00:00-04:00",
-   "started": true,
+   "id": 2026020119,
+   "away": "PIT",
+   "home": "COL",
+   "start": "2026-10-16T21:00:00-04:00",
+   "started": false,
    "picks": 0,
-   "excluded_reason": "stats behind",
-   "excluded_teams": [
-    "BUF",
-    "TOR"
-   ]
-  },
-  {
-   "id": 2026020109,
-   "away": "NYI",
-   "home": "OTT",
-   "start": "2026-10-15T19:00:00-04:00",
-   "started": true,
-   "picks": 2,
-   "excluded_reason": "stats behind",
-   "excluded_teams": [
-    "NYI",
-    "OTT"
-   ]
-  },
-  {
-   "id": 2026020111,
-   "away": "SEA",
-   "home": "TBL",
-   "start": "2026-10-15T19:00:00-04:00",
-   "started": true,
-   "picks": 0,
-   "excluded_reason": "stats behind",
-   "excluded_teams": [
-    "SEA",
-    "TBL"
-   ]
-  },
-  {
-   "id": 2026020112,
-   "away": "VAN",
-   "home": "FLA",
-   "start": "2026-10-15T19:00:00-04:00",
-   "started": true,
-   "picks": 0,
-   "excluded_reason": "stats behind",
-   "excluded_teams": [
-    "VAN",
-    "FLA"
-   ]
-  },
-  {
-   "id": 2026020113,
-   "away": "NYR",
-   "home": "NJD",
-   "start": "2026-10-15T19:00:00-04:00",
-   "started": true,
-   "picks": 1,
    "excluded_reason": null,
    "excluded_teams": []
   },
   {
-   "id": 2026020110,
-   "away": "PHI",
-   "home": "DET",
-   "start": "2026-10-15T19:30:00-04:00",
-   "started": true,
+   "id": 2026020120,
+   "away": "BOS",
+   "home": "ANA",
+   "start": "2026-10-16T22:00:00-04:00",
+   "started": false,
    "picks": 0,
-   "excluded_reason": "stats behind",
-   "excluded_teams": [
-    "PHI",
-    "DET"
-   ]
-  },
-  {
-   "id": 2026020114,
-   "away": "WPG",
-   "home": "CHI",
-   "start": "2026-10-15T20:00:00-04:00",
-   "started": true,
-   "picks": 0,
-   "excluded_reason": "stats behind",
-   "excluded_teams": [
-    "WPG",
-    "CHI"
-   ]
-  },
-  {
-   "id": 2026020115,
-   "away": "SJS",
-   "home": "NSH",
-   "start": "2026-10-15T20:00:00-04:00",
-   "started": true,
-   "picks": 0,
-   "excluded_reason": "stats behind",
-   "excluded_teams": [
-    "SJS",
-    "NSH"
-   ]
-  },
-  {
-   "id": 2026020116,
-   "away": "STL",
-   "home": "MIN",
-   "start": "2026-10-15T20:00:00-04:00",
-   "started": true,
-   "picks": 0,
-   "excluded_reason": "stats behind",
-   "excluded_teams": [
-    "STL",
-    "MIN"
-   ]
-  },
-  {
-   "id": 2026020117,
-   "away": "UTA",
-   "home": "EDM",
-   "start": "2026-10-15T21:00:00-04:00",
-   "started": true,
-   "picks": 0,
-   "excluded_reason": "stats behind",
-   "excluded_teams": [
-    "UTA",
-    "EDM"
-   ]
-  },
-  {
-   "id": 2026020118,
-   "away": "CGY",
-   "home": "VGK",
-   "start": "2026-10-15T22:00:00-04:00",
-   "started": true,
-   "picks": 0,
-   "excluded_reason": "stats behind",
-   "excluded_teams": [
-    "CGY",
-    "VGK"
-   ]
+   "excluded_reason": null,
+   "excluded_teams": []
   }
  ],
- "picks": [
-  {
-   "id": "2026-10-15:2026020109:8484759:points:0.5:under",
-   "price": -155,
-   "first_price": -155,
-   "first_price_at": "2026-10-15T17:30:01-04:00",
-   "worst_price": -155,
-   "p": 0.6375,
-   "breakeven": 0.6078,
-   "p_pct": 63,
-   "breakeven_pct": 61,
-   "state": "locked",
-   "history": [
-    {
-     "at": "2026-10-15T17:30:01-04:00",
-     "text": "Lineup confirmed"
-    },
-    {
-     "at": "2026-10-15T19:00:00-04:00",
-     "text": "Locked"
-    }
-   ],
-   "prices": [
-    {
-     "at": "2026-10-15T17:30:01-04:00",
-     "price": -155
-    }
-   ],
-   "pulled": null,
-   "graded": null,
-   "rank": null,
-   "tier": "main",
-   "game_id": 2026020109,
-   "player": "C. Yakemchuk",
-   "player_id": 8484759,
-   "team": "OTT",
-   "opp": "NYI",
-   "home": true,
-   "start": "2026-10-15T19:00:00-04:00",
-   "market": "points",
-   "line": 0.5,
-   "side": "under",
-   "bet": "Under 0.5 points",
-   "price_at": "2026-10-15T17:30:01-04:00",
-   "reason": "63% to stay under 0.5 points; -155 needs 61%. Projects 0.3 points in 18 min. NYI allow 3% fewer goals than average. Short history: 11 games.",
-   "thin": true,
-   "games_used": 11,
-   "games_this_season": 7
-  },
-  {
-   "id": "2026-10-15:2026020109:8485366:shots:3.5:under",
-   "price": -180,
-   "first_price": -180,
-   "first_price_at": "2026-10-15T17:30:01-04:00",
-   "worst_price": -180,
-   "p": 0.6638,
-   "breakeven": 0.6429,
-   "p_pct": 66,
-   "breakeven_pct": 64,
-   "state": "locked",
-   "history": [
-    {
-     "at": "2026-10-15T17:30:01-04:00",
-     "text": "Lineup confirmed"
-    },
-    {
-     "at": "2026-10-15T19:00:00-04:00",
-     "text": "Locked"
-    }
-   ],
-   "prices": [
-    {
-     "at": "2026-10-15T17:30:01-04:00",
-     "price": -180
-    }
-   ],
-   "pulled": null,
-   "graded": null,
-   "rank": null,
-   "tier": "main",
-   "game_id": 2026020109,
-   "player": "M. Schaefer",
-   "player_id": 8485366,
-   "team": "NYI",
-   "opp": "OTT",
-   "home": false,
-   "start": "2026-10-15T19:00:00-04:00",
-   "market": "shots",
-   "line": 3.5,
-   "side": "under",
-   "bet": "Under 3.5 shots on goal",
-   "price_at": "2026-10-15T17:30:01-04:00",
-   "reason": "66% to stay under 3.5 shots; -180 needs 64%. Projects 2.5 shots in 25 min. OTT allow 8% fewer shots than average.",
-   "thin": false,
-   "games_used": 88,
-   "games_this_season": 6
-  },
-  {
-   "id": "2026-10-15:2026020113:8482684:points:0.5:under",
-   "price": -110,
-   "first_price": -110,
-   "first_price_at": "2026-10-15T18:20:00-04:00",
-   "worst_price": -110,
-   "p": 0.563,
-   "breakeven": 0.5238,
-   "p_pct": 56,
-   "breakeven_pct": 52,
-   "state": "locked",
-   "history": [
-    {
-     "at": "2026-10-15T18:20:00-04:00",
-     "text": "Lineup confirmed"
-    },
-    {
-     "at": "2026-10-15T19:00:00-04:00",
-     "text": "Locked"
-    }
-   ],
-   "prices": [
-    {
-     "at": "2026-10-15T18:20:00-04:00",
-     "price": -110
-    }
-   ],
-   "pulled": null,
-   "graded": {
-    "result": "L",
-    "actual": "had 2",
-    "units": -1.0
-   },
-   "rank": null,
-   "tier": "main",
-   "game_id": 2026020113,
-   "player": "L. Hughes",
-   "player_id": 8482684,
-   "team": "NJD",
-   "opp": "NYR",
-   "home": true,
-   "start": "2026-10-15T19:00:00-04:00",
-   "market": "points",
-   "line": 0.5,
-   "side": "under",
-   "bet": "Under 0.5 points",
-   "price_at": "2026-10-15T18:20:00-04:00",
-   "reason": "56% to stay under 0.5 points; -110 needs 52%. Projects 0.4 points in 23 min. NYR allow 6% fewer goals than average.",
-   "thin": false,
-   "games_used": 74,
-   "games_this_season": 6
-  }
- ],
+ "picks": [],
  "parlays": [],
  "goal_watch": [],
  "goal_watch_note": null
