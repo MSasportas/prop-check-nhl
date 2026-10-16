@@ -1,7 +1,7 @@
 {
  "slate_date": "2026-10-15",
- "generated_at": "2026-10-15T22:50:01-04:00",
- "status_at": "2026-10-15T22:50:01-04:00",
+ "generated_at": "2026-10-15T23:00:00-04:00",
+ "status_at": "2026-10-15T23:00:00-04:00",
  "valid_until": "2026-10-16T05:00:00-04:00",
  "status": {
   "prices_state": "ok",
@@ -16,7 +16,7 @@
   "stats_state": "behind",
   "last_run": {
    "ok": true,
-   "at": "2026-10-15T22:50:01-04:00",
+   "at": "2026-10-15T23:00:00-04:00",
    "failed_step": null
   },
   "pool": {
@@ -44,6 +44,14 @@
     "reason": "stats behind"
    },
    {
+    "team": "MIN",
+    "reason": "stats behind"
+   },
+   {
+    "team": "NSH",
+    "reason": "stats behind"
+   },
+   {
     "team": "NYI",
     "reason": "stats behind"
    },
@@ -57,6 +65,14 @@
    },
    {
     "team": "SEA",
+    "reason": "stats behind"
+   },
+   {
+    "team": "SJS",
+    "reason": "stats behind"
+   },
+   {
+    "team": "STL",
     "reason": "stats behind"
    },
    {
@@ -83,7 +99,7 @@
  "banners": [
   {
    "level": "warn",
-   "text": "Not covered tonight: BUF, CHI, DET, FLA, NYI, OTT, PHI, SEA, TBL, TOR, VAN, WPG (stats behind)."
+   "text": "Not covered tonight: BUF, CHI, DET, FLA, MIN, NSH, NYI, OTT, PHI, SEA, SJS, STL, TBL, TOR, VAN, WPG (stats behind)."
   },
   {
    "level": "info",
@@ -191,8 +207,11 @@
    "start": "2026-10-15T20:00:00-04:00",
    "started": true,
    "picks": 0,
-   "excluded_reason": null,
-   "excluded_teams": []
+   "excluded_reason": "stats behind",
+   "excluded_teams": [
+    "SJS",
+    "NSH"
+   ]
   },
   {
    "id": 2026020116,
@@ -201,8 +220,11 @@
    "start": "2026-10-15T20:00:00-04:00",
    "started": true,
    "picks": 0,
-   "excluded_reason": null,
-   "excluded_teams": []
+   "excluded_reason": "stats behind",
+   "excluded_teams": [
+    "STL",
+    "MIN"
+   ]
   },
   {
    "id": 2026020117,
