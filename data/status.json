@@ -1,10 +1,10 @@
 {
  "ok": true,
  "slate_date": "2026-10-15",
- "started_at": "2026-10-15T20:00:01-04:00",
- "status_at": "2026-10-15T20:00:01-04:00",
- "finished_at": "2026-10-15T20:00:02-04:00",
- "last_ok_at": "2026-10-15T20:00:01-04:00",
+ "started_at": "2026-10-15T20:20:00-04:00",
+ "status_at": "2026-10-15T20:20:00-04:00",
+ "finished_at": "2026-10-15T20:20:01-04:00",
+ "last_ok_at": "2026-10-15T20:20:00-04:00",
  "failed_step": null,
  "steps": [
   {
@@ -24,8 +24,8 @@
   },
   {
    "step": "lineups",
-   "status": "ok",
-   "note": "4 of 4 team pages read"
+   "status": "skipped",
+   "note": "checked in the last 20 minutes"
   },
   {
    "step": "odds",
@@ -84,7 +84,7 @@
  "budget_used_today": 38,
  "prices_state": "ok",
  "prices_at": "2026-10-15T19:30:00-04:00",
- "next_price_read_at": "2026-10-15T20:15:00-04:00",
+ "next_price_read_at": "2026-10-15T20:30:00-04:00",
  "unmatched_names": [
   "Artem Zub",
   "Elias Pettersson"
@@ -104,10 +104,10 @@
  "odds_notes": [],
  "runner": {
   "event": "workflow_dispatch",
-  "run_id": "38821909863",
-  "iteration": 6,
-  "chain_link": 31,
+  "run_id": "38826904817",
+  "iteration": 3,
+  "chain_link": 32,
   "chain_started_at": "2026-10-14T20:00:13-04:00",
-  "run_started_at": "2026-10-15T19:10:14-04:00"
+  "run_started_at": "2026-10-15T20:00:13-04:00"
  }
 }
