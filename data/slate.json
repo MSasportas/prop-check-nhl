@@ -1,7 +1,7 @@
 {
  "slate_date": "2026-10-15",
- "generated_at": "2026-10-15T22:30:00-04:00",
- "status_at": "2026-10-15T22:30:00-04:00",
+ "generated_at": "2026-10-15T22:50:01-04:00",
+ "status_at": "2026-10-15T22:50:01-04:00",
  "valid_until": "2026-10-16T05:00:00-04:00",
  "status": {
   "prices_state": "ok",
@@ -13,10 +13,10 @@
   "goalies_at": null,
   "lineups_note": "20 of 22 team line pages are dated today.",
   "lineups_state": "ok",
-  "stats_state": "ok",
+  "stats_state": "behind",
   "last_run": {
    "ok": true,
-   "at": "2026-10-15T22:30:00-04:00",
+   "at": "2026-10-15T22:50:01-04:00",
    "failed_step": null
   },
   "pool": {
@@ -29,6 +29,10 @@
   "excluded_teams": [
    {
     "team": "BUF",
+    "reason": "stats behind"
+   },
+   {
+    "team": "CHI",
     "reason": "stats behind"
    },
    {
@@ -66,6 +70,10 @@
    {
     "team": "VAN",
     "reason": "stats behind"
+   },
+   {
+    "team": "WPG",
+    "reason": "stats behind"
    }
   ],
   "lines_checked": 351,
@@ -75,7 +83,7 @@
  "banners": [
   {
    "level": "warn",
-   "text": "Not covered tonight: BUF, DET, FLA, NYI, OTT, PHI, SEA, TBL, TOR, VAN (stats behind)."
+   "text": "Not covered tonight: BUF, CHI, DET, FLA, NYI, OTT, PHI, SEA, TBL, TOR, VAN, WPG (stats behind)."
   },
   {
    "level": "info",
@@ -83,9 +91,9 @@
   }
  ],
  "empty": {
-  "code": "all_started",
-  "text": "Every game has started.",
-  "sub": "Tonight's picks are under Started."
+  "code": "stats_behind",
+  "text": "Stats are behind, so no picks until they catch up.",
+  "sub": null
  },
  "games": [
   {
@@ -170,8 +178,11 @@
    "start": "2026-10-15T20:00:00-04:00",
    "started": true,
    "picks": 0,
-   "excluded_reason": null,
-   "excluded_teams": []
+   "excluded_reason": "stats behind",
+   "excluded_teams": [
+    "WPG",
+    "CHI"
+   ]
   },
   {
    "id": 2026020115,
