@@ -1,10 +1,10 @@
 {
  "ok": true,
  "slate_date": "2026-10-15",
- "started_at": "2026-10-15T20:20:00-04:00",
- "status_at": "2026-10-15T20:20:00-04:00",
- "finished_at": "2026-10-15T20:20:01-04:00",
- "last_ok_at": "2026-10-15T20:20:00-04:00",
+ "started_at": "2026-10-15T20:30:00-04:00",
+ "status_at": "2026-10-15T20:30:00-04:00",
+ "finished_at": "2026-10-15T20:30:02-04:00",
+ "last_ok_at": "2026-10-15T20:30:00-04:00",
  "failed_step": null,
  "steps": [
   {
@@ -24,13 +24,13 @@
   },
   {
    "step": "lineups",
-   "status": "skipped",
-   "note": "checked in the last 20 minutes"
+   "status": "ok",
+   "note": "4 of 4 team pages read"
   },
   {
    "step": "odds",
    "status": "ok",
-   "note": "no pull due"
+   "note": "1 game(s) priced"
   },
   {
    "step": "engine",
@@ -62,7 +62,7 @@
  "keys": [
   {
    "n": 1,
-   "left": 223
+   "left": 219
   },
   {
    "n": 2,
@@ -77,14 +77,14 @@
    "left": 458
   }
  ],
- "pool_total": 1290,
+ "pool_total": 1286,
  "allowance": 11.1597,
  "tier": 4,
  "budget_today": 122,
- "budget_used_today": 38,
+ "budget_used_today": 42,
  "prices_state": "ok",
- "prices_at": "2026-10-15T19:30:00-04:00",
- "next_price_read_at": "2026-10-15T20:30:00-04:00",
+ "prices_at": "2026-10-15T20:30:00-04:00",
+ "next_price_read_at": "2026-10-15T21:15:00-04:00",
  "unmatched_names": [
   "Artem Zub",
   "Elias Pettersson"
@@ -97,7 +97,7 @@
  ],
  "excluded_teams": [],
  "stats_through": "2026-10-14",
- "lineups_at": "2026-10-15T20:00:01-04:00",
+ "lineups_at": "2026-10-15T20:30:00-04:00",
  "lineups_note": "20 of 22 team line pages are dated today.",
  "games_today": 11,
  "record_events": 73,
@@ -105,7 +105,7 @@
  "runner": {
   "event": "workflow_dispatch",
   "run_id": "38826904817",
-  "iteration": 3,
+  "iteration": 4,
   "chain_link": 32,
   "chain_started_at": "2026-10-14T20:00:13-04:00",
   "run_started_at": "2026-10-15T20:00:13-04:00"
