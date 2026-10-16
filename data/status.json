@@ -1,10 +1,10 @@
 {
  "ok": true,
  "slate_date": "2026-10-15",
- "started_at": "2026-10-15T21:40:00-04:00",
- "status_at": "2026-10-15T21:40:00-04:00",
- "finished_at": "2026-10-15T21:40:03-04:00",
- "last_ok_at": "2026-10-15T21:40:00-04:00",
+ "started_at": "2026-10-15T21:50:00-04:00",
+ "status_at": "2026-10-15T21:50:00-04:00",
+ "finished_at": "2026-10-15T21:50:01-04:00",
+ "last_ok_at": "2026-10-15T21:50:00-04:00",
  "failed_step": null,
  "steps": [
   {
@@ -20,12 +20,12 @@
   {
    "step": "stats",
    "status": "ok",
-   "note": "1 window(s) read, 2 team-games still missing"
+   "note": "1 window(s) read, 4 team-games still missing"
   },
   {
    "step": "lineups",
-   "status": "ok",
-   "note": "2 of 2 team pages read"
+   "status": "skipped",
+   "note": "checked in the last 20 minutes"
   },
   {
    "step": "odds",
@@ -97,11 +97,19 @@
  ],
  "excluded_teams": [
   {
+   "team": "FLA",
+   "reason": "stats behind"
+  },
+  {
    "team": "NJD",
    "reason": "stats behind"
   },
   {
    "team": "NYR",
+   "reason": "stats behind"
+  },
+  {
+   "team": "VAN",
    "reason": "stats behind"
   }
  ],
@@ -113,10 +121,10 @@
  "odds_notes": [],
  "runner": {
   "event": "workflow_dispatch",
-  "run_id": "38831734617",
-  "iteration": 6,
-  "chain_link": 33,
+  "run_id": "38836348855",
+  "iteration": 2,
+  "chain_link": 34,
   "chain_started_at": "2026-10-14T20:00:13-04:00",
-  "run_started_at": "2026-10-15T20:50:12-04:00"
+  "run_started_at": "2026-10-15T21:40:13-04:00"
  }
 }
