@@ -1,7 +1,7 @@
 {
  "slate_date": "2026-10-15",
- "generated_at": "2026-10-15T23:20:00-04:00",
- "status_at": "2026-10-15T23:20:00-04:00",
+ "generated_at": "2026-10-15T23:40:01-04:00",
+ "status_at": "2026-10-15T23:40:01-04:00",
  "valid_until": "2026-10-16T05:00:00-04:00",
  "status": {
   "prices_state": "ok",
@@ -16,7 +16,7 @@
   "stats_state": "behind",
   "last_run": {
    "ok": true,
-   "at": "2026-10-15T23:20:00-04:00",
+   "at": "2026-10-15T23:40:01-04:00",
    "failed_step": null
   },
   "pool": {
@@ -37,6 +37,10 @@
    },
    {
     "team": "DET",
+    "reason": "stats behind"
+   },
+   {
+    "team": "EDM",
     "reason": "stats behind"
    },
    {
@@ -84,6 +88,10 @@
     "reason": "stats behind"
    },
    {
+    "team": "UTA",
+    "reason": "stats behind"
+   },
+   {
     "team": "VAN",
     "reason": "stats behind"
    },
@@ -99,7 +107,7 @@
  "banners": [
   {
    "level": "warn",
-   "text": "Not covered tonight: BUF, CHI, DET, FLA, MIN, NSH, NYI, OTT, PHI, SEA, SJS, STL, TBL, TOR, VAN, WPG (stats behind)."
+   "text": "Not covered tonight: BUF, CHI, DET, EDM, FLA, MIN, NSH, NYI, OTT, PHI, SEA, SJS, STL, TBL, TOR, UTA, VAN, WPG (stats behind)."
   },
   {
    "level": "info",
@@ -233,8 +241,11 @@
    "start": "2026-10-15T21:00:00-04:00",
    "started": true,
    "picks": 0,
-   "excluded_reason": null,
-   "excluded_teams": []
+   "excluded_reason": "stats behind",
+   "excluded_teams": [
+    "UTA",
+    "EDM"
+   ]
   },
   {
    "id": 2026020118,

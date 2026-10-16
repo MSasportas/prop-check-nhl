@@ -1,10 +1,10 @@
 {
  "ok": true,
  "slate_date": "2026-10-15",
- "started_at": "2026-10-15T23:20:16-04:00",
- "status_at": "2026-10-15T23:20:16-04:00",
- "finished_at": "2026-10-15T23:20:17-04:00",
- "last_ok_at": "2026-10-15T23:20:16-04:00",
+ "started_at": "2026-10-15T23:40:01-04:00",
+ "status_at": "2026-10-15T23:40:01-04:00",
+ "finished_at": "2026-10-15T23:40:02-04:00",
+ "last_ok_at": "2026-10-15T23:40:01-04:00",
  "failed_step": null,
  "steps": [
   {
@@ -19,8 +19,8 @@
   },
   {
    "step": "stats",
-   "status": "skipped",
-   "note": "waiting to retry"
+   "status": "ok",
+   "note": "1 window(s) read, 18 team-games still missing"
   },
   {
    "step": "lineups",
@@ -44,8 +44,8 @@
   },
   {
    "step": "slate",
-   "status": "skipped",
-   "note": "unchanged"
+   "status": "ok",
+   "note": "0 open pick(s)"
   },
   {
    "step": "record",
@@ -109,6 +109,10 @@
    "reason": "stats behind"
   },
   {
+   "team": "EDM",
+   "reason": "stats behind"
+  },
+  {
    "team": "FLA",
    "reason": "stats behind"
   },
@@ -153,6 +157,10 @@
    "reason": "stats behind"
   },
   {
+   "team": "UTA",
+   "reason": "stats behind"
+  },
+  {
    "team": "VAN",
    "reason": "stats behind"
   },
@@ -170,7 +178,7 @@
  "runner": {
   "event": "workflow_dispatch",
   "run_id": "38844987268",
-  "iteration": 1,
+  "iteration": 3,
   "chain_link": 36,
   "chain_started_at": "2026-10-14T20:00:13-04:00",
   "run_started_at": "2026-10-15T23:20:15-04:00"
