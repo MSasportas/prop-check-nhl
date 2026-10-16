@@ -1,10 +1,10 @@
 {
  "ok": true,
  "slate_date": "2026-10-15",
- "started_at": "2026-10-16T02:20:01-04:00",
- "status_at": "2026-10-16T02:20:01-04:00",
- "finished_at": "2026-10-16T02:20:02-04:00",
- "last_ok_at": "2026-10-16T02:20:01-04:00",
+ "started_at": "2026-10-16T02:40:15-04:00",
+ "status_at": "2026-10-16T02:40:15-04:00",
+ "finished_at": "2026-10-16T02:40:16-04:00",
+ "last_ok_at": "2026-10-16T02:40:15-04:00",
  "failed_step": null,
  "steps": [
   {
@@ -19,8 +19,8 @@
   },
   {
    "step": "stats",
-   "status": "ok",
-   "note": "1 window(s) read, 20 team-games still missing"
+   "status": "skipped",
+   "note": "waiting to retry"
   },
   {
    "step": "lineups",
@@ -44,8 +44,8 @@
   },
   {
    "step": "slate",
-   "status": "ok",
-   "note": "0 open pick(s)"
+   "status": "skipped",
+   "note": "unchanged"
   },
   {
    "step": "record",
@@ -185,10 +185,10 @@
  "odds_notes": [],
  "runner": {
   "event": "workflow_dispatch",
-  "run_id": "38857846402",
-  "iteration": 4,
-  "chain_link": 39,
+  "run_id": "38862506445",
+  "iteration": 1,
+  "chain_link": 40,
   "chain_started_at": "2026-10-14T20:00:13-04:00",
-  "run_started_at": "2026-10-16T01:50:14-04:00"
+  "run_started_at": "2026-10-16T02:40:14-04:00"
  }
 }
