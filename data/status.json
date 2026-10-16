@@ -1,10 +1,10 @@
 {
  "ok": true,
  "slate_date": "2026-10-15",
- "started_at": "2026-10-15T21:20:01-04:00",
- "status_at": "2026-10-15T21:20:01-04:00",
- "finished_at": "2026-10-15T21:20:01-04:00",
- "last_ok_at": "2026-10-15T21:20:01-04:00",
+ "started_at": "2026-10-15T21:40:00-04:00",
+ "status_at": "2026-10-15T21:40:00-04:00",
+ "finished_at": "2026-10-15T21:40:03-04:00",
+ "last_ok_at": "2026-10-15T21:40:00-04:00",
  "failed_step": null,
  "steps": [
   {
@@ -19,13 +19,13 @@
   },
   {
    "step": "stats",
-   "status": "skipped",
-   "note": "nothing new"
+   "status": "ok",
+   "note": "1 window(s) read, 2 team-games still missing"
   },
   {
    "step": "lineups",
-   "status": "skipped",
-   "note": "checked in the last 20 minutes"
+   "status": "ok",
+   "note": "2 of 2 team pages read"
   },
   {
    "step": "odds",
@@ -95,9 +95,18 @@
   "Elias Nils Pettersson",
   "Elias Pettersson"
  ],
- "excluded_teams": [],
+ "excluded_teams": [
+  {
+   "team": "NJD",
+   "reason": "stats behind"
+  },
+  {
+   "team": "NYR",
+   "reason": "stats behind"
+  }
+ ],
  "stats_through": "2026-10-14",
- "lineups_at": "2026-10-15T21:10:01-04:00",
+ "lineups_at": "2026-10-15T21:40:00-04:00",
  "lineups_note": "20 of 22 team line pages are dated today.",
  "games_today": 11,
  "record_events": 73,
@@ -105,7 +114,7 @@
  "runner": {
   "event": "workflow_dispatch",
   "run_id": "38831734617",
-  "iteration": 4,
+  "iteration": 6,
   "chain_link": 33,
   "chain_started_at": "2026-10-14T20:00:13-04:00",
   "run_started_at": "2026-10-15T20:50:12-04:00"
