@@ -1,15 +1,15 @@
 {
- "generated_at": "2026-10-15T19:00:00-04:00",
+ "generated_at": "2026-10-16T04:00:01-04:00",
  "summary": {
   "headline": {
    "w": 8,
-   "l": 5,
+   "l": 6,
    "push": 0,
    "void": 0,
-   "units": 1.05,
-   "hit_rate": 0.6154,
-   "needed": 0.5755,
-   "n": 13
+   "units": 0.05,
+   "hit_rate": 0.5714,
+   "needed": 0.5718,
+   "n": 14
   },
   "rows": [
    {
@@ -28,13 +28,13 @@
     "key": "points",
     "label": "Points",
     "w": 2,
-    "l": 1,
+    "l": 2,
     "push": 0,
     "void": 0,
-    "units": 0.49,
-    "hit_rate": 0.6667,
-    "needed": 0.5779,
-    "n": 3
+    "units": -0.51,
+    "hit_rate": 0.5,
+    "needed": 0.5644,
+    "n": 4
    },
    {
     "key": "parlays",
@@ -55,8 +55,8 @@
    "date": "2026-10-15",
    "graded": false,
    "w": 0,
-   "l": 0,
-   "units": 0,
+   "l": 1,
+   "units": -1.0,
    "entries": [
     {
      "id": "2026-10-15:2026020109:8484759:points:0.5:under",
@@ -98,9 +98,9 @@
        "at": "2026-10-15T18:20:00-04:00"
       }
      ],
-     "result": null,
-     "actual": null,
-     "units": null,
+     "result": "L",
+     "actual": "had 2",
+     "units": -1.0,
      "pulled": null,
      "legs": []
     },
