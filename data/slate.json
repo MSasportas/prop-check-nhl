@@ -1,40 +1,40 @@
 {
  "slate_date": "2026-10-17",
- "generated_at": "2026-10-17T18:10:00-04:00",
- "status_at": "2026-10-17T18:10:00-04:00",
+ "generated_at": "2026-10-17T18:20:00-04:00",
+ "status_at": "2026-10-17T18:20:00-04:00",
  "valid_until": "2026-10-18T05:00:00-04:00",
  "status": {
   "prices_state": "ok",
-  "prices_at": "2026-10-17T17:30:01-04:00",
-  "next_price_read_at": "2026-10-17T18:15:00-04:00",
+  "prices_at": "2026-10-17T18:20:00-04:00",
+  "next_price_read_at": "2026-10-17T19:15:00-04:00",
   "stats_built_at": "2026-10-17T16:10:00-04:00",
   "stats_through": "2026-10-17",
-  "lineups_at": "2026-10-17T18:10:00-04:00",
+  "lineups_at": "2026-10-17T18:20:00-04:00",
   "goalies_at": null,
   "lineups_note": "9 of 24 team line pages are dated today.",
   "lineups_state": "ok",
   "stats_state": "ok",
   "last_run": {
    "ok": true,
-   "at": "2026-10-17T18:10:00-04:00",
+   "at": "2026-10-17T18:20:00-04:00",
    "failed_step": null
   },
   "pool": {
-   "pulls_left": 1259,
+   "pulls_left": 1253,
    "keys": 4,
    "game_days_left": 15,
    "days_left": 15,
    "low": false
   },
   "excluded_teams": [],
-  "lines_checked": 280,
-  "lines_failed": 2,
+  "lines_checked": 375,
+  "lines_failed": 4,
   "tier": 4
  },
  "banners": [
   {
    "level": "info",
-   "text": "2 Hard Rock lines skipped: the two sides did not add up or the price was old."
+   "text": "4 Hard Rock lines skipped: the two sides did not add up or the price was old."
   }
  ],
  "empty": null,
@@ -219,7 +219,7 @@
    "line": 1.5,
    "side": "over",
    "bet": "Over 1.5 shots on goal",
-   "price_at": "2026-10-17T17:30:01-04:00",
+   "price_at": "2026-10-17T18:20:00-04:00",
    "reason": "60% to clear 1.5 shots; -140 needs 58%. Projects 2.3 shots in 17 min. TOR allow 13% more shots than average.",
    "thin": false,
    "games_used": 32,
