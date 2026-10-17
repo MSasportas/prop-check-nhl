@@ -1,33 +1,33 @@
 {
  "slate_date": "2026-10-17",
- "generated_at": "2026-10-17T17:20:01-04:00",
- "status_at": "2026-10-17T17:20:01-04:00",
+ "generated_at": "2026-10-17T17:30:01-04:00",
+ "status_at": "2026-10-17T17:30:01-04:00",
  "valid_until": "2026-10-18T05:00:00-04:00",
  "status": {
   "prices_state": "ok",
-  "prices_at": "2026-10-17T17:20:01-04:00",
-  "next_price_read_at": "2026-10-17T17:30:00-04:00",
+  "prices_at": "2026-10-17T17:30:01-04:00",
+  "next_price_read_at": "2026-10-17T18:15:00-04:00",
   "stats_built_at": "2026-10-17T16:10:00-04:00",
   "stats_through": "2026-10-17",
-  "lineups_at": "2026-10-17T17:20:01-04:00",
+  "lineups_at": "2026-10-17T17:30:01-04:00",
   "goalies_at": null,
   "lineups_note": "8 of 22 team line pages are dated today.",
   "lineups_state": "ok",
   "stats_state": "ok",
   "last_run": {
    "ok": true,
-   "at": "2026-10-17T17:20:01-04:00",
+   "at": "2026-10-17T17:30:01-04:00",
    "failed_step": null
   },
   "pool": {
-   "pulls_left": 1263,
+   "pulls_left": 1259,
    "keys": 4,
    "game_days_left": 15,
    "days_left": 15,
    "low": false
   },
   "excluded_teams": [],
-  "lines_checked": 252,
+  "lines_checked": 280,
   "lines_failed": 2,
   "tier": 4
  },
@@ -37,11 +37,7 @@
    "text": "2 Hard Rock lines skipped: the two sides did not add up or the price was old."
   }
  ],
- "empty": {
-  "code": "none_qualified",
-  "text": "No open picks right now.",
-  "sub": "Checked 252 lines at 5:20 PM. Next price check at 5:30 PM."
- },
+ "empty": null,
  "games": [
   {
    "id": 2026020121,
@@ -89,7 +85,7 @@
    "home": "TOR",
    "start": "2026-10-17T19:00:00-04:00",
    "started": false,
-   "picks": 0,
+   "picks": 1,
    "excluded_reason": null,
    "excluded_teams": []
   },
@@ -184,8 +180,78 @@
    "excluded_teams": []
   }
  ],
- "picks": [],
+ "picks": [
+  {
+   "id": "2026-10-17:2026020125:8475151:shots:1.5:over",
+   "price": -140,
+   "first_price": -140,
+   "first_price_at": "2026-10-17T17:30:01-04:00",
+   "worst_price": -140,
+   "p": 0.6063,
+   "breakeven": 0.5833,
+   "p_pct": 60,
+   "breakeven_pct": 58,
+   "state": "lineup",
+   "history": [
+    {
+     "at": "2026-10-17T17:30:01-04:00",
+     "text": "Lineup confirmed"
+    }
+   ],
+   "prices": [
+    {
+     "at": "2026-10-17T17:30:01-04:00",
+     "price": -140
+    }
+   ],
+   "pulled": null,
+   "graded": null,
+   "rank": 1,
+   "tier": "main",
+   "game_id": 2026020125,
+   "player": "K. Palmieri",
+   "player_id": 8475151,
+   "team": "NYI",
+   "opp": "TOR",
+   "home": false,
+   "start": "2026-10-17T19:00:00-04:00",
+   "market": "shots",
+   "line": 1.5,
+   "side": "over",
+   "bet": "Over 1.5 shots on goal",
+   "price_at": "2026-10-17T17:30:01-04:00",
+   "reason": "60% to clear 1.5 shots; -140 needs 58%. Projects 2.3 shots in 17 min. TOR allow 13% more shots than average.",
+   "thin": false,
+   "games_used": 32,
+   "games_this_season": 7
+  }
+ ],
  "parlays": [],
- "goal_watch": [],
- "goal_watch_note": null
+ "goal_watch": [
+  {
+   "player": "B. Horvat",
+   "team": "NYI",
+   "price": 155,
+   "fair_price": 178,
+   "p": 0.3599,
+   "text": "35% to score; +155 needs 39%. Fair price +178. Not a pick."
+  },
+  {
+   "player": "W. Nylander",
+   "team": "TOR",
+   "price": 130,
+   "fair_price": 182,
+   "p": 0.3542,
+   "text": "35% to score; +130 needs 43%. Fair price +182. Not a pick."
+  },
+  {
+   "player": "A. Matthews",
+   "team": "TOR",
+   "price": 100,
+   "fair_price": 194,
+   "p": 0.3406,
+   "text": "34% to score; +100 needs 50%. Fair price +194. Not a pick."
+  }
+ ],
+ "goal_watch_note": "Not picks. Our model is weakest on goals."
 }

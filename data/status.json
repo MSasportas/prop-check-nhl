@@ -1,10 +1,10 @@
 {
  "ok": true,
  "slate_date": "2026-10-17",
- "started_at": "2026-10-17T17:20:01-04:00",
- "status_at": "2026-10-17T17:20:01-04:00",
- "finished_at": "2026-10-17T17:20:01-04:00",
- "last_ok_at": "2026-10-17T17:20:01-04:00",
+ "started_at": "2026-10-17T17:30:01-04:00",
+ "status_at": "2026-10-17T17:30:01-04:00",
+ "finished_at": "2026-10-17T17:30:03-04:00",
+ "last_ok_at": "2026-10-17T17:30:01-04:00",
  "failed_step": null,
  "steps": [
   {
@@ -25,7 +25,7 @@
   {
    "step": "lineups",
    "status": "ok",
-   "note": "2 of 2 team pages read"
+   "note": "14 of 14 team pages read"
   },
   {
    "step": "odds",
@@ -35,7 +35,7 @@
   {
    "step": "engine",
    "status": "ok",
-   "note": "no change"
+   "note": "1 new event(s), 1 newly shown"
   },
   {
    "step": "grade",
@@ -45,12 +45,12 @@
   {
    "step": "slate",
    "status": "ok",
-   "note": "0 open pick(s)"
+   "note": "1 open pick(s)"
   },
   {
    "step": "record",
-   "status": "skipped",
-   "note": "unchanged"
+   "status": "ok",
+   "note": "record.json"
   }
  ],
  "sources": {
@@ -62,7 +62,7 @@
  "keys": [
   {
    "n": 1,
-   "left": 196
+   "left": 192
   },
   {
    "n": 2,
@@ -77,14 +77,14 @@
    "left": 458
   }
  ],
- "pool_total": 1263,
+ "pool_total": 1259,
  "allowance": 12.0849,
  "tier": 4,
  "budget_today": 169,
- "budget_used_today": 18,
+ "budget_used_today": 22,
  "prices_state": "ok",
- "prices_at": "2026-10-17T17:20:01-04:00",
- "next_price_read_at": "2026-10-17T17:30:00-04:00",
+ "prices_at": "2026-10-17T17:30:01-04:00",
+ "next_price_read_at": "2026-10-17T18:15:00-04:00",
  "unmatched_names": [
   "Elias Pettersson"
  ],
@@ -95,15 +95,15 @@
  ],
  "excluded_teams": [],
  "stats_through": "2026-10-17",
- "lineups_at": "2026-10-17T17:20:01-04:00",
+ "lineups_at": "2026-10-17T17:30:01-04:00",
  "lineups_note": "8 of 22 team line pages are dated today.",
  "games_today": 14,
- "record_events": 79,
+ "record_events": 80,
  "odds_notes": [],
  "runner": {
   "event": "workflow_dispatch",
   "run_id": "39067674729",
-  "iteration": 5,
+  "iteration": 6,
   "chain_link": 40,
   "chain_started_at": "2026-10-16T10:00:13-04:00",
   "run_started_at": "2026-10-17T16:40:10-04:00"

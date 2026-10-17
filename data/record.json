@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-10-17T01:20:00-04:00",
+ "generated_at": "2026-10-17T17:30:01-04:00",
  "summary": {
   "headline": {
    "w": 10,
@@ -51,6 +51,38 @@
   ]
  },
  "nights": [
+  {
+   "date": "2026-10-17",
+   "graded": false,
+   "w": 0,
+   "l": 0,
+   "units": 0,
+   "entries": [
+    {
+     "id": "2026-10-17:2026020125:8475151:shots:1.5:over",
+     "kind": "single",
+     "player": "K. Palmieri",
+     "bet": "Over 1.5 shots on goal",
+     "market": "shots",
+     "team": "NYI",
+     "game": "NYI at TOR",
+     "price": -140,
+     "first_price": -140,
+     "last_price": -140,
+     "prices": [
+      {
+       "price": -140,
+       "at": "2026-10-17T17:30:01-04:00"
+      }
+     ],
+     "result": null,
+     "actual": null,
+     "units": null,
+     "pulled": null,
+     "legs": []
+    }
+   ]
+  },
   {
    "date": "2026-10-16",
    "graded": true,
