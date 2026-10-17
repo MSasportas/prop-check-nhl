@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-10-16T05:00:01-04:00",
+ "generated_at": "2026-10-16T21:40:11-04:00",
  "summary": {
   "headline": {
    "w": 10,
@@ -51,6 +51,38 @@
   ]
  },
  "nights": [
+  {
+   "date": "2026-10-16",
+   "graded": false,
+   "w": 0,
+   "l": 0,
+   "units": 0,
+   "entries": [
+    {
+     "id": "2026-10-16:2026020120:8477956:shots:3.5:under",
+     "kind": "single",
+     "player": "D. Pastrnak",
+     "bet": "Under 3.5 shots on goal",
+     "market": "shots",
+     "team": "BOS",
+     "game": "BOS at ANA",
+     "price": -120,
+     "first_price": -120,
+     "last_price": -120,
+     "prices": [
+      {
+       "price": -120,
+       "at": "2026-10-16T13:00:00-04:00"
+      }
+     ],
+     "result": null,
+     "actual": null,
+     "units": null,
+     "pulled": null,
+     "legs": []
+    }
+   ]
+  },
   {
    "date": "2026-10-15",
    "graded": true,
