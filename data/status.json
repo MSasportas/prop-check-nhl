@@ -1,10 +1,10 @@
 {
  "ok": true,
  "slate_date": "2026-10-17",
- "started_at": "2026-10-17T18:30:00-04:00",
- "status_at": "2026-10-17T18:30:00-04:00",
- "finished_at": "2026-10-17T18:30:02-04:00",
- "last_ok_at": "2026-10-17T18:30:00-04:00",
+ "started_at": "2026-10-17T18:40:01-04:00",
+ "status_at": "2026-10-17T18:40:01-04:00",
+ "finished_at": "2026-10-17T18:40:04-04:00",
+ "last_ok_at": "2026-10-17T18:40:01-04:00",
  "failed_step": null,
  "steps": [
   {
@@ -20,12 +20,12 @@
   {
    "step": "stats",
    "status": "ok",
-   "note": "1 window(s) read, 2 team-games still missing"
+   "note": "1 window(s) read, 4 team-games still missing"
   },
   {
    "step": "lineups",
    "status": "ok",
-   "note": "2 of 2 team pages read"
+   "note": "14 of 14 team pages read"
   },
   {
    "step": "odds",
@@ -99,12 +99,20 @@
    "reason": "stats behind"
   },
   {
+   "team": "TBL",
+   "reason": "stats behind"
+  },
+  {
+   "team": "VAN",
+   "reason": "stats behind"
+  },
+  {
    "team": "WPG",
    "reason": "stats behind"
   }
  ],
  "stats_through": "2026-10-16",
- "lineups_at": "2026-10-17T18:30:00-04:00",
+ "lineups_at": "2026-10-17T18:40:01-04:00",
  "lineups_note": "9 of 24 team line pages are dated today.",
  "games_today": 14,
  "record_events": 80,
@@ -112,7 +120,7 @@
  "runner": {
   "event": "workflow_dispatch",
   "run_id": "39074641822",
-  "iteration": 2,
+  "iteration": 3,
   "chain_link": 42,
   "chain_started_at": "2026-10-16T10:00:13-04:00",
   "run_started_at": "2026-10-17T18:20:17-04:00"
