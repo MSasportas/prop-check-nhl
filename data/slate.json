@@ -1,12 +1,12 @@
 {
  "slate_date": "2026-10-16",
- "generated_at": "2026-10-16T20:00:01-04:00",
- "status_at": "2026-10-16T20:00:01-04:00",
+ "generated_at": "2026-10-16T20:20:00-04:00",
+ "status_at": "2026-10-16T20:20:00-04:00",
  "valid_until": "2026-10-17T05:00:00-04:00",
  "status": {
   "prices_state": "ok",
-  "prices_at": "2026-10-16T13:00:00-04:00",
-  "next_price_read_at": "2026-10-16T20:15:00-04:00",
+  "prices_at": "2026-10-16T20:20:00-04:00",
+  "next_price_read_at": "2026-10-16T21:15:00-04:00",
   "stats_built_at": "2026-10-16T05:30:01-04:00",
   "stats_through": "2026-10-15",
   "lineups_at": "2026-10-16T20:00:01-04:00",
@@ -16,18 +16,18 @@
   "stats_state": "ok",
   "last_run": {
    "ok": true,
-   "at": "2026-10-16T20:00:01-04:00",
+   "at": "2026-10-16T20:20:00-04:00",
    "failed_step": null
   },
   "pool": {
-   "pulls_left": 1284,
+   "pulls_left": 1283,
    "keys": 4,
    "game_days_left": 16,
    "days_left": 16,
    "low": false
   },
   "excluded_teams": [],
-  "lines_checked": 36,
+  "lines_checked": 54,
   "lines_failed": 5,
   "tier": 4
  },
@@ -40,7 +40,7 @@
  "empty": {
   "code": "none_qualified",
   "text": "No open picks right now.",
-  "sub": "Checked 36 lines at 1:00 PM. Next price check at 8:15 PM."
+  "sub": "Checked 54 lines at 8:20 PM. Next price check at 9:15 PM."
  },
  "games": [
   {
