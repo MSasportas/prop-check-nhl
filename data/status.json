@@ -1,10 +1,10 @@
 {
  "ok": true,
  "slate_date": "2026-10-17",
- "started_at": "2026-10-17T19:10:00-04:00",
- "status_at": "2026-10-17T19:10:00-04:00",
- "finished_at": "2026-10-17T19:10:01-04:00",
- "last_ok_at": "2026-10-17T19:10:00-04:00",
+ "started_at": "2026-10-17T19:20:00-04:00",
+ "status_at": "2026-10-17T19:20:00-04:00",
+ "finished_at": "2026-10-17T19:20:01-04:00",
+ "last_ok_at": "2026-10-17T19:20:00-04:00",
  "failed_step": null,
  "steps": [
   {
@@ -24,13 +24,13 @@
   },
   {
    "step": "lineups",
-   "status": "ok",
-   "note": "2 of 2 team pages read"
+   "status": "skipped",
+   "note": "checked in the last 20 minutes"
   },
   {
    "step": "odds",
    "status": "ok",
-   "note": "no pull due"
+   "note": "1 game(s) priced"
   },
   {
    "step": "engine",
@@ -62,7 +62,7 @@
  "keys": [
   {
    "n": 1,
-   "left": 186
+   "left": 185
   },
   {
    "n": 2,
@@ -77,14 +77,14 @@
    "left": 458
   }
  ],
- "pool_total": 1253,
+ "pool_total": 1252,
  "allowance": 12.0849,
  "tier": 4,
  "budget_today": 169,
- "budget_used_today": 28,
+ "budget_used_today": 29,
  "prices_state": "ok",
- "prices_at": "2026-10-17T18:20:00-04:00",
- "next_price_read_at": "2026-10-17T19:15:00-04:00",
+ "prices_at": "2026-10-17T19:20:00-04:00",
+ "next_price_read_at": "2026-10-17T20:15:00-04:00",
  "unmatched_names": [
   "Elias Pettersson"
  ],
@@ -111,10 +111,10 @@
  "odds_notes": [],
  "runner": {
   "event": "workflow_dispatch",
-  "run_id": "39074641822",
-  "iteration": 6,
-  "chain_link": 42,
+  "run_id": "39077955322",
+  "iteration": 2,
+  "chain_link": 43,
   "chain_started_at": "2026-10-16T10:00:13-04:00",
-  "run_started_at": "2026-10-17T18:20:17-04:00"
+  "run_started_at": "2026-10-17T19:10:13-04:00"
  }
 }

@@ -1,12 +1,12 @@
 {
  "slate_date": "2026-10-17",
- "generated_at": "2026-10-17T19:10:00-04:00",
- "status_at": "2026-10-17T19:10:00-04:00",
+ "generated_at": "2026-10-17T19:20:00-04:00",
+ "status_at": "2026-10-17T19:20:00-04:00",
  "valid_until": "2026-10-18T05:00:00-04:00",
  "status": {
   "prices_state": "ok",
-  "prices_at": "2026-10-17T18:20:00-04:00",
-  "next_price_read_at": "2026-10-17T19:15:00-04:00",
+  "prices_at": "2026-10-17T19:20:00-04:00",
+  "next_price_read_at": "2026-10-17T20:15:00-04:00",
   "stats_built_at": "2026-10-17T19:00:01-04:00",
   "stats_through": "2026-10-16",
   "lineups_at": "2026-10-17T19:10:00-04:00",
@@ -16,11 +16,11 @@
   "stats_state": "ok",
   "last_run": {
    "ok": true,
-   "at": "2026-10-17T19:10:00-04:00",
+   "at": "2026-10-17T19:20:00-04:00",
    "failed_step": null
   },
   "pool": {
-   "pulls_left": 1253,
+   "pulls_left": 1252,
    "keys": 4,
    "game_days_left": 15,
    "days_left": 15,
@@ -36,7 +36,7 @@
     "reason": "stats behind"
    }
   ],
-  "lines_checked": 375,
+  "lines_checked": 397,
   "lines_failed": 4,
   "tier": 4
  },
@@ -53,7 +53,7 @@
  "empty": {
   "code": "none_qualified",
   "text": "No open picks right now.",
-  "sub": "Checked 375 lines at 6:20 PM. Today's earlier pick is under Started. Next price check at 7:15 PM."
+  "sub": "Checked 397 lines at 7:20 PM. Today's earlier pick is under Started. Next price check at 8:15 PM."
  },
  "games": [
   {
