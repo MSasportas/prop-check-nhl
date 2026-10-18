@@ -34,7 +34,7 @@
   "parlay_min_p_3": 0.2,
   "parlay_edge": 0.03,
   "parlay_cap": 3,
-  "parlay_leg_max_use": 2,
+  "parlay_leg_max_use": 1,
   "goal_watch_count": 3,
   "stake": 1,
   "hold_min": 0.03,
