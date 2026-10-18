@@ -56,6 +56,20 @@
      "shots"
     ],
     "cost": 1
+   },
+   {
+    "game_id": 2026020136,
+    "pull": "B",
+    "at": "2026-10-18T18:30:00-04:00",
+    "markets": [
+     "saves",
+     "shots"
+    ],
+    "returned": [
+     "saves",
+     "shots"
+    ],
+    "cost": 2
    }
   ]
  },
