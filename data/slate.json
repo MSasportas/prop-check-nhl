@@ -1,14 +1,14 @@
 {
  "slate_date": "2026-10-17",
- "generated_at": "2026-10-17T22:50:01-04:00",
- "status_at": "2026-10-17T22:50:01-04:00",
+ "generated_at": "2026-10-17T23:10:01-04:00",
+ "status_at": "2026-10-17T23:10:01-04:00",
  "valid_until": "2026-10-18T05:00:00-04:00",
  "status": {
   "prices_state": "ok",
   "prices_at": "2026-10-17T21:20:00-04:00",
   "next_price_read_at": null,
-  "stats_built_at": "2026-10-17T22:50:01-04:00",
-  "stats_through": "2026-10-16",
+  "stats_built_at": "2026-10-17T23:10:01-04:00",
+  "stats_through": "2026-10-17",
   "lineups_at": "2026-10-17T21:30:01-04:00",
   "goalies_at": null,
   "lineups_note": "14 of 28 team line pages are dated today.",
@@ -16,7 +16,7 @@
   "stats_state": "ok",
   "last_run": {
    "ok": true,
-   "at": "2026-10-17T22:50:01-04:00",
+   "at": "2026-10-17T23:10:01-04:00",
    "failed_step": null
   },
   "pool": {
@@ -26,25 +26,12 @@
    "days_left": 15,
    "low": false
   },
-  "excluded_teams": [
-   {
-    "team": "NSH",
-    "reason": "stats behind"
-   },
-   {
-    "team": "STL",
-    "reason": "stats behind"
-   }
-  ],
+  "excluded_teams": [],
   "lines_checked": 454,
   "lines_failed": 5,
   "tier": 4
  },
  "banners": [
-  {
-   "level": "warn",
-   "text": "Not covered tonight: NSH, STL (stats behind)."
-  },
   {
    "level": "info",
    "text": "5 Hard Rock lines skipped: the two sides did not add up or the price was old."
@@ -163,11 +150,8 @@
    "start": "2026-10-17T20:00:00-04:00",
    "started": true,
    "picks": 0,
-   "excluded_reason": "stats behind",
-   "excluded_teams": [
-    "STL",
-    "NSH"
-   ]
+   "excluded_reason": null,
+   "excluded_teams": []
   },
   {
    "id": 2026020132,
