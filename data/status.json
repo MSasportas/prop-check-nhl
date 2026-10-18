@@ -1,10 +1,10 @@
 {
  "ok": true,
  "slate_date": "2026-10-17",
- "started_at": "2026-10-18T00:40:01-04:00",
- "status_at": "2026-10-18T00:40:01-04:00",
- "finished_at": "2026-10-18T00:40:02-04:00",
- "last_ok_at": "2026-10-18T00:40:01-04:00",
+ "started_at": "2026-10-18T00:50:00-04:00",
+ "status_at": "2026-10-18T00:50:00-04:00",
+ "finished_at": "2026-10-18T00:50:01-04:00",
+ "last_ok_at": "2026-10-18T00:50:00-04:00",
  "failed_step": null,
  "steps": [
   {
@@ -19,8 +19,8 @@
   },
   {
    "step": "stats",
-   "status": "ok",
-   "note": "1 window(s) read, 2 team-games still missing"
+   "status": "skipped",
+   "note": "waiting to retry"
   },
   {
    "step": "lineups",
@@ -95,7 +95,15 @@
  ],
  "excluded_teams": [
   {
+   "team": "EDM",
+   "reason": "stats behind"
+  },
+  {
    "team": "PIT",
+   "reason": "stats behind"
+  },
+  {
+   "team": "UTA",
    "reason": "stats behind"
   },
   {
@@ -112,7 +120,7 @@
  "runner": {
   "event": "workflow_dispatch",
   "run_id": "39096150492",
-  "iteration": 4,
+  "iteration": 5,
   "chain_link": 49,
   "chain_started_at": "2026-10-16T10:00:13-04:00",
   "run_started_at": "2026-10-18T00:10:12-04:00"
