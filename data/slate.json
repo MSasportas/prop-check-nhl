@@ -1,13 +1,13 @@
 {
  "slate_date": "2026-10-17",
- "generated_at": "2026-10-18T00:20:01-04:00",
- "status_at": "2026-10-18T00:20:01-04:00",
+ "generated_at": "2026-10-18T00:40:01-04:00",
+ "status_at": "2026-10-18T00:40:01-04:00",
  "valid_until": "2026-10-18T05:00:00-04:00",
  "status": {
   "prices_state": "ok",
   "prices_at": "2026-10-17T21:20:00-04:00",
   "next_price_read_at": null,
-  "stats_built_at": "2026-10-18T00:00:00-04:00",
+  "stats_built_at": "2026-10-18T00:40:01-04:00",
   "stats_through": "2026-10-16",
   "lineups_at": "2026-10-17T21:30:01-04:00",
   "goalies_at": null,
@@ -16,7 +16,7 @@
   "stats_state": "ok",
   "last_run": {
    "ok": true,
-   "at": "2026-10-18T00:20:01-04:00",
+   "at": "2026-10-18T00:40:01-04:00",
    "failed_step": null
   },
   "pool": {
@@ -28,11 +28,11 @@
   },
   "excluded_teams": [
    {
-    "team": "BOS",
+    "team": "PIT",
     "reason": "stats behind"
    },
    {
-    "team": "LAK",
+    "team": "VGK",
     "reason": "stats behind"
    }
   ],
@@ -43,7 +43,7 @@
  "banners": [
   {
    "level": "warn",
-   "text": "Not covered tonight: BOS, LAK (stats behind)."
+   "text": "Not covered tonight: PIT, VGK (stats behind)."
   },
   {
    "level": "info",
@@ -173,11 +173,8 @@
    "start": "2026-10-17T21:00:00-04:00",
    "started": true,
    "picks": 0,
-   "excluded_reason": "stats behind",
-   "excluded_teams": [
-    "BOS",
-    "LAK"
-   ]
+   "excluded_reason": null,
+   "excluded_teams": []
   },
   {
    "id": 2026020133,
@@ -196,8 +193,11 @@
    "start": "2026-10-17T22:00:00-04:00",
    "started": true,
    "picks": 0,
-   "excluded_reason": null,
-   "excluded_teams": []
+   "excluded_reason": "stats behind",
+   "excluded_teams": [
+    "PIT",
+    "VGK"
+   ]
   }
  ],
  "picks": [
