@@ -1,13 +1,13 @@
 {
  "slate_date": "2026-10-17",
- "generated_at": "2026-10-17T22:10:00-04:00",
- "status_at": "2026-10-17T22:10:00-04:00",
+ "generated_at": "2026-10-17T22:20:01-04:00",
+ "status_at": "2026-10-17T22:20:01-04:00",
  "valid_until": "2026-10-18T05:00:00-04:00",
  "status": {
   "prices_state": "ok",
   "prices_at": "2026-10-17T21:20:00-04:00",
   "next_price_read_at": null,
-  "stats_built_at": "2026-10-17T22:10:00-04:00",
+  "stats_built_at": "2026-10-17T22:20:01-04:00",
   "stats_through": "2026-10-16",
   "lineups_at": "2026-10-17T21:30:01-04:00",
   "goalies_at": null,
@@ -16,7 +16,7 @@
   "stats_state": "ok",
   "last_run": {
    "ok": true,
-   "at": "2026-10-17T22:10:00-04:00",
+   "at": "2026-10-17T22:20:01-04:00",
    "failed_step": null
   },
   "pool": {
@@ -44,10 +44,6 @@
     "reason": "stats behind"
    },
    {
-    "team": "NYI",
-    "reason": "stats behind"
-   },
-   {
     "team": "NYR",
     "reason": "stats behind"
    },
@@ -62,10 +58,6 @@
    {
     "team": "SJS",
     "reason": "stats behind"
-   },
-   {
-    "team": "TOR",
-    "reason": "stats behind"
    }
   ],
   "lines_checked": 454,
@@ -75,7 +67,7 @@
  "banners": [
   {
    "level": "warn",
-   "text": "Not covered tonight: BUF, CBJ, DET, MTL, NYI, NYR, OTT, PHI, SJS, TOR (stats behind)."
+   "text": "Not covered tonight: BUF, CBJ, DET, MTL, NYR, OTT, PHI, SJS (stats behind)."
   },
   {
    "level": "info",
@@ -135,11 +127,8 @@
    "start": "2026-10-17T19:00:00-04:00",
    "started": true,
    "picks": 1,
-   "excluded_reason": "stats behind",
-   "excluded_teams": [
-    "NYI",
-    "TOR"
-   ]
+   "excluded_reason": null,
+   "excluded_teams": []
   },
   {
    "id": 2026020126,
