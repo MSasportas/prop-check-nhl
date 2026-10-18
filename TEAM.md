@@ -158,6 +158,30 @@ price history exists; our own odds log, `data/odds/`, is building that).
     ~100 graded legs show the ranking sorts winners. 20 of 22 picks are unders; model sits 12-19 pts off the book on
     every pick (risk 1 above). Weekly review: track parlays after the fix, and edge-bucket hit rates for sizing.
 
+17. **Edge study (team meeting 2026-10-18, DS + Sharp). Read before any rule change.** Shadow-graded 742 two-way Hard Rock shots
+    lines Oct 12-17 (48 games), model rebuilt with only prior games (matches the Record on all 13 picks). Six nights = leads, not results.
+    - Hard Rock puts the vig on the over: all overs 46.2% hit, -13.8% ROI; all unders 53.8%, +0.2%. Hold ~7.9%. No blind rule clears break-even.
+    - Model has some real information (ranks players better than the book on every line; regression weight 0.68, CI 0.01-1.36;
+      log loss 0.6852 vs book 0.6903, CI includes 0). But hit rate does NOT rise with the gap: gap 0-0.03: -5.7% ROI (n 254);
+      **0.03-0.10: ~+12% (n 355, CI +1.6 to +23, found after looking = hypothesis)**; 0.10+: -6 to -20% (n 100). Current rules only
+      bet gaps ~0.135+, the zone that lost. Early unders can never qualify (0.03 early bar needs gap > 0.15, which needs a lineup).
+    - Prices move toward the model: +0.58 pts avg on 347 re-read lines, larger with larger gaps (16.5% of the gap). Real, but
+      Hard Rock's own close is over-biased, so it is not proof of profit.
+    - The 12-19 pt gap on every pick is mostly built in by the filter (0.6 blend + vig + margins), and it bets a 7.9%-hold book is
+      wrong by 15 pts, almost always on the under: treat as a red flag (likely level bias), not insight.
+    - Saves: 33 lines, model worse than book. Nothing to say yet.
+    - Lineup history is rebuildable from git history of `lineups.json` (161 versions): 78/100 team-games got a page dated that day,
+      61 by 20 min before puck. Regulars (last 3 games, steady TOI) missed 0.8% (a miss is a void, not a loss).
+    - Time to detect a 3-pt edge: Record picks only ~750 nights; **model's side on every line ~15-20 nights**; CLV 3-5 nights (already seen).
+    **Plan (Sharp's gates):** (1) Shadow log: every night grade the model's side on every two-way shots line priced -200 to +120,
+    by gap band and side, at posted price, internal file only (never the Record). (2) Closing shots pull ~20-25 min before puck
+    for every game (~1 credit each), CLV on every line. (3) Daily lineup-history file. (4) Fit the blend weight from shadow log loss.
+    **Gates:** edge = best blend weight on the model >= 0.3 and beats book log loss on >= 1,000 lines; no edge = weight <= 0.1.
+    Go = mean CLV > 0 (t >= 2) and ROI >= 0. **Kill rule: at 100 graded shots picks or Nov 30, if CLV <= 0 and ROI <= 0, shots go
+    logged-only and the page says "no proven edge".** No value change until the shadow sample decides (gap band, de-vig on the over,
+    blend weight are the candidates). Traps (not now): early-regulars rule, staking by edge, extra re-prices, threshold tuning on 13 picks.
+    DS scripts lived in session scratch (lost); the method above is enough to rebuild.
+
 ## 8. Rule-change log
 | Date | Change | Why | Sample |
 |---|---|---|---|
@@ -169,6 +193,7 @@ price history exists; our own odds log, `data/odds/`, is building that).
 | 2026-10-11 | v1.0 set (section 4) | First build: Sharp standard from the DS backtest (2024-25 fit, 2025-26 out of sample) and one live Hard Rock pull | Backtest only; 0 graded live legs |
 
 ## 9. Session log (newest first, one line each)
+- 2026-10-18 team meeting (Matt: find an edge, then prove it profitable): DS shadow-graded 742 shots lines, Sharp set gates and kill rule. Findings and plan in section 7 item 17. No code or rule changed this meeting; build waits for Matt's go.
 - 2026-10-18 (Matt: hyper-specialize in 1-2 markets): reviewed every market we can see at Hard Rock. Decision: shots only for picks now, goalie saves as #2 (log, build, prove). Points picks off in `config/rules.json`; 221 tests pass. Then shipped item 16(a): planner stops pulling points, B pulls shots + saves, 221 tests pass. Not done: no saves model yet. No pick changes to the Record.
 - 2026-10-18 1:44 PM daily check: chain alive (link 69, finished 1:40 PM, Actions runs all success; one cron run cancelled by the chain, normal), all steps/sources ok, pull A ran 1:00 PM (2 games, 34 lines, 0 picks, next check 5:15 PM), keys 476 (key 4 at 18), tier 3, no unmatched names/excluded teams. Oct 17's 1 pick graded (W); all 25 shown picks/parlays graded; record guard ok (82 lines). 221 tests pass. Nothing to fix.
 - 2026-10-18 weekly review: DS (Record thru Oct 17): singles 11-7 61% vs 57.7% BE +0.96u (shots U 7-5 +0.11, points U 2-2 -0.49); parlays 1-6 -4.45u (all before the cap fix); calibration ok (stated 60.6%, hit 61.1%, n=18); edge doesn't sort winners; 1 zero-pick night (Oct 14); 19 sides within 1 pt of qualifying. Sharp: no value changes (shots 13 / points 5 graded legs vs 50 pause / 150 change). Shipped (QA SHIP at 380px): strip shows singles + parlays, Record "All bets", reasons show the real why (first sentence dropped, 3 lines), short Record table under 30, shorter game-list status, stale state hides New/Since and says "old price", fixtures one-parlay-per-leg, gap 12. Oct 17 1-of-4 = Daily Faceoff never confirmed (gap 4). Health: chain link 65 alive, all sources ok, keys 478, grading complete. 221 tests.
