@@ -92,13 +92,14 @@ class T(unittest.TestCase):
         ps = [pick(i) for i in range(1, 12)]
         self.assertEqual(notify.notify(slate(ps)), 1)
         t = self.texts()[0]
-        self.assertEqual(t.count("\n- "), 8)
+        self.assertEqual(t.count("P. Player"), 8)
+        self.assertIn("**11 new bets", t)
         self.assertIn("+3 more on the page", t)
         self.assertIn(notify.PAGE, t)
-        self.assertIn("chance 62% needs 55%", t)
+        self.assertIn("We say 62% to hit · price needs 55%", t)
         self.assertIn("7:00 PM ET", t)
         self.assertIn("-120", t)
-        self.assertIn("Check the price in the app before you bet.", t)
+        self.assertIn("Bet only at these prices or better", t)
         self.assertLessEqual(len(t), 2000)
         self.assertEqual(len(self.state()["picks"]), 11)       # the overflow ones count as told
 
@@ -112,6 +113,21 @@ class T(unittest.TestCase):
         self.assertEqual(len(self.srv.posts), 2)
         self.assertNotIn("Player1", self.texts()[1])
         self.assertIn("Lineup confirmed", notify.pick_line(a2))
+
+    def test_readable_block_and_length_budget(self):
+        rich = dict(side="over", line=2.5, market="shots", team="NYI", opp="TOR", home=False, state="lineup",
+                    reason="62% to clear 2.5 shots; -120 needs 55%. Projects 3.1 shots in 19 min. TOR allow "
+                           "13% more shots than average, and a lot more words here to make the reason run long.")
+        ps = [dict(pick(i), **rich) for i in range(1, 12)]
+        notify.notify(slate(ps))
+        t = self.texts()[0]
+        self.assertIn("**P. Player1 OVER 2.5 shots  -120**", t)
+        self.assertIn("NYI @ TOR · 7:00 PM ET · ✅ Lineup confirmed", t)
+        self.assertIn("Why: Projects 3.1 shots in 19 min", t)
+        self.assertNotIn("Why: 62%", t)
+        self.assertLessEqual(len(t), 1990)
+        self.assertTrue(t.endswith(notify.PAGE))                 # the link is never cut off
+        self.assertIn("more on the page", t)
 
     def test_parlay_in_same_message(self):
         a, b = pick(1), pick(2)
@@ -140,7 +156,8 @@ class T(unittest.TestCase):
         notify.notify(slate([pa, pb]))                          # b was never notified
         self.assertEqual(len(self.srv.posts), 1)
         t = self.texts()[0]
-        self.assertIn("Pulled: P. Player1 Over 2.5 shots on goal - Scratched from the lineup", t)
+        self.assertIn("Don't bet these", t)
+        self.assertIn("P. Player1 Over 2.5 shots on goal (Scratched from the lineup)", t)
         self.assertNotIn("Player2", t)
         notify.notify(slate([pa, pb]))                          # not again
         self.assertEqual(len(self.srv.posts), 1)

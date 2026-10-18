@@ -39,7 +39,7 @@ price history exists; our own odds log, `data/odds/`, is building that).
 | Qualify | Price -200 to +120; chance ≥ 0.56; chance − break-even ≥ 0.02 (lineup confirmed) or 0.03 (early); model − book gap > 0.15 needs lineup confirmed; gap > 0.20 = no pick (assume the book knows) |
 | Eligibility | ≥ 10 games of history; thin = < 20 games of history or < 10 with team; missed team's last game → wait for lineup; back from 3+ missed games → sits 2 games; ice time down 2:00+ (last 2 vs last 10) → no over; team stats behind → team excluded and named |
 | Ranking | By chance − break-even, then chance, confirmed first. 1 pick per player, 3 per game. First 8 open, rest under More |
-| Parlays | One leg per game; legs chance ≥ 0.58, price -200 to +100; combined ≥ 0.34 (2 legs) / 0.20 (3); beat parlay break-even by 0.03; up to 3 a night, a leg in at most 2. Price = product of leg prices ("about") |
+| Parlays | One leg per game; legs chance ≥ 0.58, price -200 to +100; combined ≥ 0.34 (2 legs) / 0.20 (3); beat parlay break-even by 0.03; up to 3 a night, counting every parlay shown that night (locked and graded too, not pulled); a leg in 1 parlay only. Price = product of leg prices ("about") |
 | Pulls | Out per Daily Faceoff; price past -200 or past +120; line or market gone; chance − break-even < 0; market moved 4+ points against an unconfirmed pick. Parlay with a pulled leg is pulled |
 | Grading | When the NHL marks the game OFF. Regulation + OT count, shootout never. No ice time = void; whole-number tie = push. Graded at the worst price shown; parlays at their worst shown snapshot. Flat 1 unit |
 | Odds pulls | Allowance = credits left / games left before keys reset on the 1st. Pull A (1 PM, or 3h before first puck) is SHOTS ONLY at every tier (cheapest market). Points and everything else wait for that game's lineups to be confirmed (both teams' Daily Faceoff pages dated today) AND the B window (90 min before that game's puck); retried each cycle until 20 min before puck. If lineups are still unconfirmed at 45 min before puck, points only are pulled as a fallback (so Daily Faceoff being down does not kill points picks), merged with pull C when a live pick needs it. Tiers (credits per game): <1 shots only for the games the budget covers; 1-2 shots all games once; 2-4 shots (A) + points (B, once lineups confirm) plus a re-check 45 min before each game holding a pick (C); 4-7 B is shots + points; 7+ B adds goals + saves (Goal watch). Started games are never pulled. The lineups step now runs before odds so a confirmation is used the same cycle. Unspent credits roll over |
@@ -74,13 +74,15 @@ price history exists; our own odds log, `data/odds/`, is building that).
   once, a price move or Early -> Lineup confirmed never repeats), PULLED (only picks already notified, before puck),
   ACTION NEEDED (keys refused, pool low/empty: the page's sentence, once per ET day each), a one-time hello. Never
   no-pick nights, heartbeats, grading, errors. Quiet 12:30-8:00 AM ET (held items go out at 8 if still ahead). Max 6
-  messages per ET day. State `data/state/notified.json` (ids and timestamps only; marked only after a 2xx; 429/5xx =
+  messages per ET day. Message format (2026-10-18): bold bet line, game · time · lineup state, "We say X% to hit · price
+  needs Y%", "Why:" (page reason minus its first sentence), parlays as bulleted legs, footer "Bet only at these
+  prices or better", link last and never cut (blocks dropped to fit under 1,900 chars). State `data/state/notified.json` (ids and timestamps only; marked only after a 2xx; 429/5xx =
   retry next cycle). Tests: `PC_DISCORD_FIXTURE_URL` posts to a local server; in `PC_NOW`/`PC_DATA_DIR` mode nothing
   ever reaches Discord without it. Matt adds the secret: repo Settings > Secrets and variables > Actions > New
   repository secret, name `DISCORD_WEBHOOK`, value = the Discord channel webhook URL.
 - **Files:** `index.html` (page; reads `data/slate.json`, `data/record.json`, `data/rules.json`), `data/odds/<date>.json`
   (every price pulled), `data/state/` (stats store, schedule, credits ledger), `fixtures/` (QA pages: `?fixture=NAME`,
-  `?now=ISO`), `tests/` (`python -m unittest discover -s tests`, 205 tests; `tests/replay_day.py` replays a day).
+  `?now=ISO`), `tests/` (`python -m unittest discover -s tests`, 212 tests; `tests/replay_day.py` replays a day).
 - **Debug:** `python scripts/run.py --explain` shows why each line did or didn't qualify. Test env vars: `PC_NOW`,
   `PC_DATA_DIR`, `PC_ODDS_FIXTURE_DIR`, `PC_LINEUP_FIXTURE_DIR`, `PC_NHL_FIXTURE_DIR`. Never test against the live data/.
 
@@ -118,14 +120,21 @@ price history exists; our own odds log, `data/odds/`, is building that).
 12. Empty-state sub can promise "Next price check at …" when no keys are set or all are used up (`next_price_read_at`
     still set in run.py). Harmless while keys exist; Builder to clear it for `no_keys`/`all_used_up`. (QA note 2026-10-12)
 
+13. **ROI (2026-10-18, 18 singles + 7 parlays):** singles 61% vs 58% needed, +0.96u (+5% ROI); parlays -4.45u. Higher-edge
+    picks did not hit more (edge 2-3 pts: 6-3; 3-4.5: 3-3; 4.5+: 2-1), so stake sizing by confidence waits until
+    ~100 graded legs show the ranking sorts winners. 20 of 22 picks are unders; model sits 12-19 pts off the book on
+    every pick (risk 1 above). Weekly review: track parlays after the fix, and edge-bucket hit rates for sizing.
+
 ## 8. Rule-change log
 | Date | Change | Why | Sample |
 |---|---|---|---|
+| 2026-10-18 | Parlay cap and leg-use count every parlay shown that night (bug: only open ones counted, so a new set was built after each lock); a leg in 1 parlay (was 2) | Parlays were 1-6, -4.45u, the whole ROI drag (singles 11-7, +0.96u). Oct 13 showed 6 parlays (cap 3) with Rosen and Pulock in 4 each; the 3 extra all lost (-3u). One missed leg should sink one parlay, not four | 7 graded parlays; exposure cut, not a qualifying change, so the 150-leg rule doesn't apply |
 | 2026-10-12 | Lineup-gated pulls: A is shots only at every tier; points/goals/saves only after both teams' lineups are confirmed and inside the B window; fallback points-only at 45 min if unconfirmed; lineups step runs before odds | Customer asked for lineup-gated pulls to save credits (no paying for prices on unconfirmed lineups) | Ops timing, no graded sample needed |
 | 2026-10-12 | Pull B now 90 min before each game (was: before the first game, for all games) | Evening games were priced only in the morning until 45 min before puck; picks that appear after lineups confirm would show hours-old prices. Same credits | Ops timing, no graded sample needed |
 | 2026-10-11 | v1.0 set (section 4) | First build: Sharp standard from the DS backtest (2024-25 fit, 2025-26 out of sample) and one live Hard Rock pull | Backtest only; 0 graded live legs |
 
 ## 9. Session log (newest first, one line each)
+- 2026-10-18 (Matt: Discord hard to read; hit rate fine but ROI low): Record read: singles +0.96u, parlays -4.45u. Fixed parlay cap bug (all-night count), leg in 1 parlay, rewrote Discord message. QA PASS. 212 tests.
 - 2026-10-13 morning check: all 3 picks + 1 parlay graded end to end after final (picks 2W-1L +0.68u, parlay L), graded at worst shown price, record.json = rebuild, history guard ok (12 versions, needs unshallow in a fresh sandbox). 5 AM rollover ok, 16-game slate set, pull A not yet due. First-session list complete.
 - 2026-10-12 evening check: chain ok, no failed steps, Record 12 lines, record.json matches rebuild. 3 picks + 1 parlay shown and locked (Vilmanis U1.5 shots graded; Vukovic-type U3.5 and U1.5 shots + parlay awaiting final). Same day shipped: pull B per game, lineup-gated pulls (45-min fallback), own-team highlight on cards, Discord notifications (hello sent; picks shown before the webhook were not notified). 208 tests. Morning check set for grading + 5 AM rollover.
 - 2026-10-12 1:45 PM daily check: chain alive (link 4, 3 min old), all steps ok, pull A ran 10 AM (3 games), keys 1,445, tier 4, no unmatched names/excluded teams; nothing to grade (CAR@PHI had no picks; first pick FLA@BUF Vilmanis U1.5 shots locked). Fixed: page said "No picks tonight" while a pick was under Started and evening prices were still due → now "No open picks right now." + earlier-pick and next-check lines. Builder → QA PASS at 380px. 185 tests.

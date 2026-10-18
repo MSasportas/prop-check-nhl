@@ -507,6 +507,14 @@ def _parlays(inp, items, live, at):
     v, new = inp.v, []
     today = {i: it for i, it in items.items() if it["slate"] == inp.slate}
     open_parlays, use = [], {}
+    # The night's cap and each leg's use count cover EVERY parlay shown today that was not pulled, including
+    # locked and graded ones (before 2026-10-18 only open ones counted, so a fresh set was built after each lock:
+    # Oct 13 showed 6 parlays with one leg in 4 of them).
+    for i, it in today.items():
+        if it["kind"] == "parlay" and it["pulled"] is None and not record.is_open(it):
+            open_parlays.append(it["shown"]["legs"])
+            for l in it["shown"]["legs"]:
+                use[l] = use.get(l, 0) + 1
     for i, it in today.items():
         if it["kind"] != "parlay" or not record.is_open(it):
             continue
@@ -517,6 +525,9 @@ def _parlays(inp, items, live, at):
             who = today[pulled[0]]["shown"]["player"].split(". ", 1)[-1]
             new.append({"t": "pulled", "id": i, "at": at, "code": "leg", "reason": "%s leg pulled" % who})
             continue
+        open_parlays.append(legs)                               # counts toward the night's caps from here on
+        for l in legs:
+            use[l] = use.get(l, 0) + 1
         if locked or any(l not in live for l in legs):
             st = "locked" if it["state"] == "lineup" else "locked_unconfirmed"
             new.append({"t": "locked", "id": i, "at": at, "state": st})
@@ -530,9 +541,6 @@ def _parlays(inp, items, live, at):
             new.append({"t": "update", "id": i, "at": at, "p": round(n["p"], 4), "breakeven": round(n["b"], 4)})
         if n["state"] != it["state"]:
             new.append({"t": "state", "id": i, "at": at, "state": n["state"]})
-        open_parlays.append(legs)
-        for l in legs:
-            use[l] = use.get(l, 0) + 1
 
     # legs that may go in a new parlay
     lo, hi = odds.decimal(v["parlay_leg_min_price"]), odds.decimal(v["parlay_leg_max_price"])

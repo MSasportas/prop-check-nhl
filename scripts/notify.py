@@ -33,7 +33,7 @@ TIMEOUT = 5
 BUDGET_SEC = 14             # all posts of one run together
 HELLO = ("Prop Check notifications are on. You'll get a message only when there is a bet to place, "
          "when one is pulled, or when odds keys need attention.")
-CHECK = "Check the price in the app before you bet."
+CHECK = "Bet only at these prices or better. If Hard Rock shows worse, skip it."
 KEEP_DAYS = 2
 
 
@@ -125,21 +125,52 @@ def _t(iso):
 
 
 def _state_label(p):
-    return "Lineup confirmed" if p.get("state") == "lineup" else "Early"
+    return "✅ Lineup confirmed" if p.get("state") == "lineup" else "⏳ Early, lineup not set"
+
+
+SHORT = {"shots": "shots", "points": "points", "goals": "goals", "saves": "saves"}
+
+
+def _bet(p):
+    """'OVER 1.5 shots' (falls back to the full bet text)."""
+    if p.get("side") and p.get("line") is not None and p.get("market") in SHORT:
+        return "%s %s %s" % (p["side"].upper(), ("%g" % float(p["line"])), SHORT[p["market"]])
+    return p["bet"]
+
+
+def _game(p):
+    if p.get("team") and p.get("opp"):
+        return ("%s vs %s" if p.get("home") else "%s @ %s") % (p["team"], p["opp"])
+    return ""
+
+
+def _why(p):
+    """The page reason without its first sentence (that one repeats the numbers)."""
+    parts = [s.strip() for s in str(p.get("reason") or "").split(". ") if s.strip()]
+    why = ". ".join(parts[1:]).rstrip(".")
+    if len(why) > 110:
+        why = why[:107].rsplit(" ", 1)[0] + "..."
+    return why
 
 
 def pick_line(p):
-    return "%s: %s %s | chance %s%% needs %s%% | %s | %s" % (
-        p["player"], p["bet"], common.fmt_price(p["price"]), p["p_pct"], p["breakeven_pct"],
-        _t(p["start"]), _state_label(p))
+    """One pick as a short Discord block: the bet on top, then when, then why."""
+    when = " · ".join(x for x in (_game(p), _t(p["start"]), _state_label(p)) if x)
+    out = ["**%s %s  %s**" % (p["player"], _bet(p), common.fmt_price(p["price"])), when,
+           "We say %s%% to hit · price needs %s%%" % (p["p_pct"], p["breakeven_pct"])]
+    why = _why(p)
+    if why:
+        out.append("Why: " + why)
+    return "\n".join(out)
 
 
 def parlay_line(pl, by_id):
     legs = [by_id[l] for l in pl["legs"]]
-    names = " + ".join("%s %s" % (l["player"], l["bet"]) for l in legs)
-    return "Parlay: %s | about %s | chance %s%% needs %s%% | %s | %s" % (
-        names, common.fmt_price(pl["price"]), pl["p_pct"], pl["breakeven_pct"],
-        _t(min(l["start"] for l in legs)), _state_label(pl))
+    out = ["**PARLAY %d legs  about %s**" % (len(legs), common.fmt_price(pl["price"]))]
+    out += ["• %s %s (%s)" % (l["player"], _bet(l), common.fmt_price(l["price"])) for l in legs]
+    out.append("We say %s%% to hit · price needs %s%% · first game %s" % (
+        pl["p_pct"], pl["breakeven_pct"], _t(min(l["start"] for l in legs))))
+    return "\n".join(out)
 
 
 def _open(x, now):
@@ -160,14 +191,20 @@ def build_new(slate, st, now):
             new_l.append(pl)
     if not new_p and not new_l:
         return None
-    lines = [pick_line(p) for p in new_p] + [parlay_line(pl, by_id) for pl in new_l]
-    n = len(lines)
-    shown = lines[:MAX_LINES]
-    head = "New bet%s to check (%d)" % ("" if n == 1 else "s", n)
-    text = head + "\n" + "\n".join("- " + s for s in shown)
-    if n > MAX_LINES:
-        text += "\n+%d more on the page" % (n - MAX_LINES)
-    text += "\n%s\n%s" % (CHECK, PAGE)
+    blocks = [pick_line(p) for p in new_p] + [parlay_line(pl, by_id) for pl in new_l]
+    n = len(blocks)
+    head = "🏒 **%d new bet%s · %s**" % (n, "" if n == 1 else "s", now.strftime("%a %b %-d"))
+    tail = "%s\n%s" % (CHECK, PAGE)
+    shown = []
+    for b in blocks[:MAX_LINES]:
+        trial = "\n\n".join([head] + shown + [b, "+%d more on the page" % n, tail])
+        if len(trial) > 1900:
+            break
+        shown.append(b)
+    parts = [head] + shown
+    if n > len(shown):
+        parts.append("+%d more on the page" % (n - len(shown)))
+    text = "\n\n".join(parts + [tail])
     return text, new_p, new_l
 
 
@@ -177,16 +214,16 @@ def build_pulled(slate, st, now):
     for p in slate.get("picks", []):
         if p.get("pulled") and p["id"] in st["picks"] and p["id"] not in st["pulled"] \
                 and common.parse_iso(p["start"]) > now:
-            items.append(("picks", p["id"], "%s %s - %s" % (p["player"], p["bet"], p["pulled"]["reason"])))
+            items.append(("picks", p["id"], "%s %s (%s)" % (p["player"], _bet(p), p["pulled"]["reason"])))
     for pl in slate.get("parlays", []):
         if pl.get("pulled") and pl["id"] in st["parlays"] and pl["id"] not in st["pulled"] \
                 and all(l in by_id for l in pl["legs"]) \
                 and min(common.parse_iso(by_id[l]["start"]) for l in pl["legs"]) > now:
             nm = " + ".join(by_id[l]["player"] for l in pl["legs"])
-            items.append(("parlays", pl["id"], "Parlay %s - %s" % (nm, pl["pulled"]["reason"])))
+            items.append(("parlays", pl["id"], "Parlay %s (%s)" % (nm, pl["pulled"]["reason"])))
     if not items:
         return None
-    text = "\n".join("Pulled: " + s for _, _, s in items[:MAX_LINES])
+    text = "❌ **Pulled. Don't bet these:**\n" + "\n".join("• " + s for _, _, s in items[:MAX_LINES])
     if len(items) > MAX_LINES:
         text += "\n+%d more pulled on the page" % (len(items) - MAX_LINES)
     return text + "\n" + PAGE, items
@@ -268,7 +305,7 @@ def _notify(slate, sender):
                 st["parlays"][pl["id"]] = stamp
         post(new[0], mark_new)
     for code, text in build_actions(slate, st, today):
-        post("Needs you: " + text, lambda c=code: st["action"].setdefault(today, []).append(c))
+        post("⚠️ **Needs you:** " + text, lambda c=code: st["action"].setdefault(today, []).append(c))
     _save(st, before)
     return sent[0]
 
