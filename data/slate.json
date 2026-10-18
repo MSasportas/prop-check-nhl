@@ -1,7 +1,7 @@
 {
  "slate_date": "2026-10-17",
- "generated_at": "2026-10-17T21:50:00-04:00",
- "status_at": "2026-10-17T21:50:00-04:00",
+ "generated_at": "2026-10-17T22:00:00-04:00",
+ "status_at": "2026-10-17T22:00:00-04:00",
  "valid_until": "2026-10-18T05:00:00-04:00",
  "status": {
   "prices_state": "ok",
@@ -16,7 +16,7 @@
   "stats_state": "ok",
   "last_run": {
    "ok": true,
-   "at": "2026-10-17T21:50:00-04:00",
+   "at": "2026-10-17T22:00:00-04:00",
    "failed_step": null
   },
   "pool": {
@@ -32,6 +32,10 @@
     "reason": "stats behind"
    },
    {
+    "team": "CBJ",
+    "reason": "stats behind"
+   },
+   {
     "team": "CHI",
     "reason": "stats behind"
    },
@@ -40,11 +44,31 @@
     "reason": "stats behind"
    },
    {
+    "team": "DET",
+    "reason": "stats behind"
+   },
+   {
     "team": "MTL",
     "reason": "stats behind"
    },
    {
     "team": "NYI",
+    "reason": "stats behind"
+   },
+   {
+    "team": "NYR",
+    "reason": "stats behind"
+   },
+   {
+    "team": "OTT",
+    "reason": "stats behind"
+   },
+   {
+    "team": "PHI",
+    "reason": "stats behind"
+   },
+   {
+    "team": "SJS",
     "reason": "stats behind"
    },
    {
@@ -59,7 +83,7 @@
  "banners": [
   {
    "level": "warn",
-   "text": "Not covered tonight: BUF, CHI, DAL, MTL, NYI, TOR (stats behind)."
+   "text": "Not covered tonight: BUF, CBJ, CHI, DAL, DET, MTL, NYI, NYR, OTT, PHI, SJS, TOR (stats behind)."
   },
   {
    "level": "info",
@@ -67,9 +91,9 @@
   }
  ],
  "empty": {
-  "code": "none_qualified",
-  "text": "No open picks right now.",
-  "sub": "Checked 454 lines at 9:20 PM. Today's earlier pick is under Started."
+  "code": "all_started",
+  "text": "Every game has started.",
+  "sub": "Tonight's picks are under Started."
  },
  "games": [
   {
@@ -145,8 +169,11 @@
    "start": "2026-10-17T19:00:00-04:00",
    "started": true,
    "picks": 0,
-   "excluded_reason": null,
-   "excluded_teams": []
+   "excluded_reason": "stats behind",
+   "excluded_teams": [
+    "SJS",
+    "DET"
+   ]
   },
   {
    "id": 2026020128,
@@ -155,8 +182,11 @@
    "start": "2026-10-17T19:00:00-04:00",
    "started": true,
    "picks": 0,
-   "excluded_reason": null,
-   "excluded_teams": []
+   "excluded_reason": "stats behind",
+   "excluded_teams": [
+    "OTT",
+    "PHI"
+   ]
   },
   {
    "id": 2026020129,
@@ -165,8 +195,11 @@
    "start": "2026-10-17T19:00:00-04:00",
    "started": true,
    "picks": 0,
-   "excluded_reason": null,
-   "excluded_teams": []
+   "excluded_reason": "stats behind",
+   "excluded_teams": [
+    "NYR",
+    "CBJ"
+   ]
   },
   {
    "id": 2026020130,
@@ -206,7 +239,7 @@
    "away": "EDM",
    "home": "UTA",
    "start": "2026-10-17T22:00:00-04:00",
-   "started": false,
+   "started": true,
    "picks": 0,
    "excluded_reason": null,
    "excluded_teams": []
@@ -216,7 +249,7 @@
    "away": "PIT",
    "home": "VGK",
    "start": "2026-10-17T22:00:00-04:00",
-   "started": false,
+   "started": true,
    "picks": 0,
    "excluded_reason": null,
    "excluded_teams": []
@@ -273,31 +306,6 @@
   }
  ],
  "parlays": [],
- "goal_watch": [
-  {
-   "player": "C. McDavid",
-   "team": "EDM",
-   "price": 125,
-   "fair_price": 145,
-   "p": 0.4074,
-   "text": "40% to score; +125 needs 44%. Fair price +145. Not a pick."
-  },
-  {
-   "player": "L. Draisaitl",
-   "team": "EDM",
-   "price": 125,
-   "fair_price": 171,
-   "p": 0.3684,
-   "text": "36% to score; +125 needs 44%. Fair price +171. Not a pick."
-  },
-  {
-   "player": "D. Guenther",
-   "team": "UTA",
-   "price": 130,
-   "fair_price": 181,
-   "p": 0.3555,
-   "text": "35% to score; +130 needs 43%. Fair price +181. Not a pick."
-  }
- ],
- "goal_watch_note": "Not picks. Our model is weakest on goals."
+ "goal_watch": [],
+ "goal_watch_note": null
 }
