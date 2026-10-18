@@ -42,7 +42,7 @@ price history exists; our own odds log, `data/odds/`, is building that).
 | Parlays | One leg per game; legs chance ≥ 0.58, price -200 to +100; combined ≥ 0.34 (2 legs) / 0.20 (3); beat parlay break-even by 0.03; up to 3 a night, counting every parlay shown that night (locked and graded too, not pulled); a leg in 1 parlay only. Price = product of leg prices ("about") |
 | Pulls | Out per Daily Faceoff; price past -200 or past +120; line or market gone; chance − break-even < 0; market moved 4+ points against an unconfirmed pick. Parlay with a pulled leg is pulled |
 | Grading | When the NHL marks the game OFF. Regulation + OT count, shootout never. No ice time = void; whole-number tie = push. Graded at the worst price shown; parlays at their worst shown snapshot. Flat 1 unit |
-| Odds pulls | **2026-10-18: points are no longer pulled at any tier.** B = shots re-price (+ saves at tier 3, + goals at tier 4), C = shots only, fallback at 45 min = shots. Older text below still says points: read it as shots. Allowance = credits left / games left before keys reset on the 1st. Pull A (1 PM, or 3h before first puck) is SHOTS ONLY at every tier (cheapest market). Points and everything else wait for that game's lineups to be confirmed (both teams' Daily Faceoff pages dated today) AND the B window (90 min before that game's puck); retried each cycle until 20 min before puck. If lineups are still unconfirmed at 45 min before puck, points only are pulled as a fallback (so Daily Faceoff being down does not kill points picks), merged with pull C when a live pick needs it. Tiers (credits per game): <1 shots only for the games the budget covers; 1-2 shots all games once; 2-4 shots (A) + points (B, once lineups confirm) plus a re-check 45 min before each game holding a pick (C); 4-7 B is shots + points; 7+ B adds goals + saves (Goal watch). Started games are never pulled. The lineups step now runs before odds so a confirmation is used the same cycle. Unspent credits roll over |
+| Odds pulls | **2026-10-18 (item 17): pull C (45 min before puck, shots) now runs for EVERY unstarted game at tier 2+, not only games holding a pick (closing price on every line for the shadow log).** **2026-10-18: points are no longer pulled at any tier.** B = shots re-price (+ saves at tier 3, + goals at tier 4), C = shots only, fallback at 45 min = shots. Older text below still says points: read it as shots. Allowance = credits left / games left before keys reset on the 1st. Pull A (1 PM, or 3h before first puck) is SHOTS ONLY at every tier (cheapest market). Points and everything else wait for that game's lineups to be confirmed (both teams' Daily Faceoff pages dated today) AND the B window (90 min before that game's puck); retried each cycle until 20 min before puck. If lineups are still unconfirmed at 45 min before puck, points only are pulled as a fallback (so Daily Faceoff being down does not kill points picks), merged with pull C when a live pick needs it. Tiers (credits per game): <1 shots only for the games the budget covers; 1-2 shots all games once; 2-4 shots (A) + points (B, once lineups confirm) plus a re-check 45 min before each game holding a pick (C); 4-7 B is shots + points; 7+ B adds goals + saves (Goal watch). Started games are never pulled. The lineups step now runs before odds so a confirmation is used the same cycle. Unspent credits roll over |
 | Safety | A market pauses itself at 50 graded legs if its hit rate is 13+ points under its average break-even or it's at -10 units. No other value changes before 150 graded legs in that market; one change at a time |
 
 ## 5. How it runs
@@ -85,9 +85,25 @@ price history exists; our own odds log, `data/odds/`, is building that).
   Daily Faceoff starting-goalies page, one read per cycle, `data/state/goalies.json`, written only when it changes). Display
   only, no pick depends on it. Verified live 2026-10-18 (status ok, real names on the page). Page text: `lineup later` /
   `lineup not out` / `✅ lineup`, then `G <Last> ✅` / `G <Last> (likely)` / `G not posted`.
+- **Team logs (2026-10-18, item 17; internal: never on the page, the Record or Discord; "soft" steps in `run.py`, a
+  failure shows as `warn` in status.json steps and never fails the run):**
+  `shadow` (after grade) -> `data/shadow/<slate>.json` (`scripts/shadow.py`): one row per game x market x player x line for
+  every two-way line in `data/odds/`; `open` = first pre-puck read, `close` = last pre-puck read (prices, de-vigged fair
+  over, the engine's own model chance of the over before blend, blended chance each side, lineup + goalie state), `ctx`
+  (home, team/opp, position, history, thin, back-to-back, rest days, TOI last 5 / season, start), `result` (boxscore as
+  grade.py reads it; W/L/PUSH/VOID per side). Open/close never written after puck. Saves rows use `model.goalie_prob`
+  (team-level, assumes that goalie starts). Backfill: `scripts/shadow_backfill.py FROM TO` (model from prior games only;
+  check: 13/13 Record shots picks match). Done for Oct 12-17; run it for Oct 18 once final.
+  `lineup_history` (after lineups) -> `data/state/lineup_history/<slate>.json`: per team, first page dated today
+  (`first_today_at`) and last page before puck, incl. Daily Faceoff units (`groups`: f1-f4, d1-d3, pp1/pp2, pk, g; kept
+  by `lineups.parse_page` from Oct 18 on). Written only on change. Backfill from git: `scripts/lineup_backfill.py`
+  (needs full history; done Oct 12-17, no `groups` in those).
+  `market_menu` (after odds) -> `data/state/market_menu.json`: once per ISO week, one event-markets call (~1 credit,
+  ledger pull `M`) listing every market key Hard Rock posts for NHL, first/last seen. Skips if budget is tight.
 - **Files:** `index.html` (page; reads `data/slate.json`, `data/record.json`, `data/rules.json`), `data/odds/<date>.json`
-  (every price pulled), `data/state/` (stats store, schedule, credits ledger), `fixtures/` (QA pages: `?fixture=NAME`,
-  `?now=ISO`), `tests/` (`python -m unittest discover -s tests`, 221 tests; `tests/replay_day.py` replays a day).
+  (every price pulled), `data/shadow/` (shadow log), `data/state/` (stats store, schedule, credits ledger, lineup history,
+  market menu), `fixtures/` (QA pages: `?fixture=NAME`, `?now=ISO`), `tests/` (`python -m unittest discover -s tests`,
+  242 tests; `tests/replay_day.py` replays a day).
 - **Debug:** `python scripts/run.py --explain` shows why each line did or didn't qualify. Test env vars: `PC_NOW`,
   `PC_DATA_DIR`, `PC_ODDS_FIXTURE_DIR`, `PC_LINEUP_FIXTURE_DIR`, `PC_NHL_FIXTURE_DIR`. Never test against the live data/.
 
@@ -111,8 +127,8 @@ price history exists; our own odds log, `data/odds/`, is building that).
 4. **Lineup confirmation depends on Daily Faceoff, and it often never confirms (top build item).** Oct 17: 14 teams
    (incl. CBJ, CHI, PIT, VGK) never got a page dated today by 20 min before puck, so 2 of 4 qualifying sides stayed
    Early and missed the 0.03 bar, and 1 more (gap > 0.15) needed a confirmed lineup. Lost picks, not a bug. Next build:
-   free fallback from NHL play-by-play `rosterSpots` ~20-30 min before puck, plus a daily lineup-history file
-   (`lineups.json` keeps only today, so the DS can't judge the gap 0.15 rule). Needs a re-pull timing check before shipping.
+   free fallback from NHL play-by-play `rosterSpots` ~20-30 min before puck. Needs a re-pull timing check before shipping.
+   Daily lineup-history file: built 2026-10-18 (section 5, team logs), backfilled Oct 12-17.
 5. No verified free injury source; no free opponent-adjusted ranks (model uses raw opponent shots/goals allowed).
 6. The NHL schedule time is used for lock (it can be ~10 min before actual puck drop): conservative.
 7. Name matching: exact, or last name + first initial; unmatched names are listed in `status.json` and skipped.
@@ -130,7 +146,8 @@ price history exists; our own odds log, `data/odds/`, is building that).
 14. Late night, the "Not covered tonight: … (stats behind)" banner names teams whose game is already final. Misleading,
     minor; UX/Builder ticket. Also open (QA minors): strip wraps to 2 lines when records are long; one-sentence reason
     would show no reason (engine never makes one).
-15. Closing-price check is weak: most picks get no price pull after they're shown (13 of 18 "flat"). Week 1: 3 moved
+15. (2026-10-18: pull C now runs for every game at tier 2+, so every shots line gets a close ~45 min out; the shadow log
+    measures CLV on every line.) Closing-price check is weak: most picks get no price pull after they're shown (13 of 18 "flat"). Week 1: 3 moved
     toward us, 2 against, avg +0.5 pts toward us. Re-pricing every shown pick at C would cost credits; pool is 478
     (allowance ~5.2/game), so not now. Revisit when keys reset Nov 1.
 
@@ -145,7 +162,8 @@ price history exists; our own odds log, `data/odds/`, is building that).
     8-5 +0.82u, under 1.5 5-2 +1.96u, under 3.5 1-2 -1.44u (priced near -200). Points 924 lines, 94% on the 0.5 line,
     hold ~7.1%, 3-2 -0.14u, and it needs confirmed lineups (power-play units), the thing that fails most. Goals: one-sided
     prices, no de-vig, high hold. Not in our feed or log, so unverified: assists, blocks, PP points, alt shots, sides, totals.
-    Saves as #2 is a judgment, not a result: 0 graded legs.
+    Saves as #2 is a judgment, not a result: 0 graded legs. Status 2026-10-18: saves lines now go to the shadow log every
+    pull B with the existing team-level `goalie_prob` (no new saves model yet; Oct 12-17 backfill has 33 graded saves lines).
     Tools research (2026-10-18): no new source needed for saves. The NHL stats API we already use returns goalie game rows
     (`api.nhle.com/stats/rest/en/goalie/summary?isGame=true`: saves, shotsAgainst, gamesStarted, timeOnIce; tested live) and the
     boxscore has a `starter` flag. Optional later: MoneyPuck free downloads (shot-level xG, goalie games; non-commercial, credit
@@ -180,11 +198,15 @@ price history exists; our own odds log, `data/odds/`, is building that).
     Go = mean CLV > 0 (t >= 2) and ROI >= 0. **Kill rule: at 100 graded shots picks or Nov 30, if CLV <= 0 and ROI <= 0, shots go
     logged-only and the page says "no proven edge".** No value change until the shadow sample decides (gap band, de-vig on the over,
     blend weight are the candidates). Traps (not now): early-regulars rule, staking by edge, extra re-prices, threshold tuning on 13 picks.
-    DS scripts lived in session scratch (lost); the method above is enough to rebuild.
+    **Status 2026-10-18 (Builder):** plan items 1-3 built (section 5, team logs): shadow log live each cycle + backfilled
+    Oct 12-17 (751 shots, 33 saves, 850 points lines; shots results and model match the DS study exactly), C for every
+    game, lineup history. Plus a weekly Hard Rock market menu. Item 4 (fit the blend weight) is the DS's, from `data/shadow/`.
+    The DS method is ported to `scripts/shadow_backfill.py`.
 
 ## 8. Rule-change log
 | Date | Change | Why | Sample |
 |---|---|---|---|
+| 2026-10-18 (team, item 17) | Pull C (shots, 45 min before puck) for every unstarted game at tier 2+, not only games with a live pick | Closing price on every line for the shadow log / CLV gate. ~1 credit a game; tier 3 is now up to 4 a game (A 1, B 2, C 1) against an allowance of ~5.2 | Ops, no graded sample needed; no qualifying value changed |
 | 2026-10-18 (Matt) | Scope: shots only for picks (points `picks:false`); saves is the 2nd market, logged only until proven | Customer asked for at most 2 markets and to be elite at them. Customer-directed scope, not a data-driven value change; the 150-leg rule is about values. Points had 5 graded legs (3-2) so nothing is lost on evidence | Shots 13, points 5 graded legs; 1,233 shots and 924 points two-way lines in the odds log |
 | 2026-10-18 (weekly) | No value changes. Page-only fixes (Record headline adds parlays, reasons, game-list wording, stale state) | Sample too small for any rule; week 1 calibrated (60.6% stated, 61.1% hit) | Shots 13, points 5 graded legs (need 50 pause / 150 change) |
 | 2026-10-18 | Parlay cap and leg-use count every parlay shown that night (bug: only open ones counted, so a new set was built after each lock); a leg in 1 parlay (was 2) | Parlays were 1-6, -4.45u, the whole ROI drag (singles 11-7, +0.96u). Oct 13 showed 6 parlays (cap 3) with Rosen and Pulock in 4 each; the 3 extra all lost (-3u). One missed leg should sink one parlay, not four | 7 graded parlays; exposure cut, not a qualifying change, so the 150-leg rule doesn't apply |
@@ -193,6 +215,7 @@ price history exists; our own odds log, `data/odds/`, is building that).
 | 2026-10-11 | v1.0 set (section 4) | First build: Sharp standard from the DS backtest (2024-25 fit, 2025-26 out of sample) and one live Hard Rock pull | Backtest only; 0 graded live legs |
 
 ## 9. Session log (newest first, one line each)
+- 2026-10-18 Builder (item 17 build): shadow log (`scripts/shadow.py`, soft step after grade) + backfill Oct 12-17 (check 13/13 Record shots picks match), pull C for every game at tier 2+, lineup history (+ git backfill Oct 12-17), weekly market menu (~1 credit). 242 tests pass. Committed locally for QA, not pushed. Oct 18 shadow backfill to run once final.
 - 2026-10-18 team meeting (Matt: find an edge, then prove it profitable): DS shadow-graded 742 shots lines, Sharp set gates and kill rule. Findings and plan in section 7 item 17. No code or rule changed this meeting; build waits for Matt's go.
 - 2026-10-18 (Matt: hyper-specialize in 1-2 markets): reviewed every market we can see at Hard Rock. Decision: shots only for picks now, goalie saves as #2 (log, build, prove). Points picks off in `config/rules.json`; 221 tests pass. Then shipped item 16(a): planner stops pulling points, B pulls shots + saves, 221 tests pass. Not done: no saves model yet. No pick changes to the Record.
 - 2026-10-18 1:44 PM daily check: chain alive (link 69, finished 1:40 PM, Actions runs all success; one cron run cancelled by the chain, normal), all steps/sources ok, pull A ran 1:00 PM (2 games, 34 lines, 0 picks, next check 5:15 PM), keys 476 (key 4 at 18), tier 3, no unmatched names/excluded teams. Oct 17's 1 pick graded (W); all 25 shown picks/parlays graded; record guard ok (82 lines). 221 tests pass. Nothing to fix.

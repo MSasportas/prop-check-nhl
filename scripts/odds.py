@@ -173,8 +173,9 @@ class Client:
         self.errors = []                                   # short, key-free notes for status.json
 
     # -- network
-    def _get(self, path, params, need, slate=None, pull=None, game_id=None):
-        """Try keys in order until one answers. Returns (json or None, cost)."""
+    def _get(self, path, params, need, slate=None, pull=None, game_id=None, flat_cost=None):
+        """Try keys in order until one answers. Returns (json or None, cost).
+        flat_cost: what the call costs when the feed sends no cost header (else: markets returned)."""
         for i in self.pool.candidates(need):
             q = urllib.parse.urlencode(dict(params, apiKey=self.pool.keys[i]))
             r = common.http_get("%s%s?%s" % (API, path, q), timeout=30)
@@ -184,7 +185,8 @@ class Client:
                     self.errors.append("odds feed sent an unreadable answer")
                     SOURCE["failed"] += 1
                     return None, 0
-                returned = _markets_returned(js, self.cfg["ops"]["bookmakers"]) if need else 0
+                returned = flat_cost if flat_cost is not None else \
+                    (_markets_returned(js, self.cfg["ops"]["bookmakers"]) if need else 0)
                 cost = self.pool.note_headers(i, r.headers, slate, pull, game_id, returned)
                 SOURCE["ok"] += 1
                 return js, cost
@@ -286,6 +288,23 @@ class Client:
                   "markets": ",".join(market_keys), "oddsFormat": "american", "dateFormat": "iso"}
         return self._get("/events/%s/odds" % event_id, params, len(market_keys), slate, pull, game_id)
 
+    def event_markets(self, event_id, away, home, slate, game_id):
+        """Every market key the book lists for one game (the feed's event-markets endpoint, about 1 credit).
+        Returns (payload or None, cost). With fixtures: <dir>/markets_<event>.json or markets.json; no file means
+        (None, 0) and no failure is counted (most tests have none)."""
+        if self.pool.fixture:
+            js = self._fixture_json("markets_%s.json" % event_id) or self._fixture_json("markets.json")
+            if js is None:
+                return None, 0
+            if not self._fixture_spend(1, slate, "M", game_id):
+                self.errors.append("no odds key with credits left")
+                return None, 0
+            SOURCE["ok"] += 1
+            return js, 1
+        params = {"regions": self.cfg["ops"]["odds_region"], "bookmakers": ",".join(self.cfg["ops"]["bookmakers"]),
+                  "dateFormat": "iso"}
+        return self._get("/events/%s/markets" % event_id, params, 1, slate, "M", game_id, flat_cost=1)
+
 
 def _markets_returned(js, books):
     if not isinstance(js, dict):
@@ -309,7 +328,7 @@ def keys_refused(key_state, key_count):
 
 # ---------------------------------------------------------------- the plan (pure functions, easy to test)
 def tier_of(allowance, v):
-    """0: some games, shots only. 1: shots, all games. 2: + shots pull C and B. 3: + saves (logged). 4: + goals."""
+    """0: some games, shots only. 1: shots, all games. 2: + B (shots) and C (closing shots, every game). 3: + saves (logged). 4: + goals."""
     if allowance < v["tier_shots_all"]:
         return 0
     if allowance < v["tier_points"]:
@@ -334,7 +353,9 @@ def markets_for(tier, pull, live_markets=()):
             return ["shots", "saves", "goals"]
         return []
     if pull == "C":
-        return sorted(m for m in live_markets if m == "shots") if tier >= 2 else []
+        # closing price: shots for EVERY unstarted game at tier 2+ (2026-10-18, TEAM.md item 17), not only games
+        # holding a live pick, so the shadow log has a close on every line. live_markets no longer gates it.
+        return ["shots"] if tier >= 2 else []
     return []
 
 

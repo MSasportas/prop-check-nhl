@@ -1,0 +1,318 @@
+"""shadow.py: the shadow log. The model's numbers on EVERY two-way Hard Rock line, graded after the game.
+
+Internal only (TEAM.md section 7 item 17): never on the page, never in the Record, never in Discord. It is the
+sample the Data Scientist uses to decide whether the model has an edge (gap bands, de-vig, blend weight).
+
+One file per slate, data/shadow/<slate>.json, one row per (game, market, player, line):
+  open     the first read of that line before puck: prices, the book's fair over (proportional de-vig), the
+           model's own chance of the over (the same Inputs.model the engine uses, before blend and penalties),
+           the blended chance for each side (engine.edge), lineup and goalie state at that moment
+  close    the last read before puck, same fields
+  ctx      facts captured with the first read: home, team, opp, position, history, thin, back-to-back, rest,
+           recent and season ice time, start time
+  result   after the game is OFF: the stat and W / L / PUSH / VOID per side, read from the boxscore exactly as
+           scripts/grade.py reads it (read_box; no ice time = VOID)
+Snapshot rule: open and close are written only while the game has not started and only from reads made
+before puck; after puck only `result` is ever added. Only the timer (run.py) and the one-off backfill
+(scripts/shadow_backfill.py) write these files. A failure here never fails a run (run.py wraps it).
+"""
+from datetime import date, timedelta
+
+import common
+import engine
+import goalies
+import grade
+import lineups
+import model
+import nhl
+import odds
+import sched
+
+VERSION = 1
+KEEP_RESULT_DAYS = 3            # results are looked for on this slate and the two before it
+RESULT_WAIT_HOURS = 2.5         # a game is looked up only once the schedule says OFF or this long after puck
+NOTE = "Internal shadow log (TEAM.md section 7 item 17). Not the Record, not shown anywhere."
+
+
+def path(slate):
+    return common.dpath("shadow", "%s.json" % slate)
+
+
+def load(slate):
+    doc = common.read_json(path(slate))
+    if not isinstance(doc, dict) or doc.get("date") != slate or not isinstance(doc.get("rows"), list):
+        return {"date": slate, "version": VERSION, "note": NOTE, "rows": []}
+    return doc
+
+
+def serialize(doc):
+    """Compact JSON with one row per line, so git stores a day's many small changes as small deltas."""
+    head = {k: v for k, v in doc.items() if k != "rows"}
+    rows = sorted(doc["rows"], key=lambda r: (r["ctx"]["start"] or "", r["game_id"], r["market"], r["name"] or "",
+                                              r["line"], r["pid"]))
+    body = ",\n".join(common.dumps(r, False) for r in rows)
+    return common.dumps(head, False)[:-1] + ',"rows":[\n' + body + "\n]}\n"
+
+
+def save(doc):
+    common.write_text(path(doc["date"]), serialize(doc))
+
+
+def key(game_id, market, pid, line):
+    return "%s:%s:%s:%s" % (game_id, market, pid, engine.fmt_line(line))
+
+
+def _r(x, n=5):
+    return None if x is None else round(x, n)
+
+
+# ---------------------------------------------------------------- context facts
+def team_dates(inp, sched_games, team, slate):
+    """Dates this team played before the slate: stats rows plus the schedule (stats can lag a day)."""
+    ds = {r["date"] for r in inp.store.teams.get(team, []) if r["date"] < slate}
+    for g in (sched_games or {}).values():
+        if g.get("date", "") < slate and g.get("sched", "OK") == "OK" and team in (g.get("away"), g.get("home")):
+            ds.add(g["date"])
+    return ds
+
+
+def rest_days(inp, sched_games, team, slate):
+    """Full days off before tonight (0 = back-to-back). None with no earlier game."""
+    ds = team_dates(inp, sched_games, team, slate)
+    if not ds:
+        return None
+    last = max(ds)
+    return (date.fromisoformat(slate) - date.fromisoformat(last)).days - 1
+
+
+def context(inp, sched_games, g, pid, team, market):
+    home = team == g["home"]
+    opp = g["away"] if home else g["home"]
+    t_rest, o_rest = rest_days(inp, sched_games, team, inp.slate), rest_days(inp, sched_games, opp, inp.slate)
+    ctx = {"home": home, "team": team, "opp": opp, "start": g.get("start"),
+           "team_rest_days": t_rest, "opp_rest_days": o_rest,
+           "team_b2b": None if t_rest is None else t_rest == 0, "opp_b2b": None if o_rest is None else o_rest == 0}
+    if market == "saves":
+        ctx.update(pos="G", n_hist=None, n_season=None, n_team=None, thin=None, sitting=None, missed_last=None,
+                   toi_drop=None, toi_last5=None, toi_season=None)
+        return ctx
+    pv = inp.player(pid, team)
+    rows = pv["rows"]
+    last5 = [r["toi"] for r in rows[-5:]]
+    season = [r["toi"] for r in rows if r["season"] == inp.season]
+    ctx.update(pos=pv["pos"], n_hist=pv["n"], n_season=pv["n_season"], n_team=pv["n_team"], thin=pv["thin"],
+               sitting=pv["sitting"], missed_last=pv["missed_last"], toi_drop=pv["toi_drop"],
+               toi_last5=_r(sum(last5) / 60.0 / len(last5), 2) if last5 else None,
+               toi_season=_r(sum(season) / 60.0 / len(season), 2) if season else None)
+    return ctx
+
+
+# ---------------------------------------------------------------- the model on one line
+def model_over(inp, market, pid, team, opp, home):
+    """Returns (fn(line) -> dict(p_over, mu) or None, note). Skater markets use the engine's own Inputs.model; saves use
+    model.goalie_prob with the team-level inputs (it assumes this goalie starts)."""
+    if market in model.SK:
+        def run(line):
+            return inp.model(pid, team, opp, home, market, line)
+        return run, None
+    if market == "saves":
+        lg = inp.league()[0]
+        tsa = model.team_factor([r for r in inp.store.teams.get(team, []) if r["date"] < inp.slate], "sa", lg,
+                                model.GK["K"])
+        osf = model.team_factor([r for r in inp.store.teams.get(opp, []) if r["date"] < inp.slate], "sf", lg,
+                                model.GK["K"])
+
+        def run(line):
+            gp = model.goalie_prob(line, {"home": home, "league_sf": lg, "team_sa_f": tsa, "opp_sf_f": osf})
+            return {"p_over": gp["p"], "mu": gp["mu"]}
+        return run, "team-level saves model (assumes this goalie starts)"
+    return None, "no model for this market"
+
+
+def snapshot(inp, f, market, pair, pid, team, opp, home, thin, model_fn, lineup_state, goalie_state, now,
+             historical):
+    v = inp.v
+    over, under = pair["over"], pair["under"]
+    fair_over = odds.fair_two_sided(over, under)
+    s = {"at": f["at"], "pull": f["pull"], "over": over, "under": under, "fair_over": _r(fair_over),
+         "hold": _r(odds.hold(over, under)), "feed_check": pair.get("why"),
+         "model_p_over": None, "mu": None, "p_over": None, "p_under": None,
+         "lineup": None, "lineup_page_today": None, "goalie_own": None, "goalie_opp": None,
+         "logged_at": None if historical else common.iso(now)}
+    m = model_fn(pair["line"]) if model_fn else None
+    if m is not None:
+        s["model_p_over"], s["mu"] = _r(m["p_over"]), _r(m["mu"], 3)
+        th = bool(thin)
+        s["p_over"] = _r(engine.edge(m["p_over"], "over", th, over, under, v)["p"])
+        s["p_under"] = _r(engine.edge(1.0 - m["p_over"], "under", th, under, over, v)["p"])
+    if not historical:
+        if market != "saves":
+            s["lineup"] = lineups.player_status(lineup_state, team, pid)
+        page = ((lineup_state.get("teams") or {}).get(team) or {}).get("page") or {}
+        s["lineup_page_today"] = bool(page.get("today"))
+        gt = (goalie_state or {}).get("teams") or {}
+        own, oth = gt.get(team) or {}, gt.get(opp) or {}
+        s["goalie_own"] = {"name": own.get("name"), "status": own.get("status")} if own else None
+        s["goalie_opp"] = {"name": oth.get("name"), "status": oth.get("status")} if oth else None
+    return s
+
+
+def pairs_of(mk):
+    out = {}
+    for o in mk.get("outcomes", []) or []:
+        if o.get("pid") is None or o.get("line") is None:
+            continue
+        p = out.setdefault((o["pid"], o["line"]), {"over": None, "under": None, "name": o.get("name"),
+                                                   "team": o.get("team"), "line": o["line"]})
+        p[o["side"]] = o["price"]
+    return out
+
+
+def add_reads(doc, inp, odds_doc, games, sched_games, now, lineup_state=None, goalie_state=None, historical=False):
+    """Fold every pre-puck read of the slate's odds file into the doc. Returns how many rows changed.
+    historical (backfill only): the moment is past, so the 'game has not started yet' test uses the read time
+    alone and lineup / goalie state is left empty (not known for the past)."""
+    rows = {key(r["game_id"], r["market"], r["pid"], r["line"]): r for r in doc["rows"]}
+    by_id = {g["id"]: g for g in games}
+    changed = 0
+    lineup_state = lineup_state or {}
+    for f in sorted((odds_doc or {}).get("fetches", []), key=lambda x: x["at"]):
+        g = by_id.get(f["game_id"])
+        if g is None or not f.get("book"):
+            continue
+        start, at = common.parse_iso(g["start"]), common.parse_iso(f["at"])
+        if at >= start:
+            continue                                         # a read after puck is never used
+        if not historical and sched.started(g, now):
+            continue                                         # snapshot rule: nothing written after puck
+        for market, mk in sorted((f.get("markets") or {}).items()):
+            for (pid, line), pair in sorted(pairs_of(mk).items()):
+                if pair["over"] is None or pair["under"] is None or pair["team"] not in (g["away"], g["home"]):
+                    continue                                 # two-way lines of matched players only
+                k = key(g["id"], market, pid, line)
+                row = rows.get(k)
+                if row is not None and common.parse_iso(row["close"]["at"]) >= at:
+                    continue                                 # this read (or a newer one) is already in
+                team = pair["team"]
+                home = team == g["home"]
+                opp = g["away"] if home else g["home"]
+                fn, mnote = model_over(inp, market, pid, team, opp, home)
+                if row is None:
+                    ctx = context(inp, sched_games, g, pid, team, market)
+                    snap = snapshot(inp, f, market, pair, pid, team, opp, home, ctx["thin"], fn, lineup_state,
+                                    goalie_state, now, historical)
+                    if fn is not None and snap["model_p_over"] is None and market in model.SK:
+                        mnote = "no model (position %s)" % ctx["pos"]
+                    row = {"game_id": g["id"], "market": market, "pid": pid, "name": pair["name"], "line": line,
+                           "src": "backfill" if historical else "live", "model_note": mnote, "ctx": ctx,
+                           "n_reads": 1, "open": snap, "close": snap, "result": None}
+                    rows[k] = row
+                    doc["rows"].append(row)
+                else:
+                    row["close"] = snapshot(inp, f, market, pair, pid, team, opp, home, row["ctx"]["thin"], fn,
+                                            lineup_state, goalie_state, now, historical)
+                    row["n_reads"] += 1
+                changed += 1
+    return changed
+
+
+# ---------------------------------------------------------------- results (boxscore, as grade.py reads it)
+def fill_results(doc, now, cfg, sched_games, box_fn=None):
+    """Add `result` to rows of finished games. Returns (rows graded, notes)."""
+    box_fn = box_fn or nhl.boxscore
+    by_game = {}
+    for r in doc["rows"]:
+        if r.get("result") is None:
+            by_game.setdefault(r["game_id"], []).append(r)
+    n, notes, pbp_cache = 0, [], {}
+    for gid, rows in sorted(by_game.items()):
+        g = (sched_games or {}).get(str(gid)) or {}
+        start = common.parse_iso(g.get("start") or rows[0]["ctx"]["start"])
+        if start is None or now < start:
+            continue
+        postponed = g.get("sched") in ("PPD", "CNCL")
+        if not postponed and g.get("state") != "OFF" and now < start + timedelta(hours=RESULT_WAIT_HOURS):
+            continue                                         # not final yet: no boxscore call
+        box = None if postponed else box_fn(gid)
+        if not postponed and box is None:
+            notes.append("boxscore for %s not available" % gid)
+            continue
+        if box is not None and box.get("gameScheduleState") in ("PPD", "CNCL"):
+            postponed = True
+        if not postponed and box.get("gameState") != "OFF":
+            continue
+        parsed = None if postponed else grade.read_box(box)
+        if not postponed and parsed is None:
+            notes.append("boxscore for %s is missing player stats" % gid)
+            continue
+        at = common.iso(now)
+        for r in rows:
+            if postponed:
+                r["result"] = {"actual": None, "over": "VOID", "under": "VOID", "note": "game postponed", "at": at}
+                n += 1
+                continue
+            players, teams_ = parsed
+            p = players.get(r["pid"])
+            if p is None or p.get("toi") in (None, "00:00", "0:00"):
+                r["result"] = {"actual": None, "over": "VOID", "under": "VOID", "note": "did not play", "at": at}
+                n += 1
+                continue
+            note = None
+            if r["market"] == "shots" and not grade.shots_trusted(gid, p["team"], teams_, pbp_cache):
+                if now < start + timedelta(hours=cfg["ops"]["grade_shot_check_hold_hours"]):
+                    continue                                 # same wait as grade.py
+                note = "team shot total did not match the player rows"
+            field = grade.FIELD.get(r["market"])
+            actual = p.get(field) if field else None
+            if actual is None:
+                continue
+            r["result"] = {"actual": actual, "over": grade.result_for("over", r["line"], actual),
+                           "under": grade.result_for("under", r["line"], actual), "toi": p.get("toi"), "at": at}
+            if note:
+                r["result"]["note"] = note
+            n += 1
+    return n, notes
+
+
+# ---------------------------------------------------------------- the run.py step
+def step(now, slate, cfg, inp, sched_cache, games):
+    """Called by run.py after odds, engine and grade. Returns a step result dict. Never raises (the caller
+    also wraps it)."""
+    sched_games = (sched_cache or {}).get("games", {})
+    notes = []
+    wrote = 0
+    doc = load(slate)
+    before = serialize(doc)
+    odds_doc = common.read_json(odds.odds_path(slate))
+    if odds_doc and games and inp is not None:
+        added = add_reads(doc, inp, odds_doc, games, sched_games, now, inp.lineup_state or lineups.load(slate),
+                          goalies.load(slate))
+        if added:
+            notes.append("%d line read(s) logged" % added)
+    graded, bad = fill_results(doc, now, cfg, sched_games)
+    if graded:
+        notes.append("%d graded" % graded)
+    notes += bad[:2]
+    if doc["rows"] and serialize(doc) != before:
+        doc["updated_at"] = common.iso(now)
+        save(doc)
+        wrote += 1
+    # results for the last two slates (late games finish after the 5 AM rollover only in theory, but a
+    # boxscore that was late or a cycle that failed must still be filled in)
+    d = date.fromisoformat(slate)
+    for back in range(1, KEEP_RESULT_DAYS):
+        old_slate = (d - timedelta(days=back)).isoformat()
+        old = common.read_json(path(old_slate))
+        if not isinstance(old, dict) or not any(r.get("result") is None for r in old.get("rows", [])):
+            continue
+        old = load(old_slate)
+        g2, bad2 = fill_results(old, now, cfg, sched_games)
+        if g2:
+            old["updated_at"] = common.iso(now)
+            save(old)
+            wrote += 1
+            notes.append("%s: %d graded" % (old_slate, g2))
+        notes += bad2[:1]
+    if not notes:
+        return {"status": "skipped", "note": "nothing new"}
+    return {"status": "ok", "note": "; ".join(notes)}

@@ -16,11 +16,16 @@ Steps, in order, each allowed to fail without stopping the others:
     stats     this season's game rows; which teams are complete
     odds      Hard Rock prices, if a pull is due and the budget allows
     lineups   Daily Faceoff, for games close to puck drop
+    lineup_history  first today-dated page and last state before puck  -> data/state/lineup_history/
+    market_menu     once a week: every market key Hard Rock lists      -> data/state/market_menu.json
     engine    lock / pull / keep shown picks, add new ones, parlays  -> appends to the Record
     grade     results for games that are final                       -> appends to the Record
+    shadow    the model on every two-way line, graded after the game  -> data/shadow/<date>.json (internal)
     slate     data/slate.json
     record    data/record.json and month files
     status    data/status.json
+shadow, lineup_history and market_menu are "soft": they log for the team only, and a failure there is
+noted in status.json steps as "warn" and never fails the run.
 Safe to run twice in a row: every decision is made from files on disk, and every write is temp + rename.
 """
 import os
@@ -35,16 +40,21 @@ import common      # noqa: E402
 import engine      # noqa: E402
 import goalies     # noqa: E402
 import grade       # noqa: E402
+import lineup_history  # noqa: E402
 import lineups     # noqa: E402
+import market_menu  # noqa: E402
 import names       # noqa: E402
 import nhl         # noqa: E402
 import notify      # noqa: E402
 import odds        # noqa: E402
 import record      # noqa: E402
 import sched       # noqa: E402
+import shadow      # noqa: E402
 import stats       # noqa: E402
 
-STEPS = ["rules", "schedule", "stats", "lineups", "odds", "engine", "grade", "slate", "record", "status"]
+STEPS = ["rules", "schedule", "stats", "lineups", "lineup_history", "odds", "market_menu", "engine", "grade",
+         "shadow", "slate", "record", "status"]
+SOFT = ("lineup_history", "market_menu", "shadow")     # team logs: a failure is a "warn", never a failed run
 
 
 class Run:
@@ -84,6 +94,18 @@ class Run:
         except Exception as e:                              # one bad step never takes the run down
             self.steps.append({"step": name, "status": "failed", "note": common.short_err(e)})
             common.log("step %s failed: %s" % (name, common.short_err(e)))
+
+    def soft_step(self, name, fn):
+        """A logging step for the team. Whatever happens in it, the run carries on and is not marked failed."""
+        if not self.wants(name):
+            return
+        try:
+            out = fn() or {}
+            st = out.get("status", "ok")
+            self.steps.append({"step": name, "status": "warn" if st == "failed" else st, "note": out.get("note", "")})
+        except Exception as e:
+            self.steps.append({"step": name, "status": "warn", "note": common.short_err(e)})
+            common.log("step %s failed (soft, run carries on): %s" % (name, common.short_err(e)))
 
     def failed_step(self):
         return next((s["step"] for s in self.steps if s["status"] == "failed"), None)
@@ -196,6 +218,25 @@ class Run:
         self.lineup_state = res["state"]
         goalies.check(self.now, self.slate, self.games, self.started)      # display only; its own result is in sources
         return {"status": res["status"], "note": res["note"]}
+
+    def do_lineup_history(self):
+        self.load_schedule()
+        if not self.games:
+            return {"status": "skipped", "note": "no games today"}
+        return lineup_history.update(self.now, self.slate, self.games, self.lineup_state or lineups.load(self.slate))
+
+    def do_market_menu(self):
+        self.load_schedule()
+        return market_menu.check(self.now, self.slate, self.games, self.started, self.cfg, dry_run=self.dry_run)
+
+    def do_shadow(self):
+        self.load_schedule()
+        if not self.cache:
+            return {"status": "skipped", "note": "no schedule"}
+        inp = self.inp
+        if inp is None and self.games:
+            inp = self.build_inputs()
+        return shadow.step(self.now, self.slate, self.cfg, inp, self.cache, self.games)
 
     def build_inputs(self):
         self.load_schedule()
@@ -524,13 +565,16 @@ def run(only=None, dry_run=False):
     r.step("schedule", r.do_schedule)
     r.step("stats", r.do_stats)
     r.step("lineups", r.do_lineups)                         # before odds: pull B waits on confirmed lineups
+    r.soft_step("lineup_history", r.do_lineup_history)
     r.step("odds", r.do_odds)
+    r.soft_step("market_menu", r.do_market_menu)
     # m8: a pick enters the Record in the same commit that first shows it. Events are appended by the engine and
     # grade steps; if slate.json is then NOT written, this run's events are rolled back to the exact bytes the
     # log had before (never touching committed lines) and the next run makes them again.
     record_before = record.read_raw() if r.wants("slate") else None
     r.step("engine", r.do_engine)
     r.step("grade", r.do_grade)
+    r.soft_step("shadow", r.do_shadow)                      # after odds, engine and grade (TEAM.md item 17)
     failed = r.failed_step()
     last_run = {"ok": failed is None, "at": common.iso(now), "failed_step": failed}
     facts = None

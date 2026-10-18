@@ -155,8 +155,10 @@ class Plan(unittest.TestCase):
             for pull in ("A", "B", "C"):
                 self.assertNotIn("points", odds.markets_for(t, pull, {"shots", "points"}))
         self.assertEqual(odds.markets_for(1, "C", {"shots"}), [])
+        self.assertEqual(odds.markets_for(0, "C"), [])
         self.assertEqual(odds.markets_for(2, "C", {"shots"}), ["shots"])
-        self.assertEqual(odds.markets_for(2, "C", set()), [])
+        self.assertEqual(odds.markets_for(2, "C", set()), ["shots"])        # closing price for every game (item 17)
+        self.assertEqual(odds.markets_for(4, "C"), ["shots"])
 
     def test_allowance_and_budget(self):
         # the real pool on 2026-10-11: 109 credits, 143 games left this month, 3 today
@@ -253,7 +255,9 @@ class Schedule(unittest.TestCase):
         self.assertEqual(self.due("18:15", 3, done, live={1: {"shots"}}), [("B", 1, ["shots"])])
         # last chance is 20 minutes before puck; after that nothing
         self.assertEqual(self.due("18:40", 3, done), [("B", 1, ["shots"])])
-        self.assertEqual(self.due("18:41", 3, done), [])
+        # 19 minutes left: too late for B, but the closing read C (every game since 2026-10-18) still runs
+        self.assertEqual(self.due("18:41", 3, done), [("C", 1, ["shots"])])
+        self.assertEqual(self.due("18:51", 3, done), [])
         # once the shots came back the fallback is not repeated
         got = {1: done[1] + [("B", "18:16", ["shots"], ["shots"])], 2: done[2]}
         self.assertEqual(self.due("18:30", 3, got), [])
@@ -309,12 +313,13 @@ class Schedule(unittest.TestCase):
         self.assertEqual(nr("18:20", ok={}, tier=3, fetched=f({1: [("A", "13:02", sh), ("B", "18:16", ["shots"])],
                                                                2: [("A", "13:02", sh)]})), iso("21:15"))
 
-    def test_c_only_markets_with_a_live_pick(self):
+    def test_c_closing_read_for_every_game(self):
         sh, sp = ["shots"], ["shots", "points"]
         done = {1: [("A", "13:02", sh, sh), ("B", "17:35", ["shots"], ["shots"])], 2: [("A", "13:02", sh, sh)]}
         self.assertEqual(self.due("18:14", 2, done, {1: {"shots"}}), [])
         self.assertEqual(self.due("18:15", 2, done, {1: {"shots"}}), [("C", 1, ["shots"])])
-        self.assertEqual(self.due("18:15", 2, done, {}), [])                       # no live pick: nothing to re-price
+        self.assertEqual(self.due("18:15", 2, done, {}), [("C", 1, ["shots"])])    # no live pick: closing read anyway
+        self.assertEqual(self.due("18:15", 3, done, {}), [("C", 1, ["shots"])])
         self.assertEqual(self.due("18:15", 1, done, {1: {"shots"}}), [])           # tier 1 has no pull C
         self.assertEqual(self.due("18:50", 2, done, {1: {"shots"}}), [("C", 1, ["shots"])])    # 10 minutes left
         self.assertEqual(self.due("18:51", 2, done, {1: {"shots"}}), [])           # 9 minutes left: too late

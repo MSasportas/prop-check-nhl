@@ -4,6 +4,8 @@ A team's page counts only if it is dated today (Eastern). On a page dated today:
   listed on a line, pair or special-teams unit, no injury tag  -> in the lineup ("Lineup confirmed")
   listed with an injury tag or as a game-time decision         -> not sure (stays "Early")
   listed only under injuries, or not listed at all             -> out
+The page's units (lines f1-f4, pairs d1-d3, pp1/pp2, pk1/pk2, g) are kept as `groups` for the lineup history
+(scripts/lineup_history.py); no pick reads them.
 If a name on the page cannot be matched to an NHL player we no longer trust "not listed" for that team
 (a pick is never pulled because of a name we could not read).
 
@@ -73,6 +75,7 @@ def parse_page(props, people, slate):
         return None
     matcher = names.Matcher(people)
     active, unsure, injured, unmatched = set(), set(), set(), []
+    groups = {}                                             # e.g. "f1", "d2", "pp1", "pk1", "g" -> [player ids]
     skaters_listed = 0
     for p in players:
         nm = p.get("name") or ""
@@ -88,6 +91,10 @@ def parse_page(props, people, slate):
             continue
         if cat == "ev" and grp[:1] in ("f", "d"):
             skaters_listed += 1
+        if grp:
+            groups.setdefault(grp, [])
+            if hit["id"] not in groups[grp]:
+                groups[grp].append(hit["id"])
         if p.get("injuryStatus") or p.get("gameTimeDecision"):
             unsure.add(hit["id"])
         else:
@@ -98,7 +105,8 @@ def parse_page(props, people, slate):
     page_date = updated.astimezone(common.ET).date().isoformat()
     return {"today": page_date == slate, "page_date": page_date,
             "in": sorted(active), "unsure": sorted(unsure), "out": sorted(injured - active - unsure),
-            "unmatched": unmatched, "complete": not unmatched}
+            "unmatched": unmatched, "complete": not unmatched,
+            "groups": {k: sorted(v) for k, v in sorted(groups.items())}}
 
 
 def check(now, slate, games, started, ops, people_for):
