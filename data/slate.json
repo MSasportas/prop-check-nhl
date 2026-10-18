@@ -1,12 +1,12 @@
 {
  "slate_date": "2026-10-17",
- "generated_at": "2026-10-17T20:20:00-04:00",
- "status_at": "2026-10-17T20:20:00-04:00",
+ "generated_at": "2026-10-17T20:30:00-04:00",
+ "status_at": "2026-10-17T20:30:00-04:00",
  "valid_until": "2026-10-18T05:00:00-04:00",
  "status": {
   "prices_state": "ok",
-  "prices_at": "2026-10-17T20:20:00-04:00",
-  "next_price_read_at": "2026-10-17T20:30:00-04:00",
+  "prices_at": "2026-10-17T20:30:00-04:00",
+  "next_price_read_at": "2026-10-17T21:15:00-04:00",
   "stats_built_at": "2026-10-17T19:30:00-04:00",
   "stats_through": "2026-10-17",
   "lineups_at": "2026-10-17T20:10:01-04:00",
@@ -16,31 +16,31 @@
   "stats_state": "ok",
   "last_run": {
    "ok": true,
-   "at": "2026-10-17T20:20:00-04:00",
+   "at": "2026-10-17T20:30:00-04:00",
    "failed_step": null
   },
   "pool": {
-   "pulls_left": 1251,
+   "pulls_left": 1247,
    "keys": 4,
    "game_days_left": 15,
    "days_left": 15,
    "low": false
   },
   "excluded_teams": [],
-  "lines_checked": 415,
-  "lines_failed": 4,
+  "lines_checked": 435,
+  "lines_failed": 5,
   "tier": 4
  },
  "banners": [
   {
    "level": "info",
-   "text": "4 Hard Rock lines skipped: the two sides did not add up or the price was old."
+   "text": "5 Hard Rock lines skipped: the two sides did not add up or the price was old."
   }
  ],
  "empty": {
   "code": "none_qualified",
   "text": "No open picks right now.",
-  "sub": "Checked 415 lines at 8:20 PM. Today's earlier pick is under Started. Next price check at 8:30 PM."
+  "sub": "Checked 435 lines at 8:30 PM. Today's earlier pick is under Started. Next price check at 9:15 PM."
  },
  "games": [
   {
@@ -235,6 +235,31 @@
   }
  ],
  "parlays": [],
- "goal_watch": [],
- "goal_watch_note": null
+ "goal_watch": [
+  {
+   "player": "C. McDavid",
+   "team": "EDM",
+   "price": 125,
+   "fair_price": 145,
+   "p": 0.4074,
+   "text": "40% to score; +125 needs 44%. Fair price +145. Not a pick."
+  },
+  {
+   "player": "L. Draisaitl",
+   "team": "EDM",
+   "price": 125,
+   "fair_price": 171,
+   "p": 0.3684,
+   "text": "36% to score; +125 needs 44%. Fair price +171. Not a pick."
+  },
+  {
+   "player": "D. Guenther",
+   "team": "UTA",
+   "price": 130,
+   "fair_price": 181,
+   "p": 0.3555,
+   "text": "35% to score; +130 needs 43%. Fair price +181. Not a pick."
+  }
+ ],
+ "goal_watch_note": "Not picks. Our model is weakest on goals."
 }

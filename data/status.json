@@ -1,10 +1,10 @@
 {
  "ok": true,
  "slate_date": "2026-10-17",
- "started_at": "2026-10-17T20:20:00-04:00",
- "status_at": "2026-10-17T20:20:00-04:00",
- "finished_at": "2026-10-17T20:20:01-04:00",
- "last_ok_at": "2026-10-17T20:20:00-04:00",
+ "started_at": "2026-10-17T20:30:00-04:00",
+ "status_at": "2026-10-17T20:30:00-04:00",
+ "finished_at": "2026-10-17T20:30:01-04:00",
+ "last_ok_at": "2026-10-17T20:30:00-04:00",
  "failed_step": null,
  "steps": [
   {
@@ -62,7 +62,7 @@
  "keys": [
   {
    "n": 1,
-   "left": 184
+   "left": 180
   },
   {
    "n": 2,
@@ -77,14 +77,14 @@
    "left": 458
   }
  ],
- "pool_total": 1251,
+ "pool_total": 1247,
  "allowance": 12.0849,
  "tier": 4,
  "budget_today": 169,
- "budget_used_today": 30,
+ "budget_used_today": 34,
  "prices_state": "ok",
- "prices_at": "2026-10-17T20:20:00-04:00",
- "next_price_read_at": "2026-10-17T20:30:00-04:00",
+ "prices_at": "2026-10-17T20:30:00-04:00",
+ "next_price_read_at": "2026-10-17T21:15:00-04:00",
  "unmatched_names": [
   "Elias Pettersson"
  ],
@@ -103,7 +103,7 @@
  "runner": {
   "event": "workflow_dispatch",
   "run_id": "39081120701",
-  "iteration": 3,
+  "iteration": 4,
   "chain_link": 44,
   "chain_started_at": "2026-10-16T10:00:13-04:00",
   "run_started_at": "2026-10-17T20:00:12-04:00"
