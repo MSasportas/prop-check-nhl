@@ -1,10 +1,10 @@
 {
  "ok": true,
  "slate_date": "2026-10-17",
- "started_at": "2026-10-17T21:10:00-04:00",
- "status_at": "2026-10-17T21:10:00-04:00",
- "finished_at": "2026-10-17T21:10:03-04:00",
- "last_ok_at": "2026-10-17T21:10:00-04:00",
+ "started_at": "2026-10-17T21:20:00-04:00",
+ "status_at": "2026-10-17T21:20:00-04:00",
+ "finished_at": "2026-10-17T21:20:04-04:00",
+ "last_ok_at": "2026-10-17T21:20:00-04:00",
  "failed_step": null,
  "steps": [
   {
@@ -20,17 +20,17 @@
   {
    "step": "stats",
    "status": "ok",
-   "note": "1 window(s) read, 2 team-games still missing"
+   "note": "1 window(s) read"
   },
   {
    "step": "lineups",
-   "status": "ok",
-   "note": "4 of 4 team pages read"
+   "status": "skipped",
+   "note": "checked in the last 20 minutes"
   },
   {
    "step": "odds",
    "status": "ok",
-   "note": "no pull due"
+   "note": "1 game(s) priced"
   },
   {
    "step": "engine",
@@ -62,7 +62,7 @@
  "keys": [
   {
    "n": 1,
-   "left": 180
+   "left": 179
   },
   {
    "n": 2,
@@ -77,14 +77,14 @@
    "left": 458
   }
  ],
- "pool_total": 1247,
+ "pool_total": 1246,
  "allowance": 12.0849,
  "tier": 4,
  "budget_today": 169,
- "budget_used_today": 34,
+ "budget_used_today": 35,
  "prices_state": "ok",
- "prices_at": "2026-10-17T20:30:00-04:00",
- "next_price_read_at": "2026-10-17T21:15:00-04:00",
+ "prices_at": "2026-10-17T21:20:00-04:00",
+ "next_price_read_at": null,
  "unmatched_names": [
   "Elias Pettersson"
  ],
@@ -93,17 +93,8 @@
   "Elias Nils Pettersson",
   "Elias Pettersson"
  ],
- "excluded_teams": [
-  {
-   "team": "FLA",
-   "reason": "stats behind"
-  },
-  {
-   "team": "SEA",
-   "reason": "stats behind"
-  }
- ],
- "stats_through": "2026-10-16",
+ "excluded_teams": [],
+ "stats_through": "2026-10-17",
  "lineups_at": "2026-10-17T21:10:00-04:00",
  "lineups_note": "14 of 28 team line pages are dated today.",
  "games_today": 14,
@@ -112,7 +103,7 @@
  "runner": {
   "event": "workflow_dispatch",
   "run_id": "39084224009",
-  "iteration": 3,
+  "iteration": 4,
   "chain_link": 45,
   "chain_started_at": "2026-10-16T10:00:13-04:00",
   "run_started_at": "2026-10-17T20:50:13-04:00"
