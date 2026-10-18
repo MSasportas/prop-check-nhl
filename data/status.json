@@ -1,10 +1,10 @@
 {
  "ok": true,
  "slate_date": "2026-10-17",
- "started_at": "2026-10-18T01:10:01-04:00",
- "status_at": "2026-10-18T01:10:01-04:00",
- "finished_at": "2026-10-18T01:10:02-04:00",
- "last_ok_at": "2026-10-18T01:10:01-04:00",
+ "started_at": "2026-10-18T01:30:00-04:00",
+ "status_at": "2026-10-18T01:30:00-04:00",
+ "finished_at": "2026-10-18T01:30:02-04:00",
+ "last_ok_at": "2026-10-18T01:30:00-04:00",
  "failed_step": null,
  "steps": [
   {
@@ -20,7 +20,7 @@
   {
    "step": "stats",
    "status": "ok",
-   "note": "1 window(s) read, 4 team-games still missing"
+   "note": "1 window(s) read"
   },
   {
    "step": "lineups",
@@ -93,25 +93,8 @@
   "Elias Nils Pettersson",
   "Elias Pettersson"
  ],
- "excluded_teams": [
-  {
-   "team": "EDM",
-   "reason": "stats behind"
-  },
-  {
-   "team": "PIT",
-   "reason": "stats behind"
-  },
-  {
-   "team": "UTA",
-   "reason": "stats behind"
-  },
-  {
-   "team": "VGK",
-   "reason": "stats behind"
-  }
- ],
- "stats_through": "2026-10-16",
+ "excluded_teams": [],
+ "stats_through": "2026-10-17",
  "lineups_at": "2026-10-17T21:30:01-04:00",
  "lineups_note": "14 of 28 team line pages are dated today.",
  "games_today": 14,
@@ -120,7 +103,7 @@
  "runner": {
   "event": "workflow_dispatch",
   "run_id": "39099015230",
-  "iteration": 2,
+  "iteration": 4,
   "chain_link": 50,
   "chain_started_at": "2026-10-16T10:00:13-04:00",
   "run_started_at": "2026-10-18T01:00:12-04:00"
