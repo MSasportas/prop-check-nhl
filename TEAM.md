@@ -146,6 +146,12 @@ price history exists; our own odds log, `data/odds/`, is building that).
     hold ~7.1%, 3-2 -0.14u, and it needs confirmed lineups (power-play units), the thing that fails most. Goals: one-sided
     prices, no de-vig, high hold. Not in our feed or log, so unverified: assists, blocks, PP points, alt shots, sides, totals.
     Saves as #2 is a judgment, not a result: 0 graded legs.
+    Tools research (2026-10-18): no new source needed for saves. The NHL stats API we already use returns goalie game rows
+    (`api.nhle.com/stats/rest/en/goalie/summary?isGame=true`: saves, shotsAgainst, gamesStarted, timeOnIce; tested live) and the
+    boxscore has a `starter` flag. Optional later: MoneyPuck free downloads (shot-level xG, goalie games; non-commercial, credit
+    MoneyPuck anywhere shown, no scraping beyond listed files) for shot quality. Skip: paid odds/stat APIs, public repos (none
+    beat what we have, mostly xG/R packages). RotoGrinders mirrors Daily Faceoff lines + PP units: a possible lineup fallback,
+    terms and JS-vs-HTML unchecked.
 
 13. **ROI (2026-10-18, 18 singles + 7 parlays):** singles 61% vs 58% needed, +0.96u (+5% ROI); parlays -4.45u. Higher-edge
     picks did not hit more (edge 2-3 pts: 6-3; 3-4.5: 3-3; 4.5+: 2-1), so stake sizing by confidence waits until
