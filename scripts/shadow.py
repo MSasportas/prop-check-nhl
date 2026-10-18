@@ -4,7 +4,8 @@ Internal only (TEAM.md section 7 item 17): never on the page, never in the Recor
 sample the Data Scientist uses to decide whether the model has an edge (gap bands, de-vig, blend weight).
 
 One file per slate, data/shadow/<slate>.json, one row per (game, market, player, line):
-  open     the first read of that line before puck: prices, the book's fair over (proportional de-vig), the
+  open     the first read of that line before puck: prices, the book's fair over (fair_over: proportional de-vig;
+           fair_over_oh: all hold on the over, rules v2.0), the
            model's own chance of the over (the same Inputs.model the engine uses, before blend and penalties),
            the blended chance for each side (engine.edge), lineup and goalie state at that moment
   close    the last read before puck, same fields
@@ -16,6 +17,7 @@ Snapshot rule: open and close are written only while the game has not started an
 before puck; after puck only `result` is ever added. Only the timer (run.py) and the one-off backfill
 (scripts/shadow_backfill.py) write these files. A failure here never fails a run (run.py wraps it).
 """
+import time
 from datetime import date, timedelta
 
 import common
@@ -31,6 +33,9 @@ import sched
 VERSION = 1
 KEEP_RESULT_DAYS = 3            # results are looked for on this slate and the two before it
 RESULT_WAIT_HOURS = 2.5         # a game is looked up only once the schedule says OFF or this long after puck
+BUDGET_S = 60                   # the whole step stops starting new work after this many seconds (cycle cap 420 s)
+OLD_FETCH_CAP = 4               # boxscore reads per cycle for the two previous slates
+FETCH_CAP = 20                  # boxscore reads per cycle for tonight (grade's reads this run are free: shared)
 NOTE = "Internal shadow log (TEAM.md section 7 item 17). Not the Record, not shown anywhere."
 
 
@@ -135,10 +140,11 @@ def snapshot(inp, f, market, pair, pid, team, opp, home, thin, model_fn, lineup_
     over, under = pair["over"], pair["under"]
     fair_over = odds.fair_two_sided(over, under)
     s = {"at": f["at"], "pull": f["pull"], "over": over, "under": under, "fair_over": _r(fair_over),
+         "fair_over_oh": _r(odds.devig(over, under, "over", "over_hold")),
          "hold": _r(odds.hold(over, under)), "feed_check": pair.get("why"),
          "model_p_over": None, "mu": None, "p_over": None, "p_under": None,
          "lineup": None, "lineup_page_today": None, "goalie_own": None, "goalie_opp": None,
-         "logged_at": None if historical else common.iso(now)}
+         "logged_at": None if historical else common.iso(now), "rules": inp.cfg.get("version")}
     m = model_fn(pair["line"]) if model_fn else None
     if m is not None:
         s["model_p_over"], s["mu"] = _r(m["p_over"]), _r(m["mu"], 3)
@@ -168,7 +174,8 @@ def pairs_of(mk):
     return out
 
 
-def add_reads(doc, inp, odds_doc, games, sched_games, now, lineup_state=None, goalie_state=None, historical=False):
+def add_reads(doc, inp, odds_doc, games, sched_games, now, lineup_state=None, goalie_state=None, historical=False,
+              deadline=None):
     """Fold every pre-puck read of the slate's odds file into the doc. Returns how many rows changed.
     historical (backfill only): the moment is past, so the 'game has not started yet' test uses the read time
     alone and lineup / goalie state is left empty (not known for the past)."""
@@ -177,6 +184,8 @@ def add_reads(doc, inp, odds_doc, games, sched_games, now, lineup_state=None, go
     changed = 0
     lineup_state = lineup_state or {}
     for f in sorted((odds_doc or {}).get("fetches", []), key=lambda x: x["at"]):
+        if deadline is not None and time.monotonic() > deadline:
+            break                                            # out of time: the rest is picked up next cycle
         g = by_id.get(f["game_id"])
         if g is None or not f.get("book"):
             continue
@@ -217,9 +226,12 @@ def add_reads(doc, inp, odds_doc, games, sched_games, now, lineup_state=None, go
 
 
 # ---------------------------------------------------------------- results (boxscore, as grade.py reads it)
-def fill_results(doc, now, cfg, sched_games, box_fn=None):
-    """Add `result` to rows of finished games. Returns (rows graded, notes)."""
-    box_fn = box_fn or nhl.boxscore
+def fill_results(doc, now, cfg, sched_games, box_fn=None, deadline=None, budget=None):
+    """Add `result` to rows of finished games. Returns (rows graded, notes).
+    deadline (time.monotonic) and budget ({"fetch": n}: boxscores not already read this run, decremented in
+    place) bound the work per cycle."""
+    live_fn = box_fn is None
+    box_fn = box_fn or (lambda gid: nhl.boxscore(gid, quick=True))
     by_game = {}
     for r in doc["rows"]:
         if r.get("result") is None:
@@ -233,6 +245,12 @@ def fill_results(doc, now, cfg, sched_games, box_fn=None):
         postponed = g.get("sched") in ("PPD", "CNCL")
         if not postponed and g.get("state") != "OFF" and now < start + timedelta(hours=RESULT_WAIT_HOURS):
             continue                                         # not final yet: no boxscore call
+        if not postponed and not (live_fn and nhl.cached("boxscore", gid)):
+            if (deadline is not None and time.monotonic() > deadline) or (budget is not None and budget["fetch"] <= 0):
+                notes.append("results wait for the next cycle")
+                break
+            if budget is not None:
+                budget["fetch"] -= 1
         box = None if postponed else box_fn(gid)
         if not postponed and box is None:
             notes.append("boxscore for %s not available" % gid)
@@ -279,6 +297,7 @@ def step(now, slate, cfg, inp, sched_cache, games):
     """Called by run.py after odds, engine and grade. Returns a step result dict. Never raises (the caller
     also wraps it)."""
     sched_games = (sched_cache or {}).get("games", {})
+    deadline = time.monotonic() + BUDGET_S
     notes = []
     wrote = 0
     doc = load(slate)
@@ -286,10 +305,10 @@ def step(now, slate, cfg, inp, sched_cache, games):
     odds_doc = common.read_json(odds.odds_path(slate))
     if odds_doc and games and inp is not None:
         added = add_reads(doc, inp, odds_doc, games, sched_games, now, inp.lineup_state or lineups.load(slate),
-                          goalies.load(slate))
+                          goalies.load(slate), deadline=deadline)
         if added:
             notes.append("%d line read(s) logged" % added)
-    graded, bad = fill_results(doc, now, cfg, sched_games)
+    graded, bad = fill_results(doc, now, cfg, sched_games, deadline=deadline, budget={"fetch": FETCH_CAP})
     if graded:
         notes.append("%d graded" % graded)
     notes += bad[:2]
@@ -300,13 +319,16 @@ def step(now, slate, cfg, inp, sched_cache, games):
     # results for the last two slates (late games finish after the 5 AM rollover only in theory, but a
     # boxscore that was late or a cycle that failed must still be filled in)
     d = date.fromisoformat(slate)
+    old_budget = {"fetch": OLD_FETCH_CAP}
     for back in range(1, KEEP_RESULT_DAYS):
+        if old_budget["fetch"] <= 0 or time.monotonic() > deadline:
+            break
         old_slate = (d - timedelta(days=back)).isoformat()
         old = common.read_json(path(old_slate))
         if not isinstance(old, dict) or not any(r.get("result") is None for r in old.get("rows", [])):
             continue
         old = load(old_slate)
-        g2, bad2 = fill_results(old, now, cfg, sched_games)
+        g2, bad2 = fill_results(old, now, cfg, sched_games, deadline=deadline, budget=old_budget)
         if g2:
             old["updated_at"] = common.iso(now)
             save(old)

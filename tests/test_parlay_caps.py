@@ -29,7 +29,7 @@ class T(unittest.TestCase):
     def setUp(self):
         here = os.path.dirname(os.path.abspath(__file__))
         with open(os.path.join(here, "..", "config", "rules.json")) as f:
-            self.v = json.load(f)["values"]
+            self.v = common.rules_for(json.load(f), SLATE)["values"]     # v1.0: parlays were on through Oct 18
         self.inp = types.SimpleNamespace(v=self.v, slate=SLATE)
         self.ids = ["%s:g%d:p%d:shots:1.5:under" % (SLATE, i, i) for i in range(1, 7)]
         self.live = {l: live_leg(i + 1, 100 + i) for i, l in enumerate(self.ids)}
@@ -70,6 +70,22 @@ class T(unittest.TestCase):
             self.live.pop(l, None)
         second = self.run_cycle()
         self.assertLessEqual(len(first) - 1 + len(second), self.v["parlay_cap"])
+
+
+
+
+class V2(unittest.TestCase):
+    def test_parlays_off_from_v2(self):
+        here = os.path.dirname(os.path.abspath(__file__))
+        with open(os.path.join(here, "..", "config", "rules.json")) as f:
+            cfg = json.load(f)
+        v = common.rules_for(cfg, "2026-10-19")["values"]
+        self.assertEqual(v["parlay_cap"], 0)
+        ids = ["2026-10-19:g%d:p%d:shots:1.5:under" % (i, i) for i in range(1, 7)]
+        live = {l: live_leg(i + 1, 100 + i) for i, l in enumerate(ids)}
+        items = {l: dict(shown_leg(i + 1), slate="2026-10-19") for i, l in enumerate(ids)}
+        new = engine._parlays(types.SimpleNamespace(v=v, slate="2026-10-19"), items, live, "2026-10-19T17:00:00-04:00")
+        self.assertEqual(new, [])
 
 
 if __name__ == "__main__":

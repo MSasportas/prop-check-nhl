@@ -832,8 +832,11 @@ function renderTonight() {
   }
   app.appendChild(sec);
 
-  /* Parlays */
-  if (!showEmpty) {
+  /* Parlays (rules v2.0: paused, one line where they were) */
+  if (!showEmpty && num(ruleVal('parlay_cap')) === 0 && !d.pOpen.length && !d.pStarted.length) {
+    app.appendChild(h('section', { class: 'sec', id: 'parlays' }, h('div', { class: 'card empty' },
+      h('div', { class: 's', style: 'margin:0;color:var(--fg)', text: 'Parlays paused until single picks prove out.' }))));
+  } else if (!showEmpty) {
     var ps = h('section', { class: 'sec', id: 'parlays' }, h('div', { class: 'sec-h' }, h('h2', { text: 'Parlays (' + d.pOpen.length + ')' })));
     if (d.pOpen.length) { var pst = h('div', { class: 'stack' }); d.pOpen.forEach(function (p, i) { pst.appendChild(parlayCard(p, d, i + 1)); }); ps.appendChild(pst); }
     else ps.appendChild(h('div', { class: 'card empty' }, h('div', { class: 's', style: 'margin:0;color:var(--fg)',
@@ -1107,8 +1110,14 @@ function fillSheet() {
   sheetRoot.appendChild(scrim); document.body.style.overflow = 'hidden'; body.scrollTop = prevScroll;
 }
 function slot(key, kind) {
-  var v = ruleVal(key), n = num(v), t = null;
+  var path = key.split('.'), v = ruleVal(path[0]);
+  for (var i = 1; i < path.length; i++) v = isObj(v) ? v[path[i]] : undefined;
+  var n = num(v), t = null;
   if (kind === 'text') { if (v != null && v !== '') t = str(v); }
+  else if (kind === 'list') {
+    var xs = arr(v).map(function (x) { return num(x) != null ? String(num(x)) : null; }).filter(function (x) { return x != null; });
+    if (xs.length) t = xs.length === 1 ? xs[0] : xs.slice(0, -1).join(', ') + ' and ' + xs[xs.length - 1];
+  }
   else if (n != null) {
     if (kind === 'price') t = odds(n);
     else if (kind === 'pct') t = (Math.round(n * 1000) / 10) + '%';
@@ -1117,8 +1126,22 @@ function slot(key, kind) {
   }
   return t == null ? h('span', { class: 'slot miss', text: '[missing]' }) : h('span', { class: 'slot', text: t });
 }
-/* Sentences live here; every number comes from rules.json. "{key|kind}" kinds: price, pct, pts (0.02 -> 2), num, text. */
+/* Sentences live here; every number comes from rules.json. "{key|kind}" kinds: price, pct, pts (0.02 -> 2), num, text,
+   list (an array: "1.5 and 2.5"); a key may be dotted (lines_allowed.shots). RULES is v2.0; RULES_V1 is shown only while
+   rules.json still says v1.x (the slate that was running when v2.0 shipped). */
 var RULES = [
+  'Shots on goal only, at the {lines_allowed.shots|list} lines. Every pick needs a real Hard Rock price of {price_gate|price} or better, and no longer than {max_price|price}.',
+  "To read Hard Rock's own chance we put all of its margin on the over: the under's chance is its price's break-even, the over gets the rest.",
+  "Our chance blends our model ({model_weight|pct}) with that Hard Rock chance ({market_weight|pct}). Nothing else is added or taken off.",
+  "We pick when our chance beats the price's break-even by 0 to just under {edge_cap|pts} points. A bigger edge is passed, because the book likely knows something. The bar is the same whether or not the lineup is confirmed.",
+  "Under {min_history|num} games of history means no pick. A player who missed his team's last game waits for a confirmed lineup, and one back from {absence_games|num} or more missed games sits out {absence_sitout|num} games.",
+  'No more than {max_per_player|num} per player, {max_per_game|num} per game and {max_picks_night|num} a night, best edge first.',
+  'Parlays are paused until single picks prove out.',
+  'A pick is pulled if the player is out of the lineup, the price goes past {price_gate|price} or past {max_price|price}, or the line is gone. At a new price it is also pulled if our chance falls below break-even or the edge reaches {edge_cap|pts} points.',
+  "Results come from the NHL boxscore once each game is final. Overtime counts, shootouts don't. Graded at the worst price shown, {stake|num} unit each.",
+  'We need {min_sample|num} graded picks in a market before judging it. A market that is losing badly after {pause_legs|num} picks switches itself off. Rule changes are judged on our model graded on every Hard Rock line, not just on picks.'
+];
+var RULES_V1 = [
   'Every pick needs a real Hard Rock price of {price_gate|price} or better, and no longer than {max_price|price}.',
   "Our chance blends our model ({model_weight|pct}) with Hard Rock's own price ({market_weight|pct}).",
   'Before blending, we take {uncertainty|pts} points off our model on every pick, {under_penalty|pts} more on unders, and {thin_over_penalty|pts} more on overs with a thin sample.',
@@ -1139,7 +1162,7 @@ function rulesBody(body) {
   body.appendChild(head);
   if (!S.rules) body.appendChild(h('p', { style: 'color:var(--warn)', text: "The rule numbers didn't load, so they show as [missing] below." }));
   var ol = h('ol', { class: 'rules' });
-  RULES.forEach(function (s) {
+  (v != null && /^1(\.|$)/.test(str(v)) ? RULES_V1 : RULES).forEach(function (s) {
     var li = h('li'), re = /\{([a-z0-9_]+)\|([a-z]+)\}/g, last = 0, m;
     while ((m = re.exec(s))) { if (m.index > last) li.appendChild(node(s.slice(last, m.index))); li.appendChild(slot(m[1], m[2])); last = re.lastIndex; }
     if (last < s.length) li.appendChild(node(s.slice(last)));

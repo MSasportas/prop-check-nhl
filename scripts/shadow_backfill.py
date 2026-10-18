@@ -38,7 +38,7 @@ def slates(a, b):
 
 def inputs_for(cfg, slate, season, games, store):
     now = common.parse_iso(slate + "T12:00:00-04:00")
-    return engine.Inputs(cfg, now, slate, season, games, store, {}, {}, {}, {}, [])
+    return engine.Inputs(common.rules_for(cfg, slate), now, slate, season, games, store, {}, {}, {}, {}, [])
 
 
 def build(slate, cfg, cache, store, now, box_fn=None):

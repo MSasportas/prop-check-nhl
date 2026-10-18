@@ -613,7 +613,17 @@ def main():
         write(os.path.join(d, "rules.json"), RULES)
         for rel in rec.get("older", []):
             write(os.path.join(d, rel), older[rel])
-    print("wrote %d fixtures: %s" % (len(fx), ", ".join(sorted(fx))))
+    # rulesv2: the normal night under rules v2.0 (parlays paused, the v2.0 rules sheet), for QA at 380px
+    slate, rec = fx["normal"]
+    v2 = dict(slate, parlays=[], picks=[p for p in slate["picks"] if not p.get("rank") or p["rank"] <= 8])
+    d = os.path.join(HERE, "rulesv2")
+    write(os.path.join(d, "slate.json"), {k: v for k, v in v2.items() if k != "_finished"})
+    write(os.path.join(d, "record.json"), rec)
+    with open(os.path.join(os.path.dirname(HERE), "config", "rules.json")) as f:
+        cfg = json.load(f)
+    write(os.path.join(d, "rules.json"), {"fixture": True, "version": cfg["version"], "updated": cfg["updated"],
+                                          "values": cfg["values"], "ui": cfg["ui"]})
+    print("wrote %d fixtures: %s" % (len(fx) + 1, ", ".join(sorted(list(fx) + ["rulesv2"]))))
 
 
 if __name__ == "__main__":

@@ -59,9 +59,10 @@ SOFT = ("lineup_history", "market_menu", "shadow")     # team logs: a failure is
 
 class Run:
     def __init__(self, cfg, now, only=None, dry_run=False, readonly=False):
-        self.cfg, self.now, self.only, self.dry_run = cfg, now, only, dry_run
+        self.now, self.only, self.dry_run = now, only, dry_run
         self.readonly = readonly     # --explain: read files only, keep anything fetched in memory, write nothing
         self.slate = common.slate_date(now, cfg["ops"]["rollover_hour"])
+        self.cfg = common.rules_for(cfg, self.slate)       # a slate keeps the rules it started under
         self.steps = []
         self.season = None
         self.cache = None            # schedule cache
@@ -554,10 +555,13 @@ def _essence(doc):
 def run(only=None, dry_run=False):
     cfg = common.load_config()
     engine.check_config(cfg)
+    if cfg.get("previous"):
+        engine.check_config(common.rules_for(cfg, cfg["previous"]["until"]))
     now = common.now()
     started_at = now
     odds.load_keys()                                        # registers the keys so nothing can print them
     nhl.SOURCES.clear()
+    nhl.clear_cache()
     for src in (odds.SOURCE, lineups.SOURCE, goalies.SOURCE):
         src.update(ok=0, failed=0)
     r = Run(cfg, now, only, dry_run)

@@ -48,12 +48,13 @@ def _fixture(name):
 
 
 # ---------------------------------------------------------------- api-web
-def web(path):
-    """GET api-web path such as 'schedule/2026-10-11'. Returns parsed JSON or None."""
+def web(path, quick=False):
+    """GET api-web path such as 'schedule/2026-10-11'. Returns parsed JSON or None.
+    quick: one try with a 10 s timeout (team logs that must not hold a cycle up)."""
     if fixture_dir():
         js = _fixture(path.replace("/", "_") + ".json")
     else:
-        r = common.http_get("%s/%s" % (WEB, path))
+        r = common.http_get("%s/%s" % (WEB, path), **({"timeout": 10, "retries": 0} if quick else {}))
         js = r.json() if r.ok else None
         _record(path.replace("/", "_") + ".json", js)
     note("nhl_web", js is not None)
@@ -100,12 +101,35 @@ def roster(team):
     return out or None
 
 
-def boxscore(game_id):
-    return web("gamecenter/%s/boxscore" % game_id)
+# One run's boxscores and play-by-plays, shared by grade.py and shadow.py so a game is read once per run.
+# run.py clears it at the start of every run (a test can change a fixture between runs).
+CACHE = {}
 
 
-def play_by_play(game_id):
-    return web("gamecenter/%s/play-by-play" % game_id)
+def clear_cache():
+    CACHE.clear()
+
+
+def cached(kind, game_id):
+    return (kind, game_id) in CACHE
+
+
+def _game_file(kind, game_id, quick):
+    k = (kind, game_id)
+    if k not in CACHE:
+        js = web("gamecenter/%s/%s" % (game_id, kind), quick=quick)
+        if js is None:
+            return None                                     # a failed read is not kept: the next caller may retry
+        CACHE[k] = js
+    return CACHE[k]
+
+
+def boxscore(game_id, quick=False):
+    return _game_file("boxscore", game_id, quick)
+
+
+def play_by_play(game_id, quick=False):
+    return _game_file("play-by-play", game_id, quick)
 
 
 def goalie_shots(pbp, team):

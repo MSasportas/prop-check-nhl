@@ -18,12 +18,24 @@ import run      # noqa: E402
 import world    # noqa: E402
 
 ENV = ("PC_NOW", "PC_DATA_DIR", "PC_ODDS_FIXTURE_DIR", "PC_NHL_FIXTURE_DIR", "PC_LINEUP_FIXTURE_DIR", "ODDS_API_KEYS",
-       "DISCORD_WEBHOOK_URL", "PC_DISCORD_FIXTURE_URL")
+       "DISCORD_WEBHOOK_URL", "PC_DISCORD_FIXTURE_URL", "PC_CONFIG")
 FIX = os.path.join(HERE, "fixtures")
 
 
 def cfg():
-    return common.load_config()
+    """The rules the made-up slate (2026-10-11) runs under: v1.0 by default (it is before v2.0's first slate),
+    the current rules inside a Sim(rules="current")."""
+    return common.rules_for(common.load_config(), world.SLATE)
+
+
+def current_rules_config(root):
+    """A copy of config/rules.json without "previous", so the made-up 2026-10-11 slate runs the CURRENT rules."""
+    c = json.loads(slurp(common.CONFIG_PATH, "r"))
+    c.pop("previous", None)
+    path = os.path.join(root, "rules_current.json")
+    with open(path, "w", encoding="utf-8") as f:
+        json.dump(c, f)
+    return path
 
 
 def slurp(path, mode="rb"):
@@ -39,9 +51,12 @@ def load(path):
 class Sim:
     """One made-up day. Use as: s = Sim(); s.at("13:02"); ...; s.close()"""
 
-    def __init__(self, pool=12, states=None, skip_this_season=None):
+    def __init__(self, pool=12, states=None, skip_this_season=None, rules=None):
         self.saved = {k: os.environ.get(k) for k in ENV}
         self.root = tempfile.mkdtemp(prefix="pc_test_")
+        os.environ.pop("PC_CONFIG", None)
+        if rules == "current":
+            os.environ["PC_CONFIG"] = current_rules_config(self.root)
         self.w = world.build(self.root, states, skip_this_season)
         world.write(os.path.join(self.w["odds"], "pool.json"), {"keys": pool if isinstance(pool, list) else [pool]})
         os.makedirs(self.w["lineups"], exist_ok=True)

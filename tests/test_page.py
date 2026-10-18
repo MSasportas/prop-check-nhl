@@ -74,5 +74,57 @@ class PageRules(unittest.TestCase):
         self.assertEqual(got, ["Korpisalo", "Luukkonen", "Vladar", ""])
 
 
+def page_array(name):
+    with open(PAGE, encoding="utf-8") as f:
+        src = f.read()
+    m = re.search(r"^var %s = \[.*?^\];$" % re.escape(name), src, re.S | re.M)
+    if not m:
+        raise AssertionError("var %s not found in index.html" % name)
+    return m.group(0)
+
+
+class RulesSheet(unittest.TestCase):
+    """The 'How picks are made' sheet must say what the rules in force say (v2.0 from 2026-10-19)."""
+
+    def render(self, array, values):
+        js = "\n".join([page_function(n) for n in ("isObj", "arr", "num", "str", "odds", "slot")] + [
+            "var S = {rules: {values: %s}};" % json.dumps(values),
+            "function ruleVal(k) { return S.rules.values[k]; }",
+            "function h(tag, o) { return {miss: /miss/.test(o['class']), text: o.text}; }",
+            page_array(array),
+            "var out = %s.map(function (s) { var re = /\\{([a-z0-9_.]+)\\|([a-z]+)\\}/g, miss = 0;"
+            " var t = s.replace(re, function (_, k, kind) { var x = slot(k, kind); if (x.miss) miss++; return x.text; });"
+            " return {t: t, miss: miss}; });" % array,
+            "console.log(JSON.stringify(out));"])
+        return run_js(js)
+
+    def test_v2_sheet_is_complete_and_has_no_v1_rules(self):
+        cfg = helpers.common.load_config()
+        out = self.render("RULES", cfg["values"])
+        self.assertEqual([o["t"] for o in out if o["miss"]], [], "every number comes from rules.json")
+        text = " ".join(o["t"] for o in out)
+        self.assertIn("Shots on goal only, at the 1.5 and 2.5 lines.", text)
+        self.assertIn("model (70%) with that Hard Rock chance (30%)", text)
+        self.assertIn("by 0 to just under 5 points", text)
+        self.assertIn("2 per game and 8 a night", text)
+        self.assertIn("Parlays are paused until single picks prove out.", text)
+        src = page_array("RULES")
+        for gone in ("uncertainty", "under_penalty", "thin_over_penalty", "news_gap", "too_good", "drift_pull",
+                     "parlay_", "min_p", "margin_"):
+            self.assertNotIn("{" + gone, src)
+
+    def test_v1_sheet_still_renders_for_the_v1_slate(self):
+        cfg = helpers.common.rules_for(helpers.common.load_config(), "2026-10-18")
+        self.assertEqual(cfg["version"], "1.0")
+        out = self.render("RULES_V1", cfg["values"])
+        self.assertEqual([o["t"] for o in out if o["miss"]], [])
+
+    def test_parlay_paused_line(self):
+        with open(PAGE, encoding="utf-8") as f:
+            src = f.read()
+        self.assertIn("num(ruleVal('parlay_cap')) === 0", src)
+        self.assertIn("'Parlays paused until single picks prove out.'", src)
+
+
 if __name__ == "__main__":
     unittest.main()

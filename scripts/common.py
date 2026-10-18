@@ -188,9 +188,27 @@ def read_gz_json(path, default=None):
         return default
 
 
+def config_path():
+    """config/rules.json; tests may point PC_CONFIG at a copy (never used by the timer)."""
+    return os.environ.get("PC_CONFIG") or CONFIG_PATH
+
+
 def load_config():
-    with open(CONFIG_PATH, "r", encoding="utf-8") as f:
+    with open(config_path(), "r", encoding="utf-8") as f:
         return json.load(f)
+
+
+def rules_for(cfg, slate):
+    """The rules a slate is run under. config/rules.json holds the current rules in "values" and, under
+    "previous", the version before with the values that differ and the last slate it covers ("until"). A slate
+    on or before "until" keeps the previous rules, so nothing already shown changes when the rules do."""
+    prev = cfg.get("previous")
+    if not isinstance(prev, dict) or not slate or slate > prev.get("until", ""):
+        return cfg
+    out = dict(cfg)
+    out["values"] = dict(cfg["values"], **prev.get("values", {}))
+    out["version"], out["updated"] = prev.get("version", cfg.get("version")), prev.get("updated", cfg.get("updated"))
+    return out
 
 
 # ---------------------------------------------------------------- HTTP (polite: timeout, 2 retries, never raises)

@@ -177,6 +177,15 @@ def _open(x, now):
     return (not x.get("pulled")) and (not x.get("graded")) and x.get("state") in ("early", "lineup")
 
 
+def parlays_on(slate):
+    """Rules v2.0 turned parlays off (parlay_cap 0): Discord then never sends a parlay, whatever the slate holds."""
+    try:
+        cfg = common.rules_for(common.load_config(), slate.get("slate_date"))
+        return cfg["values"].get("parlay_cap", 0) > 0
+    except Exception:
+        return False
+
+
 def build_new(slate, st, now):
     """-> (text, picks, parlays) for items not yet told about, or None."""
     by_id = {p["id"]: p for p in slate.get("picks", [])}
@@ -184,7 +193,7 @@ def build_new(slate, st, now):
              and p["id"] not in st["picks"] and common.parse_iso(p["start"]) > now]
     new_p.sort(key=lambda p: (p["rank"], p["id"]))
     new_l = []
-    for pl in slate.get("parlays", []):
+    for pl in (slate.get("parlays", []) if parlays_on(slate) else []):
         if not _open(pl, now) or pl["id"] in st["parlays"] or not all(l in by_id for l in pl["legs"]):
             continue
         if all(common.parse_iso(by_id[l]["start"]) > now for l in pl["legs"]):

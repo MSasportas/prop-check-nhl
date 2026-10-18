@@ -11,6 +11,9 @@ For one side of one line:
     p         model_weight x model_adj + market_weight x fair            <- "our chance" on the card
 A new pick needs: price inside the gate, p >= min_p, p - b >= margin (confirmed or early), gap not
 "too good", and a big gap only with the lineup confirmed.
+Rules v2.0 (slates from 2026-10-19; see common.rules_for): fair = all hold on the over (devig over_hold), every
+adjustment 0, min_p and margins 0, news_gap / too_good / drift_pull off (null), and p - b must stay under edge_cap
+(also a pull at a new price); only lines in lines_allowed; max_picks_night; parlays off (parlay_cap 0).
 
 A pick that has been shown is never silently removed. Each run it either stays (with any new price
 appended to the Record), is pulled with a reason, or locks at puck drop. What was shown is rebuilt from
@@ -42,7 +45,9 @@ PULL_TEXT = {
     "market_gone": "Hard Rock took this market down",
     "margin": "The price no longer clears the bar",
     "drift": "The price moved against this side before the lineup was confirmed",
+    "edge_cap": "The price moved so far our way that we assume the book knows something",
 }
+OPTIONAL = ("news_gap", "too_good", "drift_pull", "edge_cap")     # null = that rule is off
 
 
 class ConfigError(Exception):
@@ -54,12 +59,16 @@ def check_config(cfg):
     if abs(v["model_weight"] + v["market_weight"] - 1.0) > 1e-9:
         raise ConfigError("model_weight + market_weight must equal 1")
     for k in ("min_p", "margin_confirmed", "margin_early", "uncertainty", "under_penalty", "thin_over_penalty",
-              "news_gap", "too_good", "drift_pull", "parlay_leg_min_p", "parlay_min_p_2", "parlay_min_p_3",
+              "news_gap", "too_good", "drift_pull", "edge_cap", "parlay_leg_min_p", "parlay_min_p_2", "parlay_min_p_3",
               "parlay_edge", "hold_min", "hold_max"):
+        if k in OPTIONAL and v.get(k) is None:
+            continue
         if not (0 <= v[k] <= 1):
             raise ConfigError("%s must be between 0 and 1" % k)
     if v["price_gate"] >= 0 or v["max_price"] < 100:
         raise ConfigError("price_gate must be negative and max_price +100 or longer")
+    if v.get("devig", "proportional") not in ("proportional", "over_hold"):
+        raise ConfigError("devig must be proportional or over_hold")
 
 
 # ---------------------------------------------------------------- the edge rule (pure arithmetic)
@@ -67,7 +76,7 @@ def edge(model_side, side, thin, price, other_price, v, fair=None):
     """All the numbers for one side at one price. `fair` may be passed when the other side is missing."""
     b = odds.break_even(price)
     if other_price is not None:
-        fair = odds.fair_two_sided(price, other_price)
+        fair = odds.devig(price, other_price, side, v.get("devig", "proportional"))
     adj = model_side - v["uncertainty"]
     if side == "under":
         adj -= v["under_penalty"]
@@ -88,16 +97,28 @@ def qualifies(e, price, confirmed, v):
     """Entry test for a NEW pick. Returns (True, None) or (False, why)."""
     if not inside_gate(price, v):
         return False, "price outside the gate"
-    if e["gap"] > v["too_good"] + EPS:
+    if v.get("too_good") is not None and e["gap"] > v["too_good"] + EPS:
         return False, "too good: assume the book knows"
-    if e["gap"] > v["news_gap"] + EPS and not confirmed:
+    if v.get("news_gap") is not None and e["gap"] > v["news_gap"] + EPS and not confirmed:
         return False, "big gap needs lineup confirmed"
     if e["p"] < v["min_p"] - EPS:
         return False, "chance under the minimum"
     need = v["margin_confirmed"] if confirmed else v["margin_early"]
     if e["margin"] < need - EPS:
         return False, "margin too small"
+    if over_cap(e, v):
+        return False, "edge at or over the cap: assume the book knows"
     return True, None
+
+
+def over_cap(e, v):
+    """v2.0: an edge (our chance - break-even) of edge_cap or more is not trusted (the DS study: those lost)."""
+    return v.get("edge_cap") is not None and e["margin"] >= v["edge_cap"] - EPS
+
+
+def line_allowed(market, line, v):
+    allowed = (v.get("lines_allowed") or {}).get(market)
+    return allowed is None or any(abs(line - x) < EPS for x in allowed)
 
 
 def rank_key(p, b, confirmed):
@@ -259,7 +280,7 @@ def candidates(inp, paused=()):
             if sched.started(g, inp.now) or market in paused:
                 continue
             for (pid, line), pair in mv["pairs"].items():
-                if not pair["ok"] or pair["team"] not in (g["away"], g["home"]):
+                if not pair["ok"] or pair["team"] not in (g["away"], g["home"]) or not line_allowed(market, line, v):
                     continue
                 team = pair["team"]
                 home = team == g["home"]
@@ -327,7 +348,9 @@ def explain(inp):
                         row.update({k: round(e[k], 4) for k in e})
                         row.update(mu=round(m["mu"], 3), toi_min=round(m["etoi"] / 60.0, 1), opp_f=round(m["opp_f"], 4))
                         ok, why = qualifies(e, price, status == "in", v)
-                        if pv["n"] < v["min_history"]:
+                        if not line_allowed(market, line, v):
+                            ok, why = False, "line not used"
+                        elif pv["n"] < v["min_history"]:
                             ok, why = False, "under min_history games"
                         elif pv["sitting"]:
                             ok, why = False, "back from an absence"
@@ -347,9 +370,11 @@ def explain(inp):
 def best_per_player(cands, v):
     """One line per player per market (highest p), then at most max_per_player per player (best ranked)."""
     by = {}
+    best = (lambda c: rank_key(c["e"]["p"], c["e"]["b"], c["conf"]) + (c["id"],)) if v.get("best_line_by") == "edge" \
+        else (lambda c: (-c["e"]["p"],))
     for c in cands:
         k = (c["pid"], c["market"])
-        if k not in by or c["e"]["p"] > by[k]["e"]["p"]:
+        if k not in by or best(c) < best(by[k]):
             by[k] = c
     ranked = sorted(by.values(), key=lambda c: rank_key(c["e"]["p"], c["e"]["b"], c["conf"]) + (c["id"],))
     seen, out = {}, []
@@ -430,7 +455,10 @@ def evaluate(inp, paused=(), block_new=False):
             code, text = "max_price", PULL_TEXT["max_price"] % common.fmt_price(v["max_price"])
         elif e["margin"] < v["pull_margin"] - EPS:
             code, text = "margin", PULL_TEXT["margin"]
-        elif not conf and odds.break_even(record.first_price(it)) - e["b"] >= v["drift_pull"] - EPS:
+        elif price != record.last_price(it) and over_cap(e, v):
+            code, text = "edge_cap", PULL_TEXT["edge_cap"]       # v2.0: at a new price, an edge this big is not trusted
+        elif v.get("drift_pull") is not None and not conf and \
+                odds.break_even(record.first_price(it)) - e["b"] >= v["drift_pull"] - EPS:
             code, text = "drift", PULL_TEXT["drift"]
         if code:
             new.append({"t": "pulled", "id": i, "at": at, "code": code, "reason": text, "seen_price": price})
@@ -459,9 +487,16 @@ def evaluate(inp, paused=(), block_new=False):
         per_game[x["game_id"]] = per_game.get(x["game_id"], 0) + 1
         per_player[x["pid"]] = per_player.get(x["pid"], 0) + 1
     fresh = []
+    # v2.0 nightly cap: every single shown tonight and not pulled counts (open, locked or graded)
+    pulled_now = {e["id"] for e in new if e["t"] == "pulled"}
+    night = sum(1 for i, it in singles.items() if it["pulled"] is None and i not in pulled_now)
+    night_cap = v.get("max_picks_night")
     for c in best_per_player([c for c in cands if c["id"] not in singles], v):
+        if night_cap is not None and night >= night_cap:
+            break
         if per_player.get(c["pid"], 0) >= v["max_per_player"] or per_game.get(c["game_id"], 0) >= v["max_per_game"]:
             continue
+        night += 1
         per_player[c["pid"]] = per_player.get(c["pid"], 0) + 1
         per_game[c["game_id"]] = per_game.get(c["game_id"], 0) + 1
         fresh.append(c)

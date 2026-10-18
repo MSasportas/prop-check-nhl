@@ -157,8 +157,11 @@ class Plan(unittest.TestCase):
         self.assertEqual(odds.markets_for(1, "C", {"shots"}), [])
         self.assertEqual(odds.markets_for(0, "C"), [])
         self.assertEqual(odds.markets_for(2, "C", {"shots"}), ["shots"])
-        self.assertEqual(odds.markets_for(2, "C", set()), ["shots"])        # closing price for every game (item 17)
+        self.assertEqual(odds.markets_for(2, "C", set()), [])                # tier 2: live picks only (QA fix)
+        self.assertEqual(odds.markets_for(3, "C", set()), ["shots"])        # tier 3+: closing price for every game
         self.assertEqual(odds.markets_for(4, "C"), ["shots"])
+        self.assertEqual(odds.markets_for(3, "C", set(), c_every_game=False), [])        # tight budget
+        self.assertEqual(odds.markets_for(3, "C", {"shots"}, c_every_game=False), ["shots"])
 
     def test_allowance_and_budget(self):
         # the real pool on 2026-10-11: 109 credits, 143 games left this month, 3 today
@@ -318,8 +321,13 @@ class Schedule(unittest.TestCase):
         done = {1: [("A", "13:02", sh, sh), ("B", "17:35", ["shots"], ["shots"])], 2: [("A", "13:02", sh, sh)]}
         self.assertEqual(self.due("18:14", 2, done, {1: {"shots"}}), [])
         self.assertEqual(self.due("18:15", 2, done, {1: {"shots"}}), [("C", 1, ["shots"])])
-        self.assertEqual(self.due("18:15", 2, done, {}), [("C", 1, ["shots"])])    # no live pick: closing read anyway
-        self.assertEqual(self.due("18:15", 3, done, {}), [("C", 1, ["shots"])])
+        self.assertEqual(self.due("18:15", 2, done, {}), [])                       # tier 2: no live pick, no C
+        self.assertEqual(self.due("18:15", 3, done, {}), [("C", 1, ["shots"])])    # tier 3: closing read anyway
+        now = common.parse_iso("2026-10-11T18:15:00-04:00")
+        f = {g: [{"pull": p, "at": common.parse_iso("2026-10-11T%s:00-04:00" % t), "markets": m, "returned": r}
+                 for p, t, m, r in done[g]] for g in done}
+        tight = odds.due_pulls(now, self.games, 3, V, f, {}, {}, c_every_game=False)
+        self.assertEqual(tight, [], "budget tight: C back to live picks only")
         self.assertEqual(self.due("18:15", 1, done, {1: {"shots"}}), [])           # tier 1 has no pull C
         self.assertEqual(self.due("18:50", 2, done, {1: {"shots"}}), [("C", 1, ["shots"])])    # 10 minutes left
         self.assertEqual(self.due("18:51", 2, done, {1: {"shots"}}), [])           # 9 minutes left: too late

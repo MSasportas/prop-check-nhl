@@ -121,6 +121,57 @@ class ShadowDay(unittest.TestCase):
         self.assertIsNotNone(s.slate())
 
 
+class ShadowBudget(unittest.TestCase):
+    def setUp(self):
+        self.s = Sim(pool=12)
+        self.s.at("09:00")
+
+    def tearDown(self):
+        self.s.close()
+
+    def test_grade_and_shadow_read_each_boxscore_once_per_run(self):
+        import nhl
+        s = self.s
+        s.set_odds("CAR", "PHI", [s.line("CAR", 1, "shots", 2.5, 0.14), s.line("PHI", 2, "shots", 1.5, 0.0)], UPD)
+        s.at("13:02")
+        self.assertTrue(any(e["t"] == "shown" for e in s.events()))
+        s.set_box(CAR_PHI, "CAR", "PHI", {})
+        s.set_states({CAR_PHI: "OFF"})
+        real, paths = nhl.web, []
+        nhl.web = lambda path, quick=False: paths.append(path) or real(path, quick)
+        try:
+            s.at("22:30")
+        finally:
+            nhl.web = real
+        self.assertTrue(any(e["t"] == "graded" for e in s.events()))
+        self.assertTrue(row(s, "PHI", 2, 1.5)["result"])
+        self.assertEqual(paths.count("gamecenter/%s/boxscore" % CAR_PHI), 1)
+
+    def test_out_of_time_does_nothing_and_never_fails(self):
+        s = self.s
+        s.set_odds("CAR", "PHI", [("player_shots_on_goal", world.name_of("CAR", 1), 2.5, -120, -110)], UPD)
+        real = shadow.BUDGET_S
+        shadow.BUDGET_S = -1
+        try:
+            s.at("13:02")
+        finally:
+            shadow.BUDGET_S = real
+        self.assertEqual(rows_of(s), [])
+        self.assertTrue(s.status()["ok"])
+        s.at("13:12")                                         # next cycle catches up
+        self.assertIsNotNone(row(s, "CAR", 1, 2.5))
+
+    def test_fetch_cap(self):
+        mk = lambda gid: {"game_id": gid, "market": "shots", "pid": 1, "line": 1.5,
+                          "ctx": {"start": "2026-10-10T19:00:00-04:00"}, "result": None}
+        doc = {"rows": [mk(1), mk(2), mk(3)]}
+        sg = {str(g): {"start": "2026-10-10T19:00:00-04:00", "state": "OFF", "sched": "OK"} for g in (1, 2, 3)}
+        calls, budget = [], {"fetch": 1}
+        shadow.fill_results(doc, common.parse_iso("2026-10-11T09:00:00-04:00"), helpers.cfg(), sg,
+                            lambda gid: calls.append(gid) or None, budget=budget)
+        self.assertEqual((calls, budget["fetch"]), ([1], 0))
+
+
 class ShadowUnits(unittest.TestCase):
     def setUp(self):
         self.s = Sim(pool=12)
@@ -418,18 +469,33 @@ class MarketMenu(unittest.TestCase):
 
 class ClosingRead(unittest.TestCase):
     def test_pull_c_runs_for_a_game_with_no_pick(self):
-        s = Sim(pool=12)                                      # tier 2
+        s = Sim(pool=20)                                      # 5 a game: tier 3, budget 10 today
         try:
             s.at("09:00")
+            s.set_odds("CAR", "PHI", [("player_total_saves", "Goalie CAR", 25.5, -115, -105)], UPD)
             s.at("13:02")
             s.set_lineup("CAR", "2026-10-11T17:00:00-04:00")
             s.set_lineup("PHI", "2026-10-11T17:00:00-04:00")
-            s.at("17:31")                                     # lineups confirmed: B (shots at tier 2)
+            s.at("17:31")                                     # lineups confirmed: B (shots + saves at tier 3)
             s.at("18:15")                                     # C: closing read although no pick is live
             led = common.read_json(s.path("state", "credits.json"))
             pulls = [e["pull"] for e in led["spent"] if e["game_id"] == CAR_PHI]
             self.assertEqual(pulls, ["A", "B", "C"])
             self.assertEqual(s.log_bytes(), b"")
+        finally:
+            s.close()
+
+    def test_tier_2_has_no_c_without_a_pick(self):
+        s = Sim(pool=12)                                      # 3 a game: tier 2
+        try:
+            s.at("09:00")
+            s.at("13:02")
+            s.set_lineup("CAR", "2026-10-11T17:00:00-04:00")
+            s.set_lineup("PHI", "2026-10-11T17:00:00-04:00")
+            s.at("17:31")
+            s.at("18:15")
+            led = common.read_json(s.path("state", "credits.json"))
+            self.assertEqual([e["pull"] for e in led["spent"] if e["game_id"] == CAR_PHI], ["A", "B"])
         finally:
             s.close()
 
