@@ -1,10 +1,10 @@
 {
  "ok": true,
  "slate_date": "2026-10-17",
- "started_at": "2026-10-17T22:30:01-04:00",
- "status_at": "2026-10-17T22:30:01-04:00",
- "finished_at": "2026-10-17T22:30:02-04:00",
- "last_ok_at": "2026-10-17T22:30:01-04:00",
+ "started_at": "2026-10-17T22:40:00-04:00",
+ "status_at": "2026-10-17T22:40:00-04:00",
+ "finished_at": "2026-10-17T22:40:01-04:00",
+ "last_ok_at": "2026-10-17T22:40:00-04:00",
  "failed_step": null,
  "steps": [
   {
@@ -19,8 +19,8 @@
   },
   {
    "step": "stats",
-   "status": "ok",
-   "note": "1 window(s) read, 6 team-games still missing"
+   "status": "skipped",
+   "note": "waiting to retry"
   },
   {
    "step": "lineups",
@@ -111,11 +111,19 @@
    "reason": "stats behind"
   },
   {
+   "team": "NSH",
+   "reason": "stats behind"
+  },
+  {
    "team": "NYR",
    "reason": "stats behind"
   },
   {
    "team": "SJS",
+   "reason": "stats behind"
+  },
+  {
+   "team": "STL",
    "reason": "stats behind"
   }
  ],
@@ -127,10 +135,10 @@
  "odds_notes": [],
  "runner": {
   "event": "workflow_dispatch",
-  "run_id": "39087317633",
-  "iteration": 6,
-  "chain_link": 46,
+  "run_id": "39090305210",
+  "iteration": 2,
+  "chain_link": 47,
   "chain_started_at": "2026-10-16T10:00:13-04:00",
-  "run_started_at": "2026-10-17T21:40:16-04:00"
+  "run_started_at": "2026-10-17T22:30:15-04:00"
  }
 }
