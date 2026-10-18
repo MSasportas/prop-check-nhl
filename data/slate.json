@@ -1,7 +1,7 @@
 {
  "slate_date": "2026-10-18",
- "generated_at": "2026-10-18T08:50:00-04:00",
- "status_at": "2026-10-18T08:50:00-04:00",
+ "generated_at": "2026-10-18T09:00:00-04:00",
+ "status_at": "2026-10-18T09:00:00-04:00",
  "valid_until": "2026-10-19T05:00:00-04:00",
  "status": {
   "prices_state": "not_yet",
@@ -16,7 +16,7 @@
   "stats_state": "ok",
   "last_run": {
    "ok": true,
-   "at": "2026-10-18T08:50:00-04:00",
+   "at": "2026-10-18T09:00:00-04:00",
    "failed_step": null
   },
   "pool": {
@@ -43,6 +43,20 @@
    "away": "CBJ",
    "home": "MIN",
    "start": "2026-10-18T18:00:00-04:00",
+   "lineups": {
+    "away": "not_checked",
+    "home": "not_checked"
+   },
+   "goalies": {
+    "away": {
+     "name": "Cam Talbot",
+     "status": "expected"
+    },
+    "home": {
+     "name": "Jesper Wallstedt",
+     "status": "confirmed"
+    }
+   },
    "started": false,
    "picks": 0,
    "excluded_reason": null,
@@ -53,6 +67,20 @@
    "away": "CAR",
    "home": "CGY",
    "start": "2026-10-18T20:00:00-04:00",
+   "lineups": {
+    "away": "not_checked",
+    "home": "not_checked"
+   },
+   "goalies": {
+    "away": {
+     "name": "Brandon Bussi",
+     "status": "expected"
+    },
+    "home": {
+     "name": "Devin Cooley",
+     "status": "expected"
+    }
+   },
    "started": false,
    "picks": 0,
    "excluded_reason": null,

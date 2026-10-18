@@ -1,0 +1,22 @@
+{
+ "date": "2026-10-18",
+ "teams": {
+  "MIN": {
+   "name": "Jesper Wallstedt",
+   "status": "confirmed"
+  },
+  "CBJ": {
+   "name": "Cam Talbot",
+   "status": "expected"
+  },
+  "CGY": {
+   "name": "Devin Cooley",
+   "status": "expected"
+  },
+  "CAR": {
+   "name": "Brandon Bussi",
+   "status": "expected"
+  }
+ },
+ "checked_at": "2026-10-18T09:00:00-04:00"
+}
