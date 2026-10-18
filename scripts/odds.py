@@ -309,7 +309,7 @@ def keys_refused(key_state, key_count):
 
 # ---------------------------------------------------------------- the plan (pure functions, easy to test)
 def tier_of(allowance, v):
-    """0: some games, shots only. 1: shots, all games. 2: + points and pull C. 3: + pull B. 4: + goals, saves."""
+    """0: some games, shots only. 1: shots, all games. 2: + shots pull C and B. 3: + saves (logged). 4: + goals."""
     if allowance < v["tier_shots_all"]:
         return 0
     if allowance < v["tier_points"]:
@@ -327,14 +327,14 @@ def markets_for(tier, pull, live_markets=()):
         return ["shots"]                                   # cheapest market only; points wait for confirmed lineups
     if pull == "B":
         if tier == 2:
-            return ["points"]
+            return ["shots"]                               # points picks are off (2026-10-18 focus): shots re-price only
         if tier == 3:
-            return ["shots", "points"]
+            return ["shots", "saves"]                      # saves: logged to build the second market's sample
         if tier >= 4:
-            return ["shots", "points", "goals", "saves"]
+            return ["shots", "saves", "goals"]
         return []
     if pull == "C":
-        return sorted(m for m in live_markets if m in ("shots", "points")) if tier >= 2 else []
+        return sorted(m for m in live_markets if m == "shots") if tier >= 2 else []
     return []
 
 
@@ -376,9 +376,9 @@ def due_pulls(now, games, tier, v, fetched, live_markets, started, retry_min=30,
     A pull is "done" for a game once every market it wants has been RETURNED by a read made at or after the
     pull's due time. A market the book has not posted yet costs nothing to ask for, so it is asked again
     (at most every `retry_min` minutes) until the pull's window closes.
-    lineups_ok: {game_id: bool}, both teams' lineups confirmed. Pull B (points, goals, saves) needs it; if it is
-    still False at pull_c_min before puck, B falls back to points only so Daily Faceoff being down does not
-    kill points picks. Pull A is shots only.
+    lineups_ok: {game_id: bool}, both teams' lineups confirmed. Pull B (shots re-price, saves, goals) needs it; if it is
+    still False at pull_c_min before puck, B falls back to shots only so Daily Faceoff being down does not
+    kill shots picks. Pull A is shots only.
     Returns a list of dict(pull, game, markets) in puck-time order, one per game at most."""
     lineups_ok = lineups_ok or {}
     if not games:
@@ -412,7 +412,7 @@ def due_pulls(now, games, tier, v, fetched, live_markets, started, retry_min=30,
         b_markets = markets_for(tier, "B")
         if b_markets and now >= b_due and left >= v["pull_latest_min"]:
             if not lineups_ok.get(g["id"]):
-                b_markets = ["points"] if left <= v["pull_c_min"] else []     # fallback at the 45 minute mark
+                b_markets = ["shots"] if left <= v["pull_c_min"] else []      # fallback at the 45 minute mark
             m = need(b_markets, b_due) if b_markets else []
             if m and now >= c_due and tier >= 2 and left >= v["pull_c_latest_min"]:
                 # B and C fall due together (45 minute mark): one read for both, not two
@@ -459,7 +459,7 @@ def next_read_at(now, games, tier, v, fetched, started, has_budget=True, lineups
                     cands.append(max(b_due, now))
                 elif c > now:                              # unconfirmed: the guaranteed read is the 45 minute fallback
                     cands.append(c)
-                elif "points" not in got:
+                elif "shots" not in got:
                     cands.append(now)
         if tier >= 2 and c > now:
             cands.append(c)

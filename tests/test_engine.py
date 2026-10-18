@@ -570,7 +570,7 @@ class TopTier(unittest.TestCase):
             sl = s.at("17:31")
             doc = common.read_json(s.path("odds", "2026-10-11.json"))
             b = [f for f in doc["fetches"] if f["pull"] == "B" and f["away"] == "CAR"][0]
-            self.assertEqual(b["requested"], ["goals", "points", "saves", "shots"])
+            self.assertEqual(b["requested"], ["goals", "saves", "shots"])
             self.assertEqual(sorted(b["markets"]), ["goals", "shots"])
             gw = sl["goal_watch"]
             self.assertEqual(len(gw), 3)

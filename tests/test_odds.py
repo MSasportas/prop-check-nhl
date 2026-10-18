@@ -148,9 +148,12 @@ class Plan(unittest.TestCase):
         self.assertEqual(odds.markets_for(1, "A"), ["shots"])
         self.assertEqual(odds.markets_for(2, "A"), ["shots"])           # A is shots only at every tier
         self.assertEqual(odds.markets_for(4, "A"), ["shots"])
-        self.assertEqual(odds.markets_for(2, "B"), ["points"])
-        self.assertEqual(odds.markets_for(3, "B"), ["shots", "points"])
-        self.assertEqual(odds.markets_for(4, "B"), ["shots", "points", "goals", "saves"])
+        self.assertEqual(odds.markets_for(2, "B"), ["shots"])               # points picks are off (2026-10-18)
+        self.assertEqual(odds.markets_for(3, "B"), ["shots", "saves"])      # saves logged to build the 2nd market
+        self.assertEqual(odds.markets_for(4, "B"), ["shots", "saves", "goals"])
+        for t in (0, 1, 2, 3, 4):
+            for pull in ("A", "B", "C"):
+                self.assertNotIn("points", odds.markets_for(t, pull, {"shots", "points"}))
         self.assertEqual(odds.markets_for(1, "C", {"shots"}), [])
         self.assertEqual(odds.markets_for(2, "C", {"shots"}), ["shots"])
         self.assertEqual(odds.markets_for(2, "C", set()), [])
@@ -213,7 +216,7 @@ class Schedule(unittest.TestCase):
         self.assertEqual(self.due("21:41", 1, started={1: True}), [])
 
     def test_b_waits_for_lineups_and_the_window(self):
-        sh, sp = ["shots"], ["shots", "points"]
+        sh, sp = ["shots"], ["shots", "saves"]
         done = {1: [("A", "13:02", sh, sh)], 2: [("A", "13:02", sh, sh)]}
         ok = {1: True, 2: True}
         self.assertEqual(self.due("17:29", 3, done, lineups_ok=ok), [])                  # before the window
@@ -222,12 +225,12 @@ class Schedule(unittest.TestCase):
         b1 = done[1] + [("B", "17:31", sp, sp)]
         self.assertEqual(self.due("20:29", 3, {1: b1, 2: done[2]}, lineups_ok=ok), [])
         self.assertEqual(self.due("20:30", 3, {1: b1, 2: done[2]}, lineups_ok=ok), [("B", 2, sp)])
-        self.assertEqual(self.due("17:30", 2, done, lineups_ok=ok), [("B", 1, ["points"])])    # tier 2: points once
-        self.assertEqual(self.due("17:30", 4, done, lineups_ok=ok)[0], ("B", 1, ["shots", "points", "goals", "saves"]))
+        self.assertEqual(self.due("17:30", 2, done, lineups_ok=ok), [("B", 1, ["shots"])])    # tier 2: shots re-price once
+        self.assertEqual(self.due("17:30", 4, done, lineups_ok=ok)[0], ("B", 1, ["shots", "saves", "goals"]))
         self.assertEqual(self.due("17:30", 1, done, lineups_ok=ok), [])                  # lower tiers: no B
         self.assertEqual(self.due("17:30", 0, done, lineups_ok=ok), [])
 
-    def test_points_not_pulled_before_lineups_confirm(self):
+    def test_b_not_pulled_before_lineups_confirm(self):
         sh = ["shots"]
         done = {1: [("A", "13:02", sh, sh)], 2: [("A", "13:02", sh, sh)]}
         for tier in (2, 3, 4):
@@ -237,22 +240,22 @@ class Schedule(unittest.TestCase):
         # one team confirmed is not enough
         self.assertEqual(self.due("17:40", 3, done, lineups_ok={1: False}), [])
         # confirmed late inside the window: pulled on the very next cycle
-        self.assertEqual(self.due("17:52", 3, done, lineups_ok={1: True}), [("B", 1, ["shots", "points"])])
+        self.assertEqual(self.due("17:52", 3, done, lineups_ok={1: True}), [("B", 1, ["shots", "saves"])])
 
-    def test_fallback_points_at_45_minutes_when_lineups_never_confirm(self):
+    def test_fallback_shots_at_45_minutes_when_lineups_never_confirm(self):
         sh = ["shots"]
         done = {1: [("A", "13:02", sh, sh)], 2: [("A", "13:02", sh, sh)]}
         self.assertEqual(self.due("18:14", 4, done), [])
-        self.assertEqual(self.due("18:15", 4, done), [("B", 1, ["points"])])             # no goals/saves, no shots again
-        self.assertEqual(self.due("18:15", 2, done), [("B", 1, ["points"])])
-        self.assertEqual(self.due("18:15", 1, done), [])                                 # lower tiers never get points
+        self.assertEqual(self.due("18:15", 4, done), [("B", 1, ["shots"])])              # shots re-price only, no saves/goals
+        self.assertEqual(self.due("18:15", 2, done), [("B", 1, ["shots"])])
+        self.assertEqual(self.due("18:15", 1, done), [])                                 # lower tiers get no B
         # with a live pick the 45 minute read is one combined read, not two
-        self.assertEqual(self.due("18:15", 3, done, live={1: {"shots"}}), [("B", 1, ["points", "shots"])])
+        self.assertEqual(self.due("18:15", 3, done, live={1: {"shots"}}), [("B", 1, ["shots"])])
         # last chance is 20 minutes before puck; after that nothing
-        self.assertEqual(self.due("18:40", 3, done), [("B", 1, ["points"])])
+        self.assertEqual(self.due("18:40", 3, done), [("B", 1, ["shots"])])
         self.assertEqual(self.due("18:41", 3, done), [])
-        # once the points came back the fallback is not repeated
-        got = {1: done[1] + [("B", "18:16", ["points"], ["points"])], 2: done[2]}
+        # once the shots came back the fallback is not repeated
+        got = {1: done[1] + [("B", "18:16", ["shots"], ["shots"])], 2: done[2]}
         self.assertEqual(self.due("18:30", 3, got), [])
 
     def test_malformed_lineups_state_is_unconfirmed(self):
@@ -263,8 +266,8 @@ class Schedule(unittest.TestCase):
 
     def test_late_confirmation_after_fallback_allows_the_rest(self):
         sh = ["shots"]
-        done = {1: [("A", "13:02", sh, sh), ("B", "18:16", ["points"], ["points"])], 2: [("A", "13:02", sh, sh)]}
-        self.assertEqual(self.due("18:30", 4, done, lineups_ok={1: True}), [("B", 1, ["shots", "goals", "saves"])])
+        done = {1: [("A", "13:02", sh, sh), ("B", "18:16", ["shots"], ["shots"])], 2: [("A", "13:02", sh, sh)]}
+        self.assertEqual(self.due("18:30", 4, done, lineups_ok={1: True}), [("B", 1, ["saves", "goals"])])
         self.assertEqual(self.due("18:41", 4, done, lineups_ok={1: True}), [])
 
     def test_started_games_never_pulled(self):
@@ -285,7 +288,7 @@ class Schedule(unittest.TestCase):
         self.assertLessEqual(new(2), old(2))
         self.assertEqual(new(1), old(1))
         # a game whose lineups never confirm and has no live pick costs shots + points (fallback) at most
-        self.assertEqual(len(odds.markets_for(4, "A")) + len(["points"]), 2)
+        self.assertEqual(len(odds.markets_for(4, "A")) + len(["shots"]), 2)
         self.assertLess(2, old(4))
 
     def test_next_read_time_follows_the_rules(self):
@@ -303,12 +306,12 @@ class Schedule(unittest.TestCase):
         self.assertEqual(nr("17:40", ok={}), iso("18:15"))                               # unconfirmed: the 45 min fallback
         self.assertEqual(nr("14:00", ok={}), iso("18:15"))                               # never the 90 min time
         self.assertEqual(nr("14:00", ok={1: True}), iso("17:30"))                        # confirmed already: B time
-        self.assertEqual(nr("18:20", ok={}, tier=3, fetched=f({1: [("A", "13:02", sh), ("B", "18:16", ["points"])],
+        self.assertEqual(nr("18:20", ok={}, tier=3, fetched=f({1: [("A", "13:02", sh), ("B", "18:16", ["shots"])],
                                                                2: [("A", "13:02", sh)]})), iso("21:15"))
 
     def test_c_only_markets_with_a_live_pick(self):
         sh, sp = ["shots"], ["shots", "points"]
-        done = {1: [("A", "13:02", sh, sh), ("B", "17:35", ["points"], ["points"])], 2: [("A", "13:02", sh, sh)]}
+        done = {1: [("A", "13:02", sh, sh), ("B", "17:35", ["shots"], ["shots"])], 2: [("A", "13:02", sh, sh)]}
         self.assertEqual(self.due("18:14", 2, done, {1: {"shots"}}), [])
         self.assertEqual(self.due("18:15", 2, done, {1: {"shots"}}), [("C", 1, ["shots"])])
         self.assertEqual(self.due("18:15", 2, done, {}), [])                       # no live pick: nothing to re-price
