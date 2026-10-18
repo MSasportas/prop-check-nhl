@@ -1,7 +1,7 @@
 {
  "slate_date": "2026-10-17",
- "generated_at": "2026-10-17T19:50:00-04:00",
- "status_at": "2026-10-17T19:50:00-04:00",
+ "generated_at": "2026-10-17T20:00:01-04:00",
+ "status_at": "2026-10-17T20:00:01-04:00",
  "valid_until": "2026-10-18T05:00:00-04:00",
  "status": {
   "prices_state": "ok",
@@ -16,7 +16,7 @@
   "stats_state": "ok",
   "last_run": {
    "ok": true,
-   "at": "2026-10-17T19:50:00-04:00",
+   "at": "2026-10-17T20:00:01-04:00",
    "failed_step": null
   },
   "pool": {
@@ -148,7 +148,7 @@
    "away": "STL",
    "home": "NSH",
    "start": "2026-10-17T20:00:00-04:00",
-   "started": false,
+   "started": true,
    "picks": 0,
    "excluded_reason": null,
    "excluded_teams": []
