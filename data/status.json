@@ -1,16 +1,16 @@
 {
  "ok": true,
  "slate_date": "2026-10-18",
- "started_at": "2026-10-18T19:00:01-04:00",
- "status_at": "2026-10-18T19:00:01-04:00",
- "finished_at": "2026-10-18T19:00:01-04:00",
- "last_ok_at": "2026-10-18T19:00:01-04:00",
+ "started_at": "2026-10-18T19:20:01-04:00",
+ "status_at": "2026-10-18T19:20:01-04:00",
+ "finished_at": "2026-10-18T19:20:01-04:00",
+ "last_ok_at": "2026-10-18T19:20:01-04:00",
  "failed_step": null,
  "steps": [
   {
    "step": "rules",
-   "status": "ok",
-   "note": "rules.json written"
+   "status": "skipped",
+   "note": "unchanged"
   },
   {
    "step": "schedule",
@@ -35,7 +35,7 @@
   {
    "step": "odds",
    "status": "ok",
-   "note": "no pull due"
+   "note": "1 game(s) priced"
   },
   {
    "step": "market_menu",
@@ -54,8 +54,8 @@
   },
   {
    "step": "shadow",
-   "status": "skipped",
-   "note": "nothing new"
+   "status": "ok",
+   "note": "17 line read(s) logged"
   },
   {
    "step": "slate",
@@ -78,7 +78,7 @@
  "keys": [
   {
    "n": 1,
-   "left": 173
+   "left": 172
   },
   {
    "n": 2,
@@ -93,30 +93,30 @@
    "left": 18
   }
  ],
- "pool_total": 472,
+ "pool_total": 471,
  "allowance": 5.1957,
  "tier": 3,
  "budget_today": 10,
- "budget_used_today": 6,
+ "budget_used_today": 7,
  "prices_state": "ok",
- "prices_at": "2026-10-18T18:30:00-04:00",
- "next_price_read_at": "2026-10-18T19:15:00-04:00",
+ "prices_at": "2026-10-18T19:20:01-04:00",
+ "next_price_read_at": null,
  "unmatched_names": [],
  "unknown_teams": [],
  "lineup_unmatched_names": [],
  "excluded_teams": [],
  "stats_through": "2026-10-17",
- "lineups_at": "2026-10-18T19:00:01-04:00",
+ "lineups_at": "2026-10-18T19:20:01-04:00",
  "lineups_note": "3 of 4 team line pages are dated today.",
  "games_today": 2,
  "record_events": 82,
  "odds_notes": [],
  "runner": {
   "event": "workflow_dispatch",
-  "run_id": "39171034086",
-  "iteration": 6,
-  "chain_link": 77,
+  "run_id": "39174623245",
+  "iteration": 3,
+  "chain_link": 78,
   "chain_started_at": "2026-10-16T10:00:13-04:00",
-  "run_started_at": "2026-10-18T18:10:11-04:00"
+  "run_started_at": "2026-10-18T19:00:11-04:00"
  }
 }

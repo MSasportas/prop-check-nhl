@@ -1,26 +1,26 @@
 {
  "slate_date": "2026-10-18",
- "generated_at": "2026-10-18T19:00:01-04:00",
- "status_at": "2026-10-18T19:00:01-04:00",
+ "generated_at": "2026-10-18T19:20:01-04:00",
+ "status_at": "2026-10-18T19:20:01-04:00",
  "valid_until": "2026-10-19T05:00:00-04:00",
  "status": {
   "prices_state": "ok",
-  "prices_at": "2026-10-18T18:30:00-04:00",
-  "next_price_read_at": "2026-10-18T19:15:00-04:00",
+  "prices_at": "2026-10-18T19:20:01-04:00",
+  "next_price_read_at": null,
   "stats_built_at": "2026-10-18T01:30:00-04:00",
   "stats_through": "2026-10-17",
-  "lineups_at": "2026-10-18T19:00:01-04:00",
+  "lineups_at": "2026-10-18T19:20:01-04:00",
   "goalies_at": null,
   "lineups_note": "3 of 4 team line pages are dated today.",
   "lineups_state": "ok",
   "stats_state": "ok",
   "last_run": {
    "ok": true,
-   "at": "2026-10-18T19:00:01-04:00",
+   "at": "2026-10-18T19:20:01-04:00",
    "failed_step": null
   },
   "pool": {
-   "pulls_left": 472,
+   "pulls_left": 471,
    "keys": 4,
    "game_days_left": 14,
    "days_left": 14,
@@ -39,8 +39,8 @@
  ],
  "empty": {
   "code": "none_qualified",
-  "text": "No open picks right now.",
-  "sub": "Checked 34 lines at 6:30 PM. Next price check at 7:15 PM."
+  "text": "No picks tonight. Nothing cleared the bar at Hard Rock's prices.",
+  "sub": "Checked 34 lines at 7:20 PM."
  },
  "games": [
   {
