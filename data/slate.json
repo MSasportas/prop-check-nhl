@@ -1,12 +1,12 @@
 {
  "slate_date": "2026-10-18",
- "generated_at": "2026-10-18T17:10:01-04:00",
- "status_at": "2026-10-18T17:10:01-04:00",
+ "generated_at": "2026-10-18T17:20:00-04:00",
+ "status_at": "2026-10-18T17:20:00-04:00",
  "valid_until": "2026-10-19T05:00:00-04:00",
  "status": {
   "prices_state": "ok",
-  "prices_at": "2026-10-18T13:00:00-04:00",
-  "next_price_read_at": "2026-10-18T17:15:00-04:00",
+  "prices_at": "2026-10-18T17:20:00-04:00",
+  "next_price_read_at": "2026-10-18T18:30:00-04:00",
   "stats_built_at": "2026-10-18T01:30:00-04:00",
   "stats_through": "2026-10-17",
   "lineups_at": "2026-10-18T17:10:01-04:00",
@@ -16,11 +16,11 @@
   "stats_state": "ok",
   "last_run": {
    "ok": true,
-   "at": "2026-10-18T17:10:01-04:00",
+   "at": "2026-10-18T17:20:00-04:00",
    "failed_step": null
   },
   "pool": {
-   "pulls_left": 476,
+   "pulls_left": 475,
    "keys": 4,
    "game_days_left": 14,
    "days_left": 14,
@@ -28,19 +28,19 @@
   },
   "excluded_teams": [],
   "lines_checked": 34,
-  "lines_failed": 6,
+  "lines_failed": 7,
   "tier": 3
  },
  "banners": [
   {
    "level": "info",
-   "text": "6 Hard Rock lines skipped: the two sides did not add up or the price was old."
+   "text": "7 Hard Rock lines skipped: the two sides did not add up or the price was old."
   }
  ],
  "empty": {
   "code": "none_qualified",
   "text": "No open picks right now.",
-  "sub": "Checked 34 lines at 1:00 PM. Next price check at 5:15 PM."
+  "sub": "Checked 34 lines at 5:20 PM. Next price check at 6:30 PM."
  },
  "games": [
   {
