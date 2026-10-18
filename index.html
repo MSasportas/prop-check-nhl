@@ -96,7 +96,7 @@ button{font:inherit;color:inherit;background:none;border:0;padding:0;margin:0;te
 .bar i.over{background:var(--accent);border-radius:0 3px 3px 0}
 .bar u{position:absolute;top:-3px;bottom:-3px;width:2px;margin-left:-1px;background:var(--fg);border-radius:1px}
 .reason{font-size:14px;line-height:20px;margin-top:6px;overflow-wrap:anywhere}
-.clamp{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;overflow:hidden}
+.clamp3{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:3;overflow:hidden}
 .chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px}
 .chip{display:inline-flex;align-items:center;gap:5px;height:24px;padding:0 9px 0 7px;border-radius:12px;font-size:12px;line-height:16px;
   background:var(--raise);border:1px solid var(--line);color:var(--fg);max-width:100%;white-space:nowrap}
@@ -149,7 +149,7 @@ button{font:inherit;color:inherit;background:none;border:0;padding:0;margin:0;te
 .list .li .r{flex:none;white-space:nowrap;color:var(--muted)}
 .list .li .r b{font:600 16px/20px var(--display);color:var(--fg)}
 .list .sub{display:block;font-size:12px;color:var(--warn)}
-.list .st{display:block;font-size:12px;line-height:16px;color:var(--muted);margin-top:2px}
+.list .st{display:block;font-size:12px;line-height:16px;color:var(--muted);margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 
 /* empty + skeleton + error */
 .empty .t{font-size:16px;line-height:23px;font-weight:500}
@@ -180,6 +180,9 @@ button{font:inherit;color:inherit;background:none;border:0;padding:0;margin:0;te
 .big .un{font:600 30px/34px var(--display)}
 .pos{color:var(--good)} .neg{color:var(--bad)}
 .subline{font-size:12px;line-height:17px;color:var(--muted);margin-top:2px}
+.allbets{font:600 18px/22px var(--display);letter-spacing:.01em;margin-top:6px}
+.strip .rpart{white-space:nowrap}
+.tr.c2{grid-template-columns:minmax(0,1fr) 60px 60px}
 .tbl{margin-top:16px;font-size:13px;line-height:18px}
 .tr{display:grid;grid-template-columns:minmax(0,1fr) 50px 40px 46px 50px;column-gap:6px;align-items:baseline;padding:8px 0;border-bottom:1px solid var(--line)}
 .tr.th{font-size:11px;line-height:15px;color:var(--muted);padding:0 0 4px}
@@ -575,6 +578,13 @@ function toggleBtnKeys(fn) {
 }
 
 /* ---------- pick card ---------- */
+/* The reason minus its first sentence (that one repeats the chance and price line above it).
+   Same rule as scripts/notify.py _why: split on ". ", drop the first part, rejoin. */
+function whyText(reason) {
+  var parts = str(reason).split('. ').map(function (s) { return s.trim(); }).filter(Boolean);
+  var why = parts.slice(1).join('. ').replace(/\.+$/, '');
+  return why ? why + '.' : '';
+}
 function pickCard(p, d, opts) {
   opts = opts || {};
   var mu = matchup(p, d.games), id = str(p.id), isOpen = !!S.expanded[id];
@@ -597,18 +607,20 @@ function pickCard(p, d, opts) {
     stamp.appendChild(node('was ' + odds(first) + (fTime(p.first_price_at) ? ' at ' + fTime(p.first_price_at) : '') + ' · '));
     stamp.appendChild(h('span', { class: word, text: 'now ' + word }));
   } else {
-    stamp.textContent = fStamp(p.price_at) ? 'read ' + fStamp(p.price_at) : 'read time not posted';
+    /* updates have stopped: say the price is old, not just when it was read */
+    stamp.textContent = fStamp(p.price_at) ? (stale() ? 'old price, ' : 'read ') + fStamp(p.price_at) : 'read time not posted';
   }
   card.appendChild(stamp);
 
   var pc = pctP(p), be = pctB(p);
   card.appendChild(h('div', { class: 'chance' }, 'Our chance ', h('b', { text: pc || 'not posted' }), be ? ' · needs ' + be : ''));
   var bar = chanceBar(p.p, p.breakeven); if (bar) card.appendChild(bar);
-  if (p.reason) card.appendChild(h('div', { class: 'reason' + (isOpen ? '' : ' clamp'), text: p.reason }));
+  var why = whyText(p.reason);
+  if (why) card.appendChild(h('div', { class: 'reason' + (isOpen ? '' : ' clamp3'), text: why }));
   card.appendChild(h('div', { class: 'chips' },
     stateChip(p.state),
     p.thin ? h('span', { class: 'chip hollow', text: 'Thin sample' }) : null,
-    (S.newIds[id] && !opts.noNew) ? h('span', { class: 'chip new', text: 'New' }) : null));
+    (S.newIds[id] && !opts.noNew && !stale()) ? h('span', { class: 'chip new', text: 'New' }) : null));
   var res = resultLine(p.graded); if (res) card.insertBefore(res, card.firstChild);
 
   if (isOpen) {
@@ -729,11 +741,20 @@ function statusLineEl(s) {
   if (s.odds) { el.appendChild(node(' \u00b7 ')); el.appendChild(h('span', { class: s.odds.low ? 'lowpool' : null, text: s.odds.text.replace(/ /g, '\u00a0') })); }
   return el;
 }
+/* the summary row for graded parlays, or null when none is graded yet */
+function parlayRow() {
+  var rows = S.record && isObj(S.record.summary) ? arr(S.record.summary.rows) : [];
+  for (var i = 0; i < rows.length; i++) if (isObj(rows[i]) && rows[i].key === 'parlays' && ((num(rows[i].w) || 0) + (num(rows[i].l) || 0)) > 0) return rows[i];
+  return null;
+}
+/* "Singles 11-7 +1.0u · Parlays 1-6 -4.5u" as parts: [{t, u, c}] */
 function recordStripText() {
   var hd = S.record && isObj(S.record.summary) && isObj(S.record.summary.headline) ? S.record.summary.headline : null;
-  if (!S.record) return { t: 'Record not loaded' };
-  if (!hd || !((num(hd.w) || 0) + (num(hd.l) || 0))) return { t: 'Record: no graded picks yet' };
-  return { t: 'Record ' + (num(hd.w) || 0) + '-' + (num(hd.l) || 0), u: units(hd.units, 1), c: signCls(hd.units) };
+  if (!S.record) return [{ t: 'Record not loaded' }];
+  var pr = parlayRow(), out = [];
+  if (hd && (num(hd.w) || 0) + (num(hd.l) || 0)) out.push({ t: 'Singles ' + (num(hd.w) || 0) + '-' + (num(hd.l) || 0), u: units(hd.units, 1), c: signCls(hd.units) });
+  if (pr) out.push({ t: 'Parlays ' + (num(pr.w) || 0) + '-' + (num(pr.l) || 0), u: units(pr.units, 1), c: signCls(pr.units) });
+  return out.length ? out : [{ t: 'Record: no graded picks yet' }];
 }
 function sectionToggle(key, title, body) {
   var open = !!S.open[key];
@@ -765,7 +786,9 @@ function renderTonight() {
     statusLineEl(statusText(st, exp)), h('span', { class: 'chev' }, icon('right', 16))));
   var rs = recordStripText();
   app.appendChild(h('button', { class: 'rowbtn strip', type: 'button', on: { click: function () { go('record'); } } },
-    h('span', { class: 'grow' }, rs.t, rs.u ? ' · ' : null, rs.u ? h('span', { class: rs.c, text: rs.u }) : null),
+    h('span', { class: 'grow' }, rs.map(function (x, i) {   /* each half stays whole; the line may break at the dot */
+      return [i ? ' \u00b7 ' : null, h('span', { class: 'rpart' }, x.t, x.u ? ' ' : null, x.u ? h('span', { class: x.c, text: x.u }) : null)];
+    }).reduce(function (a, b) { return a.concat(b); }, [])),
     h('span', { class: 'chev' }, icon('right', 16))));
 
   /* banners: the page's own clock truths first, then the engine's finished sentences */
@@ -782,7 +805,7 @@ function renderTonight() {
   if (!exp) arr(sl.banners).forEach(function (b) { var e = engineBanner(b); if (e) app.appendChild(e); });
   if (exp) { app.appendChild(footer()); return; }
 
-  if (S.since) {
+  if (S.since && !stale()) {                     /* nothing is "new" while updates have stopped */
     var bits = []; if (S.since.n) bits.push(S.since.n + ' new'); if (S.since.p) bits.push(S.since.p + ' pulled');
     app.appendChild(h('div', { class: 'since', text: 'Since ' + (fStamp(S.since.at) || 'your last look') + ': ' + bits.join(', ') }));
   }
@@ -865,7 +888,8 @@ function renderTonight() {
 
   app.appendChild(footer());
 }
-/* per-game lineup + goalie status lines: "CBJ ✅ lineup · ✅ Korpisalo" */
+/* per-game lineup + goalie status lines: "CBJ: ✅ lineup · G Korpisalo ✅" */
+function lastName(n) { var w = str(n).trim().split(/\s+/); return w[w.length - 1] || ''; }
 function gameStatus(g) {
   if (g.started) return [];
   var lx = isObj(g.lineups) ? g.lineups : null, gl = isObj(g.goalies) ? g.goalies : null;
@@ -873,8 +897,8 @@ function gameStatus(g) {
   function side(ab, k) {
     if (!ab) return null;
     var L = lx ? lx[k] : null, G = gl ? gl[k] : null;
-    var lt = L === 'confirmed' ? '\u2705 lineup' : L === 'waiting' ? '\u23F3 lineup not set' : '\u23F3 lineup not checked yet';
-    var gt = isObj(G) ? ((G.status === 'confirmed' ? '\u2705 ' : '\u23F3 ') + str(G.name) + (G.status === 'confirmed' ? '' : ' (expected)')) : '\u23F3 goalie not posted';
+    var lt = L === 'confirmed' ? '\u2705 lineup' : L === 'waiting' ? '\u23F3 lineup not out' : '\u23F3 lineup later';
+    var gt = (isObj(G) && lastName(G.name)) ? 'G ' + lastName(G.name) + (G.status === 'confirmed' ? ' \u2705' : ' (likely)') : 'G not posted';
     return str(ab) + ': ' + lt + ' \u00B7 ' + gt;
   }
   return [side(g.away, 'away'), side(g.home, 'home')].filter(Boolean);
@@ -914,6 +938,11 @@ function renderRecord() {
     if (num(hd.push)) sub.push(hd.push + ' push'); if (num(hd.void)) sub.push(hd.void + ' void');
     sub.push((stake != null ? stake + ' unit each, ' : '') + 'at the posted price');
     app.appendChild(h('div', { class: 'subline', text: sub.join(' · ') }));
+    var pr = parlayRow();
+    if (pr && num(hd.units) != null && num(pr.units) != null) {
+      var all = Math.round((Math.round(hd.units * 10) + Math.round(pr.units * 10))) / 10;
+      app.appendChild(h('div', { class: 'allbets' }, 'All bets: ', h('span', { class: signCls(all), text: units(all, 1) })));
+    }
     if (few(n)) {
       app.appendChild(h('div', { class: 'chance', style: 'margin-top:10px' }, 'Hit ', h('b', { text: (num(hd.w) || 0) + ' of ' + n })));
       app.appendChild(h('div', { class: 'subline', text: fewTag }));
@@ -924,22 +953,28 @@ function renderRecord() {
     }
     var rows = arr(sum.rows).filter(function (r) { return isObj(r) && ((num(r.w) || 0) + (num(r.l) || 0) + (num(r.push) || 0) + (num(r.void) || 0)) > 0; });
     if (rows.length) {
+      /* no market judgeable yet: W-L and Units only, one note under the table */
+      var anyBig = rows.some(function (r) { return !few(sampleN(r)); });
       var tbl = h('div', { class: 'tbl', role: 'table', 'aria-label': 'Record by market' });
-      tbl.appendChild(h('div', { class: 'tr th', role: 'row' }, h('span', { role: 'columnheader', text: '' }), h('span', { role: 'columnheader', text: 'W-L' }),
-        h('span', { role: 'columnheader', text: 'Hit' }), h('span', { role: 'columnheader', text: 'Needed' }), h('span', { role: 'columnheader', text: 'Units' })));
+      tbl.appendChild(h('div', { class: 'tr th' + (anyBig ? '' : ' c2'), role: 'row' }, h('span', { role: 'columnheader', text: '' }), h('span', { role: 'columnheader', text: 'W-L' }),
+        anyBig ? h('span', { role: 'columnheader', text: 'Hit' }) : null, anyBig ? h('span', { role: 'columnheader', text: 'Needed' }) : null,
+        h('span', { role: 'columnheader', text: 'Units' })));
       rows.forEach(function (r) {
         var k = sampleN(r), u = num(r.units), lab;
         if (r.key === 'pulled') lab = h('span', { class: 'lbl', role: 'cell' }, 'Pulled', h('small', { text: '(not counted above)' }));
         else lab = h('span', { class: 'lbl', role: 'cell', text: r.label || ROW_LABEL[r.key] || str(r.key) || 'Other' });
-        var tr = h('div', { class: 'tr', role: 'row' }, lab, h('span', { class: 'num', role: 'cell', text: (num(r.w) || 0) + '-' + (num(r.l) || 0) }));
-        if (!k) tr.appendChild(h('span', { class: 'span2 mu', role: 'cell', text: '—' }));
-        else if (few(k)) tr.appendChild(h('span', { class: 'span2', role: 'cell', text: (num(r.w) || 0) + ' of ' + k }));
-        else { tr.appendChild(h('span', { role: 'cell', text: pctNear(r.hit_rate) || '—' })); tr.appendChild(h('span', { role: 'cell', text: pctNear(r.needed) || '—' })); }
+        var tr = h('div', { class: 'tr' + (anyBig ? '' : ' c2'), role: 'row' }, lab, h('span', { class: 'num', role: 'cell', text: (num(r.w) || 0) + '-' + (num(r.l) || 0) }));
+        if (anyBig) {
+          if (!k) tr.appendChild(h('span', { class: 'span2 mu', role: 'cell', text: '—' }));
+          else if (few(k)) tr.appendChild(h('span', { class: 'span2', role: 'cell', text: (num(r.w) || 0) + ' of ' + k }));
+          else { tr.appendChild(h('span', { role: 'cell', text: pctNear(r.hit_rate) || '—' })); tr.appendChild(h('span', { role: 'cell', text: pctNear(r.needed) || '—' })); }
+        }
         tr.appendChild(h('span', { class: 'num ' + signCls(u), role: 'cell', text: u == null ? '—' : (units(u, 1) || '').replace(/u$/, '') }));
-        if (k && few(k)) tr.appendChild(h('span', { class: 'few', text: fewTag }));
+        if (anyBig && k && few(k)) tr.appendChild(h('span', { class: 'few', text: fewTag }));
         tbl.appendChild(tr);
       });
       app.appendChild(tbl);
+      if (!anyBig) app.appendChild(h('p', { class: 'note', text: 'Too few to judge yet' + (minS != null ? ' (under ' + minS + ' each)' : '') }));
     }
     app.appendChild(h('p', { class: 'note', text: 'Graded at the worst price shown. Push and void are 0 units and left out of hit rate.' }));
   }

@@ -222,6 +222,26 @@ class KeysRefused(unittest.TestCase):
         sl = self.s.at("17:41")
         self.assert_refused(sl, priced=True)
 
+    def test_gap12_used_up_after_a_read_promises_no_next_check(self):
+        self.modes = ["ok", "ok"]
+        sl = self.s.at("13:02")
+        self.assertIsNotNone(sl["status"]["next_price_read_at"], "keys work: a later read is planned")
+        for t in ("CAR", "PHI", "VAN", "NYR"):
+            self.s.set_lineup(t, "2026-10-11T20:00:00Z")
+        self.modes = ["usage", "usage"]                      # every key runs dry at pull B
+        self.s.at("17:31")
+        sl = self.s.at("17:41")
+        self.assertIsNone(sl["status"]["next_price_read_at"], "all used up: no read is coming")
+        self.assertNotIn("Next price check", json.dumps(sl))
+
+    def test_gap12_no_keys_after_a_read_promises_no_next_check(self):
+        self.modes = ["ok", "ok"]
+        self.assertIsNotNone(self.s.at("13:02")["status"]["next_price_read_at"])
+        os.environ.pop("ODDS_API_KEYS")                      # keys removed from the secret
+        sl = self.s.at("13:12")
+        self.assertIsNone(sl["status"]["next_price_read_at"], "no keys: no read is coming")
+        self.assertNotIn("Next price check", json.dumps(sl))
+
     def test_refused_state_survives_a_run_with_no_pull(self):
         self.modes = ["ok", "ok"]
         self.s.at("13:02")

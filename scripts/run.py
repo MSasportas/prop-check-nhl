@@ -351,7 +351,7 @@ class Run:
         ls_now = self.lineup_state or lineups.load(self.slate)
         nxt = odds.next_read_at(now, self.games, plan["tier"], v, fetched, self.started, budget_ok,
                                 lineups_ok=odds.lineups_confirmed(ls_now, self.games)) \
-            if plan and not refused else None
+            if plan and not (refused or no_keys or all_used_up) else None   # no key can read: promise no check
 
         # lineups
         ls = self.lineup_state or lineups.load(self.slate)

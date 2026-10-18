@@ -49,7 +49,22 @@
    "home": "BUF",
    "start": "2026-10-11T17:00:00-04:00",
    "picks": 0,
-   "excluded_reason": null
+   "lineups": {
+    "away": "confirmed",
+    "home": "confirmed"
+   },
+   "goalies": {
+    "away": {
+     "name": "Jeremy Swayman",
+     "status": "confirmed"
+    },
+    "home": {
+     "name": "Ukko-Pekka Luukkonen",
+     "status": "confirmed"
+    }
+   },
+   "excluded_reason": null,
+   "started": true
   },
   {
    "id": "g2",
@@ -57,7 +72,22 @@
    "home": "TBL",
    "start": "2026-10-11T19:10:00-04:00",
    "picks": 0,
-   "excluded_reason": null
+   "lineups": {
+    "away": "confirmed",
+    "home": "confirmed"
+   },
+   "goalies": {
+    "away": {
+     "name": "Sergei Bobrovsky",
+     "status": "confirmed"
+    },
+    "home": {
+     "name": "Andrei Vasilevskiy",
+     "status": "expected"
+    }
+   },
+   "excluded_reason": null,
+   "started": false
   },
   {
    "id": "g3",
@@ -65,7 +95,19 @@
    "home": "NJD",
    "start": "2026-10-11T19:10:00-04:00",
    "picks": 0,
-   "excluded_reason": null
+   "lineups": {
+    "away": "waiting",
+    "home": "confirmed"
+   },
+   "goalies": {
+    "away": {
+     "name": "Igor Shesterkin",
+     "status": "confirmed"
+    },
+    "home": null
+   },
+   "excluded_reason": null,
+   "started": false
   },
   {
    "id": "g4",
@@ -73,7 +115,22 @@
    "home": "MTL",
    "start": "2026-10-11T19:10:00-04:00",
    "picks": 0,
-   "excluded_reason": null
+   "lineups": {
+    "away": "not_checked",
+    "home": "not_checked"
+   },
+   "goalies": {
+    "away": {
+     "name": "Anthony Stolarz",
+     "status": "expected"
+    },
+    "home": {
+     "name": "Samuel Montembeault",
+     "status": "expected"
+    }
+   },
+   "excluded_reason": null,
+   "started": false
   },
   {
    "id": "g5",
@@ -81,7 +138,22 @@
    "home": "DAL",
    "start": "2026-10-11T20:10:00-04:00",
    "picks": 0,
-   "excluded_reason": null
+   "lineups": {
+    "away": "confirmed",
+    "home": "waiting"
+   },
+   "goalies": {
+    "away": {
+     "name": "Mackenzie Blackwood",
+     "status": "expected"
+    },
+    "home": {
+     "name": "Jake Oettinger",
+     "status": "confirmed"
+    }
+   },
+   "excluded_reason": null,
+   "started": false
   },
   {
    "id": "g6",
@@ -89,7 +161,16 @@
    "home": "VAN",
    "start": "2026-10-11T22:10:00-04:00",
    "picks": 0,
-   "excluded_reason": null
+   "lineups": {
+    "away": "not_checked",
+    "home": "not_checked"
+   },
+   "goalies": {
+    "away": null,
+    "home": null
+   },
+   "excluded_reason": null,
+   "started": false
   },
   {
    "id": "g7",
@@ -97,7 +178,19 @@
    "home": "SJS",
    "start": "2026-10-11T22:10:00-04:00",
    "picks": 0,
-   "excluded_reason": null
+   "lineups": {
+    "away": "not_checked",
+    "home": "not_checked"
+   },
+   "goalies": {
+    "away": {
+     "name": "Joey Daccord",
+     "status": "expected"
+    },
+    "home": null
+   },
+   "excluded_reason": null,
+   "started": false
   }
  ],
  "picks": [],

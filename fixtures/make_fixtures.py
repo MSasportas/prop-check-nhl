@@ -83,6 +83,22 @@ PICKS = [
     ("thom", "g1", "T. Thompson", "BUF", "shots", "Over 2.5 shots on goal", -140, 0.622, "locked_unconfirmed", False, 54, 3,
      "to clear 2.5 shots", "Projects 3.4 shots in 19 min."),
 ]
+# per-game lineup + goalie status for the game list (every combination the page shows)
+GAME_LINEUPS = {
+    "g1": {"away": "confirmed", "home": "confirmed"}, "g2": {"away": "confirmed", "home": "confirmed"},
+    "g3": {"away": "waiting", "home": "confirmed"}, "g4": {"away": "not_checked", "home": "not_checked"},
+    "g5": {"away": "confirmed", "home": "waiting"}, "g6": {"away": "not_checked", "home": "not_checked"},
+    "g7": {"away": "not_checked", "home": "not_checked"},
+}
+GAME_GOALIES = {
+    "g1": {"away": {"name": "Jeremy Swayman", "status": "confirmed"}, "home": {"name": "Ukko-Pekka Luukkonen", "status": "confirmed"}},
+    "g2": {"away": {"name": "Sergei Bobrovsky", "status": "confirmed"}, "home": {"name": "Andrei Vasilevskiy", "status": "expected"}},
+    "g3": {"away": {"name": "Igor Shesterkin", "status": "confirmed"}, "home": None},
+    "g4": {"away": {"name": "Anthony Stolarz", "status": "expected"}, "home": {"name": "Samuel Montembeault", "status": "expected"}},
+    "g5": {"away": {"name": "Mackenzie Blackwood", "status": "expected"}, "home": {"name": "Jake Oettinger", "status": "confirmed"}},
+    "g6": {"away": None, "home": None},
+    "g7": {"away": {"name": "Joey Daccord", "status": "expected"}, "home": None},
+}
 STATE_TEXT = {"early": "Early: lineup not confirmed", "lineup": "Lineup confirmed", "locked": "Locked",
               "locked_unconfirmed": "Locked: lineup was not confirmed"}
 
@@ -128,6 +144,9 @@ def finish(slate):
         p["reason"] = reason_for(p, p.pop("_verb"), p.pop("_tail"))
     for par in slate["parlays"]:
         par["p_pct"], par["breakeven_pct"] = pct_floor(par["p"]), round(par["breakeven"] * 100)
+    now = slate.get("fixture_now")
+    for g in slate["games"]:                    # the engine marks started games; the game list skips them
+        g["started"] = bool(now) and g["start"] <= now
     st = slate["status"]
     if st.get("lineups_at") is None and st.get("lineups_state") == "ok":
         st["lineups_state"], st["lineups_note"] = "not_yet", None
@@ -174,11 +193,12 @@ def base_slate():
         "banners": [],
         "empty": None,
         "games": [{"id": g[0], "away": g[1], "home": g[2], "start": t(g[3]), "picks": counts.get(g[0], 0),
+                   "lineups": GAME_LINEUPS.get(g[0]), "goalies": GAME_GOALIES.get(g[0]),
                    "excluded_reason": None} for g in GAMES],
         "picks": picks,
         "parlays": [make_parlay(1, ["mack", "jhug"], picks, "lineup"),
                     make_parlay(2, ["maka", "matt"], picks, "lineup"),
-                    make_parlay(3, ["mack", "jhug", "rein"], picks, "early")],
+                    make_parlay(3, ["kuch", "mcda", "demi"], picks, "early")],   # a leg is in 1 parlay only
         "goal_watch": [
             {"player": "A. Matthews", "team": "TOR", "price": 135, "fair_price": 160},
             {"player": "L. Draisaitl", "team": "EDM", "price": 125, "fair_price": 150},

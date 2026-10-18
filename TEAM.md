@@ -83,11 +83,11 @@ price history exists; our own odds log, `data/odds/`, is building that).
 - **Game list status (2026-10-18):** each unstarted game on the page shows, per team, lineup (confirmed / not set / not checked
   yet, from `data/state/lineups.json`) and the starting goalie (confirmed / expected / not posted, from `scripts/goalies.py`,
   Daily Faceoff starting-goalies page, one read per cycle, `data/state/goalies.json`, written only when it changes). Display
-  only, no pick depends on it. UNVERIFIED LIVE at build time (sandbox gets 403 from Daily Faceoff): confirm
-  `sources.dailyfaceoff_goalies` in status.json reads ok after the first cycle; if the page shape differs, fix `goalies.parse`.
+  only, no pick depends on it. Verified live 2026-10-18 (status ok, real names on the page). Page text: `lineup later` /
+  `lineup not out` / `✅ lineup`, then `G <Last> ✅` / `G <Last> (likely)` / `G not posted`.
 - **Files:** `index.html` (page; reads `data/slate.json`, `data/record.json`, `data/rules.json`), `data/odds/<date>.json`
   (every price pulled), `data/state/` (stats store, schedule, credits ledger), `fixtures/` (QA pages: `?fixture=NAME`,
-  `?now=ISO`), `tests/` (`python -m unittest discover -s tests`, 216 tests; `tests/replay_day.py` replays a day).
+  `?now=ISO`), `tests/` (`python -m unittest discover -s tests`, 221 tests; `tests/replay_day.py` replays a day).
 - **Debug:** `python scripts/run.py --explain` shows why each line did or didn't qualify. Test env vars: `PC_NOW`,
   `PC_DATA_DIR`, `PC_ODDS_FIXTURE_DIR`, `PC_LINEUP_FIXTURE_DIR`, `PC_NHL_FIXTURE_DIR`. Never test against the live data/.
 
@@ -107,9 +107,12 @@ price history exists; our own odds log, `data/odds/`, is building that).
    discourage disproportionate/always-on use; moderate risk. If the chain dies and the cron doesn't fire, the
    page says "Updates have stopped" until a push. Safer variant needs Matt: an outside scheduler (e.g. cron-job.org)
    calling workflow_dispatch with a fine-grained token, one cycle per run. Revisit if cron starts firing reliably.
-3. `toi_drop_sec` blocked overs for 4 of 16 skaters in the first live game: may be twitchy early season. Review item.
-4. Lineup confirmation depends on Daily Faceoff (scrape; reachable from the runner on day 1). If it fails, picks stay
-   Early and the page says so. Possible free fallback: NHL play-by-play `rosterSpots` ~20 min before puck (not built).
+3. ~~`toi_drop_sec` twitchy~~ Closed 2026-10-18: it removed 84 over sides in week 1 and 0 would otherwise have qualified.
+4. **Lineup confirmation depends on Daily Faceoff, and it often never confirms (top build item).** Oct 17: 14 teams
+   (incl. CBJ, CHI, PIT, VGK) never got a page dated today by 20 min before puck, so 2 of 4 qualifying sides stayed
+   Early and missed the 0.03 bar, and 1 more (gap > 0.15) needed a confirmed lineup. Lost picks, not a bug. Next build:
+   free fallback from NHL play-by-play `rosterSpots` ~20-30 min before puck, plus a daily lineup-history file
+   (`lineups.json` keeps only today, so the DS can't judge the gap 0.15 rule). Needs a re-pull timing check before shipping.
 5. No verified free injury source; no free opponent-adjusted ranks (model uses raw opponent shots/goals allowed).
 6. The NHL schedule time is used for lock (it can be ~10 min before actual puck drop): conservative.
 7. Name matching: exact, or last name + first initial; unmatched names are listed in `status.json` and skipped.
@@ -122,8 +125,14 @@ price history exists; our own odds log, `data/odds/`, is building that).
    origin) can re-send that cycle's batch once. Rare, accepted. A webhook deleted in Discord gives 404: silently
    retried each cycle, no alert. Quiet hours also hold hello and action messages.
 11. Regular season only; playoffs say "Only regular-season games are covered."
-12. Empty-state sub can promise "Next price check at …" when no keys are set or all are used up (`next_price_read_at`
-    still set in run.py). Harmless while keys exist; Builder to clear it for `no_keys`/`all_used_up`. (QA note 2026-10-12)
+12. ~~Empty state promised "Next price check" with no keys~~ Fixed 2026-10-18 (run.py, 2 tests).
+
+14. Late night, the "Not covered tonight: … (stats behind)" banner names teams whose game is already final. Misleading,
+    minor; UX/Builder ticket. Also open (QA minors): strip wraps to 2 lines when records are long; one-sentence reason
+    would show no reason (engine never makes one).
+15. Closing-price check is weak: most picks get no price pull after they're shown (13 of 18 "flat"). Week 1: 3 moved
+    toward us, 2 against, avg +0.5 pts toward us. Re-pricing every shown pick at C would cost credits; pool is 478
+    (allowance ~5.2/game), so not now. Revisit when keys reset Nov 1.
 
 13. **ROI (2026-10-18, 18 singles + 7 parlays):** singles 61% vs 58% needed, +0.96u (+5% ROI); parlays -4.45u. Higher-edge
     picks did not hit more (edge 2-3 pts: 6-3; 3-4.5: 3-3; 4.5+: 2-1), so stake sizing by confidence waits until
@@ -133,12 +142,14 @@ price history exists; our own odds log, `data/odds/`, is building that).
 ## 8. Rule-change log
 | Date | Change | Why | Sample |
 |---|---|---|---|
+| 2026-10-18 (weekly) | No value changes. Page-only fixes (Record headline adds parlays, reasons, game-list wording, stale state) | Sample too small for any rule; week 1 calibrated (60.6% stated, 61.1% hit) | Shots 13, points 5 graded legs (need 50 pause / 150 change) |
 | 2026-10-18 | Parlay cap and leg-use count every parlay shown that night (bug: only open ones counted, so a new set was built after each lock); a leg in 1 parlay (was 2) | Parlays were 1-6, -4.45u, the whole ROI drag (singles 11-7, +0.96u). Oct 13 showed 6 parlays (cap 3) with Rosen and Pulock in 4 each; the 3 extra all lost (-3u). One missed leg should sink one parlay, not four | 7 graded parlays; exposure cut, not a qualifying change, so the 150-leg rule doesn't apply |
 | 2026-10-12 | Lineup-gated pulls: A is shots only at every tier; points/goals/saves only after both teams' lineups are confirmed and inside the B window; fallback points-only at 45 min if unconfirmed; lineups step runs before odds | Customer asked for lineup-gated pulls to save credits (no paying for prices on unconfirmed lineups) | Ops timing, no graded sample needed |
 | 2026-10-12 | Pull B now 90 min before each game (was: before the first game, for all games) | Evening games were priced only in the morning until 45 min before puck; picks that appear after lineups confirm would show hours-old prices. Same credits | Ops timing, no graded sample needed |
 | 2026-10-11 | v1.0 set (section 4) | First build: Sharp standard from the DS backtest (2024-25 fit, 2025-26 out of sample) and one live Hard Rock pull | Backtest only; 0 graded live legs |
 
 ## 9. Session log (newest first, one line each)
+- 2026-10-18 weekly review: DS (Record thru Oct 17): singles 11-7 61% vs 57.7% BE +0.96u (shots U 7-5 +0.11, points U 2-2 -0.49); parlays 1-6 -4.45u (all before the cap fix); calibration ok (stated 60.6%, hit 61.1%, n=18); edge doesn't sort winners; 1 zero-pick night (Oct 14); 19 sides within 1 pt of qualifying. Sharp: no value changes (shots 13 / points 5 graded legs vs 50 pause / 150 change). Shipped (QA SHIP at 380px): strip shows singles + parlays, Record "All bets", reasons show the real why (first sentence dropped, 3 lines), short Record table under 30, shorter game-list status, stale state hides New/Since and says "old price", fixtures one-parlay-per-leg, gap 12. Oct 17 1-of-4 = Daily Faceoff never confirmed (gap 4). Health: chain link 65 alive, all sources ok, keys 478, grading complete. 221 tests.
 - 2026-10-18 (Matt): game list now shows lineup + goalie status per team. QA PASS at 380px. Goalie scrape untested against the live site.
 - 2026-10-18 (Matt: Discord hard to read; hit rate fine but ROI low): Record read: singles +0.96u, parlays -4.45u. Fixed parlay cap bug (all-night count), leg in 1 parlay, rewrote Discord message. QA PASS. 212 tests.
 - 2026-10-13 morning check: all 3 picks + 1 parlay graded end to end after final (picks 2W-1L +0.68u, parlay L), graded at worst shown price, record.json = rebuild, history guard ok (12 versions, needs unshallow in a fresh sandbox). 5 AM rollover ok, 16-game slate set, pull A not yet due. First-session list complete.
