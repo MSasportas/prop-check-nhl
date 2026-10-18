@@ -34,7 +34,7 @@ price history exists; our own odds log, `data/odds/`, is building that).
 
 | Area | Rule |
 |---|---|
-| Markets picked | Shots on goal (main line) and points, over and under. Saves and anytime goal are logged only (top odds tier). Shots alt, assists, sides, totals: out |
+| Markets picked | **Focus (customer, 2026-10-18): at most 2 markets, elite at them.** Picks now: **shots on goal only** (main line, over and under). Second market = **goalie saves**, build-and-prove: logged only until 50 logged lines are graded at the posted price and the model beats the book (see section 7 item 16). Points: off (`picks:false`, still pulled until the planner is changed). Anytime goal logged only. Shots alt, assists, blocks, PP points, sides, totals: out |
 | Chance | Model (per-minute rate over two seasons, recent games weighted, × expected ice time × opponent; calibrated) minus 0.02 uncertainty, minus 0.015 on unders, minus 0.04 on thin-history overs; blended 60% model / 40% Hard Rock's de-vigged price |
 | Qualify | Price -200 to +120; chance ≥ 0.56; chance − break-even ≥ 0.02 (lineup confirmed) or 0.03 (early); model − book gap > 0.15 needs lineup confirmed; gap > 0.20 = no pick (assume the book knows) |
 | Eligibility | ≥ 10 games of history; thin = < 20 games of history or < 10 with team; missed team's last game → wait for lineup; back from 3+ missed games → sits 2 games; ice time down 2:00+ (last 2 vs last 10) → no over; team stats behind → team excluded and named |
@@ -134,6 +134,19 @@ price history exists; our own odds log, `data/odds/`, is building that).
     toward us, 2 against, avg +0.5 pts toward us. Re-pricing every shown pick at C would cost credits; pool is 478
     (allowance ~5.2/game), so not now. Revisit when keys reset Nov 1.
 
+16. **Market focus tickets (2026-10-18), in order.** (a) Planner: stop pulling points; spend the freed credits on shots
+    re-prices at C (closes item 15) and on saves. Pull code is `scripts/odds.py` `tier_of`/plan, needs tests + QA. (b) Saves
+    model: needs goalie game logs (NHL stats API, free; skater/team files hold none) plus team shots-against; use
+    `scripts/goalies.py` for the confirmed starter. Saves needs only the goalie confirmed, not the full lineup, so it
+    dodges item 4. Log saves lines every game from pull B so the sample builds (only 33 two-way lines so far). (c) Shots:
+    keep the lineup fallback (item 4) top priority, it is what costs shots picks. (d) Re-check at the first weekly review
+    after 50 graded shots legs: is the second market earning its credits; if not, shots alone.
+    Evidence behind the choice (Oct 12-18 odds log, Hard Rock): shots 1,233 two-way lines, 4 lines (1.5/2.5/3.5), hold ~7.6%,
+    8-5 +0.82u, under 1.5 5-2 +1.96u, under 3.5 1-2 -1.44u (priced near -200). Points 924 lines, 94% on the 0.5 line,
+    hold ~7.1%, 3-2 -0.14u, and it needs confirmed lineups (power-play units), the thing that fails most. Goals: one-sided
+    prices, no de-vig, high hold. Not in our feed or log, so unverified: assists, blocks, PP points, alt shots, sides, totals.
+    Saves as #2 is a judgment, not a result: 0 graded legs.
+
 13. **ROI (2026-10-18, 18 singles + 7 parlays):** singles 61% vs 58% needed, +0.96u (+5% ROI); parlays -4.45u. Higher-edge
     picks did not hit more (edge 2-3 pts: 6-3; 3-4.5: 3-3; 4.5+: 2-1), so stake sizing by confidence waits until
     ~100 graded legs show the ranking sorts winners. 20 of 22 picks are unders; model sits 12-19 pts off the book on
@@ -142,6 +155,7 @@ price history exists; our own odds log, `data/odds/`, is building that).
 ## 8. Rule-change log
 | Date | Change | Why | Sample |
 |---|---|---|---|
+| 2026-10-18 (Matt) | Scope: shots only for picks (points `picks:false`); saves is the 2nd market, logged only until proven | Customer asked for at most 2 markets and to be elite at them. Customer-directed scope, not a data-driven value change; the 150-leg rule is about values. Points had 5 graded legs (3-2) so nothing is lost on evidence | Shots 13, points 5 graded legs; 1,233 shots and 924 points two-way lines in the odds log |
 | 2026-10-18 (weekly) | No value changes. Page-only fixes (Record headline adds parlays, reasons, game-list wording, stale state) | Sample too small for any rule; week 1 calibrated (60.6% stated, 61.1% hit) | Shots 13, points 5 graded legs (need 50 pause / 150 change) |
 | 2026-10-18 | Parlay cap and leg-use count every parlay shown that night (bug: only open ones counted, so a new set was built after each lock); a leg in 1 parlay (was 2) | Parlays were 1-6, -4.45u, the whole ROI drag (singles 11-7, +0.96u). Oct 13 showed 6 parlays (cap 3) with Rosen and Pulock in 4 each; the 3 extra all lost (-3u). One missed leg should sink one parlay, not four | 7 graded parlays; exposure cut, not a qualifying change, so the 150-leg rule doesn't apply |
 | 2026-10-12 | Lineup-gated pulls: A is shots only at every tier; points/goals/saves only after both teams' lineups are confirmed and inside the B window; fallback points-only at 45 min if unconfirmed; lineups step runs before odds | Customer asked for lineup-gated pulls to save credits (no paying for prices on unconfirmed lineups) | Ops timing, no graded sample needed |
@@ -149,6 +163,7 @@ price history exists; our own odds log, `data/odds/`, is building that).
 | 2026-10-11 | v1.0 set (section 4) | First build: Sharp standard from the DS backtest (2024-25 fit, 2025-26 out of sample) and one live Hard Rock pull | Backtest only; 0 graded live legs |
 
 ## 9. Session log (newest first, one line each)
+- 2026-10-18 (Matt: hyper-specialize in 1-2 markets): reviewed every market we can see at Hard Rock. Decision: shots only for picks now, goalie saves as #2 (log, build, prove). Points picks off in `config/rules.json`; 221 tests pass. Not done: planner still pulls points credits, no saves model yet (item 16). No pick changes to the Record.
 - 2026-10-18 1:44 PM daily check: chain alive (link 69, finished 1:40 PM, Actions runs all success; one cron run cancelled by the chain, normal), all steps/sources ok, pull A ran 1:00 PM (2 games, 34 lines, 0 picks, next check 5:15 PM), keys 476 (key 4 at 18), tier 3, no unmatched names/excluded teams. Oct 17's 1 pick graded (W); all 25 shown picks/parlays graded; record guard ok (82 lines). 221 tests pass. Nothing to fix.
 - 2026-10-18 weekly review: DS (Record thru Oct 17): singles 11-7 61% vs 57.7% BE +0.96u (shots U 7-5 +0.11, points U 2-2 -0.49); parlays 1-6 -4.45u (all before the cap fix); calibration ok (stated 60.6%, hit 61.1%, n=18); edge doesn't sort winners; 1 zero-pick night (Oct 14); 19 sides within 1 pt of qualifying. Sharp: no value changes (shots 13 / points 5 graded legs vs 50 pause / 150 change). Shipped (QA SHIP at 380px): strip shows singles + parlays, Record "All bets", reasons show the real why (first sentence dropped, 3 lines), short Record table under 30, shorter game-list status, stale state hides New/Since and says "old price", fixtures one-parlay-per-leg, gap 12. Oct 17 1-of-4 = Daily Faceoff never confirmed (gap 4). Health: chain link 65 alive, all sources ok, keys 478, grading complete. 221 tests.
 - 2026-10-18 (Matt): game list now shows lineup + goalie status per team. QA PASS at 380px. Goalie scrape untested against the live site.

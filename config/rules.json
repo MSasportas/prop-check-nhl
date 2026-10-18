@@ -72,7 +72,7 @@
   "odds_region": "us2",
   "markets": {
    "shots": {"feed_key": "player_shots_on_goal", "noun": "shots on goal", "short": "shots", "label": "Shots on goal", "picks": true},
-   "points": {"feed_key": "player_points", "noun": "points", "short": "points", "label": "Points", "picks": true},
+   "points": {"feed_key": "player_points", "noun": "points", "short": "points", "label": "Points", "picks": false},
    "goals": {"feed_key": "player_goals", "noun": "goals", "short": "goals", "label": "Anytime goal", "picks": false},
    "saves": {"feed_key": "player_total_saves", "noun": "saves", "short": "saves", "label": "Saves", "picks": false}
   },
