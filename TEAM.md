@@ -80,9 +80,14 @@ price history exists; our own odds log, `data/odds/`, is building that).
   retry next cycle). Tests: `PC_DISCORD_FIXTURE_URL` posts to a local server; in `PC_NOW`/`PC_DATA_DIR` mode nothing
   ever reaches Discord without it. Matt adds the secret: repo Settings > Secrets and variables > Actions > New
   repository secret, name `DISCORD_WEBHOOK`, value = the Discord channel webhook URL.
+- **Game list status (2026-10-18):** each unstarted game on the page shows, per team, lineup (confirmed / not set / not checked
+  yet, from `data/state/lineups.json`) and the starting goalie (confirmed / expected / not posted, from `scripts/goalies.py`,
+  Daily Faceoff starting-goalies page, one read per cycle, `data/state/goalies.json`, written only when it changes). Display
+  only, no pick depends on it. UNVERIFIED LIVE at build time (sandbox gets 403 from Daily Faceoff): confirm
+  `sources.dailyfaceoff_goalies` in status.json reads ok after the first cycle; if the page shape differs, fix `goalies.parse`.
 - **Files:** `index.html` (page; reads `data/slate.json`, `data/record.json`, `data/rules.json`), `data/odds/<date>.json`
   (every price pulled), `data/state/` (stats store, schedule, credits ledger), `fixtures/` (QA pages: `?fixture=NAME`,
-  `?now=ISO`), `tests/` (`python -m unittest discover -s tests`, 212 tests; `tests/replay_day.py` replays a day).
+  `?now=ISO`), `tests/` (`python -m unittest discover -s tests`, 216 tests; `tests/replay_day.py` replays a day).
 - **Debug:** `python scripts/run.py --explain` shows why each line did or didn't qualify. Test env vars: `PC_NOW`,
   `PC_DATA_DIR`, `PC_ODDS_FIXTURE_DIR`, `PC_LINEUP_FIXTURE_DIR`, `PC_NHL_FIXTURE_DIR`. Never test against the live data/.
 
@@ -134,6 +139,7 @@ price history exists; our own odds log, `data/odds/`, is building that).
 | 2026-10-11 | v1.0 set (section 4) | First build: Sharp standard from the DS backtest (2024-25 fit, 2025-26 out of sample) and one live Hard Rock pull | Backtest only; 0 graded live legs |
 
 ## 9. Session log (newest first, one line each)
+- 2026-10-18 (Matt): game list now shows lineup + goalie status per team. QA PASS at 380px. Goalie scrape untested against the live site.
 - 2026-10-18 (Matt: Discord hard to read; hit rate fine but ROI low): Record read: singles +0.96u, parlays -4.45u. Fixed parlay cap bug (all-night count), leg in 1 parlay, rewrote Discord message. QA PASS. 212 tests.
 - 2026-10-13 morning check: all 3 picks + 1 parlay graded end to end after final (picks 2W-1L +0.68u, parlay L), graded at worst shown price, record.json = rebuild, history guard ok (12 versions, needs unshallow in a fresh sandbox). 5 AM rollover ok, 16-game slate set, pull A not yet due. First-session list complete.
 - 2026-10-12 evening check: chain ok, no failed steps, Record 12 lines, record.json matches rebuild. 3 picks + 1 parlay shown and locked (Vilmanis U1.5 shots graded; Vukovic-type U3.5 and U1.5 shots + parlay awaiting final). Same day shipped: pull B per game, lineup-gated pulls (45-min fallback), own-team highlight on cards, Discord notifications (hello sent; picks shown before the webhook were not notified). 208 tests. Morning check set for grading + 5 AM rollover.

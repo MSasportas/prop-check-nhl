@@ -149,6 +149,7 @@ button{font:inherit;color:inherit;background:none;border:0;padding:0;margin:0;te
 .list .li .r{flex:none;white-space:nowrap;color:var(--muted)}
 .list .li .r b{font:600 16px/20px var(--display);color:var(--fg)}
 .list .sub{display:block;font-size:12px;color:var(--warn)}
+.list .st{display:block;font-size:12px;line-height:16px;color:var(--muted);margin-top:2px}
 
 /* empty + skeleton + error */
 .empty .t{font-size:16px;line-height:23px;font-weight:500}
@@ -854,13 +855,29 @@ function renderTonight() {
     games.forEach(function (g) {
       var n = num(g.picks), bits = [(g.away && g.home) ? str(g.away) + ' at ' + str(g.home) : 'Game', fTime(g.start) || 'time not posted'];
       if (n != null) bits.push(n + (n === 1 ? ' pick' : ' picks'));
+      var subs = gameStatus(g);
       x.appendChild(h('div', { class: 'li' }, h('span', { class: 'grow' }, bits.join(' · '),
+        subs.map(function (t) { return h('span', { class: 'st', text: t }); }),
         g.excluded_reason ? h('span', { class: 'sub', text: 'not covered: ' + str(g.excluded_reason) }) : null)));
     });
     return x;
   }));
 
   app.appendChild(footer());
+}
+/* per-game lineup + goalie status lines: "CBJ ✅ lineup · ✅ Korpisalo" */
+function gameStatus(g) {
+  if (g.started) return [];
+  var lx = isObj(g.lineups) ? g.lineups : null, gl = isObj(g.goalies) ? g.goalies : null;
+  if (!lx && !gl) return [];
+  function side(ab, k) {
+    if (!ab) return null;
+    var L = lx ? lx[k] : null, G = gl ? gl[k] : null;
+    var lt = L === 'confirmed' ? '\u2705 lineup' : L === 'waiting' ? '\u23F3 lineup not set' : '\u23F3 lineup not checked yet';
+    var gt = isObj(G) ? ((G.status === 'confirmed' ? '\u2705 ' : '\u23F3 ') + str(G.name) + (G.status === 'confirmed' ? '' : ' (expected)')) : '\u23F3 goalie not posted';
+    return str(ab) + ': ' + lt + ' \u00B7 ' + gt;
+  }
+  return [side(g.away, 'away'), side(g.home, 'home')].filter(Boolean);
 }
 function footer() {
   var v = S.rules ? S.rules.version : null;

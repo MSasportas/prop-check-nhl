@@ -22,6 +22,7 @@ import math
 from datetime import timedelta
 
 import common
+import goalies
 import lineups
 import model
 import names
@@ -698,9 +699,17 @@ def build_slate(inp, events, extra):
     open_picks = [p for p in picks if bucket(p) == "open"]
 
     games = []
+    goalie_state = goalies.load(inp.slate)
     for g in sorted(inp.games.values(), key=lambda x: (x["start"], x["id"])):
         ex = [t for t in (g["away"], g["home"]) if t in inp.behind]
+        lx, gx = {}, {}
+        for side in ("away", "home"):
+            rec = (inp.lineup_state.get("teams") or {}).get(g[side]) or {}
+            pg = rec.get("page")
+            lx[side] = "confirmed" if pg and pg.get("today") else ("waiting" if rec.get("checked_at") else "not_checked")
+            gx[side] = (goalie_state.get("teams") or {}).get(g[side])
         games.append({"id": g["id"], "away": g["away"], "home": g["home"], "start": g["start"],
+                      "lineups": lx, "goalies": gx,
                       "started": sched.started(g, now),
                       "picks": sum(1 for p in picks if p["game_id"] == g["id"] and not p["pulled"]),
                       "excluded_reason": inp.behind[ex[0]] if ex else None, "excluded_teams": ex})

@@ -33,6 +33,7 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
 import common      # noqa: E402
 import engine      # noqa: E402
+import goalies     # noqa: E402
 import grade       # noqa: E402
 import lineups     # noqa: E402
 import names       # noqa: E402
@@ -193,6 +194,7 @@ class Run:
             return {"status": "skipped", "note": "no games today"}
         res = lineups.check(self.now, self.slate, self.games, self.started, self.cfg["ops"], self.people_for)
         self.lineup_state = res["state"]
+        goalies.check(self.now, self.slate, self.games, self.started)      # display only; its own result is in sources
         return {"status": res["status"], "note": res["note"]}
 
     def build_inputs(self):
@@ -439,6 +441,7 @@ class Run:
         src = dict(nhl.SOURCES)
         src["odds"] = dict(odds.SOURCE)
         src["dailyfaceoff"] = dict(lineups.SOURCE)
+        src["dailyfaceoff_goalies"] = dict(goalies.SOURCE)
         # each source's most recent result: one not needed this run keeps what it said last time
         reached = dict((old.get("sources") or {}))
         for k, s in src.items():
@@ -514,7 +517,7 @@ def run(only=None, dry_run=False):
     started_at = now
     odds.load_keys()                                        # registers the keys so nothing can print them
     nhl.SOURCES.clear()
-    for src in (odds.SOURCE, lineups.SOURCE):
+    for src in (odds.SOURCE, lineups.SOURCE, goalies.SOURCE):
         src.update(ok=0, failed=0)
     r = Run(cfg, now, only, dry_run)
     r.step("rules", r.do_rules)
