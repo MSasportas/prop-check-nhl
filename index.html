@@ -1163,7 +1163,7 @@ function rulesBody(body) {
   if (!S.rules) body.appendChild(h('p', { style: 'color:var(--warn)', text: "The rule numbers didn't load, so they show as [missing] below." }));
   var ol = h('ol', { class: 'rules' });
   (v != null && /^1(\.|$)/.test(str(v)) ? RULES_V1 : RULES).forEach(function (s) {
-    var li = h('li'), re = /\{([a-z0-9_]+)\|([a-z]+)\}/g, last = 0, m;
+    var li = h('li'), re = /\{([a-z0-9_.]+)\|([a-z]+)\}/g, last = 0, m;
     while ((m = re.exec(s))) { if (m.index > last) li.appendChild(node(s.slice(last, m.index))); li.appendChild(slot(m[1], m[2])); last = re.lastIndex; }
     if (last < s.length) li.appendChild(node(s.slice(last)));
     ol.appendChild(li);

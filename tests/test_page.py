@@ -119,6 +119,19 @@ class RulesSheet(unittest.TestCase):
         out = self.render("RULES_V1", cfg["values"])
         self.assertEqual([o["t"] for o in out if o["miss"]], [])
 
+    def test_page_render_loop_accepts_dotted_keys(self):
+        """The page's own placeholder regex (not a copy) must match every placeholder in RULES, dotted ones too."""
+        import re
+        with open(PAGE, encoding="utf-8") as f:
+            src = f.read()
+        m = re.search(r"var li = h\('li'\), re = /(.+?)/g", src)
+        self.assertIsNotNone(m)
+        page_re = re.compile(m.group(1).replace("\\{", "\\{"))
+        holders = re.findall(r"\{[^{}|]+\|[a-z]+\}", page_array("RULES"))
+        self.assertTrue(any("." in h for h in holders))
+        for h in holders:
+            self.assertIsNotNone(page_re.fullmatch(h), h)
+
     def test_parlay_paused_line(self):
         with open(PAGE, encoding="utf-8") as f:
             src = f.read()
