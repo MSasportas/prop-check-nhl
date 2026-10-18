@@ -1,10 +1,10 @@
 {
  "ok": true,
  "slate_date": "2026-10-17",
- "started_at": "2026-10-17T21:30:01-04:00",
- "status_at": "2026-10-17T21:30:01-04:00",
- "finished_at": "2026-10-17T21:30:02-04:00",
- "last_ok_at": "2026-10-17T21:30:01-04:00",
+ "started_at": "2026-10-17T21:40:01-04:00",
+ "status_at": "2026-10-17T21:40:01-04:00",
+ "finished_at": "2026-10-17T21:40:02-04:00",
+ "last_ok_at": "2026-10-17T21:40:01-04:00",
  "failed_step": null,
  "steps": [
   {
@@ -19,13 +19,13 @@
   },
   {
    "step": "stats",
-   "status": "skipped",
-   "note": "nothing new"
+   "status": "ok",
+   "note": "1 window(s) read, 4 team-games still missing"
   },
   {
    "step": "lineups",
-   "status": "ok",
-   "note": "4 of 4 team pages read"
+   "status": "skipped",
+   "note": "checked in the last 20 minutes"
   },
   {
    "step": "odds",
@@ -93,8 +93,25 @@
   "Elias Nils Pettersson",
   "Elias Pettersson"
  ],
- "excluded_teams": [],
- "stats_through": "2026-10-17",
+ "excluded_teams": [
+  {
+   "team": "CHI",
+   "reason": "stats behind"
+  },
+  {
+   "team": "DAL",
+   "reason": "stats behind"
+  },
+  {
+   "team": "NYI",
+   "reason": "stats behind"
+  },
+  {
+   "team": "TOR",
+   "reason": "stats behind"
+  }
+ ],
+ "stats_through": "2026-10-16",
  "lineups_at": "2026-10-17T21:30:01-04:00",
  "lineups_note": "14 of 28 team line pages are dated today.",
  "games_today": 14,
@@ -103,7 +120,7 @@
  "runner": {
   "event": "workflow_dispatch",
   "run_id": "39084224009",
-  "iteration": 5,
+  "iteration": 6,
   "chain_link": 45,
   "chain_started_at": "2026-10-16T10:00:13-04:00",
   "run_started_at": "2026-10-17T20:50:13-04:00"
