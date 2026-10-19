@@ -114,8 +114,9 @@ road = lambda r: float(not r["home"])
 # ---------------- K1 arena
 print("== K1 arena scorekeeper factor")
 walk("K1", lambda r, c: [r["logA"], r["logA"] * road(r)])
-rule("K1r-over", lambda r: "over" if (not r["home"] and r["arena_top5"] and r["line"] in (1.5, 2.5)) else None)
-rule("K1r-under", lambda r: "under" if (not r["home"] and r["arena_bot5"] and r["line"] in (1.5, 2.5)) else None)
+# registered: every two-way line (no line filter)
+rule("K1r-over", lambda r: "over" if (not r["home"] and r["arena_top5"]) else None)
+rule("K1r-under", lambda r: "under" if (not r["home"] and r["arena_bot5"]) else None)
 
 # ---------------- K2 moneyline game script
 print("== K2 moneyline game script")
@@ -201,6 +202,9 @@ for m in rlib.TEST_MONTHS:
             roi = sum(x["profit"] for x in tr) / len(tr)
             if best is None or roi > best:
                 best, bk = roi, k
+    if bk is None:
+        print("K6g", m, "no variant with n >= 50 in training: no bets")
+        continue
     print("K6g", m, "selects", bk, "train ROI %+.1f%%" % (100 * best))
     sel += [x for x in k6b[bk] if x["month"] == m]
 report("K6g", sel)
@@ -227,4 +231,21 @@ def f9(r, c):
 walk("K9", f9, prep=prep9)
 
 # descriptive: arena factor persistence 2024-25 vs 2025-26 (free data; no betting outcome)
+def arena_season(fn):
+    from collections import defaultdict as dd
+    rows = [json.loads(l) for l in open(os.path.join(R4, "nhl", fn))]
+    h, a = dd(list), dd(list)
+    for r in rows:
+        tot = r["shotsForPerGame"] + r["shotsAgainstPerGame"]
+        if r["homeRoad"] == "H":
+            h[r["teamAbbrev"] if "teamAbbrev" in r else r["teamFullName"]].append(tot)
+        else:
+            a[r["teamAbbrev"] if "teamAbbrev" in r else r["teamFullName"]].append(tot)
+    return {t: math.log(np.mean(h[t]) / np.mean(a[t])) for t in h if t in a}
+
+
+A1, A2 = arena_season("team_2425.jsonl"), arena_season("team_2526.jsonl")
+ts = sorted(set(A1) & set(A2))
+print("K1 descriptive: arena log ratio 2024-25 vs 2025-26 (full seasons, %d teams) corr %.2f; sd %.3f / %.3f" % (
+    len(ts), np.corrcoef([A1[t] for t in ts], [A2[t] for t in ts])[0, 1], np.std([A1[t] for t in ts]), np.std([A2[t] for t in ts])))
 json.dump(OUT, open(os.path.join(R4, "k_results.json"), "w"), indent=1, default=float)

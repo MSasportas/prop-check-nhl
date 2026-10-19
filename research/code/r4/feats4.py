@@ -158,6 +158,8 @@ for r in lines + [None]:
         if r is None:
             break
         cur = r["date"]
+    if r["over"] is None or r["under"] is None:   # one-sided line: not a two-way line, skipped (registered: two-way only)
+        continue
     d = r["date"]
     arena = r["team"] if r["home"] else r["opp"]
     f = {}
