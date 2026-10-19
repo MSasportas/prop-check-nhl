@@ -113,6 +113,47 @@ v1.0 in one line: 60/40 blend, proportional de-vig, -0.02/-0.015/-0.04 adjustmen
   (proportional de-vig), `pin_fair_over`, `hr_vs_consensus` (HR proportional fair over - median), `best_over/_under` + `_book`;
   close adds `cons_move` and `stale` (HR prices unchanged since the previous read while the median moved >= 0.03); each stale
   read is kept in the row's `stale_events`. Market menu stays Hard Rock only.
+- **Doc fix (2026-10-19):** in the "Other books (2026-10-19, Researcher Q1)" bullet and the Files bullet: it says "9 books" / "9 other books".
+  We ASK for 9 (`ops.consensus_books`, max 9 so the list stays <= 10 = one billed region), but only 6 books actually return data
+  for NHL shots: fanduel, betonlineag, draftkings, betmgm, espnbet, pinnacle. williamhill_us (Caesars), betrivers and fanatics
+  return nothing. Any "9 books" in docs means "asked", never "counted". Paper counts only books that returned fresh two-sided prices.
+- **Paper test (2026-10-20 to 2026-11-23, Gap + Guard; internal like the shadow log: never a bet, never the Record, never `ops.pause`).**
+  `scripts/paper.py`, soft step `paper` in `run.py` (after `shadow`; a failure is a `warn`), config `ops.paper` {active, start 2026-10-20,
+  end 2026-11-23, judge_on 2026-11-02, thresholds}. `data/rules.json` carries only {active, start, end, judge_on}.
+  - Units: everything in EV% = fair_prob x Hard Rock decimal payout - 1 on unrounded floats; thresholds inclusive; display rounds to 0.1.
+  - STEP 1 (gap) passes iff ALL: (a) Hard Rock EV vs the market fair >= +3.0%; (b) >= 4 OTHER books priced the same player/line/side with
+    both sides quoted (Pinnacle is one of them; a book counts only if its read is fresh and its hold is 0-15%, the shadow log's rule);
+    (c) market fair = median of those books' proportionally de-vigged fair probability for the side (even count: mean of the two middle);
+    (d) Pinnacle present with both sides AND Pinnacle-fair EV on Hard Rock's price >= 0.0% (sign check only); (e) shots lines 1.5 and 2.5;
+    (f) Hard Rock price -200..+120.
+  - STEP 2 (guard): final = 0.8 x market fair + 0.2 x calibrated model chance for the side; calibrated model = the engine's raw model
+    chance of the over (shadow `model_p_over`) + a FROZEN additive offset per line on the over (1.5: +0.0179, 2.5: +0.0158); under = 1 - over.
+    Passes iff final x decimal - 1 >= +2.0%. The model can only veto, never create. No model for the player = no flag (the guard cannot run).
+  - Reads: only pull B (90 min) and pull C (45 min) reads can flag; the 1 PM read (A) is baseline only; a read with no `others` key
+    (Hard Rock-only retry) is skipped. A flag = a (game, pid, line, side) at its FIRST such read passing steps 1 and 2; price, time, market
+    fair, books, Pinnacle fair, model p, final, lineup/goalie state and the 30-minute market move (vs the latest read >= 25 min older) are
+    frozen. Later reads can only PULL: Hard Rock price changed and step-1 EV < +1.5% (hysteresis), < 4 books, Pinnacle gone or sign flipped,
+    step 2 fails, line removed; and Daily Faceoff listing the player out (checked every run). Pulled flags stay in the log and are graded at
+    the frozen price. Caps (a pulled flag still counts): 1 side per player (best final EV), 2 per game, 3 per night; ranked by final EV
+    within a read, earlier flags keep their slot. Step-1 candidates that FAIL only the guard are logged `veto` (once) with the same closing
+    data; candidates over a cap are logged `capped` (extra event type, so "gaps measured" is honest). Dedup per (game, pid, line, side).
+  - Close/CLV: the 45-minute read (pull C, or a B read inside 46 min) stores the closing market fair for every flag/veto/capped line;
+    CLV = close_fair x frozen decimal - 1 (None if first caught at that read). Grade W/L/VOID (no ice time) at the frozen price, flat 1u,
+    from the shadow row `result` (1.5/2.5 never push). VOID does not count toward N.
+  - Files (all `data/paper/`, never `data/record/`): `events.jsonl` (append-only: flag, veto, capped, pull, close, grade), `summary.json`
+    (derived: tonight's flags/vetoes/capped, last 7 nights, Nov 2 numbers; rewritten only on change or each heartbeat), `cursor.json` (last read
+    processed per game). `scripts/guard_paper.py` (HEAD must be a byte prefix of the working log) runs in `cycle.sh` after the Record guard; on a
+    breach the cycle restores `data/paper/` from HEAD and carries on (it never stops the Record). `paper.py` never imports `record`; a test hashes
+    `data/record/` around the step.
+  - Odds (credits): while paper is active pull B = shots only at EVERY tier >= 1 (no saves/goals/points pulls) and does not wait for lineups;
+    pull C = shots for EVERY game (tier floor 3 when the allowance >= 3). Started games are never pulled. Expect ~3 credits per game (A + B + C).
+  - Discord: its own PAPER message (header "PAPER - do not bet, nothing is on the page as a bet"), state `sent_paper` / `pulled_paper` /
+    `paper_sent` in `notified.json`, own cap 3 messages a day (the real 6 is untouched), same quiet hours (12:30-8 AM ET) and 14 s budget, no
+    "Bet only at these prices" footer, each flag once, one `PULLED PAPER` line for a flag told and then pulled, marked only after a 2xx.
+  - Page: a collapsed "Paper test (not bets)" section fed by `data/paper/summary.json` (its own fetch; if it fails the section says so plainly);
+    slate.json, record.json and the paused banner are untouched. UX restyle comes later.
+  - Tests: `python -m unittest discover -s tests`, 353 tests (282 + 71 in `tests/test_paper.py`; `tests/fixtures/paper_oct19/` = the real Oct 19
+    A/B reads for ANA@NYR and COL@PHI, shots only).
 - **Files:** `index.html` (page; reads `data/slate.json`, `data/record.json`, `data/rules.json`), `data/odds/<date>.json`
   (every price pulled: Hard Rock in `markets`, 9 other books in `others`; ~10x bigger: ~1.5 MB on a 16-game night, ~2.5-3 MB
   with C on every game, ~250 MB a season in the working tree; git-compressed ~60 KB/day. Gzip/rotate old days before ~Dec:
@@ -271,10 +312,29 @@ v1.0 in one line: 60/40 blend, proportional de-vig, -0.02/-0.015/-0.04 adjustmen
     testable, (3) then forward on the shadow log. Fix first: refit calibration on 2025-26 listed lines (removes the under lean),
     proportional de-vig, blend weight fitted walk-forward. Do not spend more historical credits re-slicing shots main lines.
     Historical key: 3,182 credits left (session scratch only). Raw data and scripts were in session scratch (not committed).
+21. **Gap + Guard PAPER test (Sharp final spec 2026-10-19 ~7 PM; Builder shipped, QA SHIP WITH FIXES (1 minor fixed), pushed 2026-10-19 evening).** Idea: Hard Rock's price sometimes lags the other books'
+    consensus; buy only when the gap is >= +3.0% EV with Pinnacle agreeing, and let our model veto. Hypothesis, not evidence. Paper only until Nov 2.
+    - **Frozen model offsets (do not change mid-test).** Refit once from the 2025-26 historical bundle (`research/data/hist_2025-26_hardrock.tgz`,
+      `work/shots45_lines.jsonl`): Hard Rock shots lines at -45 min, production model from prior games only (`p_over` = engine `model_p_over`, raw,
+      before blend), eligible = ok pair, >= 10 games, not sitting, not missed last game, result OK. Offset = actual over rate - mean model over:
+      **1.5: +0.0179** (9,892 lines, actual 54.95% vs model 53.16%, SE 0.5 pt; reproduces item 20's "+1.8 pts") and **2.5: +0.0158** (6,610 lines,
+      46.04% vs 44.45%, SE 0.6 pt). In-sample on the whole season (a one-number bias correction, not a rule); by month the 1.5 offset ran
+      +0.5 to +3.8 pts.
+    - **Nov 2 go / stop (CLV-based; ROI is reported, not judged).** Measured gap = a step-1 candidate (flag, veto or capped) with a CLV value.
+      GO needs ALL: >= 30 measured gaps; >= 10 graded picks (W/L only); mean CLV >= +2.0% with 80% bootstrap lower bound > 0; >= 60% of CLV
+      values positive; picks on >= 50% of nights; population slope > 0 (computed by the DS from `data/shadow/`, `summary.json` leaves it null);
+      vetoed gaps do worse than passed ones (else drop the model guard). STOP if ANY: mean CLV <= 0 at >= 25 measured gaps; units <= -8; wins
+      z < -2 against the sum of the flags' final probabilities; population slope <= 0 at >= 1,000 lines. Otherwise extend in 7-night blocks;
+      hard stop Nov 23: STOP if N < 30. `summary.json` -> `nov2` holds gaps_measured, graded_picks, w/l/void, units, wins_z, CLV stats
+      (n, mean, lb80, pos_share) for all measured gaps (headline), flags only and vetoed only, nights, nights_with_flags.
+    - Open: no model for a player = no flag (not a veto); `toi_drop` is not applied (spec silent); the night cap is first-come within a read order
+      by start time, ranked by final EV only inside one game's read; the page shows only the plain list (UX restyle pending); when the allowance is
+      under 3 credits a game pull C runs only for games with a live pick (none while paused), so there is no close and no CLV on those nights.
 
 ## 8. Rule-change log
 | Date | Change | Why | Sample |
 |---|---|---|---|
+| 2026-10-20 | **Paper test starts** (`ops.paper`): Gap + Guard flags, vetoes, CLV and grades logged to `data/paper/`, Discord PAPER pings, page section "Paper test (not bets)". Pull B = shots only at every tier >= 1 and not lineup-gated, pull C = shots on every game, while paper is active. No pick, parlay or Record change; picks stay paused | Matt approved the paper path after the 2026-10-19 Gap + Guard review (Sharp, DS, Builder, QA all GO WITH CHANGES; final GO for PAPER ONLY). Model offsets frozen (item 21) | Nov 2 go/stop in item 21; ~3 credits/game |
 | 2026-10-19 | Picks paused (`ops.pause.active`), page says no proven edge; v2.0 values kept but unused | Pre-registered fail rule: 2025-26 backtest H1 -2.7% (capped -6.1%), model worse than book | 18,383 historical Hard Rock lines (item 20) |
 | 2026-10-18 (Sharp) | **Rules v2.0** from slate 2026-10-19: over-hold de-vig; blend 70/30; no adjustments; qualify 0 <= edge < 0.05, same bar early/confirmed; no min chance, news-gap, too-good or drift rules; shots 1.5 and 2.5 only; 2 per game, 8 a night by edge; pull at a new price if edge >= 0.05; parlays off. Shadow-graded lines now count as the sample for model/blend/qualify changes | DS edge study + Sharp ruling (section 7 items 17-18): Hard Rock puts the vig on the over; gaps 0.03-0.10 won, 0.10+ lost, and v1.0 only bet ~0.135+ | 742 shadow lines; discovery +19.1% (n 150) / check +12.8% (n 83); forward gates in section 7 item 18 |
 | 2026-10-18 (QA fix) | Pull C for every game only at tier 3+ with today's budget >= 3 credits per game ahead; otherwise live picks only | Tier 2 cannot afford a closing read on every game | Ops |
@@ -287,6 +347,8 @@ v1.0 in one line: 60/40 blend, proportional de-vig, -0.02/-0.015/-0.04 adjustmen
 | 2026-10-11 | v1.0 set (section 4) | First build: Sharp standard from the DS backtest (2024-25 fit, 2025-26 out of sample) and one live Hard Rock pull | Backtest only; 0 graded live legs |
 
 ## 9. Session log (newest first, one line each)
+- 2026-10-19 ~8 PM (Matt: "let's do it"): Gap + Guard PAPER shipped to main after QA (SHIP WITH FIXES). Paper window 2026-10-20 to 2026-11-23, judged Nov 2; picks stay paused; first paper flags possible from the 90-min reads on Oct 20. Open: page section not checked in a real browser; NHL Savant visual pass dropped by Matt; UX restyle of the paper section pending.
+- 2026-10-19 Builder (Gap + Guard PAPER, Matt approved): built `scripts/paper.py`, `guard_paper.py`, `ops.paper`, odds plan (B shots-only not lineup-gated, C every game), Discord PAPER, page section; 353 tests pass (282 + 71). Oct 19 replay on the real reads: Killorn O1.5 +100 flagged at the 90-minute read (market 52.9%, +5.7% EV), Michkov O1.5 -120 vetoed (+3.7% gap, final EV +1.9%). QA: 353 tests pass, Oct 19 replay + Record-hash + timer-guard checks pass, page layout at 380px NOT browser-verified (no browser in session).
 - 2026-10-19 ~7 PM Gap + Guard review (review + prototype only; no code, rule, timer or Record change): Sharp, Data Scientist, Builder, QA all GO WITH CHANGES; every objection resolved; final = GO for PAPER ONLY. Pinned: gap/guard in EV%, 4+ books incl. Pinnacle (Pinnacle = sign check only), flag on 90/45-min reads only, model offsets refit and frozen, B shots-only and not lineup-gated, paper log and PAPER pings fully separate from the Record. Nov 2 go/stop is CLV-based (N >= 30, extend to Nov 23). Not live until Builder ships it and QA passes it.
 - 2026-10-19 ~2:50 PM Researcher run 4 (shots on goal only, resumed after a restart; K1-K12 registered before testing): arena, moneyline game script, player residual, VMR shape, last-game, price bands, LightGBM, top-k, attempts, PP change, opp blocks, shift-chart linemates; 46 variants (all-time 253), none positive with n >= 300, no lockbox look (still 1). Nothing passes; history exhausted for shots with free data; next = live news/timing (Q2, Q5, opening-line drift).
 - 2026-10-19 12:50 PM (Matt): Researcher scope is shots on goal only; new ideas on saved data, no more historical credits. RESEARCH.md updated; run 4 started.
