@@ -1,10 +1,10 @@
 {
  "ok": true,
  "slate_date": "2026-10-19",
- "started_at": "2026-10-19T12:50:01-04:00",
- "status_at": "2026-10-19T12:50:01-04:00",
- "finished_at": "2026-10-19T12:50:01-04:00",
- "last_ok_at": "2026-10-19T12:50:01-04:00",
+ "started_at": "2026-10-19T13:00:00-04:00",
+ "status_at": "2026-10-19T13:00:00-04:00",
+ "finished_at": "2026-10-19T13:00:02-04:00",
+ "last_ok_at": "2026-10-19T13:00:00-04:00",
  "failed_step": null,
  "steps": [
   {
@@ -35,12 +35,12 @@
   {
    "step": "odds",
    "status": "ok",
-   "note": "no pull due"
+   "note": "4 game(s) priced"
   },
   {
    "step": "market_menu",
-   "status": "skipped",
-   "note": "waits for pull A"
+   "status": "ok",
+   "note": "33 Hard Rock market(s) listed for ANA at NYR"
   },
   {
    "step": "engine",
@@ -54,8 +54,8 @@
   },
   {
    "step": "shadow",
-   "status": "skipped",
-   "note": "nothing new"
+   "status": "ok",
+   "note": "51 line read(s) logged"
   },
   {
    "step": "slate",
@@ -78,7 +78,7 @@
  "keys": [
   {
    "n": 1,
-   "left": 172
+   "left": 167
   },
   {
    "n": 2,
@@ -93,14 +93,14 @@
    "left": 2
   }
  ],
- "pool_total": 418,
+ "pool_total": 413,
  "allowance": 4.6444,
  "tier": 3,
  "budget_today": 18,
- "budget_used_today": 0,
- "prices_state": "not_yet",
- "prices_at": null,
- "next_price_read_at": "2026-10-19T13:00:00-04:00",
+ "budget_used_today": 5,
+ "prices_state": "ok",
+ "prices_at": "2026-10-19T13:00:00-04:00",
+ "next_price_read_at": "2026-10-19T18:15:00-04:00",
  "unmatched_names": [],
  "unknown_teams": [],
  "lineup_unmatched_names": [],
@@ -113,10 +113,10 @@
  "odds_notes": [],
  "runner": {
   "event": "workflow_dispatch",
-  "run_id": "39282091640",
-  "iteration": 6,
-  "chain_link": 103,
+  "run_id": "39288859580",
+  "iteration": 2,
+  "chain_link": 104,
   "chain_started_at": "2026-10-16T10:00:13-04:00",
-  "run_started_at": "2026-10-19T12:00:14-04:00"
+  "run_started_at": "2026-10-19T12:50:14-04:00"
  }
 }
