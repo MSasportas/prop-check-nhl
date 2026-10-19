@@ -78,3 +78,6 @@ for k, b in sorted(res.items()):
 print("stale-ladder rungs (alt > main over at main point):", len(stale), "of", sum(1 for x in lad if x["pt"] == x["row"]["line"]))
 for x in stale[:12]:
     print("  ", x["date"], x["name"], x["pt"], "alt", x["price"], "main", x["row"]["over"], x["row"]["under"])
+mev = [rlib.fair_prop(x["row"]["over"], x["row"]["under"]) * rlib.dec(x["price"]) - 1 for x in stale if x["price"] >= -200]
+print("stale rungs: mean mechanical EV vs Hard Rock's own main-line fair %+.3f (n %d); rate per player-game %.2f%%" % (
+    sum(mev) / len(mev), len(mev), 100 * len(stale) / sum(1 for x in lad if x["pt"] == x["row"]["line"])))
