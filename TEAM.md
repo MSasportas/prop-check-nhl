@@ -214,7 +214,7 @@ v1.0 in one line: 60/40 blend, proportional de-vig, -0.02/-0.015/-0.04 adjustmen
     - Builder replay (approximate: engine rules on every Oct 12-17 Hard Rock read, lineups unknown, missed-last-game players
       left out): 42 shown (6, 9, 4, 10, 4, 9 a night), 8 pulled, 21-13, +3.24u (+9.5% on 34 graded). In-sample, not evidence.
 
-19. **Historical backtest, PRE-REGISTERED 2026-10-19 9:40 AM ET, before any historical price was looked at.** Matt gave a
+19. **Historical backtest, PRE-REGISTERED 2026-10-19 9:31 AM ET (commit 79d745c), before any historical price was looked at.** Matt gave a
     historical-odds key (The Odds API, 20,000 credits; held only in session scratch, never in the repo, secrets, page or logs).
     Probe: Hard Rock 2025-26 NHL shots props exist (10 credits per market per game snapshot). Model params were fit on 2024-25
     and the v2.0 rules on Oct 2026 lines, so the 2025-26 season is out of sample for both.
@@ -233,9 +233,36 @@ v1.0 in one line: 60/40 blend, proportional de-vig, -0.02/-0.015/-0.04 adjustmen
       then saves at -45 min for a sample; then 1 PM shots for a sample (CLV). Raw historical data stays in session scratch (not
       committed); summaries and the scripts' method go in this file.
 
+20. **Backtest result (2026-10-19): v2.0 FAILS the pre-registered bar. Picks are PAUSED (`ops.pause.active`).** 16,818 credits;
+    1,287 of 1,312 2025-26 games with Hard Rock shots, 18,383 two-way lines, 0.7% names unmatched (two Elias Petterssons on VAN;
+    Chinakhov spelling, also live). Production engine read-only, prior-game rows only; 6 lines checked by hand; replica = engine picks.
+    | Hypothesis | n | ROI | 90% CI | months > 0 |
+    |---|---|---|---|---|
+    | H1 v2.0 uncapped / capped (live caps) | 3,918 / 1,198 | -2.7% / -6.1% | -5.2..-0.2 / -10.3..-1.9 | 1/7, 2/7 |
+    | H2 rule A | 4,774 | -1.4% | -3.5..+0.8 | 2/7 |
+    | H4 blind unders 1.5+2.5 | 13,427 | -6.3% | -7.7..-4.9 | 0/7 |
+    - H5 log loss: proportional book 0.6814 < model 0.6832 < over-hold book 0.6836. The model is WORSE than Hard Rock (CI +0.0005..+0.0032).
+      Model leans under by 1.5-2.5 pts on listed lines (1.5: says 53.2% over, actual 55.0%). That lean is where "under edges" came from.
+    - Over-hold was NOT structural: share of hold on the over 0.52 for the season (Oct .45, Nov .58, Dec .38, Jan .29, Feb .33, Mar .80, Apr .75).
+      Oct 2026's week was noise. Proportional de-vig is the better book estimate.
+    - Hard Rock prices are sticky: 81% of lines unchanged 1 PM to -45 min; 2.9% of the model-book gap closes (t 2.0): real, ~1/20 of the vig.
+    - Placebo: shuffled model -5.2% vs real -2.7% (p 0.02): the model has a little information, not enough to beat ~7% hold.
+    - Walk-forward Nov-Feb, 11 idea families / 156 variants (rest/B2B, opp suppression, lines, TOI trend, PP role, edge band, price band,
+      fitted blend, saves): every family negative out of sample; best -0.2%. Fitted blend gives the model ~0.1-0.4 weight.
+      Frozen candidate (v2 + team on a B2B), lockbox Mar-Apr: n 268, +2.4%, CI -6.8..+11.4 = noise.
+    - Saves (406 lines): model worse than book; walk-forward -4% to -14%.
+    **Decision (pre-registered fail rule, CEO 2026-10-19 ~11 AM, before any v2 pick was shown):** no new picks in any market; page
+    says "No picks for now: no proven edge." Odds pulls and the shadow log keep running (forward test of the one untested angle:
+    Hard Rock's slow prices around lineup/goalie news). Item 18 gates are moot while paused.
+    **Before picks return:** a new rule must be (1) pre-registered here, (2) positive walk-forward AND on a lockbox in history where
+    testable, (3) then forward on the shadow log. Fix first: refit calibration on 2025-26 listed lines (removes the under lean),
+    proportional de-vig, blend weight fitted walk-forward. Do not spend more historical credits re-slicing shots main lines.
+    Historical key: 3,182 credits left (session scratch only). Raw data and scripts were in session scratch (not committed).
+
 ## 8. Rule-change log
 | Date | Change | Why | Sample |
 |---|---|---|---|
+| 2026-10-19 | Picks paused (`ops.pause.active`), page says no proven edge; v2.0 values kept but unused | Pre-registered fail rule: 2025-26 backtest H1 -2.7% (capped -6.1%), model worse than book | 18,383 historical Hard Rock lines (item 20) |
 | 2026-10-18 (Sharp) | **Rules v2.0** from slate 2026-10-19: over-hold de-vig; blend 70/30; no adjustments; qualify 0 <= edge < 0.05, same bar early/confirmed; no min chance, news-gap, too-good or drift rules; shots 1.5 and 2.5 only; 2 per game, 8 a night by edge; pull at a new price if edge >= 0.05; parlays off. Shadow-graded lines now count as the sample for model/blend/qualify changes | DS edge study + Sharp ruling (section 7 items 17-18): Hard Rock puts the vig on the over; gaps 0.03-0.10 won, 0.10+ lost, and v1.0 only bet ~0.135+ | 742 shadow lines; discovery +19.1% (n 150) / check +12.8% (n 83); forward gates in section 7 item 18 |
 | 2026-10-18 (QA fix) | Pull C for every game only at tier 3+ with today's budget >= 3 credits per game ahead; otherwise live picks only | Tier 2 cannot afford a closing read on every game | Ops |
 | 2026-10-18 (team, item 17) | Pull C (shots, 45 min before puck) for every unstarted game at tier 2+, not only games with a live pick | Closing price on every line for the shadow log / CLV gate. ~1 credit a game; tier 3 is now up to 4 a game (A 1, B 2, C 1) against an allowance of ~5.2 | Ops, no graded sample needed; no qualifying value changed |
@@ -247,6 +274,7 @@ v1.0 in one line: 60/40 blend, proportional de-vig, -0.02/-0.015/-0.04 adjustmen
 | 2026-10-11 | v1.0 set (section 4) | First build: Sharp standard from the DS backtest (2024-25 fit, 2025-26 out of sample) and one live Hard Rock pull | Backtest only; 0 graded live legs |
 
 ## 9. Session log (newest first, one line each)
+- 2026-10-19 (Matt: historical key, backtest with best practice): pre-registered, DS backtested 2025-26 (16,818 credits). v2.0 failed; picks paused before the first v2 pick. Pause = `ops.pause` in config + `common.picks_paused`; tests set PC_PAUSE_OFF=1 (test_pause.py turns it on). 263 tests. Dry cycle on a copy: empty state 'paused', Record unchanged; page and rules sheet checked at 380px.
 - 2026-10-18 7 PM: v2.0 + shadow live, chain ok (7:00 PM run all steps ok). First market menu: Hard Rock NHL lists h2h, spreads, totals (+alts, periods, 3-way, OT, team totals, BTTS, odd/even) and player shots, alt shots, points, assists, PP points, goals (+alt, first), total saves, goals against, shutouts. No blocked shots. Weekly reviews check item 18 gates every Sunday (confirm gate ~Oct 30).
 - 2026-10-18 evening (Matt: whatever it takes, find a strongly profitable edge): DS subset hunt (680 slices, none survive; rule A survives placebo p=0.01), Sharp ruled v2.0 (over-hold de-vig, 0.7 blend, edge 0-0.05, 1.5/2.5 only, 2/game, 8/night, parlays paused) live from slate Oct 19. Builder shipped shadow log, C on every game, lineup history, market menu, v2.0. QA: shadow PASS WITH FIXES (fixed), v2.0 PASS WITH FIXES (rules sheet dotted placeholder, fixed + page-regex test). 260 tests. Open: rulesv2 fixture still has v1-style picks; sheet says pull 'at a new price' but code pulls any time below break-even (code is the safer one).
 - 2026-10-18 Builder (rules v2.0 + QA fixes): v2.0 in `config/rules.json` with v1.0 kept as "previous" for slates <= Oct 18 (`common.rules_for`); engine: over-hold de-vig, edge cap (entry + pull at a new price), line filter, 2/game, 8/night, best-edge line per player, optional rules (null = off); parlays off on page (one line) and Discord; rules sheet rewritten (v1 text kept for a v1.x rules.json); fixture `rulesv2`. QA fixes: shadow step 60 s budget, boxscores shared with grade per run (quick 10 s reads), previous-slate fetch cap 4; C every game only at tier 3+ with budget. Shadow adds `fair_over_oh` and `rules`. 259 tests pass. Local commit for QA, not pushed.

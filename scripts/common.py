@@ -198,6 +198,13 @@ def load_config():
         return json.load(f)
 
 
+def picks_paused(cfg):
+    """ops.pause.active: no new picks in any market and the page says why. Tests set PC_PAUSE_OFF=1 so the
+    engine's pick rules stay testable; the timer never sets it."""
+    pause = (cfg.get("ops") or {}).get("pause") or {}
+    return bool(pause.get("active")) and not os.environ.get("PC_PAUSE_OFF")
+
+
 def rules_for(cfg, slate):
     """The rules a slate is run under. config/rules.json holds the current rules in "values" and, under
     "previous", the version before with the values that differ and the last slate it covers ("until"). A slate

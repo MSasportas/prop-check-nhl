@@ -14,6 +14,7 @@ sys.path.insert(0, SCRIPTS)
 sys.path.insert(0, HERE)
 
 import common   # noqa: E402
+os.environ["PC_PAUSE_OFF"] = "1"   # pick rules stay testable while ops.pause is on; test_pause.py turns it back on
 import run      # noqa: E402
 import world    # noqa: E402
 

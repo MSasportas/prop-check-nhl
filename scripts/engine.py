@@ -276,6 +276,8 @@ def candidates(inp, paused=()):
             if not mcfg.get("picks") or not mv or mv.get("gone"):
                 continue
             counts["checked"] += mv["checked"]
+            if common.picks_paused(inp.cfg):
+                continue
             counts["failed"] += mv["failed"]
             if sched.started(g, inp.now) or market in paused:
                 continue
@@ -796,6 +798,10 @@ def _empty(inp, status, picks, games, extra):
         if f.get("other_games"):
             return {"code": "no_games", "text": "No picks today.", "sub": "Only regular-season games are covered."}
         return {"code": "no_games", "text": "No NHL games today.", "sub": None}
+    cfg = getattr(inp, "cfg", None) or {}
+    if common.picks_paused(cfg):
+        pause = cfg["ops"]["pause"]
+        return {"code": "paused", "text": pause.get("text") or "No picks for now.", "sub": pause.get("sub")}
     if f.get("stats_missing") or status["stats_state"] == "behind":
         return {"code": "stats_behind", "text": "Stats are behind, so no picks until they catch up.", "sub": None}
     if all(g["started"] for g in games):

@@ -1160,6 +1160,7 @@ function rulesBody(body) {
   head.appendChild(node('Rules v')); head.appendChild(v != null ? node(str(v)) : h('span', { class: 'slot miss', text: '[missing]' }));
   head.appendChild(node(' · changed ')); head.appendChild(up ? node(fDateShort(up)) : h('span', { class: 'slot miss', text: '[missing]' }));
   body.appendChild(head);
+  if (S.slate && isObj(S.slate.empty) && S.slate.empty.code === 'paused') body.appendChild(h('p', { style: 'color:var(--warn)', text: 'Picks are paused: these rules showed no proven edge in testing.' }));
   if (!S.rules) body.appendChild(h('p', { style: 'color:var(--warn)', text: "The rule numbers didn't load, so they show as [missing] below." }));
   var ol = h('ol', { class: 'rules' });
   (v != null && /^1(\.|$)/.test(str(v)) ? RULES_V1 : RULES).forEach(function (s) {

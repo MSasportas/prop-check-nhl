@@ -86,6 +86,7 @@
   "_about": "How the engine runs. None of these change which bets qualify.",
   "rollover_hour": 5,
   "heartbeat_min": 20,
+  "pause": {"active": true, "since": "2026-10-19", "why": "Pre-registered 2025-26 backtest (TEAM.md item 19/20): v2.0 lost -2.7% on 3,918 Hard Rock lines.", "text": "No picks for now: no proven edge.", "sub": "We tested our shots rules on all of last season's Hard Rock prices and they lost money. Picks stay off while the team tests new ideas, so nothing here is a bet."},
   "bookmakers": ["hardrockbet"],
   "odds_region": "us2",
   "markets": {
