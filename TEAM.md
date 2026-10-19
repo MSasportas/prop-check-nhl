@@ -214,6 +214,25 @@ v1.0 in one line: 60/40 blend, proportional de-vig, -0.02/-0.015/-0.04 adjustmen
     - Builder replay (approximate: engine rules on every Oct 12-17 Hard Rock read, lineups unknown, missed-last-game players
       left out): 42 shown (6, 9, 4, 10, 4, 9 a night), 8 pulled, 21-13, +3.24u (+9.5% on 34 graded). In-sample, not evidence.
 
+19. **Historical backtest, PRE-REGISTERED 2026-10-19 9:40 AM ET, before any historical price was looked at.** Matt gave a
+    historical-odds key (The Odds API, 20,000 credits; held only in session scratch, never in the repo, secrets, page or logs).
+    Probe: Hard Rock 2025-26 NHL shots props exist (10 credits per market per game snapshot). Model params were fit on 2024-25
+    and the v2.0 rules on Oct 2026 lines, so the 2025-26 season is out of sample for both.
+    - **Frozen hypotheses** (exact current code/config, no tuning): H1 v2.0 as in config; H2 rule A (no edge cap, lines 1.5/2.5/3.5,
+      no caps); H3 v1.0 (expect a loss); H4 blind unders 1.5+2.5 in -200..+120 (baseline); H5 model vs over-hold-de-vigged book log loss.
+    - **Prices:** primary = Hard Rock snapshot 45 min before puck (our pull C); secondary = 1 PM ET snapshot (our pull A) for a
+      sample, for CLV. Graded 1u flat at that price; regulation + OT, no shootout; no ice time = void.
+    - **No leakage:** model state for each game built only from games strictly before that date; no closing price, result, lineup
+      or later stat used in a projection; stat corrections ignored. No historical lineups exist, so v2's early bar is the honest test.
+    - **Primary success:** H1 full-season ROI >= +3% with 90% lower bound > 0 (game-clustered bootstrap), and positive in at least
+      4 of 6 months. **Fail:** H1 ROI <= 0: v2 goes back to logged-only on the page and the edge question restarts.
+    - **New ideas** (anything: subsets, home/away, rest, saves models, de-vig/blend variants): walk-forward only. Fit on months
+      up to m, test on m+1, rolling. **Lockbox:** Mar 1-Apr 2026 games are not scored for any new idea until its rule is frozen
+      and logged here. Count every variant tried; report the multiple-testing view.
+    - **Budget:** max 18,000 credits, 2,000 kept in reserve. Order: shots at -45 min for all 2025-26 regular-season games;
+      then saves at -45 min for a sample; then 1 PM shots for a sample (CLV). Raw historical data stays in session scratch (not
+      committed); summaries and the scripts' method go in this file.
+
 ## 8. Rule-change log
 | Date | Change | Why | Sample |
 |---|---|---|---|
