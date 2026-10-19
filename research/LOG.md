@@ -1,5 +1,28 @@
 # LOG.md: Researcher runs (newest first)
 
+- 2026-10-19 ~2:50 PM ET (Researcher run 4, SHOTS ON GOAL ONLY; resumed after a session restart at 2:34 PM). Registrations K1-K9
+  were written ~12:55-1:15 PM and committed (a96d06a) before any test ran; K10-K12 were registered and pushed (00b9a4b) after K1-K9
+  ran and before K10-K12 were built. No odds key used, no historical odds pulled. Free NHL data only (team/skater logs, realtime
+  attempts/blocks, TOI/PP TOI, and 2025-26 shift charts for the 945 pre-lockbox games). Scripts: research/code/r4/ (feats4.py,
+  k_tests.py, k7.py, k_own.py, fetch_rest.py, fetch_shifts.py). Script fixes to match the registration before scoring: one-sided
+  lines skipped (2 of 18,383), K1r on every line (the draft script had limited it to 1.5/2.5).
+  - K1 arena scorekeeper: logistic -13.7% n153; road overs in top-5 arenas -1.7% n747, road unders bottom-5 -5.8% n832. Arena
+    effect does not persist across seasons (corr 0.11).
+  - K2 moneyline game script: 0 bets (no side within 1 pt of an edge). K3 player residual history: -12.6% n240.
+  - K4 distribution shape (VMR): -10.2% n287. K5 last-game overreaction: +0.0% n246 [-8.7,+9.0]; rules -9.1% n616 / -2.8% n1,024.
+  - K6 price-band rules (plus-money overs/unders): -6.7% to -10.6% on 1,390-4,563 bets, every fold negative; selector -8.9%.
+  - K7 LightGBM on book + 24 prior-only features: no better than the book (Nov worse, Dec-Feb equal); -11.0% n76. K8 top-k -8% to -9%.
+  - K9 attempts surplus -14.3% n237 (weight real and positive, too small). K10 PP TOI change -7.7% n534. K11 opp block rate
+    -13.2% n235. K12 shift-chart linemate change -7.2% n369.
+  46 variants (~2.3 false positives expected); none positive with n >= 300, so no placebo and no lockbox look. All-time 253.
+  Lockbox looks: 1 (unchanged).
+  **Verdict: nothing passes; no candidate for the Sharp.** On 12,877 pre-lockbox Hard Rock shots lines, no free pre-game
+  information (arena, game script, player history, shape, form, attempts, PP role, opponent blocks, linemates, boosted trees)
+  moves the probability past Hard Rock's ~3.5-pt-per-side hold. History is exhausted for main-line shots with free data; what is
+  left is timing/news, which only the live feed can test.
+  Next: (1) Q2 lineup/PP1 news latency on the live shadow log (Hard Rock shots prices are sticky: 81% unchanged 1 PM to -45);
+  (2) Q5 Hard Rock vs the 9-book consensus on live shots reads by read time and news window; (3) first-posted Hard Rock shots line
+  vs the -45 price on the live feed (history only had 1 PM and -45): does the opening number drift predictably?
 - 2026-10-19 ~12:45 PM ET (Researcher run 3: attack Hard Rock as a retail book). Credits: 1,860 of 2,051 spent (191 left; ledger in
   research/data/hist_addon_2026-10-19_h2h_saves.tgz): 50 featured probes, 1,670 featured moneyline (10 books, 22:30Z on all 167 game
   days = every game's late price + most games' day-ahead price), 140 saves with 10 books (14 games). Scripts: research/code/r3/.
