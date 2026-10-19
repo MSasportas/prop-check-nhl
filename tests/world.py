@@ -172,9 +172,7 @@ def two_sided(fair_over, hold=0.07):
     return american_from_prob(fair_over * (1 + hold)), american_from_prob((1 - fair_over) * (1 + hold))
 
 
-def odds_payload(away, home, lines, last_update, event_id="ev"):
-    """lines: [(market feed key, player name, line, over price, under price)] -> the feed's answer for one game.
-    A price of None leaves that side out."""
+def book_markets(lines, last_update):
     markets = {}
     for key, who, line, over, under in lines:
         m = markets.setdefault(key, {"key": key, "last_update": last_update, "outcomes": []})
@@ -182,8 +180,18 @@ def odds_payload(away, home, lines, last_update, event_id="ev"):
             m["outcomes"].append({"name": "Over", "description": who, "price": over, "point": line})
         if under is not None:
             m["outcomes"].append({"name": "Under", "description": who, "price": under, "point": line})
+    return list(markets.values())
+
+
+def odds_payload(away, home, lines, last_update, event_id="ev", others=None, hr=True):
+    """lines: [(market feed key, player name, line, over price, under price)] -> the feed's answer for one game.
+    A price of None leaves that side out. others: {book key: lines} for other books (listed after Hard Rock).
+    hr=False leaves Hard Rock out of the answer."""
+    books = [{"key": "hardrockbet", "title": "Hard Rock Bet", "markets": book_markets(lines, last_update)}] if hr else []
+    for book, blines in (others or {}).items():
+        books.append({"key": book, "title": book, "markets": book_markets(blines, last_update)})
     return {"id": event_id, "home_team": TEAMS.get(home, home), "away_team": TEAMS.get(away, away),
-            "bookmakers": [{"key": "hardrockbet", "title": "Hard Rock Bet", "markets": list(markets.values())}]}
+            "bookmakers": books}
 
 
 def boxscore(gid, away, home, stats_by_pid, state="OFF", missing=(), shootout=False):

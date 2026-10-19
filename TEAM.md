@@ -102,10 +102,23 @@ v1.0 in one line: 60/40 blend, proportional de-vig, -0.02/-0.015/-0.04 adjustmen
   (needs full history; done Oct 12-17, no `groups` in those).
   `market_menu` (after odds) -> `data/state/market_menu.json`: once per ISO week, one event-markets call (~1 credit,
   ledger pull `M`) listing every market key Hard Rock posts for NHL, first/last seen. Skips if budget is tight.
+  **Other books (2026-10-19, Researcher Q1):** every price read asks `bookmakers=hardrockbet` + `ops.consensus_books` (9: DK,
+  FD, MGM, Caesars, ESPN, BetRivers, Fanatics, Pinnacle, BetOnline; max 9 so the list stays <= 10 = one billed region = same
+  credits as Hard Rock alone; ledger uses the feed's `x-requests-last`, fallback = markets returned x regions, never x books).
+  Hard Rock stays THE book: a fetch's `markets` is Hard Rock exactly as before; other books sit under `others`
+  {book: {market: {last_update, outcomes}}} (pid-matched like Hard Rock; no `others` key = Hard Rock-only read). Engine, page,
+  Record and status read `markets` only (byte-for-byte test: `tests/test_consensus.py`). Cost catch: a market only another
+  book has IS billed, so a retry of a market Hard Rock had not posted asks Hard Rock only (max ~1 extra credit per game-market
+  per day, e.g. saves at B). Shadow rows (open/close) add `cons_books`, `cons_stale_books`, `cons_fair_over_med/_mean`
+  (proportional de-vig), `pin_fair_over`, `hr_vs_consensus` (HR proportional fair over - median), `best_over/_under` + `_book`;
+  close adds `cons_move` and `stale` (HR prices unchanged since the previous read while the median moved >= 0.03); each stale
+  read is kept in the row's `stale_events`. Market menu stays Hard Rock only.
 - **Files:** `index.html` (page; reads `data/slate.json`, `data/record.json`, `data/rules.json`), `data/odds/<date>.json`
-  (every price pulled), `data/shadow/` (shadow log), `data/state/` (stats store, schedule, credits ledger, lineup history,
-  market menu), `fixtures/` (QA pages: `?fixture=NAME`, `?now=ISO`), `tests/` (`python -m unittest discover -s tests`,
-  259 tests; `tests/replay_day.py` replays a day).
+  (every price pulled: Hard Rock in `markets`, 9 other books in `others`; ~10x bigger: ~1.5 MB on a 16-game night, ~2.5-3 MB
+  with C on every game, ~250 MB a season in the working tree; git-compressed ~60 KB/day. Gzip/rotate old days before ~Dec:
+  Pages' 1 GB site limit and full-history checkout), `data/shadow/` (shadow log), `data/state/` (stats store, schedule,
+  credits ledger, lineup history, market menu), `fixtures/` (QA pages: `?fixture=NAME`, `?now=ISO`), `tests/`
+  (`python -m unittest discover -s tests`, 282 tests; `tests/replay_day.py` replays a day).
 - **Debug:** `python scripts/run.py --explain` shows why each line did or didn't qualify. Test env vars: `PC_NOW`,
   `PC_DATA_DIR`, `PC_ODDS_FIXTURE_DIR`, `PC_LINEUP_FIXTURE_DIR`, `PC_NHL_FIXTURE_DIR`. Never test against the live data/.
 
@@ -274,6 +287,7 @@ v1.0 in one line: 60/40 blend, proportional de-vig, -0.02/-0.015/-0.04 adjustmen
 | 2026-10-11 | v1.0 set (section 4) | First build: Sharp standard from the DS backtest (2024-25 fit, 2025-26 out of sample) and one live Hard Rock pull | Backtest only; 0 graded live legs |
 
 ## 9. Session log (newest first, one line each)
+- 2026-10-19 Builder (Q1, CEO approved): every odds read also asks 9 other books (same credits, one region); `others` in data/odds, consensus + stale fields in the shadow log; Hard Rock picks/page/Record byte-for-byte unchanged (test). 282 tests. Local commit for QA, not pushed.
 - 2026-10-19 Researcher run 2: R1-R11 (25 variants), nothing passes; Hard Rock = market + ~3.5 pts/side, never beat 8-9 other books' consensus; 1,120 hist credits (2,062 left); next Q1 multi-book live pulls. NOT saved: the new alt-ladder/probe pulls (1.8 MB) — the Project is out of room; they live only in session scratch until Matt frees space or adds a private repo.
 - 2026-10-19 11 AM (Matt: save historical data; hire a Researcher; find an edge): historical odds bundle saved privately as Project doc data/nhl_hist_2025-26_hardrock.tar.gz.b64.txt (round-trip checksum ok; not in this public repo). Researcher role created (research/RESEARCH.md, HYPOTHESES.md, LOG.md); first run now, then a daily scheduled run.
 - 2026-10-19 (Matt: historical key, backtest with best practice): pre-registered, DS backtested 2025-26 (16,818 credits). v2.0 failed; picks paused before the first v2 pick. Pause = `ops.pause` in config + `common.picks_paused`; tests set PC_PAUSE_OFF=1 (test_pause.py turns it on). 263 tests. Dry cycle on a copy: empty state 'paused', Record unchanged; page and rules sheet checked at 380px.

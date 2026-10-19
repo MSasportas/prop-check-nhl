@@ -88,6 +88,8 @@
   "heartbeat_min": 20,
   "pause": {"active": true, "since": "2026-10-19", "why": "Pre-registered 2025-26 backtest (TEAM.md item 19/20): v2.0 lost -2.7% on 3,918 Hard Rock lines.", "text": "No picks for now: no proven edge.", "sub": "We tested our shots rules on all of last season's Hard Rock prices and they lost money. Picks stay off while the team tests new ideas, so nothing here is a bet."},
   "bookmakers": ["hardrockbet"],
+  "consensus_books": ["draftkings", "fanduel", "betmgm", "williamhill_us", "espnbet", "betrivers", "fanatics", "pinnacle", "betonlineag"],
+  "_consensus_about": "Other books asked on every price read beside Hard Rock (max 9: the feed bills up to 10 books as one region, so no extra credits). Shadow log only: picks, page and Record use Hard Rock alone. [] = Hard Rock only.",
   "odds_region": "us2",
   "markets": {
    "shots": {"feed_key": "player_shots_on_goal", "noun": "shots on goal", "short": "shots", "label": "Shots on goal", "picks": true},

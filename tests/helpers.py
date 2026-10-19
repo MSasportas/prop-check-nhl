@@ -105,10 +105,11 @@ class Sim:
                     g["gameState"] = states[g["id"]]
         world.write(p, js)
 
-    def set_odds(self, away, home, lines, last_update):
+    def set_odds(self, away, home, lines, last_update, others=None, hr=True):
+        """others: {book: lines} for other books (consensus, shadow log only). hr=False: Hard Rock has nothing."""
         lines = list(lines) + [("player_shots_on_goal", world.name_of(home, 17), 0.5, -600, 400)]   # outside the gate
         world.write(os.path.join(self.w["odds"], "odds_%s_%s.json" % (away.lower(), home.lower())),
-                    world.odds_payload(away, home, lines, last_update))
+                    world.odds_payload(away, home, lines, last_update, others=others, hr=hr))
 
     def drop_odds(self, away, home):
         p = os.path.join(self.w["odds"], "odds_%s_%s.json" % (away.lower(), home.lower()))

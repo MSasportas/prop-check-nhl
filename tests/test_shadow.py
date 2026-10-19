@@ -460,7 +460,8 @@ class MarketMenu(unittest.TestCase):
         self.assertEqual(cost, 1)
         self.assertIn("/events/ev1/markets?", seen[0])
         self.assertIn("regions=us2", seen[0])
-        self.assertIn("bookmakers=hardrockbet", seen[0])
+        self.assertIn("bookmakers=hardrockbet&", seen[0])           # Hard Rock only: other books are for prices
+        self.assertNotIn("draftkings", seen[0])
         self.assertEqual(pool.spent[-1]["pull"], "M")
         self.assertEqual(market_menu.book_markets(js, ["hardrockbet"])[0][0], "player_shots_on_goal")
         pool.save()

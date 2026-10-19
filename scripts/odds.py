@@ -10,7 +10,12 @@ What lives here
             those games into memory, then writes data/odds/<date>.json once.
   checks    a line is used only if both sides are there, the hold is sane and the price is fresh.
 
-Cost: 1 credit per market RETURNED per game. The events list is free.
+Cost: 1 credit per market RETURNED per game (by any book asked) per region; the feed bills every group of up to 10
+bookmakers in `bookmakers=` as ONE region, so Hard Rock plus up to 9 other books (ops.consensus_books, TEAM.md Q1)
+costs the same as Hard Rock alone. The ledger takes the feed's own x-requests-last header; the estimate is used only
+when that header is missing. The events list is free.
+Hard Rock is THE book: build_view, the engine, the page and the Record read only a fetch's "markets" (Hard Rock).
+Other books' prices sit beside it under "others" (shadow log only).
 With PC_ODDS_FIXTURE_DIR set nothing here touches the network (see _fixture_* below).
 """
 import json
@@ -24,6 +29,7 @@ import names
 import teams
 
 API = "https://api.the-odds-api.com/v4/sports/icehockey_nhl"
+MAX_BOOKS_PER_REGION = 10     # the feed bills each group of up to 10 bookmakers as one region
 C_RESERVE = 3                 # credits per game still ahead today below which C goes back to live picks only
 SOURCE = {"ok": 0, "failed": 0}
 KEYS_REFUSED_TEXT = "Hard Rock prices are off: the odds keys were refused. New keys are needed."
@@ -198,7 +204,7 @@ class Client:
                     SOURCE["failed"] += 1
                     return None, 0
                 returned = flat_cost if flat_cost is not None else \
-                    (_markets_returned(js, self.cfg["ops"]["bookmakers"]) if need else 0)
+                    (cost_estimate(js, params.get("bookmakers", "").split(",")) if need else 0)
                 cost = self.pool.note_headers(i, r.headers, slate, pull, game_id, returned)
                 SOURCE["ok"] += 1
                 return js, cost
@@ -278,8 +284,10 @@ class Client:
                 SOURCE["failed"] += 1
         return events
 
-    def event_odds(self, event_id, away, home, market_keys, slate, pull, game_id):
-        """Prices for one game. Returns (payload or None, cost). None = the feed failed (retry later)."""
+    def event_odds(self, event_id, away, home, market_keys, slate, pull, game_id, others=True):
+        """Prices for one game. Returns (payload or None, cost). None = the feed failed (retry later).
+        others: also ask ops.consensus_books (same bill, see request_books); False = Hard Rock only."""
+        books = request_books(self.cfg, others)
         if self.pool.fixture:
             js = self._fixture_json("odds_%s_%s.json" % (away.lower(), home.lower())) or \
                 self._fixture_json("odds_%s.json" % event_id)
@@ -288,15 +296,16 @@ class Client:
                 SOURCE["failed"] += 1
                 return None, 0
             js = json.loads(json.dumps(js))
-            for b in js.get("bookmakers", []):             # the real feed returns only what was asked for
+            js["bookmakers"] = [b for b in js.get("bookmakers", []) or [] if b.get("key") in books]
+            for b in js["bookmakers"]:                     # the real feed returns only what was asked for
                 b["markets"] = [m for m in b.get("markets", []) if m["key"] in market_keys]
-            cost = _markets_returned(js, self.cfg["ops"]["bookmakers"])
+            cost = cost_estimate(js, books)
             if not self._fixture_spend(cost, slate, pull, game_id):
                 self.errors.append("no odds key with credits left")
                 return None, 0
             SOURCE["ok"] += 1
             return js, cost
-        params = {"regions": self.cfg["ops"]["odds_region"], "bookmakers": ",".join(self.cfg["ops"]["bookmakers"]),
+        params = {"regions": self.cfg["ops"]["odds_region"], "bookmakers": ",".join(books),
                   "markets": ",".join(market_keys), "oddsFormat": "american", "dateFormat": "iso"}
         return self._get("/events/%s/odds" % event_id, params, len(market_keys), slate, pull, game_id)
 
@@ -318,7 +327,25 @@ class Client:
         return self._get("/events/%s/markets" % event_id, params, 1, slate, "M", game_id, flat_cost=1)
 
 
-def _markets_returned(js, books):
+def request_books(cfg, others=True):
+    """The bookmakers= list for a price read: ops.bookmakers (Hard Rock) first, then ops.consensus_books, never more
+    than MAX_BOOKS_PER_REGION in all so the read is billed as one region (same credits as Hard Rock alone)."""
+    books = list(cfg["ops"]["bookmakers"])
+    if others:
+        for b in cfg["ops"].get("consensus_books") or []:
+            if b not in books and len(books) < MAX_BOOKS_PER_REGION:
+                books.append(b)
+    return books
+
+
+def regions_billed(n_books):
+    """The feed bills each group of up to 10 bookmakers as one region (minimum 1)."""
+    return max(1, -(-int(n_books) // MAX_BOOKS_PER_REGION))
+
+
+def _markets_returned(js):
+    """Distinct market keys that came back, from ANY book: the feed bills a market once per region whichever and
+    however many books returned it (NOT once per book)."""
     if not isinstance(js, dict):
         return 0
     keys = set()
@@ -326,6 +353,13 @@ def _markets_returned(js, books):
         for m in b.get("markets", []) or []:
             keys.add(m.get("key"))
     return len(keys)
+
+
+def cost_estimate(js, books):
+    """What a price read costs when the feed sends no x-requests-last header: markets returned x regions billed.
+    With up to 10 books that is markets returned x 1."""
+    books = [b for b in books or [] if b]
+    return _markets_returned(js) * regions_billed(len(books) or 1)
 
 
 def keys_refused(key_state, key_count):
@@ -528,8 +562,34 @@ def match_events(events, games, hours):
     return out, unknown
 
 
-def normalize(payload, game, matcher, requested_keys, pull, at, cost, cfg):
-    """One game's raw feed answer -> the record we keep in data/odds/<date>.json (every price, all markets)."""
+def _outcome_rows(m, find, unmatched):
+    """One market's feed outcomes -> our rows (over/under with a price only). find(name) -> player or None.
+    unmatched: list that collects names no roster player matched (None = do not collect)."""
+    rows = []
+    for o in m.get("outcomes", []) or []:
+        who = o.get("description") or ""
+        side = (o.get("name") or "").lower()
+        if side not in ("over", "under") or o.get("price") is None:
+            continue
+        p = find(who)
+        if p is None and unmatched is not None and who not in unmatched:
+            unmatched.append(who)
+        try:
+            price = int(round(float(o["price"])))
+            line = float(o["point"]) if o.get("point") is not None else None
+        except (TypeError, ValueError):
+            continue
+        rows.append({"name": who, "pid": p["id"] if p else None, "team": p["team"] if p else None,
+                     "side": side, "line": line, "price": price})
+    return rows
+
+
+def normalize(payload, game, matcher, requested_keys, pull, at, cost, cfg, others=None):
+    """One game's raw feed answer -> the record we keep in data/odds/<date>.json (every price, all markets).
+    Hard Rock (the first of ops.bookmakers found) fills "markets" exactly as before. When other books were asked
+    (others = True) the record also gets "others": {book: {market: {last_update, outcomes}}} for every other book
+    that answered, names matched to player ids the same way ({} when none answered). A Hard Rock-only read has no
+    "others" key."""
     key_to_market = {m["feed_key"]: name for name, m in cfg["ops"]["markets"].items()}
     book = None
     for want in cfg["ops"]["bookmakers"]:
@@ -539,26 +599,41 @@ def normalize(payload, game, matcher, requested_keys, pull, at, cost, cfg):
     out = {"game_id": game["id"], "away": game["away"], "home": game["home"], "pull": pull, "at": common.iso(at),
            "cost": cost, "requested": sorted(key_to_market.get(k, k) for k in requested_keys),
            "book": book.get("key") if book else None, "markets": {}, "unmatched": []}
+    seen = {}
+
+    def find(who):
+        if who not in seen:
+            seen[who] = matcher.find(who) if matcher else None
+        return seen[who]
+
     for m in (book or {}).get("markets", []) or []:
         name = key_to_market.get(m.get("key"), m.get("key"))
-        rows = []
-        for o in m.get("outcomes", []) or []:
-            who = o.get("description") or ""
-            side = (o.get("name") or "").lower()
-            if side not in ("over", "under") or o.get("price") is None:
+        out["markets"][name] = {"last_update": m.get("last_update"), "outcomes": _outcome_rows(m, find, out["unmatched"])}
+    if others:
+        oth = {}
+        for b in (payload or {}).get("bookmakers", []) or []:
+            k = b.get("key") if isinstance(b, dict) else None
+            if not k or b is book or k in cfg["ops"]["bookmakers"]:
                 continue
-            p = matcher.find(who) if matcher else None
-            if p is None and who not in out["unmatched"]:
-                out["unmatched"].append(who)
-            try:
-                price = int(round(float(o["price"])))
-                line = float(o["point"]) if o.get("point") is not None else None
-            except (TypeError, ValueError):
-                continue
-            rows.append({"name": who, "pid": p["id"] if p else None, "team": p["team"] if p else None,
-                         "side": side, "line": line, "price": price})
-        out["markets"][name] = {"last_update": m.get("last_update"), "outcomes": rows}
+            bm = {}
+            for m in b.get("markets", []) or []:
+                name = key_to_market.get(m.get("key"), m.get("key"))
+                bm[name] = {"last_update": m.get("last_update"), "outcomes": _outcome_rows(m, find, None)}
+            if bm:
+                oth[k] = bm
+        out["others"] = oth
     return out
+
+
+def hr_missing_last(done, markets):
+    """True when, for any of these markets, the newest earlier read today that asked for it came back without Hard
+    Rock's. Such a retry asks Hard Rock only: a market Hard Rock has not posted is free to ask for, but if another
+    book has it the read is billed, so other books are not asked again until Hard Rock answers."""
+    for m in markets:
+        asked = [f for f in done or () if m in (f.get("markets") or ())]
+        if asked and m not in (max(asked, key=lambda f: f["at"]).get("returned") or ()):
+            return True
+    return False
 
 
 # ---------------------------------------------------------------- feed checks
@@ -754,14 +829,15 @@ def run_pulls(now, slate, games, sched_left, cfg, rosters_for, live_markets, sta
             failed_games.append(g["id"])
             client.errors.append("no feed event for %s at %s" % (g["away"], g["home"]))
             continue
+        others = bool(ops.get("consensus_books")) and not hr_missing_last(fetched_map(day).get(g["id"]), d["markets"])
         payload, cost = client.event_odds(ev, g["away"], g["home"], [key_of[m] for m in d["markets"]],
-                                          slate, d["pull"], g["id"])
+                                          slate, d["pull"], g["id"], others=others)
         if payload is None:
             failed_games.append(g["id"])
             continue
         matcher = rosters_for(g)
         stage["fetches"].append(normalize(payload, g, matcher, [key_of[m] for m in d["markets"]],
-                                          d["pull"], now, cost, cfg))
+                                          d["pull"], now, cost, cfg, others=others))
         res["fetched_now"] += 1
         day["skipped"].pop(str(g["id"]), None)
         day["stage"] = stage

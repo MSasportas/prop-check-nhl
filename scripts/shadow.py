@@ -9,6 +9,14 @@ One file per slate, data/shadow/<slate>.json, one row per (game, market, player,
            model's own chance of the over (the same Inputs.model the engine uses, before blend and penalties),
            the blended chance for each side (engine.edge), lineup and goalie state at that moment
   close    the last read before puck, same fields
+  consensus (in open and close, TEAM.md Q1): when the read also asked other books (fetch "others"), for this exact
+           player + line: cons_books (other books with both sides, fresh, sane hold; cons_stale_books = books left out
+           because their own last_update was older than stale_min at read time), their proportional fair over
+           (cons_fair_over_med / _mean), pin_fair_over (Pinnacle), hr_vs_consensus (Hard Rock's proportional fair
+           over minus the median), best other-book price per side (best_over / best_under + _book, one side is
+           enough). close also has cons_move (median change since the previous read of this line) and stale = Hard
+           Rock's two prices unchanged since the previous read while the consensus median moved >= STALE_MOVE;
+           every stale read is kept in the row's stale_events. All None when the read did not ask other books.
   ctx      facts captured with the first read: home, team, opp, position, history, thin, back-to-back, rest,
            recent and season ice time, start time
   result   after the game is OFF: the stat and W / L / PUSH / VOID per side, read from the boxscore exactly as
@@ -36,6 +44,9 @@ RESULT_WAIT_HOURS = 2.5         # a game is looked up only once the schedule say
 BUDGET_S = 60                   # the whole step stops starting new work after this many seconds (cycle cap 420 s)
 OLD_FETCH_CAP = 4               # boxscore reads per cycle for the two previous slates
 FETCH_CAP = 20                  # boxscore reads per cycle for tonight (grade's reads this run are free: shared)
+STALE_MOVE = 0.03              # consensus fair over moved this much while Hard Rock's prices stood still = stale
+CONS_HOLD = (0.0, 0.15)       # an other book's two-way line counts toward the consensus only with a hold in this range
+PINNACLE = "pinnacle"
 NOTE = "Internal shadow log (TEAM.md section 7 item 17). Not the Record, not shown anywhere."
 
 
@@ -134,8 +145,77 @@ def model_over(inp, market, pid, team, opp, home):
     return None, "no model for this market"
 
 
+# ---------------------------------------------------------------- other books (consensus)
+def other_lines(f, market, v):
+    """From one read's "others": {(pid, line): {"pairs": {book: (over, under)}, "best": {side: (price, book)}}}.
+    Matched players only; a book's market is skipped when its own last_update is stale at read time. None when the
+    read did not ask other books."""
+    if "others" not in f:
+        return None
+    at = common.parse_iso(f["at"])
+    out = {}
+    for book, mks in sorted((f.get("others") or {}).items()):
+        mk = (mks or {}).get(market)
+        if not mk:
+            continue
+        if odds.is_stale(mk.get("last_update"), at, v):
+            for key_ in pairs_of(mk):
+                out.setdefault(key_, {"pairs": {}, "best": {}, "stale": 0})["stale"] += 1
+            continue
+        for (pid, line), p in pairs_of(mk).items():
+            e = out.setdefault((pid, line), {"pairs": {}, "best": {}, "stale": 0})
+            for side in ("over", "under"):
+                pr = p[side]
+                if pr is not None and (side not in e["best"] or odds.decimal(pr) > odds.decimal(e["best"][side][0])):
+                    e["best"][side] = (pr, book)
+            if p["over"] is not None and p["under"] is not None and \
+                    CONS_HOLD[0] <= odds.hold(p["over"], p["under"]) <= CONS_HOLD[1]:
+                e["pairs"][book] = (p["over"], p["under"])
+    return out
+
+
+def _median(xs):
+    xs = sorted(xs)
+    n = len(xs)
+    return None if not n else (xs[n // 2] if n % 2 else (xs[n // 2 - 1] + xs[n // 2]) / 2.0)
+
+
+def consensus(entry, hr_fair_over, asked):
+    """Consensus fields for one line from other_lines()'s entry (None = no other book has this line)."""
+    out = {"cons_books": None, "cons_stale_books": None, "cons_fair_over_med": None, "cons_fair_over_mean": None, "pin_fair_over": None,
+           "hr_vs_consensus": None, "best_over": None, "best_over_book": None, "best_under": None,
+           "best_under_book": None}
+    if not asked:
+        return out
+    entry = entry or {"pairs": {}, "best": {}, "stale": 0}
+    fairs = {b: odds.fair_two_sided(o, u) for b, (o, u) in entry["pairs"].items()}
+    out["cons_books"] = len(fairs)
+    out["cons_stale_books"] = entry["stale"]
+    if fairs:
+        med = _median(list(fairs.values()))
+        out["cons_fair_over_med"] = _r(med)
+        out["cons_fair_over_mean"] = _r(sum(fairs.values()) / len(fairs))
+        out["hr_vs_consensus"] = _r(hr_fair_over - med)
+    if PINNACLE in fairs:
+        out["pin_fair_over"] = _r(fairs[PINNACLE])
+    for side in ("over", "under"):
+        if side in entry["best"]:
+            out["best_" + side], out["best_%s_book" % side] = entry["best"][side]
+    return out
+
+
+def stale_vs(prev, snap):
+    """(cons_move, stale) for a read against the previous read of the same line. None, None without a consensus
+    median on both reads."""
+    if not prev or prev.get("cons_fair_over_med") is None or snap.get("cons_fair_over_med") is None:
+        return None, None
+    move = snap["cons_fair_over_med"] - prev["cons_fair_over_med"]
+    still = prev.get("over") == snap["over"] and prev.get("under") == snap["under"]
+    return _r(move), bool(still and abs(move) >= STALE_MOVE - 1e-9)
+
+
 def snapshot(inp, f, market, pair, pid, team, opp, home, thin, model_fn, lineup_state, goalie_state, now,
-             historical):
+             historical, cons=None):
     v = inp.v
     over, under = pair["over"], pair["under"]
     fair_over = odds.fair_two_sided(over, under)
@@ -145,6 +225,7 @@ def snapshot(inp, f, market, pair, pid, team, opp, home, thin, model_fn, lineup_
          "model_p_over": None, "mu": None, "p_over": None, "p_under": None,
          "lineup": None, "lineup_page_today": None, "goalie_own": None, "goalie_opp": None,
          "logged_at": None if historical else common.iso(now), "rules": inp.cfg.get("version")}
+    s.update(cons or consensus(None, fair_over, False))
     m = model_fn(pair["line"]) if model_fn else None
     if m is not None:
         s["model_p_over"], s["mu"] = _r(m["p_over"]), _r(m["mu"], 3)
@@ -195,6 +276,7 @@ def add_reads(doc, inp, odds_doc, games, sched_games, now, lineup_state=None, go
         if not historical and sched.started(g, now):
             continue                                         # snapshot rule: nothing written after puck
         for market, mk in sorted((f.get("markets") or {}).items()):
+            oth = other_lines(f, market, inp.v)
             for (pid, line), pair in sorted(pairs_of(mk).items()):
                 if pair["over"] is None or pair["under"] is None or pair["team"] not in (g["away"], g["home"]):
                     continue                                 # two-way lines of matched players only
@@ -206,20 +288,30 @@ def add_reads(doc, inp, odds_doc, games, sched_games, now, lineup_state=None, go
                 home = team == g["home"]
                 opp = g["away"] if home else g["home"]
                 fn, mnote = model_over(inp, market, pid, team, opp, home)
+                cons = consensus((oth or {}).get((pid, line)), odds.fair_two_sided(pair["over"], pair["under"]),
+                                 oth is not None)
                 if row is None:
                     ctx = context(inp, sched_games, g, pid, team, market)
                     snap = snapshot(inp, f, market, pair, pid, team, opp, home, ctx["thin"], fn, lineup_state,
-                                    goalie_state, now, historical)
+                                    goalie_state, now, historical, cons)
+                    snap["cons_move"], snap["stale"] = None, None
                     if fn is not None and snap["model_p_over"] is None and market in model.SK:
                         mnote = "no model (position %s)" % ctx["pos"]
                     row = {"game_id": g["id"], "market": market, "pid": pid, "name": pair["name"], "line": line,
                            "src": "backfill" if historical else "live", "model_note": mnote, "ctx": ctx,
-                           "n_reads": 1, "open": snap, "close": snap, "result": None}
+                           "n_reads": 1, "open": snap, "close": snap, "stale_events": [], "result": None}
                     rows[k] = row
                     doc["rows"].append(row)
                 else:
-                    row["close"] = snapshot(inp, f, market, pair, pid, team, opp, home, row["ctx"]["thin"], fn,
-                                            lineup_state, goalie_state, now, historical)
+                    prev = row["close"]
+                    snap = snapshot(inp, f, market, pair, pid, team, opp, home, row["ctx"]["thin"], fn,
+                                    lineup_state, goalie_state, now, historical, cons)
+                    snap["cons_move"], snap["stale"] = stale_vs(prev, snap)
+                    if snap["stale"]:
+                        row.setdefault("stale_events", []).append(
+                            {"at": snap["at"], "from_at": prev.get("at"), "over": snap["over"], "under": snap["under"],
+                             "cons_from": prev["cons_fair_over_med"], "cons_to": snap["cons_fair_over_med"]})
+                    row["close"] = snap
                     row["n_reads"] += 1
                 changed += 1
     return changed
