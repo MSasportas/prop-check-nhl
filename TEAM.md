@@ -24,7 +24,7 @@ short message.
 4. Readable on a phone in seconds.
 
 ## 3. The team (subagents run by the CEO; any chat in the project is the CEO)
-Sharp (betting method, final call) · Data Scientist (data, model, samples, judging the Record) · UX (page) ·
+Sharp (betting method, final call) · Data Scientist (data, model, samples, judging the Record) · **Researcher (new 2026-10-19: tests new hypotheses every day to find an edge; rules in research/RESEARCH.md; writes research/ only)** · UX (page) ·
 Builder (all code) · QA (tests every change before it goes live, real browser at 380px, hasn't seen the build).
 Rule changes: the Data Scientist names the sample first; the Sharp decides; log it in section 8.
 
@@ -274,6 +274,7 @@ v1.0 in one line: 60/40 blend, proportional de-vig, -0.02/-0.015/-0.04 adjustmen
 | 2026-10-11 | v1.0 set (section 4) | First build: Sharp standard from the DS backtest (2024-25 fit, 2025-26 out of sample) and one live Hard Rock pull | Backtest only; 0 graded live legs |
 
 ## 9. Session log (newest first, one line each)
+- 2026-10-19 11 AM (Matt: save historical data; hire a Researcher; find an edge): historical odds bundle saved privately as Project doc data/nhl_hist_2025-26_hardrock.tar.gz.b64.txt (round-trip checksum ok; not in this public repo). Researcher role created (research/RESEARCH.md, HYPOTHESES.md, LOG.md); first run now, then a daily scheduled run.
 - 2026-10-19 (Matt: historical key, backtest with best practice): pre-registered, DS backtested 2025-26 (16,818 credits). v2.0 failed; picks paused before the first v2 pick. Pause = `ops.pause` in config + `common.picks_paused`; tests set PC_PAUSE_OFF=1 (test_pause.py turns it on). 263 tests. Dry cycle on a copy: empty state 'paused', Record unchanged; page and rules sheet checked at 380px.
 - 2026-10-18 7 PM: v2.0 + shadow live, chain ok (7:00 PM run all steps ok). First market menu: Hard Rock NHL lists h2h, spreads, totals (+alts, periods, 3-way, OT, team totals, BTTS, odd/even) and player shots, alt shots, points, assists, PP points, goals (+alt, first), total saves, goals against, shutouts. No blocked shots. Weekly reviews check item 18 gates every Sunday (confirm gate ~Oct 30).
 - 2026-10-18 evening (Matt: whatever it takes, find a strongly profitable edge): DS subset hunt (680 slices, none survive; rule A survives placebo p=0.01), Sharp ruled v2.0 (over-hold de-vig, 0.7 blend, edge 0-0.05, 1.5/2.5 only, 2/game, 8/night, parlays paused) live from slate Oct 19. Builder shipped shadow log, C on every game, lineup history, market menu, v2.0. QA: shadow PASS WITH FIXES (fixed), v2.0 PASS WITH FIXES (rules sheet dotted placeholder, fixed + page-regex test). 260 tests. Open: rulesv2 fixture still has v1-style picks; sheet says pull 'at a new price' but code pulls any time below break-even (code is the safer one).
