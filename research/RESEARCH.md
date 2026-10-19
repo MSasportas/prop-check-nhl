@@ -11,15 +11,14 @@ and report. Don't re-run ideas already in HYPOTHESES.md unless the change is sta
 The aim is ROI, but a false edge costs Matt real money: the bar below never moves to make a deadline.
 
 ## Data (nothing here may be paid for twice)
-- **Historical Hard Rock odds 2025-26** (bought 2026-10-19, 16,818 credits): private Project doc
-  `data/nhl_hist_2025-26_hardrock.tar.gz.b64.txt` in the claude.ai Project "NHL" (Projects tool, `project_read`).
-  Decode: `base64 -d FILE > b.tgz && tar -xzf b.tgz` (sha256 of b.tgz:
-  a498115d52898176205a0d93db479b3102185ccb75d5433b84d42d37871e6ebe). Contents: `raw/odds/` (every API response:
-  events lists + shots at -45 min for all 1,311 games, saves -45 for 233 games, shots 1 PM for 144 games), `work/`
-  (`shots45_lines.jsonl` 18,383 lines with prices, results and the production model's prior-only p_over;
+- **Historical Hard Rock odds 2025-26** (bought 2026-10-19): `research/data/hist_2025-26_hardrock.tgz` in this repo
+  (Matt's choice: everything in one repo). `tar -xzf` it into a scratch folder, never into the repo. Contents:
+  `raw/odds/` (every API response: events lists + shots at -45 min for all 1,311 games, saves -45 for 233 games,
+  shots 1 PM for 144 games), `raw/research/` (alt-shot ladders at -45 for 97 games; multi-market/multi-book probes),
+  `work/` (`shots45_lines.jsonl` 18,383 lines with prices, results and the production model's prior-only p_over;
   `shots45_feat.jsonl` same plus features; `saves45_lines.jsonl`; `shots13_lines.jsonl`), `code/` (pull, build,
-  walk-forward, lockbox, placebo scripts), `PLAN.md`, `results.md`.
-  NEVER commit raw odds to this public repo (the odds provider's data; keep it private). Summaries and code are fine.
+  walk-forward, lockbox, placebo scripts), `research/` (derived features), ledgers, `PLAN.md`, `results.md`.
+  Add new historical pulls as a NEW tgz in research/data/ (never rewrite an old one). Never commit any key.
 - **Live 2026-27**: `data/odds/` (every Hard Rock read), `data/shadow/` (every line, open/close, model p, context,
   results), `data/state/lineup_history/`. This is the forward test that no history can replace.
 - **Free**: NHL APIs (api-web.nhle.com, api.nhle.com/stats/rest), MoneyPuck downloads (non-commercial, credit them).
