@@ -149,6 +149,14 @@ button{font:inherit;color:inherit;background:none;border:0;padding:0;margin:0;te
 .list .li .r{flex:none;white-space:nowrap;color:var(--muted)}
 .list .li .r b{font:600 16px/20px var(--display);color:var(--fg)}
 .list .sub{display:block;font-size:12px;color:var(--warn)}
+.pp-note{font-size:12px;line-height:17px;color:var(--warn);margin:0 0 8px}
+.pp-head{font:600 15px/19px var(--display);letter-spacing:.02em;margin:10px 0 4px}
+.pp-row{padding:9px 0;border-bottom:1px solid var(--line);font-size:13px;line-height:18px}
+.pp-row:last-child{border-bottom:0}
+.pp-row .nm{font:600 16px/20px var(--display);overflow-wrap:anywhere}
+.pp-row .l2,.pp-row .l3{display:block;font-size:12px;line-height:17px;color:var(--muted);overflow-wrap:anywhere}
+.pp-row.pulled{opacity:.7}.pp-row.pulled .nm{text-decoration:line-through}
+.pp-row .why{color:var(--warn)}
 .list .st{display:block;font-size:12px;line-height:16px;color:var(--muted);margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 
 /* empty + skeleton + error */
@@ -256,7 +264,7 @@ var SEEN_KEY = FIX ? 'pc_seen_fx' : 'pc_seen';
 var UI_DEF = { stale_after_min: 75, refresh_sec: 120, picks_open: 8 };
 
 var S = {
-  slate: null, record: null, rules: null, recordErr: null,
+  slate: null, record: null, rules: null, recordErr: null, paper: null, paperErr: null,
   loaded: false, loadErr: false, fetchFail: false, loadedAt: null, busy: false,
   view: 'tonight', expanded: {}, open: {}, moreOpen: false, filter: 'all', legsOpen: {},
   older: [], olderIdx: 0, olderBusy: false, olderErr: false,
@@ -449,9 +457,12 @@ function settle(p) { return p.then(function (v) { return { ok: true, v: v }; }, 
 function load() {
   if (S.busy) return Promise.resolve();
   S.busy = true;
-  return Promise.all([settle(getJSON(BASE + 'slate.json')), settle(getJSON(BASE + 'record.json')), settle(getJSON(BASE + 'rules.json'))])
+  /* the paper test has its own file and its own failure: it never touches the picks above */
+  return Promise.all([settle(getJSON(BASE + 'slate.json')), settle(getJSON(BASE + 'record.json')), settle(getJSON(BASE + 'rules.json')),
+                      settle(getJSON(BASE + 'paper/summary.json'))])
     .then(function (r) {
       S.busy = false; S.loaded = true;
+      if (r[3].ok) { S.paper = r[3].v; S.paperErr = null; } else if (!S.paper) S.paperErr = r[3].kind;
       if (r[1].ok) { S.record = r[1].v; S.recordErr = null; } else if (!S.record) S.recordErr = r[1].kind;
       if (r[2].ok) S.rules = r[2].v;
       if (r[0].ok) { S.slate = r[0].v; S.fetchFail = false; S.loadErr = false; S.loadedAt = now(); }
@@ -497,7 +508,7 @@ function writeSeen() {
 function calcKey() {
   var d = S.slate ? split() : null;
   return JSON.stringify([S.loaded, S.loadErr, S.fetchFail, S.recordErr, S.slate && S.slate.generated_at, S.slate && S.slate.status_at, S.record && S.record.generated_at,
-    S.rules && S.rules.version, S.rules && S.rules.updated, S.slate && expired(), S.slate && stale(),
+    S.paper && S.paper.generated_at, S.paperErr, S.rules && S.rules.version, S.rules && S.rules.updated, S.slate && expired(), S.slate && stale(),
     d ? d.started.length : 0, S.slate ? dayKey(now()) : 0]);
 }
 function maybeRender() { var k = calcKey(); if (k !== S.key) render(); }
@@ -889,7 +900,63 @@ function renderTonight() {
     return x;
   }));
 
+  var pp = paperSection();
+  if (pp) app.appendChild(pp);
+
   app.appendChild(footer());
+}
+/* ---------- Paper test (Gap + Guard): not bets, own file, own failure ---------- */
+function paperOn() { return !!((S.rules && isObj(S.rules.paper) && S.rules.paper.active) || S.paper); }
+function toPuck(start) {
+  var t = ms(start); if (t == null) return '';
+  var m = Math.round((t - now()) / 60000);
+  if (m <= 0) return 'puck dropped';
+  return (m >= 60 ? Math.floor(m / 60) + 'h ' + (m % 60) + 'm' : m + 'm') + ' to puck';
+}
+function paperRow(x) {
+  var pulled = isObj(x.pulled), tail = [];
+  tail.push('Gap ' + (num(x.gap_pct) != null ? (x.gap_pct >= 0 ? '+' : '') + x.gap_pct.toFixed(1) + '%' : '—') + ' vs ' + str(x.n_books) + ' books');
+  tail.push('guard ' + (x.guard === 'pass' ? 'ok' : 'veto') + (num(x.final_p_pct) != null ? ' (final ' + x.final_p_pct.toFixed(1) + '%)' : ''));
+  var state = pulled ? 'Pulled' : (x.result ? 'Graded' : (x.locked ? 'Locked' : 'Open'));
+  var l3 = [str(x.settled || 'Early'), toPuck(x.start), state];
+  if (x.result) l3.push(x.result + (num(x.units) != null ? ' ' + (x.units >= 0 ? '+' : '') + x.units.toFixed(2) + 'u' : ''));
+  if (num(x.clv_pct) != null) l3.push('CLV ' + (x.clv_pct >= 0 ? '+' : '') + x.clv_pct.toFixed(1) + '%');
+  return h('div', { class: 'pp-row' + (pulled ? ' pulled' : '') },
+    h('div', { class: 'nm', text: str(x.player) + ' ' + str(x.bet) + '  ' + odds(x.price) }),
+    h('span', { class: 'l2', text: str(x.game) + ' · ' + (fTime(x.start) || '') + ' · ' + tail.join(' · ') }),
+    h('span', { class: 'l3', text: l3.filter(Boolean).join(' · ') }),
+    pulled ? h('span', { class: 'l3 why', text: 'Pulled: ' + str(x.pulled.reason) }) : null);
+}
+function paperSection() {
+  if (!paperOn()) return null;
+  var P = S.paper, n = P && isObj(P.tonight) ? arr(P.tonight.flags).length : null;
+  var title = 'Paper test (not bets)' + (n != null ? ' (' + n + ')' : '');
+  return sectionToggle('paper', title, function () {
+    var box = h('div', null, h('p', { class: 'pp-note', text: 'Test only. Nothing here is a bet, and none of it is in the picks or the Record.' }));
+    if (!P) {
+      box.appendChild(h('div', { class: 'card empty' }, h('div', { class: 's', style: 'margin:0;color:var(--fg)',
+        text: S.paperErr === 'file' ? "The paper test file couldn't be read. Trying again." : "Can't load the paper test. Check your connection." })));
+      return box;
+    }
+    var t = isObj(P.tonight) ? P.tonight : {}, fl = arr(t.flags).filter(isObj), vt = arr(t.vetoes).filter(isObj);
+    var gen = ms(P.generated_at);
+    if (gen != null && now() - gen > 3600000 * 2) box.appendChild(h('p', { class: 'pp-note', text: 'Paper data is old: last update ' + fTime(gen) + '.' }));
+    if (P.active === false) box.appendChild(h('p', { class: 'pp-note', text: 'The paper test is off right now.' }));
+    var nv = isObj(P.nov2) ? P.nov2 : {};
+    var cg = isObj(nv.clv_gaps) ? nv.clv_gaps : {};
+    box.appendChild(h('p', { class: 'mu', style: 'font-size:12px;line-height:17px;margin:0 0 8px', text:
+      'Gaps measured ' + (num(nv.gaps_measured) || 0) + ' · graded ' + (num(nv.graded_picks) || 0) + ' (' + (num(nv.w) || 0) + '-' + (num(nv.l) || 0) + ') · ' +
+      (num(cg.mean) != null ? 'mean CLV ' + (cg.mean >= 0 ? '+' : '') + (100 * cg.mean).toFixed(1) + '%' : 'mean CLV n/a') +
+      (isObj(P.window) && P.window.judge_on ? ' · judged ' + fDateShort(P.window.judge_on) : '') }));
+    box.appendChild(h('div', { class: 'pp-head', text: "Tonight's paper flags" }));
+    if (!fl.length) box.appendChild(h('p', { class: 'mu', style: 'font-size:13px;margin:0', text: P.active === false ? 'None.' : 'None yet. Flags can appear from the 90-minute price read.' }));
+    else { var lst = h('div', { class: 'list' }); fl.forEach(function (x) { lst.appendChild(paperRow(x)); }); box.appendChild(lst); }
+    if (vt.length) {
+      box.appendChild(h('div', { class: 'pp-head', text: 'Gap seen, model vetoed (' + vt.length + ')' }));
+      var vl = h('div', { class: 'list' }); vt.forEach(function (x) { vl.appendChild(paperRow(x)); }); box.appendChild(vl);
+    }
+    return box;
+  });
 }
 /* per-game lineup + goalie status lines: "CBJ: ✅ lineup · G Korpisalo ✅" */
 function lastName(n) { var w = str(n).trim().split(/\s+/); return w[w.length - 1] || ''; }

@@ -214,7 +214,11 @@ class Modes(unittest.TestCase):
         self.s.at("09:00")
         rules = common.read_json(self.s.path("rules.json"))
         cfg = helpers.cfg()
-        self.assertEqual(rules, {"version": cfg["version"], "updated": cfg["updated"], "values": cfg["values"], "ui": cfg["ui"]})
+        want = {"version": cfg["version"], "updated": cfg["updated"], "values": cfg["values"], "ui": cfg["ui"]}
+        pp = cfg["ops"]["paper"]                                 # the page's paper section: window only, never thresholds
+        want["paper"] = {k: pp.get(k) for k in ("active", "start", "end", "judge_on")}
+        self.assertEqual(rules, want)
+        self.assertNotIn("thresholds", rules["paper"])
         for k in ("price_gate", "max_price", "min_p", "margin_confirmed", "margin_early", "model_weight", "market_weight",
                   "uncertainty", "under_penalty", "thin_over_penalty", "thin_rows", "thin_team_games", "min_history",
                   "news_gap", "too_good", "pull_margin", "drift_pull", "max_per_player", "max_per_game",

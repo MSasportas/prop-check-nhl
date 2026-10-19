@@ -298,7 +298,7 @@ class T(unittest.TestCase):
     def test_state_has_only_ids_and_times(self):
         notify.notify(slate([pick(1)]))
         st = self.state()
-        self.assertEqual(set(st), {"picks", "parlays", "pulled", "sent", "action", "hello"})
+        self.assertEqual(set(st), {"picks", "parlays", "pulled", "sent", "action", "hello", "sent_paper", "pulled_paper", "paper_sent"})
         self.assertNotIn("http", json.dumps(st))
 
 

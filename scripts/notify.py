@@ -5,6 +5,10 @@ Sends (all plain text, one webhook post each):
   pulled       one short message for picks he was told about that were pulled before puck drop
   action       odds keys refused / odds pool low or empty (the page's own sentence), once per ET day each
   hello        once, the first time the webhook works
+  PAPER      (Gap + Guard paper test, TEAM.md item 21) its own messages, headed "PAPER - do not bet": one batched message
+             per cycle for flags not told about, plus one PAPER PULLED line for a flag that was told and then pulled. Own
+             state (sent_paper / pulled_paper / paper_sent), own cap of 3 a day that does NOT use the 6 above, same quiet
+             hours and 14 s budget, no "Bet only at these prices" footer. Marked only after a 2xx.
 Never: no-pick nights, heartbeats, lineup checks, grading, errors. Quiet 12:30 AM to 8:00 AM ET (items are held:
 they are still open at 8:00 and go out then). At most 6 messages per ET day. A price move or Early -> Lineup
 confirmed never re-notifies.
@@ -26,6 +30,8 @@ import common
 
 PAGE = "https://msasportas.github.io/prop-check-nhl/"
 MAX_PER_DAY = 6
+PAPER_MAX_PER_DAY = 3       # paper messages, counted apart from MAX_PER_DAY
+PAPER_HEAD = "PAPER - do not bet, nothing is on the page as a bet"
 MAX_LINES = 8
 QUIET_FROM = (0, 30)        # inclusive
 QUIET_TO = (8, 0)           # exclusive
@@ -106,6 +112,9 @@ def load_state():
     st.setdefault("sent", {})               # ET date -> messages sent that day
     st.setdefault("action", {})             # ET date -> ["refused", "pool"] already told
     st.setdefault("hello", None)
+    st.setdefault("sent_paper", {})         # paper flag id -> ISO time told (never the real picks' / parlays' ids)
+    st.setdefault("pulled_paper", {})       # paper flag id -> ISO time the pull was told
+    st.setdefault("paper_sent", {})         # ET date -> paper messages sent that day (its own cap)
     return st
 
 
@@ -113,9 +122,9 @@ def _prune(st, today):
     from datetime import date, timedelta
     d0 = date.fromisoformat(today)
     keep = {(d0 - timedelta(days=i)).isoformat() for i in range(KEEP_DAYS)}
-    for k in ("picks", "parlays", "pulled"):
+    for k in ("picks", "parlays", "pulled", "sent_paper", "pulled_paper"):
         st[k] = {i: t for i, t in st[k].items() if i[:10] in keep}
-    for k in ("sent", "action"):
+    for k in ("sent", "action", "paper_sent"):
         st[k] = {d: v for d, v in st[k].items() if d in keep}
 
 
@@ -238,6 +247,41 @@ def build_pulled(slate, st, now):
     return text + "\n" + PAGE, items
 
 
+def _paper_summary(slate_date):
+    s = common.read_json(common.dpath("paper", "summary.json"))
+    if isinstance(s, dict) and s.get("slate") == slate_date and s.get("active"):
+        return s
+    return None
+
+
+def paper_line(x):
+    """One paper flag as a short block (no bet instruction anywhere)."""
+    when = " · ".join(y for y in (x["game"], _t(x["start"]), "✅ " + x["settled"] if x["settled"] != "Early" else "⏳ Early") if y)
+    return "\n".join(["**%s %s  %s**" % (x["player"], x["bet"], common.fmt_price(x["price"])), when,
+                      "Gap %+.1f%% vs %d books · guard ok (final %.1f%%)" % (x["gap_pct"], x["n_books"], x["final_p_pct"])])
+
+
+def build_paper(summary, st, now):
+    """-> (text, new_flags, pulled_flags) or None. Only flags of games still ahead; a flag already pulled before it was
+    told about is never told. Header says PAPER and that nothing is a bet; there is no 'bet at these prices' footer."""
+    flags = [x for x in (summary.get("tonight") or {}).get("flags", []) if common.parse_iso(x["start"]) > now]
+    new = [x for x in flags if x["id"] not in st["sent_paper"] and not x.get("pulled")]
+    pulled = [x for x in flags if x.get("pulled") and x["id"] in st["sent_paper"] and x["id"] not in st["pulled_paper"]]
+    if not new and not pulled:
+        return None
+    parts = [PAPER_HEAD]
+    if new:
+        parts.append("%d paper flag%s" % (len(new), "" if len(new) == 1 else "s"))
+        parts += [paper_line(x) for x in new[:MAX_LINES]]
+        if len(new) > MAX_LINES:
+            parts.append("+%d more on the page" % (len(new) - MAX_LINES))
+    if pulled:
+        parts.append("PULLED PAPER")
+        parts += ["• %s %s (%s)" % (x["player"], x["bet"], x["pulled"]["reason"]) for x in pulled[:MAX_LINES]]
+    parts.append(PAGE)
+    return "\n\n".join(parts), new, pulled
+
+
 def build_actions(slate, st, today):
     """Things only Matt can do: [(code, text)] not yet told today."""
     told = set(st["action"].get(today, []))
@@ -274,7 +318,9 @@ def _notify(slate, sender):
         return 0
     if slate is None:
         slate = common.read_json(common.dpath("slate.json"))
-    if not isinstance(slate, dict) or slate.get("slate_date") != common.slate_date(now):
+    real = isinstance(slate, dict) and slate.get("slate_date") == common.slate_date(now)
+    paper = _paper_summary(common.slate_date(now))
+    if not real and not paper:
         return 0                                               # old slate: say nothing about it
     sender = sender or Sender(url, __import__("time").monotonic)
     st = load_state()
@@ -295,17 +341,30 @@ def _notify(slate, sender):
         _save(st, before)                                      # written at once after each 2xx: no double send
         return True
 
+    def post_paper(text, mark):
+        if st["paper_sent"].get(today, 0) >= PAPER_MAX_PER_DAY:
+            return False                                       # its own cap; the real one is untouched
+        if not sender.send(text):
+            return False
+        st["paper_sent"][today] = st["paper_sent"].get(today, 0) + 1
+        sent[0] += 1
+        mark()
+        _save(st, before)
+        return True
+
     def set_hello():
         st["hello"] = stamp
-    if not st["hello"]:
+    if not real:
+        pass
+    elif not st["hello"]:
         post(HELLO, set_hello)
-    pulled = build_pulled(slate, st, now)
+    pulled = build_pulled(slate, st, now) if real else None
     if pulled:
         def mark_pulled():
             for kind, i, _ in pulled[1]:
                 st["pulled"][i] = stamp
         post(pulled[0], mark_pulled)
-    new = build_new(slate, st, now)
+    new = build_new(slate, st, now) if real else None
     if new:
         def mark_new():
             for p in new[1]:
@@ -313,8 +372,16 @@ def _notify(slate, sender):
             for pl in new[2]:
                 st["parlays"][pl["id"]] = stamp
         post(new[0], mark_new)
-    for code, text in build_actions(slate, st, today):
+    for code, text in (build_actions(slate, st, today) if real else []):
         post("⚠️ **Needs you:** " + text, lambda c=code: st["action"].setdefault(today, []).append(c))
+    pp = build_paper(paper, st, now) if paper else None
+    if pp:
+        def mark_paper():
+            for x in pp[1]:
+                st["sent_paper"][x["id"]] = stamp
+            for x in pp[2]:
+                st["pulled_paper"][x["id"]] = stamp
+        post_paper(pp[0], mark_paper)
     _save(st, before)
     return sent[0]
 

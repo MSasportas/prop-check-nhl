@@ -21,10 +21,11 @@ Steps, in order, each allowed to fail without stopping the others:
     engine    lock / pull / keep shown picks, add new ones, parlays  -> appends to the Record
     grade     results for games that are final                       -> appends to the Record
     shadow    the model on every two-way line, graded after the game  -> data/shadow/<date>.json (internal)
+    paper     Gap + Guard paper test: flags, vetoes, CLV, grades      -> data/paper/ (internal, never bets)
     slate     data/slate.json
     record    data/record.json and month files
     status    data/status.json
-shadow, lineup_history and market_menu are "soft": they log for the team only, and a failure there is
+shadow, paper, lineup_history and market_menu are "soft": they log for the team only, and a failure there is
 noted in status.json steps as "warn" and never fails the run.
 Safe to run twice in a row: every decision is made from files on disk, and every write is temp + rename.
 """
@@ -47,14 +48,15 @@ import names       # noqa: E402
 import nhl         # noqa: E402
 import notify      # noqa: E402
 import odds        # noqa: E402
+import paper       # noqa: E402
 import record      # noqa: E402
 import sched       # noqa: E402
 import shadow      # noqa: E402
 import stats       # noqa: E402
 
 STEPS = ["rules", "schedule", "stats", "lineups", "lineup_history", "odds", "market_menu", "engine", "grade",
-         "shadow", "slate", "record", "status"]
-SOFT = ("lineup_history", "market_menu", "shadow")     # team logs: a failure is a "warn", never a failed run
+         "shadow", "paper", "slate", "record", "status"]
+SOFT = ("lineup_history", "market_menu", "shadow", "paper")     # team logs: a failure is a "warn", never a failed run
 
 
 class Run:
@@ -115,6 +117,9 @@ class Run:
     def do_rules(self):
         out = {"version": self.cfg["version"], "updated": self.cfg["updated"],
                "values": self.cfg["values"], "ui": self.cfg["ui"]}
+        pp = (self.cfg.get("ops") or {}).get("paper")
+        if pp:                                              # what the page's paper section needs; never the thresholds
+            out["paper"] = {k: pp.get(k) for k in ("active", "start", "end", "judge_on")}
         if common.read_json(common.dpath("rules.json")) != out:
             common.write_json(common.dpath("rules.json"), out)
             return {"note": "rules.json written"}
@@ -238,6 +243,15 @@ class Run:
         if inp is None and self.games:
             inp = self.build_inputs()
         return shadow.step(self.now, self.slate, self.cfg, inp, self.cache, self.games)
+
+    def do_paper(self):
+        self.load_schedule()
+        if not self.cache:
+            return {"status": "skipped", "note": "no schedule"}
+        inp = self.inp
+        if inp is None and self.games:
+            inp = self.build_inputs()
+        return paper.step(self.now, self.slate, self.cfg, inp, self.cache, self.games)
 
     def build_inputs(self):
         self.load_schedule()
@@ -391,8 +405,9 @@ class Run:
         budget_ok = bool(plan) and plan["budget_today"] - sum(e["cost"] for e in led.get("spent", [])
                                                               if e["date"] == self.slate) > 0
         ls_now = self.lineup_state or lineups.load(self.slate)
-        nxt = odds.next_read_at(now, self.games, plan["tier"], v, fetched, self.started, budget_ok,
-                                lineups_ok=odds.lineups_confirmed(ls_now, self.games)) \
+        paper_on = common.paper_active(cfg, self.slate)
+        nxt = odds.next_read_at(now, self.games, odds.eff_tier(plan, paper_on), v, fetched, self.started, budget_ok,
+                                lineups_ok=odds.lineups_confirmed(ls_now, self.games), paper=paper_on) \
             if plan and not (refused or no_keys or all_used_up) else None   # no key can read: promise no check
 
         # lineups
@@ -579,6 +594,7 @@ def run(only=None, dry_run=False):
     r.step("engine", r.do_engine)
     r.step("grade", r.do_grade)
     r.soft_step("shadow", r.do_shadow)                      # after odds, engine and grade (TEAM.md item 17)
+    r.soft_step("paper", r.do_paper)                        # after shadow: grades from its results (TEAM.md item 21)
     failed = r.failed_step()
     last_run = {"ok": failed is None, "at": common.iso(now), "failed_step": failed}
     facts = None

@@ -205,6 +205,17 @@ def picks_paused(cfg):
     return bool(pause.get("active")) and not os.environ.get("PC_PAUSE_OFF")
 
 
+def paper_active(cfg, slate=None):
+    """ops.paper.active and the slate inside [start, end] (Gap + Guard paper test, TEAM.md item 21). Independent of
+    ops.pause: the paper test never turns picks on or off."""
+    p = (cfg.get("ops") or {}).get("paper") or {}
+    if not p.get("active"):
+        return False
+    if slate and ((p.get("start") and slate < p["start"]) or (p.get("end") and slate > p["end"])):
+        return False
+    return True
+
+
 def rules_for(cfg, slate):
     """The rules a slate is run under. config/rules.json holds the current rules in "values" and, under
     "previous", the version before with the values that differ and the last slate it covers ("until"). A slate

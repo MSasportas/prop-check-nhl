@@ -386,13 +386,16 @@ def tier_of(allowance, v):
     return 4
 
 
-def markets_for(tier, pull, live_markets=(), c_every_game=None):
+def markets_for(tier, pull, live_markets=(), c_every_game=None, paper=False):
     """Which markets a pull asks for at a tier. [] = this pull does not run at this tier.
+    paper (ops.paper active, TEAM.md item 21): B is shots only at EVERY tier >= 1 (no saves / goals pulls).
     C (closing shots read): every game at tier 3+, only games holding a live shots pick at tier 2.
     c_every_game overrides that (run_pulls passes False when today's budget is tight)."""
     if pull == "A":
         return ["shots"]                                   # cheapest market only; points wait for confirmed lineups
     if pull == "B":
+        if paper:
+            return ["shots"] if tier >= 1 else []
         if tier == 2:
             return ["shots"]                               # points picks are off (2026-10-18 focus): shots re-price only
         if tier == 3:
@@ -408,6 +411,18 @@ def markets_for(tier, pull, live_markets=(), c_every_game=None):
         every = tier >= 3 if c_every_game is None else c_every_game
         return ["shots"] if every or "shots" in (live_markets or ()) else []
     return []
+
+
+PAPER_TIER_FLOOR_ALLOWANCE = 3.0     # paper test: tier 3 (C on every game) once the allowance is at least this
+
+
+def eff_tier(plan, paper):
+    """The tier the pulls run at. While the paper test is active the tier floor is 3 when the allowance is >= 3
+    credits a game (A + B + C on every game, shots only, about 3 credits a game)."""
+    tier = plan["tier"]
+    if paper and plan.get("allowance", 0) >= PAPER_TIER_FLOOR_ALLOWANCE:
+        return max(tier, 3)
+    return tier
 
 
 def make_plan(pool_left, games_left, games_today, v):
@@ -439,7 +454,8 @@ def lineups_confirmed(state, games):
     return {g["id"]: ok(g["away"]) and ok(g["home"]) for g in games}
 
 
-def due_pulls(now, games, tier, v, fetched, live_markets, started, retry_min=30, lineups_ok=None, c_every_game=None):
+def due_pulls(now, games, tier, v, fetched, live_markets, started, retry_min=30, lineups_ok=None, c_every_game=None,
+              paper=False):
     """Decide, from what is on disk, which pull each game needs right now.
 
     games: today's games. fetched: {game_id: [dict(pull, at (datetime), markets asked, returned)]} for every
@@ -451,6 +467,7 @@ def due_pulls(now, games, tier, v, fetched, live_markets, started, retry_min=30,
     lineups_ok: {game_id: bool}, both teams' lineups confirmed. Pull B (shots re-price, saves, goals) needs it; if it is
     still False at pull_c_min before puck, B falls back to shots only so Daily Faceoff being down does not
     kill shots picks. Pull A is shots only.
+    paper: B does not wait for lineups (Gap + Guard paper test: the 90 minute read is the flag read).
     Returns a list of dict(pull, game, markets) in puck-time order, one per game at most."""
     lineups_ok = lineups_ok or {}
     if not games:
@@ -481,9 +498,9 @@ def due_pulls(now, games, tier, v, fetched, live_markets, started, retry_min=30,
             return missing
 
         choice = None
-        b_markets = markets_for(tier, "B")
+        b_markets = markets_for(tier, "B", paper=paper)
         if b_markets and now >= b_due and left >= v["pull_latest_min"]:
-            if not lineups_ok.get(g["id"]):
+            if not paper and not lineups_ok.get(g["id"]):
                 b_markets = ["shots"] if left <= v["pull_c_min"] else []      # fallback at the 45 minute mark
             m = need(b_markets, b_due) if b_markets else []
             if m and now >= c_due and tier >= 2 and left >= v["pull_c_latest_min"]:
@@ -505,7 +522,7 @@ def due_pulls(now, games, tier, v, fetched, live_markets, started, retry_min=30,
     return out
 
 
-def next_read_at(now, games, tier, v, fetched, started, has_budget=True, lineups_ok=None):
+def next_read_at(now, games, tier, v, fetched, started, has_budget=True, lineups_ok=None, paper=False):
     """The next time a price read is expected (for the status sheet). None when none is coming."""
     if not games or not has_budget:
         return None
@@ -521,14 +538,14 @@ def next_read_at(now, games, tier, v, fetched, started, has_budget=True, lineups
             cands.append(max(t["A"], now))
         b_due = start - timedelta(minutes=v["pull_b_min"])
         c = start - timedelta(minutes=v["pull_c_min"])
-        bm = markets_for(tier, "B")
+        bm = markets_for(tier, "B", paper=paper)
         if bm and start - timedelta(minutes=v["pull_latest_min"]) >= max(b_due, now):
             got = set()
             for f in done:
                 if f["at"] >= b_due:
                     got |= set(f["returned"])
             if set(bm) - got:
-                if (lineups_ok or {}).get(g["id"]):
+                if paper or (lineups_ok or {}).get(g["id"]):
                     cands.append(max(b_due, now))
                 elif c > now:                              # unconfirmed: the guaranteed read is the 45 minute fallback
                     cands.append(c)
@@ -809,9 +826,11 @@ def run_pulls(now, slate, games, sched_left, cfg, rosters_for, live_markets, sta
     # 3. which pulls are due
     # closing read for every game only while today's budget still has C_RESERVE credits per game still ahead
     ahead = sum(1 for g in games if not started.get(g["id"]))
-    c_every = plan["tier"] >= 3 and plan["budget_today"] - pool.spent_on(slate) >= C_RESERVE * max(ahead, 1)
-    due = due_pulls(now, games, plan["tier"], v, fetched_map(day), live_markets, started,
-                    ops.get("empty_retry_min", 30), lineups_ok=lineups_ok, c_every_game=c_every)
+    paper = common.paper_active(cfg, slate)
+    tier = eff_tier(plan, paper)
+    c_every = tier >= 3 and plan["budget_today"] - pool.spent_on(slate) >= C_RESERVE * max(ahead, 1)
+    due = due_pulls(now, games, tier, v, fetched_map(day), live_markets, started,
+                    ops.get("empty_retry_min", 30), lineups_ok=lineups_ok, c_every_game=c_every, paper=paper)
     key_of = {name: m["feed_key"] for name, m in ops["markets"].items()}
     stage = day.get("stage") or {"since": None, "fetches": []}
     failed_games, no_budget = [], []

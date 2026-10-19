@@ -94,6 +94,14 @@ fi
 # 3. guard
 "$PY" scripts/guard_record.py || { fail "record guard"; exit 1; }
 
+# 3b. paper log (Gap + Guard test, TEAM.md item 21): append-only too, but it is not the Record. A breach restores
+#     data/paper/ from HEAD and the cycle carries on.
+"$PY" scripts/guard_paper.py || {
+  say "paper log guard failed; restoring data/paper from HEAD (the Record is untouched)"
+  git checkout -q HEAD -- data/paper 2>/dev/null || true
+  git clean -fdq data/paper
+}
+
 # 4. publish
 git add -A data
 if git diff --cached --quiet; then
