@@ -59,8 +59,9 @@ reported per variant; lockbox (Mar 1+) only for a frozen variant positive Nov-Fe
 | P4 | 2026-10-19 | Goalie saves OVER + each opposing skater's shots OVER (same game, -45) | saves45 + shots45 | | registered |
 | P5 | 2026-10-19 | Goalie saves UNDER + each opposing skater's shots UNDER | saves45 + shots45 | | registered |
 | P6 | 2026-10-19 | 3-leg same-team shots OVERS (every triple) | shots45 | | registered |
+| S6 | 2026-10-19 | **Schedule spots on the moneyline (free data).** Walk-forward L2 logistic on late-price games: logit P(home win) = a + b*logit(consensus fair) + c*home on 2nd night of a back-to-back + d*away on a back-to-back + e*(home rest days - away rest days, capped +-3), all from the NHL schedule before the game. Bet Hard Rock side with p - BE >= T, T in {.01,.02,.03} (3 variants). Registered after S1-S3 and P1-P6 were run | featured h2h pull + NHL schedule | | registered |
 
-Run 3 variants registered: S1 6, S1e 6, S2 2, S3 3, P1-P6 6 = 23 (all-time 181 -> 204 if all run).
+Run 3 variants registered: S1 6, S1e 6, S2 2, S3 3, P1-P6 6 = 23, + S6 3 = 26 (all-time 181 -> 207 if all run).
 
 ## Queued (not yet tested)
 | id | rule idea | data | status |
