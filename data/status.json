@@ -1,10 +1,10 @@
 {
  "ok": true,
  "slate_date": "2026-10-19",
- "started_at": "2026-10-19T18:50:01-04:00",
- "status_at": "2026-10-19T18:50:01-04:00",
- "finished_at": "2026-10-19T18:50:01-04:00",
- "last_ok_at": "2026-10-19T18:50:01-04:00",
+ "started_at": "2026-10-19T19:00:00-04:00",
+ "status_at": "2026-10-19T19:00:00-04:00",
+ "finished_at": "2026-10-19T19:00:01-04:00",
+ "last_ok_at": "2026-10-19T19:00:00-04:00",
  "failed_step": null,
  "steps": [
   {
@@ -24,8 +24,8 @@
   },
   {
    "step": "lineups",
-   "status": "skipped",
-   "note": "checked in the last 20 minutes"
+   "status": "ok",
+   "note": "4 of 4 team pages read"
   },
   {
    "step": "lineup_history",
@@ -35,7 +35,7 @@
   {
    "step": "odds",
    "status": "ok",
-   "note": "no pull due"
+   "note": "1 game(s) priced"
   },
   {
    "step": "market_menu",
@@ -54,8 +54,8 @@
   },
   {
    "step": "shadow",
-   "status": "skipped",
-   "note": "nothing new"
+   "status": "ok",
+   "note": "16 line read(s) logged"
   },
   {
    "step": "slate",
@@ -78,7 +78,7 @@
  "keys": [
   {
    "n": 1,
-   "left": 161
+   "left": 160
   },
   {
    "n": 2,
@@ -93,13 +93,13 @@
    "left": 2
   }
  ],
- "pool_total": 407,
+ "pool_total": 406,
  "allowance": 4.6444,
  "tier": 3,
  "budget_today": 18,
- "budget_used_today": 11,
+ "budget_used_today": 12,
  "prices_state": "ok",
- "prices_at": "2026-10-19T18:00:00-04:00",
+ "prices_at": "2026-10-19T19:00:00-04:00",
  "next_price_read_at": "2026-10-19T19:30:00-04:00",
  "unmatched_names": [],
  "unknown_teams": [],
@@ -109,7 +109,7 @@
  ],
  "excluded_teams": [],
  "stats_through": "2026-10-18",
- "lineups_at": "2026-10-19T18:40:00-04:00",
+ "lineups_at": "2026-10-19T19:00:00-04:00",
  "lineups_note": "8 of 8 team line pages are dated today.",
  "games_today": 4,
  "record_events": 82,
@@ -117,7 +117,7 @@
  "runner": {
   "event": "workflow_dispatch",
   "run_id": "39336550291",
-  "iteration": 2,
+  "iteration": 3,
   "chain_link": 111,
   "chain_started_at": "2026-10-16T10:00:13-04:00",
   "run_started_at": "2026-10-19T18:40:13-04:00"
