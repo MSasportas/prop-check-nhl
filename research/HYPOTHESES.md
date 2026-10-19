@@ -66,6 +66,32 @@ Run 3 count: 26 variants tested (S1 6, S1e 6, S2 2, S3 3, P1-P6 6, S6 3) + 1 pri
 Positives seen: S1/S1e n <= 5, S3 T=.03 n22, P5 +4.6% (CI spans 0, unbettable price). Cumulative variants all runs: 207. Lockbox looks: still 1.
 Raw pulls: research/data/hist_addon_2026-10-19_h2h_saves.tgz (featured h2h 10 books 22:30Z x 167 game days + 2 featured probes + 14 saves games; no key).
 
+## Run 4 (Researcher, 2026-10-19 PM). SHOTS ON GOAL ONLY. Registered before any of these were tested.
+Note (CEO, 2:40 PM): written ~12:55-1:15 PM by run 4, which was cut off by a session restart at 2:34 PM before committing or producing any result file; committed now, unchanged, before the resumed run tests anything.
+Matt: "Use the historical to try different ideas, not different markets." No new historical odds pulls. Free NHL data fetched to
+scratch (code: research/code/r4/fetch_rest.py): team per-game logs 2024-25 + 2025-26, skater per-game SOG/TOI 2024-25, skater
+realtime (missed + blocked attempts) and TOI/PP TOI 2025-26, plus the cached 2025-26 boxscores. Every feature for a line dated d
+uses only games dated < d (2024-25 always allowed: it is all before). Moneyline = run 3's 10-book h2h pull (consensus = mean
+proportional de-vig of the 9 non-Hard Rock books), using the latest snapshot taken at or before that game's shots -45 snapshot.
+Common: shots45_lines, every two-way Hard Rock line (all points), proportional de-vig fair = f, side price >= -200, 1u flat,
+regulation + OT, VOID = no bet, game-clustered bootstrap. Logistic tests (L2 = 2, Newton as R3):
+logit P(over) = a + a15*[line 1.5] + a35*[line >= 3.5] + b*logit(f) + feature terms; fit on all months before the test month;
+bet a side when p - BE >= T, T in {.01, .02, .03} (3 variants). Folds Nov, Dec, Jan, Feb reported; lockbox (Mar 1+) untouched
+unless a frozen variant is positive Nov-Feb with n >= 300 (look #2 would need one-sided p < 0.05/2 = 0.025). Placebo for any
+positive variant with n >= 300: shuffle the feature(s) within date x line, rerun, 200 times.
+
+| id | date | rule (exact) | data | result | status |
+|---|---|---|---|---|---|
+| K1 | 2026-10-19 | **Arena scorekeeper factor.** For arena = home team H: ratio = mean total SOG (both teams) in H's prior home games / mean in H's prior road games (2024-25 + 2025-26 before d); logA = n/(n+30) x log(ratio), n = H's prior home games. Logistic terms c1*logA + c2*logA*[player on the road team] (3 variants). Plus K1r rules (2 variants): road players' OVER in the 5 arenas with the highest prior logA (>= 0); road players' UNDER in the 5 lowest (<= 0). Descriptive: corr of 2024-25 vs 2025-26 arena ratio | free NHL team logs + shots45 | | |
+| K2 | 2026-10-19 | **Market-implied game script.** pw = consensus win prob of the player's team. Terms c1*(pw - .5) + c2*(pw - .5)*[D]. Lines with no moneyline snapshot before the shots snapshot are dropped (3 variants) | h2h addon + shots45 | | |
+| K3 | 2026-10-19 | **Player-level persistent mispricing.** For each player, prior Hard Rock lines (date < d, OK): res = [actual > line] - f. Term c1*sum(res)/(n + 10) + c2*same*[D] (3 variants) | shots45 | | |
+| K4 | 2026-10-19 | **Distribution shape.** Player VMR (var/mean of SOG per game, 2024-25 + prior 2025-26, shrunk 20 games toward his position's VMR from the training months). Market assumed to use the position VMR: solve mean m so NB(m, var = m x VMR_pos) gives P(X > line) = f; p_shape = P(X > line) under NB(m, var = m x VMR_player) (Poisson if VMR <= 1.01). Term c*(logit p_shape - logit f) (3 variants) | NHL logs + shots45 | | |
+| K5 | 2026-10-19 | **Last-game overreaction.** z = (last game SOG - mean of his earlier prior games) / sqrt(that mean); dl = line - his previous Hard Rock line (0 if none). Terms c1*z + c2*dl (3 variants). K5r rules (2 variants): UNDER when last game SOG >= line + 3; OVER when last game SOG = 0 and his prior mean >= line | NHL logs + shots45 | | |
+| K6 | 2026-10-19 | **Price selection, fixed rules (no fit).** Lines 1.5 + 2.5 only: a overs >= +100; b overs >= +110; c overs >= +120; d unders >= +100; e unders >= +110; f 2.5 overs >= +110; g walk-forward selector = whichever of a-f had the best ROI on all months before the test month (n >= 50). 7 variants. NOTE a-c contain R8's 1.5 overs, already seen in Nov-Feb (not clean); only the lockbox is clean for them | shots45 | | |
+| K7 | 2026-10-19 | **Gradient boosting on the market + rich prior-only features.** LightGBM binary, init_score = logit(f) (learns the residual from the book), features: logit f, line, D, home, logA, pw (NaN if none), K3 residual, K4 shape term, K5 z and dl, L5/L10/season SOG minus line, TOI L5 minus season, PP TOI per game L10, team SF L10, opp SA L10, rest days team/opp, B2B team/opp, travel (previous game in another arena), K9 attempts term, n prior. Params: 7 leaves, min 200 per leaf, lr .03, L2 10, feature fraction .8, rounds by early stopping on the last 25% (by date) of the training rows (max 400), then refit on all training rows. EV-threshold variant K7s: T chosen in {.01, .02, .03, .05} by ROI on that inner 25% split (n >= 30, else .03). Plus fixed T in {.01, .02, .03, .05} for transparency. 5 variants | all above | | |
+| K8 | 2026-10-19 | **Selection: top-k per night** from K7: each date, the k highest-EV (p x decimal - 1) K7 sides with EV > 0, k in {1, 3, 5} (3 variants) | K7 | | |
+| K9 | 2026-10-19 | **Shot attempts surplus (own idea).** From 2025-26 realtime logs before d: att = SOG + missed + blocked attempts per game (last 20 games), conv_pos = position SOG/attempt from training months; term c*(att x conv_pos - SOG per game, same 20 games) (expected SOG from attempts minus his real SOG; book may price from SOG only). 3 variants | NHL realtime + shots45 | | |
+
 ## Queued (not yet tested)
 | id | rule idea | data | status |
 |---|---|---|---|
