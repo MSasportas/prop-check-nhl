@@ -4,6 +4,10 @@ Read TEAM.md first (sections 4, 7 items 17-20), then this file, then research/HY
 Update HYPOTHESES.md and LOG.md last, then add one line to TEAM.md section 9.
 
 ## The job
+**Scope (Matt, 2026-10-19): SHOTS ON GOAL ONLY.** Find the edge in Hard Rock shots on goal props (main lines, over
+and under). Do not test other markets. Try different IDEAS (models, features, player types, timing, structure, price
+selection) on the saved historical shots data and the live shadow log. No new historical pulls (191 credits left; ask
+the CEO only if an idea truly needs one).
 Find a rule that beats Hard Rock (Florida) at its posted prices, in a market Matt can bet: player props first
 (shots, saves, points, assists, PP points, goals, alt lines), sides and totals allowed. No leg worse than -200.
 Every run: come up with NEW ideas (models, features, markets, timing, de-vig, structure), test them honestly,
