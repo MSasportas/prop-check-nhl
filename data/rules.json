@@ -72,5 +72,11 @@
   "stale_after_min": 75,
   "refresh_sec": 120,
   "picks_open": 8
+ },
+ "paper": {
+  "active": true,
+  "start": "2026-10-20",
+  "end": "2026-11-23",
+  "judge_on": "2026-11-02"
  }
 }
