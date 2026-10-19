@@ -1,22 +1,38 @@
 {
- "date": "2026-10-18",
+ "date": "2026-10-19",
  "teams": {
-  "MIN": {
-   "name": "Jesper Wallstedt",
-   "status": "confirmed"
+  "PHI": {
+   "name": "Dan Vladar",
+   "status": "expected"
   },
-  "CBJ": {
-   "name": "Cam Talbot",
-   "status": "confirmed"
+  "COL": {
+   "name": "Mackenzie Blackwood",
+   "status": "expected"
   },
-  "CGY": {
-   "name": "Devin Cooley",
-   "status": "confirmed"
+  "NYR": {
+   "name": "Dylan Garand",
+   "status": "expected"
   },
-  "CAR": {
-   "name": "Brandon Bussi",
-   "status": "confirmed"
+  "ANA": {
+   "name": "Lukas Dostal",
+   "status": "expected"
+  },
+  "TOR": {
+   "name": "Anthony Stolarz",
+   "status": "expected"
+  },
+  "SJS": {
+   "name": "Alex Nedeljkovic",
+   "status": "expected"
+  },
+  "UTA": {
+   "name": "Karel Vejmelka",
+   "status": "expected"
+  },
+  "PIT": {
+   "name": "Arturs Silovs",
+   "status": "expected"
   }
  },
- "checked_at": "2026-10-18T17:40:01-04:00"
+ "checked_at": "2026-10-19T05:00:01-04:00"
 }

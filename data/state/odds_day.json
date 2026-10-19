@@ -1,90 +1,25 @@
 {
- "date": "2026-10-18",
+ "date": "2026-10-19",
  "plan": {
-  "allowance": 5.1957,
+  "allowance": 4.6444,
   "tier": 3,
-  "budget_today": 10,
-  "pool_at_plan": 478,
-  "games_left": 92,
-  "games_today": 2,
+  "budget_today": 18,
+  "pool_at_plan": 418,
+  "games_left": 90,
+  "games_today": 4,
   "key_count": 4,
   "unknown_keys": 0,
-  "made_at": "2026-10-18T05:00:01-04:00"
+  "made_at": "2026-10-19T05:00:01-04:00"
  },
  "events": {
-  "2026020135": "3af4496cf626dc3538fb93001aa2fba0",
-  "2026020136": "0922c474e6588f94af491684dbae6cdb"
+  "2026020137": "ea54f93ba7f80a041cb134ca262d7bc0",
+  "2026020138": "c8d71abe9d49ca6ea219b84923b9a48c",
+  "2026020139": "7ac756ef7eb5d5b1042e68d86d561147",
+  "2026020140": "0e2b3099b25e9827dc4a6abd7fabfa51"
  },
- "events_at": "2026-10-18T05:00:01-04:00",
+ "events_at": "2026-10-19T05:00:01-04:00",
  "unknown_teams": [],
- "done": {
-  "2026020135": [
-   {
-    "game_id": 2026020135,
-    "pull": "A",
-    "at": "2026-10-18T13:00:00-04:00",
-    "markets": [
-     "shots"
-    ],
-    "returned": [
-     "shots"
-    ],
-    "cost": 1
-   },
-   {
-    "game_id": 2026020135,
-    "pull": "B",
-    "at": "2026-10-18T17:20:00-04:00",
-    "markets": [
-     "shots"
-    ],
-    "returned": [
-     "shots"
-    ],
-    "cost": 1
-   }
-  ],
-  "2026020136": [
-   {
-    "game_id": 2026020136,
-    "pull": "A",
-    "at": "2026-10-18T13:00:00-04:00",
-    "markets": [
-     "shots"
-    ],
-    "returned": [
-     "shots"
-    ],
-    "cost": 1
-   },
-   {
-    "game_id": 2026020136,
-    "pull": "B",
-    "at": "2026-10-18T18:30:00-04:00",
-    "markets": [
-     "saves",
-     "shots"
-    ],
-    "returned": [
-     "saves",
-     "shots"
-    ],
-    "cost": 2
-   },
-   {
-    "game_id": 2026020136,
-    "pull": "C",
-    "at": "2026-10-18T19:20:01-04:00",
-    "markets": [
-     "shots"
-    ],
-    "returned": [
-     "shots"
-    ],
-    "cost": 1
-   }
-  ]
- },
+ "done": {},
  "stage": null,
  "skipped": {},
  "last_fail_at": null,

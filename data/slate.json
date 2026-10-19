@@ -1,92 +1,135 @@
 {
- "slate_date": "2026-10-18",
- "generated_at": "2026-10-19T04:30:00-04:00",
- "status_at": "2026-10-19T04:30:00-04:00",
- "valid_until": "2026-10-19T05:00:00-04:00",
+ "slate_date": "2026-10-19",
+ "generated_at": "2026-10-19T05:00:01-04:00",
+ "status_at": "2026-10-19T05:00:01-04:00",
+ "valid_until": "2026-10-20T05:00:00-04:00",
  "status": {
-  "prices_state": "ok",
-  "prices_at": "2026-10-18T19:20:01-04:00",
-  "next_price_read_at": null,
+  "prices_state": "not_yet",
+  "prices_at": null,
+  "next_price_read_at": "2026-10-19T13:00:00-04:00",
   "stats_built_at": "2026-10-18T23:30:01-04:00",
   "stats_through": "2026-10-18",
-  "lineups_at": "2026-10-18T19:50:00-04:00",
+  "lineups_at": null,
   "goalies_at": null,
-  "lineups_note": "3 of 4 team line pages are dated today.",
-  "lineups_state": "ok",
+  "lineups_note": null,
+  "lineups_state": "not_yet",
   "stats_state": "ok",
   "last_run": {
    "ok": true,
-   "at": "2026-10-19T04:30:00-04:00",
+   "at": "2026-10-19T05:00:01-04:00",
    "failed_step": null
   },
   "pool": {
-   "pulls_left": 471,
+   "pulls_left": 418,
    "keys": 4,
-   "game_days_left": 14,
-   "days_left": 14,
+   "game_days_left": 13,
+   "days_left": 13,
    "low": false
   },
   "excluded_teams": [],
-  "lines_checked": 34,
-  "lines_failed": 7,
+  "lines_checked": 0,
+  "lines_failed": 0,
   "tier": 3
  },
- "banners": [
-  {
-   "level": "info",
-   "text": "7 Hard Rock lines skipped: the two sides did not add up or the price was old."
-  }
- ],
+ "banners": [],
  "empty": {
-  "code": "all_started",
-  "text": "Every game has started.",
-  "sub": "No picks were posted tonight."
+  "code": "not_yet",
+  "text": "No prices read yet today.",
+  "sub": "First read is due at 1:00 PM."
  },
  "games": [
   {
-   "id": 2026020135,
-   "away": "CBJ",
-   "home": "MIN",
-   "start": "2026-10-18T18:00:00-04:00",
+   "id": 2026020137,
+   "away": "ANA",
+   "home": "NYR",
+   "start": "2026-10-19T19:00:00-04:00",
    "lineups": {
-    "away": "confirmed",
-    "home": "waiting"
+    "away": "not_checked",
+    "home": "not_checked"
    },
    "goalies": {
     "away": {
-     "name": "Cam Talbot",
-     "status": "confirmed"
+     "name": "Lukas Dostal",
+     "status": "expected"
     },
     "home": {
-     "name": "Jesper Wallstedt",
-     "status": "confirmed"
+     "name": "Dylan Garand",
+     "status": "expected"
     }
    },
-   "started": true,
+   "started": false,
    "picks": 0,
    "excluded_reason": null,
    "excluded_teams": []
   },
   {
-   "id": 2026020136,
-   "away": "CAR",
-   "home": "CGY",
-   "start": "2026-10-18T20:00:00-04:00",
+   "id": 2026020138,
+   "away": "COL",
+   "home": "PHI",
+   "start": "2026-10-19T19:00:00-04:00",
    "lineups": {
-    "away": "confirmed",
-    "home": "confirmed"
+    "away": "not_checked",
+    "home": "not_checked"
    },
    "goalies": {
     "away": {
-     "name": "Brandon Bussi",
-     "status": "confirmed"
+     "name": "Mackenzie Blackwood",
+     "status": "expected"
     },
     "home": {
-     "name": "Devin Cooley",
-     "status": "confirmed"
+     "name": "Dan Vladar",
+     "status": "expected"
     }
    },
-   "started": true,
+   "started": false,
+   "picks": 0,
+   "excluded_reason": null,
+   "excluded_teams": []
+  },
+  {
+   "id": 2026020139,
+   "away": "SJS",
+   "home": "TOR",
+   "start": "2026-10-19T19:30:00-04:00",
+   "lineups": {
+    "away": "not_checked",
+    "home": "not_checked"
+   },
+   "goalies": {
+    "away": {
+     "name": "Alex Nedeljkovic",
+     "status": "expected"
+    },
+    "home": {
+     "name": "Anthony Stolarz",
+     "status": "expected"
+    }
+   },
+   "started": false,
+   "picks": 0,
+   "excluded_reason": null,
+   "excluded_teams": []
+  },
+  {
+   "id": 2026020140,
+   "away": "PIT",
+   "home": "UTA",
+   "start": "2026-10-19T21:00:00-04:00",
+   "lineups": {
+    "away": "not_checked",
+    "home": "not_checked"
+   },
+   "goalies": {
+    "away": {
+     "name": "Arturs Silovs",
+     "status": "expected"
+    },
+    "home": {
+     "name": "Karel Vejmelka",
+     "status": "expected"
+    }
+   },
+   "started": false,
    "picks": 0,
    "excluded_reason": null,
    "excluded_teams": []
