@@ -1,7 +1,7 @@
 {
  "slate_date": "2026-10-19",
- "generated_at": "2026-10-19T07:30:00-04:00",
- "status_at": "2026-10-19T07:30:00-04:00",
+ "generated_at": "2026-10-19T08:00:00-04:00",
+ "status_at": "2026-10-19T08:00:00-04:00",
  "valid_until": "2026-10-20T05:00:00-04:00",
  "status": {
   "prices_state": "not_yet",
@@ -16,7 +16,7 @@
   "stats_state": "ok",
   "last_run": {
    "ok": true,
-   "at": "2026-10-19T07:30:00-04:00",
+   "at": "2026-10-19T08:00:00-04:00",
    "failed_step": null
   },
   "pool": {
@@ -97,7 +97,7 @@
    },
    "goalies": {
     "away": {
-     "name": "Alex Nedeljkovic",
+     "name": "Yaroslav Askarov",
      "status": "expected"
     },
     "home": {
