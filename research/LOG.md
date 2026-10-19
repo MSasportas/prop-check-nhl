@@ -1,5 +1,23 @@
 # LOG.md: Researcher runs (newest first)
 
+- 2026-10-19 ~12:45 PM ET (Researcher run 3: attack Hard Rock as a retail book). Credits: 1,860 of 2,051 spent (191 left; ledger in
+  research/data/hist_addon_2026-10-19_h2h_saves.tgz): 50 featured probes, 1,670 featured moneyline (10 books, 22:30Z on all 167 game
+  days = every game's late price + most games' day-ahead price), 140 saves with 10 books (14 games). Scripts: research/code/r3/.
+  - S1/S1e stale moneyline vs the other books (late 1,102 games, early 685): Hard Rock sits within 0.5 pts of consensus; EV >= 0 on
+    0.1-0.5% of sides; n <= 5 bets per variant. Timing: Hard Rock's early-to-late move copies the market (slope 0.94); no lag.
+  - S2 Florida bias: none. FLA +0.12 pts dearer, TBL 0.15 pts cheaper, same overround (4.4%). Fading locals n86 +0.5% [-20,+21].
+  - S3 ML calibration: -0.1% n187. S6 back-to-back/rest on the ML: -3.8% n364.
+  - S7 saves vs 2-5 other books: 44 of 44 Hard Rock sides EV < 0 (mean -6.6%). Hard Rock saves = market + heavy vig.
+  - P1-P6 product-priced same-game parlays: teammates' shots barely correlate (lift x1.03 overs, x0.98 unders), so -10% to -15%.
+    The real correlation is goalie saves vs the opposing skaters' shots: P5 (saves Under + opp skater Under) lift x1.21, +4.6% Nov-Feb
+    on 1,676 pairs / ~140 games, CI -6.7..+15.7; placebo -11.5%. Pays only if Hard Rock's SGP pays >= 0.95x the product of singles;
+    no API shows SGP prices, so it is a lead (Q4), not a candidate. No lockbox look (price unverifiable; ~56 lockbox saves games = no power).
+  26 variants (~1.3 false positives expected); all-time 207. Lockbox looks: 1 (unchanged). Process note: S7-probe's registration
+  commit landed just after its pull (script error), before any analysis.
+  **Verdict: nothing passes; no candidate for the Sharp.** Every Hard Rock market checked (shots, alt shots, points, assists, saves,
+  moneyline, team totals, alt totals, BTTS) is the market price plus vig, at every fixed time sampled, with no Florida shading.
+  Next: Q4 one in-app SGP price check (saves Under + opp skater Under vs product), Q5 live Hard Rock-vs-9-books on the Q1 feed by read
+  time / news window, Q2 lineup-news latency (forward).
 - 2026-10-19 ~11:20 AM ET (Researcher run 2, first run). Credits: 1,120 of 3,182 spent (2,062 left; ledger
   hist/ledger_research.jsonl): 150 on 1-game/1-snapshot probes (multi-book shots, points/assists/PPP/goals, team totals/alt
   totals/BTTS, 1 PM and -70 min shots), 970 on Hard Rock alt-shots ladders at -45 for the 104 pre-lockbox games with 1 PM prices
