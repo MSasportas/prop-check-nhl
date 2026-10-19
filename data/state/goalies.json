@@ -2,8 +2,8 @@
  "date": "2026-10-19",
  "teams": {
   "PHI": {
-   "name": "Dan Vladar",
-   "status": "expected"
+   "name": "Joseph Woll",
+   "status": "confirmed"
   },
   "COL": {
    "name": "Mackenzie Blackwood",
@@ -18,7 +18,7 @@
    "status": "expected"
   },
   "TOR": {
-   "name": "Anthony Stolarz",
+   "name": "Sergei Bobrovsky",
    "status": "expected"
   },
   "SJS": {
@@ -34,5 +34,5 @@
    "status": "expected"
   }
  },
- "checked_at": "2026-10-19T08:00:00-04:00"
+ "checked_at": "2026-10-19T10:40:00-04:00"
 }
