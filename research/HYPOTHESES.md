@@ -34,6 +34,34 @@ Run 2 count: 25 variants tested (R2 3, R3 3, R4 2, R4b 2, R6 3, R7 3, R8 3, R10 
 Expected false positives at 5%: ~1.25. Positives seen: R4b n10, R8 +6.4% n293 (post-hoc), R11 n42: all n < 300, CIs span 0.
 Cumulative variants all runs: 181. Lockbox looks: still 1.
 
+## Run 3 (Researcher, 2026-10-19 PM). Registered before any of these were tested.
+Brief: stop polishing the shots model; attack Hard Rock as a retail book (market-vs-market, local bias, structure, timing).
+Probes before registering (prices only, no results, 50 credits): featured h2h/totals/spreads, 10 books, 2025-11-18 22:30Z and
+2025-12-09 17:00Z. Findings that shaped the pull: `hardrockbet_fl` returns nothing historically (only `hardrockbet`); Hard Rock has
+no h2h_3_way or 1st-period totals historically (probe 641); at 17:00Z next-day games have no Hard Rock price, at 22:30Z most do,
+so one 22:30Z snapshot per game day gives every game a LATE price (same-day games, ~0.5-4.5 h before puck) and an EARLY price
+(next-day games, ~24-28 h before). Pull: featured h2h, 10 books (hardrockbet + pinnacle, draftkings, fanduel, betmgm,
+williamhill_us, espnbet, betrivers, fanatics), 22:30Z every game day Oct 7 - Apr 16 (~1,650 credits).
+Common: consensus fair = mean of proportional de-vig fair over the OTHER books with both sides at that snapshot (>= 3 books);
+Pinnacle fair = Pinnacle alone de-vigged. EV = fair x decimal(Hard Rock price) - 1. Hard Rock price must be >= -200. h2h graded
+on the final result incl. OT/shootout (NHL final score). 1u flat, game-clustered bootstrap. Walk-forward folds Nov, Dec, Jan, Feb
+reported per variant; lockbox (Mar 1+) only for a frozen variant positive Nov-Feb with n >= 300, once.
+
+| id | date | rule (exact) | data | result | status |
+|---|---|---|---|---|---|
+| S1 | 2026-10-19 | **Moneyline stale vs the market, LATE price.** Same-day games (puck 0.25-6 h after the snapshot). Bet the Hard Rock side whose EV >= T. T in {0, .01, .02} x fair in {consensus, Pinnacle} (6 variants) | featured h2h pull | | registered |
+| S1e | 2026-10-19 | **Same, EARLY price (timing).** Next-day games (puck 18-34 h after the snapshot), same 6 variants. Plus descriptive: does Hard Rock's early-to-late move lag the consensus move (regress HR late-early on consensus late-early)? | same | | registered |
+| S2 | 2026-10-19 | **Florida local bias.** Descriptive: d = Hard Rock fair(team) - consensus fair(team), late price, for FLA and TBL sides vs every other team (game-clustered CI). Bets: S2a every FLA/TBL opponent ML at Hard Rock (late, >= -200); S2b same only when that price's EV vs consensus >= -0.01 (2 variants). n ~150 games, so it can never reach the n >= 300 lockbox bar alone: a shading finding would go forward-only | same | | registered |
+| S3 | 2026-10-19 | **Moneyline calibration (favourite-longshot) at Hard Rock.** Walk-forward logistic: logit P(win) = a + b*logit(consensus fair) + c*home, fit on months before m; bet Hard Rock side with p - BE >= T, T in {.01, .02, .03} (3 variants) | same | | registered |
+| P1 | 2026-10-19 | **Correlated parlays (structure), same-team shots overs.** Every pair of teammates' two-way shots OVER lines at the -45 snapshot (each leg >= -200), parlay paid at the PRODUCT of Hard Rock decimal prices (what a product-priced parlay would pay). Report ROI, joint hit vs product of fair (lift), and the break-even same-game-parlay price. No fitting | shots45 (existing) | | registered |
+| P2 | 2026-10-19 | Same, teammates' UNDER pairs | shots45 | | registered |
+| P3 | 2026-10-19 | Same, OVER pairs from opposing teams (same game) | shots45 | | registered |
+| P4 | 2026-10-19 | Goalie saves OVER + each opposing skater's shots OVER (same game, -45) | saves45 + shots45 | | registered |
+| P5 | 2026-10-19 | Goalie saves UNDER + each opposing skater's shots UNDER | saves45 + shots45 | | registered |
+| P6 | 2026-10-19 | 3-leg same-team shots OVERS (every triple) | shots45 | | registered |
+
+Run 3 variants registered: S1 6, S1e 6, S2 2, S3 3, P1-P6 6 = 23 (all-time 181 -> 204 if all run).
+
 ## Queued (not yet tested)
 | id | rule idea | data | status |
 |---|---|---|---|
