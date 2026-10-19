@@ -1,10 +1,10 @@
 {
  "ok": true,
  "slate_date": "2026-10-19",
- "started_at": "2026-10-19T19:20:01-04:00",
- "status_at": "2026-10-19T19:20:01-04:00",
- "finished_at": "2026-10-19T19:20:02-04:00",
- "last_ok_at": "2026-10-19T19:20:01-04:00",
+ "started_at": "2026-10-19T19:30:00-04:00",
+ "status_at": "2026-10-19T19:30:00-04:00",
+ "finished_at": "2026-10-19T19:30:01-04:00",
+ "last_ok_at": "2026-10-19T19:30:00-04:00",
  "failed_step": null,
  "steps": [
   {
@@ -24,18 +24,18 @@
   },
   {
    "step": "lineups",
-   "status": "ok",
-   "note": "4 of 4 team pages read"
+   "status": "skipped",
+   "note": "checked in the last 20 minutes"
   },
   {
    "step": "lineup_history",
-   "status": "ok",
-   "note": "1 team(s) changed"
+   "status": "skipped",
+   "note": "no change"
   },
   {
    "step": "odds",
    "status": "ok",
-   "note": "no pull due"
+   "note": "1 game(s) priced"
   },
   {
    "step": "market_menu",
@@ -54,8 +54,8 @@
   },
   {
    "step": "shadow",
-   "status": "skipped",
-   "note": "nothing new"
+   "status": "ok",
+   "note": "18 line read(s) logged"
   },
   {
    "step": "slate",
@@ -78,7 +78,7 @@
  "keys": [
   {
    "n": 1,
-   "left": 160
+   "left": 158
   },
   {
    "n": 2,
@@ -93,15 +93,17 @@
    "left": 2
   }
  ],
- "pool_total": 406,
+ "pool_total": 404,
  "allowance": 4.6444,
  "tier": 3,
  "budget_today": 18,
- "budget_used_today": 12,
+ "budget_used_today": 14,
  "prices_state": "ok",
- "prices_at": "2026-10-19T19:00:00-04:00",
- "next_price_read_at": "2026-10-19T19:30:00-04:00",
- "unmatched_names": [],
+ "prices_at": "2026-10-19T19:30:00-04:00",
+ "next_price_read_at": "2026-10-19T20:15:00-04:00",
+ "unmatched_names": [
+  "Yegor Chinakhov"
+ ],
  "unknown_teams": [],
  "lineup_unmatched_names": [
   "Cole Knuble",
@@ -117,7 +119,7 @@
  "runner": {
   "event": "workflow_dispatch",
   "run_id": "39336550291",
-  "iteration": 5,
+  "iteration": 6,
   "chain_link": 111,
   "chain_started_at": "2026-10-16T10:00:13-04:00",
   "run_started_at": "2026-10-19T18:40:13-04:00"
