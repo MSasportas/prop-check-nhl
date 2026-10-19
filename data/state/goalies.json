@@ -26,7 +26,7 @@
    "status": "confirmed"
   },
   "UTA": {
-   "name": "Karel Vejmelka",
+   "name": "Sebastian Cossa",
    "status": "expected"
   },
   "PIT": {
@@ -34,5 +34,5 @@
    "status": "expected"
   }
  },
- "checked_at": "2026-10-19T12:30:01-04:00"
+ "checked_at": "2026-10-19T12:50:01-04:00"
 }
