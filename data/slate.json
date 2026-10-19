@@ -1,22 +1,22 @@
 {
  "slate_date": "2026-10-19",
- "generated_at": "2026-10-19T15:40:01-04:00",
- "status_at": "2026-10-19T15:40:01-04:00",
+ "generated_at": "2026-10-19T16:00:01-04:00",
+ "status_at": "2026-10-19T16:00:01-04:00",
  "valid_until": "2026-10-20T05:00:00-04:00",
  "status": {
   "prices_state": "ok",
   "prices_at": "2026-10-19T13:00:00-04:00",
-  "next_price_read_at": "2026-10-19T18:15:00-04:00",
+  "next_price_read_at": "2026-10-19T17:30:00-04:00",
   "stats_built_at": "2026-10-18T23:30:01-04:00",
   "stats_through": "2026-10-18",
-  "lineups_at": null,
+  "lineups_at": "2026-10-19T16:00:01-04:00",
   "goalies_at": null,
-  "lineups_note": null,
-  "lineups_state": "not_yet",
+  "lineups_note": "4 of 4 team line pages are dated today.",
+  "lineups_state": "ok",
   "stats_state": "ok",
   "last_run": {
    "ok": true,
-   "at": "2026-10-19T15:40:01-04:00",
+   "at": "2026-10-19T16:00:01-04:00",
    "failed_step": null
   },
   "pool": {
@@ -44,8 +44,8 @@
    "home": "NYR",
    "start": "2026-10-19T19:00:00-04:00",
    "lineups": {
-    "away": "not_checked",
-    "home": "not_checked"
+    "away": "confirmed",
+    "home": "confirmed"
    },
    "goalies": {
     "away": {
@@ -68,8 +68,8 @@
    "home": "PHI",
    "start": "2026-10-19T19:00:00-04:00",
    "lineups": {
-    "away": "not_checked",
-    "home": "not_checked"
+    "away": "confirmed",
+    "home": "confirmed"
    },
    "goalies": {
     "away": {
