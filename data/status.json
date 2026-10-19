@@ -1,10 +1,10 @@
 {
  "ok": true,
  "slate_date": "2026-10-19",
- "started_at": "2026-10-19T18:20:00-04:00",
- "status_at": "2026-10-19T18:20:00-04:00",
- "finished_at": "2026-10-19T18:20:03-04:00",
- "last_ok_at": "2026-10-19T18:20:00-04:00",
+ "started_at": "2026-10-19T18:40:00-04:00",
+ "status_at": "2026-10-19T18:40:00-04:00",
+ "finished_at": "2026-10-19T18:40:01-04:00",
+ "last_ok_at": "2026-10-19T18:40:00-04:00",
  "failed_step": null,
  "steps": [
   {
@@ -29,8 +29,8 @@
   },
   {
    "step": "lineup_history",
-   "status": "skipped",
-   "note": "no change"
+   "status": "ok",
+   "note": "1 team(s) changed"
   },
   {
    "step": "odds",
@@ -104,11 +104,12 @@
  "unmatched_names": [],
  "unknown_teams": [],
  "lineup_unmatched_names": [
-  "Cole Knuble"
+  "Cole Knuble",
+  "Jacob Gaucher"
  ],
  "excluded_teams": [],
  "stats_through": "2026-10-18",
- "lineups_at": "2026-10-19T18:20:00-04:00",
+ "lineups_at": "2026-10-19T18:40:00-04:00",
  "lineups_note": "8 of 8 team line pages are dated today.",
  "games_today": 4,
  "record_events": 82,
@@ -116,7 +117,7 @@
  "runner": {
   "event": "workflow_dispatch",
   "run_id": "39330547990",
-  "iteration": 4,
+  "iteration": 6,
   "chain_link": 110,
   "chain_started_at": "2026-10-16T10:00:13-04:00",
   "run_started_at": "2026-10-19T17:50:11-04:00"
