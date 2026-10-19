@@ -9,3 +9,16 @@
 | H5 | 2026-10-19 | model vs book log loss | same | model worse (0.6832 vs 0.6814) | failed |
 | WF1-11 | 2026-10-19 | 11 families / 156 variants: rest/B2B, opp suppression, line subsets, TOI trend, PP role, edge band, price band, fitted blend, saves (2 models) | walk-forward Nov-Feb | all negative, best -0.2% | failed |
 | LB1 | 2026-10-19 | v2 + team on back-to-back (frozen) | lockbox Mar-Apr | +2.4% n268, CI -6.8..+11.4 | noise (lockbox look #1) |
+
+## Run 2 (Researcher, 2026-10-19). Registered before any of these were tested.
+Common to all: Hard Rock posted price at the -45 min snapshot (5-min grid, as item 19), price >= -200 (plus money any),
+1u flat, regulation + OT, void no TOI, push on tie, game-clustered bootstrap. BE = break-even of the Hard Rock price.
+Walk-forward test months Nov, Dec, Jan, Feb (train = all earlier months incl. Oct); lockbox Mar 1+ untouched until frozen.
+
+| id | date | rule (exact) | data | result | status |
+|---|---|---|---|---|---|
+| R1 | 2026-10-19 | **Hard Rock vs other books (stale/off-market line), shots.** Same snapshot, same player, same line. Each other book with both sides: proportional de-vig. Consensus fair = mean over other books. Primary: >= 2 other books, bet the Hard Rock side with consensus fair - BE >= 0.02. No model. Variants (counted): T in {0, .01, .02, .03, .04} x min books {1, 2} x consensus {mean, median} = 20; walk-forward picks the variant with the best train ROI (min n 50) | new pull: player_shots_on_goal, up to 10 books incl. hardrockbet, -45 min, stratified game sample | | registered |
+| R2 | 2026-10-19 | **Model flaws fixed, then edge.** Walk-forward logistic on every listed two-way line: logit P(over) = a_line + b*logit(proportional-de-vig book) + c*logit(model p_over). Bet side with p - BE >= T, T in {.01,.02,.03} (3 variants) | shots45_lines (existing) | | registered |
+| R3 | 2026-10-19 | **Market-implied residuals.** Walk-forward L2 logistic: logit P(over) = a_line + b*logit(prop book) + features known before the game: L5 and L10 SOG mean minus line, season-to-date SOG/game minus line, L10 over-rate at this line, TOI L5 minus season, position, home, team B2B, opponent SOG-against L10, book price band. Bet side with p - BE >= T, T in {.01,.02,.03} (3 variants). Plus a residual table by each feature (descriptive, train months only) | shots45_lines + NHL boxscores (existing) | | registered |
+| R4 | 2026-10-19 | **Hard Rock alt shots ladder vs its own main line.** Fit each player's SOG distribution (negative binomial, dispersion fitted on training months) to the main line's proportional-de-vig fair over; price every alt rung (X+); bet a rung whose model-from-main-line fair - BE >= T, T in {.02,.04} (2 variants). No player model | new pull: player_shots_alternate (only if the probe shows Hard Rock posts it historically) | | registered |
+| R5 | 2026-10-19 | **Sides/totals: Hard Rock vs other books.** As R1 on h2h and totals (same line), one snapshot per game day before the first game; consensus = mean proportional de-vig of other books; bet HR side with consensus - BE >= T, T in {.01,.02,.03} (3 variants per market) | new pull: featured markets, only if credits remain after R1 | | registered |
