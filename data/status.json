@@ -1,10 +1,10 @@
 {
  "ok": true,
  "slate_date": "2026-10-19",
- "started_at": "2026-10-19T13:00:00-04:00",
- "status_at": "2026-10-19T13:00:00-04:00",
- "finished_at": "2026-10-19T13:00:02-04:00",
- "last_ok_at": "2026-10-19T13:00:00-04:00",
+ "started_at": "2026-10-19T13:30:01-04:00",
+ "status_at": "2026-10-19T13:30:01-04:00",
+ "finished_at": "2026-10-19T13:30:02-04:00",
+ "last_ok_at": "2026-10-19T13:30:01-04:00",
  "failed_step": null,
  "steps": [
   {
@@ -35,12 +35,12 @@
   {
    "step": "odds",
    "status": "ok",
-   "note": "4 game(s) priced"
+   "note": "no pull due"
   },
   {
    "step": "market_menu",
-   "status": "ok",
-   "note": "33 Hard Rock market(s) listed for ANA at NYR"
+   "status": "skipped",
+   "note": "read this week"
   },
   {
    "step": "engine",
@@ -54,8 +54,8 @@
   },
   {
    "step": "shadow",
-   "status": "ok",
-   "note": "51 line read(s) logged"
+   "status": "skipped",
+   "note": "nothing new"
   },
   {
    "step": "slate",
@@ -114,7 +114,7 @@
  "runner": {
   "event": "workflow_dispatch",
   "run_id": "39288859580",
-  "iteration": 2,
+  "iteration": 5,
   "chain_link": 104,
   "chain_started_at": "2026-10-16T10:00:13-04:00",
   "run_started_at": "2026-10-19T12:50:14-04:00"
