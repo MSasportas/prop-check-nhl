@@ -1,10 +1,10 @@
 {
  "ok": true,
  "slate_date": "2026-10-18",
- "started_at": "2026-10-18T20:20:01-04:00",
- "status_at": "2026-10-18T20:20:01-04:00",
- "finished_at": "2026-10-18T20:20:01-04:00",
- "last_ok_at": "2026-10-18T20:20:01-04:00",
+ "started_at": "2026-10-18T20:30:00-04:00",
+ "status_at": "2026-10-18T20:30:00-04:00",
+ "finished_at": "2026-10-18T20:30:02-04:00",
+ "last_ok_at": "2026-10-18T20:30:00-04:00",
  "failed_step": null,
  "steps": [
   {
@@ -19,8 +19,8 @@
   },
   {
    "step": "stats",
-   "status": "skipped",
-   "note": "nothing new"
+   "status": "ok",
+   "note": "1 window(s) read, 2 team-games still missing"
   },
   {
    "step": "lineups",
@@ -104,7 +104,16 @@
  "unmatched_names": [],
  "unknown_teams": [],
  "lineup_unmatched_names": [],
- "excluded_teams": [],
+ "excluded_teams": [
+  {
+   "team": "CBJ",
+   "reason": "stats behind"
+  },
+  {
+   "team": "MIN",
+   "reason": "stats behind"
+  }
+ ],
  "stats_through": "2026-10-17",
  "lineups_at": "2026-10-18T19:50:00-04:00",
  "lineups_note": "3 of 4 team line pages are dated today.",
@@ -114,7 +123,7 @@
  "runner": {
   "event": "workflow_dispatch",
   "run_id": "39178144863",
-  "iteration": 4,
+  "iteration": 5,
   "chain_link": 79,
   "chain_started_at": "2026-10-16T10:00:13-04:00",
   "run_started_at": "2026-10-18T19:50:12-04:00"
