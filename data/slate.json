@@ -1,7 +1,7 @@
 {
  "slate_date": "2026-10-19",
- "generated_at": "2026-10-19T10:10:01-04:00",
- "status_at": "2026-10-19T10:10:01-04:00",
+ "generated_at": "2026-10-19T10:30:01-04:00",
+ "status_at": "2026-10-19T10:30:01-04:00",
  "valid_until": "2026-10-20T05:00:00-04:00",
  "status": {
   "prices_state": "not_yet",
@@ -16,7 +16,7 @@
   "stats_state": "ok",
   "last_run": {
    "ok": true,
-   "at": "2026-10-19T10:10:01-04:00",
+   "at": "2026-10-19T10:30:01-04:00",
    "failed_step": null
   },
   "pool": {
@@ -33,9 +33,9 @@
  },
  "banners": [],
  "empty": {
-  "code": "not_yet",
-  "text": "No prices read yet today.",
-  "sub": "First read is due at 1:00 PM."
+  "code": "paused",
+  "text": "No picks for now: no proven edge.",
+  "sub": "We tested our shots rules on all of last season's Hard Rock prices and they lost money. Picks stay off while the team tests new ideas, so nothing here is a bet."
  },
  "games": [
   {
