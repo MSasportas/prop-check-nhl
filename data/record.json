@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-10-20T19:00:01-04:00",
+ "generated_at": "2026-10-20T19:20:01-04:00",
  "summary": {
   "headline": {
    "w": 0,
@@ -45,6 +45,29 @@
      "legs": []
     },
     {
+     "id": "2026-10-20:2026020147:8482175:shots:1.5:under",
+     "kind": "single",
+     "player": "J. Peterka",
+     "bet": "Under 1.5 shots on goal",
+     "market": "shots",
+     "team": "BOS",
+     "game": "BOS at DAL",
+     "price": 105,
+     "first_price": 105,
+     "last_price": 105,
+     "prices": [
+      {
+       "price": 105,
+       "at": "2026-10-20T19:20:01-04:00"
+      }
+     ],
+     "result": null,
+     "actual": null,
+     "units": null,
+     "pulled": null,
+     "legs": []
+    },
+    {
      "id": "2026-10-20:2026020146:8480023:shots:1.5:under",
      "kind": "single",
      "player": "R. Thomas",
@@ -64,7 +87,10 @@
      "result": null,
      "actual": null,
      "units": null,
-     "pulled": null,
+     "pulled": {
+      "at": "2026-10-20T19:20:01-04:00",
+      "reason": "Our model no longer backs this price"
+     },
      "legs": []
     }
    ]
