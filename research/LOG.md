@@ -1,5 +1,24 @@
 # LOG.md: Researcher runs (newest first)
 
+- 2026-10-20 ~8:30 AM ET (Researcher run 6, daily; SHOTS ON GOAL ONLY). No key used, no historical odds pull. N1-N5 registered and pushed
+  (ae64445) before any test ran. Free NHL stats REST per-game logs (skater, team, goalie; 2024-25 + 2025-26 through Feb 28 only, lockbox
+  never fetched). Scripts: research/code/r6/ (fetch6.py, n6.py; output n6_results.txt). 12,952 pre-lockbox two-way lines.
+  - N1 team coherence (do Hard Rock's player lines add up to the team's expected shots?): best T=.02 +0.7% n110 [-12.8,+13.8]; T=.01
+    -5.4% n259. The gap has a real, stable positive weight, but it is far too small to clear ~3.5 pts of hold per side.
+  - N1b within-team share vs history: -4.4% n109; weight ~0. N2 starting goalies (opp save %, backups): best T=.02 +3.2% n230
+    [-5.7,+11.4], T=.01 -6.1% n519. N3 vig placement (skew/hold, a better de-vig): -9.6% n204; skew is a real calibration fix but loses.
+  - N4 player home/road split: -9.9% n211, weight 0. N5 close game -> OT: 0 bets, weight 0.
+  - As in run 4, the walk-forward logistics bet almost only in November (Oct-only training); from December nothing moves P past BE.
+  - Forward (score_fwd.py, all nights to date = 2026-10-19 only; Oct 20 not played yet): all 13 Q1a bets now graded 7-6 +0.9u (+7.2%);
+    Q1f +12.2% n11; Q1k Pinnacle +0.3% n14; Q1m 1-1; Q2a/b 0 bets. Too small to judge (bar n >= 300).
+  18 variants (~0.9 false positives expected); none positive with n >= 300, so no placebo and no lockbox look. All-time historical 271;
+  forward 15. Lockbox looks: 1 (unchanged).
+  **Verdict: nothing passed; no candidate for the Sharp.** Team-level coherence, goalies, de-vig shape, home/road and OT chance are all
+  already in Hard Rock's price to within its hold. Free-data features on main-line shots are exhausted; the live consensus feed is the
+  only live route.
+  Next: (1) daily forward re-score (Q1/Q2) as nights land; (2) Q6 A-read vs B/C split and an unders-only split, registered from a
+  clean start date before looking once ~2 weeks are in; (3) N1 gap as a guard input for Gap + Guard picks (descriptive only on the live
+  shadow log first: does a Gap pick with a negative team-coherence gap hit less?).
 - 2026-10-19 ~11:55 PM ET (Researcher run 5, extra: night 1 of the live 9-book consensus; SHOTS ONLY; forward tests). No key used,
   no historical pull. Registered Q1a-m (13 variants) + Q2a-b (2) and pushed (0c0ce82) BEFORE any EV or result was computed; then
   built research/code/fwd/score_fwd.py, which re-scores every registered forward variant on ALL nights to date (output

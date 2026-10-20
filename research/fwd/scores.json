@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-10-20T03:51:22+00:00",
+ "generated_at": "2026-10-20T11:55:20+00:00",
  "nights": [
   "2026-10-19"
  ],
@@ -13,98 +13,98 @@
  "variants": {
   "Q1a": {
    "bets": 13,
-   "graded": 10,
-   "w": 6,
-   "units": 1.742,
-   "roi": 0.1742,
+   "graded": 13,
+   "w": 7,
+   "units": 0.942,
+   "roi": 0.0725,
    "ci90": [
-    -0.2557,
-    0.4607
+    -0.2873,
+    0.3985
    ],
-   "p_one_sided": 0.2635,
+   "p_one_sided": 0.366,
    "mean_ev": 0.0223,
    "mean_clv": 0.0196,
-   "games": 3,
+   "games": 4,
    "candidate": false
   },
   "Q1f": {
    "bets": 11,
-   "graded": 8,
-   "w": 5,
-   "units": 2.136,
-   "roi": 0.267,
+   "graded": 11,
+   "w": 6,
+   "units": 1.336,
+   "roi": 0.1215,
    "ci90": [
-    -0.2557,
-    0.7896
+    -0.2873,
+    0.696
    ],
-   "p_one_sided": 0.2635,
+   "p_one_sided": 0.321,
    "mean_ev": 0.0203,
    "mean_clv": 0.0172,
-   "games": 3,
+   "games": 4,
    "candidate": false
   },
   "Q1b": {
    "bets": 9,
+   "graded": 9,
+   "w": 5,
+   "units": 0.742,
+   "roi": 0.0824,
+   "ci90": [
+    -0.2369,
+    0.3379
+   ],
+   "p_one_sided": 0.372,
+   "mean_ev": 0.0299,
+   "mean_clv": 0.0255,
+   "games": 3,
+   "candidate": false
+  },
+  "Q1g": {
+   "bets": 7,
+   "graded": 7,
+   "w": 4,
+   "units": 1.136,
+   "roi": 0.1623,
+   "ci90": [
+    -0.2369,
+    0.6944
+   ],
+   "p_one_sided": 0.372,
+   "mean_ev": 0.029,
+   "mean_clv": 0.0233,
+   "games": 3,
+   "candidate": false
+  },
+  "Q1c": {
+   "bets": 7,
    "graded": 7,
    "w": 4,
    "units": 0.542,
    "roi": 0.0774,
    "ci90": [
-    -0.3492,
-    0.3973
+    -0.5119,
+    0.3131
    ],
-   "p_one_sided": 0.26,
-   "mean_ev": 0.0299,
-   "mean_clv": 0.0255,
-   "games": 2,
+   "p_one_sided": 0.4095,
+   "mean_ev": 0.0343,
+   "mean_clv": 0.0304,
+   "games": 3,
    "candidate": false
   },
-  "Q1g": {
-   "bets": 7,
+  "Q1h": {
+   "bets": 5,
    "graded": 5,
    "w": 3,
    "units": 0.936,
    "roi": 0.1872,
    "ci90": [
-    -0.3492,
-    0.9917
+    -0.5119,
+    0.6532
    ],
-   "p_one_sided": 0.26,
-   "mean_ev": 0.029,
-   "mean_clv": 0.0233,
-   "games": 2,
-   "candidate": false
-  },
-  "Q1c": {
-   "bets": 7,
-   "graded": 6,
-   "w": 4,
-   "units": 1.542,
-   "roi": 0.257,
-   "ci90": [
-    -0.0238,
-    0.3973
-   ],
-   "p_one_sided": 0.26,
-   "mean_ev": 0.0343,
-   "mean_clv": 0.0304,
-   "games": 2,
-   "candidate": false
-  },
-  "Q1h": {
-   "bets": 5,
-   "graded": 4,
-   "w": 3,
-   "units": 1.936,
-   "roi": 0.484,
-   "ci90": [
-    -0.0238,
-    0.9917
-   ],
-   "p_one_sided": 0.26,
+   "p_one_sided": 0.4095,
    "mean_ev": 0.0347,
    "mean_clv": 0.0293,
-   "games": 2,
+   "games": 3,
    "candidate": false
   },
   "Q1d": {
@@ -173,34 +173,34 @@
   },
   "Q1k": {
    "bets": 14,
-   "graded": 11,
+   "graded": 14,
    "w": 7,
-   "units": 3.036,
-   "roi": 0.276,
+   "units": 0.036,
+   "roi": 0.0026,
    "ci90": [
-    0.0551,
-    0.497
+    -0.471,
+    0.441
    ],
-   "p_one_sided": 0.042,
+   "p_one_sided": 0.409,
    "mean_ev": 0.022,
    "mean_clv": 0.0057,
-   "games": 3,
+   "games": 4,
    "candidate": false
   },
   "Q1l": {
    "bets": 7,
-   "graded": 6,
+   "graded": 7,
    "w": 4,
-   "units": 2.003,
-   "roi": 0.3338,
+   "units": 1.003,
+   "roi": 0.1433,
    "ci90": [
-    0.1032,
-    0.6567
+    -0.3768,
+    0.6125
    ],
-   "p_one_sided": 0.036,
+   "p_one_sided": 0.2915,
    "mean_ev": 0.0363,
    "mean_clv": 0.0157,
-   "games": 3,
+   "games": 4,
    "candidate": false
   },
   "Q1m": {
@@ -396,7 +396,7 @@
     "ev": 0.0191,
     "books": 5,
     "clv": 0.0191,
-    "pl": null
+    "pl": 1.2000000000000002
    },
    {
     "date": "2026-10-19",
@@ -410,7 +410,7 @@
     "ev": 0.0008,
     "books": 6,
     "clv": 0.0008,
-    "pl": null
+    "pl": -1.0
    },
    {
     "date": "2026-10-19",
@@ -424,7 +424,7 @@
     "ev": 0.0269,
     "books": 6,
     "clv": 0.012,
-    "pl": null
+    "pl": -1.0
    }
   ],
   "Q1f": [
@@ -552,7 +552,7 @@
     "ev": 0.0191,
     "books": 5,
     "clv": 0.0191,
-    "pl": null
+    "pl": 1.2000000000000002
    },
    {
     "date": "2026-10-19",
@@ -566,7 +566,7 @@
     "ev": 0.0008,
     "books": 6,
     "clv": 0.0008,
-    "pl": null
+    "pl": -1.0
    },
    {
     "date": "2026-10-19",
@@ -580,7 +580,7 @@
     "ev": 0.0269,
     "books": 6,
     "clv": 0.012,
-    "pl": null
+    "pl": -1.0
    }
   ],
   "Q1b": [
@@ -694,7 +694,7 @@
     "ev": 0.0191,
     "books": 5,
     "clv": 0.0191,
-    "pl": null
+    "pl": 1.2000000000000002
    },
    {
     "date": "2026-10-19",
@@ -708,7 +708,7 @@
     "ev": 0.0269,
     "books": 6,
     "clv": 0.012,
-    "pl": null
+    "pl": -1.0
    }
   ],
   "Q1g": [
@@ -794,7 +794,7 @@
     "ev": 0.0191,
     "books": 5,
     "clv": 0.0191,
-    "pl": null
+    "pl": 1.2000000000000002
    },
    {
     "date": "2026-10-19",
@@ -808,7 +808,7 @@
     "ev": 0.0269,
     "books": 6,
     "clv": 0.012,
-    "pl": null
+    "pl": -1.0
    }
   ],
   "Q1c": [
@@ -908,7 +908,7 @@
     "ev": 0.0269,
     "books": 6,
     "clv": 0.012,
-    "pl": null
+    "pl": -1.0
    }
   ],
   "Q1h": [
@@ -980,7 +980,7 @@
     "ev": 0.0269,
     "books": 6,
     "clv": 0.012,
-    "pl": null
+    "pl": -1.0
    }
   ],
   "Q1d": [
@@ -1200,7 +1200,7 @@
     "ev": 0.0415,
     "books": 6,
     "clv": 0.0025,
-    "pl": null
+    "pl": -1.0
    },
    {
     "date": "2026-10-19",
@@ -1270,7 +1270,7 @@
     "ev": 0.0098,
     "books": 6,
     "clv": 0.0008,
-    "pl": null
+    "pl": -1.0
    },
    {
     "date": "2026-10-19",
@@ -1284,7 +1284,7 @@
     "ev": 0.0097,
     "books": 6,
     "clv": 0.012,
-    "pl": null
+    "pl": -1.0
    }
   ],
   "Q1l": [
@@ -1342,7 +1342,7 @@
     "ev": 0.0415,
     "books": 6,
     "clv": 0.0025,
-    "pl": null
+    "pl": -1.0
    },
    {
     "date": "2026-10-19",
@@ -1642,7 +1642,7 @@
     }
    ],
    "shadow_shots_rows": 66,
-   "shadow_shots_graded": 48
+   "shadow_shots_graded": 66
   }
  }
 }
