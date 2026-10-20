@@ -79,7 +79,7 @@
   },
   "CAR": {
    "name": "Pyotr Kochetkov",
-   "status": "expected"
+   "status": "confirmed"
   },
   "VGK": {
    "name": "Carter Hart",
@@ -90,5 +90,5 @@
    "status": "expected"
   }
  },
- "checked_at": "2026-10-20T14:30:00-04:00"
+ "checked_at": "2026-10-20T16:30:00-04:00"
 }
