@@ -19,7 +19,7 @@
   },
   "WSH": {
    "name": "Logan Thompson",
-   "status": "expected"
+   "status": "confirmed"
   },
   "LAK": {
    "name": "Anton Forsberg",
@@ -27,7 +27,7 @@
   },
   "CBJ": {
    "name": "Jet Greaves",
-   "status": "expected"
+   "status": "confirmed"
   },
   "TOR": {
    "name": "Anthony Stolarz",
@@ -90,5 +90,5 @@
    "status": "expected"
   }
  },
- "checked_at": "2026-10-20T10:00:01-04:00"
+ "checked_at": "2026-10-20T10:40:01-04:00"
 }
