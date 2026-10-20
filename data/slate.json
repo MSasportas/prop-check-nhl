@@ -1,7 +1,7 @@
 {
  "slate_date": "2026-10-20",
- "generated_at": "2026-10-20T10:40:01-04:00",
- "status_at": "2026-10-20T10:40:01-04:00",
+ "generated_at": "2026-10-20T10:50:01-04:00",
+ "status_at": "2026-10-20T10:50:01-04:00",
  "valid_until": "2026-10-21T05:00:00-04:00",
  "status": {
   "prices_state": "not_yet",
@@ -16,7 +16,7 @@
   "stats_state": "ok",
   "last_run": {
    "ok": true,
-   "at": "2026-10-20T10:40:01-04:00",
+   "at": "2026-10-20T10:50:01-04:00",
    "failed_step": null
   },
   "pool": {
@@ -53,7 +53,7 @@
      "status": "expected"
     },
     "home": {
-     "name": "Jacob Fowler",
+     "name": "Jakub Dobes",
      "status": "expected"
     }
    },
@@ -74,7 +74,7 @@
    "goalies": {
     "away": {
      "name": "Scott Wedgewood",
-     "status": "expected"
+     "status": "confirmed"
     },
     "home": {
      "name": "Nico Daws",
@@ -102,7 +102,7 @@
     },
     "home": {
      "name": "Ilya Sorokin",
-     "status": "expected"
+     "status": "confirmed"
     }
    },
    "started": false,

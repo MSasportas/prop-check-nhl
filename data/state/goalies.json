@@ -3,7 +3,7 @@
  "teams": {
   "NYI": {
    "name": "Ilya Sorokin",
-   "status": "expected"
+   "status": "confirmed"
   },
   "ANA": {
    "name": "Lukas Dostal",
@@ -15,7 +15,7 @@
   },
   "COL": {
    "name": "Scott Wedgewood",
-   "status": "expected"
+   "status": "confirmed"
   },
   "WSH": {
    "name": "Logan Thompson",
@@ -34,7 +34,7 @@
    "status": "confirmed"
   },
   "MTL": {
-   "name": "Jacob Fowler",
+   "name": "Jakub Dobes",
    "status": "expected"
   },
   "SJS": {
@@ -90,5 +90,5 @@
    "status": "expected"
   }
  },
- "checked_at": "2026-10-20T10:40:01-04:00"
+ "checked_at": "2026-10-20T10:50:01-04:00"
 }
