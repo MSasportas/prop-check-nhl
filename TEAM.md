@@ -67,6 +67,18 @@ v1.0 in one line: 60/40 blend, proportional de-vig, -0.02/-0.015/-0.04 adjustmen
   edited version stays in history); only a force-push that removes the bad commit(s) does, restoring the last good
   log. `python scripts/run.py --rebuild-record` regenerates the derived Record views. Only the timer writes
   `data/record/`. No chat ever edits it.
+- **Customer-ordered reset (only exception to append-only):** a reset is accepted by `guard_record.py` only when the old
+  Record is preserved byte-exact in the repo. `data/record/resets.json` (append-only list) has an entry
+  `{at, ordered_by, archive, sha256, lines}`; the archive file lives under `archive/` and is never rewritten. A
+  (old -> new) pair that fails the prefix rule passes iff new is an empty file AND resets.json (read from the newer side:
+  the working file, or that commit's tree) has an entry whose sha256 equals sha256(old) AND the archive it names, read from
+  the same side, is byte-identical to old. The same rule applies in the HEAD check, the `--history` walk (including the
+  cached `.git/pc_record_verified` path) and the `--origin` remembered-Record check (a remembered Record that is a prefix of
+  an archived one is fine). Every run also requires: resets.json only ever gains entries (checked across all commits), and
+  every archive it names still matches its sha256 in the working tree. Anything else (plain truncation, wrong sha, missing
+  or edited archive, shallow clone) is the same breach as before. First use: 2026-10-19, archive `archive/record_2026-10-19/`
+  (events.jsonl byte-exact, 82 lines, plus the old record.json view). The page shows one line on the Record view when
+  resets.json exists. **Future resets need Matt's explicit order**; no one else may add a resets.json entry.
 - **Odds keys:** GitHub secret `ODDS_API_KEYS` (comma-separated). Never in the repo, page or logs. Rotates when a key
   is out or refused; a refused key is "unknown", not empty. Page warns when the pool is low.
 - **Discord notifications:** `scripts/notify.py`, called at the end of `run.py` (never fails or slows a run: 5 s
@@ -334,6 +346,7 @@ v1.0 in one line: 60/40 blend, proportional de-vig, -0.02/-0.015/-0.04 adjustmen
 ## 8. Rule-change log
 | Date | Change | Why | Sample |
 |---|---|---|---|
+| 2026-10-19 | **Record reset.** Record restarted empty; old Record archived at `archive/record_2026-10-19/` (18 singles 11-7 61% +0.96u, 7 parlays 1-6 -4.45u; Oct 12-18, 82 lines). Guard now accepts a reset only with a matching archive (`data/record/resets.json`) | Matt's order: "Restart all records and tracking. Everything starts fresh" (scope: Record + paper; odds, shadow logs, credits ledger untouched) | Record is empty until picks resume |
 | 2026-10-20 | **Paper test starts** (`ops.paper`): Gap + Guard flags, vetoes, CLV and grades logged to `data/paper/`, Discord PAPER pings, page section "Paper test (not bets)". Pull B = shots only at every tier >= 1 and not lineup-gated, pull C = shots on every game, while paper is active. No pick, parlay or Record change; picks stay paused | Matt approved the paper path after the 2026-10-19 Gap + Guard review (Sharp, DS, Builder, QA all GO WITH CHANGES; final GO for PAPER ONLY). Model offsets frozen (item 21) | Nov 2 go/stop in item 21; ~3 credits/game |
 | 2026-10-19 | Picks paused (`ops.pause.active`), page says no proven edge; v2.0 values kept but unused | Pre-registered fail rule: 2025-26 backtest H1 -2.7% (capped -6.1%), model worse than book | 18,383 historical Hard Rock lines (item 20) |
 | 2026-10-18 (Sharp) | **Rules v2.0** from slate 2026-10-19: over-hold de-vig; blend 70/30; no adjustments; qualify 0 <= edge < 0.05, same bar early/confirmed; no min chance, news-gap, too-good or drift rules; shots 1.5 and 2.5 only; 2 per game, 8 a night by edge; pull at a new price if edge >= 0.05; parlays off. Shadow-graded lines now count as the sample for model/blend/qualify changes | DS edge study + Sharp ruling (section 7 items 17-18): Hard Rock puts the vig on the over; gaps 0.03-0.10 won, 0.10+ lost, and v1.0 only bet ~0.135+ | 742 shadow lines; discovery +19.1% (n 150) / check +12.8% (n 83); forward gates in section 7 item 18 |
@@ -347,6 +360,7 @@ v1.0 in one line: 60/40 blend, proportional de-vig, -0.02/-0.015/-0.04 adjustmen
 | 2026-10-11 | v1.0 set (section 4) | First build: Sharp standard from the DS backtest (2024-25 fit, 2025-26 out of sample) and one live Hard Rock pull | Backtest only; 0 graded live legs |
 
 ## 9. Session log (newest first, one line each)
+- 2026-10-19 ~8:30 PM (Matt: "Restart all records and tracking. Everything starts fresh"; scope chosen: Record + paper): old Record archived byte-exact at archive/record_2026-10-19/ and restarted empty; guard accepts only a reset with a matching archive (data/record/resets.json); paper log was already empty; odds, shadow logs and credits untouched. QA SHIP WITH FIXES (note rendering fixed), 369 tests, real 780-commit history walk passes. Future resets need Matt's explicit order.
 - 2026-10-19 ~8 PM (Matt: "let's do it"): Gap + Guard PAPER shipped to main after QA (SHIP WITH FIXES). Paper window 2026-10-20 to 2026-11-23, judged Nov 2; picks stay paused; first paper flags possible from the 90-min reads on Oct 20. Open: page section not checked in a real browser; NHL Savant visual pass dropped by Matt; UX restyle of the paper section pending.
 - 2026-10-19 Builder (Gap + Guard PAPER, Matt approved): built `scripts/paper.py`, `guard_paper.py`, `ops.paper`, odds plan (B shots-only not lineup-gated, C every game), Discord PAPER, page section; 353 tests pass (282 + 71). Oct 19 replay on the real reads: Killorn O1.5 +100 flagged at the 90-minute read (market 52.9%, +5.7% EV), Michkov O1.5 -120 vetoed (+3.7% gap, final EV +1.9%). QA: 353 tests pass, Oct 19 replay + Record-hash + timer-guard checks pass, page layout at 380px NOT browser-verified (no browser in session).
 - 2026-10-19 ~7 PM Gap + Guard review (review + prototype only; no code, rule, timer or Record change): Sharp, Data Scientist, Builder, QA all GO WITH CHANGES; every objection resolved; final = GO for PAPER ONLY. Pinned: gap/guard in EV%, 4+ books incl. Pinnacle (Pinnacle = sign check only), flag on 90/45-min reads only, model offsets refit and frozen, B shots-only and not lineup-gated, paper log and PAPER pings fully separate from the Record. Nov 2 go/stop is CLV-based (N >= 30, extend to Nov 23). Not live until Builder ships it and QA passes it.
