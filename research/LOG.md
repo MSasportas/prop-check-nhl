@@ -1,5 +1,27 @@
 # LOG.md: Researcher runs (newest first)
 
+- 2026-10-19 ~11:55 PM ET (Researcher run 5, extra: night 1 of the live 9-book consensus; SHOTS ONLY; forward tests). No key used,
+  no historical pull. Registered Q1a-m (13 variants) + Q2a-b (2) and pushed (0c0ce82) BEFORE any EV or result was computed; then
+  built research/code/fwd/score_fwd.py, which re-scores every registered forward variant on ALL nights to date (output
+  research/fwd/scores.md + .json). Forward bar fixed in HYPOTHESES.md: n >= 300 graded, ROI > 0, one-sided p < 0.0033, CLV > 0.
+  - Night 1 = 4 games, 66 Hard Rock shots lines, 143 line-reads; 141 reads (64 lines) had a consensus (median 5 books).
+  - Hard Rock at or better than the consensus fair on a side: 15 of 282 side-reads, 13 distinct lines (20% of lines), up to +5.7%
+    EV (median side -8.2%, 90th pct -1.6%, 99th +3.6%). History said 0 of 100; difference = median of ~5 live books vs a mean of
+    8-9 then, and/or one night's luck. 11 of the 15 were UNDERS at plus money. Hard Rock hold on these lines 9.4%.
+  - Q1 (bet when Hard Rock beats consensus fair by >= X), graded so far (PIT@UTA's 3 bets not final at 11:40 PM): X=0 6-4 +1.7u
+    (+17%, CI -26..+46); X=.01 +8% n7; X=.02 +26% n6; X=.03 -39% n3; X=.05 0-1. Pinnacle-only X=0 7-4 +3.0u n11. Gap lookalike
+    1-1. CLV ~= EV (prices barely moved between reads). 4 games of results: noise, not evidence.
+  - Stale events (Hard Rock frozen while consensus moved >= 3 pts): 0. Goalies: all 8 confirmed by the 2 PM check. Lineups: 4
+    Daily Faceoff group changes (PHI 6:40 PM, PIT 8:50 PM), only Rakell had a Hard Rock line and no read came after the news before
+    puck, so Q2 had 0 bets and no latency could be timed. 6 of the 13 Q1a bets came from the 1 PM read (before lineups/goalies).
+  - Ops note for the CEO (not research): the two 7 PM games (ANA@NYR, COL@PHI) got B (5:30) but no 45-min C read (no 6:10 run;
+    6:00 then 6:20). Gap + Guard only picks at B/C, so a missing C is a missed chance.
+  15 forward variants (all-time historical still 253). Lockbox looks: 1 (unchanged).
+  **Verdict: nothing passes; too small to judge (n 13 at best vs 300 needed).** First live sign that Hard Rock sometimes sits at or
+  above the market on shots (mostly plus-money unders), which history never showed; needs weeks.
+  Next: (1) daily run: `git fetch --unshallow origin` then `python3 -I research/code/fwd/score_fwd.py .`, append the table line;
+  (2) Q6 split Q1 by read (A vs B/C) and by side (unders) once ~2 weeks are in, register any split before looking;
+  (3) Q5 / Q2 latency as news events land between reads.
 - 2026-10-19 ~2:50 PM ET (Researcher run 4, SHOTS ON GOAL ONLY; resumed after a session restart at 2:34 PM). Registrations K1-K9
   were written ~12:55-1:15 PM and committed (a96d06a) before any test ran; K10-K12 were registered and pushed (00b9a4b) after K1-K9
   ran and before K10-K12 were built. No odds key used, no historical odds pulled. Free NHL data only (team/skater logs, realtime

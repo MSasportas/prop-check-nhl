@@ -354,6 +354,7 @@ probability x Hard Rock decimal payout - 1, on unrounded numbers; every threshol
 | 2026-10-11 | v1.0 set (section 4) | First build: Sharp standard from the DS backtest (2024-25 fit, 2025-26 out of sample) and one live Hard Rock pull | Backtest only; 0 graded live legs |
 
 ## 9. Session log (newest first, one line each)
+- 2026-10-19 ~11:55 PM Researcher run 5 (extra, live consensus night 1, shots): Q1a-m + Q2a-b registered before scoring; research/code/fwd/score_fwd.py re-scores them on all nights daily. Night 1: 64 of 66 lines had consensus (median 5 books); Hard Rock at/above consensus fair on 13 lines (mostly plus-money unders, up to +5.7%); Q1 X=0 6-4 +1.7u on 10 graded = noise (bar n >= 300); 0 stale events, Q2 0 bets. Ops: 7 PM games got no 45-min C read on Oct 19.
 - 2026-10-19 Builder (Matt: one version only, the gap + model part): Gap + Guard is now THE engine (v3.0). `engine.py` rebuilt on the research log
   (`paper.py` stays the single source of the maths); picks go to the page, the Record (`shown` with `gg_id`, price frozen) and Discord; old
   v1/v2 engine, rules sheets, pause, paper section, PAPER messages, parlays and goal watch removed; `gg_grade` step added; fixtures regenerated.
