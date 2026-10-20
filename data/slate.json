@@ -1,22 +1,22 @@
 {
  "slate_date": "2026-10-19",
- "generated_at": "2026-10-19T22:20:00-04:00",
- "status_at": "2026-10-19T22:20:00-04:00",
+ "generated_at": "2026-10-19T22:30:01-04:00",
+ "status_at": "2026-10-19T22:30:01-04:00",
  "valid_until": "2026-10-20T05:00:00-04:00",
  "status": {
   "prices_state": "ok",
   "prices_at": "2026-10-19T20:20:00-04:00",
   "next_price_read_at": null,
-  "stats_built_at": "2026-10-19T22:20:00-04:00",
+  "stats_built_at": "2026-10-19T22:30:01-04:00",
   "stats_through": "2026-10-18",
   "lineups_at": "2026-10-19T20:50:01-04:00",
   "goalies_at": null,
   "lineups_note": "8 of 8 team line pages are dated today.",
   "lineups_state": "ok",
-  "stats_state": "behind",
+  "stats_state": "ok",
   "last_run": {
    "ok": true,
-   "at": "2026-10-19T22:20:00-04:00",
+   "at": "2026-10-19T22:30:01-04:00",
    "failed_step": null
   },
   "pool": {
@@ -27,14 +27,6 @@
    "low": false
   },
   "excluded_teams": [
-   {
-    "team": "COL",
-    "reason": "stats behind"
-   },
-   {
-    "team": "PHI",
-    "reason": "stats behind"
-   },
    {
     "team": "SJS",
     "reason": "stats behind"
@@ -51,7 +43,7 @@
  "banners": [
   {
    "level": "warn",
-   "text": "Not covered tonight: COL, PHI, SJS, TOR (stats behind)."
+   "text": "Not covered tonight: SJS, TOR (stats behind)."
   }
  ],
  "empty": {
@@ -105,11 +97,8 @@
    },
    "started": true,
    "picks": 0,
-   "excluded_reason": "stats behind",
-   "excluded_teams": [
-    "COL",
-    "PHI"
-   ]
+   "excluded_reason": null,
+   "excluded_teams": []
   },
   {
    "id": 2026020139,
