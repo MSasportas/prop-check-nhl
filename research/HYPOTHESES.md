@@ -102,6 +102,36 @@ no lockbox look. Cumulative variants all runs: 253. Lockbox looks: still 1.
 Why the logistic tests bet almost only in November: trained on October alone the fit is noisy; from December on, the book's
 own price (b ~ 1.0) plus any of these features never moves P(over) the ~3.5+ pts needed to clear Hard Rock's hold on a side.
 
+## Run 5 (Researcher, 2026-10-19 night, extra run). FORWARD tests on the live feed. Registered before any EV or result was looked at.
+Shots on goal only (scope). Looked at before registering: file layouts only (data/odds fetch keys, one saves shadow row, lineup_history
+and goalies.json shapes, git history counts). No Hard Rock-vs-consensus EV and no shots result was seen before this commit.
+Scored by `research/code/fwd/score_fwd.py`, which re-scores every registered forward variant on ALL nights to date (2026-10-19 on) each
+run; output `research/fwd/scores.json` + `research/fwd/scores.md`. Grading as the Record: 1u flat at the frozen read's Hard Rock price,
+result = shadow `result.actual` vs line (regulation + OT as the shadow log grades), no ice time / no result = void, tie impossible (x.5).
+Game-clustered bootstrap (2,000 resamples) for CI and one-sided p.
+**Forward bar (fixed now, never lowered):** a variant is a CANDIDATE FOR SHARP only when n >= 300 graded bets AND ROI > 0 AND
+game-clustered one-sided p < 0.05 / 15 (= 0.0033; Bonferroni over the 15 Q1 + Q2 variants below) AND CLV (bet EV vs the consensus at the
+line's last pre-puck read) mean > 0. Until n >= 300 every result is reported as "too small to judge".
+
+Common Q1 definitions. Universe: every read in `data/odds/<date>.json` that carries `others`, market `shots`, every matched player and
+line where Hard Rock posts both sides; side bet only if its Hard Rock price is -200 or better. Consensus at that read, mirroring
+scripts/shadow.py: each other book with both sides at the same pid + line, its own last_update < 60 min before the read, hold 0-15%;
+proportional de-vig; fair = MEDIAN over those books (even count: mean of the middle two). EV(side) = consensus fair(side) x Hard Rock
+decimal - 1 (unrounded). Books = number of books in that median. A line+side is bet at most once: at the FIRST read (time order) where it
+qualifies, price frozen there (like the product). CLV = consensus fair(side) at the last read of that line before puck x frozen decimal - 1.
+
+| id | date | rule (exact) | data | result | status |
+|---|---|---|---|---|---|
+| Q1a-e | 2026-10-19 | **Bet Hard Rock when it beats consensus fair, >= 1 book.** EV >= X with books >= 1, any read (A, B, C). X = 0.00 / 0.01 / 0.02 / 0.03 / 0.05 (5 variants: a b c d e) | data/odds + data/shadow, 2026-10-19 on | see research/fwd/scores.md | forward, open |
+| Q1f-j | 2026-10-19 | Same with books >= 4. X = 0.00 / 0.01 / 0.02 / 0.03 / 0.05 (5 variants: f g h i j) | same | same | forward, open |
+| Q1k-l | 2026-10-19 | **Pinnacle alone as fair** (Pinnacle with both sides, fresh, hold 0-15%). EV vs Pinnacle fair >= X, X = 0.00 / 0.02 (2 variants) | same | same | forward, open |
+| Q1m | 2026-10-19 | **Gap step 1 lookalike (no guard).** B and C reads only, books >= 4 incl. Pinnacle with Pinnacle-fair EV >= 0, median EV >= 0.03, price -200..+120 (1 variant; the product's guard and caps are NOT applied; that is the DS's Gap + Guard job, not this test) | same | same | forward, open |
+| Q2a | 2026-10-19 | **Lineup promotion, Hard Rock unchanged -> OVER.** Lineup checks = every commit of data/state/lineups.json (git history, time = the team's `tried_at`, else commit time) on the slate date before puck. Event: a skater whose group improves between consecutive checks of his team (f3/f4/none -> f1/f2, or not pp1 -> pp1). At the first Hard Rock read after the event: if his Hard Rock over and under prices on that line are identical to his last Hard Rock read BEFORE the event, bet the OVER at that read's price (-200 or better). One bet per player per slate | data/state/lineups.json git history + data/odds + data/shadow | same | forward, open |
+| Q2b | 2026-10-19 | **Lineup demotion or teammate news, Hard Rock unchanged.** Same, two triggers: (i) his group worsens (f1/f2 -> f3/f4/none, or pp1 -> not pp1) -> UNDER; (ii) a teammate in his f-line or pp1 group at the previous check is listed `out` -> OVER for him. Same unchanged-price condition and pricing (1 variant, both triggers pooled) | same | same | forward, open |
+| Q2-desc | 2026-10-19 | Descriptive, no bets: for every lineup event and every stale event (shadow `stale_events`: Hard Rock unchanged while the consensus median moved >= 0.03), minutes from the news to Hard Rock's first price change and to the consensus's first move | same + goalies.json git history | same | forward, descriptive |
+
+Run 5 count: 14 forward variants (Q1 13, Q2 2; Bonferroni uses 15 to be conservative). Historical cumulative unchanged at 253. Lockbox looks: 1.
+
 ## Queued (not yet tested)
 | id | rule idea | data | status |
 |---|---|---|---|
