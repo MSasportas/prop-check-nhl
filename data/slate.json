@@ -1,42 +1,38 @@
 {
  "slate_date": "2026-10-20",
- "generated_at": "2026-10-20T17:20:01-04:00",
- "status_at": "2026-10-20T17:20:01-04:00",
+ "generated_at": "2026-10-20T17:30:02-04:00",
+ "status_at": "2026-10-20T17:30:02-04:00",
  "valid_until": "2026-10-21T05:00:00-04:00",
  "status": {
   "prices_state": "ok",
-  "prices_at": "2026-10-20T13:00:00-04:00",
-  "next_price_read_at": "2026-10-20T17:30:00-04:00",
+  "prices_at": "2026-10-20T17:30:02-04:00",
+  "next_price_read_at": "2026-10-20T18:15:00-04:00",
   "stats_built_at": "2026-10-20T00:30:01-04:00",
   "stats_through": "2026-10-19",
-  "lineups_at": "2026-10-20T17:20:01-04:00",
+  "lineups_at": "2026-10-20T17:30:02-04:00",
   "goalies_at": null,
   "lineups_note": "11 of 14 team line pages are dated today.",
   "lineups_state": "ok",
   "stats_state": "ok",
   "last_run": {
    "ok": true,
-   "at": "2026-10-20T17:20:01-04:00",
+   "at": "2026-10-20T17:30:02-04:00",
    "failed_step": null
   },
   "pool": {
-   "pulls_left": 384,
+   "pulls_left": 379,
    "keys": 4,
    "game_days_left": 12,
    "days_left": 12,
    "low": false
   },
   "excluded_teams": [],
-  "lines_checked": 0,
-  "flag_reads": 0,
+  "lines_checked": 92,
+  "flag_reads": 5,
   "tier": 3
  },
  "banners": [],
- "empty": {
-  "code": "none_qualified",
-  "text": "No picks yet today",
-  "sub": "Picks come from the price read 90 minutes before each game. Next read at 5:30 PM."
- },
+ "empty": null,
  "games": [
   {
    "id": 2026020141,
@@ -130,7 +126,7 @@
     }
    },
    "started": false,
-   "picks": 0,
+   "picks": 1,
    "excluded_reason": null,
    "excluded_teams": []
   },
@@ -303,7 +299,62 @@
    "excluded_teams": []
   }
  ],
- "picks": [],
+ "picks": [
+  {
+   "id": "2026-10-20:2026020144:8471214:shots:2.5:under",
+   "price": 105,
+   "first_price": 105,
+   "first_price_at": "2026-10-20T17:30:02-04:00",
+   "worst_price": 105,
+   "p": 0.534,
+   "breakeven": 0.4878,
+   "p_pct": 53,
+   "breakeven_pct": 49,
+   "state": "lineup",
+   "history": [
+    {
+     "at": "2026-10-20T17:30:02-04:00",
+     "text": "Lineup confirmed"
+    }
+   ],
+   "prices": [
+    {
+     "at": "2026-10-20T17:30:02-04:00",
+     "price": 105
+    }
+   ],
+   "pulled": null,
+   "graded": null,
+   "rank": 1,
+   "tier": "main",
+   "game_id": 2026020144,
+   "player": "A. Ovechkin",
+   "player_id": 8471214,
+   "team": "WSH",
+   "opp": "LAK",
+   "home": true,
+   "start": "2026-10-20T19:00:00-04:00",
+   "market": "shots",
+   "line": 2.5,
+   "side": "under",
+   "bet": "Under 2.5 shots on goal",
+   "price_at": "2026-10-20T17:30:02-04:00",
+   "gap_pct": 7.5,
+   "market_fair_pct": 52.5,
+   "n_books": 5,
+   "guard": {
+    "verdict": "agrees",
+    "ours_pct": 53.4,
+    "model_pct": 58.7
+   },
+   "settled": "lineup",
+   "settled_label": "Lineup confirmed",
+   "reason": "5 other books say 52.5%; Hard Rock's +105 only needs 48.8%. Our model agrees (our blend: 53.4%).",
+   "thin": false,
+   "games_used": 90,
+   "games_this_season": 8
+  }
+ ],
  "parlays": [],
  "parlays_note": "Parlays are not offered: there is no evidence for them yet."
 }

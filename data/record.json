@@ -1,5 +1,5 @@
 {
- "generated_at": null,
+ "generated_at": "2026-10-20T17:30:02-04:00",
  "summary": {
   "headline": {
    "w": 0,
@@ -13,6 +13,39 @@
   },
   "rows": []
  },
- "nights": [],
+ "nights": [
+  {
+   "date": "2026-10-20",
+   "graded": false,
+   "w": 0,
+   "l": 0,
+   "units": 0,
+   "entries": [
+    {
+     "id": "2026-10-20:2026020144:8471214:shots:2.5:under",
+     "kind": "single",
+     "player": "A. Ovechkin",
+     "bet": "Under 2.5 shots on goal",
+     "market": "shots",
+     "team": "WSH",
+     "game": "LAK at WSH",
+     "price": 105,
+     "first_price": 105,
+     "last_price": 105,
+     "prices": [
+      {
+       "price": 105,
+       "at": "2026-10-20T17:30:02-04:00"
+      }
+     ],
+     "result": null,
+     "actual": null,
+     "units": null,
+     "pulled": null,
+     "legs": []
+    }
+   ]
+  }
+ ],
  "older": []
 }

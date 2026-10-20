@@ -1,6 +1,6 @@
 {
- "version": "3.0",
- "updated": "2026-10-19",
+ "version": "3.1",
+ "updated": "2026-10-20",
  "values": {
   "min_history": 10,
   "absence_games": 3,
@@ -39,8 +39,8 @@
    "model_weight": 0.2,
    "final_ev": 0.02,
    "max_per_player": 1,
-   "max_per_game": 2,
-   "max_per_night": 3,
+   "max_per_game": null,
+   "max_per_night": null,
    "live_from": "2026-10-20",
    "safety_units": -10
   }

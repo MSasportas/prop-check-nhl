@@ -1,7 +1,7 @@
 {
  "version": 1,
  "note": "Gap + Guard research log. Every flag here is a pick on the page and in the Record; vetoed and capped rows are research only.",
- "generated_at": "2026-10-20T17:10:00-04:00",
+ "generated_at": "2026-10-20T17:30:02-04:00",
  "slate": "2026-10-20",
  "active": true,
  "window": {
@@ -9,14 +9,49 @@
   "checkpoint": "2026-11-02"
  },
  "tonight": {
-  "flags": [],
+  "flags": [
+   {
+    "id": "2026-10-20:2026020144:8471214:2.5:under",
+    "kind": "flag",
+    "slate": "2026-10-20",
+    "game_id": 2026020144,
+    "player": "A. Ovechkin",
+    "team": "WSH",
+    "opp": "LAK",
+    "game": "WSH vs LAK",
+    "start": "2026-10-20T19:00:00-04:00",
+    "side": "under",
+    "line": 2.5,
+    "bet": "UNDER 2.5 shots",
+    "price": 105,
+    "gap_pct": 7.5,
+    "final_pct": 9.5,
+    "market_fair_pct": 52.5,
+    "final_p_pct": 53.4,
+    "n_books": 5,
+    "guard": "pass",
+    "cap": null,
+    "flagged_at": "2026-10-20T17:30:02-04:00",
+    "read_pull": "B",
+    "settled": "Lineup confirmed",
+    "frozen_settled": "Lineup confirmed",
+    "move30_pct": 0.2,
+    "pulled": null,
+    "locked": false,
+    "state": "open",
+    "close_fair_pct": null,
+    "clv_pct": null,
+    "result": null,
+    "units": null
+   }
+  ],
   "vetoes": [],
   "capped": []
  },
  "nights": [],
  "nov2": {
   "gaps_measured": 0,
-  "gaps_logged": 0,
+  "gaps_logged": 1,
   "graded_picks": 0,
   "w": 0,
   "l": 0,
@@ -44,7 +79,7 @@
   "clv_passed_mean": null,
   "clv_vetoed_mean": null,
   "nights": 1,
-  "nights_with_flags": 0,
+  "nights_with_flags": 1,
   "population_slope": null,
   "checkpoint": "2026-11-02"
  }
