@@ -29,6 +29,15 @@ def open_day(s):
     return s.at("13:02")
 
 
+def gg_day(s, vn=False):
+    """Baseline read, then the 90-minute read for CAR@PHI (and VAN@NYR) with one Gap + Guard candidate each."""
+    s.at("09:00")
+    s.read("13:02")
+    s.clock("17:00")
+    cp = [s.gg_lines("CAR", 1)]
+    return s.read("17:31", cp=cp, vn=[s.gg_lines("VAN", 1)] if vn else ()), cp
+
+
 class B1KeysRefused(unittest.TestCase):
     """The real client against a fake feed. Morning: every key refused (429 or plain 401). Later: the feed is fine."""
 
@@ -123,40 +132,7 @@ class B1KeysRefused(unittest.TestCase):
 
 
 class B2ParlayGradedAtAShownPrice(unittest.TestCase):
-    def test_graded_at_the_worst_shown_snapshot(self):
-        s = Sim(pool=12)
-        try:
-            sl = open_day(s)
-            par = sl["parlays"][0]
-            first = (par["price"], dict(par["leg_prices"]))
-            legs = par["legs"]
-            car = s.pick("CAR", 1, sl)
-            in_par = [p for p in sl["picks"] if p["id"] in legs]
-            # 6:16 PM: CAR's leg gets WORSE; later its other... the parlay is re-priced as its own event
-            cl = [p for p in in_par if p["game_id"] == 2026020901][0]
-            team = cl["team"]
-            worse = cl["price"] - 10
-            s.set_odds("CAR", "PHI", [("player_shots_on_goal", world.name_of(team, 1), 2.5, worse, 102),
-                                      s.line("PHI" if team == "CAR" else "CAR", 1, "shots", 2.5, 0.14)], "2026-10-11T22:10:00Z")
-            sl = s.at("18:16")
-            p2 = [x for x in sl["parlays"] if x["id"] == par["id"]][0]
-            shown = [x["price"] for x in p2["prices"]]
-            self.assertEqual(len(shown), 2)
-            self.assertEqual(p2["leg_prices"][cl["id"]], worse)
-            # 7:16 PM: the VAN/NYR leg gets BETTER (later snapshot, but the parlay already locked with the 7 PM game)
-            s.at("19:01")
-            for gid, away, home in ((2026020901, "CAR", "PHI"), (2026020902, "VAN", "NYR")):
-                s.set_box(gid, away, home, {p["player_id"]: (4, 0, 0) for p in in_par})
-            s.set_states({2026020901: "OFF", 2026020902: "OFF"})
-            s.at("23:10")
-            g = {e["id"]: e for e in s.events() if e["t"] == "graded"}
-            gp = g[par["id"]]["price"]
-            self.assertIn(gp, shown, "graded at a parlay price that was actually shown")
-            self.assertEqual(gp, min(shown, key=odds.decimal))
-            # every leg's own worst price multiplied would only match if both legs' worst came from one moment
-            self.assertEqual(g[par["id"]]["units"], round(odds.decimal(gp) - 1, 4))
-        finally:
-            s.close()
+    """Parlays are not offered, but an old parlay event in a Record still folds and grades the way it always did."""
 
     def test_void_leg_uses_the_same_snapshot(self):
         par = {"t": "shown", "kind": "parlay", "id": "P", "at": "2026-10-11T13:02:00-04:00", "slate": "2026-10-11",
@@ -173,37 +149,20 @@ class B2ParlayGradedAtAShownPrice(unittest.TestCase):
         self.assertEqual(record.grade_parlay([("W", snap["legs"]["a"]), ("VOID", snap["legs"]["b"])]), ("W", -130, 0.7692))
 
 
-class M1GoalWatchNote(unittest.TestCase):
-    def test_note(self):
-        s = Sim(pool=40)
-        try:
-            s.at("09:00")
-            s.set_odds("CAR", "PHI", [s.line("CAR", 1, "shots", 2.5, 0.14)], UPD)
-            s.at("13:02")
-            self.assertIsNone(s.slate()["goal_watch_note"])
-            goals = [("player_goals", world.name_of("CAR", i), 0.5, 150, None) for i in (0, 1, 2)]
-            s.set_odds("CAR", "PHI", [s.line("CAR", 1, "shots", 2.5, 0.14)] + goals, "2026-10-11T21:25:00Z")
-            s.set_lineup("CAR", "2026-10-11T20:00:00Z")
-            s.set_lineup("PHI", "2026-10-11T20:00:00Z")
-            sl = s.at("17:31")
-            self.assertEqual(sl["goal_watch_note"], "Not picks. Our model is weakest on goals.")
-            self.assertNotIn("short of fair", json.dumps(sl))
-            self.assertTrue(all("price" in r and "fair_price" in r for r in sl["goal_watch"]))
-        finally:
-            s.close()
-
-
-class M2PastMaxPrice(unittest.TestCase):
-    def test_pulled(self):
+class M2PriceIsFrozen(unittest.TestCase):
+    def test_a_better_price_later_changes_nothing(self):
         s = Sim(pool=12)
         try:
-            open_day(s)
-            s.set_odds("CAR", "PHI", [("player_shots_on_goal", world.name_of("CAR", 1), 2.5, 150, -190),
-                                      s.line("PHI", 1, "shots", 2.5, 0.14)], "2026-10-11T22:10:00Z")
-            sl = s.at("18:16")
+            sl, cp = gg_day(s)
             p = s.pick("CAR", 1, sl)
-            self.assertEqual(p["pulled"]["reason"], "Price moved past +120")
-            self.assertNotEqual(p["price"], 150, "the price that caused the pull was never live")
+            self.assertEqual(p["price"], p["first_price"])
+            first = p["price"]
+            hr = ("player_shots_on_goal", world.name_of("CAR", 1), 1.5, 150, -190)      # far better than the flagged price
+            sl = s.read("18:16", cp=[(hr, cp[0][1])])
+            p = s.pick("CAR", 1, sl)
+            self.assertIsNone(p["pulled"])
+            self.assertEqual((p["price"], p["first_price"], p["worst_price"]), (first, first, first))
+            self.assertEqual([e["t"] for e in s.events()], ["shown"])
         finally:
             s.close()
 
@@ -238,23 +197,15 @@ class Minors(unittest.TestCase):
         self.s.close()
 
     def test_m1_percents_match_the_sentence(self):
-        sl = open_day(self.s)
+        sl, _ = gg_day(self.s)
+        self.assertTrue(sl["picks"])
         for p in sl["picks"]:
-            self.assertTrue(p["reason"].startswith("%d%% to " % p["p_pct"]), (p["p_pct"], p["reason"]))
-            self.assertIn("needs %d%%." % p["breakeven_pct"], p["reason"])
+            self.assertEqual(p["p_pct"], int(p["p"] * 100 + 1e-9), p["p"])               # shown as a whole percent, never rounded up
+            self.assertIn("(our blend: %.1f%%)" % (100 * p["p"]), p["reason"])
+            self.assertIn("%d other books say %.1f%%" % (p["n_books"], p["market_fair_pct"]), p["reason"])
+            self.assertEqual(p["breakeven_pct"], round(100 * p["breakeven"]))
         # an exact edge case: p just under a whole percent, rounded to 4 places it would read one higher
-        e = {"p": 0.589996, "b": 0.5555}
-        self.assertEqual(engine.pcts(e), (58, 56))
-
-    def test_m2_parlay_time_is_the_newest_leg_price(self):
-        s = self.s
-        open_day(s)
-        s.set_odds("CAR", "PHI", [s.line("CAR", 1, "shots", 2.5, 0.14), s.line("PHI", 1, "shots", 2.5, 0.141)],
-                   "2026-10-11T22:10:00Z")
-        sl = s.at("18:16")
-        for q in sl["parlays"]:
-            legs = [p for p in sl["picks"] if p["id"] in q["legs"]]
-            self.assertEqual(q["price_at"], max(p["price_at"] for p in legs))
+        self.assertEqual((engine.pct_floor(0.589996), engine.pct_round(0.5555)), (58, 56))
 
     def test_m5_failure_moves_status_at_not_generated_at(self):
         sl0 = open_day(self.s)
@@ -287,11 +238,13 @@ class Minors(unittest.TestCase):
     def test_m8_slate_failure_takes_back_this_runs_events(self):
         s = self.s
         s.at("09:00")
-        s.set_odds("CAR", "PHI", [s.line("CAR", 1, "shots", 2.5, 0.14)], UPD)
+        s.read("13:02")
+        s.clock("17:00")
+        cp = [s.gg_lines("CAR", 1)]
         real = engine.build_slate
         engine.build_slate = lambda *a, **k: (_ for _ in ()).throw(RuntimeError("slate broke"))
         try:
-            sl = s.at("13:02")
+            sl = s.read("17:31", cp=cp)
         finally:
             engine.build_slate = real
         self.assertEqual(s.log_bytes(), b"", "the pick was never on the page, so it is not on the Record")
@@ -299,7 +252,7 @@ class Minors(unittest.TestCase):
         st = s.status()
         self.assertEqual(st["failed_step"], "slate")
         self.assertIn("taken back", json.dumps(st["steps"]))
-        sl = s.at("13:12")                                        # the next run shows it and records it together
+        sl = s.read("17:41", cp=cp)                               # the next run shows it and records it together
         self.assertEqual(len(sl["picks"]), 1)
         self.assertEqual([e["t"] for e in s.events()], ["shown"])
         self.assertEqual(s.events()[0]["id"], sl["picks"][0]["id"])

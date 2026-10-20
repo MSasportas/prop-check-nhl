@@ -1,6 +1,6 @@
 """Other books beside Hard Rock (TEAM.md Q1): one price read asks Hard Rock plus up to 9 other books for the same
 credits, keeps them under "others" in data/odds, and the shadow log compares Hard Rock to their consensus.
-Hard Rock stays THE book: picks, page and Record must be byte-for-byte the same with or without other books."""
+A pick is a Hard Rock price that beats the other books, so without them there is no pick."""
 import json
 import os
 import time
@@ -216,105 +216,45 @@ class Retry(unittest.TestCase):
         finally:
             s.close()
 
-    def test_saves_only_at_other_books_is_not_paid_again_and_again(self):
-        s = Sim(pool=20)                                      # tier 3: B is shots + saves
+    def test_b_and_c_ask_shots_only_with_the_other_books_one_credit_each(self):
+        """Gap + Guard is live: B is shots only on every tier (even with saves on offer at another book), not gated on lineups."""
+        s = Sim(pool=20)
         try:
             s.at("09:00")
             hr = [s.line("CAR", 1, "shots", 2.5, 0.0)]
             oth = {"draftkings": hr + [("player_total_saves", "Goalie CAR", 25.5, -115, -105)]}
             s.set_odds("CAR", "PHI", hr, UPD, others=oth)
             s.at("13:02")
-            s.set_lineup("CAR", "2026-10-11T17:00:00-04:00")
-            s.set_lineup("PHI", "2026-10-11T17:00:00-04:00")
-            s.at("17:31")                                     # B: Hard Rock shots, DraftKings shots + saves -> 2
-            s.at("18:01")                                     # retry saves: Hard Rock only -> free
-            s.at("18:15")                                     # C (shots): other books again -> 1
+            s.set_odds("CAR", "PHI", hr, "2026-10-11T21:31:00Z", others=oth)
+            s.at("17:31")                                     # B, no lineups posted: shots only, one credit
+            s.set_odds("CAR", "PHI", hr, "2026-10-11T22:16:00Z", others=oth)
+            s.at("18:16")                                     # C (45 minutes): shots again
             doc = common.read_json(s.path("odds", "2026-10-11.json"))
             got = [(f["pull"], f["requested"], f["cost"], "others" in f) for f in doc["fetches"]
                    if f["game_id"] == CAR_PHI]
-            self.assertEqual(got, [("A", ["shots"], 1, True), ("B", ["saves", "shots"], 2, True),
-                                   ("B", ["saves"], 0, False), ("C", ["shots"], 1, True)])
+            self.assertEqual(got, [("A", ["shots"], 1, True), ("B", ["shots"], 1, True), ("C", ["shots"], 1, True)])
         finally:
             s.close()
 
 
-class HardRockUnchanged(unittest.TestCase):
-    """The same Hard Rock data with and without other books: every file the picks, page and Record use is
-    byte-for-byte the same. Only data/odds (an extra "others" key per read), the odds stage file and the shadow
-    log (consensus fields) may differ."""
-
-    def strip(self, raw):
-        doc = json.loads(raw)
-        for f in doc.get("fetches", []) + ((doc.get("stage") or {}).get("fetches", [])):
-            f.pop("others", None)
-        return doc
-
-    def day(self, with_others):
-        """One whole made-up day (pull A, lineups, B, C, lock, grade). Returns (data tree, graded events)."""
+class NoOthersNoPicks(unittest.TestCase):
+    def test_hard_rock_alone_never_makes_a_pick(self):
+        """A pick needs the other books (Gap + Guard step 1). Hard Rock lines with no other book: nothing is shown or appended."""
         s = Sim(pool=20)
         try:
-            def set_odds(game, lines, upd):
-                away, home = game
-                oth = None
-                if with_others:
-                    oth = {bk: shifted(lines, 5 + i) for i, bk in enumerate(OTHERS9)}
-                    oth["draftkings"] = oth["draftkings"] + [
-                        ("player_shots_on_goal", world.name_of(away, 9), 1.5, -150, 120),
-                        ("player_shots_on_goal", "Not A Player", 2.5, -110, -110)]
-                    # (a market only another book has is billed: see Retry, it is not "the same Hard Rock data")
-                s.set_odds(away, home, lines, upd, others=oth)
-
             s.at("09:00")
-            lines = {("CAR", "PHI"): [s.line("CAR", 1, "shots", 2.5, 0.14), s.line("PHI", 1, "shots", 2.5, 0.14),
-                                      s.line("PHI", 2, "shots", 1.5, 0.05, "under")],
-                     ("VAN", "NYR"): [s.line("VAN", 1, "shots", 2.5, 0.14), s.line("NYR", 1, "shots", 2.5, 0.14)]}
-            for g, ls in lines.items():
-                set_odds(g, ls, UPD)
-            sl = s.at("13:02")
-            self.assertTrue(sl["picks"], "the test needs picks on the page")
-            s.set_lineup("CAR", "2026-10-11T17:00:00-04:00")
-            s.set_lineup("PHI", "2026-10-11T17:00:00-04:00")
-            price = next(p["price"] for p in sl["picks"] if p["team"] == "CAR")
-            set_odds(("CAR", "PHI"), [("player_shots_on_goal", world.name_of("CAR", 1), 2.5, price - 10, 102)]
-                     + lines[("CAR", "PHI")][1:], "2026-10-11T21:30:00Z")
-            set_odds(("VAN", "NYR"), lines[("VAN", "NYR")], "2026-10-11T22:30:00Z")   # fresh feed stamps for B/C
-            for hh in ("17:31", "18:01", "18:15", "18:35", "19:05", "19:15", "20:00"):
-                s.at(hh)
-            car, phi, van, nyr = (world.pid_of(t, 1) for t in ("CAR", "PHI", "VAN", "NYR"))
-            s.set_box(CAR_PHI, "CAR", "PHI", {car: (4, 0, 0), phi: (1, 0, 0)})
-            s.set_box(VAN_NYR, "VAN", "NYR", {nyr: (5, 0, 0), van: (2, 0, 0)})
-            s.set_states({CAR_PHI: "OFF", VAN_NYR: "OFF"})
-            s.at("23:10")
-            return s.tree(), [e for e in s.events() if e["t"] == "graded"]
+            lines = [s.line("CAR", 1, "shots", 2.5, 0.14), s.line("PHI", 1, "shots", 2.5, 0.14)]
+            s.set_odds("CAR", "PHI", lines, UPD)
+            s.at("13:02")
+            s.set_odds("CAR", "PHI", lines, "2026-10-11T21:31:00Z")
+            sl = s.at("17:31")
+            s.set_odds("CAR", "PHI", lines, "2026-10-11T22:16:00Z")
+            sl = s.at("18:16")
+            self.assertEqual(sl["picks"], [])
+            self.assertEqual(s.events(), [])
+            self.assertIsNotNone(sl["empty"])
         finally:
             s.close()
-
-    def test_full_day_byte_for_byte(self):
-        ta, ga = self.day(False)
-        tb, gb = self.day(True)
-        self.assertTrue(ga, "the test needs graded picks")
-        self.assertEqual(sorted(ta), sorted(tb))
-        differ = []
-        for k in sorted(ta):
-            if k.startswith("shadow/"):
-                continue
-            if k in ("odds/2026-10-11.json", "state/odds_day.json"):
-                self.assertEqual(self.strip(ta[k]), self.strip(tb[k]), k)
-                differ += [k] if ta[k] != tb[k] else []
-                continue
-            self.assertEqual(ta[k], tb[k], k)
-        self.assertIn("odds/2026-10-11.json", differ)                  # the other books really were there
-        ob = json.loads(tb["odds/2026-10-11.json"])
-        got = [(f["pull"], f["requested"], len(f.get("others", ())) if "others" in f else None) for f in ob["fetches"]]
-        # every read asks the 9 other books, except a retry of saves (which Hard Rock has not posted) asks Hard Rock only
-        self.assertTrue(all(n == 9 for _, req, n in got if req != ["saves"]), got)
-        self.assertTrue(all(n is None for _, req, n in got if req == ["saves"]), got)
-        rows = json.loads(tb["shadow/2026-10-11.json"])["rows"]
-        shots = [r for r in rows if r["market"] == "shots"]
-        self.assertTrue(shots)
-        self.assertEqual([(r["name"], r["line"], r["close"]["cons_books"]) for r in shots
-                          if r["close"]["cons_books"] != 9 and r["line"] != 0.5],
-                         [], "every Hard Rock shots line has all 9 other books in its consensus")
 
 
 class ShadowConsensus(unittest.TestCase):

@@ -1,6 +1,5 @@
-"""The Gap + Guard PAPER test (TEAM.md item 21): gap/guard math, flags, pulls, caps, CLV, grading, the paper log guard,
-the Record staying untouched, the odds plan (B / C), Discord and the page section. Offline: made-up reads in a temp folder,
-a local fake Discord server, never the live data/."""
+"""The Gap + Guard engine (paper.py, TEAM.md section 4): gap/guard math, flags, pulls, caps, CLV, grading, the research-log guard,
+the Record staying untouched and the odds plan (B / C). Offline: made-up reads in a temp folder, never the live data/."""
 import hashlib
 import json
 import os
@@ -10,17 +9,15 @@ import subprocess
 import tempfile
 import unittest
 
-import helpers  # noqa: F401  (puts scripts/ on sys.path; sets PC_PAUSE_OFF)
+import helpers  # noqa: F401  (puts scripts/ on sys.path)
 import common
 import guard_paper
 import guard_record
-import notify
 import odds
 import paper
 import run
 import world
 from helpers import Sim
-from test_notify import Server, SECRET
 
 SLATE = "2026-10-21"
 HERE = os.path.dirname(os.path.abspath(__file__))
@@ -44,7 +41,7 @@ def entry_for(fairs, hold=0.05):
 
 
 def thresholds():
-    return json.loads(json.dumps(common.load_config()["ops"]["paper"]["thresholds"]))
+    return json.loads(json.dumps(common.load_config()["ops"]["gap_guard"]["thresholds"]))
 
 
 T = thresholds()
@@ -221,7 +218,7 @@ def game(gid, away, home, hhmm):
 class Base(unittest.TestCase):
     def setUp(self):
         self.saved = {k: os.environ.get(k) for k in ("PC_NOW", "PC_DATA_DIR", "PC_CONFIG", "DISCORD_WEBHOOK_URL",
-                                                     "PC_DISCORD_FIXTURE_URL", "PC_PAUSE_OFF")}
+                                                     "PC_DISCORD_FIXTURE_URL")}
         self.dir = tempfile.mkdtemp(prefix="pc_paper_")
         os.environ["PC_DATA_DIR"] = self.dir
         os.environ.pop("PC_CONFIG", None)
@@ -604,49 +601,35 @@ class CloseAndGrade(Base):
         self.assertEqual(n["clv_vetoed"]["n"], 1)
         self.assertIsNotNone(n["clv_gaps"]["lb80"])
         self.assertIsNone(n["population_slope"])
-        self.assertEqual((n["judge_on"], n["hard_stop"]), ("2026-11-02", "2026-11-23"))
+        self.assertEqual(n["checkpoint"], "2026-11-02")
+        self.assertNotIn("hard_stop", n)                                     # no end date: this is the live rule
 
 
 class Switches(Base):
     def test_off_outside_the_window_and_without_config(self):
         c = self.lines(101, "AAA", "Ann Aa", 1.5, 0.52)
         self.read(1, "B", "17:30", [c])
-        self.cfg["ops"]["paper"]["active"] = False
+        self.cfg["ops"]["gap_guard"]["active"] = False
         self.step("17:31")
         self.assertEqual(self.events(), [])
-        self.cfg["ops"]["paper"]["active"] = True
-        self.cfg["ops"]["paper"]["start"] = "2026-10-22"
+        self.cfg["ops"]["gap_guard"]["active"] = True
+        self.cfg["ops"]["gap_guard"]["live_from"] = "2026-10-22"
         self.step("17:32")
         self.assertEqual(self.events(), [])
-        del self.cfg["ops"]["paper"]
+        del self.cfg["ops"]["gap_guard"]
         os.environ["PC_NOW"] = at("17:33")
         self.assertEqual(paper.step(common.now(), SLATE, self.cfg, self.inp, {"games": {}}, self.games)["status"], "skipped")
 
-    def test_pause_does_not_matter_either_way(self):
-        out = []
-        for flag in (None, "1"):                                                   # picks paused / unpaused
-            self.tearDown()
-            self.setUp()
-            if flag is None:
-                os.environ.pop("PC_PAUSE_OFF", None)
-            else:
-                os.environ["PC_PAUSE_OFF"] = flag
-            self.assertEqual(common.picks_paused(self.cfg), flag is None)
-            c = self.lines(101, "AAA", "Ann Aa", 1.5, 0.52)
-            self.read(1, "B", "17:30", [c])
-            self.step("17:31")
-            out.append(paper.read_raw())
-        self.assertEqual(out[0], out[1])
-        self.assertTrue(out[0])
-        self.assertTrue(common.load_config()["ops"]["pause"]["active"])           # and the paper test never changes it
-
-    def test_the_paper_window_is_not_the_pause(self):
+    def test_live_from_is_the_first_slate_and_there_is_no_end_date(self):
         cfg = common.load_config()
-        self.assertTrue(common.paper_active(cfg, "2026-10-20"))
-        self.assertTrue(common.paper_active(cfg, "2026-11-23"))
-        self.assertFalse(common.paper_active(cfg, "2026-10-19"))
-        self.assertFalse(common.paper_active(cfg, "2026-11-24"))
-        self.assertFalse(common.paper_active({"ops": {}}, "2026-10-20"))
+        self.assertEqual(cfg["ops"]["gap_guard"]["live_from"], "2026-10-20")
+        self.assertFalse(common.gap_guard_active(cfg, "2026-10-19"))          # nothing for the slate before it
+        self.assertFalse(common.gap_guard_active(cfg, "2026-10-12"))
+        self.assertTrue(common.gap_guard_active(cfg, "2026-10-20"))
+        self.assertTrue(common.gap_guard_active(cfg, "2026-11-23"))
+        self.assertTrue(common.gap_guard_active(cfg, "2027-03-01"))           # no hard stop any more
+        self.assertFalse(common.gap_guard_active({"ops": {}}, "2026-10-20"))
+        self.assertNotIn("end", cfg["ops"]["gap_guard"])
 
 
 # ---------------------------------------------------------------- the paper log guard and the Record
@@ -820,7 +803,7 @@ class FullDay(unittest.TestCase):
 
     def make(self, pool=500):
         s = Sim(pool=pool, rules="current")
-        edit_config(lambda c: c["ops"]["paper"].update(start="2026-10-01"))
+        edit_config(lambda c: c["ops"]["gap_guard"].update(live_from="2026-10-01"))
         return s
 
     def test_three_shots_reads_per_game_about_three_credits(self):
@@ -838,13 +821,13 @@ class FullDay(unittest.TestCase):
                 self.assertEqual(fs, [("A", ["shots"], 1), ("B", ["shots"], 1), ("C", ["shots"], 1)], gid)
             self.assertEqual(sum(f["cost"] for f in doc["fetches"]), 6)
             self.assertTrue(all(f["requested"] == ["shots"] for f in doc["fetches"]))       # no saves / goals / points
-            self.assertEqual({st["step"]: st["status"] for st in s.status()["steps"]}["paper"], "ok")
+            self.assertEqual({st["step"]: st["status"] for st in s.status()["steps"]}["gapguard"], "ok")
         finally:
             s.close()
 
-    def test_without_paper_b_still_waits_for_lineups(self):
+    def test_with_gap_guard_off_the_old_plan_b_still_waits_for_lineups(self):
         s = Sim(pool=500, rules="current")
-        edit_config(lambda c: c["ops"]["paper"].update(active=False))
+        edit_config(lambda c: c["ops"]["gap_guard"].update(active=False))
         try:
             s.at("09:00")
             s.at("13:02")
@@ -855,7 +838,7 @@ class FullDay(unittest.TestCase):
         finally:
             s.close()
 
-    def test_record_is_byte_identical_and_a_paper_failure_is_only_a_warn(self):
+    def test_a_gap_guard_failure_is_a_failed_step_adds_no_pick_and_leaves_the_record_alone(self):
         s = self.make()
         try:
             s.at("09:00")
@@ -868,199 +851,35 @@ class FullDay(unittest.TestCase):
             finally:
                 paper.step = real
             steps = {st["step"]: st for st in s.status()["steps"]}
-            self.assertEqual(steps["paper"]["status"], "warn")
-            self.assertTrue(s.status()["ok"])
-            self.assertIsNone(s.status()["failed_step"])
-            self.assertEqual(s.slate()["status"]["last_run"]["ok"], True)
-            after = (tree_hash(s.path("record")) if os.path.isdir(s.path("record")) else None, s.log_bytes())
-            self.assertEqual(before, after)
-            s.at("18:16")
+            self.assertEqual(steps["gapguard"]["status"], "failed")           # the pick source: not a soft step
+            self.assertFalse(s.status()["ok"])
+            self.assertEqual(s.status()["failed_step"], "gapguard")
+            self.assertEqual(steps["engine"]["status"], "ok")                  # everything else carries on
+            self.assertEqual(s.slate()["status"]["last_run"]["failed_step"], "gapguard")
             self.assertEqual((tree_hash(s.path("record")) if os.path.isdir(s.path("record")) else None, s.log_bytes()), before)
+            s.at("18:16")                                                       # next run is fine again
+            self.assertTrue(s.status()["ok"])
         finally:
             s.close()
-
-    def test_picks_stay_paused_and_the_slate_has_no_paper_data(self):
-        s = self.make()
-        os.environ.pop("PC_PAUSE_OFF", None)
-        try:
-            s.at("09:00")
-            for hhmm in ("13:02", "17:31", "18:16"):
-                for away, home in (("CAR", "PHI"), ("VAN", "NYR")):
-                    s.set_odds(away, home, [s.line(away, 1, "shots", 2.5, 0.0)], "2026-10-11T%02d:%02d:00Z" % (
-                        int(hhmm[:2]) + 4, int(hhmm[3:]) - 1))
-                s.at(hhmm)
-            sl = s.slate()
-            self.assertEqual(sl["empty"]["code"], "paused")
-            self.assertNotIn("paper", json.dumps(sl).lower())
-            self.assertEqual(s.log_bytes(), b"")
-        finally:
-            os.environ["PC_PAUSE_OFF"] = "1"
-            s.close()
-
-
-# ---------------------------------------------------------------- Discord
-def paper_item(n, start="19:00", settled="Early", pulled=None):
-    return {"id": "%s:1:%d:1.5:over" % (SLATE, n), "player": "P. Player%d" % n, "bet": "OVER 1.5 shots", "price": 100,
-            "game": "AAA @ BBB", "start": at(start), "settled": settled, "gap_pct": 5.7, "n_books": 6, "final_p_pct": 53.1,
-            "final_pct": 6.1, "guard": "pass", "pulled": pulled, "state": "pulled" if pulled else "open"}
-
-
-class Discord(unittest.TestCase):
-    def setUp(self):
-        self.srv = Server()
-        self.dir = tempfile.mkdtemp(prefix="pc_pn_")
-        self.saved = {k: os.environ.get(k) for k in ("PC_NOW", "PC_DATA_DIR", "DISCORD_WEBHOOK_URL", "PC_DISCORD_FIXTURE_URL")}
-        os.environ.update(PC_DATA_DIR=self.dir, DISCORD_WEBHOOK_URL=SECRET, PC_DISCORD_FIXTURE_URL=self.srv.url)
-        self.now("10:00")
-        notify.notify(self.slate())
-        self.srv.posts.clear()                                                         # the hello
-
-    def tearDown(self):
-        self.srv.close()
-        shutil.rmtree(self.dir, ignore_errors=True)
-        for k, v in self.saved.items():
-            if v is None:
-                os.environ.pop(k, None)
-            else:
-                os.environ[k] = v
-
-    def now(self, hhmm):
-        os.environ["PC_NOW"] = at(hhmm)
-
-    def slate(self):
-        return {"slate_date": SLATE, "status": {"prices_state": "ok"}, "banners": [], "picks": [], "parlays": []}
-
-    def summary(self, flags):
-        common.write_json(os.path.join(self.dir, "paper", "summary.json"),
-                          {"slate": SLATE, "active": True, "tonight": {"flags": flags, "vetoes": [], "capped": []}})
-
-    def texts(self):
-        return [p["content"] for p in self.srv.posts]
-
-    def state(self):
-        return common.read_json(notify.state_path())
-
-    def test_one_batched_message_headed_paper_no_bet_footer_each_flag_once(self):
-        self.summary([paper_item(1), paper_item(2, settled="Lineup confirmed")])
-        self.assertEqual(notify.notify(self.slate()), 1)
-        t = self.texts()[0]
-        self.assertTrue(t.startswith("PAPER - do not bet, nothing is on the page as a bet"))
-        self.assertIn("P. Player1", t)
-        self.assertIn("P. Player2", t)
-        self.assertIn("+100", t)
-        self.assertIn("Gap +5.7% vs 6 books", t)
-        self.assertNotIn("Bet only at these prices", t)
-        self.assertNotIn("new bet", t.lower())
-        self.assertIn(notify.PAGE, t)
-        self.assertEqual(sorted(self.state()["sent_paper"]), sorted(p["id"] for p in (paper_item(1), paper_item(2))))
-        self.assertEqual(self.state()["picks"], {})                                    # its own id map
-        self.assertEqual(self.state()["parlays"], {})
-        notify.notify(self.slate())
-        self.summary([paper_item(1), paper_item(2), paper_item(3)])
-        self.now("10:10")
-        notify.notify(self.slate())
-        self.assertEqual(len(self.srv.posts), 2)
-        self.assertNotIn("Player1", self.texts()[1])                                   # told once
-        self.assertIn("Player3", self.texts()[1])
-
-    def test_pulled_after_notified_gets_one_paper_pulled_line(self):
-        self.summary([paper_item(1)])
-        notify.notify(self.slate())
-        self.summary([paper_item(1, pulled={"reason": "price moved, gap gone", "at": at("10:30")})])
-        self.now("10:30")
-        notify.notify(self.slate())
-        notify.notify(self.slate())
-        self.assertEqual(len(self.srv.posts), 2)
-        self.assertIn("PULLED PAPER", self.texts()[1])
-        self.assertIn("price moved, gap gone", self.texts()[1])
-        self.assertTrue(self.texts()[1].startswith("PAPER - do not bet"))
-        self.assertNotIn("Don't bet these", self.texts()[1])
-        self.assertEqual(list(self.state()["pulled_paper"]), [paper_item(1)["id"]])
-        self.assertEqual(self.state()["pulled"], {})
-
-    def test_pulled_before_it_was_notified_is_never_told(self):
-        self.summary([paper_item(1, pulled={"reason": "x", "at": at("10:00")})])
-        self.assertEqual(notify.notify(self.slate()), 0)
-        self.assertEqual(self.srv.posts, [])
-
-    def test_own_cap_of_three_a_day_and_the_real_cap_is_untouched(self):
-        for n in range(1, 6):
-            self.summary([paper_item(i) for i in range(1, n + 1)])
-            self.now("10:%02d" % (10 * n))
-            notify.notify(self.slate())
-        self.assertEqual(len(self.srv.posts), 3)
-        st = self.state()
-        self.assertEqual(st["paper_sent"], {SLATE: 3})
-        self.assertEqual(st["sent"].get(SLATE, 0), 1)                                  # only the hello: paper used none of the 6
-        self.assertEqual(notify.MAX_PER_DAY, 6)
-        self.assertEqual(notify.PAPER_MAX_PER_DAY, 3)
-
-    def test_real_cap_used_up_does_not_block_paper(self):
-        st = notify.load_state()
-        st["sent"][SLATE] = notify.MAX_PER_DAY
-        common.write_json(notify.state_path(), st)
-        self.summary([paper_item(1)])
-        self.assertEqual(notify.notify(self.slate()), 1)
-        self.assertEqual(self.state()["sent"][SLATE], notify.MAX_PER_DAY)
-
-    def test_quiet_hours_hold_paper_messages_and_they_go_out_at_8(self):
-        self.summary([paper_item(1, start="19:00")])
-        for hhmm in ("00:30", "03:00", "07:59"):
-            self.now(hhmm)
-            self.assertEqual(notify.notify(self.slate()), 0)
-        self.assertEqual(self.srv.posts, [])
-        self.now("08:00")
-        self.assertEqual(notify.notify(self.slate()), 1)
-
-    def test_marked_only_after_a_2xx(self):
-        self.summary([paper_item(1)])
-        self.srv.status = 500
-        notify.notify(self.slate())
-        self.assertEqual(self.state()["sent_paper"], {})
-        self.assertEqual(self.state()["paper_sent"], {})
-        self.srv.status = 200
-        self.now("10:10")
-        self.assertEqual(notify.notify(self.slate()), 1)
-        self.assertEqual(len(self.state()["sent_paper"]), 1)
-
-    def test_nothing_for_games_that_have_started_old_summary_or_paper_off(self):
-        self.summary([paper_item(1, start="09:00")])
-        self.assertEqual(notify.notify(self.slate()), 0)
-        common.write_json(os.path.join(self.dir, "paper", "summary.json"),
-                          {"slate": "2026-10-20", "active": True, "tonight": {"flags": [paper_item(1)]}})
-        self.assertEqual(notify.notify(self.slate()), 0)
-        common.write_json(os.path.join(self.dir, "paper", "summary.json"),
-                          {"slate": SLATE, "active": False, "tonight": {"flags": [paper_item(1)]}})
-        self.assertEqual(notify.notify(self.slate()), 0)
-        self.assertEqual(self.srv.posts, [])
-
-    def test_never_to_the_real_webhook_in_test_mode_without_the_fixture_server(self):
-        os.environ.pop("PC_DISCORD_FIXTURE_URL")
-        self.assertIsNone(notify.endpoint())
-        self.summary([paper_item(1)])
-        self.assertEqual(notify.notify(self.slate()), 0)
 
 
 # ---------------------------------------------------------------- replay of the real Oct 19 reads (Researcher/Builder replay)
 class Oct19Replay(unittest.TestCase):
     """The real 2026-10-19 Hard Rock + other-book reads (A and B for ANA@NYR and COL@PHI, shots only), replayed through the
     paper step with the model values the engine produced that day. Expected: Killorn O1.5 +100 flagged at the 90-minute
-    read, Michkov O1.5 -120 vetoed (gap real, guard says no), nothing else; the only Discord traffic goes to the fixture
-    server. Never the live data/."""
+    read, Michkov O1.5 -120 vetoed (gap real, guard says no), nothing else. Never the live data/."""
     DAY = "2026-10-19"
 
     def setUp(self):
-        self.srv = Server()
         self.dir = tempfile.mkdtemp(prefix="pc_oct19_")
-        self.saved = {k: os.environ.get(k) for k in ("PC_NOW", "PC_DATA_DIR", "PC_CONFIG", "DISCORD_WEBHOOK_URL",
-                                                     "PC_DISCORD_FIXTURE_URL")}
-        os.environ.update(PC_DATA_DIR=self.dir, DISCORD_WEBHOOK_URL=SECRET, PC_DISCORD_FIXTURE_URL=self.srv.url)
+        self.saved = {k: os.environ.get(k) for k in ("PC_NOW", "PC_DATA_DIR", "PC_CONFIG")}
+        os.environ.update(PC_DATA_DIR=self.dir)
         os.environ.pop("PC_CONFIG", None)
         os.makedirs(os.path.join(self.dir, "odds"))
         shutil.copy(os.path.join(HERE, "fixtures", "paper_oct19", "odds_2026-10-19.json"),
                     os.path.join(self.dir, "odds", self.DAY + ".json"))
         self.cfg = json.loads(json.dumps(common.load_config()))
-        self.cfg["ops"]["paper"]["start"] = self.DAY
+        self.cfg["ops"]["gap_guard"]["live_from"] = self.DAY
         self.games = [{"id": 2026020137, "away": "ANA", "home": "NYR", "start": "2026-10-19T19:00:00-04:00", "date": self.DAY},
                       {"id": 2026020138, "away": "COL", "home": "PHI", "start": "2026-10-19T19:00:00-04:00", "date": self.DAY}]
         self.inp = Stub()
@@ -1068,7 +887,6 @@ class Oct19Replay(unittest.TestCase):
         self.inp.raw[(8484387, 1.5)] = 0.4973965194814922        # Michkov
 
     def tearDown(self):
-        self.srv.close()
         shutil.rmtree(self.dir, ignore_errors=True)
         for k, v in self.saved.items():
             if v is None:
@@ -1104,51 +922,6 @@ class Oct19Replay(unittest.TestCase):
     def summary_flags(self):
         return common.read_json(paper.summary_path())["tonight"]["flags"]
 
-    def test_discord_goes_only_to_the_fixture_server_and_says_paper(self):
-        notify.notify({"slate_date": self.DAY, "status": {"prices_state": "ok"}, "banners": [], "picks": [], "parlays": []})
-        self.srv.posts.clear()
-        os.environ["PC_NOW"] = "%sT17:36:00-04:00" % self.DAY
-        self.step("17:35")
-        n = notify.notify({"slate_date": self.DAY, "status": {"prices_state": "ok"}, "banners": [], "picks": [], "parlays": []})
-        self.assertEqual(n, 1)
-        self.assertEqual(len(self.srv.posts), 1)
-        t = self.srv.posts[0]["content"]
-        self.assertTrue(t.startswith("PAPER - do not bet"))
-        self.assertIn("Killorn", t)
-        self.assertNotIn("Michkov", t)                                                      # vetoes are never sent
-        self.assertEqual(notify.endpoint(), self.srv.url)
-
-
-# ---------------------------------------------------------------- the page section
-class Page(unittest.TestCase):
-    def setUp(self):
-        self.src = open(os.path.join(ROOT, "index.html"), encoding="utf-8").read()
-
-    def test_section_has_its_own_fetch_and_does_not_touch_the_picks_files(self):
-        self.assertIn("BASE + 'paper/summary.json'", self.src)
-        self.assertIn("Paper test (not bets)", self.src)
-        self.assertIn("Test only. Nothing here is a bet", self.src)
-        self.assertIn("The paper test file couldn't be read", self.src)
-        self.assertIn("Can't load the paper test", self.src)
-        m = re.search(r"function paperSection\(\).*?\n}\n", self.src, re.S)
-        self.assertTrue(m)
-        for bad in ("S.slate", "S.record", "recordErr", "fetchFail"):
-            self.assertNotIn(bad, m.group(0))
-        self.assertIn("sectionToggle('paper'", self.src)                                    # collapsed until tapped
-
-    def test_rows_show_what_was_asked_for(self):
-        m = re.search(r"function paperRow\(x\).*?\n}\n", self.src, re.S)
-        for needle in ("x.player", "x.bet", "odds(x.price)", "x.gap_pct", "x.guard", "x.settled", "toPuck(x.start)", "Pulled", "Locked",
-                       "x.pulled.reason"):
-            self.assertIn(needle, m.group(0), needle)
-
-    def test_page_still_parses(self):
-        node = shutil.which("node")
-        if not node:
-            self.skipTest("node not installed")
-        js = re.search(r"<script>([\s\S]*)</script>", self.src).group(1)
-        r = subprocess.run([node, "-e", "new Function(%s); console.log('ok')" % json.dumps(js)], capture_output=True, text=True)
-        self.assertEqual(r.stdout.strip(), "ok", r.stderr)
 
 
 if __name__ == "__main__":

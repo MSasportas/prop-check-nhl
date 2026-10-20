@@ -198,35 +198,20 @@ def load_config():
         return json.load(f)
 
 
-def picks_paused(cfg):
-    """ops.pause.active: no new picks in any market and the page says why. Tests set PC_PAUSE_OFF=1 so the
-    engine's pick rules stay testable; the timer never sets it."""
-    pause = (cfg.get("ops") or {}).get("pause") or {}
-    return bool(pause.get("active")) and not os.environ.get("PC_PAUSE_OFF")
+def gap_guard(cfg):
+    """ops.gap_guard: THE live rule (TEAM.md section 4). {} when the config has none."""
+    return (cfg.get("ops") or {}).get("gap_guard") or {}
 
 
-def paper_active(cfg, slate=None):
-    """ops.paper.active and the slate inside [start, end] (Gap + Guard paper test, TEAM.md item 21). Independent of
-    ops.pause: the paper test never turns picks on or off."""
-    p = (cfg.get("ops") or {}).get("paper") or {}
+def gap_guard_active(cfg, slate=None):
+    """ops.gap_guard.active and the slate on or after live_from (2026-10-20, the first slate it covers). Nothing is
+    shown, flagged or appended for an earlier slate."""
+    p = gap_guard(cfg)
     if not p.get("active"):
         return False
-    if slate and ((p.get("start") and slate < p["start"]) or (p.get("end") and slate > p["end"])):
+    if slate and p.get("live_from") and slate < p["live_from"]:
         return False
     return True
-
-
-def rules_for(cfg, slate):
-    """The rules a slate is run under. config/rules.json holds the current rules in "values" and, under
-    "previous", the version before with the values that differ and the last slate it covers ("until"). A slate
-    on or before "until" keeps the previous rules, so nothing already shown changes when the rules do."""
-    prev = cfg.get("previous")
-    if not isinstance(prev, dict) or not slate or slate > prev.get("until", ""):
-        return cfg
-    out = dict(cfg)
-    out["values"] = dict(cfg["values"], **prev.get("values", {}))
-    out["version"], out["updated"] = prev.get("version", cfg.get("version")), prev.get("updated", cfg.get("updated"))
-    return out
 
 
 # ---------------------------------------------------------------- HTTP (polite: timeout, 2 retries, never raises)

@@ -1,48 +1,15 @@
 {
- "version": "2.0",
- "updated": "2026-10-18",
- "effective_from": "2026-10-19",
- "_about": "EVERY rule value lives here. The engine reads this file; data/rules.json (what the page reads) is generated from it. Probabilities are 0-1, prices are American integers, times are Eastern.",
+ "version": "3.0",
+ "updated": "2026-10-19",
+ "effective_from": "2026-10-20",
+ "_about": "EVERY rule value lives here. The engine reads this file; data/rules.json (what the page reads) is generated from it. There is ONE rule set: Gap + Guard (ops.gap_guard). Probabilities are 0-1, prices are American integers, times are Eastern.",
  "values": {
-  "price_gate": -200,
-  "max_price": 120,
-  "devig": "over_hold",
-  "min_p": 0,
-  "margin_confirmed": 0,
-  "margin_early": 0,
-  "edge_cap": 0.05,
-  "lines_allowed": {"shots": [1.5, 2.5]},
-  "best_line_by": "edge",
-  "model_weight": 0.70,
-  "market_weight": 0.30,
-  "uncertainty": 0,
-  "under_penalty": 0,
-  "thin_over_penalty": 0,
-  "thin_rows": 20,
-  "thin_team_games": 10,
   "min_history": 10,
   "absence_games": 3,
   "absence_sitout": 2,
+  "thin_rows": 20,
+  "thin_team_games": 10,
   "toi_drop_sec": 120,
-  "news_gap": null,
-  "too_good": null,
-  "pull_margin": 0.0,
-  "drift_pull": null,
-  "max_per_player": 1,
-  "max_per_game": 2,
-  "max_picks_night": 8,
-  "parlay_leg_min_p": 0.58,
-  "parlay_leg_min_price": -200,
-  "parlay_leg_max_price": 100,
-  "parlay_one_per_game": true,
-  "parlay_min_legs": 2,
-  "parlay_max_legs": 3,
-  "parlay_min_p_2": 0.34,
-  "parlay_min_p_3": 0.20,
-  "parlay_edge": 0.03,
-  "parlay_cap": 0,
-  "parlay_leg_max_use": 1,
-  "goal_watch_count": 3,
   "stake": 1,
   "hold_min": 0.03,
   "hold_max": 0.11,
@@ -58,24 +25,7 @@
   "tier_second_pull": 4,
   "tier_top": 7,
   "min_sample": 30,
-  "close_check": 30,
-  "pause_legs": 50,
-  "pause_gap": 0.13,
-  "pause_units": -10,
-  "change_legs": 150,
   "grade_time": "once each game is final"
- },
- "previous": {
-  "_about": "Rules v1.0, kept for slates up to and including 'until' (picks already shown keep the rules they were shown under). Only the values that differ from v2.0.",
-  "version": "1.0",
-  "updated": "2026-10-11",
-  "until": "2026-10-18",
-  "values": {
-   "devig": "proportional", "min_p": 0.56, "margin_confirmed": 0.02, "margin_early": 0.03, "edge_cap": null,
-   "lines_allowed": null, "best_line_by": "p", "model_weight": 0.60, "market_weight": 0.40, "uncertainty": 0.02,
-   "under_penalty": 0.015, "thin_over_penalty": 0.04, "news_gap": 0.15, "too_good": 0.20, "drift_pull": 0.04,
-   "max_per_game": 3, "max_picks_night": null, "parlay_cap": 3
-  }
  },
  "ui": {
   "stale_after_min": 75,
@@ -83,18 +33,25 @@
   "picks_open": 8
  },
  "ops": {
-  "_about": "How the engine runs. None of these change which bets qualify.",
+  "_about": "How the engine runs. None of these change which bets qualify. Markets other than shots are read and logged for the team (shadow log) only; picks are shots lines 1.5 and 2.5 (ops.gap_guard).",
   "rollover_hour": 5,
   "heartbeat_min": 20,
-  "pause": {"active": true, "since": "2026-10-19", "why": "Pre-registered 2025-26 backtest (TEAM.md item 19/20): v2.0 lost -2.7% on 3,918 Hard Rock lines.", "text": "No picks for now: no proven edge.", "sub": "We tested our shots rules on all of last season's Hard Rock prices and they lost money. Picks stay off while the team tests new ideas, so nothing here is a bet."},
-  "paper": {
-   "_about": "Gap + Guard PAPER test (TEAM.md section 7 item 21). Never a bet: nothing here reaches slate.json, the Record or the pause. Offsets are FROZEN (refit once from the 2025-26 Hard Rock shots lines at -45 min, model from prior games only; do not change mid-test). All EV% = fair_prob x Hard Rock decimal payout - 1; every threshold is inclusive.",
+  "safety_pause": {
+   "_about": "Automatic safeguard, not a rule about what qualifies: when the Record's graded singles are down this many units, no NEW picks are added (shown picks are still looked after) until a person reviews.",
+   "units": -10,
+   "text": "New picks are stopped: the Record is down 10 units or more.",
+   "sub": "The team has to review before picks resume. Picks already shown are unaffected."
+  },
+  "gap_guard": {
+   "_about": "THE live rule: Gap + Guard (TEAM.md section 4). Every pick on the page and in the Record comes from this block and nothing else. Offsets are FROZEN (refit once from the 2025-26 Hard Rock shots lines at -45 min, model from prior games only; do not change without the Data Scientist naming the sample and the Sharp logging it in section 8). All EV% = fair_prob x Hard Rock decimal payout - 1; every threshold is inclusive.",
    "active": true,
-   "start": "2026-10-20",
-   "end": "2026-11-23",
-   "judge_on": "2026-11-02",
+   "live_from": "2026-10-20",
+   "checkpoint": "2026-11-02",
    "thresholds": {
-    "lines": [1.5, 2.5],
+    "lines": [
+     1.5,
+     2.5
+    ],
     "price_gate": -200,
     "max_price": 120,
     "gap_ev": 0.03,
@@ -103,9 +60,15 @@
     "pull_ev": 0.015,
     "market_weight": 0.8,
     "model_weight": 0.2,
-    "offsets": {"1.5": 0.0179, "2.5": 0.0158},
+    "offsets": {
+     "1.5": 0.0179,
+     "2.5": 0.0158
+    },
     "final_ev": 0.02,
-    "flag_pulls": ["B", "C"],
+    "flag_pulls": [
+     "B",
+     "C"
+    ],
     "close_min": 45,
     "move_min": 25,
     "max_per_player": 1,
@@ -114,15 +77,47 @@
     "min_history": 10
    }
   },
-  "bookmakers": ["hardrockbet"],
-  "consensus_books": ["draftkings", "fanduel", "betmgm", "williamhill_us", "espnbet", "betrivers", "fanatics", "pinnacle", "betonlineag"],
+  "bookmakers": [
+   "hardrockbet"
+  ],
+  "consensus_books": [
+   "draftkings",
+   "fanduel",
+   "betmgm",
+   "williamhill_us",
+   "espnbet",
+   "betrivers",
+   "fanatics",
+   "pinnacle",
+   "betonlineag"
+  ],
   "_consensus_about": "Other books asked on every price read beside Hard Rock (max 9: the feed bills up to 10 books as one region, so no extra credits). Shadow log only: picks, page and Record use Hard Rock alone. [] = Hard Rock only.",
   "odds_region": "us2",
   "markets": {
-   "shots": {"feed_key": "player_shots_on_goal", "noun": "shots on goal", "short": "shots", "label": "Shots on goal", "picks": true},
-   "points": {"feed_key": "player_points", "noun": "points", "short": "points", "label": "Points", "picks": false},
-   "goals": {"feed_key": "player_goals", "noun": "goals", "short": "goals", "label": "Anytime goal", "picks": false},
-   "saves": {"feed_key": "player_total_saves", "noun": "saves", "short": "saves", "label": "Saves", "picks": false}
+   "shots": {
+    "feed_key": "player_shots_on_goal",
+    "noun": "shots on goal",
+    "short": "shots",
+    "label": "Shots on goal"
+   },
+   "points": {
+    "feed_key": "player_points",
+    "noun": "points",
+    "short": "points",
+    "label": "Points"
+   },
+   "goals": {
+    "feed_key": "player_goals",
+    "noun": "goals",
+    "short": "goals",
+    "label": "Anytime goal"
+   },
+   "saves": {
+    "feed_key": "player_total_saves",
+    "noun": "saves",
+    "short": "saves",
+    "label": "Saves"
+   }
   },
   "event_match_hours": 6,
   "stage_hold_min": 25,

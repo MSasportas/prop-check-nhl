@@ -34,7 +34,7 @@
  "banners": [],
  "empty": {
   "code": "not_yet",
-  "text": "No prices read yet today. First read is due at 1:00 PM.",
+  "text": "No picks yet today. The first look at the other books is about 90 minutes before the first puck.",
   "sub": null
  },
  "games": [
@@ -190,6 +190,5 @@
  ],
  "picks": [],
  "parlays": [],
- "goal_watch": [],
- "goal_watch_note": null
+ "parlays_note": "Parlays are not offered: there is no evidence for them yet."
 }

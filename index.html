@@ -128,19 +128,7 @@ button{font:inherit;color:inherit;background:none;border:0;padding:0;margin:0;te
 .lastprice{flex:none;text-align:right;font-size:12px;line-height:16px;white-space:nowrap;padding-top:5px}
 .lastprice span{font:600 17px/20px var(--display)}
 
-/* parlay */
-.ptitle{font:600 17px/22px var(--display);letter-spacing:.01em}
-.leg{padding:8px 0;border-bottom:1px solid var(--line)}
-.leg .l1{display:flex;align-items:baseline;gap:8px}
-.leg .lname{font:600 17px/22px var(--display);flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.leg .lprice{font:600 20px/22px var(--display);flex:none}
-.leg .l2{font-size:12px;line-height:17px;color:var(--muted);overflow-wrap:anywhere}
-.leg .l2 .lb{color:var(--fg)}
-.leg .l2 .lpulled{color:var(--fg);font-weight:500}
-.psum{margin-top:8px;font-size:13px;line-height:19px}
-.psum .about{font:600 20px/24px var(--display)}
-
-/* goal watch + games */
+/* games */
 .list{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:2px 12px}
 .list .li{display:flex;gap:8px;align-items:baseline;padding:9px 0;border-bottom:1px solid var(--line);font-size:13px;line-height:18px}
 .list .li:last-child{border-bottom:0}
@@ -149,14 +137,6 @@ button{font:inherit;color:inherit;background:none;border:0;padding:0;margin:0;te
 .list .li .r{flex:none;white-space:nowrap;color:var(--muted)}
 .list .li .r b{font:600 16px/20px var(--display);color:var(--fg)}
 .list .sub{display:block;font-size:12px;color:var(--warn)}
-.pp-note{font-size:12px;line-height:17px;color:var(--warn);margin:0 0 8px}
-.pp-head{font:600 15px/19px var(--display);letter-spacing:.02em;margin:10px 0 4px}
-.pp-row{padding:9px 0;border-bottom:1px solid var(--line);font-size:13px;line-height:18px}
-.pp-row:last-child{border-bottom:0}
-.pp-row .nm{font:600 16px/20px var(--display);overflow-wrap:anywhere}
-.pp-row .l2,.pp-row .l3{display:block;font-size:12px;line-height:17px;color:var(--muted);overflow-wrap:anywhere}
-.pp-row.pulled{opacity:.7}.pp-row.pulled .nm{text-decoration:line-through}
-.pp-row .why{color:var(--warn)}
 .list .st{display:block;font-size:12px;line-height:16px;color:var(--muted);margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 
 /* empty + skeleton + error */
@@ -264,7 +244,7 @@ var SEEN_KEY = FIX ? 'pc_seen_fx' : 'pc_seen';
 var UI_DEF = { stale_after_min: 75, refresh_sec: 120, picks_open: 8 };
 
 var S = {
-  slate: null, record: null, rules: null, recordErr: null, paper: null, paperErr: null,
+  slate: null, record: null, rules: null, recordErr: null,
   loaded: false, loadErr: false, fetchFail: false, loadedAt: null, busy: false,
   view: 'tonight', expanded: {}, open: {}, moreOpen: false, filter: 'all', legsOpen: {},
   older: [], olderIdx: 0, olderBusy: false, olderErr: false,
@@ -418,8 +398,8 @@ function hasStarted(p, games) {
   var t = ms(p.start || (games[p.game_id] && games[p.game_id].start));
   return t != null && now() >= t;
 }
-function split() { /* open / started / pulled, picks and parlays */
-  var games = gameMap(), out = { games: games, open: [], started: [], pulled: [], byId: {}, pOpen: [], pStarted: [], pPulled: [] };
+function split() { /* open / started / pulled picks */
+  var games = gameMap(), out = { games: games, open: [], started: [], pulled: [], byId: {} };
   var picks = arr(S.slate && S.slate.picks).filter(isObj), i, p;
   for (i = 0; i < picks.length; i++) {
     p = picks[i]; if (p.id != null) out.byId[p.id] = p;
@@ -427,14 +407,6 @@ function split() { /* open / started / pulled, picks and parlays */
   }
   var byRank = function (a, b) { var x = num(a.rank), y = num(b.rank); return (x == null ? 1e9 : x) - (y == null ? 1e9 : y); };
   out.open.sort(byRank); out.started.sort(byRank);
-  var pars = arr(S.slate && S.slate.parlays).filter(isObj);
-  for (i = 0; i < pars.length; i++) {
-    p = pars[i];
-    if (p.pulled) { out.pPulled.push(p); continue; }
-    var st = /^locked/.test(str(p.state)) || isObj(p.graded), legs = arr(p.legs);
-    for (var j = 0; j < legs.length && !st; j++) { var lp = out.byId[legs[j]]; if (lp && hasStarted(lp, games)) st = true; }
-    (st ? out.pStarted : out.pOpen).push(p);
-  }
   return out;
 }
 
@@ -457,13 +429,11 @@ function settle(p) { return p.then(function (v) { return { ok: true, v: v }; }, 
 function load() {
   if (S.busy) return Promise.resolve();
   S.busy = true;
-  /* the paper test has its own file and its own failure: it never touches the picks above */
   return Promise.all([settle(getJSON(BASE + 'slate.json')), settle(getJSON(BASE + 'record.json')), settle(getJSON(BASE + 'rules.json')),
-                      settle(getJSON(BASE + 'paper/summary.json')), settle(getJSON(BASE + 'record/resets.json', true))])
+                      settle(getJSON(BASE + 'record/resets.json', true))])
     .then(function (r) {
-      if (r[4].ok && Array.isArray(r[4].v) && r[4].v.length) S.reset = true;
+      if (r[3].ok && Array.isArray(r[3].v) && r[3].v.length) S.reset = true;
       S.busy = false; S.loaded = true;
-      if (r[3].ok) { S.paper = r[3].v; S.paperErr = null; } else if (!S.paper) S.paperErr = r[3].kind;
       if (r[1].ok) { S.record = r[1].v; S.recordErr = null; } else if (!S.record) S.recordErr = r[1].kind;
       if (r[2].ok) S.rules = r[2].v;
       if (r[0].ok) { S.slate = r[0].v; S.fetchFail = false; S.loadErr = false; S.loadedAt = now(); }
@@ -488,7 +458,6 @@ function readSeen() {
     var o = JSON.parse(raw); if (!isObj(o) || o.slate_date !== S.slate.slate_date) return;
     var seen = {}, pulled = {}, i, d = split(), nNew = 0, nPulled = 0;
     arr(o.seen_ids).forEach(function (x) { seen[x] = 1; }); arr(o.pulled_ids).forEach(function (x) { pulled[x] = 1; });
-    d.pulled = d.pulled.concat(d.pPulled);
     for (i = 0; i < d.open.length; i++) if (!seen[d.open[i].id] && !pulled[d.open[i].id]) { S.newIds[d.open[i].id] = 1; nNew++; }
     for (i = 0; i < d.pulled.length; i++) if (!pulled[d.pulled[i].id]) nPulled++;
     if (nNew || nPulled) S.since = { at: o.at, n: nNew, p: nPulled };
@@ -499,7 +468,7 @@ function writeSeen() {
     if (!S.slate || expired() || !S.slate.slate_date) return;
     var d = split(), id = function (p) { return p.id; };
     window.localStorage.setItem(SEEN_KEY, JSON.stringify({
-      slate_date: S.slate.slate_date, seen_ids: d.open.concat(d.started, d.pOpen, d.pStarted).map(id), pulled_ids: d.pulled.concat(d.pPulled).map(id),
+      slate_date: S.slate.slate_date, seen_ids: d.open.concat(d.started).map(id), pulled_ids: d.pulled.map(id),
       at: new Date(now()).toISOString()
     }));
   } catch (e) { /* ignore */ }
@@ -509,7 +478,7 @@ function writeSeen() {
 function calcKey() {
   var d = S.slate ? split() : null;
   return JSON.stringify([S.loaded, S.loadErr, S.fetchFail, S.recordErr, S.slate && S.slate.generated_at, S.slate && S.slate.status_at, S.record && S.record.generated_at,
-    S.paper && S.paper.generated_at, S.paperErr, S.rules && S.rules.version, S.rules && S.rules.updated, S.slate && expired(), S.slate && stale(),
+    S.rules && S.rules.version, S.rules && S.rules.updated, S.slate && expired(), S.slate && stale(),
     d ? d.started.length : 0, S.slate ? dayKey(now()) : 0]);
 }
 function maybeRender() { var k = calcKey(); if (k !== S.key) render(); }
@@ -590,17 +559,22 @@ function toggleBtnKeys(fn) {
 }
 
 /* ---------- pick card ---------- */
-/* The reason minus its first sentence (that one repeats the chance and price line above it).
-   Same rule as scripts/notify.py _why: split on ". ", drop the first part, rejoin. */
-function whyText(reason) {
-  var parts = str(reason).split('. ').map(function (s) { return s.trim(); }).filter(Boolean);
-  var why = parts.slice(1).join('. ').replace(/\.+$/, '');
-  return why ? why + '.' : '';
+function toPuck(start) {
+  var t = ms(start); if (t == null) return '';
+  var m = Math.round((t - now()) / 60000);
+  if (m <= 0) return 'puck dropped';
+  return (m >= 60 ? Math.floor(m / 60) + 'h ' + (m % 60) + 'm' : m + 'm') + ' to puck';
+}
+function signedPct(v) { var n = num(v); return n == null ? null : (n >= 0 ? '+' : '') + n.toFixed(1) + '%'; }
+/* How settled the pick is: Early / Lineup confirmed / Goalie confirmed while open, Locked after puck. */
+function settledChip(p) {
+  if (/^locked/.test(str(p.state))) return stateChip(p.state);
+  var k = str(p.settled);
+  return stateChip(k === 'lineup' || k === 'goalie' ? k : 'early');
 }
 function pickCard(p, d, opts) {
   opts = opts || {};
   var mu = matchup(p, d.games), id = str(p.id), isOpen = !!S.expanded[id];
-  var price = num(p.price), first = num(p.first_price);
   var card = h('div', { class: 'card pick', role: 'button', tabindex: '0', 'aria-expanded': isOpen ? 'true' : 'false', 'data-id': id });
   var toggle = function () { if (S.expanded[id]) delete S.expanded[id]; else S.expanded[id] = 1; rerender(); };
   var ev = toggleBtnKeys(toggle); card.addEventListener('click', ev.click); card.addEventListener('keydown', ev.keydown);
@@ -613,37 +587,29 @@ function pickCard(p, d, opts) {
     h('div', { class: 'bet', text: p.bet || 'Bet not posted' }),
     h('div', { class: 'price', text: odds(p.price) })));
 
+  /* the price is frozen at the read that found the pick: say when, and that it is the price to bet */
   var stamp = h('div', { class: 'stamp' });
-  if (price != null && first != null && price !== first) {
-    var a = payout(price), b = payout(first), word = (a != null && b != null && a < b) ? 'worse' : 'better';
-    stamp.appendChild(node('was ' + odds(first) + (fTime(p.first_price_at) ? ' at ' + fTime(p.first_price_at) : '') + ' · '));
-    stamp.appendChild(h('span', { class: word, text: 'now ' + word }));
-  } else {
-    /* updates have stopped: say the price is old, not just when it was read */
-    stamp.textContent = fStamp(p.price_at) ? (stale() ? 'old price, ' : 'read ') + fStamp(p.price_at) : 'read time not posted';
-  }
+  stamp.textContent = fStamp(p.first_price_at || p.price_at) ? (stale() ? 'old price, ' : 'price read ') + fStamp(p.first_price_at || p.price_at) +
+    ' · bet at this price or better' : 'read time not posted';
   card.appendChild(stamp);
 
-  var pc = pctP(p), be = pctB(p);
-  card.appendChild(h('div', { class: 'chance' }, 'Our chance ', h('b', { text: pc || 'not posted' }), be ? ' · needs ' + be : ''));
+  var gap = signedPct(p.gap_pct), nb = num(p.n_books), mf = num(p.market_fair_pct);
+  card.appendChild(h('div', { class: 'chance' }, 'Gap ', h('b', { text: gap || 'not posted' }), ' vs market',
+    (nb != null && mf != null) ? ' (' + nb + ' books say ' + mf.toFixed(1) + '%)' : ''));
+  var pc = pctP(p), be = pctB(p), gd = isObj(p.guard) ? p.guard : {};
+  card.appendChild(h('div', { class: 'chance' }, gd.verdict === 'agrees' ? 'Model agrees · ' : '', 'We say ', h('b', { text: pc || 'not posted' }), be ? ' · price needs ' + be : ''));
   var bar = chanceBar(p.p, p.breakeven); if (bar) card.appendChild(bar);
-  var why = whyText(p.reason);
-  if (why) card.appendChild(h('div', { class: 'reason' + (isOpen ? '' : ' clamp3'), text: why }));
+  if (p.reason) card.appendChild(h('div', { class: 'reason', text: str(p.reason) }));
+  var tp = (!isObj(p.graded) && !/^locked/.test(str(p.state))) ? toPuck(p.start || (d.games[p.game_id] && d.games[p.game_id].start)) : '';
   card.appendChild(h('div', { class: 'chips' },
-    stateChip(p.state),
-    p.thin ? h('span', { class: 'chip hollow', text: 'Thin sample' }) : null,
+    settledChip(p),
+    tp ? h('span', { class: 'chip hollow', text: tp }) : null,
     (S.newIds[id] && !opts.noNew && !stale()) ? h('span', { class: 'chip new', text: 'New' }) : null));
   var res = resultLine(p.graded); if (res) card.insertBefore(res, card.firstChild);
 
   if (isOpen) {
     var more = h('div', { class: 'more' });
-    var ph;
-    if (first != null && price != null && (first !== price || (p.first_price_at && p.price_at && p.first_price_at !== p.price_at)))
-      ph = 'First ' + odds(first) + (fTime(p.first_price_at) ? ' ' + fTime(p.first_price_at) : '') + ' · Now ' + odds(price) + (fTime(p.price_at) ? ' ' + fTime(p.price_at) : '');
-    else ph = 'Price ' + odds(price != null ? price : first) + (fTime(p.price_at || p.first_price_at) ? ' ' + fTime(p.price_at || p.first_price_at) : '') + ', one read so far';
-    more.appendChild(h('div', { text: ph }));
-    var worst = num(p.worst_price) != null ? p.worst_price : p.price;
-    more.appendChild(h('div', { text: 'Graded on the Record at ' + odds(worst) + ', the worst price shown.' }));
+    more.appendChild(h('div', { text: 'Price ' + odds(p.price) + (fTime(p.first_price_at || p.price_at) ? ' read ' + fTime(p.first_price_at || p.price_at) : '') + '. It is frozen: this is the price graded on the Record.' }));
     var gu = num(p.games_used), gs = num(p.games_this_season);
     more.appendChild(h('div', { text: 'Games used: ' + (gu == null ? 'not posted' : gu) + (gs == null ? '' : ' (' + gs + ' this season)') }));
     var hist = arr(p.history).filter(isObj);
@@ -672,46 +638,6 @@ function pulledCard(p, d) {
       h('div', { class: 'r2' }, h('div', { class: 'bet strike', text: p.bet || 'Bet not posted' }),
         h('div', { class: 'lastprice' }, 'Last price shown ', h('span', { text: odds(p.price) }))),
       resultLine(p.graded),
-      h('div', { class: 'note', text: PULL_NOTE })));
-}
-
-/* ---------- parlay card ---------- */
-function legRows(par, d, struck) {
-  return arr(par.legs).map(function (lid) {
-    var strike = typeof struck === 'function' ? struck(lid) : !!struck;
-    var p = d.byId[lid];
-    if (!p) return h('div', { class: 'leg' }, h('div', { class: 'l2', text: 'Leg not available' }));
-    var mu = matchup(p, d.games);
-    return h('div', { class: 'leg' },
-      h('div', { class: 'l1' }, h('span', { class: 'lname', text: p.player || 'Player not named' }), h('span', { class: 'lprice', text: odds(p.price) })),
-      h('div', { class: 'l2' }, h('span', { class: 'lb' + (strike ? ' strike' : ''), text: p.bet || 'Bet not posted' }),
-        strike ? h('span', { class: 'lpulled', text: ' \u00b7 pulled' }) : null,
-        mu.text ? ' · ' : '', muNodes(mu, false), mu.time ? ' ' + mu.time : ''));
-  });
-}
-function parlayCard(par, d, n) {
-  var legs = arr(par.legs), at = fStamp(par.price_at);
-  var pc = pctP(par), be = pctB(par);
-  return h('div', { class: 'card', 'data-id': str(par.id) },
-    resultLine(par.graded),
-    h('div', { class: 'ptitle', text: 'Parlay' + (n ? ' ' + n : '') + ' \u00b7 ' + legs.length + ' legs' }),
-    legRows(par, d, false),
-    h('div', { class: 'psum' },
-      h('div', null, h('span', { class: 'about', text: 'about ' + odds(par.price) }), ' from leg prices' + (at ? ' at ' + at : '')),
-      h('div', { text: 'Chance about ' + (pc || 'not posted') + (be ? ' · needs ' + be : '') })),
-    h('div', { class: 'chips' }, stateChip(par.state)),
-    h('div', { class: 'note', text: "Each leg is in a different game. Hard Rock's parlay price may differ slightly." }));
-}
-function pulledParlayCard(par, d) {
-  var legs = arr(par.legs), named = isObj(par.pulled) && Array.isArray(par.pulled.legs) ? par.pulled.legs.map(str) : null;
-  /* strike only the leg(s) that caused the pull: the engine's pulled.legs, else legs whose own pick is pulled */
-  var culprit = function (lid) { if (named) return named.indexOf(str(lid)) >= 0; var lp = d.byId[lid]; return !!(lp && lp.pulled); };
-  return h('div', { class: 'card', 'data-id': str(par.id) },
-    pulledBar(par.pulled),
-    h('div', { class: 'dim' },
-      h('div', { class: 'ptitle', text: 'Parlay · ' + legs.length + ' legs · was about ' + odds(par.price) }),
-      legRows(par, d, culprit),
-      resultLine(par.graded),
       h('div', { class: 'note', text: PULL_NOTE })));
 }
 
@@ -828,7 +754,7 @@ function renderTonight() {
   if (showEmpty) {
     var t, s2 = null;
     if (emp && emp.text) { t = str(emp.text); s2 = emp.sub ? str(emp.sub) : null; }
-    else if (d.started.length || d.pStarted.length) {
+    else if (d.started.length) {
       var gs = arr(sl.games).filter(isObj), all = gs.length > 0 && gs.every(function (g) { var x = ms(g.start); return x != null && now() >= x; });
       t = all ? "Every game has started. Tonight's picks are under Started." : "No open picks right now. Tonight's earlier picks are under Started.";
     } else if (d.pulled.length) t = 'No open picks right now.';
@@ -844,45 +770,21 @@ function renderTonight() {
   }
   app.appendChild(sec);
 
-  /* Parlays (rules v2.0: paused, one line where they were) */
-  if (!showEmpty && num(ruleVal('parlay_cap')) === 0 && !d.pOpen.length && !d.pStarted.length) {
-    app.appendChild(h('section', { class: 'sec', id: 'parlays' }, h('div', { class: 'card empty' },
-      h('div', { class: 's', style: 'margin:0;color:var(--fg)', text: 'Parlays paused until single picks prove out.' }))));
-  } else if (!showEmpty) {
-    var ps = h('section', { class: 'sec', id: 'parlays' }, h('div', { class: 'sec-h' }, h('h2', { text: 'Parlays (' + d.pOpen.length + ')' })));
-    if (d.pOpen.length) { var pst = h('div', { class: 'stack' }); d.pOpen.forEach(function (p, i) { pst.appendChild(parlayCard(p, d, i + 1)); }); ps.appendChild(pst); }
-    else ps.appendChild(h('div', { class: 'card empty' }, h('div', { class: 's', style: 'margin:0;color:var(--fg)',
-      text: d.pStarted.length ? 'No open parlay right now. ' + (d.pStarted.length === 1 ? "Tonight's parlay is" : "Tonight's parlays are") + ' under Started.' : 'No parlay tonight.' })));
-    app.appendChild(ps);
-  }
-
-  /* Goal watch */
-  var gw = arr(sl.goal_watch).filter(isObj);
-  if (gw.length) {
-    var gl = h('div', { class: 'list' });
-    gw.forEach(function (g) {
-      gl.appendChild(h('div', { class: 'li' }, h('span', { class: 'grow nm', text: g.player || 'Player not named' }),
-        h('span', { class: 'r' }, 'Hard Rock ', h('b', { text: odds(g.price) })), h('span', { class: 'r' }, 'fair ', h('b', { text: odds(g.fair_price) }))));
-    });
-    app.appendChild(h('section', { class: 'sec', id: 'goalwatch' }, h('div', { class: 'sec-h' }, h('h2', { text: 'Goal watch' })),
-      h('div', { class: 'sec-sub', text: sl.goal_watch_note ? str(sl.goal_watch_note) : 'Not picks.' }), gl));
-  }
+  app.appendChild(h('p', { class: 'note', text: str(sl.parlays_note) || 'Parlays are not offered: there is no evidence for them yet.' }));
 
   /* Pulled today: always open */
-  var nPulled = d.pulled.length + d.pPulled.length;
+  var nPulled = d.pulled.length;
   if (nPulled) {
     var pl = h('div', { class: 'stack' });
     d.pulled.forEach(function (p) { pl.appendChild(pulledCard(p, d)); });
-    d.pPulled.forEach(function (p) { pl.appendChild(pulledParlayCard(p, d)); });
     app.appendChild(h('section', { class: 'sec', id: 'pulled' }, h('div', { class: 'sec-h' }, h('h2', { text: 'Pulled today (' + nPulled + ')' })), pl));
   }
 
   /* Started */
-  var nStarted = d.started.length + d.pStarted.length;
+  var nStarted = d.started.length;
   if (nStarted) app.appendChild(sectionToggle('started', 'Started (' + nStarted + ')', function () {
     var x = h('div', { class: 'stack' });
     d.started.forEach(function (p) { x.appendChild(pickCard(p, d, { rank: false, noNew: true })); });
-    d.pStarted.forEach(function (p) { x.appendChild(parlayCard(p, d, 0)); });
     return x;
   }));
 
@@ -901,65 +803,7 @@ function renderTonight() {
     return x;
   }));
 
-  var pp = paperSection();
-  if (pp) app.appendChild(pp);
-
   app.appendChild(footer());
-}
-/* ---------- Paper test (Gap + Guard): not bets, own file, own failure ---------- */
-function paperOn() { return !!((S.rules && isObj(S.rules.paper) && S.rules.paper.active) || S.paper); }
-function toPuck(start) {
-  var t = ms(start); if (t == null) return '';
-  var m = Math.round((t - now()) / 60000);
-  if (m <= 0) return 'puck dropped';
-  return (m >= 60 ? Math.floor(m / 60) + 'h ' + (m % 60) + 'm' : m + 'm') + ' to puck';
-}
-function paperRow(x) {
-  var pulled = isObj(x.pulled), tail = [];
-  tail.push('Gap ' + (num(x.gap_pct) != null ? (x.gap_pct >= 0 ? '+' : '') + x.gap_pct.toFixed(1) + '%' : '—') + ' vs ' + str(x.n_books) + ' books');
-  tail.push('guard ' + (x.guard === 'pass' ? 'ok' : 'veto') + (num(x.final_p_pct) != null ? ' (final ' + x.final_p_pct.toFixed(1) + '%)' : ''));
-  var state = pulled ? 'Pulled' : (x.result ? 'Graded' : (x.locked ? 'Locked' : 'Open'));
-  var l3 = [str(x.settled || 'Early'), toPuck(x.start), state];
-  if (x.result) l3.push(x.result + (num(x.units) != null ? ' ' + (x.units >= 0 ? '+' : '') + x.units.toFixed(2) + 'u' : ''));
-  if (num(x.clv_pct) != null) l3.push('CLV ' + (x.clv_pct >= 0 ? '+' : '') + x.clv_pct.toFixed(1) + '%');
-  return h('div', { class: 'pp-row' + (pulled ? ' pulled' : '') },
-    h('div', { class: 'nm', text: str(x.player) + ' ' + str(x.bet) + '  ' + odds(x.price) }),
-    h('span', { class: 'l2', text: str(x.game) + ' · ' + (fTime(x.start) || '') + ' · ' + tail.join(' · ') }),
-    h('span', { class: 'l3', text: l3.filter(Boolean).join(' · ') }),
-    pulled ? h('span', { class: 'l3 why', text: 'Pulled: ' + str(x.pulled.reason) }) : null);
-}
-function paperSection() {
-  if (!paperOn()) return null;
-  var P = S.paper, n = P && isObj(P.tonight) ? arr(P.tonight.flags).length : null;
-  var title = 'Paper test (not bets)' + (n != null ? ' (' + n + ')' : '');
-  return sectionToggle('paper', title, function () {
-    var box = h('div', null, h('p', { class: 'pp-note', text: 'Test only. Nothing here is a bet, and none of it is in the picks or the Record.' }));
-    if (!P) {
-      var ps = S.rules && isObj(S.rules.paper) ? S.rules.paper.start : null, pst = ps ? ms(ps + 'T05:00:00-04:00') : null;
-      if (pst != null && now() < pst) { box.appendChild(h('p', { class: 'mu', style: 'font-size:13px;margin:0', text: 'The paper test starts ' + fDateShort(ps) + '.' })); return box; }
-      box.appendChild(h('div', { class: 'card empty' }, h('div', { class: 's', style: 'margin:0;color:var(--fg)',
-        text: S.paperErr === 'file' ? "The paper test file couldn't be read. Trying again." : "Can't load the paper test. Check your connection." })));
-      return box;
-    }
-    var t = isObj(P.tonight) ? P.tonight : {}, fl = arr(t.flags).filter(isObj), vt = arr(t.vetoes).filter(isObj);
-    var gen = ms(P.generated_at);
-    if (gen != null && now() - gen > 3600000 * 2) box.appendChild(h('p', { class: 'pp-note', text: 'Paper data is old: last update ' + fTime(gen) + '.' }));
-    if (P.active === false) box.appendChild(h('p', { class: 'pp-note', text: 'The paper test is off right now.' }));
-    var nv = isObj(P.nov2) ? P.nov2 : {};
-    var cg = isObj(nv.clv_gaps) ? nv.clv_gaps : {};
-    box.appendChild(h('p', { class: 'mu', style: 'font-size:12px;line-height:17px;margin:0 0 8px', text:
-      'Gaps measured ' + (num(nv.gaps_measured) || 0) + ' · graded ' + (num(nv.graded_picks) || 0) + ' (' + (num(nv.w) || 0) + '-' + (num(nv.l) || 0) + ') · ' +
-      (num(cg.mean) != null ? 'mean CLV ' + (cg.mean >= 0 ? '+' : '') + (100 * cg.mean).toFixed(1) + '%' : 'mean CLV n/a') +
-      (isObj(P.window) && P.window.judge_on ? ' · judged ' + fDateShort(P.window.judge_on) : '') }));
-    box.appendChild(h('div', { class: 'pp-head', text: "Tonight's paper flags" }));
-    if (!fl.length) box.appendChild(h('p', { class: 'mu', style: 'font-size:13px;margin:0', text: P.active === false ? 'None.' : 'None yet. Flags can appear from the 90-minute price read.' }));
-    else { var lst = h('div', { class: 'list' }); fl.forEach(function (x) { lst.appendChild(paperRow(x)); }); box.appendChild(lst); }
-    if (vt.length) {
-      box.appendChild(h('div', { class: 'pp-head', text: 'Gap seen, model vetoed (' + vt.length + ')' }));
-      var vl = h('div', { class: 'list' }); vt.forEach(function (x) { vl.appendChild(paperRow(x)); }); box.appendChild(vl);
-    }
-    return box;
-  });
 }
 /* per-game lineup + goalie status lines: "CBJ: ✅ lineup · G Korpisalo ✅" */
 function lastName(n) { var w = str(n).trim().split(/\s+/); return w[w.length - 1] || ''; }
@@ -1055,7 +899,7 @@ function renderRecord() {
 
   /* list */
   var fl = h('div', { class: 'filters', role: 'group', 'aria-label': 'Show' });
-  [['all', 'All'], ['singles', 'Singles'], ['parlays', 'Parlays'], ['pulled', 'Pulled']].forEach(function (f) {
+  [['all', 'All'], ['pulled', 'Pulled']].forEach(function (f) {
     fl.appendChild(h('button', { class: 'fbtn', type: 'button', 'aria-pressed': S.filter === f[0] ? 'true' : 'false',
       on: { click: function () { S.filter = f[0]; rerender(); } } }, h('span', { text: f[1] })));
   });
@@ -1197,33 +1041,18 @@ function slot(key, kind) {
   }
   return t == null ? h('span', { class: 'slot miss', text: '[missing]' }) : h('span', { class: 'slot', text: t });
 }
-/* Sentences live here; every number comes from rules.json. "{key|kind}" kinds: price, pct, pts (0.02 -> 2), num, text,
-   list (an array: "1.5 and 2.5"); a key may be dotted (lines_allowed.shots). RULES is v2.0; RULES_V1 is shown only while
-   rules.json still says v1.x (the slate that was running when v2.0 shipped). */
+/* Sentences live here; every number comes from rules.json ("values", with the one rule under gap_guard). "{key|kind}" kinds:
+   price, pct, pts (0.02 -> 2), num, text, list (an array: "1.5 and 2.5"); a key may be dotted (gap_guard.lines). There is ONE rule. */
 var RULES = [
-  'Shots on goal only, at the {lines_allowed.shots|list} lines. Every pick needs a real Hard Rock price of {price_gate|price} or better, and no longer than {max_price|price}.',
-  "To read Hard Rock's own chance we put all of its margin on the over: the under's chance is its price's break-even, the over gets the rest.",
-  "Our chance blends our model ({model_weight|pct}) with that Hard Rock chance ({market_weight|pct}). Nothing else is added or taken off.",
-  "We pick when our chance beats the price's break-even by 0 to just under {edge_cap|pts} points. A bigger edge is passed, because the book likely knows something. The bar is the same whether or not the lineup is confirmed.",
-  "Under {min_history|num} games of history means no pick. A player who missed his team's last game waits for a confirmed lineup, and one back from {absence_games|num} or more missed games sits out {absence_sitout|num} games.",
-  'No more than {max_per_player|num} per player, {max_per_game|num} per game and {max_picks_night|num} a night, best edge first.',
-  'Parlays are paused until single picks prove out.',
-  'A pick is pulled if the player is out of the lineup, the price goes past {price_gate|price} or past {max_price|price}, or the line is gone. At a new price it is also pulled if our chance falls below break-even or the edge reaches {edge_cap|pts} points.',
-  "Results come from the NHL boxscore once each game is final. Overtime counts, shootouts don't. Graded at the worst price shown, {stake|num} unit each.",
-  'We need {min_sample|num} graded picks in a market before judging it. A market that is losing badly after {pause_legs|num} picks switches itself off. Rule changes are judged on our model graded on every Hard Rock line, not just on picks.'
-];
-var RULES_V1 = [
-  'Every pick needs a real Hard Rock price of {price_gate|price} or better, and no longer than {max_price|price}.',
-  "Our chance blends our model ({model_weight|pct}) with Hard Rock's own price ({market_weight|pct}).",
-  'Before blending, we take {uncertainty|pts} points off our model on every pick, {under_penalty|pts} more on unders, and {thin_over_penalty|pts} more on overs with a thin sample.',
-  "We only pick when our chance is at least {min_p|pct} and beats the price's break-even by {margin_confirmed|pts} points ({margin_early|pts} when the lineup isn't confirmed).",
-  'Thin sample means under {thin_rows|num} games of history, or under {thin_team_games|num} with his team. Under {min_history|num} games of history means no pick.',
-  "If our model sits more than {news_gap|pts} points above what Hard Rock's price implies, we wait for the lineup. More than {too_good|pts} points and we pass, because the book likely knows something.",
-  'No more than {max_per_player|num} per player and {max_per_game|num} per game on any night.',
-  "Parlays are {parlay_min_legs|num} or {parlay_max_legs|num} legs, one leg per game, up to {parlay_cap|num} a night. Every leg needs our chance of at least {parlay_leg_min_p|pct} and a price from {parlay_leg_min_price|price} to {parlay_leg_max_price|price}. The combined chance must be at least {parlay_min_p_2|pct} for 2 legs or {parlay_min_p_3|pct} for 3, and beat the parlay's break-even by {parlay_edge|pts} points.",
-  'A pick is pulled if the player is out of the lineup, the price goes past {price_gate|price} or past {max_price|price}, the line is gone, our chance falls to less than {pull_margin|pts} points over break-even, or the price moves {drift_pull|pts} points against us before the lineup is confirmed.',
-  "Results come from the NHL boxscore once each game is final. Overtime counts, shootouts don't. Graded at the worst price shown, {stake|num} unit each.",
-  'We need {min_sample|num} graded picks in a market before judging it. A market that is losing badly after {pause_legs|num} picks switches itself off, and no other rule changes before {change_legs|num}.'
+  'We bet only Hard Rock shots on goal at the {gap_guard.lines|list} lines, over or under, at {gap_guard.price_gate|price} or better and no longer than {gap_guard.max_price|price}.',
+  "Step 1, the gap. At the 90 and 45 minute price reads we ask the other books. At least {gap_guard.books_min|num} of them (Pinnacle must be one) must price the same player and line, both sides. We take their margin out and use the middle chance. Hard Rock's price has to beat it by at least {gap_guard.gap_ev|pct}, and Pinnacle on its own must not say the price loses.",
+  "Step 2, the guard. We blend {gap_guard.market_weight|pct} the other books' chance with {gap_guard.model_weight|pct} our model's chance. The blend still has to beat the price by at least {gap_guard.final_ev|pct}. The model can only say no: it never creates a pick.",
+  'The first 90 or 45 minute read that passes both steps becomes the pick, and its price is frozen. That is the price shown here, in the alerts and graded on the Record. The 1 PM read only sets a baseline.',
+  'No more than {gap_guard.max_per_player|num} per player, {gap_guard.max_per_game|num} per game and {gap_guard.max_per_night|num} a night, best blend first. Parlays are not offered: there is no evidence for them yet.',
+  'A pick is pulled if the player is out of the lineup, Hard Rock moves the price and the gap falls under {gap_guard.pull_ev|pct}, fewer than {gap_guard.books_min|num} other books still quote it, Pinnacle stops quoting it or disagrees, our model stops backing it, or the line is taken down. Pulled picks stay on the Record.',
+  "A player needs {min_history|num} games of history. One who missed his team's last game waits for a confirmed lineup, and one back from {absence_games|num} or more missed games sits out {absence_sitout|num} games.",
+  "Results come from the NHL boxscore once each game is final. Overtime counts, shootouts don't. Graded at the price shown, {stake|num} unit each.",
+  'New picks stop by themselves if the Record falls to {gap_guard.safety_units|num} units, until the team reviews. We need {min_sample|num} graded picks before judging results.'
 ];
 function rulesBody(body) {
   var v = S.rules ? S.rules.version : null, up = S.rules ? S.rules.updated : null;
@@ -1231,10 +1060,9 @@ function rulesBody(body) {
   head.appendChild(node('Rules v')); head.appendChild(v != null ? node(str(v)) : h('span', { class: 'slot miss', text: '[missing]' }));
   head.appendChild(node(' · changed ')); head.appendChild(up ? node(fDateShort(up)) : h('span', { class: 'slot miss', text: '[missing]' }));
   body.appendChild(head);
-  if (S.slate && isObj(S.slate.empty) && S.slate.empty.code === 'paused') body.appendChild(h('p', { style: 'color:var(--warn)', text: 'Picks are paused: these rules showed no proven edge in testing.' }));
   if (!S.rules) body.appendChild(h('p', { style: 'color:var(--warn)', text: "The rule numbers didn't load, so they show as [missing] below." }));
   var ol = h('ol', { class: 'rules' });
-  (v != null && /^1(\.|$)/.test(str(v)) ? RULES_V1 : RULES).forEach(function (s) {
+  RULES.forEach(function (s) {
     var li = h('li'), re = /\{([a-z0-9_.]+)\|([a-z]+)\}/g, last = 0, m;
     while ((m = re.exec(s))) { if (m.index > last) li.appendChild(node(s.slice(last, m.index))); li.appendChild(slot(m[1], m[2])); last = re.lastIndex; }
     if (last < s.length) li.appendChild(node(s.slice(last)));

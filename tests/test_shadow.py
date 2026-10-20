@@ -53,8 +53,7 @@ class ShadowDay(unittest.TestCase):
         m = s.inputs().model(world.pid_of("CAR", 1), "CAR", "PHI", False, "shots", 2.5)
         self.assertAlmostEqual(r["open"]["model_p_over"], m["p_over"], places=5)       # the engine's own model
         self.assertAlmostEqual(r["open"]["fair_over"], odds.fair_two_sided(r["open"]["over"], r["open"]["under"]), 5)
-        e = engine.edge(m["p_over"], "over", False, r["open"]["over"], r["open"]["under"], helpers.cfg()["values"])
-        self.assertAlmostEqual(r["open"]["p_over"], e["p"], places=5)
+        self.assertNotIn("p_over", r["open"])                                      # no second, blended chance in the log
         self.assertEqual(r["open"], r["close"])
         self.assertEqual((r["n_reads"], r["src"], r["result"]), (1, "live", None))
         c = r["ctx"]
@@ -132,8 +131,9 @@ class ShadowBudget(unittest.TestCase):
     def test_grade_and_shadow_read_each_boxscore_once_per_run(self):
         import nhl
         s = self.s
-        s.set_odds("CAR", "PHI", [s.line("CAR", 1, "shots", 2.5, 0.14), s.line("PHI", 2, "shots", 1.5, 0.0)], UPD)
-        s.at("13:02")
+        s.read("13:02")
+        s.clock("17:00")
+        s.read("17:31", cp=[s.gg_lines("CAR", 1), s.gg_lines("PHI", 2)])
         self.assertTrue(any(e["t"] == "shown" for e in s.events()))
         s.set_box(CAR_PHI, "CAR", "PHI", {})
         s.set_states({CAR_PHI: "OFF"})
@@ -271,8 +271,9 @@ class Backfill(unittest.TestCase):
 
     def test_backfill_matches_the_record_model_value(self):
         s = self.s
-        s.set_odds("CAR", "PHI", [s.line("CAR", 1, "shots", 2.5, 0.14)], UPD)
-        s.at("13:02")
+        s.read("13:02")
+        s.clock("17:00")
+        s.read("17:31", cp=[s.gg_lines("CAR", 1)])
         self.assertTrue(any(e["t"] == "shown" for e in s.events()), "the setup needs a pick on the Record")
         os.unlink(s.path("shadow", "%s.json" % world.SLATE))
         cache = common.read_json(s.path("state", "schedule.json"))

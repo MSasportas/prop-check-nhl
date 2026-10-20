@@ -1,5 +1,5 @@
 """QA round 2 (2026-10-12): M1 + m11 (Record history guard), M2 (every key refused), m1, m2, m3, m4, m5, m7,
-m9, m10, m12. The cycle-level M1 cases live in test_cycle.py."""
+m10, m12. The cycle-level M1 cases live in test_cycle.py."""
 import contextlib
 import io
 import json
@@ -31,6 +31,15 @@ def open_day(s):
     s.set_odds("CAR", "PHI", [s.line("CAR", 1, "shots", 2.5, 0.14), s.line("PHI", 1, "shots", 2.5, 0.14)], UPD)
     s.set_odds("VAN", "NYR", [s.line("VAN", 1, "shots", 2.5, 0.14), s.line("NYR", 1, "shots", 2.5, 0.14)], UPD)
     return s.at("13:02")
+
+
+def gg_day(s):
+    """Baseline read, then the 90-minute read for CAR@PHI with one Gap + Guard candidate. Returns (slate, cp)."""
+    s.at("09:00")
+    s.read("13:02")
+    s.clock("17:00")
+    cp = [s.gg_lines("CAR", 1)]
+    return s.read("17:31", cp=cp), cp
 
 
 # ---------------------------------------------------------------- M1 / m11: the guard against git
@@ -180,8 +189,7 @@ class KeysRefused(unittest.TestCase):
         self.assertTrue(self.s.status()["ok"] or self.s.status()["failed_step"] != "odds")
         if sl["empty"]:
             self.assertEqual((sl["empty"]["code"], sl["empty"]["sub"]), ("keys_refused", odds.KEYS_REFUSED_TEXT))
-            self.assertEqual(sl["empty"]["text"], "No picks tonight. Nothing cleared the bar at Hard Rock's prices."
-                             if priced else "No Hard Rock prices today, so no picks.")
+            self.assertEqual(sl["empty"]["text"], "No picks yet today" if priced else "No Hard Rock prices today, so no picks.")
 
     def test_fresh_day_every_key_401(self):
         sl = self.s.at("13:02")
@@ -280,19 +288,18 @@ class Minors2(unittest.TestCase):
         s = self.s
         s.at("09:00")
         sl = s.slate()
-        self.assertTrue(any("Live picks are re-checked before the game" in b["text"] for b in sl["banners"]), sl["banners"])
+        self.assertTrue(any("Picks come from the reads 90 and 45 minutes before each game" in b["text"] for b in sl["banners"]), sl["banners"])
         for _, away, home, _ in world.GAMES:
             s.drop_odds(away, home)                          # pull A gets no answer
         sl = s.at("13:02")
         self.assertEqual(sl["status"]["prices_state"], "feed_down")
         texts = [b["text"] for b in sl["banners"]]
-        self.assertFalse(any("Points are read once" in t or "One price check" in t for t in texts), texts)
+        self.assertFalse(any("Picks come from the reads" in t or "One price check" in t for t in texts), texts)
         self.assertTrue(any(t.startswith("The odds feed did not answer at 1:02 PM") for t in texts), texts)
         s.set_odds("CAR", "PHI", [s.line("CAR", 1, "shots", 2.5, 0.14)], UPD)
         s.set_odds("VAN", "NYR", [s.line("VAN", 1, "shots", 2.5, 0.14)], UPD)
         sl = s.at("13:12")                                   # the retry reads prices: the promise is back
-        self.assertIn("Prices checked at 1:12 PM (shots). Points are read once each game's lineups are confirmed, about 90 min before puck, "
-            "or 45 min before if lineups are not confirmed. Live picks are re-checked before the game.",
+        self.assertIn("Prices checked at 1:12 PM (shots). Picks come from the reads 90 and 45 minutes before each game.",
                       [b["text"] for b in sl["banners"]])
 
     def test_m3_days_left_capped_at_the_reset(self):
@@ -307,56 +314,28 @@ class Minors2(unittest.TestCase):
 
     def test_m7_explain_writes_nothing(self):
         s = self.s
-        open_day(s)
+        gg_day(s)
         os.unlink(s.path("state", "rosters.json"))           # would be re-fetched and saved by a normal run
         before = s.tree()
         buf = io.StringIO()
         with contextlib.redirect_stdout(buf):
             self.assertEqual(run.main(["--explain"]), 0)
-        self.assertIn("QUALIFIES", buf.getvalue())
+        self.assertIn("PASSES BOTH CHECKS", buf.getvalue())
         self.assertEqual(s.tree(), before)
 
     def test_m12_shown_pick_is_not_repriced_from_a_failed_pair(self):
         s = self.s
-        sl = open_day(s)
+        sl, cp = gg_day(s)
         p = s.pick("CAR", 1, sl)
         n_events = len(s.events())
-        # 6:16 PM pull C: the pair's hold is 20% (fails the feed checks), and our side's price is far worse
-        s.set_odds("CAR", "PHI", [("player_shots_on_goal", world.name_of("CAR", 1), 2.5, -150, -150),
-                                  s.line("PHI", 1, "shots", 2.5, 0.14)], "2026-10-11T22:10:00Z")
-        sl = s.at("18:16")
+        # 6:16 PM read: the pair's hold is 20% (fails the feed checks) and the price is far worse
+        bad = ("player_shots_on_goal", world.name_of("CAR", 1), 1.5, -150, -150)
+        sl = s.read("18:16", cp=[(bad, cp[0][1])])
         p2 = s.pick("CAR", 1, sl)
         self.assertIsNone(p2["pulled"])
-        self.assertEqual((p2["price"], p2["prices"]), (p["price"], p["prices"]), "kept the last good price")
+        self.assertEqual((p2["price"], p2["prices"]), (p["price"], p["prices"]), "kept the frozen price")
         mine = [e for e in s.events()[n_events:] if e.get("id") == p["id"]]
         self.assertFalse([e for e in mine if e["t"] in ("price", "pulled")], mine)
-
-
-class GoalWatchShortOnly(unittest.TestCase):
-    def test_m9_only_rows_where_hard_rock_pays_less_than_fair(self):
-        s = Sim(pool=40)                                     # 40 / 4 games: top tier, goal watch on
-        try:
-            s.at("09:00")
-            s.set_odds("CAR", "PHI", [s.line("CAR", 1, "shots", 2.5, 0.14)], UPD)
-            s.at("13:02")
-            s.set_lineup("CAR", "2026-10-11T20:00:00Z")
-            s.set_lineup("PHI", "2026-10-11T20:00:00Z")
-            s.clock("17:31")
-            fair = {i: 1.0 / s.inputs().model(world.pid_of("CAR", i), "CAR", "PHI", False, "goals", 0.5)["p_over"]
-                    for i in (0, 1, 2)}
-            short = {0: odds.american(1 + (fair[0] - 1) * 0.6), 1: odds.american(1 + (fair[1] - 1) * 0.8),
-                     2: odds.american(1 + (fair[2] - 1) * 1.5)}      # 2 pays MORE than fair: never shown
-            goals = [("player_goals", world.name_of("CAR", i), 0.5, short[i], None) for i in (0, 1, 2)]
-            s.set_odds("CAR", "PHI", [s.line("CAR", 1, "shots", 2.5, 0.14)] + goals, "2026-10-11T21:25:00Z")
-            sl = s.at("17:31")
-            names = {r["player"] for r in sl["goal_watch"]}
-            self.assertEqual(len(sl["goal_watch"]), 2, sl["goal_watch"])
-            self.assertNotIn(s.inputs().display_name(world.pid_of("CAR", 2), world.name_of("CAR", 2)), names)
-            for r in sl["goal_watch"]:
-                self.assertLess(odds.decimal(r["price"]), odds.decimal(r["fair_price"]) + 1e-9, r)
-            self.assertTrue(sl["goal_watch_note"].startswith("Not picks."))
-        finally:
-            s.close()
 
 
 # ---------------------------------------------------------------- page sentences (m4, m5, m10, M2)
@@ -367,17 +346,15 @@ class PageText(unittest.TestCase):
             cls.html = f.read()
 
     def test_m4_rules_sheet(self):
-        self.assertIn("the price goes past {price_gate|price} or past {max_price|price}", self.html)
-        self.assertIn("Parlays are {parlay_min_legs|num} or {parlay_max_legs|num} legs", self.html)
-        v = helpers.cfg()["values"]
-        self.assertEqual((v["parlay_min_legs"], v["parlay_max_legs"]), (2, 3))
+        self.assertIn("at {gap_guard.price_gate|price} or better and no longer than {gap_guard.max_price|price}", self.html)
+        self.assertIn("Parlays are not offered", self.html)
+        self.assertNotIn("parlay_min_legs", self.html)
         self.assertNotIn("two or three legs", self.html)
 
     def test_m5_m10_m2_sentences(self):
-        self.assertIn("No open parlay right now. ", self.html)
-        self.assertIn("\"Tonight's parlay is\"", self.html)
         self.assertIn("Last night's picks are in the Record.", self.html)
         self.assertNotIn("Last night's results are in the Record.", self.html)
+        self.assertNotIn("No open parlay right now", self.html)
         self.assertIn("case 'keys_refused':", self.html)
         self.assertIn(odds.KEYS_REFUSED_TEXT, self.html)
 

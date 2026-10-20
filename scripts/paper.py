@@ -1,9 +1,11 @@
-"""paper.py: the Gap + Guard PAPER test (TEAM.md section 7 item 21). Nothing here is a bet.
+"""paper.py: the Gap + Guard engine, the ONLY thing that decides what is a pick (TEAM.md section 4). The file name is kept from
+the retired paper test; its log under data/paper/ is the "Gap + Guard research log" (flags, vetoes, capped, pulls, CLV, grades).
 
 A flag is a Hard Rock shots line (1.5 / 2.5) whose price beats the other books' consensus by enough (STEP 1, the gap) and
 that our model does not contradict (STEP 2, the guard: the model can only veto, never create). Flags are logged, frozen at the
 price of their first qualifying read, followed to the 45-minute read (CLV) and graded at the frozen price, flat 1 unit.
-Whether the idea works is judged on Nov 2 (section 7 item 21).
+engine.py turns every flag into a pick on the page and in the Record (price frozen at the flag) and every pull event into a pulled
+pick; nothing else creates a pick. The log also keeps the team's research rows (vetoed and capped candidates, close/CLV).
 
 Everything is in EV% = fair_prob x Hard Rock decimal payout - 1, on unrounded floats, every threshold inclusive (>=).
   STEP 1 (gap) passes iff ALL: (a) EV of Hard Rock's price against the market fair >= gap_ev (+3.0%); (b) >= books_min (4)
@@ -13,15 +15,15 @@ Everything is in EV% = fair_prob x Hard Rock decimal payout - 1, on unrounded fl
     (f) Hard Rock price -200 .. +120. A book counts only if it returned fresh, two-sided prices with a sane hold
     (shadow.other_lines: the same rule as the shadow log's consensus).
   STEP 2 (guard): final = market_weight x market_fair + model_weight x calibrated model chance for the side, where the
-    calibrated model = raw model chance of the over + a FROZEN additive offset per line (config ops.paper.thresholds.offsets;
+    calibrated model = raw model chance of the over + a FROZEN additive offset per line (config ops.gap_guard.thresholds.offsets;
     refit once from the 2025-26 Hard Rock shots lines, model from prior games only); under = 1 - over. Passes iff
     final x decimal - 1 >= final_ev (+2.0%).
 Reads: only pull B (90 min) and pull C (45 min) reads can flag. Pull A (the 1 PM read) is baseline / context only. A read with
 no "others" key (Hard Rock-only retry) is skipped entirely. Later reads can only PULL a flag (never re-price it).
 Files (all under data/paper/, never under data/record/): events.jsonl (append-only: flag, veto, capped, pull, close, grade),
 summary.json (derived, for the page and Discord), cursor.json (last read processed per game, derived). This module must never
-import record's append functions or write under data/record/ (tests hash data/record/ around the step).
-A failure here never fails a run (run.py wraps it as a soft step).
+import record's append functions or write under data/record/ (only engine.py writes the Record, from this log).
+A failure here stops NEW picks for that run (engine.py finds no new flags) but never touches the Record.
 """
 import json
 import os
@@ -39,7 +41,7 @@ import shadow
 EPS = 1e-9
 VERSION = 1
 MARKET = "shots"
-NOTE = "PAPER TEST - not bets. Nothing here is on the page as a bet, in the Record or in the picks."
+NOTE = "Gap + Guard research log. Every flag here is a pick on the page and in the Record; vetoed and capped rows are research only."
 SUMMARY_NIGHTS = 7
 
 
@@ -250,7 +252,7 @@ class Paper:
     def __init__(self, now, slate, cfg, inp, sched_cache, games):
         self.now, self.slate, self.cfg, self.inp = now, slate, cfg, inp
         self.sched_cache, self.games = sched_cache or {}, games or []
-        self.P = (cfg.get("ops") or {}).get("paper") or {}
+        self.P = common.gap_guard(cfg)
         self.T = self.P.get("thresholds") or {}
         self.v = cfg["values"]
         self.events = read_events()
@@ -296,18 +298,18 @@ class Paper:
         return True
 
     # ---- one read of one game
-    def process_game(self, g, reads, cursor):
+    def process_game(self, g, reads, cursor, allow_new=True):
         gid = str(g["id"])
         last = common.parse_iso(cursor.get(gid)) if cursor.get(gid) else None
         for idx, f in enumerate(reads):
             at = common.parse_iso(f["at"])
             if last is not None and at <= last:
                 continue
-            if self.P.get("active") and common.paper_active(self.cfg, self.slate) and can_flag(f, g, self.T):
-                self.process_read(g, f, reads[:idx])
+            if self.P.get("active") and common.gap_guard_active(self.cfg, self.slate) and can_flag(f, g, self.T):
+                self.process_read(g, f, reads[:idx], allow_new)
             cursor[gid] = f["at"]
 
-    def process_read(self, g, f, earlier):
+    def process_read(self, g, f, earlier, allow_new=True):
         T, v = self.T, self.v
         view = view_of(f, v)
         if view["pairs"] is None:
@@ -322,14 +324,18 @@ class Paper:
             reason = self.pull_reason(fl, g, view)
             if reason:
                 self.emit({"t": "pull", "id": fl["id"], "read_at": read_at, "reason": reason[0], "detail": reason[1]})
-        # (b) candidates: step 1 then step 2, ranked by final EV, capped
+        # (b) candidates: step 1 then step 2, ranked by final EV, capped. allow_new=False (stats behind, safety pause):
+        # nothing new is flagged from this read; flags already alive are still looked after above and below.
         passed, now_ids = [], set()
-        for (pid, line), pair in sorted(view["pairs"].items()):
+        behind = getattr(self.inp, "behind", None) or {}
+        for (pid, line), pair in sorted(view["pairs"].items() if allow_new else []):
             if pair["over"] is None or pair["under"] is None or pair["why"] is not None:
                 continue
             if pair["team"] not in (g["away"], g["home"]) or fmt_line(line) not in {fmt_line(x) for x in T["lines"]}:
                 continue
             team = pair["team"]
+            if team in behind:
+                continue                                  # this team's stats are behind: no model, no flag
             entry = view["others"].get((pid, line))
             if not entry or len(entry["pairs"]) < T["books_min"]:
                 continue                                  # cheap exit before the model runs
@@ -523,7 +529,7 @@ def view_item(it, ls, goalie_state, now):
 
 
 def build_summary(now, slate, cfg, events, ls=None, goalie_state=None, nights=()):
-    P = (cfg.get("ops") or {}).get("paper") or {}
+    P = common.gap_guard(cfg)
     items = fold(events)
     ls = ls if ls is not None else lineups.load(slate)
     goalie_state = goalie_state if goalie_state is not None else goalies.load(slate)
@@ -554,11 +560,11 @@ def build_summary(now, slate, cfg, events, ls=None, goalie_state=None, nights=()
         "clv_passed_mean": _stats(clv_pass)["mean"], "clv_vetoed_mean": _stats(clv_veto)["mean"],
         "nights": len(nights), "nights_with_flags": len(flag_nights & set(nights)) if nights else len(flag_nights),
         "population_slope": None,
-        "judge_on": P.get("judge_on"), "hard_stop": P.get("end"),
+        "checkpoint": P.get("checkpoint"),
     }
     return {"version": VERSION, "note": NOTE, "generated_at": common.iso(now), "slate": slate,
-            "active": common.paper_active(cfg, slate), "window": {"start": P.get("start"), "end": P.get("end"),
-                                                                  "judge_on": P.get("judge_on")},
+            "active": common.gap_guard_active(cfg, slate), "window": {"live_from": P.get("live_from"),
+                                                                      "checkpoint": P.get("checkpoint")},
             "tonight": {"flags": [x for x in tonight if x["kind"] == "flag"],
                         "vetoes": [x for x in tonight if x["kind"] == "veto"],
                         "capped": [x for x in tonight if x["kind"] == "capped"]},
@@ -581,16 +587,17 @@ def write_summary(summary, now, heartbeat_min):
     return True
 
 
-def step(now, slate, cfg, inp, sched_cache, games):
-    """Called by run.py (soft step, after shadow). Never raises past run.py's wrapper."""
-    P = (cfg.get("ops") or {}).get("paper") or {}
+def step(now, slate, cfg, inp, sched_cache, games, allow_new=True):
+    """Called by run.py before the engine (after odds). Never raises past run.py's wrapper.
+    allow_new=False: flag nothing new (stats behind, safety pause); pulls, closes and grades still run."""
+    P = common.gap_guard(cfg)
     if not P:
-        return {"status": "skipped", "note": "no ops.paper in the config"}
+        return {"status": "skipped", "note": "no ops.gap_guard in the config"}
     p = Paper(now, slate, cfg, inp, sched_cache, games)
     cursor = common.read_json(cursor_path(), {}) or {}
     cursor.setdefault("reads", {})
     cursor.setdefault("nights", [])
-    live = common.paper_active(cfg, slate)
+    live = common.gap_guard_active(cfg, slate)
     if live and games and inp is not None:
         odds_doc = common.read_json(odds.odds_path(slate)) or {}
         by_game = {}
@@ -598,7 +605,7 @@ def step(now, slate, cfg, inp, sched_cache, games):
             if f.get("game_id") is not None and common.parse_iso(f["at"]) <= now:
                 by_game.setdefault(f["game_id"], []).append(f)
         for g in sorted(games, key=lambda x: (x["start"], x["id"])):
-            p.process_game(g, by_game.get(g["id"], []), cursor["reads"])
+            p.process_game(g, by_game.get(g["id"], []), cursor["reads"], allow_new)
         p.pull_out()
         if slate not in cursor["nights"]:
             cursor["nights"].append(slate)
@@ -613,4 +620,45 @@ def step(now, slate, cfg, inp, sched_cache, games):
     for e in p.new:
         counts[e["t"]] = counts.get(e["t"], 0) + 1
     note = ", ".join("%d %s" % (c, t) for t, c in sorted(counts.items())) or "nothing new"
-    return {"status": "ok" if live else "skipped", "note": ("paper test: " if live else "paper test off: ") + note}
+    return {"status": "ok" if live else "skipped", "note": ("gap+guard: " if live else "gap+guard not live yet: ") + note}
+
+
+# ---------------------------------------------------------------- --explain (reads only, writes nothing)
+def explain(inp, cfg, odds_doc, games, now):
+    """Every shots side on the latest 90/45-minute read of each unstarted game with its Gap + Guard numbers and the first
+    reason it did not pass. For people: `python scripts/run.py --explain`."""
+    p = Paper(now, inp.slate, cfg, inp, None, games)
+    T, rows = p.T, []
+    by_game = {}
+    for f in sorted((odds_doc or {}).get("fetches", []), key=lambda x: x["at"]):
+        if f.get("game_id") is not None and common.parse_iso(f["at"]) <= now:
+            by_game.setdefault(f["game_id"], []).append(f)
+    for g in sorted(games, key=lambda x: (x["start"], x["id"])):
+        reads = [f for f in by_game.get(g["id"], []) if "others" in f and f.get("book") and f.get("pull") in T["flag_pulls"]]
+        if not reads:
+            continue
+        f = reads[-1]
+        view = view_of(f, p.v)
+        for (pid, line), pair in sorted((view["pairs"] or {}).items(), key=lambda kv: kv[1]["name"] or ""):
+            for side in ("over", "under"):
+                row = {"player": pair["name"], "team": pair["team"], "line": line, "side": side, "price": pair[side],
+                       "read": f["pull"], "n_books": 0, "market_fair": None, "gap_ev": None, "final_ev": None}
+                if pair["over"] is None or pair["under"] is None or pair["why"] is not None:
+                    row["verdict"] = "feed check: %s" % (pair["why"] or "one side missing")
+                elif pair["team"] in (getattr(inp, "behind", None) or {}):
+                    row["verdict"] = "team excluded: stats behind"
+                else:
+                    a = p.assess_lazy(side, line, pair[side], view["others"].get((pid, line)), g, pair["team"], pid, True)
+                    row.update(n_books=a["n_books"], market_fair=a["market_fair"], gap_ev=a["gap_ev"], final_ev=a["final_ev"])
+                    if not a["step1"]:
+                        row["verdict"] = "no gap: " + ", ".join(a["fails"])
+                    elif a["guard"] is None:
+                        row["verdict"] = "no model for him"
+                    elif not a["guard"]:
+                        row["verdict"] = "vetoed by our model"
+                    elif not p.eligible(pid, pair["team"]):
+                        row["verdict"] = "not eligible (history, absence or lineup)"
+                    else:
+                        row["verdict"] = "PASSES BOTH CHECKS"
+                rows.append(row)
+    return rows

@@ -7,7 +7,7 @@ One file per slate, data/shadow/<slate>.json, one row per (game, market, player,
   open     the first read of that line before puck: prices, the book's fair over (fair_over: proportional de-vig;
            fair_over_oh: all hold on the over, rules v2.0), the
            model's own chance of the over (the same Inputs.model the engine uses, before blend and penalties),
-           the blended chance for each side (engine.edge), lineup and goalie state at that moment
+           lineup and goalie state at that moment
   close    the last read before puck, same fields
   consensus (in open and close, TEAM.md Q1): when the read also asked other books (fetch "others"), for this exact
            player + line: cons_books (other books with both sides, fresh, sane hold; cons_stale_books = books left out
@@ -29,7 +29,6 @@ import time
 from datetime import date, timedelta
 
 import common
-import engine
 import goalies
 import grade
 import lineups
@@ -75,7 +74,7 @@ def save(doc):
 
 
 def key(game_id, market, pid, line):
-    return "%s:%s:%s:%s" % (game_id, market, pid, engine.fmt_line(line))
+    return "%s:%s:%s:%s" % (game_id, market, pid, "%g" % line)
 
 
 def _r(x, n=5):
@@ -222,16 +221,13 @@ def snapshot(inp, f, market, pair, pid, team, opp, home, thin, model_fn, lineup_
     s = {"at": f["at"], "pull": f["pull"], "over": over, "under": under, "fair_over": _r(fair_over),
          "fair_over_oh": _r(odds.devig(over, under, "over", "over_hold")),
          "hold": _r(odds.hold(over, under)), "feed_check": pair.get("why"),
-         "model_p_over": None, "mu": None, "p_over": None, "p_under": None,
+         "model_p_over": None, "mu": None,
          "lineup": None, "lineup_page_today": None, "goalie_own": None, "goalie_opp": None,
          "logged_at": None if historical else common.iso(now), "rules": inp.cfg.get("version")}
     s.update(cons or consensus(None, fair_over, False))
     m = model_fn(pair["line"]) if model_fn else None
     if m is not None:
         s["model_p_over"], s["mu"] = _r(m["p_over"]), _r(m["mu"], 3)
-        th = bool(thin)
-        s["p_over"] = _r(engine.edge(m["p_over"], "over", th, over, under, v)["p"])
-        s["p_under"] = _r(engine.edge(1.0 - m["p_over"], "under", th, under, over, v)["p"])
     if not historical:
         if market != "saves":
             s["lineup"] = lineups.player_status(lineup_state, team, pid)

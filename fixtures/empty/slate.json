@@ -34,8 +34,8 @@
  "banners": [],
  "empty": {
   "code": "none_qualified",
-  "text": "No picks tonight. Nothing cleared the bar at Hard Rock's prices.",
-  "sub": "Checked 212 lines at 5:02 PM."
+  "text": "No picks yet today. 212 lines read, none cleared both checks.",
+  "sub": "Next price read at 7:25 PM."
  },
  "games": [
   {
@@ -190,25 +190,5 @@
  ],
  "picks": [],
  "parlays": [],
- "goal_watch": [
-  {
-   "player": "A. Matthews",
-   "team": "TOR",
-   "price": 135,
-   "fair_price": 160
-  },
-  {
-   "player": "L. Draisaitl",
-   "team": "EDM",
-   "price": 125,
-   "fair_price": 150
-  },
-  {
-   "player": "S. Reinhart",
-   "team": "FLA",
-   "price": 170,
-   "fair_price": 195
-  }
- ],
- "goal_watch_note": null
+ "parlays_note": "Parlays are not offered: there is no evidence for them yet."
 }

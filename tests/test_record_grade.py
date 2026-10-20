@@ -363,21 +363,22 @@ class GradedDay(unittest.TestCase):
         s = Sim(pool=12)
         try:
             s.at("09:00")
-            s.set_odds("CAR", "PHI", [s.line("CAR", 1, "shots", 2.5, 0.14), s.line("PHI", 1, "shots", 2.5, 0.14)], UPD)
-            s.set_odds("VAN", "NYR", [s.line("VAN", 1, "shots", 2.5, 0.14), s.line("NYR", 1, "shots", 2.5, 0.14)], UPD)
-            sl = s.at("13:02")
+            s.read("13:02")
+            s.clock("17:00")
+            cp = [s.gg_lines("CAR", 1), s.gg_lines("PHI", 1)]
+            sl = s.read("17:31", cp=cp)                                        # 90-minute read, 7 PM game: two picks
+            # 6:16 PM (45-minute read): PHI's price drifts so the gap is gone (pulled); CAR's stays
+            sl = s.read("18:16", cp=[cp[0], s.gg_lines("PHI", 1, ev=-0.04)])
+            self.assertEqual(s.pick("PHI", 1, sl)["pulled"]["reason"], "Hard Rock moved the price and the gap is gone")
+            sl = s.read("18:31", cp=[cp[0], s.gg_lines("PHI", 1, ev=-0.04)], vn=[s.gg_lines("VAN", 1)])   # 8 PM game: the third pick
             first = {p["team"]: p["price"] for p in sl["picks"]}
             ids = {p["team"]: p["id"] for p in sl["picks"]}
-            self.assertEqual(len(sl["parlays"]), 2)
-            # 6:16 PM re-price of CAR at PHI: CAR a little worse (stays), PHI past the gate (pulled)
-            name = lambda t: world.name_of(t, 1)
-            s.set_odds("CAR", "PHI", [("player_shots_on_goal", name("CAR"), 2.5, first["CAR"] - 10, 102),
-                                      ("player_shots_on_goal", name("PHI"), 2.5, -215, 170)], "2026-10-11T22:10:00Z")
-            sl = s.at("18:16")
-            self.assertEqual(s.pick("PHI", 1, sl)["pulled"]["reason"], "Price moved past -200")
+            self.assertEqual(sorted(first), ["CAR", "PHI", "VAN"])
+            self.assertEqual(sl["parlays"], [])
+            self.assertEqual(s.pick("CAR", 1, sl)["price"], first["CAR"])      # the shown price never changes
             s.at("19:00")
             s.at("20:00")
-            # results: CAR 4 shots (W), PHI 1 (L, pulled), VAN scratched (VOID), NYR 5 (W)
+            # results: CAR 4 shots (W), PHI 1 (L, pulled), VAN scratched (VOID)
             car, phi, van, nyr = (world.pid_of(t, 1) for t in ("CAR", "PHI", "VAN", "NYR"))
             s.set_box(G1, "CAR", "PHI", {car: (4, 0, 0), phi: (1, 0, 0)}, state="FINAL")
             s.set_states({G1: "FINAL", G2: "LIVE"})
@@ -388,29 +389,24 @@ class GradedDay(unittest.TestCase):
             s.set_states({G1: "OFF", G2: "OFF"})
             sl = s.at("23:10")
             g = {e["id"]: e for e in s.events() if e["t"] == "graded"}
-            self.assertEqual({t: g[ids[t]]["result"] for t in ids}, {"CAR": "W", "PHI": "L", "VAN": "VOID", "NYR": "W"})
-            worst_car = first["CAR"] - 10
-            self.assertEqual(g[ids["CAR"]]["price"], worst_car)                    # the worst price shown
-            self.assertAlmostEqual(g[ids["CAR"]]["units"], round(100.0 / -worst_car, 4))
-            self.assertEqual(g[ids["PHI"]]["price"], first["PHI"])                 # -215 was never a live price
+            self.assertEqual({t: g[ids[t]]["result"] for t in ids}, {"CAR": "W", "PHI": "L", "VAN": "VOID"})
+            self.assertEqual(g[ids["CAR"]]["price"], first["CAR"])                 # graded at the price shown
+            self.assertEqual(g[ids["PHI"]]["price"], first["PHI"])
+            self.assertAlmostEqual(g[ids["CAR"]]["units"], round(odds.decimal(first["CAR"]) - 1, 4))
+            self.assertEqual(g[ids["VAN"]]["units"], 0.0)
             self.assertEqual(s.pick("CAR", 1, sl)["graded"], {"result": "W", "actual": "had 4", "units": g[ids["CAR"]]["units"]})
-            # parlays: graded from their legs
-            for q in sl["parlays"]:
-                legs = [(g[l]["result"], g[l]["price"]) for l in q["legs"]]
-                want = record.grade_parlay(legs)
-                self.assertEqual((g[q["id"]]["result"], g[q["id"]]["units"]), (want[0], want[2]))
             # the Record
             rec = common.read_json(s.path("record.json"))
             h = rec["summary"]["headline"]
-            self.assertEqual((h["w"], h["l"], h["void"], h["n"]), (2, 0, 1, 2))
-            self.assertAlmostEqual(h["units"], round(g[ids["CAR"]]["units"] + g[ids["NYR"]]["units"], 2))
+            self.assertEqual((h["w"], h["l"], h["void"], h["n"]), (1, 0, 1, 1))
+            self.assertAlmostEqual(h["units"], round(g[ids["CAR"]]["units"], 2))
             rows = {r["key"]: r for r in rec["summary"]["rows"]}
-            self.assertEqual((rows["pulled"]["w"], rows["pulled"]["l"]), (0, 2))   # PHI single + the parlay it was in
+            self.assertEqual((rows["pulled"]["w"], rows["pulled"]["l"]), (0, 1))   # PHI: pulled, still graded, not in the headline
+            self.assertNotIn("parlays", rows)
             night = rec["nights"][0]
-            self.assertEqual((night["date"], night["graded"], night["w"], night["l"]), ("2026-10-11", True, 2, 0))
-            self.assertEqual(len(night["entries"]), 6)
-            par = [e for e in night["entries"] if e["kind"] == "parlay"]
-            self.assertTrue(all(len(e["legs"]) == 2 and all(l["result"] for l in e["legs"]) for e in par))
+            self.assertEqual((night["date"], night["graded"], night["w"], night["l"]), ("2026-10-11", True, 1, 0))
+            self.assertEqual(len(night["entries"]), 3)
+            self.assertEqual({e["kind"] for e in night["entries"]}, {"single"})
             # running again adds nothing, and the next morning starts a clean slate with the Record intact
             n = len(s.events())
             s.at("23:20")
@@ -420,8 +416,7 @@ class GradedDay(unittest.TestCase):
             self.assertEqual(len(s.events()), n)
             self.assertEqual(common.read_json(s.path("record.json")), rec)
             kinds = [e["t"] for e in s.events()]
-            self.assertEqual({k: kinds.count(k) for k in set(kinds)},
-                             {"shown": 6, "price": 2, "pulled": 2, "locked": 4, "graded": 6})
+            self.assertEqual({k: kinds.count(k) for k in set(kinds)}, {"shown": 3, "pulled": 1, "locked": 2, "graded": 3})
         finally:
             s.close()
 
@@ -429,8 +424,10 @@ class GradedDay(unittest.TestCase):
         s = Sim(pool=12)
         try:
             s.at("09:00")
-            s.set_odds("VAN", "NYR", [s.line("NYR", 1, "shots", 2.5, 0.14)], UPD)
-            s.at("13:02")
+            s.read("13:02")
+            s.clock("17:00")
+            s.read("18:31", vn=[s.gg_lines("NYR", 1, line=2.5)])
+            self.assertEqual([e["t"] for e in s.events()], ["shown"])
             s.at("20:00")
             s.set_states({G1: "OFF", G2: "LIVE"})
             s.at("23:59")

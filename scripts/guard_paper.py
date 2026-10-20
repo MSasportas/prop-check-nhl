@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""guard_paper.py: the prefix guard for the paper log (data/paper/events.jsonl), the paper test's twin of guard_record.py.
+"""guard_paper.py: the prefix guard for the Gap + Guard research log (data/paper/events.jsonl), the twin of guard_record.py.
 
     python scripts/guard_paper.py
         the committed (HEAD) paper log must be an exact byte prefix of the working file: lines may only be added at the

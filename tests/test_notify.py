@@ -47,7 +47,8 @@ class Server:
 def pick(n, rank=None, start="19:00", state="early", pulled=None):
     return {"id": "%s:g1:p%d:shots:2.5:over" % (DAY, n), "price": -120, "p_pct": 62, "breakeven_pct": 55, "state": state,
             "pulled": pulled, "graded": None, "rank": rank if rank is not None else n, "player": "P. Player%d" % n,
-            "bet": "Over 2.5 shots on goal", "start": "%sT%s:00-04:00" % (DAY, start)}
+            "bet": "Over 2.5 shots on goal", "start": "%sT%s:00-04:00" % (DAY, start), "gap_pct": 4.8,
+            "market_fair_pct": 61.0, "n_books": 5, "settled": "lineup" if state == "lineup" else "early"}
 
 
 def slate(picks=(), parlays=(), banners=(), prices_state="ok", date=DAY):
@@ -93,20 +94,20 @@ class T(unittest.TestCase):
         self.assertEqual(notify.notify(slate(ps)), 1)
         t = self.texts()[0]
         self.assertEqual(t.count("P. Player"), 8)
-        self.assertIn("**11 new bets", t)
+        self.assertIn("NEW PICKS (11)", t)
         self.assertIn("+3 more on the page", t)
         self.assertIn(notify.PAGE, t)
-        self.assertIn("We say 62% to hit · price needs 55%", t)
+        self.assertIn("Gap +4.8% vs market, we say 62%, price needs 55%", t)
         self.assertIn("7:00 PM ET", t)
         self.assertIn("-120", t)
-        self.assertIn("Bet only at these prices or better", t)
+        self.assertIn("Bet only at this price or better", t)
         self.assertLessEqual(len(t), 2000)
         self.assertEqual(len(self.state()["picks"]), 11)       # the overflow ones count as told
 
     def test_dedupe_price_move_and_state_change(self):
         a = pick(1)
         notify.notify(slate([a]))
-        a2 = dict(a, price=-150, state="lineup")
+        a2 = dict(a, price=-150, state="lineup", settled="lineup")
         notify.notify(slate([a2]))
         self.assertEqual(len(self.srv.posts), 1)
         notify.notify(slate([a2, pick(2)]))
@@ -115,7 +116,7 @@ class T(unittest.TestCase):
         self.assertIn("Lineup confirmed", notify.pick_line(a2))
 
     def test_readable_block_and_length_budget(self):
-        rich = dict(side="over", line=2.5, market="shots", team="NYI", opp="TOR", home=False, state="lineup",
+        rich = dict(side="over", line=2.5, market="shots", team="NYI", opp="TOR", home=False, state="lineup", settled="lineup",
                     reason="62% to clear 2.5 shots; -120 needs 55%. Projects 3.1 shots in 19 min. TOR allow "
                            "13% more shots than average, and a lot more words here to make the reason run long.")
         ps = [dict(pick(i), **rich) for i in range(1, 12)]
@@ -123,21 +124,47 @@ class T(unittest.TestCase):
         t = self.texts()[0]
         self.assertIn("**P. Player1 OVER 2.5 shots  -120**", t)
         self.assertIn("NYI @ TOR · 7:00 PM ET · ✅ Lineup confirmed", t)
-        self.assertIn("Why: Projects 3.1 shots in 19 min", t)
-        self.assertNotIn("Why: 62%", t)
+        self.assertNotIn("Why:", t)                                # the numbers line replaces the reason
         self.assertLessEqual(len(t), 1990)
         self.assertTrue(t.endswith(notify.PAGE))                 # the link is never cut off
         self.assertIn("more on the page", t)
 
-    def test_parlay_in_same_message(self):
+    def test_parlays_and_paper_are_never_sent(self):
         a, b = pick(1), pick(2)
         pl = {"id": "%s:parlay:x" % DAY, "legs": [a["id"], b["id"]], "price": 165, "p_pct": 40, "breakeven_pct": 37,
               "state": "early", "pulled": None, "graded": None}
-        notify.notify(slate([a, b], [pl]))
+        sl = slate([a, b], [pl])
+        sl["paper"] = {"flags": [{"id": "x"}], "pulled": [{"id": "y"}]}
+        notify.notify(sl)
         self.assertEqual(len(self.srv.posts), 1)
-        self.assertIn("about +165", self.texts()[0])
-        notify.notify(slate([a, b], [pl]))
+        t = self.texts()[0]
+        self.assertNotIn("+165", t)
+        self.assertNotIn("PAPER", t.upper().replace("PAGE", ""))
+        self.assertNotIn("parlay", t.lower())
+        notify.notify(sl)
         self.assertEqual(len(self.srv.posts), 1)
+
+    def test_new_pick_message_is_exactly_what_matt_reads(self):
+        p = dict(pick(1), side="over", line=1.5, market="shots", team="CAR", opp="PHI", home=False, state="lineup",
+                 price=-169, gap_pct=5.1, p_pct=71, breakeven_pct=63, settled="lineup", settled_label="Lineup confirmed")
+        notify.notify(slate([p]))
+        t = self.texts()[0]
+        lines = t.split("\n")
+        self.assertTrue(lines[0].startswith("🏒 **NEW PICK · "))
+        self.assertEqual(lines[2], "**P. Player1 OVER 1.5 shots  -169**")
+        self.assertEqual(lines[3], "CAR @ PHI · 7:00 PM ET · ✅ Lineup confirmed")
+        self.assertEqual(lines[4], "Gap +5.1% vs market, we say 71%, price needs 63%")
+        self.assertEqual(lines[-2], notify.CHECK)
+        self.assertEqual(lines[-1], notify.PAGE)
+
+    def test_pulled_message_for_a_told_pick(self):
+        a = dict(pick(1), side="over", line=2.5, market="shots")
+        notify.notify(slate([a]))
+        self.srv.posts.clear()
+        notify.notify(slate([dict(a, pulled={"at": "x", "reason": "Hard Rock moved the price and the gap is gone"})]))
+        t = self.texts()[0]
+        self.assertTrue(t.startswith("❌ **PULLED. Don't bet these:**"))
+        self.assertIn("P. Player1 OVER 2.5 shots (Hard Rock moved the price and the gap is gone)", t.replace("Over", "OVER"))
 
     def test_started_pulled_graded_not_new(self):
         old = pick(1, start="09:00")
@@ -298,7 +325,7 @@ class T(unittest.TestCase):
     def test_state_has_only_ids_and_times(self):
         notify.notify(slate([pick(1)]))
         st = self.state()
-        self.assertEqual(set(st), {"picks", "parlays", "pulled", "sent", "action", "hello", "sent_paper", "pulled_paper", "paper_sent"})
+        self.assertEqual(set(st), {"picks", "pulled", "sent", "action", "hello"})
         self.assertNotIn("http", json.dumps(st))
 
 

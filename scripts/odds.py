@@ -388,7 +388,7 @@ def tier_of(allowance, v):
 
 def markets_for(tier, pull, live_markets=(), c_every_game=None, paper=False):
     """Which markets a pull asks for at a tier. [] = this pull does not run at this tier.
-    paper (ops.paper active, TEAM.md item 21): B is shots only at EVERY tier >= 1 (no saves / goals pulls).
+    paper (= Gap + Guard live: ops.gap_guard active, TEAM.md section 4): B is shots only at EVERY tier >= 1 (no saves / goals pulls).
     C (closing shots read): every game at tier 3+, only games holding a live shots pick at tier 2.
     c_every_game overrides that (run_pulls passes False when today's budget is tight)."""
     if pull == "A":
@@ -826,7 +826,7 @@ def run_pulls(now, slate, games, sched_left, cfg, rosters_for, live_markets, sta
     # 3. which pulls are due
     # closing read for every game only while today's budget still has C_RESERVE credits per game still ahead
     ahead = sum(1 for g in games if not started.get(g["id"]))
-    paper = common.paper_active(cfg, slate)
+    paper = common.gap_guard_active(cfg, slate)
     tier = eff_tier(plan, paper)
     c_every = tier >= 3 and plan["budget_today"] - pool.spent_on(slate) >= C_RESERVE * max(ahead, 1)
     due = due_pulls(now, games, tier, v, fetched_map(day), live_markets, started,

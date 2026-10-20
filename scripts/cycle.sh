@@ -94,10 +94,10 @@ fi
 # 3. guard
 "$PY" scripts/guard_record.py || { fail "record guard"; exit 1; }
 
-# 3b. paper log (Gap + Guard test, TEAM.md item 21): append-only too, but it is not the Record. A breach restores
-#     data/paper/ from HEAD and the cycle carries on.
+# 3b. Gap + Guard research log (data/paper/, TEAM.md section 4): append-only too, but it is not the Record. A breach restores
+#     data/paper/ from HEAD and the cycle carries on (picks already in the Record stay; engine.py skips a flag it already showed).
 "$PY" scripts/guard_paper.py || {
-  say "paper log guard failed; restoring data/paper from HEAD (the Record is untouched)"
+  say "Gap + Guard log guard failed; restoring data/paper from HEAD (the Record is untouched)"
   git checkout -q HEAD -- data/paper 2>/dev/null || true
   git clean -fdq data/paper
 }

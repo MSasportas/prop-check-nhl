@@ -108,12 +108,13 @@ class Degrade(unittest.TestCase):
         s = helpers.Sim(pool=12)
         try:
             s.at("09:00")
-            s.set_odds("CAR", "PHI", [s.line("CAR", 1, "shots", 2.5, 0.14)], "2026-10-11T17:00:00Z")
-            s.at("13:02")
-            sl = s.at("16:30")                                          # no page files at all: every fetch fails
+            s.read("13:02")
+            s.clock("17:00")
+            sl = s.read("17:31", cp=[s.gg_lines("CAR", 1)])             # no page files at all: every fetch fails
             self.assertIsNone(sl["status"]["lineups_at"])
             self.assertEqual(sl["status"]["lineups_note"], "Lineups not checked: Daily Faceoff did not answer.")
             self.assertEqual([p["state"] for p in sl["picks"]], ["early"])
+            self.assertEqual([p["settled"] for p in sl["picks"]], ["early"])
             st = s.status()
             self.assertTrue(st["ok"])
             self.assertEqual(st["sources"]["dailyfaceoff"], "failed")
@@ -126,13 +127,16 @@ class Degrade(unittest.TestCase):
         s = helpers.Sim(pool=12)
         try:
             s.at("09:00")
-            s.set_odds("CAR", "PHI", [s.line("CAR", 1, "shots", 2.5, 0.14)], "2026-10-11T17:00:00Z")
-            s.at("13:02")
+            s.read("13:02")
+            s.clock("17:00")
+            cp = [s.gg_lines("CAR", 1)]
+            sl = s.read("17:31", cp=cp)
+            self.assertEqual(sl["picks"][0]["state"], "early")
             s.set_lineup("CAR", "2026-10-11T20:00:00Z")
-            sl = s.at("16:30")
+            sl = s.read("18:10", cp=cp)
             self.assertEqual(sl["picks"][0]["state"], "lineup")
             os.unlink(os.path.join(s.w["lineups"], "carolina-hurricanes.json"))
-            sl = s.at("17:00")
+            sl = s.read("18:40", cp=cp)
             self.assertEqual(sl["picks"][0]["state"], "lineup")
             self.assertEqual([h["text"] for h in sl["picks"][0]["history"]],
                              ["Early: lineup not confirmed", "Lineup confirmed"])

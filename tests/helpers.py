@@ -14,7 +14,6 @@ sys.path.insert(0, SCRIPTS)
 sys.path.insert(0, HERE)
 
 import common   # noqa: E402
-os.environ["PC_PAUSE_OFF"] = "1"   # pick rules stay testable while ops.pause is on; test_pause.py turns it back on
 import run      # noqa: E402
 import world    # noqa: E402
 
@@ -24,16 +23,16 @@ FIX = os.path.join(HERE, "fixtures")
 
 
 def cfg():
-    """The rules the made-up slate (2026-10-11) runs under: v1.0 by default (it is before v2.0's first slate),
-    the current rules inside a Sim(rules="current")."""
-    return common.rules_for(common.load_config(), world.SLATE)
+    """The live rules (config/rules.json)."""
+    return common.load_config()
 
 
-def current_rules_config(root):
-    """A copy of config/rules.json without "previous", so the made-up 2026-10-11 slate runs the CURRENT rules."""
+def made_up_slate_config(root):
+    """A copy of config/rules.json whose Gap + Guard goes live early enough for the made-up 2026-10-11 slate (the real
+    live_from is 2026-10-20, the first slate it covers)."""
     c = json.loads(slurp(common.CONFIG_PATH, "r"))
-    c.pop("previous", None)
-    path = os.path.join(root, "rules_current.json")
+    c["ops"]["gap_guard"]["live_from"] = "2026-10-01"
+    path = os.path.join(root, "rules_made_up_slate.json")
     with open(path, "w", encoding="utf-8") as f:
         json.dump(c, f)
     return path
@@ -55,9 +54,7 @@ class Sim:
     def __init__(self, pool=12, states=None, skip_this_season=None, rules=None):
         self.saved = {k: os.environ.get(k) for k in ENV}
         self.root = tempfile.mkdtemp(prefix="pc_test_")
-        os.environ.pop("PC_CONFIG", None)
-        if rules == "current":
-            os.environ["PC_CONFIG"] = current_rules_config(self.root)
+        os.environ["PC_CONFIG"] = made_up_slate_config(self.root)
         self.w = world.build(self.root, states, skip_this_season)
         world.write(os.path.join(self.w["odds"], "pool.json"), {"keys": pool if isinstance(pool, list) else [pool]})
         os.makedirs(self.w["lineups"], exist_ok=True)
@@ -169,3 +166,49 @@ class Sim:
     def pick(self, team, i, slate=None):
         slate = slate or self.slate()
         return next((p for p in slate["picks"] if p["player_id"] == world.pid_of(team, i)), None)
+
+
+# ---------------------------------------------------------------- Gap + Guard prices for the made-up league
+BOOKS = ["draftkings", "fanduel", "betmgm", "espnbet", "pinnacle"]      # the books that return data (>= 4 with Pinnacle)
+
+
+def _gg_methods():
+    import world as w
+
+    def gg_lines(self, team, i, line=1.5, side="over", ev=0.05, books=None, fair=None, hr_hold=0.05):
+        """(hard rock line, {book: line}) that pass BOTH Gap + Guard steps for this player: the other books agree on a
+        fair chance F (default: the model's own calibrated chance, so the guard agrees), Hard Rock pays +ev (EV%) on it."""
+        T = common.gap_guard(common.load_config())["thresholds"]
+        raw = self.model_over(team, i, "shots", line)
+        cal = min(0.999, max(0.001, raw + T["offsets"]["%g" % line]))
+        F_over = (min(0.66, max(0.48, cal)) if side == "over" else 1.0 - min(0.66, max(0.48, 1.0 - cal))) if fair is None else fair
+        F = F_over if side == "over" else 1.0 - F_over                  # fair chance of the side we bet
+        b = F / (1.0 + ev)                                               # Hard Rock's break-even for that side
+        mine = w.american_from_prob(b)
+        other = w.american_from_prob(1.0 + hr_hold - b)
+        over, under = (mine, other) if side == "over" else (other, mine)
+        name = w.name_of(team, i)
+        hr = ("player_shots_on_goal", name, line, over, under)
+        oth = {}
+        for bk in (books or BOOKS):
+            o, u = w.two_sided(F_over, 0.05)
+            oth[bk] = ("player_shots_on_goal", name, line, o, u)
+        return hr, oth
+
+    def read(self, hhmm, cp=(), vn=(), day=w.SLATE, extra_hr_cp=(), extra_hr_vn=()):
+        """One feed answer for both games, then one run. cp / vn: gg_lines() results for CAR@PHI / VAN@NYR."""
+        hh, mm = int(hhmm[:2]), int(hhmm[3:])
+        upd = "%sT%02d:%02d:00Z" % (day, hh + 4, max(0, mm - 1))
+        for (away, home), picks, extra in ((("CAR", "PHI"), cp, extra_hr_cp), (("VAN", "NYR"), vn, extra_hr_vn)):
+            hr = [x[0] for x in picks] + list(extra)
+            oth = {}
+            for x in picks:
+                for bk, line in x[1].items():
+                    oth.setdefault(bk, []).append(line)
+            self.set_odds(away, home, hr, upd, others=oth or None)
+        return self.at(hhmm, day)
+
+    Sim.gg_lines, Sim.read = gg_lines, read
+
+
+_gg_methods()

@@ -18,15 +18,16 @@ Steps, in order, each allowed to fail without stopping the others:
     lineups   Daily Faceoff, for games close to puck drop
     lineup_history  first today-dated page and last state before puck  -> data/state/lineup_history/
     market_menu     once a week: every market key Hard Rock lists      -> data/state/market_menu.json
-    engine    lock / pull / keep shown picks, add new ones, parlays  -> appends to the Record
+    gapguard  Gap + Guard: flags, vetoes, pulls, CLV, grades        -> data/paper/ (the Gap + Guard research log)
+    engine    flags -> picks: show / pull / lock                     -> appends to the Record
     grade     results for games that are final                       -> appends to the Record
     shadow    the model on every two-way line, graded after the game  -> data/shadow/<date>.json (internal)
-    paper     Gap + Guard paper test: flags, vetoes, CLV, grades      -> data/paper/ (internal, never bets)
     slate     data/slate.json
     record    data/record.json and month files
     status    data/status.json
-shadow, paper, lineup_history and market_menu are "soft": they log for the team only, and a failure there is
-noted in status.json steps as "warn" and never fails the run.
+shadow, lineup_history and market_menu are "soft": they log for the team only, and a failure there is
+noted in status.json steps as "warn" and never fails the run. gapguard is NOT soft: it is where picks come from, so a
+failure is a failed step (the page says so) and no new pick is added that run; shown picks are still looked after.
 Safe to run twice in a row: every decision is made from files on disk, and every write is temp + rename.
 """
 import os
@@ -54,9 +55,9 @@ import sched       # noqa: E402
 import shadow      # noqa: E402
 import stats       # noqa: E402
 
-STEPS = ["rules", "schedule", "stats", "lineups", "lineup_history", "odds", "market_menu", "engine", "grade",
-         "shadow", "paper", "slate", "record", "status"]
-SOFT = ("lineup_history", "market_menu", "shadow", "paper")     # team logs: a failure is a "warn", never a failed run
+STEPS = ["rules", "schedule", "stats", "lineups", "lineup_history", "odds", "market_menu", "gapguard", "engine", "grade",
+         "shadow", "gg_grade", "slate", "record", "status"]
+SOFT = ("lineup_history", "market_menu", "shadow", "gg_grade")              # team logs: a failure is a "warn", never a failed run
 
 
 class Run:
@@ -64,7 +65,7 @@ class Run:
         self.now, self.only, self.dry_run = now, only, dry_run
         self.readonly = readonly     # --explain: read files only, keep anything fetched in memory, write nothing
         self.slate = common.slate_date(now, cfg["ops"]["rollover_hour"])
-        self.cfg = common.rules_for(cfg, self.slate)       # a slate keeps the rules it started under
+        self.cfg = cfg
         self.steps = []
         self.season = None
         self.cache = None            # schedule cache
@@ -81,7 +82,7 @@ class Run:
         self.inp = None
         self.new_events = 0
         self.wrote_slate = False
-        self.paused = {}
+        self.safety = None           # ops.safety_pause verdict ({text, sub}) or None
         self.odds_doc = None
 
     # ---- helpers
@@ -115,11 +116,15 @@ class Run:
 
     # ---- steps
     def do_rules(self):
+        gg = common.gap_guard(self.cfg)
+        T = gg.get("thresholds") or {}
+        public = {k: T.get(k) for k in ("lines", "price_gate", "max_price", "gap_ev", "books_min", "pin_ev_min", "pull_ev",
+                                        "market_weight", "model_weight", "final_ev", "max_per_player", "max_per_game",
+                                        "max_per_night")}
+        public["live_from"] = gg.get("live_from")
+        public["safety_units"] = ((self.cfg.get("ops") or {}).get("safety_pause") or {}).get("units")
         out = {"version": self.cfg["version"], "updated": self.cfg["updated"],
-               "values": self.cfg["values"], "ui": self.cfg["ui"]}
-        pp = (self.cfg.get("ops") or {}).get("paper")
-        if pp:                                              # what the page's paper section needs; never the thresholds
-            out["paper"] = {k: pp.get(k) for k in ("active", "start", "end", "judge_on")}
+               "values": dict(self.cfg["values"], gap_guard=public), "ui": self.cfg["ui"]}
         if common.read_json(common.dpath("rules.json")) != out:
             common.write_json(common.dpath("rules.json"), out)
             return {"note": "rules.json written"}
@@ -235,6 +240,26 @@ class Run:
         self.load_schedule()
         return market_menu.check(self.now, self.slate, self.games, self.started, self.cfg, dry_run=self.dry_run)
 
+    def block_new(self):
+        """No NEW picks this run: stats missing or behind for half the slate, or the safety pause. Shown picks are still
+        looked after."""
+        return bool(self.stats_missing or self.too_far_behind() or self.safety)
+
+    def do_gapguard(self):
+        self.load_schedule()
+        if not self.cache:
+            return {"status": "skipped", "note": "no schedule"}
+        inp = self.build_inputs()
+        self.safety = engine.safety_pause(inp.events, self.cfg)
+        return paper.step(self.now, self.slate, self.cfg, inp, self.cache, self.games, allow_new=not self.block_new())
+
+    def do_gg_grade(self):
+        """Second pass of the research log, after the shadow step has the final box scores, so a finished game is
+        graded in the same run (a no-op when nothing new). The Record is not touched here."""
+        if self.inp is None:
+            return {"status": "skipped", "note": "no inputs"}
+        return paper.step(self.now, self.slate, self.cfg, self.inp, self.cache, self.games, allow_new=not self.block_new())
+
     def do_shadow(self):
         self.load_schedule()
         if not self.cache:
@@ -243,15 +268,6 @@ class Run:
         if inp is None and self.games:
             inp = self.build_inputs()
         return shadow.step(self.now, self.slate, self.cfg, inp, self.cache, self.games)
-
-    def do_paper(self):
-        self.load_schedule()
-        if not self.cache:
-            return {"status": "skipped", "note": "no schedule"}
-        inp = self.inp
-        if inp is None and self.games:
-            inp = self.build_inputs()
-        return paper.step(self.now, self.slate, self.cfg, inp, self.cache, self.games)
 
     def build_inputs(self):
         self.load_schedule()
@@ -277,10 +293,9 @@ class Run:
         if not self.cache:
             return {"status": "skipped", "note": "no schedule"}
         inp = self.build_inputs()
-        self.paused = engine.paused_markets(inp.events, self.cfg)
-        # stats missing, or behind for half the slate or more: keep shown picks, add none
-        block = self.stats_missing or self.too_far_behind()
-        new, self.extra = engine.evaluate(inp, paused=self.paused, block_new=block)
+        self.safety = engine.safety_pause(inp.events, self.cfg)
+        # stats missing, or behind for half the slate or more, or the safety pause: keep shown picks, add none
+        new, self.extra = engine.evaluate(inp, paper.read_events(), block_new=self.block_new())
         record.append(new)
         self.events = inp.events + new
         self.new_events += len(new)
@@ -390,9 +405,8 @@ class Run:
                 banners.append({"level": "warn", "text": "Shots only today. One price check at %s. Odds keys low." % a_time})
             elif plan["tier"] == 2 and open_games:
                 verb = "Prices checked at" if prices_at else "Prices are checked at"
-                banners.append({"level": "info", "text": "%s %s (shots). Points are read once each game's lineups are confirmed, "
-                                                 "about 90 min before puck, or 45 min before if lineups are not confirmed. "
-                                                 "Live picks are re-checked before the game." % (verb, a_time)})
+                banners.append({"level": "info", "text": "%s %s (shots). Picks come from the reads 90 and 45 minutes "
+                                                 "before each game." % (verb, a_time)})
             if sub is None and not fetches and times:
                 if now < times["A"]:
                     sub = "First read is due at %s." % common.fmt_time(times["A"])
@@ -405,7 +419,7 @@ class Run:
         budget_ok = bool(plan) and plan["budget_today"] - sum(e["cost"] for e in led.get("spent", [])
                                                               if e["date"] == self.slate) > 0
         ls_now = self.lineup_state or lineups.load(self.slate)
-        paper_on = common.paper_active(cfg, self.slate)
+        paper_on = common.gap_guard_active(cfg, self.slate)
         nxt = odds.next_read_at(now, self.games, odds.eff_tier(plan, paper_on), v, fetched, self.started, budget_ok,
                                 lineups_ok=odds.lineups_confirmed(ls_now, self.games), paper=paper_on) \
             if plan and not (refused or no_keys or all_used_up) else None   # no key can read: promise no check
@@ -447,7 +461,8 @@ class Run:
             "lineups_state": lineups_state,
             "last_run": last_run, "pool": pool,
             "banners": banners, "not_yet_sub": sub, "other_games": self.other_games,
-            "paused": getattr(self, "paused", {}),
+            "safety_pause": self.safety, "flag_reads": self.flag_reads(doc, now),
+            "gg_vetoes": self.vetoes_tonight(),
             # for status.json only
             "_keys": [{"n": k["n"], "left": k.get("left")} for k in key_state], "_plan": plan,
             "_spent_today": sum(e["cost"] for e in led.get("spent", []) if e["date"] == self.slate),
@@ -455,6 +470,29 @@ class Run:
             "_lineup_unmatched": sorted({n for t in ls.get("teams", {}).values()
                                          for n in (t.get("page") or {}).get("unmatched", [])}),
         }
+
+    def flag_reads(self, doc, now):
+        """{games, lines}: games with a 90/45-minute read that asked the other books, and the Hard Rock shots lines on each
+        game's latest such read (what 'N lines read, none cleared both checks' counts)."""
+        T = common.gap_guard(self.cfg).get("thresholds") or {}
+        last = {}
+        for f in sorted((doc or {}).get("fetches", []), key=lambda x: x["at"]):
+            if f.get("pull") in T.get("flag_pulls", ["B", "C"]) and "others" in f and f.get("book") and f.get("game_id") is not None \
+                    and common.parse_iso(f["at"]) <= now:
+                last[f["game_id"]] = f
+        lines = 0
+        for f in last.values():
+            mk = (f.get("markets") or {}).get("shots")
+            lines += len(shadow.pairs_of(mk)) if mk else 0
+        return {"games": len(last), "lines": lines}
+
+    def vetoes_tonight(self):
+        """How many of tonight's candidates had the gap but were vetoed by the model (from the Gap + Guard log)."""
+        try:
+            return sum(1 for it in paper.fold(paper.read_events()).values()
+                       if it.get("veto") and it["veto"].get("slate") == self.slate and "flag" not in it)
+        except Exception:
+            return 0
 
     def lineups_state(self, ls):
         """ok | not_yet | failed | partial, from the teams in today's games that we have tried."""
@@ -570,8 +608,6 @@ def _essence(doc):
 def run(only=None, dry_run=False):
     cfg = common.load_config()
     engine.check_config(cfg)
-    if cfg.get("previous"):
-        engine.check_config(common.rules_for(cfg, cfg["previous"]["until"]))
     now = common.now()
     started_at = now
     odds.load_keys()                                        # registers the keys so nothing can print them
@@ -587,6 +623,7 @@ def run(only=None, dry_run=False):
     r.soft_step("lineup_history", r.do_lineup_history)
     r.step("odds", r.do_odds)
     r.soft_step("market_menu", r.do_market_menu)
+    r.step("gapguard", r.do_gapguard)                       # the Gap + Guard log: where every pick comes from
     # m8: a pick enters the Record in the same commit that first shows it. Events are appended by the engine and
     # grade steps; if slate.json is then NOT written, this run's events are rolled back to the exact bytes the
     # log had before (never touching committed lines) and the next run makes them again.
@@ -594,7 +631,7 @@ def run(only=None, dry_run=False):
     r.step("engine", r.do_engine)
     r.step("grade", r.do_grade)
     r.soft_step("shadow", r.do_shadow)                      # after odds, engine and grade (TEAM.md item 17)
-    r.soft_step("paper", r.do_paper)                        # after shadow: grades from its results (TEAM.md item 21)
+    r.soft_step("gg_grade", r.do_gg_grade)                  # the research log grades from the shadow results just written
     failed = r.failed_step()
     last_run = {"ok": failed is None, "at": common.iso(now), "failed_step": failed}
     facts = None
@@ -663,9 +700,9 @@ def dry_run_main():
         print("  new Record events: %d" % r.new_events)
         sl = common.read_json(os.path.join(dst, "slate.json")) or {}
         for p in sl.get("picks", []):
-            print("  %s %s %s %s  chance %s needs %s  [%s]" % (
-                p.get("rank") or "-", p["player"], p["bet"], common.fmt_price(p["price"]), p["p"], p["breakeven"],
-                "pulled" if p["pulled"] else p["state"]))
+            print("  %s %s %s %s  gap %s%% vs %s books, we say %s%%, needs %s%%  [%s]" % (
+                p.get("rank") or "-", p["player"], p["bet"], common.fmt_price(p["price"]), p.get("gap_pct"), p.get("n_books"),
+                p["p_pct"], p["breakeven_pct"], "pulled" if p["pulled"] else p["state"]))
         if sl.get("empty"):
             print("  empty: %s %s" % (sl["empty"]["text"], sl["empty"].get("sub") or ""))
         for b in sl.get("banners", []):
@@ -695,15 +732,16 @@ def main(argv):
         return dry_run_main()
     if "--explain" in argv:
         r = Run(common.load_config(), common.now(), readonly=True)
-        rows = engine.explain(r.build_inputs())
-        print("%-22s %-4s %-6s %4s %-5s %6s | %6s %6s %6s %6s %6s %7s %7s | %-7s %s" % (
-            "player", "team", "market", "line", "side", "price", "model", "adj", "fair", "p", "b", "margin", "gap",
-            "lineup", "verdict"))
-        for x in sorted(rows, key=lambda x: -(x.get("margin", -9))):
-            print("%-22s %-4s %-6s %4s %-5s %6s | %6s %6s %6s %6s %6s %7s %7s | %-7s %s" % (
-                x["player"][:22], x["team"], x["market"], x["line"], x["side"], common.fmt_price(x["price"]),
-                x.get("model", ""), x.get("model_adj", ""), x.get("fair", ""), x.get("p", ""), x.get("b", ""),
-                x.get("margin", ""), x.get("gap", ""), x["lineup"], x["verdict"]))
+        inp = r.build_inputs()
+        rows = paper.explain(inp, r.cfg, r.odds_doc, r.games, r.now)
+        print("%-22s %-4s %4s %-5s %6s %-2s | %5s %9s %8s %8s | %s" % (
+            "player", "team", "line", "side", "price", "rd", "books", "mkt fair", "gap EV", "final EV", "verdict"))
+        pc = lambda x: "" if x is None else "%+.1f%%" % (100 * x)
+        for x in sorted(rows, key=lambda x: -(x["gap_ev"] if x["gap_ev"] is not None else -9)):
+            print("%-22s %-4s %4s %-5s %6s %-2s | %5s %9s %8s %8s | %s" % (
+                (x["player"] or "")[:22], x["team"], x["line"], x["side"], common.fmt_price(x["price"]) if x["price"] is not None else "-",
+                x["read"], x["n_books"], "" if x["market_fair"] is None else "%.1f%%" % (100 * x["market_fair"]),
+                pc(x["gap_ev"]), pc(x["final_ev"]), x["verdict"]))
         return 0
     only = None
     if "--only" in argv:
