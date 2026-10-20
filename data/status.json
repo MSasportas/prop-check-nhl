@@ -1,10 +1,10 @@
 {
  "ok": true,
  "slate_date": "2026-10-19",
- "started_at": "2026-10-19T20:00:01-04:00",
- "status_at": "2026-10-19T20:00:01-04:00",
- "finished_at": "2026-10-19T20:00:01-04:00",
- "last_ok_at": "2026-10-19T20:00:01-04:00",
+ "started_at": "2026-10-19T20:20:00-04:00",
+ "status_at": "2026-10-19T20:20:00-04:00",
+ "finished_at": "2026-10-19T20:20:01-04:00",
+ "last_ok_at": "2026-10-19T20:20:00-04:00",
  "failed_step": null,
  "steps": [
   {
@@ -24,8 +24,8 @@
   },
   {
    "step": "lineups",
-   "status": "ok",
-   "note": "2 of 2 team pages read"
+   "status": "skipped",
+   "note": "checked in the last 20 minutes"
   },
   {
    "step": "lineup_history",
@@ -35,7 +35,7 @@
   {
    "step": "odds",
    "status": "ok",
-   "note": "no pull due"
+   "note": "1 game(s) priced"
   },
   {
    "step": "market_menu",
@@ -54,8 +54,8 @@
   },
   {
    "step": "shadow",
-   "status": "skipped",
-   "note": "nothing new"
+   "status": "ok",
+   "note": "16 line read(s) logged"
   },
   {
    "step": "paper",
@@ -83,7 +83,7 @@
  "keys": [
   {
    "n": 1,
-   "left": 158
+   "left": 157
   },
   {
    "n": 2,
@@ -98,14 +98,14 @@
    "left": 2
   }
  ],
- "pool_total": 404,
+ "pool_total": 403,
  "allowance": 4.6444,
  "tier": 3,
  "budget_today": 18,
- "budget_used_today": 14,
+ "budget_used_today": 15,
  "prices_state": "ok",
- "prices_at": "2026-10-19T19:30:00-04:00",
- "next_price_read_at": "2026-10-19T20:15:00-04:00",
+ "prices_at": "2026-10-19T20:20:00-04:00",
+ "next_price_read_at": null,
  "unmatched_names": [
   "Yegor Chinakhov"
  ],
@@ -119,12 +119,12 @@
  "lineups_at": "2026-10-19T20:00:01-04:00",
  "lineups_note": "8 of 8 team line pages are dated today.",
  "games_today": 4,
- "record_events": 82,
+ "record_events": 0,
  "odds_notes": [],
  "runner": {
   "event": "workflow_dispatch",
   "run_id": "39342974491",
-  "iteration": 3,
+  "iteration": 5,
   "chain_link": 113,
   "chain_started_at": "2026-10-16T10:00:13-04:00",
   "run_started_at": "2026-10-19T19:40:11-04:00"
