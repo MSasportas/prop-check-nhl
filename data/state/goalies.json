@@ -47,7 +47,7 @@
   },
   "BOS": {
    "name": "Jeremy Swayman",
-   "status": "expected"
+   "status": "confirmed"
   },
   "STL": {
    "name": "Joel Hofer",
@@ -67,7 +67,7 @@
   },
   "SEA": {
    "name": "Philipp Grubauer",
-   "status": "expected"
+   "status": "confirmed"
   },
   "DET": {
    "name": "Daniil Tarasov",
@@ -90,5 +90,5 @@
    "status": "expected"
   }
  },
- "checked_at": "2026-10-20T12:50:00-04:00"
+ "checked_at": "2026-10-20T13:00:00-04:00"
 }

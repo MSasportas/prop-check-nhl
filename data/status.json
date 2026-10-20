@@ -1,10 +1,10 @@
 {
  "ok": true,
  "slate_date": "2026-10-20",
- "started_at": "2026-10-20T12:30:01-04:00",
- "status_at": "2026-10-20T12:30:01-04:00",
- "finished_at": "2026-10-20T12:30:01-04:00",
- "last_ok_at": "2026-10-20T12:30:01-04:00",
+ "started_at": "2026-10-20T13:00:00-04:00",
+ "status_at": "2026-10-20T13:00:00-04:00",
+ "finished_at": "2026-10-20T13:00:07-04:00",
+ "last_ok_at": "2026-10-20T13:00:00-04:00",
  "failed_step": null,
  "steps": [
   {
@@ -35,7 +35,7 @@
   {
    "step": "odds",
    "status": "ok",
-   "note": "no pull due"
+   "note": "11 game(s) priced"
   },
   {
    "step": "market_menu",
@@ -59,8 +59,8 @@
   },
   {
    "step": "shadow",
-   "status": "skipped",
-   "note": "nothing new"
+   "status": "ok",
+   "note": "183 line read(s) logged"
   },
   {
    "step": "gg_grade",
@@ -88,7 +88,7 @@
  "keys": [
   {
    "n": 1,
-   "left": 157
+   "left": 146
   },
   {
    "n": 2,
@@ -103,15 +103,17 @@
    "left": 0
   }
  ],
- "pool_total": 395,
+ "pool_total": 384,
  "allowance": 4.593,
  "tier": 3,
  "budget_today": 50,
- "budget_used_today": 0,
- "prices_state": "not_yet",
- "prices_at": null,
- "next_price_read_at": "2026-10-20T13:00:00-04:00",
- "unmatched_names": [],
+ "budget_used_today": 11,
+ "prices_state": "ok",
+ "prices_at": "2026-10-20T13:00:00-04:00",
+ "next_price_read_at": "2026-10-20T17:30:00-04:00",
+ "unmatched_names": [
+  "Elias Pettersson"
+ ],
  "unknown_teams": [],
  "lineup_unmatched_names": [],
  "excluded_teams": [],
@@ -123,10 +125,10 @@
  "odds_notes": [],
  "runner": {
   "event": "workflow_dispatch",
-  "run_id": "39450531912",
-  "iteration": 6,
-  "chain_link": 136,
+  "run_id": "39457982386",
+  "iteration": 4,
+  "chain_link": 137,
   "chain_started_at": "2026-10-16T10:00:13-04:00",
-  "run_started_at": "2026-10-20T11:40:14-04:00"
+  "run_started_at": "2026-10-20T12:30:13-04:00"
  }
 }
