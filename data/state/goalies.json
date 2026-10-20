@@ -1,38 +1,94 @@
 {
- "date": "2026-10-19",
+ "date": "2026-10-20",
  "teams": {
-  "PHI": {
-   "name": "Joseph Woll",
-   "status": "confirmed"
-  },
-  "COL": {
-   "name": "Mackenzie Blackwood",
-   "status": "confirmed"
-  },
-  "NYR": {
-   "name": "Dylan Garand",
-   "status": "confirmed"
+  "NYI": {
+   "name": "Ilya Sorokin",
+   "status": "expected"
   },
   "ANA": {
-   "name": "Ville Husso",
+   "name": "Lukas Dostal",
    "status": "confirmed"
+  },
+  "NJD": {
+   "name": "Nico Daws",
+   "status": "expected"
+  },
+  "COL": {
+   "name": "Scott Wedgewood",
+   "status": "expected"
+  },
+  "WSH": {
+   "name": "Logan Thompson",
+   "status": "expected"
+  },
+  "LAK": {
+   "name": "Anton Forsberg",
+   "status": "expected"
+  },
+  "CBJ": {
+   "name": "Jet Greaves",
+   "status": "expected"
   },
   "TOR": {
-   "name": "Sergei Bobrovsky",
+   "name": "Anthony Stolarz",
    "status": "confirmed"
+  },
+  "MTL": {
+   "name": "Jacob Fowler",
+   "status": "expected"
   },
   "SJS": {
-   "name": "Yaroslav Askarov",
+   "name": "Alex Nedeljkovic",
+   "status": "expected"
+  },
+  "DAL": {
+   "name": "Jake Oettinger",
+   "status": "expected"
+  },
+  "BOS": {
+   "name": "Jeremy Swayman",
+   "status": "expected"
+  },
+  "STL": {
+   "name": "Joel Hofer",
+   "status": "expected"
+  },
+  "WPG": {
+   "name": "Stuart Skinner",
+   "status": "expected"
+  },
+  "EDM": {
+   "name": "Devon Levi",
+   "status": "expected"
+  },
+  "MIN": {
+   "name": "Jesper Wallstedt",
+   "status": "expected"
+  },
+  "SEA": {
+   "name": "Philipp Grubauer",
+   "status": "expected"
+  },
+  "DET": {
+   "name": "Daniil Tarasov",
    "status": "confirmed"
   },
-  "UTA": {
-   "name": "Sebastian Cossa",
-   "status": "confirmed"
+  "VAN": {
+   "name": "Leevi Merilainen",
+   "status": "expected"
   },
-  "PIT": {
-   "name": "Arturs Silovs",
-   "status": "confirmed"
+  "CAR": {
+   "name": "Pyotr Kochetkov",
+   "status": "expected"
+  },
+  "VGK": {
+   "name": "Adin Hill",
+   "status": "expected"
+  },
+  "TBL": {
+   "name": "Andrei Vasilevskiy",
+   "status": "expected"
   }
  },
- "checked_at": "2026-10-19T14:00:00-04:00"
+ "checked_at": "2026-10-20T05:00:00-04:00"
 }
