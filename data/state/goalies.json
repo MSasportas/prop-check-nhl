@@ -51,7 +51,7 @@
   },
   "STL": {
    "name": "Joel Hofer",
-   "status": "expected"
+   "status": "confirmed"
   },
   "WPG": {
    "name": "Stuart Skinner",
@@ -83,12 +83,12 @@
   },
   "VGK": {
    "name": "Carter Hart",
-   "status": "expected"
+   "status": "confirmed"
   },
   "TBL": {
    "name": "Andrei Vasilevskiy",
    "status": "expected"
   }
  },
- "checked_at": "2026-10-20T13:00:00-04:00"
+ "checked_at": "2026-10-20T14:30:00-04:00"
 }
