@@ -43,7 +43,7 @@
   },
   "DAL": {
    "name": "Jake Oettinger",
-   "status": "expected"
+   "status": "confirmed"
   },
   "BOS": {
    "name": "Jeremy Swayman",
@@ -90,5 +90,5 @@
    "status": "expected"
   }
  },
- "checked_at": "2026-10-20T11:20:01-04:00"
+ "checked_at": "2026-10-20T11:50:00-04:00"
 }
