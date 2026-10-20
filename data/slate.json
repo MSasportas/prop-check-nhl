@@ -1,7 +1,7 @@
 {
  "slate_date": "2026-10-20",
- "generated_at": "2026-10-20T18:50:01-04:00",
- "status_at": "2026-10-20T18:50:01-04:00",
+ "generated_at": "2026-10-20T19:00:01-04:00",
+ "status_at": "2026-10-20T19:00:01-04:00",
  "valid_until": "2026-10-21T05:00:00-04:00",
  "status": {
   "prices_state": "ok",
@@ -9,14 +9,14 @@
   "next_price_read_at": "2026-10-20T19:15:00-04:00",
   "stats_built_at": "2026-10-20T00:30:01-04:00",
   "stats_through": "2026-10-19",
-  "lineups_at": "2026-10-20T18:50:01-04:00",
+  "lineups_at": "2026-10-20T19:00:01-04:00",
   "goalies_at": null,
-  "lineups_note": "13 of 18 team line pages are dated today.",
+  "lineups_note": "14 of 20 team line pages are dated today.",
   "lineups_state": "ok",
   "stats_state": "ok",
   "last_run": {
    "ok": true,
-   "at": "2026-10-20T18:50:01-04:00",
+   "at": "2026-10-20T19:00:01-04:00",
    "failed_step": null
   },
   "pool": {
@@ -53,7 +53,7 @@
      "status": "confirmed"
     }
    },
-   "started": false,
+   "started": true,
    "picks": 0,
    "excluded_reason": null,
    "excluded_teams": []
@@ -77,7 +77,7 @@
      "status": "confirmed"
     }
    },
-   "started": false,
+   "started": true,
    "picks": 0,
    "excluded_reason": null,
    "excluded_teams": []
@@ -101,7 +101,7 @@
      "status": "confirmed"
     }
    },
-   "started": false,
+   "started": true,
    "picks": 0,
    "excluded_reason": null,
    "excluded_teams": []
@@ -125,7 +125,7 @@
      "status": "confirmed"
     }
    },
-   "started": false,
+   "started": true,
    "picks": 1,
    "excluded_reason": null,
    "excluded_teams": []
@@ -149,7 +149,7 @@
      "status": "confirmed"
     }
    },
-   "started": false,
+   "started": true,
    "picks": 0,
    "excluded_reason": null,
    "excluded_teams": []
@@ -256,8 +256,8 @@
    "home": "VAN",
    "start": "2026-10-20T22:00:00-04:00",
    "lineups": {
-    "away": "not_checked",
-    "home": "not_checked"
+    "away": "confirmed",
+    "home": "waiting"
    },
    "goalies": {
     "away": {
@@ -301,60 +301,6 @@
  ],
  "picks": [
   {
-   "id": "2026-10-20:2026020144:8471214:shots:2.5:under",
-   "price": 105,
-   "first_price": 105,
-   "first_price_at": "2026-10-20T17:30:02-04:00",
-   "worst_price": 105,
-   "p": 0.534,
-   "breakeven": 0.4878,
-   "p_pct": 53,
-   "breakeven_pct": 49,
-   "state": "lineup",
-   "history": [
-    {
-     "at": "2026-10-20T17:30:02-04:00",
-     "text": "Lineup confirmed"
-    }
-   ],
-   "prices": [
-    {
-     "at": "2026-10-20T17:30:02-04:00",
-     "price": 105
-    }
-   ],
-   "pulled": null,
-   "graded": null,
-   "rank": 1,
-   "tier": "main",
-   "game_id": 2026020144,
-   "player": "A. Ovechkin",
-   "player_id": 8471214,
-   "team": "WSH",
-   "opp": "LAK",
-   "home": true,
-   "start": "2026-10-20T19:00:00-04:00",
-   "market": "shots",
-   "line": 2.5,
-   "side": "under",
-   "bet": "Under 2.5 shots on goal",
-   "price_at": "2026-10-20T17:30:02-04:00",
-   "gap_pct": 7.5,
-   "market_fair_pct": 52.5,
-   "n_books": 5,
-   "guard": {
-    "verdict": "agrees",
-    "ours_pct": 53.4,
-    "model_pct": 58.7
-   },
-   "settled": "goalie",
-   "settled_label": "Goalie confirmed",
-   "reason": "5 other books say 52.5%; Hard Rock's +105 only needs 48.8%. Our model agrees (our blend: 53.4%).",
-   "thin": false,
-   "games_used": 90,
-   "games_this_season": 8
-  },
-  {
    "id": "2026-10-20:2026020146:8480023:shots:1.5:under",
    "price": -105,
    "first_price": -105,
@@ -379,7 +325,7 @@
    ],
    "pulled": null,
    "graded": null,
-   "rank": 2,
+   "rank": 1,
    "tier": "main",
    "game_id": 2026020146,
    "player": "R. Thomas",
@@ -406,6 +352,64 @@
    "reason": "5 other books say 52.8%; Hard Rock's -105 only needs 51.2%. Our model agrees (our blend: 52.4%).",
    "thin": false,
    "games_used": 72,
+   "games_this_season": 8
+  },
+  {
+   "id": "2026-10-20:2026020144:8471214:shots:2.5:under",
+   "price": 105,
+   "first_price": 105,
+   "first_price_at": "2026-10-20T17:30:02-04:00",
+   "worst_price": 105,
+   "p": 0.534,
+   "breakeven": 0.4878,
+   "p_pct": 53,
+   "breakeven_pct": 49,
+   "state": "locked",
+   "history": [
+    {
+     "at": "2026-10-20T17:30:02-04:00",
+     "text": "Lineup confirmed"
+    },
+    {
+     "at": "2026-10-20T19:00:01-04:00",
+     "text": "Locked"
+    }
+   ],
+   "prices": [
+    {
+     "at": "2026-10-20T17:30:02-04:00",
+     "price": 105
+    }
+   ],
+   "pulled": null,
+   "graded": null,
+   "rank": null,
+   "tier": "main",
+   "game_id": 2026020144,
+   "player": "A. Ovechkin",
+   "player_id": 8471214,
+   "team": "WSH",
+   "opp": "LAK",
+   "home": true,
+   "start": "2026-10-20T19:00:00-04:00",
+   "market": "shots",
+   "line": 2.5,
+   "side": "under",
+   "bet": "Under 2.5 shots on goal",
+   "price_at": "2026-10-20T17:30:02-04:00",
+   "gap_pct": 7.5,
+   "market_fair_pct": 52.5,
+   "n_books": 5,
+   "guard": {
+    "verdict": "agrees",
+    "ours_pct": 53.4,
+    "model_pct": 58.7
+   },
+   "settled": "goalie",
+   "settled_label": "Goalie confirmed",
+   "reason": "5 other books say 52.5%; Hard Rock's +105 only needs 48.8%. Our model agrees (our blend: 53.4%).",
+   "thin": false,
+   "games_used": 90,
    "games_this_season": 8
   }
  ],

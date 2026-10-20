@@ -1,7 +1,7 @@
 {
  "version": 1,
  "note": "Gap + Guard research log. Every flag here is a pick on the page and in the Record; vetoed and capped rows are research only.",
- "generated_at": "2026-10-20T18:40:00-04:00",
+ "generated_at": "2026-10-20T19:00:01-04:00",
  "slate": "2026-10-20",
  "active": true,
  "window": {
@@ -37,8 +37,8 @@
     "frozen_settled": "Lineup confirmed",
     "move30_pct": 0.2,
     "pulled": null,
-    "locked": false,
-    "state": "open",
+    "locked": true,
+    "state": "locked",
     "close_fair_pct": 52.1,
     "clv_pct": 6.8,
     "result": null,
