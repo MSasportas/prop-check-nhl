@@ -11,7 +11,7 @@
   },
   "NJD": {
    "name": "Jake Allen",
-   "status": "expected"
+   "status": "confirmed"
   },
   "COL": {
    "name": "Scott Wedgewood",
@@ -90,5 +90,5 @@
    "status": "expected"
   }
  },
- "checked_at": "2026-10-20T11:00:01-04:00"
+ "checked_at": "2026-10-20T11:10:00-04:00"
 }
