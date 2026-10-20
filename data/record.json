@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-10-20T17:30:02-04:00",
+ "generated_at": "2026-10-20T18:30:00-04:00",
  "summary": {
   "headline": {
    "w": 0,
@@ -36,6 +36,29 @@
       {
        "price": 105,
        "at": "2026-10-20T17:30:02-04:00"
+      }
+     ],
+     "result": null,
+     "actual": null,
+     "units": null,
+     "pulled": null,
+     "legs": []
+    },
+    {
+     "id": "2026-10-20:2026020146:8480023:shots:1.5:under",
+     "kind": "single",
+     "player": "R. Thomas",
+     "bet": "Under 1.5 shots on goal",
+     "market": "shots",
+     "team": "STL",
+     "game": "WPG at STL",
+     "price": -105,
+     "first_price": -105,
+     "last_price": -105,
+     "prices": [
+      {
+       "price": -105,
+       "at": "2026-10-20T18:30:00-04:00"
       }
      ],
      "result": null,
