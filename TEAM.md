@@ -28,7 +28,7 @@ Sharp (betting method, final call) · Data Scientist (data, model, samples, judg
 Builder (all code) · QA (tests every change before it goes live, real browser at 380px, hasn't seen the build).
 Rule changes: the Data Scientist names the sample first; the Sharp decides; log it in section 8.
 
-## 4. Current rules (v3.0, 2026-10-19; first slate 2026-10-20). Source of truth: `config/rules.json` (`ops.gap_guard`)
+## 4. Current rules (v3.1, 2026-10-20; first slate 2026-10-20). Source of truth: `config/rules.json` (`ops.gap_guard`)
 There is ONE rule: Gap + Guard. Hard Rock's price must beat the other books' middle price by a margin (the gap), and our
 model must not disagree (the guard). The v1.0 and v2.0 engines, the "previous" rules block, `rules_for`, the pause and the
 paper mode are gone; they are not options. History of why: section 7 items 17-21 and section 8. All EV% below = fair
@@ -43,7 +43,7 @@ probability x Hard Rock decimal payout - 1, on unrounded numbers; every threshol
 | The pick | The **first passing read** makes the pick and **freezes its price** there. That price is shown on the page and in Discord and is what is graded: flat 1 unit, regulation + OT, void if no ice time. Later prices never change it (better or worse) |
 | Eligibility | >= 10 games of history; missed his team's last game -> waits for a confirmed lineup; back from 3+ missed games -> sits 2 games; team stats behind -> team excluded and named; Daily Faceoff lists him out -> never picked. Settled level shown: Early / Lineup confirmed / Goalie confirmed |
 | Pulls | Later reads only PULL: Hard Rock's price changed and step-1 EV < **+1.5%**; fewer than 4 books; Pinnacle gone or sign flipped; step 2 fails; line removed; Daily Faceoff lists him out (every run). A pulled pick stays on the page and in the Record marked pulled, and is still graded at its frozen price (counted under "Pulled", not in the headline). No pulls after puck drop |
-| Caps | 1 side per player (best final EV), **2 per game, 3 per night**, ranked by final EV within a read; earlier picks keep their slot; a pulled pick still counts. Locked at puck drop (NHL schedule time) |
+| Caps | 1 side per player (best final EV). **No per-game or nightly cap (v3.1, 2026-10-20, Matt): every qualifying leg is shown, ranked by final EV, and graded on the Record** (`max_per_game`/`max_per_night` = null = off). Locked at puck drop (NHL schedule time) |
 | Parlays | **Not offered** (no evidence). Page and Discord say so; Record keeps the old parlay shapes only so the archived Record still reads |
 | Grading | When the NHL marks the game OFF. Regulation + OT count, shootout never. No ice time = void. Graded at the price shown. Flat 1 unit |
 | Odds pulls | Shots only at every tier. Pull A 1 PM (or 3h before first puck), **B 90 min before each game (not lineup-gated)**, **C 45 min before each game, every game** (tier floor 3 when the allowance is >= 3). About 3 credits per game. Started games are never pulled. Allowance = credits left / game days before keys reset on the 1st |
@@ -293,6 +293,7 @@ probability x Hard Rock decimal payout - 1, on unrounded numbers; every threshol
     Chinakhov spelling, also live). Production engine read-only, prior-game rows only; 6 lines checked by hand; replica = engine picks.
     | Hypothesis | n | ROI | 90% CI | months > 0 |
     |---|---|---|---|---|
+| 2026-10-20 (CEO, Matt; Builder) | **v3.1: per-game (2) and nightly (3) caps removed.** Every leg that passes Gap + Guard is shown, ranked by final EV, in the Record and Discord. 1 side per player stays (you can't bet both sides). Page rules sheet reworded | Matt: "The limits I don't like. At the very least they should track all picks even if they exceed the limit." The product spec is every qualifying leg, ranked; the caps were exposure limits, not evidence-based | No picks shown under v3.0 yet (first live slate tonight); Nov 2 checkpoint now judges every passing leg |
     | H1 v2.0 uncapped / capped (live caps) | 3,918 / 1,198 | -2.7% / -6.1% | -5.2..-0.2 / -10.3..-1.9 | 1/7, 2/7 |
     | H2 rule A | 4,774 | -1.4% | -3.5..+0.8 | 2/7 |
     | H4 blind unders 1.5+2.5 | 13,427 | -6.3% | -7.7..-4.9 | 0/7 |
@@ -358,6 +359,7 @@ probability x Hard Rock decimal payout - 1, on unrounded numbers; every threshol
 | 2026-10-11 | v1.0 set (section 4) | First build: Sharp standard from the DS backtest (2024-25 fit, 2025-26 out of sample) and one live Hard Rock pull | Backtest only; 0 graded live legs |
 
 ## 9. Session log (newest first, one line each)
+- 2026-10-20 ~5:25 PM (Matt: dislikes the limits, track every pick): v3.1 removes the 2/game and 3/night caps before tonight's first 5:30 PM read; 1 per player kept. paper.py treats a null cap as off; tests updated (322 pass); fixtures regenerated; rules sheet checked at 380px in Chromium (no overflow, no errors). Done by the CEO directly (no time for a separate Builder/QA round before the 5:30 read); weekly review to re-check.
 - 2026-10-20 1:45 PM daily check: chain alive (link 138, Actions runs ok), all steps/sources ok, pull A ran 1 PM (11 games), keys 384 (key 4 empty), tier 3, budget 50 (11 used); unmatched: Elias Pettersson (two on VAN, known); no excluded teams. Nothing to grade (Record empty since reset, live from today); Oct 19 shadow graded. Fixed: C-for-every-game reserve over-counted (Oct 19 7 PM games got no C; tonight's margin was 1 credit) -> counts only B + C still owed. Builder -> QA SHIP (no page change), 322 tests.
 - 2026-10-20 ~8:30 AM Researcher run 6 (daily, shots): N1-N5 registered before testing (team coherence of Hard Rock lines, within-team share, starting goalies, vig placement, home/road, close-game OT); 18 variants, best N2 +3.2% n230 / N1 +0.7% n110, nothing positive with n >= 300, no lockbox look (still 1); forward Q1a +7.2% n13 (1 night). Nothing passed.
 - 2026-10-19 ~11:55 PM Researcher run 5 (extra, live consensus night 1, shots): Q1a-m + Q2a-b registered before scoring; research/code/fwd/score_fwd.py re-scores them on all nights daily. Night 1: 64 of 66 lines had consensus (median 5 books); Hard Rock at/above consensus fair on 13 lines (mostly plus-money unders, up to +5.7%); Q1 X=0 6-4 +1.7u on 10 graded = noise (bar n >= 300); 0 stale events, Q2 0 bets. Ops: 7 PM games got no 45-min C read on Oct 19.

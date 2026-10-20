@@ -1,6 +1,6 @@
 {
- "version": "3.0",
- "updated": "2026-10-19",
+ "version": "3.1",
+ "updated": "2026-10-20",
  "effective_from": "2026-10-20",
  "_about": "EVERY rule value lives here. The engine reads this file; data/rules.json (what the page reads) is generated from it. There is ONE rule set: Gap + Guard (ops.gap_guard). Probabilities are 0-1, prices are American integers, times are Eastern.",
  "values": {
@@ -72,8 +72,8 @@
     "close_min": 45,
     "move_min": 25,
     "max_per_player": 1,
-    "max_per_game": 2,
-    "max_per_night": 3,
+    "max_per_game": null,
+    "max_per_night": null,
     "min_history": 10
    }
   },

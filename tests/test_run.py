@@ -79,9 +79,9 @@ class Idempotent(unittest.TestCase):
         self.twice("23:10")
         self.twice("09:00", day="2026-10-12")
         kinds = [e["t"] for e in s.events()]
-        self.assertEqual(kinds.count("shown"), 3)                      # the night cap is 3
-        self.assertEqual(kinds.count("graded"), 3)
-        self.assertEqual(kinds.count("locked"), 3)
+        self.assertEqual(kinds.count("shown"), 4)                      # no night cap (2026-10-20)
+        self.assertEqual(kinds.count("graded"), 4)
+        self.assertEqual(kinds.count("locked"), 4)
         ids = [(e["t"], e["id"]) for e in s.events() if e["t"] in ("shown", "locked", "graded", "pulled")]
         self.assertEqual(len(ids), len(set(ids)), "no pick is shown, locked, pulled or graded twice")
 
@@ -126,7 +126,7 @@ class Failures(unittest.TestCase):
         self.assertEqual(sl["status"]["last_run"], {"ok": False, "at": "2026-10-11T18:40:00-04:00", "failed_step": "lineups"})
         self.assertEqual(sl["banners"][0]["text"],
                          "Part of the last update failed at 6:40 PM (lineups). Some of what is below may be older.")
-        self.assertEqual(len([p for p in sl["picks"] if p["rank"]]), 3)       # picks are still there
+        self.assertEqual(len([p for p in sl["picks"] if p["rank"]]), 4)       # picks are still there
         sl = s.at("18:50")                                                    # next good run clears it
         self.assertTrue(s.status()["ok"])
         self.assertTrue(sl["status"]["last_run"]["ok"])
@@ -185,7 +185,7 @@ class Failures(unittest.TestCase):
         os.environ["PC_NHL_FIXTURE_DIR"] = os.path.join(s.root, "empty")
         sl = s.at("18:41")
         self.assertEqual(s.status()["failed_step"], "schedule")
-        self.assertEqual(len([p for p in sl["picks"] if p["rank"]]), 3)
+        self.assertEqual(len([p for p in sl["picks"] if p["rank"]]), 4)
         self.assertIn("Part of the last update failed at 6:41 PM (schedule).", sl["banners"][0]["text"])
         sl = s.at("19:05")                                              # still down at puck time: the clock locks the picks
         self.assertEqual([p["state"] for p in sl["picks"] if p["game_id"] == 2026020901], ["locked_unconfirmed"] * 2)

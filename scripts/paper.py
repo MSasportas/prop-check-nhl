@@ -384,9 +384,9 @@ class Paper:
         mine = self.flags_where(slate=self.slate)
         if sum(1 for x in mine if x["pid"] == a["pid"]) >= T["max_per_player"]:
             return "player"
-        if sum(1 for x in mine if x["game_id"] == g["id"]) >= T["max_per_game"]:
+        if T.get("max_per_game") is not None and sum(1 for x in mine if x["game_id"] == g["id"]) >= T["max_per_game"]:
             return "game"
-        if len(mine) >= T["max_per_night"]:
+        if T.get("max_per_night") is not None and len(mine) >= T["max_per_night"]:
             return "night"
         return None
 

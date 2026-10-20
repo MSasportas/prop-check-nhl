@@ -108,7 +108,7 @@ class RulesSheet(unittest.TestCase):
         self.assertIn("80% the other books' chance with 20% our model's chance", text)
         self.assertIn("by at least 2%", text)
         self.assertIn("The first 90 or 45 minute read that passes both steps becomes the pick, and its price is frozen", text)
-        self.assertIn("No more than 1 per player, 2 per game and 3 a night", text)
+        self.assertIn("One pick per player (his best side and line). No per-game or nightly limit", text)
         self.assertIn("Parlays are not offered", text)
         self.assertIn("-10 units", text)
         src = page_array("RULES")

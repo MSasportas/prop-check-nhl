@@ -217,11 +217,11 @@ class CapsLockGrade(unittest.TestCase):
         day(s)
         cp = [s.gg_lines("CAR", 1), s.gg_lines("CAR", 2, ev=0.08), s.gg_lines("PHI", 1, ev=0.12), s.gg_lines("PHI", 2, ev=0.06)]
         sl = s.read("17:31", cp=cp)
-        self.assertEqual(len(sl["picks"]), 2)                         # 2 per game
+        self.assertEqual(len(sl["picks"]), 4)                         # no per-game cap (2026-10-20)
         sl = s.read("18:31", cp=cp, vn=[s.gg_lines("VAN", 1), s.gg_lines("NYR", 1, ev=0.09)])
-        self.assertEqual(len([p for p in sl["picks"] if not p["pulled"]]), 3)      # 3 per night
-        self.assertEqual(kinds(s).count("shown"), 3)
-        self.assertEqual(sorted(p["rank"] for p in sl["picks"]), [1, 2, 3])
+        self.assertEqual(len([p for p in sl["picks"] if not p["pulled"]]), 6)      # no nightly cap
+        self.assertEqual(kinds(s).count("shown"), 6)
+        self.assertEqual(sorted(p["rank"] for p in sl["picks"]), [1, 2, 3, 4, 5, 6])
 
     def test_one_side_per_player(self):
         s = self.s

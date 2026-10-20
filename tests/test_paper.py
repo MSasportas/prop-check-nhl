@@ -58,7 +58,7 @@ class Maths(unittest.TestCase):
                          (0.03, 4, 0.02, 0.015, 0.0))
         self.assertEqual((T["market_weight"], T["model_weight"]), (0.8, 0.2))
         self.assertEqual((T["price_gate"], T["max_price"], T["lines"]), (-200, 120, [1.5, 2.5]))
-        self.assertEqual((T["max_per_player"], T["max_per_game"], T["max_per_night"]), (1, 2, 3))
+        self.assertEqual((T["max_per_player"], T["max_per_game"], T["max_per_night"]), (1, None, None))
         self.assertEqual(T["flag_pulls"], ["B", "C"])
         self.assertAlmostEqual(OFF15, 0.0179)
         self.assertAlmostEqual(OFF25, 0.0158)
@@ -490,12 +490,12 @@ class Caps(Base):
         self.read(2, "B", "18:00", g2, "CCC", "DDD")
         self.step("18:01")
         fl = {e["pid"]: e for e in self.events("flag")}
-        self.assertEqual(sorted(fl), [101, 102, 201])
+        self.assertEqual(sorted(fl), [101, 102, 103, 201, 202])                 # no game or night cap (2026-10-20)
         self.assertEqual(fl[101]["line"], 1.5)                                   # the player's BEST side wins
         cap = {(e["pid"], e["line"]): e["cap"] for e in self.events("capped")}
-        self.assertEqual(cap, {(101, 2.5): "player", (103, 1.5): "game", (202, 1.5): "night"})
-        self.assertEqual(len(self.summary()["tonight"]["flags"]), 3)
-        self.assertEqual(len(self.summary()["tonight"]["capped"]), 3)
+        self.assertEqual(cap, {(101, 2.5): "player"})
+        self.assertEqual(len(self.summary()["tonight"]["flags"]), 5)
+        self.assertEqual(len(self.summary()["tonight"]["capped"]), 1)
 
     def test_best_of_a_players_two_sides_or_lines_is_picked_regardless_of_order(self):
         g1 = [self.lines(101, "AAA", "Ann Aa", 1.5, 0.52), self.lines(101, "AAA", "Ann Aa", 2.5, 0.56)]
@@ -514,7 +514,8 @@ class Caps(Base):
         c3 = self.lines(103, "AAA", "Cy Cc", 1.5, 0.55)
         self.read(1, "C", "18:15", c + [c3])
         self.step("18:16")
-        self.assertEqual([e["pid"] for e in self.events("capped")], [103])
+        self.assertEqual([e["pid"] for e in self.events("capped")], [])          # no game cap: 103 is a pick
+        self.assertIn(103, [e["pid"] for e in self.events("flag")])
 
 
 class CloseAndGrade(Base):
