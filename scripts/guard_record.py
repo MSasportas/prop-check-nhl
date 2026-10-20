@@ -18,6 +18,11 @@ removed or reordered. Exit 1 (and print why) on any breach, so the cycle stops b
         after a push: remember REF's Record as the newest one seen on origin (for --origin above).
     python scripts/guard_record.py --old FILE --new FILE     (tests)
 
+One exception, a customer-ordered reset (TEAM.md section 5): a pair (old, new) that fails the prefix rule is
+accepted only if new is an empty file and data/record/resets.json (read from the NEWER side) has an entry whose
+sha256 equals sha256(old) and whose archive file (under archive/, read from the same side) is byte-identical to old.
+resets.json is append-only itself, and every archive it names must still match its sha256 in the working tree.
+
 "File absent from HEAD" passes only when git says the path is truly not in HEAD; any other git error fails.
 Speed: the last verified version is remembered in .git/pc_record_verified (never committed), so later checks
 in the same checkout only walk the versions added since.
@@ -29,6 +34,7 @@ import subprocess
 import sys
 
 REL = "data/record/events.jsonl"
+RESETS = "data/record/resets.json"
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 
@@ -81,6 +87,107 @@ def _unborn(root):
     return subprocess.run(["git", "rev-parse", "-q", "--verify", ref], cwd=root, capture_output=True).returncode != 0
 
 
+# ---------------------------------------------------------------- customer-ordered resets
+def _entries(raw):
+    """resets.json bytes -> list of dict entries, or None when absent/unreadable."""
+    if raw is None:
+        return None
+    try:
+        v = json.loads(raw.decode("utf-8"))
+    except (ValueError, UnicodeDecodeError):
+        return None
+    return v if isinstance(v, list) and all(isinstance(e, dict) for e in v) else None
+
+
+def _archive_ok(e, reader):
+    """The archive bytes an entry names (read from the same side), or None unless they match the entry's sha256."""
+    path = e.get("archive")
+    if not isinstance(path, str) or not path.startswith("archive/") or ".." in path.split("/") or path.startswith("/"):
+        return None
+    data = reader(path)
+    if data is None or hashlib.sha256(data).hexdigest() != e.get("sha256"):
+        return None
+    if e.get("lines") != data.count(b"\n"):
+        return None
+    return data
+
+
+def reset_accepts(old, new, reader):
+    """True when (old -> new) is a recorded reset: new is empty and a reset entry (from the newer side) names an
+    archive byte-identical to old."""
+    if new != b"":
+        return False
+    ents = _entries(reader(RESETS))
+    if not ents:
+        return False
+    sha = hashlib.sha256(old).hexdigest()
+    return any(e.get("sha256") == sha and _archive_ok(e, reader) == old for e in ents)
+
+
+def seen_after_reset(seen_n, seen_sha, reader):
+    """True when what this runner last saw on origin is a prefix of an archived (reset) Record."""
+    for e in _entries(reader(RESETS)) or []:
+        arch = _archive_ok(e, reader)
+        if arch is not None and len(arch) >= seen_n and hashlib.sha256(arch[:seen_n]).hexdigest() == seen_sha:
+            return True
+    return False
+
+
+def pair_check(old, new, reader, present=True):
+    """check(), except a recorded reset is fine."""
+    why = check(old, new)
+    if why and present and reset_accepts(old, new, reader):
+        return None
+    return why
+
+
+def resets_prefix(old_raw, new_raw):
+    """resets.json is append-only: returns a reason or None."""
+    if old_raw is None:
+        return None
+    o, n = _entries(old_raw), _entries(new_raw)
+    if o is None:
+        return None if not old_raw.strip() else "resets.json was unreadable and was replaced"
+    if n is None or n[:len(o)] != o:
+        return "resets.json lost or changed an entry"
+    return None
+
+
+def archives_intact(raw, reader):
+    for e in _entries(raw) or []:
+        if _archive_ok(e, reader) is None:
+            return "the archived Record %s is missing or was changed" % (e.get("archive"),)
+    return None
+
+
+def work_reader(root):
+    def read(rel):
+        try:
+            with open(os.path.join(root, rel), "rb") as f:
+                return f.read()
+        except OSError:
+            return None
+    return read
+
+
+def commit_reader(root, rev):
+    def read(rel):
+        if not git(root, "ls-tree", "--name-only", rev, "--", rel).strip():
+            return None
+        return git(root, "cat-file", "blob", "%s:%s" % (rev, rel))
+    return read
+
+
+def resets_state(root):
+    """Working resets.json vs HEAD: append-only, and every archive it names intact. Returns a reason or None."""
+    rd = work_reader(root)
+    work = rd(RESETS)
+    head = None if _unborn(root) else commit_reader(root, "HEAD")(RESETS)
+    if head is not None and work is None:
+        return "resets.json is gone"
+    return resets_prefix(head, work) or archives_intact(work, rd)
+
+
 def working(root):
     try:
         with open(os.path.join(root, REL), "rb") as f:
@@ -95,7 +202,8 @@ def head_check(root):
     if old is not None and new is None:
         return "the Record file is gone", 0, 0
     old, new = old or b"", new or b""
-    return check(old, new), old.count(b"\n"), new.count(b"\n")
+    why = pair_check(old, new, work_reader(root)) or resets_state(root)
+    return why, old.count(b"\n"), new.count(b"\n")
 
 
 def _cache_path(root):
@@ -159,9 +267,10 @@ def history_check(root, origin=None):
     # fails ("lost lines") and nothing can sneak back in after it
     walk, prev = commits[start:], None
     for h, cur in zip(walk, _blobs(root, ["%s:%s" % (h, REL) for h in walk])):
+        cur_present = cur is not None
         cur = cur if cur is not None else b""
         if prev is not None:
-            why = check(prev[1], cur)
+            why = pair_check(prev[1], cur, commit_reader(root, h), present=cur_present)
             if why:
                 return "%s in commit %s (after %s)" % (why, h[:10], prev[0][:10]), len(walk)
         prev = (h, cur)
@@ -170,12 +279,16 @@ def history_check(root, origin=None):
     if new is None and head:
         return "the Record file is gone", len(walk)
     new = new or b""
-    why = check(head or b"", new)
+    why = pair_check(head or b"", new, work_reader(root))
     if why:
         return why + " (working file vs HEAD)", len(walk)
+    why = _resets_history(root)
+    if why:
+        return why, len(walk)
     seen_n, seen_sha = c.get("seen_len"), c.get("seen_sha")
     if isinstance(seen_n, int) and seen_sha:
-        if len(new) < seen_n or hashlib.sha256(new[:seen_n]).hexdigest() != seen_sha:
+        if (len(new) < seen_n or hashlib.sha256(new[:seen_n]).hexdigest() != seen_sha) \
+                and not seen_after_reset(seen_n, seen_sha, work_reader(root)):
             return "the Record this runner last saw on origin is no longer a prefix of it (history was rewritten)", \
                 len(walk)
     if cache:
@@ -190,6 +303,23 @@ def history_check(root, origin=None):
         except OSError:
             pass
     return None, len(walk)
+
+
+def _resets_history(root):
+    """Every committed version of resets.json must extend the one before, and the working file the last; the
+    archives it names must be intact in the working tree."""
+    commits = [] if _unborn(root) else git(root, "log", "--reverse", "--format=%H", "HEAD", "--", RESETS).decode().split()
+    prev = None
+    for h, cur in zip(commits, _blobs(root, ["%s:%s" % (h, RESETS) for h in commits])):
+        if prev is not None:
+            if cur is None:
+                return "resets.json was deleted in commit %s" % h[:10]
+            why = resets_prefix(prev, cur)
+            if why:
+                return "%s in commit %s" % (why, h[:10])
+        if cur is not None:
+            prev = cur
+    return resets_state(root)
 
 
 def remember(root, ref):

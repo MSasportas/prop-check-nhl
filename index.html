@@ -459,8 +459,9 @@ function load() {
   S.busy = true;
   /* the paper test has its own file and its own failure: it never touches the picks above */
   return Promise.all([settle(getJSON(BASE + 'slate.json')), settle(getJSON(BASE + 'record.json')), settle(getJSON(BASE + 'rules.json')),
-                      settle(getJSON(BASE + 'paper/summary.json'))])
+                      settle(getJSON(BASE + 'paper/summary.json')), settle(getJSON(BASE + 'record/resets.json'))])
     .then(function (r) {
+      if (r[4].ok && Array.isArray(r[4].v) && r[4].v.length) S.reset = true;
       S.busy = false; S.loaded = true;
       if (r[3].ok) { S.paper = r[3].v; S.paperErr = null; } else if (!S.paper) S.paperErr = r[3].kind;
       if (r[1].ok) { S.record = r[1].v; S.recordErr = null; } else if (!S.record) S.recordErr = r[1].kind;
@@ -995,6 +996,7 @@ function renderRecord() {
       h('div', { style: 'margin-top:12px' }, h('button', { class: 'btn', type: 'button', text: 'Try again', on: { click: function () { load().then(function () { render(); }); } } }))));
     app.appendChild(footer()); return;
   }
+  if (S.reset) app.appendChild(h('p', { class: 'mu', style: 'margin:8px 0 0', text: "Record restarted Oct 19 at Matt's request. Earlier picks are archived." }));
   var sum = isObj(S.record.summary) ? S.record.summary : {}, hd = isObj(sum.headline) ? sum.headline : {};
   var minS = num(ruleVal('min_sample')), stake = ruleVal('stake'), n = sampleN(hd);
   var few = function (k) { return minS == null || k < minS; };
