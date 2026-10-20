@@ -1,16 +1,16 @@
 {
  "ok": true,
  "slate_date": "2026-10-19",
- "started_at": "2026-10-19T21:40:01-04:00",
- "status_at": "2026-10-19T21:40:01-04:00",
- "finished_at": "2026-10-19T21:40:01-04:00",
- "last_ok_at": "2026-10-19T21:40:01-04:00",
+ "started_at": "2026-10-19T21:50:01-04:00",
+ "status_at": "2026-10-19T21:50:01-04:00",
+ "finished_at": "2026-10-19T21:50:02-04:00",
+ "last_ok_at": "2026-10-19T21:50:01-04:00",
  "failed_step": null,
  "steps": [
   {
    "step": "rules",
-   "status": "ok",
-   "note": "rules.json written"
+   "status": "skipped",
+   "note": "unchanged"
   },
   {
    "step": "schedule",
@@ -19,8 +19,8 @@
   },
   {
    "step": "stats",
-   "status": "skipped",
-   "note": "nothing new"
+   "status": "ok",
+   "note": "1 window(s) read, 4 team-games still missing"
   },
   {
    "step": "lineups",
@@ -120,7 +120,24 @@
   "Ilya Solovyov",
   "Jacob Gaucher"
  ],
- "excluded_teams": [],
+ "excluded_teams": [
+  {
+   "team": "ANA",
+   "reason": "stats behind"
+  },
+  {
+   "team": "COL",
+   "reason": "stats behind"
+  },
+  {
+   "team": "NYR",
+   "reason": "stats behind"
+  },
+  {
+   "team": "PHI",
+   "reason": "stats behind"
+  }
+ ],
  "stats_through": "2026-10-18",
  "lineups_at": "2026-10-19T20:50:01-04:00",
  "lineups_note": "8 of 8 team line pages are dated today.",
@@ -129,10 +146,10 @@
  "odds_notes": [],
  "runner": {
   "event": "workflow_dispatch",
-  "run_id": "39351901050",
-  "iteration": 4,
-  "chain_link": 115,
+  "run_id": "39354701427",
+  "iteration": 2,
+  "chain_link": 116,
   "chain_started_at": "2026-10-16T10:00:13-04:00",
-  "run_started_at": "2026-10-19T21:10:14-04:00"
+  "run_started_at": "2026-10-19T21:40:16-04:00"
  }
 }
