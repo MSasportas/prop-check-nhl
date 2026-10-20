@@ -55,7 +55,7 @@
   },
   "WPG": {
    "name": "Stuart Skinner",
-   "status": "expected"
+   "status": "confirmed"
   },
   "EDM": {
    "name": "Devon Levi",
@@ -90,5 +90,5 @@
    "status": "expected"
   }
  },
- "checked_at": "2026-10-20T11:50:00-04:00"
+ "checked_at": "2026-10-20T12:50:00-04:00"
 }
