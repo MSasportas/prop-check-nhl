@@ -59,7 +59,7 @@
   },
   "EDM": {
    "name": "Devon Levi",
-   "status": "expected"
+   "status": "confirmed"
   },
   "MIN": {
    "name": "Jesper Wallstedt",
@@ -90,5 +90,5 @@
    "status": "expected"
   }
  },
- "checked_at": "2026-10-20T18:40:00-04:00"
+ "checked_at": "2026-10-20T19:50:00-04:00"
 }
