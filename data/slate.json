@@ -1,7 +1,7 @@
 {
  "slate_date": "2026-10-19",
- "generated_at": "2026-10-19T21:30:00-04:00",
- "status_at": "2026-10-19T21:30:00-04:00",
+ "generated_at": "2026-10-19T21:40:01-04:00",
+ "status_at": "2026-10-19T21:40:01-04:00",
  "valid_until": "2026-10-20T05:00:00-04:00",
  "status": {
   "prices_state": "ok",
@@ -16,7 +16,7 @@
   "stats_state": "ok",
   "last_run": {
    "ok": true,
-   "at": "2026-10-19T21:30:00-04:00",
+   "at": "2026-10-19T21:40:01-04:00",
    "failed_step": null
   },
   "pool": {
@@ -28,14 +28,14 @@
   },
   "excluded_teams": [],
   "lines_checked": 60,
-  "lines_failed": 0,
+  "flag_reads": 4,
   "tier": 3
  },
  "banners": [],
  "empty": {
-  "code": "paused",
-  "text": "No picks for now: no proven edge.",
-  "sub": "We tested our shots rules on all of last season's Hard Rock prices and they lost money. Picks stay off while the team tests new ideas, so nothing here is a bet."
+  "code": "not_live",
+  "text": "No picks today.",
+  "sub": "Picks start Oct 20. Nothing is shown before then."
  },
  "games": [
   {
@@ -137,6 +137,5 @@
  ],
  "picks": [],
  "parlays": [],
- "goal_watch": [],
- "goal_watch_note": null
+ "parlays_note": "Parlays are not offered: there is no evidence for them yet."
 }

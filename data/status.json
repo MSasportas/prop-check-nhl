@@ -1,16 +1,16 @@
 {
  "ok": true,
  "slate_date": "2026-10-19",
- "started_at": "2026-10-19T21:10:01-04:00",
- "status_at": "2026-10-19T21:10:01-04:00",
- "finished_at": "2026-10-19T21:10:01-04:00",
- "last_ok_at": "2026-10-19T21:10:01-04:00",
+ "started_at": "2026-10-19T21:40:01-04:00",
+ "status_at": "2026-10-19T21:40:01-04:00",
+ "finished_at": "2026-10-19T21:40:01-04:00",
+ "last_ok_at": "2026-10-19T21:40:01-04:00",
  "failed_step": null,
  "steps": [
   {
    "step": "rules",
-   "status": "skipped",
-   "note": "unchanged"
+   "status": "ok",
+   "note": "rules.json written"
   },
   {
    "step": "schedule",
@@ -43,6 +43,11 @@
    "note": "read this week"
   },
   {
+   "step": "gapguard",
+   "status": "skipped",
+   "note": "gap+guard not live yet: nothing new"
+  },
+  {
    "step": "engine",
    "status": "ok",
    "note": "no change"
@@ -58,14 +63,14 @@
    "note": "nothing new"
   },
   {
-   "step": "paper",
+   "step": "gg_grade",
    "status": "skipped",
-   "note": "paper test off: nothing new"
+   "note": "gap+guard not live yet: nothing new"
   },
   {
    "step": "slate",
-   "status": "skipped",
-   "note": "unchanged"
+   "status": "ok",
+   "note": "0 open pick(s)"
   },
   {
    "step": "record",
@@ -124,10 +129,10 @@
  "odds_notes": [],
  "runner": {
   "event": "workflow_dispatch",
-  "run_id": "39347011073",
-  "iteration": 6,
-  "chain_link": 114,
+  "run_id": "39351901050",
+  "iteration": 4,
+  "chain_link": 115,
   "chain_started_at": "2026-10-16T10:00:13-04:00",
-  "run_started_at": "2026-10-19T20:20:11-04:00"
+  "run_started_at": "2026-10-19T21:10:14-04:00"
  }
 }
