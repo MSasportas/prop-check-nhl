@@ -1,10 +1,10 @@
 {
  "ok": true,
  "slate_date": "2026-10-19",
- "started_at": "2026-10-19T21:50:01-04:00",
- "status_at": "2026-10-19T21:50:01-04:00",
- "finished_at": "2026-10-19T21:50:02-04:00",
- "last_ok_at": "2026-10-19T21:50:01-04:00",
+ "started_at": "2026-10-19T22:20:00-04:00",
+ "status_at": "2026-10-19T22:20:00-04:00",
+ "finished_at": "2026-10-19T22:20:02-04:00",
+ "last_ok_at": "2026-10-19T22:20:00-04:00",
  "failed_step": null,
  "steps": [
   {
@@ -59,8 +59,8 @@
   },
   {
    "step": "shadow",
-   "status": "skipped",
-   "note": "nothing new"
+   "status": "ok",
+   "note": "19 graded"
   },
   {
    "step": "gg_grade",
@@ -122,19 +122,19 @@
  ],
  "excluded_teams": [
   {
-   "team": "ANA",
-   "reason": "stats behind"
-  },
-  {
    "team": "COL",
    "reason": "stats behind"
   },
   {
-   "team": "NYR",
+   "team": "PHI",
    "reason": "stats behind"
   },
   {
-   "team": "PHI",
+   "team": "SJS",
+   "reason": "stats behind"
+  },
+  {
+   "team": "TOR",
    "reason": "stats behind"
   }
  ],
@@ -147,7 +147,7 @@
  "runner": {
   "event": "workflow_dispatch",
   "run_id": "39354701427",
-  "iteration": 2,
+  "iteration": 5,
   "chain_link": 116,
   "chain_started_at": "2026-10-16T10:00:13-04:00",
   "run_started_at": "2026-10-19T21:40:16-04:00"
