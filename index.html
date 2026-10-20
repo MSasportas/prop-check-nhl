@@ -439,7 +439,7 @@ function split() { /* open / started / pulled, picks and parlays */
 }
 
 /* ---------- fetch ---------- */
-function getJSON(path) {
+function getJSON(path, arrOk) {
   var ctl = (typeof AbortController !== 'undefined') ? new AbortController() : null;
   var timer = ctl ? setTimeout(function () { ctl.abort(); }, 15000) : null;
   var sep = path.indexOf('?') >= 0 ? '&' : '?';
@@ -448,7 +448,7 @@ function getJSON(path) {
       if (!r.ok) throw fileErr('http ' + r.status);
       return r.text().then(function (t) { try { return JSON.parse(t); } catch (e) { throw fileErr('parse'); } });
     }, function (e) { var x = new Error('net'); x.kind = 'net'; throw x; })
-    .then(function (j) { if (timer) clearTimeout(timer); if (!isObj(j)) throw fileErr('shape'); return j; },
+    .then(function (j) { if (timer) clearTimeout(timer); if (!isObj(j) && !(arrOk && Array.isArray(j))) throw fileErr('shape'); return j; },
           function (e) { if (timer) clearTimeout(timer); if (!e || !e.kind) { var x = new Error('net'); x.kind = 'net'; throw x; } throw e; });
 }
 /* 'file' = the network answered but the file was missing or unreadable; 'net' = the request itself failed */
@@ -459,7 +459,7 @@ function load() {
   S.busy = true;
   /* the paper test has its own file and its own failure: it never touches the picks above */
   return Promise.all([settle(getJSON(BASE + 'slate.json')), settle(getJSON(BASE + 'record.json')), settle(getJSON(BASE + 'rules.json')),
-                      settle(getJSON(BASE + 'paper/summary.json')), settle(getJSON(BASE + 'record/resets.json'))])
+                      settle(getJSON(BASE + 'paper/summary.json')), settle(getJSON(BASE + 'record/resets.json', true))])
     .then(function (r) {
       if (r[4].ok && Array.isArray(r[4].v) && r[4].v.length) S.reset = true;
       S.busy = false; S.loaded = true;

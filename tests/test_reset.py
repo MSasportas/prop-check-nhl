@@ -291,5 +291,13 @@ class TheRealReset(unittest.TestCase):
         self.assertEqual((rec["summary"]["headline"]["n"], rec["nights"], rec["older"]), (0, [], []))
 
 
+
+class PageResetNote(unittest.TestCase):
+    def test_resets_array_is_allowed_through_the_page_shape_check(self):
+        """resets.json is a JSON array; getJSON() rejects non-objects, so the note line needs the arrOk flag."""
+        html = open(os.path.join(REPO, "index.html"), encoding="utf-8").read()
+        self.assertIn("function getJSON(path, arrOk)", html)
+        self.assertIn("getJSON(BASE + 'record/resets.json', true)", html)
+
 if __name__ == "__main__":
     unittest.main()
