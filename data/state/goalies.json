@@ -10,7 +10,7 @@
    "status": "confirmed"
   },
   "NJD": {
-   "name": "Nico Daws",
+   "name": "Jake Allen",
    "status": "expected"
   },
   "COL": {
@@ -35,7 +35,7 @@
   },
   "MTL": {
    "name": "Jakub Dobes",
-   "status": "expected"
+   "status": "confirmed"
   },
   "SJS": {
    "name": "Alex Nedeljkovic",
@@ -90,5 +90,5 @@
    "status": "expected"
   }
  },
- "checked_at": "2026-10-20T10:50:01-04:00"
+ "checked_at": "2026-10-20T11:00:01-04:00"
 }
