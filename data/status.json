@@ -1,10 +1,10 @@
 {
  "ok": true,
  "slate_date": "2026-10-19",
- "started_at": "2026-10-20T00:10:14-04:00",
- "status_at": "2026-10-20T00:10:14-04:00",
- "finished_at": "2026-10-20T00:10:16-04:00",
- "last_ok_at": "2026-10-20T00:10:14-04:00",
+ "started_at": "2026-10-20T00:30:01-04:00",
+ "status_at": "2026-10-20T00:30:01-04:00",
+ "finished_at": "2026-10-20T00:30:02-04:00",
+ "last_ok_at": "2026-10-20T00:30:01-04:00",
  "failed_step": null,
  "steps": [
   {
@@ -20,7 +20,7 @@
   {
    "step": "stats",
    "status": "ok",
-   "note": "1 window(s) read, 2 team-games still missing"
+   "note": "1 window(s) read"
   },
   {
    "step": "lineups",
@@ -120,17 +120,8 @@
   "Ilya Solovyov",
   "Jacob Gaucher"
  ],
- "excluded_teams": [
-  {
-   "team": "PIT",
-   "reason": "stats behind"
-  },
-  {
-   "team": "UTA",
-   "reason": "stats behind"
-  }
- ],
- "stats_through": "2026-10-18",
+ "excluded_teams": [],
+ "stats_through": "2026-10-19",
  "lineups_at": "2026-10-19T20:50:01-04:00",
  "lineups_note": "8 of 8 team line pages are dated today.",
  "games_today": 4,
@@ -139,7 +130,7 @@
  "runner": {
   "event": "workflow_dispatch",
   "run_id": "39368118629",
-  "iteration": 1,
+  "iteration": 3,
   "chain_link": 119,
   "chain_started_at": "2026-10-16T10:00:13-04:00",
   "run_started_at": "2026-10-20T00:10:13-04:00"
