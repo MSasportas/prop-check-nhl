@@ -23,7 +23,7 @@
   },
   "LAK": {
    "name": "Darcy Kuemper",
-   "status": "expected"
+   "status": "confirmed"
   },
   "CBJ": {
    "name": "Jet Greaves",
@@ -90,5 +90,5 @@
    "status": "expected"
   }
  },
- "checked_at": "2026-10-20T17:00:00-04:00"
+ "checked_at": "2026-10-20T18:40:00-04:00"
 }

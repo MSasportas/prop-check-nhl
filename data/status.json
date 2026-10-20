@@ -1,10 +1,10 @@
 {
  "ok": true,
  "slate_date": "2026-10-20",
- "started_at": "2026-10-20T18:30:00-04:00",
- "status_at": "2026-10-20T18:30:00-04:00",
- "finished_at": "2026-10-20T18:30:12-04:00",
- "last_ok_at": "2026-10-20T18:30:00-04:00",
+ "started_at": "2026-10-20T18:40:00-04:00",
+ "status_at": "2026-10-20T18:40:00-04:00",
+ "finished_at": "2026-10-20T18:40:03-04:00",
+ "last_ok_at": "2026-10-20T18:40:00-04:00",
  "failed_step": null,
  "steps": [
   {
@@ -25,17 +25,17 @@
   {
    "step": "lineups",
    "status": "ok",
-   "note": "4 of 4 team pages read"
+   "note": "14 of 14 team pages read"
   },
   {
    "step": "lineup_history",
-   "status": "skipped",
-   "note": "no change"
+   "status": "ok",
+   "note": "3 team(s) changed"
   },
   {
    "step": "odds",
    "status": "ok",
-   "note": "2 game(s) priced"
+   "note": "no pull due"
   },
   {
    "step": "market_menu",
@@ -45,12 +45,12 @@
   {
    "step": "gapguard",
    "status": "ok",
-   "note": "gap+guard: 1 flag"
+   "note": "gap+guard: nothing new"
   },
   {
    "step": "engine",
    "status": "ok",
-   "note": "1 new event(s), 1 newly shown"
+   "note": "no change"
   },
   {
    "step": "grade",
@@ -59,8 +59,8 @@
   },
   {
    "step": "shadow",
-   "status": "ok",
-   "note": "26 line read(s) logged"
+   "status": "skipped",
+   "note": "nothing new"
   },
   {
    "step": "gg_grade",
@@ -74,8 +74,8 @@
   },
   {
    "step": "record",
-   "status": "ok",
-   "note": "record.json"
+   "status": "skipped",
+   "note": "unchanged"
   }
  ],
  "sources": {
@@ -118,15 +118,15 @@
  "lineup_unmatched_names": [],
  "excluded_teams": [],
  "stats_through": "2026-10-19",
- "lineups_at": "2026-10-20T18:30:00-04:00",
- "lineups_note": "12 of 16 team line pages are dated today.",
+ "lineups_at": "2026-10-20T18:40:00-04:00",
+ "lineups_note": "13 of 18 team line pages are dated today.",
  "games_today": 11,
  "record_events": 2,
  "odds_notes": [],
  "runner": {
   "event": "workflow_dispatch",
   "run_id": "39507336901",
-  "iteration": 2,
+  "iteration": 3,
   "chain_link": 144,
   "chain_started_at": "2026-10-16T10:00:13-04:00",
   "run_started_at": "2026-10-20T18:20:14-04:00"
