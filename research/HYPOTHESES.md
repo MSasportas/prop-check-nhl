@@ -132,6 +132,28 @@ qualifies, price frozen there (like the product). CLV = consensus fair(side) at 
 
 Run 5 count: 15 forward variants (Q1 13, Q2 2; Bonferroni over 15). (Fixed typo 'Q1 13 + Q2 2 = 14' after scoring; the bar was always 0.05/15.) Historical cumulative unchanged at 253. Lockbox looks: 1.
 
+## Run 6 (Researcher, 2026-10-20 AM, daily). SHOTS ON GOAL ONLY. Registered before any of these were tested.
+No odds key, no historical odds pull. Free NHL stats REST per-game logs fetched to scratch (research/code/r6/fetch6.py): skater summary
+2024-25 + 2025-26 (SOG, team, home/road), team summary 2024-25 + 2025-26 (shots for/against), goalie summary 2024-25 + 2025-26 (starts,
+saves, shots against). Every feature for a line dated d uses only games dated < d, except N2's starter identity (see N2).
+Common (as run 4): shots45_lines, every two-way Hard Rock line, proportional de-vig fair f, side price >= -200, 1u flat, regulation + OT,
+VOID = no bet, game-clustered bootstrap. Walk-forward L2 logistic (L2 = 2, extra terms standardised on the training rows):
+logit P(over) = a + a15*[line 1.5] + a35*[line >= 3.5] + b*logit(f) + terms; fit on all months before the test month (Oct included);
+bet the side with p - BE >= T, T in {.01, .02, .03} (3 variants each). Folds Nov, Dec, Jan, Feb reported. Placebo (shuffle the
+feature(s) within date x line, 200 times) for any variant positive Nov-Feb with n >= 300; lockbox (Mar 1+) only for such a frozen
+variant, once, needing one-sided p < 0.05/2 = 0.025 (look #2).
+
+| id | date | rule (exact) | data | result | status |
+|---|---|---|---|---|---|
+| N1 | 2026-10-20 | **Team coherence of Hard Rock's player lines.** For each (game, team) at -45: m_i = Poisson mean solving P(X > line_i) = f_i for each listed player (one line per player: the line with f nearest 0.5); S = sum m_i; k = number of listed players (need k >= 4, else row dropped). E = 0.5 x (team SOG for per game over its last 20 games + opponent SOG against per game over its last 20; 2024-25 + 2025-26 before d, >= 5 each). Terms c1*(log E - log S) + c2*k. Idea: when Hard Rock's lines add up to fewer team shots than the matchup implies, its overs are cheap (and vice versa) | team logs + shots45 | | registered |
+| N1b | 2026-10-20 | **Within-team share.** Same groups. h_i = player's SOG / his team's SOG over his last 20 games before d (2024-25 + 2025-26, games with the same team abbrev, >= 5 games, else row dropped); hs_i = h_i / sum_j h_j over the listed players; is_i = m_i / S. Term c*log(hs_i / is_i) (Hard Rock gives him a smaller share of the team total than his history -> over) | skater + team logs + shots45 | | registered |
+| N2 | 2026-10-20 | **Starting goalies.** Starter = the goalie with gamesStarted = 1 in that game's goalie log (ASSUMPTION: starters are confirmed by the -45 read; this is the only same-game input and is stated as such). sv_dev = opp starter's save % over his prior games (2024-25 + 2025-26 before d), shrunk 300 shots to the training-row mean, minus that mean; opp_backup = 1 if the opp starter started < 40% of his team's 2025-26 games before d (team >= 5 games, else 0); own_backup = same for the player's own starter. Terms c1*sv_dev + c2*opp_backup + c3*own_backup | goalie logs + shots45 | | registered |
+| N3 | 2026-10-20 | **Where Hard Rock puts its vig.** hold = BE(over) + BE(under) - 1; skew = (BE(over) - f) - (BE(under) - (1 - f)) (vig loaded on the over vs the under beyond proportional). Terms c1*skew + c2*hold (does a better de-vig than proportional leave a side under-priced?) | shots45 | | registered |
+| N4 | 2026-10-20 | **Player home/road split.** From his prior games (2024-25 + 2025-26 before d): diff = SOG/g at home - SOG/g on the road (needs >= 3 of each, else 0), shrunk: diff x w/(w + 10), w = nh x nr/(nh + nr). Term c*diff x (+1 if he is home, -1 if road) | skater logs + shots45 | | registered |
+| N5 | 2026-10-20 | **Close game -> overtime -> more shots.** pw = consensus win prob of the player's team (run 3 h2h pull, latest snapshot at or before the shots -45 snapshot, as K2); close = 0.5 - abs(pw - 0.5). Term c1*close (K2 used pw - 0.5 linearly; this is the symmetric shape, a new variant). Lines with no moneyline snapshot dropped | h2h addon + shots45 | | registered |
+
+Run 6 count (planned): 18 variants (N1, N1b, N2, N3, N4, N5 x 3 T). Cumulative historical after this run: 271. Forward variants unchanged at 15.
+
 ## Queued (not yet tested)
 | id | rule idea | data | status |
 |---|---|---|---|
