@@ -39,7 +39,7 @@
   },
   "SJS": {
    "name": "Alex Nedeljkovic",
-   "status": "expected"
+   "status": "confirmed"
   },
   "DAL": {
    "name": "Jake Oettinger",
@@ -90,5 +90,5 @@
    "status": "expected"
   }
  },
- "checked_at": "2026-10-20T16:30:00-04:00"
+ "checked_at": "2026-10-20T17:00:00-04:00"
 }
