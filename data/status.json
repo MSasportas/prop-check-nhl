@@ -1,10 +1,10 @@
 {
  "ok": true,
  "slate_date": "2026-10-20",
- "started_at": "2026-10-20T18:10:00-04:00",
- "status_at": "2026-10-20T18:10:00-04:00",
- "finished_at": "2026-10-20T18:10:01-04:00",
- "last_ok_at": "2026-10-20T18:10:00-04:00",
+ "started_at": "2026-10-20T18:20:00-04:00",
+ "status_at": "2026-10-20T18:20:00-04:00",
+ "finished_at": "2026-10-20T18:20:03-04:00",
+ "last_ok_at": "2026-10-20T18:20:00-04:00",
  "failed_step": null,
  "steps": [
   {
@@ -25,7 +25,7 @@
   {
    "step": "lineups",
    "status": "ok",
-   "note": "4 of 4 team pages read"
+   "note": "12 of 12 team pages read"
   },
   {
    "step": "lineup_history",
@@ -35,7 +35,7 @@
   {
    "step": "odds",
    "status": "ok",
-   "note": "no pull due"
+   "note": "5 game(s) priced"
   },
   {
    "step": "market_menu",
@@ -45,7 +45,7 @@
   {
    "step": "gapguard",
    "status": "ok",
-   "note": "gap+guard: nothing new"
+   "note": "gap+guard: 1 close"
   },
   {
    "step": "engine",
@@ -59,8 +59,8 @@
   },
   {
    "step": "shadow",
-   "status": "skipped",
-   "note": "nothing new"
+   "status": "ok",
+   "note": "91 line read(s) logged"
   },
   {
    "step": "gg_grade",
@@ -88,7 +88,7 @@
  "keys": [
   {
    "n": 1,
-   "left": 141
+   "left": 136
   },
   {
    "n": 2,
@@ -103,14 +103,14 @@
    "left": 0
   }
  ],
- "pool_total": 379,
+ "pool_total": 374,
  "allowance": 4.593,
  "tier": 3,
  "budget_today": 50,
- "budget_used_today": 16,
+ "budget_used_today": 21,
  "prices_state": "ok",
- "prices_at": "2026-10-20T17:30:02-04:00",
- "next_price_read_at": "2026-10-20T18:15:00-04:00",
+ "prices_at": "2026-10-20T18:20:00-04:00",
+ "next_price_read_at": "2026-10-20T18:30:00-04:00",
  "unmatched_names": [
   "Elias Pettersson"
  ],
@@ -118,7 +118,7 @@
  "lineup_unmatched_names": [],
  "excluded_teams": [],
  "stats_through": "2026-10-19",
- "lineups_at": "2026-10-20T18:10:00-04:00",
+ "lineups_at": "2026-10-20T18:20:00-04:00",
  "lineups_note": "12 of 16 team line pages are dated today.",
  "games_today": 11,
  "record_events": 1,
@@ -126,7 +126,7 @@
  "runner": {
   "event": "workflow_dispatch",
   "run_id": "39500870716",
-  "iteration": 5,
+  "iteration": 6,
   "chain_link": 143,
   "chain_started_at": "2026-10-16T10:00:13-04:00",
   "run_started_at": "2026-10-20T17:30:19-04:00"
