@@ -798,6 +798,78 @@ class Plan(unittest.TestCase):
         self.assertEqual(nxt, common.parse_iso(at("18:15")))
 
 
+class ClosingBudget(unittest.TestCase):
+    """C on every game is kept while today's budget left covers the B and C reads still owed (not a flat 3 credits a
+    game ahead). The 2026-10-20 slate: 11 games, budget 50, shots only (paper), tier 3."""
+    V = common.load_config()["values"]
+    TIMES = ["19:00"] * 5 + ["20:00"] * 6
+
+    def setUp(self):
+        self.games = [game(i, "A%02d" % i, "H%02d" % i, t) for i, t in enumerate(self.TIMES, 1)]
+        self.fetched = {}
+        for g in self.games:
+            self.read(g["id"], "A", "13:00")                                     # A on all 11: 11 credits
+
+    def read(self, gid, pull, hhmm):
+        self.fetched.setdefault(gid, []).append({"pull": pull, "at": common.parse_iso(at(hhmm)), "markets": ["shots"],
+                                                 "returned": ["shots"]})
+
+    def spent(self):
+        return sum(len(f["markets"]) for fs in self.fetched.values() for f in fs)
+
+    def plan(self, hhmm, budget=50, live=None, started=None):
+        now = common.parse_iso(at(hhmm))
+        started = started or {}
+        every = odds.c_for_every_game(now, self.games, 3, self.V, self.fetched, started, budget - self.spent(), paper=True)
+        due = odds.due_pulls(now, self.games, 3, self.V, self.fetched, live or {}, started, 30, c_every_game=every,
+                             paper=True)
+        return every, [(d["pull"], d["game"]["id"], d["markets"]) for d in due]
+
+    def test_tonight_c_reads_run_for_the_7_pm_and_then_the_8_pm_games(self):
+        for gid in range(1, 6):
+            self.read(gid, "B", "17:30")                                         # B on the five 7 PM games
+        self.assertEqual(self.spent(), 16)
+        now = common.parse_iso(at("18:15"))
+        self.assertEqual(odds.credits_still_needed(now, self.games, 3, self.V, self.fetched, {}, paper=True), 17)
+        every, due = self.plan("18:15")                                          # 34 left, 17 owed (old rule: 33)
+        self.assertTrue(every)
+        self.assertEqual(due, [("C", gid, ["shots"]) for gid in range(1, 6)])
+        for gid in range(1, 6):
+            self.read(gid, "C", "18:15")
+        self.assertEqual(self.spent(), 21)
+        every, due = self.plan("18:30")
+        self.assertEqual(due, [("B", gid, ["shots"]) for gid in range(6, 12)])  # the 8 PM games' 90 minute read
+        for gid in range(6, 12):
+            self.read(gid, "B", "18:30")
+        seven_started = {gid: True for gid in range(1, 6)}
+        every, due = self.plan("19:15", started=seven_started)                   # 23 left, 6 owed
+        self.assertTrue(every)
+        self.assertEqual(due, [("C", gid, ["shots"]) for gid in range(6, 12)])
+
+    def test_kept_where_the_old_flat_reserve_dropped_it(self):
+        for gid in range(1, 6):
+            self.read(gid, "B", "17:30")
+        self.read(1, "B", "17:40")
+        self.read(2, "B", "17:40")                                               # two extra reads: 18 spent
+        every, due = self.plan("18:15")                                          # 32 left < 3 x 11 (old), 17 owed (new)
+        self.assertTrue(every)
+        self.assertEqual(len(due), 5)
+
+    def test_tight_budget_c_goes_back_to_live_picks_only(self):
+        for gid in range(1, 6):
+            self.read(gid, "B", "17:30")
+        every, due = self.plan("18:15", budget=20, live={2: {"shots"}})          # 4 left, 17 owed
+        self.assertFalse(every)
+        self.assertEqual(due, [("C", 2, ["shots"])])
+        self.assertFalse(odds.c_for_every_game(common.parse_iso(at("18:15")), self.games, 2, self.V, self.fetched, {},
+                                               99, paper=True))                  # tier 2: never every game
+        late = {gid: True for gid in range(1, 12)}
+        self.assertTrue(odds.c_for_every_game(common.parse_iso(at("21:00")), self.games, 3, self.V, self.fetched, late,
+                                              1, paper=True))                    # nothing owed: needs at least 1
+        self.assertFalse(odds.c_for_every_game(common.parse_iso(at("21:00")), self.games, 3, self.V, self.fetched, late,
+                                               0, paper=True))
+
+
 class FullDay(unittest.TestCase):
     """Three reads a game through the real pull code with unconfirmed lineups, ~3 credits a game, shots only."""
 

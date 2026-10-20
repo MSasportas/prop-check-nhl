@@ -149,7 +149,7 @@ probability x Hard Rock decimal payout - 1, on unrounded numbers; every threshol
   the real reason ("108 lines read, none cleared both checks."). Stale and low-credit warnings unchanged. The paper section, the
   paused banner and the goal-watch list are gone. One rules sheet (the 9 lines in `RULES` in index.html), numbers from rules.json.
 - **Discord (v3.0, replaces the older Discord and PAPER wording in this section):** cycle, 8 blocks then "+N more"; each pick once), PULLED (only picks already notified, before puck), ACTION NEEDED (keys refused, pool low/empty, once per ET day each), a one-time hello. NEW PICK block = bold bet line `**P. Name OVER 1.5 shots +100**`, `CAR @ PHI · 7:00 PM ET · ⏳ Early` (or `✅ Lineup confirmed`), `Gap +5.7% vs market, we say 53%, price needs 50%`; footer "Bet only at this price or better. If Hard Rock shows worse, skip it." and the link last, never cut. Never: no-pick nights, heartbeats, grading, errors, vetoes. Quiet 12:30-8:00 AM ET (held items go out at 8 if still ahead). Max 6 messages per ET day. Delete "parlays included", "Why:" and "Bet only at these prices or better". State `notified.json` keys: picks, pulled, sent, action, hello.
-- Tests: `python -m unittest discover -s tests`, 319 tests (`tests/test_live_picks.py` end to end; `tests/test_paper.py` research-log maths; `tests/fixtures/paper_oct19/` = real Oct 19 reads). Fixtures: `python3 fixtures/make_fixtures.py`.
+- Tests: `python -m unittest discover -s tests`, 322 tests (`tests/test_live_picks.py` end to end; `tests/test_paper.py` research-log maths; `tests/fixtures/paper_oct19/` = real Oct 19 reads). Fixtures: `python3 fixtures/make_fixtures.py`.
 
 - **Files:** `index.html` (page; reads `data/slate.json`, `data/record.json`, `data/rules.json`), `data/odds/<date>.json`
   (every price pulled: Hard Rock in `markets`, 9 other books in `others`; ~10x bigger: ~1.5 MB on a 16-game night, ~2.5-3 MB
@@ -189,6 +189,10 @@ probability x Hard Rock decimal payout - 1, on unrounded numbers; every threshol
    (QA round 2): R1 days left capped at the 1st; R2 rules sheet; R3 refused keys show "keys_refused"; R5 cycle runs
    `guard_record.py --history` after each pull (a force-pushed rewrite is caught only by a runner that saw the
    old Record, i.e. within one ~50 min run).
+9a. **Closing read budget (fixed 2026-10-20):** C for every game used to need 3 credits per unstarted game left in today's budget,
+   ignoring A/B already paid, so Oct 19's 7 PM games got no C. Now `odds.c_for_every_game` counts only B + C still owed.
+   Open minors: it does not count a pull A still owed (Hard Rock posts late; can only under-reserve, never overspend);
+   `scripts/market_menu.py` still uses a flat 3 per game reserve.
 9. If a cycle pulled prices but its push failed, that cycle's credits are spent again next cycle. Rare.
 10. Discord: `notified.json` lives in the repo, so a cycle that fails after sending (run/push failure resets data/ to
    origin) can re-send that cycle's batch once. Rare, accepted. A webhook deleted in Discord gives 404: silently
@@ -354,6 +358,7 @@ probability x Hard Rock decimal payout - 1, on unrounded numbers; every threshol
 | 2026-10-11 | v1.0 set (section 4) | First build: Sharp standard from the DS backtest (2024-25 fit, 2025-26 out of sample) and one live Hard Rock pull | Backtest only; 0 graded live legs |
 
 ## 9. Session log (newest first, one line each)
+- 2026-10-20 1:45 PM daily check: chain alive (link 138, Actions runs ok), all steps/sources ok, pull A ran 1 PM (11 games), keys 384 (key 4 empty), tier 3, budget 50 (11 used); unmatched: Elias Pettersson (two on VAN, known); no excluded teams. Nothing to grade (Record empty since reset, live from today); Oct 19 shadow graded. Fixed: C-for-every-game reserve over-counted (Oct 19 7 PM games got no C; tonight's margin was 1 credit) -> counts only B + C still owed. Builder -> QA SHIP (no page change), 322 tests.
 - 2026-10-20 ~8:30 AM Researcher run 6 (daily, shots): N1-N5 registered before testing (team coherence of Hard Rock lines, within-team share, starting goalies, vig placement, home/road, close-game OT); 18 variants, best N2 +3.2% n230 / N1 +0.7% n110, nothing positive with n >= 300, no lockbox look (still 1); forward Q1a +7.2% n13 (1 night). Nothing passed.
 - 2026-10-19 ~11:55 PM Researcher run 5 (extra, live consensus night 1, shots): Q1a-m + Q2a-b registered before scoring; research/code/fwd/score_fwd.py re-scores them on all nights daily. Night 1: 64 of 66 lines had consensus (median 5 books); Hard Rock at/above consensus fair on 13 lines (mostly plus-money unders, up to +5.7%); Q1 X=0 6-4 +1.7u on 10 graded = noise (bar n >= 300); 0 stale events, Q2 0 bets. Ops: 7 PM games got no 45-min C read on Oct 19.
 - 2026-10-19 Builder (Matt: one version only, the gap + model part): Gap + Guard is now THE engine (v3.0). `engine.py` rebuilt on the research log

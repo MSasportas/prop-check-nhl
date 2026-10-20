@@ -488,9 +488,10 @@ class ClosingRead(unittest.TestCase):
             s.close()
 
     def test_tier_2_has_no_c_without_a_pick(self):
-        s = Sim(pool=12)                                      # 3 a game: tier 2
+        s = Sim(pool=11)                                      # 2.75 a game: tier 2 (3.0 is tier 3 by the paper floor)
         try:
             s.at("09:00")
+            self.assertLess(s.status()["allowance"], 3.0)            # under the paper floor: pulls run at tier 2
             s.at("13:02")
             s.set_lineup("CAR", "2026-10-11T17:00:00-04:00")
             s.set_lineup("PHI", "2026-10-11T17:00:00-04:00")

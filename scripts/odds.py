@@ -30,7 +30,6 @@ import teams
 
 API = "https://api.the-odds-api.com/v4/sports/icehockey_nhl"
 MAX_BOOKS_PER_REGION = 10     # the feed bills each group of up to 10 bookmakers as one region
-C_RESERVE = 3                 # credits per game still ahead today below which C goes back to live picks only
 SOURCE = {"ok": 0, "failed": 0}
 KEYS_REFUSED_TEXT = "Hard Rock prices are off: the odds keys were refused. New keys are needed."
 
@@ -454,6 +453,49 @@ def lineups_confirmed(state, games):
     return {g["id"]: ok(g["away"]) and ok(g["home"]) for g in games}
 
 
+def _missing(done, markets, due_at):
+    """The markets of a pull not yet RETURNED by a read made at or after its due time (done: one game's reads)."""
+    got = set()
+    for f in done:
+        if f["at"] >= due_at:
+            got |= set(f["returned"])
+    return [m for m in markets if m not in got]
+
+
+def credits_still_needed(now, games, tier, v, fetched, started, paper=False):
+    """Credits the rest of today's B and C reads would cost if C ran on every game: for each unstarted game, the
+    markets of B and C (C as an every-game read) not yet done whose window is still open, one credit a market.
+    When B and C fall due together (45 minute mark) they are one read, so their markets are counted once."""
+    if not games:
+        return 0
+    total = 0
+    for g in games:
+        if started.get(g["id"]):
+            continue
+        start = common.parse_iso(g["start"])
+        left = (start - now).total_seconds() / 60.0
+        done = fetched.get(g["id"], [])
+        c_due = start - timedelta(minutes=v["pull_c_min"])
+        b_due = start - timedelta(minutes=v["pull_b_min"])
+        b = _missing(done, markets_for(tier, "B", paper=paper), b_due) if left >= v["pull_latest_min"] else []
+        c = _missing(done, markets_for(tier, "C", c_every_game=True, paper=paper), c_due) \
+            if tier >= 2 and left >= v["pull_c_latest_min"] else []
+        if b and now >= c_due:
+            total += len(set(b) | set(c))                  # one read for both
+        else:
+            total += len(b) + len(c)
+    return total
+
+
+def c_for_every_game(now, games, tier, v, fetched, started, budget_left, paper=False):
+    """True when the closing read (C) runs on every unstarted game: tier 3+ and today's budget left still covers
+    every B and C read still owed today (credits_still_needed, at least 1). False = C only for games holding a live
+    shots pick, so a tight budget keeps the reads that protect live picks."""
+    if tier < 3:
+        return False
+    return budget_left >= max(credits_still_needed(now, games, tier, v, fetched, started, paper=paper), 1)
+
+
 def due_pulls(now, games, tier, v, fetched, live_markets, started, retry_min=30, lineups_ok=None, c_every_game=None,
               paper=False):
     """Decide, from what is on disk, which pull each game needs right now.
@@ -484,11 +526,7 @@ def due_pulls(now, games, tier, v, fetched, live_markets, started, retry_min=30,
         b_due = start - timedelta(minutes=v["pull_b_min"])     # B is per game: pull_b_min before ITS puck
 
         def need(markets, due_at):
-            got = set()
-            for f in done:
-                if f["at"] >= due_at:
-                    got |= set(f["returned"])
-            missing = [m for m in markets if m not in got]
+            missing = _missing(done, markets, due_at)
             last_try = None
             for f in done:                                 # only asks that included a still-missing market count
                 if f["at"] >= due_at and set(missing) & set(f["markets"]):
@@ -824,12 +862,13 @@ def run_pulls(now, slate, games, sched_left, cfg, rosters_for, live_markets, sta
         return res
 
     # 3. which pulls are due
-    # closing read for every game only while today's budget still has C_RESERVE credits per game still ahead
-    ahead = sum(1 for g in games if not started.get(g["id"]))
+    # closing read for every game only while today's budget left covers every B and C read still owed today
     paper = common.gap_guard_active(cfg, slate)
     tier = eff_tier(plan, paper)
-    c_every = tier >= 3 and plan["budget_today"] - pool.spent_on(slate) >= C_RESERVE * max(ahead, 1)
-    due = due_pulls(now, games, tier, v, fetched_map(day), live_markets, started,
+    fetched = fetched_map(day)
+    c_every = c_for_every_game(now, games, tier, v, fetched, started, plan["budget_today"] - pool.spent_on(slate),
+                               paper=paper)
+    due = due_pulls(now, games, tier, v, fetched, live_markets, started,
                     ops.get("empty_retry_min", 30), lineups_ok=lineups_ok, c_every_game=c_every, paper=paper)
     key_of = {name: m["feed_key"] for name, m in ops["markets"].items()}
     stage = day.get("stage") or {"since": None, "fetches": []}
