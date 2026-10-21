@@ -1,22 +1,22 @@
 {
  "slate_date": "2026-10-20",
- "generated_at": "2026-10-20T22:10:00-04:00",
- "status_at": "2026-10-20T22:10:00-04:00",
+ "generated_at": "2026-10-20T22:20:01-04:00",
+ "status_at": "2026-10-20T22:20:01-04:00",
  "valid_until": "2026-10-21T05:00:00-04:00",
  "status": {
   "prices_state": "ok",
   "prices_at": "2026-10-20T21:50:00-04:00",
   "next_price_read_at": null,
-  "stats_built_at": "2026-10-20T21:40:00-04:00",
+  "stats_built_at": "2026-10-20T22:20:01-04:00",
   "stats_through": "2026-10-19",
-  "lineups_at": "2026-10-20T22:00:00-04:00",
+  "lineups_at": "2026-10-20T22:20:01-04:00",
   "goalies_at": null,
-  "lineups_note": "15 of 22 team line pages are dated today.",
+  "lineups_note": "16 of 22 team line pages are dated today.",
   "lineups_state": "ok",
   "stats_state": "ok",
   "last_run": {
    "ok": true,
-   "at": "2026-10-20T22:10:00-04:00",
+   "at": "2026-10-20T22:20:01-04:00",
    "failed_step": null
   },
   "pool": {
@@ -27,14 +27,6 @@
    "low": false
   },
   "excluded_teams": [
-   {
-    "team": "ANA",
-    "reason": "stats behind"
-   },
-   {
-    "team": "CBJ",
-    "reason": "stats behind"
-   },
    {
     "team": "COL",
     "reason": "stats behind"
@@ -52,15 +44,7 @@
     "reason": "stats behind"
    },
    {
-    "team": "NYI",
-    "reason": "stats behind"
-   },
-   {
     "team": "SJS",
-    "reason": "stats behind"
-   },
-   {
-    "team": "TOR",
     "reason": "stats behind"
    },
    {
@@ -75,7 +59,7 @@
  "banners": [
   {
    "level": "warn",
-   "text": "Not covered tonight: ANA, CBJ, COL, LAK, MTL, NJD, NYI, SJS, TOR, WSH (stats behind)."
+   "text": "Not covered tonight: COL, LAK, MTL, NJD, SJS, WSH (stats behind)."
   }
  ],
  "empty": {
@@ -159,11 +143,8 @@
    },
    "started": true,
    "picks": 0,
-   "excluded_reason": "stats behind",
-   "excluded_teams": [
-    "ANA",
-    "NYI"
-   ]
+   "excluded_reason": null,
+   "excluded_teams": []
   },
   {
    "id": 2026020144,
@@ -213,11 +194,8 @@
    },
    "started": true,
    "picks": 0,
-   "excluded_reason": "stats behind",
-   "excluded_teams": [
-    "TOR",
-    "CBJ"
-   ]
+   "excluded_reason": null,
+   "excluded_teams": []
   },
   {
    "id": 2026020146,
@@ -345,7 +323,7 @@
    "home": "VGK",
    "start": "2026-10-20T22:30:00-04:00",
    "lineups": {
-    "away": "waiting",
+    "away": "confirmed",
     "home": "waiting"
    },
    "goalies": {
