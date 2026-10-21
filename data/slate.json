@@ -1,7 +1,7 @@
 {
  "slate_date": "2026-10-20",
- "generated_at": "2026-10-20T21:50:00-04:00",
- "status_at": "2026-10-20T21:50:00-04:00",
+ "generated_at": "2026-10-20T22:00:00-04:00",
+ "status_at": "2026-10-20T22:00:00-04:00",
  "valid_until": "2026-10-21T05:00:00-04:00",
  "status": {
   "prices_state": "ok",
@@ -9,14 +9,14 @@
   "next_price_read_at": null,
   "stats_built_at": "2026-10-20T21:40:00-04:00",
   "stats_through": "2026-10-19",
-  "lineups_at": "2026-10-20T21:40:00-04:00",
+  "lineups_at": "2026-10-20T22:00:00-04:00",
   "goalies_at": null,
   "lineups_note": "15 of 22 team line pages are dated today.",
   "lineups_state": "ok",
   "stats_state": "ok",
   "last_run": {
    "ok": true,
-   "at": "2026-10-20T21:50:00-04:00",
+   "at": "2026-10-20T22:00:00-04:00",
    "failed_step": null
   },
   "pool": {
@@ -78,7 +78,11 @@
    "text": "Not covered tonight: ANA, CBJ, COL, LAK, MTL, NJD, NYI, SJS, TOR, WSH (stats behind)."
   }
  ],
- "empty": null,
+ "empty": {
+  "code": "none_qualified",
+  "text": "No picks yet today",
+  "sub": "182 lines read, none cleared both checks. Today's earlier picks are under Started."
+ },
  "games": [
   {
    "id": 2026020141,
@@ -330,7 +334,7 @@
      "status": "confirmed"
     }
    },
-   "started": false,
+   "started": true,
    "picks": 1,
    "excluded_reason": null,
    "excluded_teams": []
@@ -361,60 +365,6 @@
   }
  ],
  "picks": [
-  {
-   "id": "2026-10-20:2026020150:8478427:shots:2.5:under",
-   "price": 120,
-   "first_price": 120,
-   "first_price_at": "2026-10-20T20:30:01-04:00",
-   "worst_price": 120,
-   "p": 0.4749,
-   "breakeven": 0.4545,
-   "p_pct": 47,
-   "breakeven_pct": 45,
-   "state": "lineup",
-   "history": [
-    {
-     "at": "2026-10-20T20:30:01-04:00",
-     "text": "Lineup confirmed"
-    }
-   ],
-   "prices": [
-    {
-     "at": "2026-10-20T20:30:01-04:00",
-     "price": 120
-    }
-   ],
-   "pulled": null,
-   "graded": null,
-   "rank": 1,
-   "tier": "main",
-   "game_id": 2026020150,
-   "player": "S. Aho",
-   "player_id": 8478427,
-   "team": "CAR",
-   "opp": "VAN",
-   "home": false,
-   "start": "2026-10-20T22:00:00-04:00",
-   "market": "shots",
-   "line": 2.5,
-   "side": "under",
-   "bet": "Under 2.5 shots on goal",
-   "price_at": "2026-10-20T20:30:01-04:00",
-   "gap_pct": 4.2,
-   "market_fair_pct": 47.3,
-   "n_books": 6,
-   "guard": {
-    "verdict": "agrees",
-    "ours_pct": 47.5,
-    "model_pct": 49.6
-   },
-   "settled": "goalie",
-   "settled_label": "Goalie confirmed",
-   "reason": "6 other books say 47.3%; Hard Rock's +120 only needs 45.5%. Our model agrees (our blend: 47.5%).",
-   "thin": false,
-   "games_used": 89,
-   "games_this_season": 10
-  },
   {
    "id": "2026-10-20:2026020146:8480023:shots:1.5:under",
    "price": -105,
@@ -652,6 +602,64 @@
    "thin": true,
    "games_used": 91,
    "games_this_season": 9
+  },
+  {
+   "id": "2026-10-20:2026020150:8478427:shots:2.5:under",
+   "price": 120,
+   "first_price": 120,
+   "first_price_at": "2026-10-20T20:30:01-04:00",
+   "worst_price": 120,
+   "p": 0.4749,
+   "breakeven": 0.4545,
+   "p_pct": 47,
+   "breakeven_pct": 45,
+   "state": "locked",
+   "history": [
+    {
+     "at": "2026-10-20T20:30:01-04:00",
+     "text": "Lineup confirmed"
+    },
+    {
+     "at": "2026-10-20T22:00:00-04:00",
+     "text": "Locked"
+    }
+   ],
+   "prices": [
+    {
+     "at": "2026-10-20T20:30:01-04:00",
+     "price": 120
+    }
+   ],
+   "pulled": null,
+   "graded": null,
+   "rank": null,
+   "tier": "main",
+   "game_id": 2026020150,
+   "player": "S. Aho",
+   "player_id": 8478427,
+   "team": "CAR",
+   "opp": "VAN",
+   "home": false,
+   "start": "2026-10-20T22:00:00-04:00",
+   "market": "shots",
+   "line": 2.5,
+   "side": "under",
+   "bet": "Under 2.5 shots on goal",
+   "price_at": "2026-10-20T20:30:01-04:00",
+   "gap_pct": 4.2,
+   "market_fair_pct": 47.3,
+   "n_books": 6,
+   "guard": {
+    "verdict": "agrees",
+    "ours_pct": 47.5,
+    "model_pct": 49.6
+   },
+   "settled": "goalie",
+   "settled_label": "Goalie confirmed",
+   "reason": "6 other books say 47.3%; Hard Rock's +120 only needs 45.5%. Our model agrees (our blend: 47.5%).",
+   "thin": false,
+   "games_used": 89,
+   "games_this_season": 10
   }
  ],
  "parlays": [],
