@@ -158,6 +158,25 @@ Forward variants unchanged at 15. Lockbox looks: still 1. Output: research/code/
 Script note (before scoring): N1b normalises both shares over the listed players that HAVE a history share (players with < 5 games dropped from the
 group, not the whole group), as the registered 'else row dropped' reads.
 
+## Run 7 (Researcher, 2026-10-21 AM, daily). SHOTS ON GOAL ONLY. Registered before any of these were tested.
+No odds key, no historical odds pull. Free NHL stats REST per-game logs refetched to scratch with research/code/r6/fetch6.py (skater,
+team, goalie; 2024-25 + 2025-26 through Feb 28; lockbox never fetched). Every feature for a line dated d uses only games dated < d.
+Common (as runs 4 and 6): shots45_lines, every two-way Hard Rock line, proportional de-vig fair f, side price >= -200, 1u flat,
+regulation + OT, VOID = no bet, game-clustered bootstrap. Fixed rules (no fit) report all bets Nov-Feb with folds. Logistic tests:
+research/code/wf.py (logit P(over) = a + a15*[1.5] + a35*[>=3.5] + b*logit(f) + standardised terms, L2 = 2, fit on all months before
+the test month), bet the side with p - BE >= T, T in {.01, .02, .03}. Placebo (shuffle the feature within date x line, 200 times) for
+any variant positive Nov-Feb with n >= 300; lockbox (Mar 1+) only for such a frozen variant, once, needing one-sided p < 0.05/2 = 0.025.
+
+| id | date | rule (exact) | data | result | status |
+|---|---|---|---|---|---|
+| T1 | 2026-10-21 | **Return from absence.** missed = number of his current team's 2025-26 games (before d) played after his own last 2025-26 game for that team (0 if he played the team's last game; 0 if he has no 2025-26 game for that team, e.g. a trade or season debut). Fixed rules: T1a UNDER when missed >= 1; T1b UNDER when missed >= 3. Logistic T1c: terms c1*[missed >= 1] + c2*log(1 + missed) (3 T). 5 variants. Idea: rust and eased-in minutes after a layoff, priced off his usual line | skater + team logs + shots45 | | registered |
+| T2 | 2026-10-21 | **Star tax (retail book shades popular overs).** pts = his 2024-25 regular-season points (sum of the per-game log). Fixed rules: T2a UNDER on players in the league top 25 by pts; T2b top 50. Logistic T2c: term c*log(1 + pts + his 2025-26 points before d) (3 T). 5 variants | skater logs + shots45 | | registered |
+| T3 | 2026-10-21 | **Time-zone travel.** tz of each arena (home team: ET 0, CT -1, MT -2, PT -3; UTA MT). For his team: prev = its last game before d; if it was <= 2 days before d, shift = tz(this arena) - tz(prev arena), else 0. Fixed rules: T3a UNDER when abs(shift) >= 2; T3b UNDER when shift >= 2 (flew east, lost hours). Logistic T3c: terms c1*abs(shift) + c2*shift (3 T). 5 variants | team logs + shots45 | | registered |
+| T4 | 2026-10-21 | **Big-slate calibration (book attention).** slate = number of NHL games on date d (team logs, known in advance). big = [slate >= 10]. Logistic terms c1*big + c2*big*logit(f) (is Hard Rock less calibrated on crowded nights?) (3 T) | team logs + shots45 | | registered |
+| T5 | 2026-10-21 | **New team.** new = his 2024-25 last team != r.team. g = his 2025-26 games for r.team before d. If new and g >= 3: dn = (his SOG/g with r.team this season - his 2024-25 SOG/g) x g/(g + 10), else 0. Terms c1*new*[g < 20] + c2*dn (does the book anchor to last season's role for movers?) (3 T) | skater logs + shots45 | | registered |
+
+Run 7 count: 21 variants registered (T1 5, T2 5, T3 5, T4 3, T5 3).
+
 ## Queued (not yet tested)
 | id | rule idea | data | status |
 |---|---|---|---|
