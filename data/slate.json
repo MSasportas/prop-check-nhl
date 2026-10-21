@@ -1,7 +1,7 @@
 {
  "slate_date": "2026-10-20",
- "generated_at": "2026-10-20T22:20:01-04:00",
- "status_at": "2026-10-20T22:20:01-04:00",
+ "generated_at": "2026-10-20T22:30:00-04:00",
+ "status_at": "2026-10-20T22:30:00-04:00",
  "valid_until": "2026-10-21T05:00:00-04:00",
  "status": {
   "prices_state": "ok",
@@ -16,7 +16,7 @@
   "stats_state": "ok",
   "last_run": {
    "ok": true,
-   "at": "2026-10-20T22:20:01-04:00",
+   "at": "2026-10-20T22:30:00-04:00",
    "failed_step": null
   },
   "pool": {
@@ -63,9 +63,9 @@
   }
  ],
  "empty": {
-  "code": "none_qualified",
-  "text": "No picks yet today",
-  "sub": "182 lines read, none cleared both checks. Today's earlier picks are under Started."
+  "code": "all_started",
+  "text": "Every game has started.",
+  "sub": "Tonight's picks are under Started."
  },
  "games": [
   {
@@ -336,7 +336,7 @@
      "status": "confirmed"
     }
    },
-   "started": false,
+   "started": true,
    "picks": 0,
    "excluded_reason": null,
    "excluded_teams": []
@@ -493,7 +493,11 @@
     }
    ],
    "pulled": null,
-   "graded": null,
+   "graded": {
+    "result": "W",
+    "actual": "had 2",
+    "units": 1.05
+   },
    "rank": null,
    "tier": "main",
    "game_id": 2026020144,
