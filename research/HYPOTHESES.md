@@ -176,6 +176,7 @@ any variant positive Nov-Feb with n >= 300; lockbox (Mar 1+) only for such a fro
 | T5 | 2026-10-21 | **New team.** new = his 2024-25 last team != r.team. g = his 2025-26 games for r.team before d. If new and g >= 3: dn = (his SOG/g with r.team this season - his 2024-25 SOG/g) x g/(g + 10), else 0. Terms c1*new*[g < 20] + c2*dn (does the book anchor to last season's role for movers?) (3 T) | skater logs + shots45 | | registered |
 
 Run 7 count: 21 variants registered (T1 5, T2 5, T3 5, T4 3, T5 3).
+| LB2 | 2026-10-21 | **Lockbox look #2, FROZEN before looking: T5 at T = .01** (the only run-7 variant positive Nov-Feb with n >= 300: +1.8% n405, 90% [-5.8, +9.3]; placebo 0 of 200 shuffles >= real, shuffled mean -8.5% sd 3.1). Exact rule unchanged: wf.py logistic with terms new*[g < 20] and dn, L2 2, standardised on training rows; walk-forward test months 2026-03 (train Oct-Feb) and 2026-04 (train Oct-Mar); bet side with p - BE >= .01, price >= -200. Pass = one-sided game-clustered bootstrap p < 0.05/2 = 0.025 on all lockbox bets (and ROI > 0). Lockbox logs fetched with research/code/r7/fetch_lb.py | shots45 Mar-Apr + logs | | registered |
 
 ## Queued (not yet tested)
 | id | rule idea | data | status |
