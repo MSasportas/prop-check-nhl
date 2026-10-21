@@ -36,7 +36,7 @@ The aim is ROI, but a false edge costs Matt real money: the bar below never move
    result, later stat, or lineup not known at bet time. Prices: bet at the snapshot price you would have had.
 3. **Walk-forward.** Fit on months up to m, score m+1, rolling (Nov 2025 -> Feb 2026). Report every fold.
 4. **Lockbox** = games Mar 1 - Apr 2026. Only a FROZEN candidate that is positive walk-forward with n >= 300 may
-   look, once. Each look is logged (LOG.md, count). One look already happened (2026-10-19, v2+B2B, +2.4% noise).
+   look, once. Each look is logged (LOG.md, count). Looks so far: 2 (2026-10-19 v2+B2B +2.4% noise; 2026-10-21 LB2 T5 movers -7.5%, p 0.85).
    Pass on the lockbox needs one-sided p < 0.05 / (number of lockbox looks so far, including this one).
 5. **Count everything.** Every variant tried counts. Report expected false positives and a shuffle placebo.
 6. **Grading** like the Record: 1u flat at the posted price; regulation + OT; no ice time = void; tie = push.

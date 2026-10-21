@@ -1,5 +1,25 @@
 # LOG.md: Researcher runs (newest first)
 
+- 2026-10-21 ~8:15 AM ET (Researcher run 7, daily; SHOTS ON GOAL ONLY). No key used, no historical odds pull. T1-T5 registered and pushed
+  (810c48b) before any test ran; LB2 frozen and pushed (9da1bcb) before the lockbox was looked at. Free NHL stats REST logs refetched to
+  scratch (r6/fetch6.py; Mar-Apr logs only after LB2 was frozen, r7/fetch_lb.py). Script research/code/r7/t7.py, output t7_results.txt.
+  10,405 graded Nov-Feb lines.
+  - T1 return from absence (UNDER on players back from missed games): -13.0% n161 / -21.8% n95. The logistic found the opposite:
+    returners go OVER (T1c T=.03 +23.3% n84, all 4 folds positive, p .0085 before correction, ~0.18 after 21 variants, n < 300). Lead only:
+    queued as Q7, forward only (history now seen).
+  - T2 star tax (unders on last season's top-25/50 scorers): -5.5% n1,038 / -7.7% n2,077. No retail shading of stars.
+  - T3 time-zone travel (unders after a 2+ zone trip within 2 days): +1.5% n498 [-5.8,+8.0] / east +0.5% n256; logistic -9.4%. Noise.
+  - T4 big-slate calibration: -11.1% n363 (Nov only). Hard Rock is not sloppier on 10+ game nights.
+  - T5 new team (book anchoring to last season for movers): T=.01 +1.8% n405 [-5.8,+9.3], folds -10.3/+25.2/+6.8/+22.7; T=.02 +15.9% n148.
+    Placebo 0/200 >= real. Frozen as LB2 -> **lockbox look #2: -7.5% n179 [-18.6,+4.3], p 0.85. Failed.**
+  - Forward re-score (score_fwd.py, nights Oct 19-20, 6 games + 13 games): Q1a +5.5% n82 [-13,+23], Q1f +12.8% n65, Q1k Pinnacle +3.4%
+    n70, Q1m -1.4% n8; mean CLV ~= EV (+2.6%). Q2a/b 0 bets. Oct 20: 117 of 1,096 side-reads at/above consensus (10.7%), 5 stale events.
+    Too small to judge (bar n >= 300, p < 0.0033).
+  21 variants (~1.05 false positives expected); all-time historical 292. Lockbox looks: 2 (next needs p < 0.0167). Forward variants 15.
+  **Verdict: nothing passed; no candidate for the Sharp.** The one variant that reached the lockbox (movers) was negative there.
+  Next: (1) Q7 returners' overs, forward (needs a missed-games field on live shadow lines; ask the DS/Builder via the CEO, or derive from
+  data/state/lineup_history and NHL boxscores in research code); (2) Q6 Q1 split by read (A vs B/C) and unders, registered with a clean
+  start date; (3) T5 movers and T3 travel re-checked forward on the shadow log only if Q1's consensus feed shows Hard Rock lagging those spots.
 - 2026-10-20 ~8:30 AM ET (Researcher run 6, daily; SHOTS ON GOAL ONLY). No key used, no historical odds pull. N1-N5 registered and pushed
   (ae64445) before any test ran. Free NHL stats REST per-game logs (skater, team, goalie; 2024-25 + 2025-26 through Feb 28 only, lockbox
   never fetched). Scripts: research/code/r6/ (fetch6.py, n6.py; output n6_results.txt). 12,952 pre-lockbox two-way lines.

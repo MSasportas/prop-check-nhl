@@ -10,11 +10,17 @@ sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), ".."
 import rlib, wf  # noqa: E402
 
 D = os.environ["PC_R7_DIR"]
+LB = len(sys.argv) > 1 and sys.argv[1] == "lockbox"   # LB2 only: frozen T5 T=.01, look #2
+if LB:
+    rlib.LOCKBOX = "2026-05-01"
+    rlib.TEST_MONTHS = ["2026-03", "2026-04"]
+EXTRA_T = ["nhl/team_2526_lb.jsonl"] if LB else []
+EXTRA_S = ("nhl/skater_2526_lb.jsonl",) if LB else ()
 jl = lambda p: [json.loads(l) for l in open(os.path.join(D, p))]
 
 # ---- team games: abbrev -> sorted [(date, gid, homeRoad, opp)]
 tg = defaultdict(list); by_gid = defaultdict(list)
-for t in jl("nhl/team_2425.jsonl") + jl("nhl/team_2526.jsonl"):
+for t in jl("nhl/team_2425.jsonl") + jl("nhl/team_2526.jsonl") + sum((jl(x) for x in EXTRA_T), []):
     by_gid[t["gameId"]].append(t)
 slate = Counter()
 for gid, two in by_gid.items():
@@ -28,7 +34,7 @@ for L in tg.values():
 tdates = {k: [x[0] for x in L] for k, L in tg.items()}
 
 sk = defaultdict(list)  # pid -> [(date, gid, team, shots, points)]
-for p in ("nhl/skater_2425.jsonl", "nhl/skater_2526.jsonl"):
+for p in ("nhl/skater_2425.jsonl", "nhl/skater_2526.jsonl") + EXTRA_S:
     for s in jl(p):
         sk[s["playerId"]].append((s["gameDate"], s["gameId"], s["teamAbbrev"], s["shots"], s["points"]))
 for L in sk.values():
@@ -166,3 +172,9 @@ if len(sys.argv) > 2 and sys.argv[1] == "placebo" and sys.argv[2] == "T5":
     rois = np.array(rois)
     print("T5 T=.01 real ROI %+.2f%% n%d | placebo mean %+.2f%% sd %.2f mean n %.0f | share >= real %.3f" % (
         100 * real["roi"], real["n"], 100 * rois.mean(), 100 * rois.std(), np.mean(ns), (rois >= real["roi"]).mean()))
+
+
+if LB:
+    b = wf.run("LB2-T5", lines, lambda r: [r["new"], r["dn"]], Ts=(0.01,), verbose=True)[0.01]
+    s_ = rlib.summ(b)
+    print("LB2 lockbox T5 T=.01:", rlib.fmt(s_), "| one-sided p %.4f (pass needs < 0.025 and ROI > 0)" % s_["p_one"], "|", rlib.by_month(b))
