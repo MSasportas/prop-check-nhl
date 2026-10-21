@@ -1,13 +1,13 @@
 {
  "slate_date": "2026-10-20",
- "generated_at": "2026-10-20T22:40:01-04:00",
- "status_at": "2026-10-20T22:40:01-04:00",
+ "generated_at": "2026-10-20T22:50:01-04:00",
+ "status_at": "2026-10-20T22:50:01-04:00",
  "valid_until": "2026-10-21T05:00:00-04:00",
  "status": {
   "prices_state": "ok",
   "prices_at": "2026-10-20T21:50:00-04:00",
   "next_price_read_at": null,
-  "stats_built_at": "2026-10-20T22:30:15-04:00",
+  "stats_built_at": "2026-10-20T22:50:01-04:00",
   "stats_through": "2026-10-19",
   "lineups_at": "2026-10-20T22:20:01-04:00",
   "goalies_at": null,
@@ -16,7 +16,7 @@
   "stats_state": "ok",
   "last_run": {
    "ok": true,
-   "at": "2026-10-20T22:40:01-04:00",
+   "at": "2026-10-20T22:50:01-04:00",
    "failed_step": null
   },
   "pool": {
@@ -28,15 +28,11 @@
   },
   "excluded_teams": [
    {
-    "team": "LAK",
+    "team": "BOS",
     "reason": "stats behind"
    },
    {
-    "team": "MTL",
-    "reason": "stats behind"
-   },
-   {
-    "team": "SJS",
+    "team": "DAL",
     "reason": "stats behind"
    },
    {
@@ -45,10 +41,6 @@
    },
    {
     "team": "WPG",
-    "reason": "stats behind"
-   },
-   {
-    "team": "WSH",
     "reason": "stats behind"
    }
   ],
@@ -59,7 +51,7 @@
  "banners": [
   {
    "level": "warn",
-   "text": "Not covered tonight: LAK, MTL, SJS, STL, WPG, WSH (stats behind)."
+   "text": "Not covered tonight: BOS, DAL, STL, WPG (stats behind)."
   }
  ],
  "empty": {
@@ -89,11 +81,8 @@
    },
    "started": true,
    "picks": 0,
-   "excluded_reason": "stats behind",
-   "excluded_teams": [
-    "SJS",
-    "MTL"
-   ]
+   "excluded_reason": null,
+   "excluded_teams": []
   },
   {
    "id": 2026020142,
@@ -164,11 +153,8 @@
    },
    "started": true,
    "picks": 1,
-   "excluded_reason": "stats behind",
-   "excluded_teams": [
-    "LAK",
-    "WSH"
-   ]
+   "excluded_reason": null,
+   "excluded_teams": []
   },
   {
    "id": 2026020145,
@@ -242,8 +228,11 @@
    },
    "started": true,
    "picks": 1,
-   "excluded_reason": null,
-   "excluded_teams": []
+   "excluded_reason": "stats behind",
+   "excluded_teams": [
+    "BOS",
+    "DAL"
+   ]
   },
   {
    "id": 2026020148,

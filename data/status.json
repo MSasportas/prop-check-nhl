@@ -1,10 +1,10 @@
 {
  "ok": true,
  "slate_date": "2026-10-20",
- "started_at": "2026-10-20T22:40:01-04:00",
- "status_at": "2026-10-20T22:40:01-04:00",
- "finished_at": "2026-10-20T22:40:01-04:00",
- "last_ok_at": "2026-10-20T22:40:01-04:00",
+ "started_at": "2026-10-20T22:50:01-04:00",
+ "status_at": "2026-10-20T22:50:01-04:00",
+ "finished_at": "2026-10-20T22:50:02-04:00",
+ "last_ok_at": "2026-10-20T22:50:01-04:00",
  "failed_step": null,
  "steps": [
   {
@@ -19,8 +19,8 @@
   },
   {
    "step": "stats",
-   "status": "skipped",
-   "note": "waiting to retry"
+   "status": "ok",
+   "note": "1 window(s) read, 4 team-games still missing"
   },
   {
    "step": "lineups",
@@ -121,15 +121,11 @@
  ],
  "excluded_teams": [
   {
-   "team": "LAK",
+   "team": "BOS",
    "reason": "stats behind"
   },
   {
-   "team": "MTL",
-   "reason": "stats behind"
-  },
-  {
-   "team": "SJS",
+   "team": "DAL",
    "reason": "stats behind"
   },
   {
@@ -138,10 +134,6 @@
   },
   {
    "team": "WPG",
-   "reason": "stats behind"
-  },
-  {
-   "team": "WSH",
    "reason": "stats behind"
   }
  ],
@@ -154,7 +146,7 @@
  "runner": {
   "event": "workflow_dispatch",
   "run_id": "39533356587",
-  "iteration": 2,
+  "iteration": 3,
   "chain_link": 149,
   "chain_started_at": "2026-10-16T10:00:13-04:00",
   "run_started_at": "2026-10-20T22:30:14-04:00"
