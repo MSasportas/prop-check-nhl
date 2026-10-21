@@ -1,7 +1,7 @@
 {
  "version": 1,
  "note": "Gap + Guard research log. Every flag here is a pick on the page and in the Record; vetoed and capped rows are research only.",
- "generated_at": "2026-10-20T22:50:01-04:00",
+ "generated_at": "2026-10-20T23:20:01-04:00",
  "slate": "2026-10-20",
  "active": true,
  "window": {
@@ -147,8 +147,8 @@
     "state": "locked",
     "close_fair_pct": 50.9,
     "clv_pct": null,
-    "result": null,
-    "units": null
+    "result": "W",
+    "units": 1.05
    },
    {
     "id": "2026-10-20:2026020146:8480023:1.5:under",
@@ -185,8 +185,8 @@
     "state": "pulled",
     "close_fair_pct": 52.1,
     "clv_pct": 1.8,
-    "result": null,
-    "units": null
+    "result": "W",
+    "units": 0.952
    }
   ],
   "vetoes": [],
@@ -196,12 +196,12 @@
  "nov2": {
   "gaps_measured": 4,
   "gaps_logged": 5,
-  "graded_picks": 1,
-  "w": 1,
+  "graded_picks": 3,
+  "w": 3,
   "l": 0,
   "void": 0,
-  "units": 1.0499999999999998,
-  "wins_z": 0.9342518527130325,
+  "units": 3.052380952380952,
+  "wins_z": 1.6592716526243783,
   "clv_gaps": {
    "n": 4,
    "mean": 0.04283932724244316,

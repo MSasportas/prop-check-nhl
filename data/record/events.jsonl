@@ -9,3 +9,5 @@
 {"at":"2026-10-20T21:00:01-04:00","code":"guard_fails","id":"2026-10-20:2026020149:8482665:shots:1.5:under","reason":"Our model no longer backs this price","t":"pulled"}
 {"at":"2026-10-20T22:00:00-04:00","id":"2026-10-20:2026020150:8478427:shots:2.5:under","state":"locked","t":"locked"}
 {"actual":2,"actual_text":"had 2","at":"2026-10-20T22:30:00-04:00","id":"2026-10-20:2026020144:8471214:shots:2.5:under","price":105,"result":"W","t":"graded","units":1.05}
+{"actual":0,"actual_text":"had 0","at":"2026-10-20T23:20:01-04:00","id":"2026-10-20:2026020146:8480023:shots:1.5:under","price":-105,"result":"W","t":"graded","units":0.9524}
+{"actual":1,"actual_text":"had 1","at":"2026-10-20T23:20:01-04:00","id":"2026-10-20:2026020147:8482175:shots:1.5:under","price":105,"result":"W","t":"graded","units":1.05}

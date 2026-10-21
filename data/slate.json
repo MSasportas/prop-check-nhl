@@ -1,7 +1,7 @@
 {
  "slate_date": "2026-10-20",
- "generated_at": "2026-10-20T22:50:01-04:00",
- "status_at": "2026-10-20T22:50:01-04:00",
+ "generated_at": "2026-10-20T23:20:01-04:00",
+ "status_at": "2026-10-20T23:20:01-04:00",
  "valid_until": "2026-10-21T05:00:00-04:00",
  "status": {
   "prices_state": "ok",
@@ -16,7 +16,7 @@
   "stats_state": "ok",
   "last_run": {
    "ok": true,
-   "at": "2026-10-20T22:50:01-04:00",
+   "at": "2026-10-20T23:20:01-04:00",
    "failed_step": null
   },
   "pool": {
@@ -363,7 +363,11 @@
     "at": "2026-10-20T19:20:01-04:00",
     "reason": "Our model no longer backs this price"
    },
-   "graded": null,
+   "graded": {
+    "result": "W",
+    "actual": "had 0",
+    "units": 0.9524
+   },
    "rank": null,
    "tier": "main",
    "game_id": 2026020146,
@@ -544,7 +548,11 @@
     }
    ],
    "pulled": null,
-   "graded": null,
+   "graded": {
+    "result": "W",
+    "actual": "had 1",
+    "units": 1.05
+   },
    "rank": null,
    "tier": "main",
    "game_id": 2026020147,
