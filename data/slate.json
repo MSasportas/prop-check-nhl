@@ -1,7 +1,7 @@
 {
  "slate_date": "2026-10-20",
- "generated_at": "2026-10-20T19:50:00-04:00",
- "status_at": "2026-10-20T19:50:00-04:00",
+ "generated_at": "2026-10-20T20:00:00-04:00",
+ "status_at": "2026-10-20T20:00:00-04:00",
  "valid_until": "2026-10-21T05:00:00-04:00",
  "status": {
   "prices_state": "ok",
@@ -16,7 +16,7 @@
   "stats_state": "ok",
   "last_run": {
    "ok": true,
-   "at": "2026-10-20T19:50:00-04:00",
+   "at": "2026-10-20T20:00:00-04:00",
    "failed_step": null
   },
   "pool": {
@@ -32,7 +32,11 @@
   "tier": 3
  },
  "banners": [],
- "empty": null,
+ "empty": {
+  "code": "none_qualified",
+  "text": "No picks yet today",
+  "sub": "133 lines read, none cleared both checks. Today's earlier picks are under Started. Next read at 8:10 PM."
+ },
  "games": [
   {
    "id": 2026020141,
@@ -173,7 +177,7 @@
      "status": "confirmed"
     }
    },
-   "started": false,
+   "started": true,
    "picks": 0,
    "excluded_reason": null,
    "excluded_teams": []
@@ -197,7 +201,7 @@
      "status": "confirmed"
     }
    },
-   "started": false,
+   "started": true,
    "picks": 1,
    "excluded_reason": null,
    "excluded_teams": []
@@ -300,60 +304,6 @@
   }
  ],
  "picks": [
-  {
-   "id": "2026-10-20:2026020147:8482175:shots:1.5:under",
-   "price": 105,
-   "first_price": 105,
-   "first_price_at": "2026-10-20T19:20:01-04:00",
-   "worst_price": 105,
-   "p": 0.5065,
-   "breakeven": 0.4878,
-   "p_pct": 50,
-   "breakeven_pct": 49,
-   "state": "lineup",
-   "history": [
-    {
-     "at": "2026-10-20T19:20:01-04:00",
-     "text": "Lineup confirmed"
-    }
-   ],
-   "prices": [
-    {
-     "at": "2026-10-20T19:20:01-04:00",
-     "price": 105
-    }
-   ],
-   "pulled": null,
-   "graded": null,
-   "rank": 1,
-   "tier": "main",
-   "game_id": 2026020147,
-   "player": "J. Peterka",
-   "player_id": 8482175,
-   "team": "BOS",
-   "opp": "DAL",
-   "home": false,
-   "start": "2026-10-20T20:00:00-04:00",
-   "market": "shots",
-   "line": 1.5,
-   "side": "under",
-   "bet": "Under 1.5 shots on goal",
-   "price_at": "2026-10-20T19:20:01-04:00",
-   "gap_pct": 4.4,
-   "market_fair_pct": 50.9,
-   "n_books": 6,
-   "guard": {
-    "verdict": "agrees",
-    "ours_pct": 50.6,
-    "model_pct": 51.4
-   },
-   "settled": "goalie",
-   "settled_label": "Goalie confirmed",
-   "reason": "6 other books say 50.9%; Hard Rock's +105 only needs 48.8%. Our model agrees (our blend: 50.7%).",
-   "thin": true,
-   "games_used": 91,
-   "games_this_season": 9
-  },
   {
    "id": "2026-10-20:2026020146:8480023:shots:1.5:under",
    "price": -105,
@@ -472,6 +422,64 @@
    "thin": false,
    "games_used": 90,
    "games_this_season": 8
+  },
+  {
+   "id": "2026-10-20:2026020147:8482175:shots:1.5:under",
+   "price": 105,
+   "first_price": 105,
+   "first_price_at": "2026-10-20T19:20:01-04:00",
+   "worst_price": 105,
+   "p": 0.5065,
+   "breakeven": 0.4878,
+   "p_pct": 50,
+   "breakeven_pct": 49,
+   "state": "locked",
+   "history": [
+    {
+     "at": "2026-10-20T19:20:01-04:00",
+     "text": "Lineup confirmed"
+    },
+    {
+     "at": "2026-10-20T20:00:00-04:00",
+     "text": "Locked"
+    }
+   ],
+   "prices": [
+    {
+     "at": "2026-10-20T19:20:01-04:00",
+     "price": 105
+    }
+   ],
+   "pulled": null,
+   "graded": null,
+   "rank": null,
+   "tier": "main",
+   "game_id": 2026020147,
+   "player": "J. Peterka",
+   "player_id": 8482175,
+   "team": "BOS",
+   "opp": "DAL",
+   "home": false,
+   "start": "2026-10-20T20:00:00-04:00",
+   "market": "shots",
+   "line": 1.5,
+   "side": "under",
+   "bet": "Under 1.5 shots on goal",
+   "price_at": "2026-10-20T19:20:01-04:00",
+   "gap_pct": 4.4,
+   "market_fair_pct": 50.9,
+   "n_books": 6,
+   "guard": {
+    "verdict": "agrees",
+    "ours_pct": 50.6,
+    "model_pct": 51.4
+   },
+   "settled": "goalie",
+   "settled_label": "Goalie confirmed",
+   "reason": "6 other books say 50.9%; Hard Rock's +105 only needs 48.8%. Our model agrees (our blend: 50.7%).",
+   "thin": true,
+   "games_used": 91,
+   "games_this_season": 9
   }
  ],
  "parlays": [],
