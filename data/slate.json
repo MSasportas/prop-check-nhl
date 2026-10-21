@@ -1,7 +1,7 @@
 {
  "slate_date": "2026-10-20",
- "generated_at": "2026-10-20T22:30:15-04:00",
- "status_at": "2026-10-20T22:30:15-04:00",
+ "generated_at": "2026-10-20T22:40:01-04:00",
+ "status_at": "2026-10-20T22:40:01-04:00",
  "valid_until": "2026-10-21T05:00:00-04:00",
  "status": {
   "prices_state": "ok",
@@ -16,7 +16,7 @@
   "stats_state": "ok",
   "last_run": {
    "ok": true,
-   "at": "2026-10-20T22:30:15-04:00",
+   "at": "2026-10-20T22:40:01-04:00",
    "failed_step": null
   },
   "pool": {
@@ -40,6 +40,14 @@
     "reason": "stats behind"
    },
    {
+    "team": "STL",
+    "reason": "stats behind"
+   },
+   {
+    "team": "WPG",
+    "reason": "stats behind"
+   },
+   {
     "team": "WSH",
     "reason": "stats behind"
    }
@@ -51,7 +59,7 @@
  "banners": [
   {
    "level": "warn",
-   "text": "Not covered tonight: LAK, MTL, SJS, WSH (stats behind)."
+   "text": "Not covered tonight: LAK, MTL, SJS, STL, WPG, WSH (stats behind)."
   }
  ],
  "empty": {
@@ -207,8 +215,11 @@
    },
    "started": true,
    "picks": 0,
-   "excluded_reason": null,
-   "excluded_teams": []
+   "excluded_reason": "stats behind",
+   "excluded_teams": [
+    "WPG",
+    "STL"
+   ]
   },
   {
    "id": 2026020147,
