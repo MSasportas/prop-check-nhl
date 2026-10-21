@@ -75,7 +75,7 @@
   },
   "VAN": {
    "name": "Leevi Merilainen",
-   "status": "expected"
+   "status": "confirmed"
   },
   "CAR": {
    "name": "Pyotr Kochetkov",
@@ -90,5 +90,5 @@
    "status": "expected"
   }
  },
- "checked_at": "2026-10-20T21:00:01-04:00"
+ "checked_at": "2026-10-20T21:40:00-04:00"
 }
