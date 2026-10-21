@@ -1,10 +1,10 @@
 {
  "ok": true,
  "slate_date": "2026-10-20",
- "started_at": "2026-10-20T21:40:00-04:00",
- "status_at": "2026-10-20T21:40:00-04:00",
- "finished_at": "2026-10-20T21:40:04-04:00",
- "last_ok_at": "2026-10-20T21:40:00-04:00",
+ "started_at": "2026-10-20T21:50:00-04:00",
+ "status_at": "2026-10-20T21:50:00-04:00",
+ "finished_at": "2026-10-20T21:50:03-04:00",
+ "last_ok_at": "2026-10-20T21:50:00-04:00",
  "failed_step": null,
  "steps": [
   {
@@ -20,12 +20,12 @@
   {
    "step": "stats",
    "status": "ok",
-   "note": "1 window(s) read, 6 team-games still missing"
+   "note": "1 window(s) read, 10 team-games still missing"
   },
   {
    "step": "lineups",
-   "status": "ok",
-   "note": "4 of 4 team pages read"
+   "status": "skipped",
+   "note": "checked in the last 20 minutes"
   },
   {
    "step": "lineup_history",
@@ -35,7 +35,7 @@
   {
    "step": "odds",
    "status": "ok",
-   "note": "no pull due"
+   "note": "1 game(s) priced"
   },
   {
    "step": "market_menu",
@@ -59,8 +59,8 @@
   },
   {
    "step": "shadow",
-   "status": "skipped",
-   "note": "nothing new"
+   "status": "ok",
+   "note": "17 line read(s) logged"
   },
   {
    "step": "gg_grade",
@@ -88,7 +88,7 @@
  "keys": [
   {
    "n": 1,
-   "left": 125
+   "left": 124
   },
   {
    "n": 2,
@@ -103,14 +103,14 @@
    "left": 0
   }
  ],
- "pool_total": 363,
+ "pool_total": 362,
  "allowance": 4.593,
  "tier": 3,
  "budget_today": 50,
- "budget_used_today": 32,
+ "budget_used_today": 33,
  "prices_state": "ok",
- "prices_at": "2026-10-20T21:20:00-04:00",
- "next_price_read_at": "2026-10-20T21:45:00-04:00",
+ "prices_at": "2026-10-20T21:50:00-04:00",
+ "next_price_read_at": null,
  "unmatched_names": [
   "Elias Pettersson"
  ],
@@ -125,6 +125,10 @@
    "reason": "stats behind"
   },
   {
+   "team": "CBJ",
+   "reason": "stats behind"
+  },
+  {
    "team": "COL",
    "reason": "stats behind"
   },
@@ -133,11 +137,23 @@
    "reason": "stats behind"
   },
   {
+   "team": "MTL",
+   "reason": "stats behind"
+  },
+  {
    "team": "NJD",
    "reason": "stats behind"
   },
   {
    "team": "NYI",
+   "reason": "stats behind"
+  },
+  {
+   "team": "SJS",
+   "reason": "stats behind"
+  },
+  {
+   "team": "TOR",
    "reason": "stats behind"
   },
   {
@@ -153,10 +169,10 @@
  "odds_notes": [],
  "runner": {
   "event": "workflow_dispatch",
-  "run_id": "39523694413",
-  "iteration": 6,
-  "chain_link": 147,
+  "run_id": "39528651072",
+  "iteration": 2,
+  "chain_link": 148,
   "chain_started_at": "2026-10-16T10:00:13-04:00",
-  "run_started_at": "2026-10-20T20:50:16-04:00"
+  "run_started_at": "2026-10-20T21:40:17-04:00"
  }
 }

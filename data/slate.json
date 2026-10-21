@@ -1,12 +1,12 @@
 {
  "slate_date": "2026-10-20",
- "generated_at": "2026-10-20T21:40:00-04:00",
- "status_at": "2026-10-20T21:40:00-04:00",
+ "generated_at": "2026-10-20T21:50:00-04:00",
+ "status_at": "2026-10-20T21:50:00-04:00",
  "valid_until": "2026-10-21T05:00:00-04:00",
  "status": {
   "prices_state": "ok",
-  "prices_at": "2026-10-20T21:20:00-04:00",
-  "next_price_read_at": "2026-10-20T21:45:00-04:00",
+  "prices_at": "2026-10-20T21:50:00-04:00",
+  "next_price_read_at": null,
   "stats_built_at": "2026-10-20T21:40:00-04:00",
   "stats_through": "2026-10-19",
   "lineups_at": "2026-10-20T21:40:00-04:00",
@@ -16,11 +16,11 @@
   "stats_state": "ok",
   "last_run": {
    "ok": true,
-   "at": "2026-10-20T21:40:00-04:00",
+   "at": "2026-10-20T21:50:00-04:00",
    "failed_step": null
   },
   "pool": {
-   "pulls_left": 363,
+   "pulls_left": 362,
    "keys": 4,
    "game_days_left": 12,
    "days_left": 12,
@@ -32,6 +32,10 @@
     "reason": "stats behind"
    },
    {
+    "team": "CBJ",
+    "reason": "stats behind"
+   },
+   {
     "team": "COL",
     "reason": "stats behind"
    },
@@ -40,11 +44,23 @@
     "reason": "stats behind"
    },
    {
+    "team": "MTL",
+    "reason": "stats behind"
+   },
+   {
     "team": "NJD",
     "reason": "stats behind"
    },
    {
     "team": "NYI",
+    "reason": "stats behind"
+   },
+   {
+    "team": "SJS",
+    "reason": "stats behind"
+   },
+   {
+    "team": "TOR",
     "reason": "stats behind"
    },
    {
@@ -59,7 +75,7 @@
  "banners": [
   {
    "level": "warn",
-   "text": "Not covered tonight: ANA, COL, LAK, NJD, NYI, WSH (stats behind)."
+   "text": "Not covered tonight: ANA, CBJ, COL, LAK, MTL, NJD, NYI, SJS, TOR, WSH (stats behind)."
   }
  ],
  "empty": null,
@@ -85,8 +101,11 @@
    },
    "started": true,
    "picks": 0,
-   "excluded_reason": null,
-   "excluded_teams": []
+   "excluded_reason": "stats behind",
+   "excluded_teams": [
+    "SJS",
+    "MTL"
+   ]
   },
   {
    "id": 2026020142,
@@ -190,8 +209,11 @@
    },
    "started": true,
    "picks": 0,
-   "excluded_reason": null,
-   "excluded_teams": []
+   "excluded_reason": "stats behind",
+   "excluded_teams": [
+    "TOR",
+    "CBJ"
+   ]
   },
   {
    "id": 2026020146,
