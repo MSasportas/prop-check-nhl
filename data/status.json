@@ -1,10 +1,10 @@
 {
  "ok": true,
  "slate_date": "2026-10-21",
- "started_at": "2026-10-21T18:40:00-04:00",
- "status_at": "2026-10-21T18:40:00-04:00",
- "finished_at": "2026-10-21T18:40:01-04:00",
- "last_ok_at": "2026-10-21T18:40:00-04:00",
+ "started_at": "2026-10-21T18:50:01-04:00",
+ "status_at": "2026-10-21T18:50:01-04:00",
+ "finished_at": "2026-10-21T18:50:01-04:00",
+ "last_ok_at": "2026-10-21T18:50:01-04:00",
  "failed_step": null,
  "steps": [
   {
@@ -24,8 +24,8 @@
   },
   {
    "step": "lineups",
-   "status": "ok",
-   "note": "4 of 4 team pages read"
+   "status": "skipped",
+   "note": "checked in the last 20 minutes"
   },
   {
    "step": "lineup_history",
@@ -110,7 +110,7 @@
  "budget_used_today": 4,
  "prices_state": "ok",
  "prices_at": "2026-10-21T18:00:00-04:00",
- "next_price_read_at": "2026-10-21T18:45:00-04:00",
+ "next_price_read_at": null,
  "unmatched_names": [
   "Jason Zucker"
  ],
@@ -129,7 +129,7 @@
  "runner": {
   "event": "workflow_dispatch",
   "run_id": "39684470203",
-  "iteration": 4,
+  "iteration": 5,
   "chain_link": 176,
   "chain_started_at": "2026-10-16T10:00:13-04:00",
   "run_started_at": "2026-10-21T18:10:10-04:00"
