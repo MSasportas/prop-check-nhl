@@ -17,7 +17,7 @@ import common   # noqa: E402
 import run      # noqa: E402
 import world    # noqa: E402
 
-ENV = ("PC_NOW", "PC_DATA_DIR", "PC_ODDS_FIXTURE_DIR", "PC_NHL_FIXTURE_DIR", "PC_LINEUP_FIXTURE_DIR", "ODDS_API_KEYS",
+ENV = ("PC_NOW", "PC_DATA_DIR", "PC_ODDS_FIXTURE_DIR", "PC_NHL_FIXTURE_DIR", "PC_LINEUP_FIXTURE_DIR", "ODDS_API_KEYS", "ODDS_API_KEYS_2",
        "DISCORD_WEBHOOK_URL", "PC_DISCORD_FIXTURE_URL", "PC_CONFIG")
 FIX = os.path.join(HERE, "fixtures")
 
@@ -61,6 +61,7 @@ class Sim:
         for _, away, home, _ in world.GAMES:                # a default answer for each game: one line nobody can pick
             self.set_odds(away, home, [], "2026-10-11T17:00:00Z")
         os.environ.pop("ODDS_API_KEYS", None)
+        os.environ.pop("ODDS_API_KEYS_2", None)
         os.environ.pop("DISCORD_WEBHOOK_URL", None)
         os.environ.pop("PC_DISCORD_FIXTURE_URL", None)
         os.environ.update(PC_DATA_DIR=self.w["data"], PC_NHL_FIXTURE_DIR=self.w["nhl"],

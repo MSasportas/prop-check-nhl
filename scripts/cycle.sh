@@ -14,7 +14,7 @@
 # built on the bad Record), drop this cycle's work and exit 1. The page goes stale and says "Updates have
 # stopped" until a person repairs origin.
 #
-# Never prints a key: the keys exist only in the ODDS_API_KEYS environment variable, which run.py scrubs.
+# Never prints a key: the keys exist only in the ODDS_API_KEYS (and ODDS_API_KEYS_2) environment variables, which run.py scrubs.
 # Settings (environment): GITHUB_REF_NAME (branch, default main), PC_PYTHON (default python3),
 # CYCLE_RUN_TIMEOUT (default 420), CYCLE_RUN_CMD (tests only: replaces step 2).
 set -u

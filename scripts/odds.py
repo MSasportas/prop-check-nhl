@@ -1,7 +1,7 @@
 """odds.py: Hard Rock prices from the-odds-api (bookmaker `hardrockbet`).
 
 What lives here
-  keys      read from env ODDS_API_KEYS only. Never printed, never written. A key that is used up or
+  keys      read from env ODDS_API_KEYS (then ODDS_API_KEYS_2) only. Never printed, never written. A key that is used up or
             refused (401 / 429) is skipped and the next one is tried.
   ledger    data/state/credits.json: what each key has left (by position, never the key) and what we spent.
   plan      allowance = pool credits left / games left before the 1st. The allowance picks a tier, the
@@ -75,8 +75,15 @@ def hold(price_a, price_b):
 
 # ---------------------------------------------------------------- keys and ledger
 def load_keys():
-    raw = os.environ.get("ODDS_API_KEYS", "")
-    keys = [k.strip() for k in raw.replace("\n", ",").split(",") if k.strip()]
+    """ODDS_API_KEYS, then ODDS_API_KEYS_2 (a second secret so a new key can be added without re-typing the old
+    ones; its keys go after the first secret's, so key numbers 1..n never move). Duplicates are kept once."""
+    keys = []
+    for var in ("ODDS_API_KEYS", "ODDS_API_KEYS_2"):
+        raw = os.environ.get(var, "")
+        for k in raw.replace("\n", ",").split(","):
+            k = k.strip()
+            if k and k not in keys:
+                keys.append(k)
     for k in keys:
         common.register_secret(k)
     return keys

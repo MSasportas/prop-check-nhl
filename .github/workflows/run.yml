@@ -43,6 +43,7 @@ jobs:
         timeout-minutes: 60     # a step timeout still lets the hand-over step below run
         env:
           ODDS_API_KEYS: ${{ secrets.ODDS_API_KEYS }}    # the only place the keys exist; never echoed
+          ODDS_API_KEYS_2: ${{ secrets.ODDS_API_KEYS_2 }}  # optional extra keys (added after the first set); never echoed
           DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK }}   # optional; notifications only, never echoed
           PC_RUNNER_EVENT: ${{ github.event_name }}
           PC_RUNNER_RUN_ID: ${{ github.run_id }}

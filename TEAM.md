@@ -83,7 +83,7 @@ probability x Hard Rock decimal payout - 1, on unrounded numbers; every threshol
   or edited archive, shallow clone) is the same breach as before. First use: 2026-10-19, archive `archive/record_2026-10-19/`
   (events.jsonl byte-exact, 82 lines, plus the old record.json view). The page shows one line on the Record view when
   resets.json exists. **Future resets need Matt's explicit order**; no one else may add a resets.json entry.
-- **Odds keys:** GitHub secret `ODDS_API_KEYS` (comma-separated). Never in the repo, page or logs. Rotates when a key
+- **Odds keys:** GitHub secret `ODDS_API_KEYS` (comma-separated), plus optional `ODDS_API_KEYS_2` (2026-10-21: extra keys appended after the first set, so Matt can add a key without re-typing the old ones; key numbers 1..n never move). Never in the repo, page or logs. Rotates when a key
   is out or refused; a refused key is "unknown", not empty. Page warns when the pool is low.
 - **Discord notifications:** `scripts/notify.py`, called at the end of `run.py` (never fails or slows a run: 5 s
   timeout, one retry, whole run capped at 14 s). Webhook = GitHub secret `DISCORD_WEBHOOK` (the script reads it from env `DISCORD_WEBHOOK_URL`), passed to the loop step
@@ -350,6 +350,12 @@ probability x Hard Rock decimal payout - 1, on unrounded numbers; every threshol
     vs units at Hard Rock's price on the 45-minute read (shadow `close`), counting a pick as skipped if it would not have passed at that read;
     plus how often the price moved against / for us between them. One-line answer to Matt. No build needed (flags + shadow closes hold it).
 
+23. **Key pool drained outside the timer (2026-10-21 daily check).** Between the Oct 20 and Oct 21 5 AM key checks, key 2 fell 109 -> 66 and
+    key 3 129 -> 2 (-170 credits) while our ledger charged neither (Oct 20 used only key 1, 33 credits). Something outside this repo is using
+    those keys. Pool 190 for 75 games Oct 21-31 = allowance ~2.5 -> tier 2: C (45-min read) only for games holding a live pick, so fewer
+    C-read picks and fewer closes/CLV for the Nov 2 checkpoint. Full plan needs ~225. Matt asked once (2026-10-21) for one new free key in
+    secret `ODDS_API_KEYS_2`. Keys reset Nov 1.
+
 ## 8. Rule-change log
 | Date | Change | Why | Sample |
 |---|---|---|---|
@@ -370,6 +376,7 @@ probability x Hard Rock decimal payout - 1, on unrounded numbers; every threshol
 | 2026-10-11 | v1.0 set (section 4) | First build: Sharp standard from the DS backtest (2024-25 fit, 2025-26 out of sample) and one live Hard Rock pull | Backtest only; 0 graded live legs |
 
 ## 9. Session log (newest first, one line each)
+- 2026-10-21 1:45 PM daily check: chain alive (link 170, runs success), all steps/sources ok, pull A ran 1 PM (2 games), Oct 20 fully graded (5 picks 3-2, +1.05u; Thomas/Beniers pulled but graded). Keys 190 (key 3 at 2, key 4 empty), tier 2, allowance 2.56: 170 credits left keys 2-3 overnight outside our ledger (gap 23). Unmatched: Jason Zucker (BUF; not on NHL roster, 0 games this season, would sit anyway). No excluded teams. Shipped: optional second key secret `ODDS_API_KEYS_2` (QA SHIP, 337 tests); asked Matt for one free key.
 - 2026-10-21 ~9 AM-noon (Matt: pulled after I bet, am I stuck? should I wait for the final check?): answered (no; a pull means don't bet NOW). Oct 20 pulls were mislabeled "model". Shipped v3.2 pull advice + Price final + Discord 12/day; QA SHIP (1 minor fixed: slipped 90-min read no longer counts as final). 3 stale "Record empty" tests rewritten. Item 22 registered for Nov 2. 334 tests.
 - 2026-10-21 ~8:15 AM Researcher run 7 (daily, shots): T1-T5 registered before testing (return from absence, star tax, time-zone travel, big-slate calibration, new team); 21 variants, only T5 T=.01 reached n >= 300 (+1.8% n405, placebo ok) -> lockbox look #2 failed (-7.5% n179, p 0.85; looks now 2). Lead: returners' overs (+23% n84, post-hoc) queued forward-only (Q7). Forward Q1a +5.5% n82 (2 nights). Nothing passed.
 - 2026-10-20 ~5:25 PM (Matt: dislikes the limits, track every pick): v3.1 removes the 2/game and 3/night caps before tonight's first 5:30 PM read; 1 per player kept. paper.py treats a null cap as off; tests updated (322 pass); fixtures regenerated; rules sheet checked at 380px in Chromium (no overflow, no errors). Done by the CEO directly (no time for a separate Builder/QA round before the 5:30 read); weekly review to re-check.
