@@ -1,7 +1,7 @@
 {
  "slate_date": "2026-10-21",
- "generated_at": "2026-10-21T19:20:00-04:00",
- "status_at": "2026-10-21T19:20:00-04:00",
+ "generated_at": "2026-10-21T19:30:00-04:00",
+ "status_at": "2026-10-21T19:30:00-04:00",
  "valid_until": "2026-10-22T05:00:00-04:00",
  "status": {
   "prices_state": "ok",
@@ -16,7 +16,7 @@
   "stats_state": "ok",
   "last_run": {
    "ok": true,
-   "at": "2026-10-21T19:20:00-04:00",
+   "at": "2026-10-21T19:30:00-04:00",
    "failed_step": null
   },
   "pool": {
@@ -31,16 +31,11 @@
   "flag_reads": 2,
   "tier": 2
  },
- "banners": [
-  {
-   "level": "info",
-   "text": "Prices checked at 6:00 PM (shots). Picks come from the reads 90 and 45 minutes before each game."
-  }
- ],
+ "banners": [],
  "empty": {
-  "code": "none_qualified",
-  "text": "No picks yet today",
-  "sub": "27 lines read, none cleared both checks."
+  "code": "all_started",
+  "text": "Every game has started.",
+  "sub": "No picks were posted tonight."
  },
  "games": [
   {
@@ -62,7 +57,7 @@
      "status": "confirmed"
     }
    },
-   "started": false,
+   "started": true,
    "picks": 0,
    "excluded_reason": null,
    "excluded_teams": []
@@ -86,7 +81,7 @@
      "status": "confirmed"
     }
    },
-   "started": false,
+   "started": true,
    "picks": 0,
    "excluded_reason": null,
    "excluded_teams": []
