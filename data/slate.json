@@ -1,12 +1,12 @@
 {
  "slate_date": "2026-10-20",
- "generated_at": "2026-10-20T20:50:01-04:00",
- "status_at": "2026-10-20T20:50:01-04:00",
+ "generated_at": "2026-10-20T21:00:01-04:00",
+ "status_at": "2026-10-20T21:00:01-04:00",
  "valid_until": "2026-10-21T05:00:00-04:00",
  "status": {
   "prices_state": "ok",
-  "prices_at": "2026-10-20T20:30:01-04:00",
-  "next_price_read_at": "2026-10-20T20:55:00-04:00",
+  "prices_at": "2026-10-20T21:00:01-04:00",
+  "next_price_read_at": "2026-10-20T21:15:00-04:00",
   "stats_built_at": "2026-10-20T00:30:01-04:00",
   "stats_through": "2026-10-19",
   "lineups_at": "2026-10-20T20:50:01-04:00",
@@ -16,19 +16,19 @@
   "stats_state": "ok",
   "last_run": {
    "ok": true,
-   "at": "2026-10-20T20:50:01-04:00",
+   "at": "2026-10-20T21:00:01-04:00",
    "failed_step": null
   },
   "pool": {
-   "pulls_left": 366,
+   "pulls_left": 364,
    "keys": 4,
    "game_days_left": 12,
    "days_left": 12,
    "low": false
   },
   "excluded_teams": [],
-  "lines_checked": 165,
-  "flag_reads": 10,
+  "lines_checked": 182,
+  "flag_reads": 11,
   "tier": 3
  },
  "banners": [],
@@ -214,14 +214,14 @@
    "goalies": {
     "away": {
      "name": "Jesper Wallstedt",
-     "status": "expected"
+     "status": "confirmed"
     },
     "home": {
      "name": "Devon Levi",
      "status": "confirmed"
     }
    },
-   "started": false,
+   "started": true,
    "picks": 0,
    "excluded_reason": null,
    "excluded_teams": []
@@ -246,7 +246,7 @@
     }
    },
    "started": false,
-   "picks": 1,
+   "picks": 0,
    "excluded_reason": null,
    "excluded_teams": []
   },
@@ -355,60 +355,6 @@
    "games_this_season": 10
   },
   {
-   "id": "2026-10-20:2026020149:8482665:shots:1.5:under",
-   "price": -105,
-   "first_price": -105,
-   "first_price_at": "2026-10-20T20:10:01-04:00",
-   "worst_price": -105,
-   "p": 0.5327,
-   "breakeven": 0.5122,
-   "p_pct": 53,
-   "breakeven_pct": 51,
-   "state": "early",
-   "history": [
-    {
-     "at": "2026-10-20T20:10:01-04:00",
-     "text": "Early: lineup not confirmed"
-    }
-   ],
-   "prices": [
-    {
-     "at": "2026-10-20T20:10:01-04:00",
-     "price": -105
-    }
-   ],
-   "pulled": null,
-   "graded": null,
-   "rank": 2,
-   "tier": "main",
-   "game_id": 2026020149,
-   "player": "M. Beniers",
-   "player_id": 8482665,
-   "team": "SEA",
-   "opp": "DET",
-   "home": true,
-   "start": "2026-10-20T21:40:00-04:00",
-   "market": "shots",
-   "line": 1.5,
-   "side": "under",
-   "bet": "Under 1.5 shots on goal",
-   "price_at": "2026-10-20T20:10:01-04:00",
-   "gap_pct": 4.4,
-   "market_fair_pct": 53.5,
-   "n_books": 5,
-   "guard": {
-    "verdict": "agrees",
-    "ours_pct": 53.3,
-    "model_pct": 54.3
-   },
-   "settled": "early",
-   "settled_label": "Early",
-   "reason": "5 other books say 53.5%; Hard Rock's -105 only needs 51.2%. Our model agrees (our blend: 53.3%).",
-   "thin": false,
-   "games_used": 91,
-   "games_this_season": 9
-  },
-  {
    "id": "2026-10-20:2026020146:8480023:shots:1.5:under",
    "price": -105,
    "first_price": -105,
@@ -468,6 +414,67 @@
    "thin": false,
    "games_used": 72,
    "games_this_season": 8
+  },
+  {
+   "id": "2026-10-20:2026020149:8482665:shots:1.5:under",
+   "price": -105,
+   "first_price": -105,
+   "first_price_at": "2026-10-20T20:10:01-04:00",
+   "worst_price": -105,
+   "p": 0.5327,
+   "breakeven": 0.5122,
+   "p_pct": 53,
+   "breakeven_pct": 51,
+   "state": "early",
+   "history": [
+    {
+     "at": "2026-10-20T20:10:01-04:00",
+     "text": "Early: lineup not confirmed"
+    },
+    {
+     "at": "2026-10-20T21:00:01-04:00",
+     "text": "Pulled: Our model no longer backs this price"
+    }
+   ],
+   "prices": [
+    {
+     "at": "2026-10-20T20:10:01-04:00",
+     "price": -105
+    }
+   ],
+   "pulled": {
+    "at": "2026-10-20T21:00:01-04:00",
+    "reason": "Our model no longer backs this price"
+   },
+   "graded": null,
+   "rank": null,
+   "tier": "main",
+   "game_id": 2026020149,
+   "player": "M. Beniers",
+   "player_id": 8482665,
+   "team": "SEA",
+   "opp": "DET",
+   "home": true,
+   "start": "2026-10-20T21:40:00-04:00",
+   "market": "shots",
+   "line": 1.5,
+   "side": "under",
+   "bet": "Under 1.5 shots on goal",
+   "price_at": "2026-10-20T20:10:01-04:00",
+   "gap_pct": 4.4,
+   "market_fair_pct": 53.5,
+   "n_books": 5,
+   "guard": {
+    "verdict": "agrees",
+    "ours_pct": 53.3,
+    "model_pct": 54.3
+   },
+   "settled": "early",
+   "settled_label": "Early",
+   "reason": "5 other books say 53.5%; Hard Rock's -105 only needs 51.2%. Our model agrees (our blend: 53.3%).",
+   "thin": false,
+   "games_used": 91,
+   "games_this_season": 9
   },
   {
    "id": "2026-10-20:2026020144:8471214:shots:2.5:under",

@@ -63,7 +63,7 @@
   },
   "MIN": {
    "name": "Jesper Wallstedt",
-   "status": "expected"
+   "status": "confirmed"
   },
   "SEA": {
    "name": "Philipp Grubauer",
@@ -90,5 +90,5 @@
    "status": "expected"
   }
  },
- "checked_at": "2026-10-20T19:50:00-04:00"
+ "checked_at": "2026-10-20T21:00:01-04:00"
 }
