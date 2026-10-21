@@ -1,7 +1,7 @@
 {
  "slate_date": "2026-10-20",
- "generated_at": "2026-10-21T00:40:01-04:00",
- "status_at": "2026-10-21T00:40:01-04:00",
+ "generated_at": "2026-10-21T00:50:00-04:00",
+ "status_at": "2026-10-21T00:50:00-04:00",
  "valid_until": "2026-10-21T05:00:00-04:00",
  "status": {
   "prices_state": "ok",
@@ -16,7 +16,7 @@
   "stats_state": "ok",
   "last_run": {
    "ok": true,
-   "at": "2026-10-21T00:40:01-04:00",
+   "at": "2026-10-21T00:50:00-04:00",
    "failed_step": null
   },
   "pool": {
@@ -28,11 +28,19 @@
   },
   "excluded_teams": [
    {
+    "team": "CAR",
+    "reason": "stats behind"
+   },
+   {
     "team": "DET",
     "reason": "stats behind"
    },
    {
     "team": "SEA",
+    "reason": "stats behind"
+   },
+   {
+    "team": "VAN",
     "reason": "stats behind"
    }
   ],
@@ -43,7 +51,7 @@
  "banners": [
   {
    "level": "warn",
-   "text": "Not covered tonight: DET, SEA (stats behind)."
+   "text": "Not covered tonight: CAR, DET, SEA, VAN (stats behind)."
   }
  ],
  "empty": {
@@ -292,8 +300,11 @@
    },
    "started": true,
    "picks": 1,
-   "excluded_reason": null,
-   "excluded_teams": []
+   "excluded_reason": "stats behind",
+   "excluded_teams": [
+    "CAR",
+    "VAN"
+   ]
   },
   {
    "id": 2026020151,
