@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-10-20T20:10:01-04:00",
+ "generated_at": "2026-10-20T20:30:01-04:00",
  "summary": {
   "headline": {
    "w": 0,
@@ -82,6 +82,29 @@
       {
        "price": -105,
        "at": "2026-10-20T20:10:01-04:00"
+      }
+     ],
+     "result": null,
+     "actual": null,
+     "units": null,
+     "pulled": null,
+     "legs": []
+    },
+    {
+     "id": "2026-10-20:2026020150:8478427:shots:2.5:under",
+     "kind": "single",
+     "player": "S. Aho",
+     "bet": "Under 2.5 shots on goal",
+     "market": "shots",
+     "team": "CAR",
+     "game": "CAR at VAN",
+     "price": 120,
+     "first_price": 120,
+     "last_price": 120,
+     "prices": [
+      {
+       "price": 120,
+       "at": "2026-10-20T20:30:01-04:00"
       }
      ],
      "result": null,
