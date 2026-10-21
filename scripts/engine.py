@@ -35,8 +35,39 @@ PULL_TEXT = {
     "line removed": ("line_gone", "Hard Rock took this line down"),
     "pinnacle gone": ("pinnacle_gone", "Pinnacle stopped quoting this line"),
     "pinnacle disagrees": ("pinnacle_flip", "Pinnacle no longer agrees with the price"),
-    "model guard fails": ("guard_fails", "Our model no longer backs this price"),
+    "model guard fails": ("guard_fails", "The edge fell under our bar"),
 }
+# what to do if you already bet it (Hard Rock bets cannot be taken back)
+OUT_IF_BET = "Already bet? It should void and refund (no ice time)."
+
+
+def advice(code, pull, shown_price, bar):
+    """(what happened, what it means if you already bet at the shown price). pull = the Gap + Guard log's pull event,
+    which carries Hard Rock's price now and the final EV at the SHOWN price on that read (paper.at_your_price)."""
+    fp = common.fmt_price
+    now, yev = pull.get("now_price"), pull.get("yours_ev")
+    moved = now is not None and shown_price is not None and now != shown_price
+    if code == "line_gone":
+        return "Hard Rock took the line down", "Got %s? Your bet still stands." % fp(shown_price)
+    if code in ("books_low", "pinnacle_gone"):
+        what = "Too few other books to check it against" if code == "books_low" else "Pinnacle stopped quoting it"
+        return what, "Got %s? Nothing says it got worse. Haven't bet? Skip it." % fp(shown_price)
+    if moved:
+        what = "Hard Rock moved it to %s" % fp(now)
+    elif code == "pinnacle_flip":
+        what = "Pinnacle moved against it"
+    else:
+        what = "The other books moved against it"
+    if code == "pinnacle_flip" and pull.get("yours_pin_ev") is not None and pull["yours_pin_ev"] < -EPS:
+        return what, "Pinnacle, the sharpest book, leans against it even at %s. Haven't bet? Skip it." % fp(shown_price)
+    if yev is None:
+        return what, None
+    if yev >= bar - EPS:
+        tail = (" Don't bet it at %s." % fp(now)) if moved else ""
+        return what, "Got %s? Still a good bet.%s" % (fp(shown_price), tail)
+    if yev >= -EPS:
+        return what, "Got %s? Still a small plus. Too thin to bet now." % fp(shown_price)
+    return what, "Edge is gone even at %s. Haven't bet? Skip it." % fp(shown_price)
 
 
 class ConfigError(Exception):
@@ -234,18 +265,17 @@ def evaluate(inp, gg_events=(), block_new=False):
         status = inp.confirmed(sh["team"], sh["player_id"])
         if status == "out":
             code, text = PULL_TEXT["out"]
-            new.append({"t": "pulled", "id": i, "at": at, "code": code, "reason": text})
+            new.append({"t": "pulled", "id": i, "at": at, "code": code, "reason": text, "if_bet": OUT_IF_BET})
             continue
         pull = (gg.get(sh.get("gg_id")) or {}).get("pull")
         if pull:
-            code, text = _pull_words(pull)
-            new.append({"t": "pulled", "id": i, "at": at, "code": code, "reason": text})
+            new.append(_pulled_event(i, at, pull, sh.get("price"), inp.cfg))
             continue
         state = "lineup" if status == "in" else "early"
         if state != it["state"]:
             new.append({"t": "state", "id": i, "at": at, "state": state})
         live[i] = {"final_ev": sh.get("final_ev") or 0.0, "price": record.last_price(it), "game_id": sh["game_id"],
-                   "pid": sh["player_id"]}
+                   "pid": sh["player_id"], "final": _is_final(gg.get(sh.get("gg_id")), sh.get("start"), inp.cfg)}
 
     # ---- 2. new picks: every Gap + Guard flag of tonight not shown yet (paper.py already applied the caps)
     fresh = []
@@ -258,7 +288,8 @@ def evaluate(inp, gg_events=(), block_new=False):
                 continue
             fresh.append((rid, fl, g))
             if not (gg.get(fl["id"]) or {}).get("pull"):
-                live[rid] = {"final_ev": round(fl["final_ev"], 4), "price": fl["price"], "game_id": fl["game_id"], "pid": fl["pid"]}
+                live[rid] = {"final_ev": round(fl["final_ev"], 4), "price": fl["price"], "game_id": fl["game_id"], "pid": fl["pid"],
+                             "final": _is_final(gg.get(fl["id"]), g["start"], inp.cfg)}
     order = sorted(live, key=lambda i: (-round(live[i]["final_ev"], 4), i))
     ranks = {i: n + 1 for n, i in enumerate(order)}
     for rid, fl, g in fresh:
@@ -285,9 +316,33 @@ def evaluate(inp, gg_events=(), block_new=False):
         new.append({"t": "shown", "kind": "single", "id": rid, "at": at, "slate": inp.slate, "pick": body})
         pull = (gg.get(fl["id"]) or {}).get("pull")
         if pull:                                            # flagged and pulled before this run saw it: stays, marked pulled
-            code, text = _pull_words(pull)
-            new.append({"t": "pulled", "id": rid, "at": at, "code": code, "reason": text})
+            new.append(_pulled_event(rid, at, pull, fl["price"], inp.cfg))
     return new, {"ranks": ranks, "live": live}
+
+
+def _is_final(gg_item, start, cfg):
+    """The last price check is done: the Gap + Guard close came from a read taken at or inside the 45-minute mark. A 90-minute
+    read that slipped to 45-46 minutes counts as the close in the research log but the 45-minute read still runs after it, so
+    it does not make a pick final (no chip rather than a false one)."""
+    c = (gg_item or {}).get("close")
+    if not c or (gg_item or {}).get("pull") or not c.get("read_at") or not start:
+        return False
+    mins = (common.parse_iso(start) - common.parse_iso(c["read_at"])).total_seconds() / 60.0
+    return mins <= (common.gap_guard(cfg).get("thresholds") or {}).get("close_min", 45) + EPS
+
+
+def _pulled_event(i, at, pull, shown_price, cfg):
+    code, text = _pull_words(pull)
+    if code == "out":
+        return {"t": "pulled", "id": i, "at": at, "code": code, "reason": text, "if_bet": OUT_IF_BET}
+    bar = (common.gap_guard(cfg).get("thresholds") or {}).get("final_ev", 0.02)
+    if "yours_ev" not in pull and "now_price" not in pull:
+        return {"t": "pulled", "id": i, "at": at, "code": code, "reason": text}     # an older pull event: no advice
+    what, if_bet = advice(code, pull, shown_price, bar)
+    e = {"t": "pulled", "id": i, "at": at, "code": code, "reason": what}
+    if if_bet:
+        e["if_bet"] = if_bet
+    return e
 
 
 def _pull_words(pull):
@@ -325,7 +380,10 @@ def build_slate(inp, events, extra):
             "breakeven_pct": it["breakeven_pct"] if it.get("breakeven_pct") is not None else pct_round(it["breakeven"]),
             "state": it["state"], "history": hist,
             "prices": [{"at": p["at"], "price": p["price"]} for p in it["prices"]],
-            "pulled": {"at": it["pulled"]["at"], "reason": it["pulled"]["reason"]} if it["pulled"] else None,
+            "pulled": {"at": it["pulled"]["at"], "reason": it["pulled"]["reason"], "if_bet": it["pulled"].get("if_bet")}
+            if it["pulled"] else None,
+            # the last price read (45 min before puck) is done: from here only a scratch can pull it
+            "price_final": bool((live.get(i) or {}).get("final")) if record.is_open(it) else False,
             "graded": {"result": g["result"], "actual": g["actual_text"], "units": g["units"]} if g else None,
             "rank": ranks.get(i) if record.is_open(it) else None, "tier": "main", "game_id": sh["game_id"],
             "player": sh["player"], "player_id": sh["player_id"], "team": sh["team"], "opp": sh["opp"],

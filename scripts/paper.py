@@ -323,7 +323,9 @@ class Paper:
                 continue
             reason = self.pull_reason(fl, g, view)
             if reason:
-                self.emit({"t": "pull", "id": fl["id"], "read_at": read_at, "reason": reason[0], "detail": reason[1]})
+                e = {"t": "pull", "id": fl["id"], "read_at": read_at, "reason": reason[0], "detail": reason[1]}
+                e.update(self.at_your_price(fl, g, view))
+                self.emit(e)
         # (b) candidates: step 1 then step 2, ranked by final EV, capped. allow_new=False (stats behind, safety pause):
         # nothing new is flagged from this read; flags already alive are still looked after above and below.
         passed, now_ids = [], set()
@@ -447,6 +449,17 @@ class Paper:
         if a["guard"] is False:
             return "model guard fails", "final EV %+.1f%%" % (100 * a["final_ev"])
         return None
+
+    def at_your_price(self, fl, g, view):
+        """For someone who already bet at the frozen price: Hard Rock's price now and the final EV at the FROZEN price on
+        this read's market (same maths as step 2). Research fields on the pull event; engine.py turns them into advice."""
+        pair = (view["pairs"] or {}).get((fl["pid"], fl["line"]))
+        now_price = None if pair is None else pair.get(fl["side"])
+        entry = view["others"].get((fl["pid"], fl["line"]))
+        a = self.assess_lazy(fl["side"], fl["line"], fl["price"], entry, g, fl["team"], fl["pid"], guard_anyway=True)
+        return {"now_price": now_price, "yours_ev": None if a is None else a.get("final_ev"),
+                "yours_gap_ev": None if a is None else a.get("gap_ev"),
+                "yours_pin_ev": None if a is None else a.get("pin_ev")}
 
     def pull_out(self):
         """A player Daily Faceoff now lists as out (or no longer in the lineup) is pulled, whatever the last read says."""

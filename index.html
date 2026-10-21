@@ -122,6 +122,7 @@ button{font:inherit;color:inherit;background:none;border:0;padding:0;margin:0;te
 .pullbar .ic{flex:none;display:flex;color:var(--bad);margin-top:1px}
 .pullbar b{font-weight:500;letter-spacing:.04em}
 .pullbar .why{overflow-wrap:anywhere}
+.ifbet{font-size:14px;line-height:20px;margin:0 0 8px;overflow-wrap:anywhere}
 .dim{opacity:.6}
 .dim .meta,.dim .note,.dim .stamp,.dim .mu{color:var(--fg)}
 .strike{text-decoration:line-through;text-decoration-thickness:2px}
@@ -603,6 +604,7 @@ function pickCard(p, d, opts) {
   var tp = (!isObj(p.graded) && !/^locked/.test(str(p.state))) ? toPuck(p.start || (d.games[p.game_id] && d.games[p.game_id].start)) : '';
   card.appendChild(h('div', { class: 'chips' },
     settledChip(p),
+    (p.price_final && !/^locked/.test(str(p.state))) ? h('span', { class: 'chip ok' }, icon('check', 13), 'Price final') : null,
     tp ? h('span', { class: 'chip hollow', text: tp }) : null,
     (S.newIds[id] && !opts.noNew && !stale()) ? h('span', { class: 'chip new', text: 'New' }) : null));
   var res = resultLine(p.graded); if (res) card.insertBefore(res, card.firstChild);
@@ -632,6 +634,7 @@ function pulledCard(p, d) {
   var mu = matchup(p, d.games);
   return h('div', { class: 'card', 'data-id': str(p.id) },
     pulledBar(p.pulled),
+    (isObj(p.pulled) && p.pulled.if_bet) ? h('div', { class: 'ifbet', text: str(p.pulled.if_bet) }) : null,
     h('div', { class: 'dim' },
       h('div', { class: 'r1' }, h('span', { class: 'name', text: p.player || 'Player not named' }),
         h('span', { class: 'meta' }, muNodes(mu, true))),
@@ -1049,7 +1052,7 @@ var RULES = [
   "Step 2, the guard. We blend {gap_guard.market_weight|pct} the other books' chance with {gap_guard.model_weight|pct} our model's chance. The blend still has to beat the price by at least {gap_guard.final_ev|pct}. The model can only say no: it never creates a pick.",
   'The first 90 or 45 minute read that passes both steps becomes the pick, and its price is frozen. That is the price shown here, in the alerts and graded on the Record. The 1 PM read only sets a baseline.',
   'One pick per player (his best side and line). No per-game or nightly limit: every leg that clears both steps is shown, ranked best blend first, and graded on the Record. Parlays are not offered: there is no evidence for them yet.',
-  'A pick is pulled if the player is out of the lineup, Hard Rock moves the price and the gap falls under {gap_guard.pull_ev|pct}, fewer than {gap_guard.books_min|num} other books still quote it, Pinnacle stops quoting it or disagrees, our model stops backing it, or the line is taken down. Pulled picks stay on the Record.',
+  "A pick is pulled if the player is out of the lineup, Hard Rock moves the price and the gap falls under {gap_guard.pull_ev|pct}, fewer than {gap_guard.books_min|num} other books still quote it, Pinnacle stops quoting it or disagrees, the blend no longer beats the price by {gap_guard.final_ev|pct}, or the line is taken down. Each pulled pick says what it means if you already bet it at the shown price (a Hard Rock bet can't be taken back). The 45 minute read is the last price check: after it a pick shows Price final, and only a scratch can pull it. Pulled picks stay on the Record.",
   "A player needs {min_history|num} games of history. One who missed his team's last game waits for a confirmed lineup, and one back from {absence_games|num} or more missed games sits out {absence_sitout|num} games.",
   "Results come from the NHL boxscore once each game is final. Overtime counts, shootouts don't. Graded at the price shown, {stake|num} unit each.",
   'New picks stop by themselves if the Record falls to {gap_guard.safety_units|num} units, until the team reviews. We need {min_sample|num} graded picks before judging results.'

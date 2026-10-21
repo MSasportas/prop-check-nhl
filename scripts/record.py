@@ -116,7 +116,7 @@ def fold(events):
                 it["reason"] = e["reason"]
         elif t == "pulled":
             if it["pulled"] is None and it["locked_at"] is None:
-                it["pulled"] = {"at": e["at"], "reason": e.get("reason"), "code": e.get("code")}
+                it["pulled"] = {"at": e["at"], "reason": e.get("reason"), "code": e.get("code"), "if_bet": e.get("if_bet")}
         elif t == "locked":
             if it["locked_at"] is None:
                 it["locked_at"] = e["at"]

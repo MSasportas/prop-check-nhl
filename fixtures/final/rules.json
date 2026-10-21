@@ -1,0 +1,54 @@
+{
+ "fixture": true,
+ "version": "3.2",
+ "updated": "2026-10-21",
+ "values": {
+  "min_history": 10,
+  "absence_games": 3,
+  "absence_sitout": 2,
+  "thin_rows": 20,
+  "thin_team_games": 10,
+  "toi_drop_sec": 120,
+  "stake": 1,
+  "hold_min": 0.03,
+  "hold_max": 0.11,
+  "stale_min": 60,
+  "pull_a": "13:00",
+  "pull_a_before_first_min": 180,
+  "pull_b_min": 90,
+  "pull_c_min": 45,
+  "pull_latest_min": 20,
+  "pull_c_latest_min": 10,
+  "tier_shots_all": 1,
+  "tier_points": 2,
+  "tier_second_pull": 4,
+  "tier_top": 7,
+  "min_sample": 30,
+  "grade_time": "once each game is final",
+  "gap_guard": {
+   "lines": [
+    1.5,
+    2.5
+   ],
+   "price_gate": -200,
+   "max_price": 120,
+   "gap_ev": 0.03,
+   "books_min": 4,
+   "pin_ev_min": 0.0,
+   "pull_ev": 0.015,
+   "market_weight": 0.8,
+   "model_weight": 0.2,
+   "final_ev": 0.02,
+   "max_per_player": 1,
+   "max_per_game": null,
+   "max_per_night": null,
+   "live_from": "2026-10-20",
+   "safety_units": -10
+  }
+ },
+ "ui": {
+  "stale_after_min": 75,
+  "refresh_sec": 120,
+  "picks_open": 8
+ }
+}

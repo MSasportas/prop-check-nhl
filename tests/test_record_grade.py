@@ -369,7 +369,7 @@ class GradedDay(unittest.TestCase):
             sl = s.read("17:31", cp=cp)                                        # 90-minute read, 7 PM game: two picks
             # 6:16 PM (45-minute read): PHI's price drifts so the gap is gone (pulled); CAR's stays
             sl = s.read("18:16", cp=[cp[0], s.gg_lines("PHI", 1, ev=-0.04)])
-            self.assertEqual(s.pick("PHI", 1, sl)["pulled"]["reason"], "Hard Rock moved the price and the gap is gone")
+            self.assertEqual(s.pick("PHI", 1, sl)["pulled"]["reason"], "Hard Rock moved it to -220")
             sl = s.read("18:31", cp=[cp[0], s.gg_lines("PHI", 1, ev=-0.04)], vn=[s.gg_lines("VAN", 1)])   # 8 PM game: the third pick
             first = {p["team"]: p["price"] for p in sl["picks"]}
             ids = {p["team"]: p["id"] for p in sl["picks"]}

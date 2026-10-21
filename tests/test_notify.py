@@ -163,8 +163,8 @@ class T(unittest.TestCase):
         self.srv.posts.clear()
         notify.notify(slate([dict(a, pulled={"at": "x", "reason": "Hard Rock moved the price and the gap is gone"})]))
         t = self.texts()[0]
-        self.assertTrue(t.startswith("❌ **PULLED. Don't bet these:**"))
-        self.assertIn("P. Player1 OVER 2.5 shots (Hard Rock moved the price and the gap is gone)", t.replace("Over", "OVER"))
+        self.assertTrue(t.startswith("❌ **PULLED. Don't bet these now:**"))
+        self.assertIn("P. Player1 OVER 2.5 shots -120 (Hard Rock moved the price and the gap is gone)", t.replace("Over", "OVER"))
 
     def test_started_pulled_graded_not_new(self):
         old = pick(1, start="09:00")
@@ -184,7 +184,7 @@ class T(unittest.TestCase):
         self.assertEqual(len(self.srv.posts), 1)
         t = self.texts()[0]
         self.assertIn("Don't bet these", t)
-        self.assertIn("P. Player1 Over 2.5 shots on goal (Scratched from the lineup)", t)
+        self.assertIn("P. Player1 Over 2.5 shots on goal -120 (Scratched from the lineup)", t)
         self.assertNotIn("Player2", t)
         notify.notify(slate([pa, pb]))                          # not again
         self.assertEqual(len(self.srv.posts), 1)
@@ -217,20 +217,20 @@ class T(unittest.TestCase):
         self.at("08:00")
         self.assertEqual(notify.notify(slate([pick(1, start="07:00")])), 0)
 
-    def test_daily_cap_six(self):
-        for i in range(1, 12):
+    def test_daily_cap_twelve(self):
+        for i in range(1, 20):
             notify.notify(slate([pick(i)]))
-        self.assertEqual(len(self.srv.posts), 5)                # hello used 1 of 6
-        self.assertEqual(self.state()["sent"][DAY], 6)
+        self.assertEqual(len(self.srv.posts), 11)               # hello used 1 of 12
+        self.assertEqual(self.state()["sent"][DAY], 12)
         self.at("10:00", "2026-10-13")
         notify.notify(slate([pick(1)], date="2026-10-13"))
-        self.assertEqual(len(self.srv.posts), 5)                # slate date is old -> silent
+        self.assertEqual(len(self.srv.posts), 11)               # slate date is old -> silent
         self.at("11:00", "2026-10-13")
         p = pick(1)
         p["id"] = "2026-10-13:g1:p1:shots:2.5:over"
         p["start"] = "2026-10-13T19:00:00-04:00"
         notify.notify(slate([p], date="2026-10-13"))
-        self.assertEqual(len(self.srv.posts), 6)                # new day, new count
+        self.assertEqual(len(self.srv.posts), 12)               # new day, new count
 
     def test_action_needed_once_per_day_each(self):
         sl = slate(prices_state="keys_refused", banners=[{"level": "stop", "text": "ignored"}])
@@ -322,10 +322,39 @@ class T(unittest.TestCase):
             self.assertNotIn("SECRETTOKEN", p["content"])
             self.assertEqual(p["allowed_mentions"], {"parse": []})
 
+    def test_price_final_once_for_a_told_pick(self):
+        a = dict(pick(1), side="over", line=2.5, market="shots")
+        notify.notify(slate([a]))
+        self.srv.posts.clear()
+        notify.notify(slate([dict(a, price_final=True)]))
+        t = self.texts()
+        self.assertEqual(len(t), 1)
+        self.assertTrue(t[0].startswith("✅ **PRICE FINAL.**"))
+        self.assertIn("P. Player1 OVER 2.5 shots -120", t[0])
+        notify.notify(slate([dict(a, price_final=True)]))             # not again
+        self.assertEqual(len(self.srv.posts), 1)
+
+    def test_a_pick_found_at_the_last_read_says_final_in_its_new_block_only(self):
+        a = dict(pick(1), side="over", line=2.5, market="shots", price_final=True)
+        notify.notify(slate([a]))
+        t = [x for x in self.texts() if "NEW PICK" in x]
+        self.assertIn("✅ Price final", t[0])
+        n = len(self.srv.posts)
+        notify.notify(slate([a]))
+        self.assertEqual(len(self.srv.posts), n)                         # no separate FINAL ping
+
+    def test_pull_says_what_it_means_if_you_bet(self):
+        a = dict(pick(1), side="over", line=2.5, market="shots")
+        notify.notify(slate([a]))
+        self.srv.posts.clear()
+        notify.notify(slate([dict(a, pulled={"at": "x", "reason": "Hard Rock moved it to -140",
+                                             "if_bet": "Got -120? Still a good bet. Don't bet it at -140."})]))
+        self.assertIn("Got -120? Still a good bet.", self.texts()[0])
+
     def test_state_has_only_ids_and_times(self):
         notify.notify(slate([pick(1)]))
         st = self.state()
-        self.assertEqual(set(st), {"picks", "pulled", "sent", "action", "hello"})
+        self.assertEqual(set(st), {"picks", "pulled", "final", "sent", "action", "hello"})
         self.assertNotIn("http", json.dumps(st))
 
 

@@ -265,11 +265,10 @@ class TheRealReset(unittest.TestCase):
         arch = open(os.path.join(REPO, e["archive"]), "rb").read()
         self.assertEqual((hashlib.sha256(arch).hexdigest(), arch.count(b"\n")), (e["sha256"], e["lines"]))
         self.assertEqual((e["lines"], e["ordered_by"], e["at"]), (82, "Matt", "2026-10-19"))
-        self.assertEqual(os.path.getsize(os.path.join(REPO, EV)), 0)
-        self.assertTrue(G.reset_accepts(arch, b"", G.work_reader(REPO)))
+        self.assertTrue(G.reset_accepts(arch, b"", G.work_reader(REPO)))      # the Record has grown since (live from Oct 20)
         self.assertIsNone(G.resets_state(REPO) if os.path.isdir(os.path.join(REPO, ".git")) else None)
 
-    def test_empty_record_cycle_on_a_copy(self):
+    def test_a_cycle_on_a_copy_adds_nothing_to_the_record(self):
         tmp = tempfile.mkdtemp(prefix="pc_reset_data_")
         self.addCleanup(shutil.rmtree, tmp, True)
         data = os.path.join(tmp, "data")
@@ -287,8 +286,7 @@ class TheRealReset(unittest.TestCase):
         self.assertEqual([s["step"] for s in st["steps"] if s["status"] == "failed"], [])
         for k, v in before.items():
             self.assertEqual(open(os.path.join(data, k), "rb").read(), v, k)       # no pick added, views identical
-        rec = json.load(open(os.path.join(data, "record.json")))
-        self.assertEqual((rec["summary"]["headline"]["n"], rec["nights"], rec["older"]), (0, [], []))
+
 
 
 

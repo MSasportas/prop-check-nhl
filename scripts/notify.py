@@ -4,11 +4,15 @@ Sends (all plain text, one webhook post each):
   NEW PICK   one message per run for every open pick not told about before (max 8 blocks, then "+N more"): bold bet line,
              game, time, how settled it is, "Gap +X% vs market, we say Y%, price needs Z%", link, and "Bet only at this
              price or better". Parlays are not offered, so there is never a parlay block.
-  PULLED     one short message for picks he was told about that were pulled before puck drop
+  PULLED     one short message for picks he was told about that were pulled before puck drop, each with what it means
+             if he already bet it at the shown price (a Hard Rock bet can't be taken back)
+  FINAL      one short message when the 45-minute read (the last price check) has passed for picks he was told about:
+             from then on only a scratch can pull them. A pick first shown at that read says "Price final" in its NEW block
+             instead. Sent only while fewer than FINAL_ROOM messages went out that ET day, so it never crowds out a pick or pull
   ACTION     odds keys refused / odds pool low or empty (the page's own sentence), once per ET day each
   hello      once, the first time the webhook works
 Never: no-pick nights, heartbeats, lineup checks, grading, errors, vetoes. Quiet 12:30 AM to 8:00 AM ET (items are held:
-they are still open at 8:00 and go out then). At most 6 messages per ET day. A new price or Early -> Lineup confirmed never
+they are still open at 8:00 and go out then). At most 12 messages per ET day (FINAL pings stop at 9). A new price or Early -> Lineup confirmed never
 re-notifies (a pick's price is frozen anyway).
 
 The webhook URL comes ONLY from the env DISCORD_WEBHOOK_URL (a GitHub secret). It is registered as a secret
@@ -27,7 +31,8 @@ import urllib.request
 import common
 
 PAGE = "https://msasportas.github.io/prop-check-nhl/"
-MAX_PER_DAY = 6
+MAX_PER_DAY = 12
+FINAL_ROOM = 9
 MAX_LINES = 8
 QUIET_FROM = (0, 30)        # inclusive
 QUIET_TO = (8, 0)           # exclusive
@@ -106,6 +111,7 @@ def load_state():
         st.pop(gone, None)                  # retired with the parlays and the PAPER messages
     st.setdefault("picks", {})              # id -> ISO time told
     st.setdefault("pulled", {})             # id -> ISO time the pull was told
+    st.setdefault("final", {})              # id -> ISO time "price final" was told
     st.setdefault("sent", {})               # ET date -> messages sent that day
     st.setdefault("action", {})             # ET date -> ["refused", "pool"] already told
     st.setdefault("hello", None)
@@ -116,7 +122,7 @@ def _prune(st, today):
     from datetime import date, timedelta
     d0 = date.fromisoformat(today)
     keep = {(d0 - timedelta(days=i)).isoformat() for i in range(KEEP_DAYS)}
-    for k in ("picks", "pulled"):
+    for k in ("picks", "pulled", "final"):
         st[k] = {i: t for i, t in st[k].items() if i[:10] in keep}
     for k in ("sent", "action"):
         st[k] = {d: v for d, v in st[k].items() if d in keep}
@@ -155,7 +161,7 @@ def _game(p):
 
 def pick_line(p):
     """One pick as a short Discord block: the bet on top, then when and how settled, then the numbers."""
-    when = " · ".join(x for x in (_game(p), _t(p["start"]), _state_label(p)) if x)
+    when = " · ".join(x for x in (_game(p), _t(p["start"]), _state_label(p), "✅ Price final" if p.get("price_final") else "") if x)
     gap = p.get("gap_pct")
     gap_txt = ("Gap %+.1f%% vs market" % gap) if isinstance(gap, (int, float)) else "Gap vs market"
     return "\n".join(["**%s %s  %s**" % (p["player"], _bet(p), common.fmt_price(p["price"])), when,
@@ -195,13 +201,30 @@ def build_pulled(slate, st, now):
     for p in slate.get("picks", []):
         if p.get("pulled") and p["id"] in st["picks"] and p["id"] not in st["pulled"] \
                 and common.parse_iso(p["start"]) > now:
-            items.append(("picks", p["id"], "%s %s (%s)" % (p["player"], _bet(p), p["pulled"]["reason"])))
+            line = "%s %s %s (%s)" % (p["player"], _bet(p), common.fmt_price(p["price"]), p["pulled"]["reason"])
+            if p["pulled"].get("if_bet"):
+                line += "\n   " + p["pulled"]["if_bet"]
+            items.append(("picks", p["id"], line))
     if not items:
         return None
-    text = "❌ **PULLED. Don't bet these:**\n" + "\n".join("• " + s for _, _, s in items[:MAX_LINES])
+    text = "❌ **PULLED. Don't bet these now:**\n" + "\n".join("• " + s for _, _, s in items[:MAX_LINES])
     if len(items) > MAX_LINES:
         text += "\n+%d more pulled on the page" % (len(items) - MAX_LINES)
     return text + "\n" + PAGE, items
+
+
+def build_final(slate, st, now):
+    """Open picks already told about whose last price check is done (and not told yet): (text, ids) or None."""
+    items = [p for p in slate.get("picks", []) if p.get("price_final") and _open(p, now) and p["id"] in st["picks"]
+             and p["id"] not in st["final"] and common.parse_iso(p["start"]) > now]
+    if not items:
+        return None
+    items.sort(key=lambda p: (p.get("rank") or 999, p["id"]))
+    lines = ["• %s %s %s" % (p["player"], _bet(p), common.fmt_price(p["price"])) for p in items[:MAX_LINES]]
+    text = "✅ **PRICE FINAL.** Last price check done. Only a scratch can pull these now:\n" + "\n".join(lines)
+    if len(items) > MAX_LINES:
+        text += "\n+%d more on the page" % (len(items) - MAX_LINES)
+    return text + "\n" + CHECK + "\n" + PAGE, [p["id"] for p in items]
 
 
 def build_actions(slate, st, today):
@@ -277,7 +300,15 @@ def _notify(slate, sender):
         def mark_new():
             for p in new[1]:
                 st["picks"][p["id"]] = stamp
+                if p.get("price_final"):
+                    st["final"][p["id"]] = stamp        # its NEW block already said "Price final"
         post(new[0], mark_new)
+    fin = build_final(slate, st, now)
+    if fin and st["sent"].get(today, 0) < FINAL_ROOM:
+        def mark_final():
+            for i in fin[1]:
+                st["final"][i] = stamp
+        post(fin[0], mark_final)
     for code, text in build_actions(slate, st, today):
         post("⚠️ **Needs you:** " + text, lambda c=code: st["action"].setdefault(today, []).append(c))
     _save(st, before)

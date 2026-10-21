@@ -373,13 +373,23 @@ def build():
     # Hard Rock moved the price on one pick and the gap fell under 1.5%: pulled, stays on the page and the Record
     s = base_slate()
     m = find(s, "mack")
-    m["pulled"] = {"at": t("17:50"), "reason": "Hard Rock moved the price and the gap is gone"}
-    m["history"].append({"at": t("17:50"), "text": "Pulled: Hard Rock moved the price and the gap is gone"})
+    m["pulled"] = {"at": t("17:50"), "reason": "Hard Rock moved it to -160",
+                   "if_bet": "Got %s? Still a good bet. Don't bet it at -160." % (("+%d" % m["price"]) if m["price"] > 0 else str(m["price"]))}
+    m["history"].append({"at": t("17:50"), "text": "Pulled: Hard Rock moved it to -160"})
     rerank(s)
     out["moved"] = (s, rec)
 
+    # 2026-10-21: the 45-minute read is done for the first game's picks: "Price final"
     s = base_slate()
-    find(s, "maka")["pulled"] = {"at": t("18:41"), "reason": "Scratched from the lineup"}
+    for p in s["picks"]:
+        if not p["pulled"] and not p["state"].startswith("locked"):
+            p["price_final"] = True
+            break
+    out["final"] = (s, rec)
+
+    s = base_slate()
+    find(s, "maka")["pulled"] = {"at": t("18:41"), "reason": "Scratched from the lineup",
+                                 "if_bet": "Already bet? It should void and refund (no ice time)."}
     find(s, "maka")["history"].append({"at": t("18:41"), "text": "Pulled: Scratched from the lineup"})
     rerank(s)
     out["pulled"] = (s, rec)

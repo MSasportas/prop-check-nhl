@@ -241,12 +241,13 @@
     },
     {
      "at": "2026-10-11T17:50:00-04:00",
-     "text": "Pulled: Hard Rock moved the price and the gap is gone"
+     "text": "Pulled: Hard Rock moved it to -160"
     }
    ],
    "pulled": {
     "at": "2026-10-11T17:50:00-04:00",
-    "reason": "Hard Rock moved the price and the gap is gone"
+    "reason": "Hard Rock moved it to -160",
+    "if_bet": "Got -145? Still a good bet. Don't bet it at -160."
    }
   },
   {

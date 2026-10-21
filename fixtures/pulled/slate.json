@@ -303,7 +303,8 @@
    ],
    "pulled": {
     "at": "2026-10-11T18:41:00-04:00",
-    "reason": "Scratched from the lineup"
+    "reason": "Scratched from the lineup",
+    "if_bet": "Already bet? It should void and refund (no ice time)."
    }
   },
   {

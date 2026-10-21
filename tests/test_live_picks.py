@@ -145,7 +145,8 @@ class Pulled(unittest.TestCase):
 
     def test_price_moved_and_the_gap_is_gone(self):
         sl = self.s.read("18:16", cp=[self.s.gg_lines("CAR", 1, ev=-0.04)])
-        self.check_pulled(sl, "gap_gone", "Hard Rock moved the price and the gap is gone")
+        p = self.check_pulled(sl, "gap_gone", "Hard Rock moved it to -220")
+        self.assertEqual(p["pulled"]["if_bet"], "Got -169? Still a good bet. Don't bet it at -220.")
 
     def test_price_moved_but_the_gap_is_still_1_5_percent_keeps_it(self):
         sl = self.s.read("18:16", cp=[self.s.gg_lines("CAR", 1, ev=0.016)])
@@ -154,14 +155,16 @@ class Pulled(unittest.TestCase):
 
     def test_fewer_than_four_books(self):
         sl = self.s.read("18:16", cp=[self.s.gg_lines("CAR", 1, books=BOOKS[:3])])
-        self.check_pulled(sl, "books_low", "Other books stopped quoting this line")
+        p = self.check_pulled(sl, "books_low", "Too few other books to check it against")
+        self.assertEqual(p["pulled"]["if_bet"], "Got -169? Nothing says it got worse. Haven't bet? Skip it.")
 
     def test_pinnacle_flips_sign(self):
         hr, oth = self.s.gg_lines("CAR", 1)
         k, name, line, o, u = oth["pinnacle"]
         oth["pinnacle"] = (k, name, line, u, o)                       # Pinnacle now has the other side as the favourite
         sl = self.s.read("18:16", cp=[(hr, oth)])
-        self.check_pulled(sl, "pinnacle_flip", "Pinnacle no longer agrees with the price")
+        p = self.check_pulled(sl, "pinnacle_flip", "Pinnacle moved against it")
+        self.assertEqual(p["pulled"]["if_bet"], "Pinnacle, the sharpest book, leans against it even at -169. Haven't bet? Skip it.")
 
     def test_pinnacle_gone(self):
         hr, oth = self.s.gg_lines("CAR", 1)
@@ -172,11 +175,13 @@ class Pulled(unittest.TestCase):
     def test_player_listed_out_by_daily_faceoff(self):
         self.s.set_lineup("CAR", "2026-10-11T20:00:00Z", out=[1])
         sl = self.s.read("18:16", cp=[self.gg])
-        self.check_pulled(sl, "out", "Scratched from the lineup")
+        p = self.check_pulled(sl, "out", "Scratched from the lineup")
+        self.assertEqual(p["pulled"]["if_bet"], "Already bet? It should void and refund (no ice time).")
 
     def test_line_taken_down(self):
         sl = self.s.read("18:16", cp=[self.s.gg_lines("CAR", 2, ev=0.0)])   # another (non-qualifying) line only: his is gone
-        self.check_pulled(sl, "line_gone", "Hard Rock took this line down")
+        p = self.check_pulled(sl, "line_gone", "Hard Rock took the line down")
+        self.assertEqual(p["pulled"]["if_bet"], "Got -169? Your bet still stands.")
 
     def test_a_pulled_pick_stays_in_the_record_and_is_not_pulled_twice_or_shown_again(self):
         s = self.s
@@ -187,7 +192,7 @@ class Pulled(unittest.TestCase):
         sl = s.at("19:05")
         self.assertEqual(kinds(s), ["shown", "pulled"])               # a pulled pick is not locked either
         p = s.pick("CAR", 1, sl)
-        self.assertEqual(p["pulled"]["reason"], "Hard Rock moved the price and the gap is gone")
+        self.assertEqual(p["pulled"]["reason"], "Hard Rock moved it to -220")
 
     def test_a_pulled_pick_is_graded_at_its_shown_price_and_counted_under_pulled(self):
         s = self.s
@@ -312,15 +317,16 @@ class FirstLiveSlate(unittest.TestCase):
         new, _ = engine.evaluate(inp, gg)
         self.assertEqual(new, [])
 
-    def test_the_committed_record_starts_empty_with_the_reset_on_file(self):
-        self.assertEqual(os.path.getsize(os.path.join(ROOT, "data", "record", "events.jsonl")), 0)
+    def test_the_committed_record_starts_after_the_reset_with_the_reset_on_file(self):
+        # was "starts empty" (true on 2026-10-19); since the first live slate it only holds slates from live_from on
+        with open(os.path.join(ROOT, "data", "record", "events.jsonl"), "rb") as f:
+            evs = record.parse(f.read())
+        self.assertTrue(all(e["id"][:10] >= "2026-10-20" for e in evs))
         resets = common.read_json(os.path.join(ROOT, "data", "record", "resets.json"))
         self.assertEqual([r["at"] for r in resets], ["2026-10-19"])
         arch = os.path.join(ROOT, resets[0]["archive"])
         with open(arch, "rb") as f:
             self.assertEqual(hashlib.sha256(f.read()).hexdigest(), resets[0]["sha256"])      # the archived Record is intact
-        rec = common.read_json(os.path.join(ROOT, "data", "record.json"))
-        self.assertEqual(rec["nights"], [])
 
 
 class RecordGuard(unittest.TestCase):
@@ -460,13 +466,13 @@ class Discord(unittest.TestCase):
             s.read("18:21", cp=[s.gg_lines("CAR", 1, ev=-0.04)])
             pulled = [p["content"] for p in srv.posts if "PULLED" in p["content"]]
             self.assertEqual(len(pulled), 1)
-            self.assertIn("Hard Rock moved the price and the gap is gone", pulled[0])
+            self.assertIn("Hard Rock moved it to -220", pulled[0])
         finally:
             srv.close()
             s.close()
 
-    def test_the_six_a_day_cap_and_quiet_hours_are_unchanged(self):
-        self.assertEqual(notify.MAX_PER_DAY, 6)
+    def test_the_twelve_a_day_cap_and_quiet_hours(self):
+        self.assertEqual((notify.MAX_PER_DAY, notify.FINAL_ROOM), (12, 9))
         self.assertEqual((notify.QUIET_FROM, notify.QUIET_TO), ((0, 30), (8, 0)))
 
 
@@ -497,3 +503,63 @@ class Credits(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+# ---------------------------------------------------------------- 2026-10-21: what a pull means if you already bet, and "Price final"
+class IfYouBet(unittest.TestCase):
+    """engine.advice() judges a pull at the price the pick was SHOWN at (the one Matt may already hold)."""
+    def adv(self, code, **pull):
+        return engine.advice(code, pull, -105, 0.02)
+
+    def test_beniers_oct20_price_got_worse_and_the_shown_price_is_still_good(self):
+        self.assertEqual(self.adv("guard_fails", now_price=-110, yours_ev=0.040),
+                         ("Hard Rock moved it to -110", "Got -105? Still a good bet. Don't bet it at -110."))
+
+    def test_thomas_oct20_market_drifted_a_little_and_the_shown_price_is_a_small_plus(self):
+        self.assertEqual(self.adv("guard_fails", now_price=-105, yours_ev=0.013),
+                         ("The other books moved against it", "Got -105? Still a small plus. Too thin to bet now."))
+
+    def test_edge_gone_even_at_the_shown_price(self):
+        self.assertEqual(self.adv("guard_fails", now_price=-105, yours_ev=-0.01)[1],
+                         "Edge is gone even at -105. Haven't bet? Skip it.")
+
+    def test_pinnacle_against_at_the_shown_price(self):
+        self.assertIn("leans against it even at -105", self.adv("pinnacle_flip", now_price=-105, yours_ev=0.03, yours_pin_ev=-0.01)[1])
+
+    def test_an_older_pull_event_without_the_numbers_keeps_the_plain_reason(self):
+        e = engine._pulled_event("x", "t", {"reason": "model guard fails"}, -105, {"ops": {"gap_guard": {"thresholds": {}}}})
+        self.assertEqual((e["reason"], "if_bet" in e), ("The edge fell under our bar", False))
+
+
+class PriceFinal(unittest.TestCase):
+    def setUp(self):
+        self.s = Sim(pool=12)
+        day(self.s)
+        self.gg = self.s.gg_lines("CAR", 1)
+
+    def tearDown(self):
+        self.s.close()
+
+    def test_not_final_after_the_90_minute_read_final_after_the_45(self):
+        s = self.s
+        sl = s.read("17:31", cp=[self.gg])
+        self.assertFalse(s.pick("CAR", 1, sl)["price_final"])
+        sl = s.read("18:16", cp=[self.gg])                              # 45-minute read, nothing moved
+        p = s.pick("CAR", 1, sl)
+        self.assertIsNone(p["pulled"])
+        self.assertTrue(p["price_final"])
+        self.assertEqual(kinds(s), ["shown"])                            # the Record gets nothing new for it
+
+    def test_first_found_at_the_45_minute_read_is_final_at_once(self):
+        sl = self.s.read("18:16", cp=[self.gg])
+        self.assertTrue(self.s.pick("CAR", 1, sl)["price_final"])
+
+    def test_a_pick_pulled_at_the_45_is_not_final(self):
+        s = self.s
+        s.read("17:31", cp=[self.gg])
+        sl = s.read("18:16", cp=[s.gg_lines("CAR", 1, ev=-0.04)])
+        self.assertFalse(s.pick("CAR", 1, sl)["price_final"])
+
+    def test_a_slipped_90_minute_read_at_45_and_a_half_minutes_is_not_final(self):
+        sl = self.s.read("18:14", cp=[self.gg])                         # 46 min to a 7 PM puck: the log's close, not the last check
+        self.assertFalse(self.s.pick("CAR", 1, sl)["price_final"])

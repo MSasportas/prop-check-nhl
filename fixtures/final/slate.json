@@ -1,0 +1,367 @@
+{
+ "fixture": true,
+ "fixture_now": "2026-10-11T18:55:00-04:00",
+ "slate_date": "2026-10-11",
+ "generated_at": "2026-10-11T18:52:00-04:00",
+ "status_at": "2026-10-11T18:52:00-04:00",
+ "valid_until": "2026-10-12T05:00:00-04:00",
+ "status": {
+  "prices_state": "ok",
+  "prices_at": "2026-10-11T17:02:00-04:00",
+  "next_price_read_at": "2026-10-11T19:25:00-04:00",
+  "stats_built_at": "2026-10-11T09:12:00-04:00",
+  "stats_through": "2026-10-10",
+  "stats_state": "ok",
+  "lineups_at": "2026-10-11T18:35:00-04:00",
+  "goalies_at": null,
+  "lineups_state": "ok",
+  "lineups_note": "14 of 14 team line pages are dated today.",
+  "last_run": {
+   "ok": true,
+   "at": "2026-10-11T18:52:00-04:00",
+   "failed_step": null
+  },
+  "pool": {
+   "pulls_left": 412,
+   "keys": 3,
+   "game_days_left": 6,
+   "days_left": 21,
+   "low": false
+  },
+  "excluded_teams": [],
+  "lines_checked": 212
+ },
+ "banners": [],
+ "empty": null,
+ "games": [
+  {
+   "id": "g1",
+   "away": "BOS",
+   "home": "BUF",
+   "start": "2026-10-11T17:00:00-04:00",
+   "picks": 1,
+   "lineups": {
+    "away": "confirmed",
+    "home": "confirmed"
+   },
+   "goalies": {
+    "away": {
+     "name": "Jeremy Swayman",
+     "status": "confirmed"
+    },
+    "home": {
+     "name": "Ukko-Pekka Luukkonen",
+     "status": "confirmed"
+    }
+   },
+   "excluded_reason": null,
+   "started": true
+  },
+  {
+   "id": "g2",
+   "away": "FLA",
+   "home": "TBL",
+   "start": "2026-10-11T19:10:00-04:00",
+   "picks": 0,
+   "lineups": {
+    "away": "confirmed",
+    "home": "confirmed"
+   },
+   "goalies": {
+    "away": {
+     "name": "Sergei Bobrovsky",
+     "status": "confirmed"
+    },
+    "home": {
+     "name": "Andrei Vasilevskiy",
+     "status": "expected"
+    }
+   },
+   "excluded_reason": null,
+   "started": false
+  },
+  {
+   "id": "g3",
+   "away": "NYR",
+   "home": "NJD",
+   "start": "2026-10-11T19:10:00-04:00",
+   "picks": 0,
+   "lineups": {
+    "away": "waiting",
+    "home": "confirmed"
+   },
+   "goalies": {
+    "away": {
+     "name": "Igor Shesterkin",
+     "status": "confirmed"
+    },
+    "home": null
+   },
+   "excluded_reason": null,
+   "started": false
+  },
+  {
+   "id": "g4",
+   "away": "TOR",
+   "home": "MTL",
+   "start": "2026-10-11T19:10:00-04:00",
+   "picks": 0,
+   "lineups": {
+    "away": "not_checked",
+    "home": "not_checked"
+   },
+   "goalies": {
+    "away": {
+     "name": "Anthony Stolarz",
+     "status": "expected"
+    },
+    "home": {
+     "name": "Samuel Montembeault",
+     "status": "expected"
+    }
+   },
+   "excluded_reason": null,
+   "started": false
+  },
+  {
+   "id": "g5",
+   "away": "COL",
+   "home": "DAL",
+   "start": "2026-10-11T20:10:00-04:00",
+   "picks": 2,
+   "lineups": {
+    "away": "confirmed",
+    "home": "waiting"
+   },
+   "goalies": {
+    "away": {
+     "name": "Mackenzie Blackwood",
+     "status": "expected"
+    },
+    "home": {
+     "name": "Jake Oettinger",
+     "status": "confirmed"
+    }
+   },
+   "excluded_reason": null,
+   "started": false
+  },
+  {
+   "id": "g6",
+   "away": "EDM",
+   "home": "VAN",
+   "start": "2026-10-11T22:10:00-04:00",
+   "picks": 0,
+   "lineups": {
+    "away": "not_checked",
+    "home": "not_checked"
+   },
+   "goalies": {
+    "away": null,
+    "home": null
+   },
+   "excluded_reason": null,
+   "started": false
+  },
+  {
+   "id": "g7",
+   "away": "SEA",
+   "home": "SJS",
+   "start": "2026-10-11T22:10:00-04:00",
+   "picks": 0,
+   "lineups": {
+    "away": "not_checked",
+    "home": "not_checked"
+   },
+   "goalies": {
+    "away": {
+     "name": "Joey Daccord",
+     "status": "expected"
+    },
+    "home": null
+   },
+   "excluded_reason": null,
+   "started": false
+  }
+ ],
+ "picks": [
+  {
+   "id": "2026-10-11:g5:mack",
+   "rank": 1,
+   "tier": "main",
+   "game_id": "g5",
+   "player": "N. MacKinnon",
+   "team": "COL",
+   "opp": "DAL",
+   "home": false,
+   "start": "2026-10-11T20:10:00-04:00",
+   "market": "shots",
+   "line": 2.5,
+   "side": "over",
+   "bet": "Over 2.5 shots on goal",
+   "price": -145,
+   "price_at": "2026-10-11T17:31:00-04:00",
+   "first_price": -145,
+   "first_price_at": "2026-10-11T17:31:00-04:00",
+   "worst_price": -145,
+   "prices": [
+    {
+     "at": "2026-10-11T17:31:00-04:00",
+     "price": -145
+    }
+   ],
+   "p": 0.644,
+   "breakeven": 0.5918,
+   "p_pct": 64,
+   "breakeven_pct": 59,
+   "gap_pct": 5.6,
+   "market_fair_pct": 62.5,
+   "n_books": 6,
+   "guard": {
+    "verdict": "agrees",
+    "ours_pct": 64.4,
+    "model_pct": 72.0
+   },
+   "settled": "lineup",
+   "settled_label": "Lineup confirmed",
+   "reason": "6 other books say 62.5%; Hard Rock's -145 only needs 59.2%. Our model agrees (our blend: 64.4%).",
+   "graded": null,
+   "state": "lineup",
+   "thin": false,
+   "games_used": 61,
+   "games_this_season": 4,
+   "history": [
+    {
+     "at": "2026-10-11T17:31:00-04:00",
+     "text": "Early: lineup not confirmed"
+    },
+    {
+     "at": "2026-10-11T18:35:00-04:00",
+     "text": "Lineup confirmed"
+    }
+   ],
+   "pulled": null,
+   "price_final": true
+  },
+  {
+   "id": "2026-10-11:g5:maka",
+   "rank": 2,
+   "tier": "main",
+   "game_id": "g5",
+   "player": "C. Makar",
+   "team": "COL",
+   "opp": "DAL",
+   "home": false,
+   "start": "2026-10-11T20:10:00-04:00",
+   "market": "shots",
+   "line": 1.5,
+   "side": "over",
+   "bet": "Over 1.5 shots on goal",
+   "price": -190,
+   "price_at": "2026-10-11T17:31:00-04:00",
+   "first_price": -190,
+   "first_price_at": "2026-10-11T17:31:00-04:00",
+   "worst_price": -190,
+   "prices": [
+    {
+     "at": "2026-10-11T17:31:00-04:00",
+     "price": -190
+    }
+   ],
+   "p": 0.6936,
+   "breakeven": 0.6552,
+   "p_pct": 69,
+   "breakeven_pct": 66,
+   "gap_pct": 4.1,
+   "market_fair_pct": 68.2,
+   "n_books": 5,
+   "guard": {
+    "verdict": "agrees",
+    "ours_pct": 69.4,
+    "model_pct": 74.0
+   },
+   "settled": "lineup",
+   "settled_label": "Lineup confirmed",
+   "reason": "5 other books say 68.2%; Hard Rock's -190 only needs 65.5%. Our model agrees (our blend: 69.4%).",
+   "graded": null,
+   "state": "lineup",
+   "thin": false,
+   "games_used": 60,
+   "games_this_season": 4,
+   "history": [
+    {
+     "at": "2026-10-11T17:31:00-04:00",
+     "text": "Early: lineup not confirmed"
+    },
+    {
+     "at": "2026-10-11T18:35:00-04:00",
+     "text": "Lineup confirmed"
+    }
+   ],
+   "pulled": null
+  },
+  {
+   "id": "2026-10-11:g1:past",
+   "rank": null,
+   "tier": "main",
+   "game_id": "g1",
+   "player": "D. Pastrnak",
+   "team": "BOS",
+   "opp": "BUF",
+   "home": false,
+   "start": "2026-10-11T17:00:00-04:00",
+   "market": "shots",
+   "line": 2.5,
+   "side": "over",
+   "bet": "Over 2.5 shots on goal",
+   "price": -125,
+   "price_at": "2026-10-11T17:31:00-04:00",
+   "first_price": -125,
+   "first_price_at": "2026-10-11T17:31:00-04:00",
+   "worst_price": -125,
+   "prices": [
+    {
+     "at": "2026-10-11T17:31:00-04:00",
+     "price": -125
+    }
+   ],
+   "p": 0.592,
+   "breakeven": 0.5556,
+   "p_pct": 59,
+   "breakeven_pct": 56,
+   "gap_pct": 4.4,
+   "market_fair_pct": 58.0,
+   "n_books": 6,
+   "guard": {
+    "verdict": "agrees",
+    "ours_pct": 59.2,
+    "model_pct": 64.0
+   },
+   "settled": "lineup",
+   "settled_label": "Lineup confirmed",
+   "reason": "6 other books say 58.0%; Hard Rock's -125 only needs 55.6%. Our model agrees (our blend: 59.2%).",
+   "graded": null,
+   "state": "locked",
+   "thin": false,
+   "games_used": 60,
+   "games_this_season": 4,
+   "history": [
+    {
+     "at": "2026-10-11T17:31:00-04:00",
+     "text": "Early: lineup not confirmed"
+    },
+    {
+     "at": "2026-10-11T18:35:00-04:00",
+     "text": "Lineup confirmed"
+    },
+    {
+     "at": "2026-10-11T17:00:00-04:00",
+     "text": "Locked"
+    }
+   ],
+   "pulled": null
+  }
+ ],
+ "parlays": [],
+ "parlays_note": "Parlays are not offered: there is no evidence for them yet."
+}
