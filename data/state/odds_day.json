@@ -17,7 +17,36 @@
  },
  "events_at": "2026-10-21T05:00:01-04:00",
  "unknown_teams": [],
- "done": {},
+ "done": {
+  "2026020152": [
+   {
+    "game_id": 2026020152,
+    "pull": "A",
+    "at": "2026-10-21T13:00:01-04:00",
+    "markets": [
+     "shots"
+    ],
+    "returned": [
+     "shots"
+    ],
+    "cost": 1
+   }
+  ],
+  "2026020153": [
+   {
+    "game_id": 2026020153,
+    "pull": "A",
+    "at": "2026-10-21T13:00:01-04:00",
+    "markets": [
+     "shots"
+    ],
+    "returned": [
+     "shots"
+    ],
+    "cost": 1
+   }
+  ]
+ },
  "stage": null,
  "skipped": {},
  "last_fail_at": null,
