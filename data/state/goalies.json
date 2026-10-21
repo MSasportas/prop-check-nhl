@@ -1,94 +1,22 @@
 {
- "date": "2026-10-20",
+ "date": "2026-10-21",
  "teams": {
-  "NYI": {
-   "name": "Ilya Sorokin",
-   "status": "confirmed"
+  "OTT": {
+   "name": "Linus Ullmark",
+   "status": "expected"
   },
-  "ANA": {
-   "name": "Lukas Dostal",
-   "status": "confirmed"
+  "FLA": {
+   "name": "Akira Schmid",
+   "status": "expected"
   },
-  "NJD": {
-   "name": "Jake Allen",
-   "status": "confirmed"
+  "BUF": {
+   "name": "Ukko-Pekka Luukkonen",
+   "status": "expected"
   },
-  "COL": {
-   "name": "Scott Wedgewood",
-   "status": "confirmed"
-  },
-  "WSH": {
-   "name": "Logan Thompson",
-   "status": "confirmed"
-  },
-  "LAK": {
-   "name": "Darcy Kuemper",
-   "status": "confirmed"
-  },
-  "CBJ": {
-   "name": "Jet Greaves",
-   "status": "confirmed"
-  },
-  "TOR": {
-   "name": "Anthony Stolarz",
-   "status": "confirmed"
-  },
-  "MTL": {
-   "name": "Jakub Dobes",
-   "status": "confirmed"
-  },
-  "SJS": {
-   "name": "Alex Nedeljkovic",
-   "status": "confirmed"
-  },
-  "DAL": {
-   "name": "Jake Oettinger",
-   "status": "confirmed"
-  },
-  "BOS": {
-   "name": "Jeremy Swayman",
-   "status": "confirmed"
-  },
-  "STL": {
-   "name": "Joel Hofer",
-   "status": "confirmed"
-  },
-  "WPG": {
-   "name": "Stuart Skinner",
-   "status": "confirmed"
-  },
-  "EDM": {
-   "name": "Devon Levi",
-   "status": "confirmed"
-  },
-  "MIN": {
-   "name": "Jesper Wallstedt",
-   "status": "confirmed"
-  },
-  "SEA": {
-   "name": "Philipp Grubauer",
-   "status": "confirmed"
-  },
-  "DET": {
-   "name": "Daniil Tarasov",
-   "status": "confirmed"
-  },
-  "VAN": {
-   "name": "Leevi Merilainen",
-   "status": "confirmed"
-  },
-  "CAR": {
-   "name": "Pyotr Kochetkov",
-   "status": "confirmed"
-  },
-  "VGK": {
-   "name": "Carter Hart",
-   "status": "confirmed"
-  },
-  "TBL": {
-   "name": "Andrei Vasilevskiy",
-   "status": "confirmed"
+  "PHI": {
+   "name": "Dan Vladar",
+   "status": "expected"
   }
  },
- "checked_at": "2026-10-20T22:10:00-04:00"
+ "checked_at": "2026-10-21T05:00:01-04:00"
 }
