@@ -1,13 +1,13 @@
 {
  "slate_date": "2026-10-20",
- "generated_at": "2026-10-21T00:20:01-04:00",
- "status_at": "2026-10-21T00:20:01-04:00",
+ "generated_at": "2026-10-21T00:40:01-04:00",
+ "status_at": "2026-10-21T00:40:01-04:00",
  "valid_until": "2026-10-21T05:00:00-04:00",
  "status": {
   "prices_state": "ok",
   "prices_at": "2026-10-20T21:50:00-04:00",
   "next_price_read_at": null,
-  "stats_built_at": "2026-10-20T23:30:01-04:00",
+  "stats_built_at": "2026-10-21T00:40:01-04:00",
   "stats_through": "2026-10-19",
   "lineups_at": "2026-10-20T22:20:01-04:00",
   "goalies_at": null,
@@ -16,7 +16,7 @@
   "stats_state": "ok",
   "last_run": {
    "ok": true,
-   "at": "2026-10-21T00:20:01-04:00",
+   "at": "2026-10-21T00:40:01-04:00",
    "failed_step": null
   },
   "pool": {
@@ -28,11 +28,11 @@
   },
   "excluded_teams": [
    {
-    "team": "EDM",
+    "team": "DET",
     "reason": "stats behind"
    },
    {
-    "team": "MIN",
+    "team": "SEA",
     "reason": "stats behind"
    }
   ],
@@ -43,7 +43,7 @@
  "banners": [
   {
    "level": "warn",
-   "text": "Not covered tonight: EDM, MIN (stats behind)."
+   "text": "Not covered tonight: DET, SEA (stats behind)."
   }
  ],
  "empty": {
@@ -241,11 +241,8 @@
    },
    "started": true,
    "picks": 0,
-   "excluded_reason": "stats behind",
-   "excluded_teams": [
-    "MIN",
-    "EDM"
-   ]
+   "excluded_reason": null,
+   "excluded_teams": []
   },
   {
    "id": 2026020149,
@@ -268,8 +265,11 @@
    },
    "started": true,
    "picks": 0,
-   "excluded_reason": null,
-   "excluded_teams": []
+   "excluded_reason": "stats behind",
+   "excluded_teams": [
+    "DET",
+    "SEA"
+   ]
   },
   {
    "id": 2026020150,
