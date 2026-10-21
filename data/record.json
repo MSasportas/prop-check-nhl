@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-10-20T23:20:01-04:00",
+ "generated_at": "2026-10-21T01:00:00-04:00",
  "summary": {
   "headline": {
    "w": 2,
@@ -28,13 +28,13 @@
     "key": "pulled",
     "label": "Pulled (not counted above)",
     "w": 1,
-    "l": 0,
+    "l": 1,
     "push": 0,
     "void": 0,
-    "units": 0.95,
-    "hit_rate": 1.0,
+    "units": -0.05,
+    "hit_rate": 0.5,
     "needed": 0.5122,
-    "n": 1
+    "n": 2
    }
   ]
  },
@@ -109,9 +109,9 @@
        "at": "2026-10-20T20:10:01-04:00"
       }
      ],
-     "result": null,
-     "actual": null,
-     "units": null,
+     "result": "L",
+     "actual": "had 2",
+     "units": -1.0,
      "pulled": {
       "at": "2026-10-20T21:00:01-04:00",
       "reason": "Our model no longer backs this price"
