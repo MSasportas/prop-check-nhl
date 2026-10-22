@@ -1,10 +1,10 @@
 {
  "ok": true,
  "slate_date": "2026-10-22",
- "started_at": "2026-10-22T15:40:00-04:00",
- "status_at": "2026-10-22T15:40:00-04:00",
- "finished_at": "2026-10-22T15:40:01-04:00",
- "last_ok_at": "2026-10-22T15:40:00-04:00",
+ "started_at": "2026-10-22T16:00:01-04:00",
+ "status_at": "2026-10-22T16:00:01-04:00",
+ "finished_at": "2026-10-22T16:00:03-04:00",
+ "last_ok_at": "2026-10-22T16:00:01-04:00",
  "failed_step": null,
  "steps": [
   {
@@ -24,13 +24,13 @@
   },
   {
    "step": "lineups",
-   "status": "skipped",
-   "note": "no game close enough"
+   "status": "ok",
+   "note": "10 of 10 team pages read"
   },
   {
    "step": "lineup_history",
-   "status": "skipped",
-   "note": "no change"
+   "status": "ok",
+   "note": "10 team(s) changed"
   },
   {
    "step": "odds",
@@ -69,8 +69,8 @@
   },
   {
    "step": "slate",
-   "status": "skipped",
-   "note": "unchanged"
+   "status": "ok",
+   "note": "0 open pick(s)"
   },
   {
    "step": "record",
@@ -129,20 +129,22 @@
   "Yegor Chinakhov"
  ],
  "unknown_teams": [],
- "lineup_unmatched_names": [],
+ "lineup_unmatched_names": [
+  "Jonas Johansson"
+ ],
  "excluded_teams": [],
  "stats_through": "2026-10-21",
- "lineups_at": null,
- "lineups_note": null,
+ "lineups_at": "2026-10-22T16:00:01-04:00",
+ "lineups_note": "8 of 10 team line pages are dated today.",
  "games_today": 12,
  "record_events": 15,
  "odds_notes": [],
  "runner": {
   "event": "workflow_dispatch",
-  "run_id": "39834832505",
-  "iteration": 6,
-  "chain_link": 205,
+  "run_id": "39842088697",
+  "iteration": 3,
+  "chain_link": 206,
   "chain_started_at": "2026-10-16T10:00:13-04:00",
-  "run_started_at": "2026-10-22T14:50:29-04:00"
+  "run_started_at": "2026-10-22T15:40:28-04:00"
  }
 }
