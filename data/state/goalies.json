@@ -38,8 +38,8 @@
    "status": "confirmed"
   },
   "ANA": {
-   "name": "Lukas Dostal",
-   "status": "expected"
+   "name": "Ville Husso",
+   "status": "confirmed"
   },
   "NYI": {
    "name": "Semyon Varlamov",
@@ -98,5 +98,5 @@
    "status": "expected"
   }
  },
- "checked_at": "2026-10-22T12:10:00-04:00"
+ "checked_at": "2026-10-22T12:20:01-04:00"
 }
