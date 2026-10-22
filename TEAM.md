@@ -354,7 +354,8 @@ probability x Hard Rock decimal payout - 1, on unrounded numbers; every threshol
     key 3 129 -> 2 (-170 credits) while our ledger charged neither (Oct 20 used only key 1, 33 credits). Something outside this repo is using
     those keys. Pool 190 for 75 games Oct 21-31 = allowance ~2.5 -> tier 2: C (45-min read) only for games holding a live pick, so fewer
     C-read picks and fewer closes/CLV for the Nov 2 checkpoint. Full plan needs ~225. Matt asked once (2026-10-21) for one new free key in
-    secret `ODDS_API_KEYS_2`. Keys reset Nov 1.
+    secret `ODDS_API_KEYS_2`. Keys reset Nov 1. Oct 22 overnight the outside drain hit again (key 2 66 -> 0, key 3 2 -> 0; pool 120, tier 1).
+    **Resolved 2026-10-22 10 AM:** Matt updated the secrets; the 10:00 run reads 7 keys (2 with 288 and 415 credits, the old 120 key, 4 empty), pool 823, tier 4, allowance 11.3. Key numbers changed order.
 
 ## 8. Rule-change log
 | Date | Change | Why | Sample |
