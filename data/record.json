@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-10-22T17:30:00-04:00",
+ "generated_at": "2026-10-22T18:30:01-04:00",
  "summary": {
   "headline": {
    "w": 2,
@@ -84,6 +84,29 @@
       {
        "price": -130,
        "at": "2026-10-22T17:30:00-04:00"
+      }
+     ],
+     "result": null,
+     "actual": null,
+     "units": null,
+     "pulled": null,
+     "legs": []
+    },
+    {
+     "id": "2026-10-22:2026020160:8478397:shots:1.5:over",
+     "kind": "single",
+     "player": "R. Andersson",
+     "bet": "Over 1.5 shots on goal",
+     "market": "shots",
+     "team": "VGK",
+     "game": "VGK at STL",
+     "price": -105,
+     "first_price": -105,
+     "last_price": -105,
+     "prices": [
+      {
+       "price": -105,
+       "at": "2026-10-22T18:30:01-04:00"
       }
      ],
      "result": null,
