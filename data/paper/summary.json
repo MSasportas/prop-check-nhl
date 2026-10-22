@@ -1,7 +1,7 @@
 {
  "version": 1,
  "note": "Gap + Guard research log. Every flag here is a pick on the page and in the Record; vetoed and capped rows are research only.",
- "generated_at": "2026-10-22T18:10:01-04:00",
+ "generated_at": "2026-10-22T18:20:00-04:00",
  "slate": "2026-10-22",
  "active": true,
  "window": {
@@ -39,8 +39,8 @@
     "pulled": null,
     "locked": false,
     "state": "open",
-    "close_fair_pct": null,
-    "clv_pct": null,
+    "close_fair_pct": 50.9,
+    "clv_pct": 4.3,
     "result": null,
     "units": null
    },
@@ -73,8 +73,8 @@
     "pulled": null,
     "locked": false,
     "state": "open",
-    "close_fair_pct": null,
-    "clv_pct": null,
+    "close_fair_pct": 58.2,
+    "clv_pct": 3.0,
     "result": null,
     "units": null
    }
@@ -109,8 +109,8 @@
     "pulled": null,
     "locked": false,
     "state": "open",
-    "close_fair_pct": null,
-    "clv_pct": null,
+    "close_fair_pct": 49.9,
+    "clv_pct": 4.7,
     "result": null,
     "units": null
    }
@@ -304,7 +304,7 @@
   }
  ],
  "nov2": {
-  "gaps_measured": 4,
+  "gaps_measured": 7,
   "gaps_logged": 8,
   "graded_picks": 5,
   "w": 3,
@@ -313,25 +313,25 @@
   "units": 1.052380952380952,
   "wins_z": 0.38307365909518726,
   "clv_gaps": {
-   "n": 4,
-   "mean": 0.04283932724244316,
-   "lb80": 0.030119896249707068,
+   "n": 7,
+   "mean": 0.04162951075565756,
+   "lb80": 0.034614421086398624,
    "pos_share": 1.0
   },
   "clv_flags": {
-   "n": 4,
-   "mean": 0.04283932724244316,
-   "lb80": 0.030119896249707068,
+   "n": 6,
+   "mean": 0.0407366864637276,
+   "lb80": 0.032442806721747784,
    "pos_share": 1.0
   },
   "clv_vetoed": {
-   "n": 0,
-   "mean": null,
-   "lb80": null,
-   "pos_share": null
+   "n": 1,
+   "mean": 0.04698645650723732,
+   "lb80": 0.04698645650723732,
+   "pos_share": 1.0
   },
-  "clv_passed_mean": 0.04283932724244316,
-  "clv_vetoed_mean": null,
+  "clv_passed_mean": 0.0407366864637276,
+  "clv_vetoed_mean": 0.04698645650723732,
   "nights": 3,
   "nights_with_flags": 2,
   "population_slope": null,
