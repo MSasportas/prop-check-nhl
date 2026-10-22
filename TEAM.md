@@ -155,7 +155,7 @@ probability x Hard Rock decimal payout - 1, on unrounded numbers; every threshol
   Discord: PULLED lists each with its `if_bet` line ("Don't bet these now"); ✅ PRICE FINAL once per told pick; a pick first shown at
   the last read says "✅ Price final" in its NEW block. **Max 12 messages per ET day; FINAL pings only while < 9 sent** (replaces the 6/day
   wording above). `notified.json` gains `final`.
-- Tests: `python -m unittest discover -s tests`, 334 tests (`tests/test_live_picks.py` end to end; `tests/test_paper.py` research-log maths; `tests/fixtures/paper_oct19/` = real Oct 19 reads). Fixtures: `python3 fixtures/make_fixtures.py`.
+- Tests: `python -m unittest discover -s tests`, 339 tests (`tests/test_live_picks.py` end to end; `tests/test_paper.py` research-log maths; `tests/fixtures/paper_oct19/` = real Oct 19 reads). Fixtures: `python3 fixtures/make_fixtures.py`.
 
 - **Files:** `index.html` (page; reads `data/slate.json`, `data/record.json`, `data/rules.json`), `data/odds/<date>.json`
   (every price pulled: Hard Rock in `markets`, 9 other books in `others`; ~10x bigger: ~1.5 MB on a 16-game night, ~2.5-3 MB
@@ -190,7 +190,9 @@ probability x Hard Rock decimal payout - 1, on unrounded numbers; every threshol
    Daily lineup-history file: built 2026-10-18 (section 5, team logs), backfilled Oct 12-17.
 5. No verified free injury source; no free opponent-adjusted ranks (model uses raw opponent shots/goals allowed).
 6. The NHL schedule time is used for lock (it can be ~10 min before actual puck drop): conservative.
-7. Name matching: exact, or last name + first initial; unmatched names are listed in `status.json` and skipped.
+7. Name matching: exact, or last name + first initial; unmatched names are listed in `status.json` and skipped. First names go
+   through a fixed transliteration list first (`names._FIRST_ALIAS`, 2026-10-22: Yegor = Egor fixes Chinakhov). Still unmatched by
+   design: Elias Pettersson (two on VAN, never guessed); players not on the NHL roster (e.g. Seth Jarvis Oct 22, Zucker Oct 21).
 8. QA minors open: R4 null-price pick renders as "—"; R6 chain recovery depends on the cron. Fixed 2026-10-12
    (QA round 2): R1 days left capped at the 1st; R2 rules sheet; R3 refused keys show "keys_refused"; R5 cycle runs
    `guard_record.py --history` after each pull (a force-pushed rewrite is caught only by a runner that saw the
@@ -377,6 +379,7 @@ probability x Hard Rock decimal payout - 1, on unrounded numbers; every threshol
 | 2026-10-11 | v1.0 set (section 4) | First build: Sharp standard from the DS backtest (2024-25 fit, 2025-26 out of sample) and one live Hard Rock pull | Backtest only; 0 graded live legs |
 
 ## 9. Session log (newest first, one line each)
+- 2026-10-22 1:45 PM daily check: chain alive (link 203, run 429 in progress, 1:50 PM commit, Pages builds ok), all steps/sources ok, pull A ran 1 PM (12 games, 12 credits). Keys 811 (3 live keys), tier 4, allowance 11.3, budget 135. Oct 21: 2 games, B read, 0 flags/vetoes, no C (tier was 1-2), shadow graded 34/34; Record = Oct 20 only (5 graded). No excluded teams. Unmatched: Pettersson (known), Seth Jarvis (not on CAR roster), Chinakhov -> fixed: transliteration list in `names.py` (Yegor = Egor); 806 names re-matched Oct 20-22, only change is Chinakhov; no page change; 339 tests.
 - 2026-10-22 ~8:10 AM Researcher run 8 (daily, shots): U1-U5 registered before testing (template prices, start time, opponent D/F shot mix, division games, player vs opponent); 17 variants, none positive with n >= 300 (best U5r +8.5% n50), no lockbox look (still 2). Forward Q1a +7.4% n90 (3 nights). Nothing passed.
 - 2026-10-21 1:45 PM daily check: chain alive (link 170, runs success), all steps/sources ok, pull A ran 1 PM (2 games), Oct 20 fully graded (5 picks 3-2, +1.05u; Thomas/Beniers pulled but graded). Keys 190 (key 3 at 2, key 4 empty), tier 2, allowance 2.56: 170 credits left keys 2-3 overnight outside our ledger (gap 23). Unmatched: Jason Zucker (BUF; not on NHL roster, 0 games this season, would sit anyway). No excluded teams. Shipped: optional second key secret `ODDS_API_KEYS_2` (QA SHIP, 337 tests); asked Matt for one free key.
 - 2026-10-21 ~9 AM-noon (Matt: pulled after I bet, am I stuck? should I wait for the final check?): answered (no; a pull means don't bet NOW). Oct 20 pulls were mislabeled "model". Shipped v3.2 pull advice + Price final + Discord 12/day; QA SHIP (1 minor fixed: slipped 90-min read no longer counts as final). 3 stale "Record empty" tests rewritten. Item 22 registered for Nov 2. 334 tests.

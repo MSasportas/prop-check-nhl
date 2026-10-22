@@ -3,12 +3,17 @@
 Rules, in order, and never a guess:
   1. exact full name (accents, punctuation, case and Jr/Sr/II/III ignored)
   2. same last name AND same first initial, and only one such player in the game
+First names are read through _FIRST_ALIAS first (fixed transliteration pairs only, e.g. the feed's
+'Yegor' Chinakhov is the NHL's 'Egor'), so both sides compare the same spelling.
 Anything else is reported as unmatched and left out.
 """
 import re
 import unicodedata
 
 _SUFFIX = {"jr", "sr", "ii", "iii", "iv"}
+# Russian/Ukrainian first-name transliterations seen across books vs the NHL. Whole first names only.
+_FIRST_ALIAS = {"yegor": "egor", "yevgeni": "evgeni", "yevgeny": "evgeny", "evgenii": "evgeni",
+                "ilia": "ilya", "artyom": "artem", "semyon": "semen", "fyodor": "fedor"}
 
 
 def norm(name):
@@ -27,7 +32,7 @@ def split_name(name):
         return "", ""
     if len(parts) == 1:
         return "", parts[0]
-    return parts[0], "".join(parts[1:])
+    return _FIRST_ALIAS.get(parts[0], parts[0]), "".join(parts[1:])
 
 
 def full_key(name):
