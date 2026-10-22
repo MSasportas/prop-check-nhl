@@ -1,10 +1,10 @@
 {
  "ok": true,
  "slate_date": "2026-10-21",
- "started_at": "2026-10-21T22:30:01-04:00",
- "status_at": "2026-10-21T22:30:01-04:00",
- "finished_at": "2026-10-21T22:30:07-04:00",
- "last_ok_at": "2026-10-21T22:30:01-04:00",
+ "started_at": "2026-10-21T22:50:00-04:00",
+ "status_at": "2026-10-21T22:50:00-04:00",
+ "finished_at": "2026-10-21T22:50:02-04:00",
+ "last_ok_at": "2026-10-21T22:50:00-04:00",
  "failed_step": null,
  "steps": [
   {
@@ -20,7 +20,7 @@
   {
    "step": "stats",
    "status": "ok",
-   "note": "1 window(s) read, 4 team-games still missing"
+   "note": "1 window(s) read, 2 team-games still missing"
   },
   {
    "step": "lineups",
@@ -121,19 +121,11 @@
  ],
  "excluded_teams": [
   {
-   "team": "BUF",
-   "reason": "stats behind"
-  },
-  {
    "team": "FLA",
    "reason": "stats behind"
   },
   {
    "team": "OTT",
-   "reason": "stats behind"
-  },
-  {
-   "team": "PHI",
    "reason": "stats behind"
   }
  ],
@@ -146,7 +138,7 @@
  "runner": {
   "event": "workflow_dispatch",
   "run_id": "39710802462",
-  "iteration": 2,
+  "iteration": 4,
   "chain_link": 181,
   "chain_started_at": "2026-10-16T10:00:13-04:00",
   "run_started_at": "2026-10-21T22:20:15-04:00"
