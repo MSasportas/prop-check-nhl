@@ -5,28 +5,28 @@
    "n": 1,
    "left": 120,
    "status": "ok",
-   "checked_at": "2026-10-21T18:00:00-04:00",
+   "checked_at": "2026-10-22T05:00:00-04:00",
    "month": "2026-10"
   },
   {
    "n": 2,
-   "left": 66,
-   "status": "ok",
-   "checked_at": "2026-10-21T05:00:01-04:00",
+   "left": 0,
+   "status": "empty",
+   "checked_at": "2026-10-22T05:00:00-04:00",
    "month": "2026-10"
   },
   {
    "n": 3,
-   "left": 2,
-   "status": "ok",
-   "checked_at": "2026-10-21T05:00:01-04:00",
+   "left": 0,
+   "status": "empty",
+   "checked_at": "2026-10-22T05:00:00-04:00",
    "month": "2026-10"
   },
   {
    "n": 4,
    "left": 0,
    "status": "empty",
-   "checked_at": "2026-10-21T05:00:01-04:00",
+   "checked_at": "2026-10-22T05:00:00-04:00",
    "month": "2026-10"
   }
  ],

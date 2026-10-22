@@ -1,22 +1,102 @@
 {
- "date": "2026-10-21",
+ "date": "2026-10-22",
  "teams": {
   "OTT": {
-   "name": "Linus Ullmark",
-   "status": "confirmed"
+   "name": "Samuel Ersson",
+   "status": "expected"
+  },
+  "SJS": {
+   "name": "Yaroslav Askarov",
+   "status": "expected"
+  },
+  "BOS": {
+   "name": "Jeremy Swayman",
+   "status": "expected"
+  },
+  "NSH": {
+   "name": "Juuse Saros",
+   "status": "expected"
+  },
+  "TOR": {
+   "name": "Sergei Bobrovsky",
+   "status": "expected"
+  },
+  "NYR": {
+   "name": "Dylan Garand",
+   "status": "expected"
+  },
+  "PIT": {
+   "name": "Sergei Murashov",
+   "status": "expected"
   },
   "FLA": {
-   "name": "Akira Schmid",
-   "status": "confirmed"
+   "name": "Cooper Black",
+   "status": "expected"
   },
-  "BUF": {
-   "name": "Ukko-Pekka Luukkonen",
-   "status": "confirmed"
+  "NJD": {
+   "name": "Nico Daws",
+   "status": "expected"
   },
-  "PHI": {
-   "name": "Dan Vladar",
-   "status": "confirmed"
+  "ANA": {
+   "name": "Lukas Dostal",
+   "status": "expected"
+  },
+  "NYI": {
+   "name": "Ilya Sorokin",
+   "status": "expected"
+  },
+  "LAK": {
+   "name": "Anton Forsberg",
+   "status": "expected"
+  },
+  "STL": {
+   "name": "Joel Hofer",
+   "status": "expected"
+  },
+  "VGK": {
+   "name": "Adin Hill",
+   "status": "expected"
+  },
+  "DAL": {
+   "name": "Jake Oettinger",
+   "status": "expected"
+  },
+  "WPG": {
+   "name": "Stuart Skinner",
+   "status": "expected"
+  },
+  "EDM": {
+   "name": "Devon Levi",
+   "status": "expected"
+  },
+  "CAR": {
+   "name": "Brandon Bussi",
+   "status": "expected"
+  },
+  "CGY": {
+   "name": "Devin Cooley",
+   "status": "expected"
+  },
+  "MIN": {
+   "name": "Jesper Wallstedt",
+   "status": "expected"
+  },
+  "SEA": {
+   "name": "Joey Daccord",
+   "status": "expected"
+  },
+  "UTA": {
+   "name": "Karel Vejmelka",
+   "status": "expected"
+  },
+  "VAN": {
+   "name": "Kevin Lankinen",
+   "status": "expected"
+  },
+  "DET": {
+   "name": "John Gibson",
+   "status": "expected"
   }
  },
- "checked_at": "2026-10-21T19:20:00-04:00"
+ "checked_at": "2026-10-22T05:00:00-04:00"
 }

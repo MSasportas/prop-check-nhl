@@ -1,76 +1,33 @@
 {
- "date": "2026-10-21",
+ "date": "2026-10-22",
  "plan": {
-  "allowance": 2.56,
-  "tier": 2,
-  "budget_today": 5,
-  "pool_at_plan": 192,
-  "games_left": 75,
-  "games_today": 2,
+  "allowance": 1.6438,
+  "tier": 1,
+  "budget_today": 19,
+  "pool_at_plan": 120,
+  "games_left": 73,
+  "games_today": 12,
   "key_count": 4,
   "unknown_keys": 0,
-  "made_at": "2026-10-21T05:00:01-04:00"
+  "made_at": "2026-10-22T05:00:00-04:00"
  },
  "events": {
-  "2026020152": "0b4bab4d663e04a571655ec7477eb10a",
-  "2026020153": "5736c2282f978bfdf849f4b10876080e"
+  "2026020157": "921ae4814ca448a3040aa6de5b0fb9e9",
+  "2026020154": "62fca8dce49c8fa3988f75322311b896",
+  "2026020158": "d57c3873ab3f113b8b77614edff4cf8f",
+  "2026020155": "5ae32c2722f3ff4fa178c253f864b384",
+  "2026020156": "c8d6c1c9324cfd008466f555073828d2",
+  "2026020159": "bfe0cd1ca4d32c4946e6ee28e21f0619",
+  "2026020161": "64c943b2b0c51d39a312874b925590f7",
+  "2026020160": "58afd2b5779b2e4f163314436900d379",
+  "2026020162": "7e4df53f515e77bc6555279eb5d6946a",
+  "2026020163": "8a951cc95f91e5df49f7aad4219c40e0",
+  "2026020165": "2d1a2e330020589eb147fe4736ccfd1e",
+  "2026020164": "ec5f71ec810aef5fc417a879c49750f1"
  },
- "events_at": "2026-10-21T05:00:01-04:00",
+ "events_at": "2026-10-22T05:00:00-04:00",
  "unknown_teams": [],
- "done": {
-  "2026020152": [
-   {
-    "game_id": 2026020152,
-    "pull": "A",
-    "at": "2026-10-21T13:00:01-04:00",
-    "markets": [
-     "shots"
-    ],
-    "returned": [
-     "shots"
-    ],
-    "cost": 1
-   },
-   {
-    "game_id": 2026020152,
-    "pull": "B",
-    "at": "2026-10-21T18:00:00-04:00",
-    "markets": [
-     "shots"
-    ],
-    "returned": [
-     "shots"
-    ],
-    "cost": 1
-   }
-  ],
-  "2026020153": [
-   {
-    "game_id": 2026020153,
-    "pull": "A",
-    "at": "2026-10-21T13:00:01-04:00",
-    "markets": [
-     "shots"
-    ],
-    "returned": [
-     "shots"
-    ],
-    "cost": 1
-   },
-   {
-    "game_id": 2026020153,
-    "pull": "B",
-    "at": "2026-10-21T18:00:00-04:00",
-    "markets": [
-     "shots"
-    ],
-    "returned": [
-     "shots"
-    ],
-    "cost": 1
-   }
-  ]
- },
+ "done": {},
  "stage": null,
  "skipped": {},
  "last_fail_at": null,

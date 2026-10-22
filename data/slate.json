@@ -1,87 +1,336 @@
 {
- "slate_date": "2026-10-21",
- "generated_at": "2026-10-22T04:30:00-04:00",
- "status_at": "2026-10-22T04:30:00-04:00",
- "valid_until": "2026-10-22T05:00:00-04:00",
+ "slate_date": "2026-10-22",
+ "generated_at": "2026-10-22T05:00:00-04:00",
+ "status_at": "2026-10-22T05:00:00-04:00",
+ "valid_until": "2026-10-23T05:00:00-04:00",
  "status": {
-  "prices_state": "ok",
-  "prices_at": "2026-10-21T18:00:00-04:00",
-  "next_price_read_at": null,
+  "prices_state": "not_yet",
+  "prices_at": null,
+  "next_price_read_at": "2026-10-22T13:00:00-04:00",
   "stats_built_at": "2026-10-21T23:30:01-04:00",
   "stats_through": "2026-10-21",
-  "lineups_at": "2026-10-21T19:20:00-04:00",
+  "lineups_at": null,
   "goalies_at": null,
-  "lineups_note": "3 of 4 team line pages are dated today.",
-  "lineups_state": "ok",
+  "lineups_note": null,
+  "lineups_state": "not_yet",
   "stats_state": "ok",
   "last_run": {
    "ok": true,
-   "at": "2026-10-22T04:30:00-04:00",
+   "at": "2026-10-22T05:00:00-04:00",
    "failed_step": null
   },
   "pool": {
-   "pulls_left": 188,
+   "pulls_left": 120,
    "keys": 4,
-   "game_days_left": 11,
-   "days_left": 8,
-   "low": false
+   "game_days_left": 8,
+   "days_left": 5,
+   "low": true
   },
   "excluded_teams": [],
-  "lines_checked": 27,
-  "flag_reads": 2,
-  "tier": 2
+  "lines_checked": 0,
+  "flag_reads": 0,
+  "tier": 1
  },
- "banners": [],
+ "banners": [
+  {
+   "level": "warn",
+   "text": "Shots only today. One price check at 1:00 PM. Odds keys low."
+  },
+  {
+   "level": "warn",
+   "text": "Odds pulls are running low: about 5 days left. Fewer price checks until more keys are added."
+  }
+ ],
  "empty": {
-  "code": "all_started",
-  "text": "Every game has started.",
-  "sub": "No picks were posted tonight."
+  "code": "not_yet",
+  "text": "No picks yet today",
+  "sub": "First read is due at 1:00 PM."
  },
  "games": [
   {
-   "id": 2026020152,
-   "away": "PHI",
-   "home": "BUF",
-   "start": "2026-10-21T19:30:00-04:00",
+   "id": 2026020154,
+   "away": "NSH",
+   "home": "BOS",
+   "start": "2026-10-22T19:00:00-04:00",
    "lineups": {
-    "away": "confirmed",
-    "home": "confirmed"
+    "away": "not_checked",
+    "home": "not_checked"
    },
    "goalies": {
     "away": {
-     "name": "Dan Vladar",
-     "status": "confirmed"
+     "name": "Juuse Saros",
+     "status": "expected"
     },
     "home": {
-     "name": "Ukko-Pekka Luukkonen",
-     "status": "confirmed"
+     "name": "Jeremy Swayman",
+     "status": "expected"
     }
    },
-   "started": true,
+   "started": false,
    "picks": 0,
    "excluded_reason": null,
    "excluded_teams": []
   },
   {
-   "id": 2026020153,
-   "away": "FLA",
-   "home": "OTT",
-   "start": "2026-10-21T19:30:00-04:00",
+   "id": 2026020155,
+   "away": "NYR",
+   "home": "TOR",
+   "start": "2026-10-22T19:00:00-04:00",
    "lineups": {
-    "away": "waiting",
-    "home": "confirmed"
+    "away": "not_checked",
+    "home": "not_checked"
    },
    "goalies": {
     "away": {
-     "name": "Akira Schmid",
-     "status": "confirmed"
+     "name": "Dylan Garand",
+     "status": "expected"
     },
     "home": {
-     "name": "Linus Ullmark",
-     "status": "confirmed"
+     "name": "Sergei Bobrovsky",
+     "status": "expected"
     }
    },
-   "started": true,
+   "started": false,
+   "picks": 0,
+   "excluded_reason": null,
+   "excluded_teams": []
+  },
+  {
+   "id": 2026020156,
+   "away": "SJS",
+   "home": "OTT",
+   "start": "2026-10-22T19:00:00-04:00",
+   "lineups": {
+    "away": "not_checked",
+    "home": "not_checked"
+   },
+   "goalies": {
+    "away": {
+     "name": "Yaroslav Askarov",
+     "status": "expected"
+    },
+    "home": {
+     "name": "Samuel Ersson",
+     "status": "expected"
+    }
+   },
+   "started": false,
+   "picks": 0,
+   "excluded_reason": null,
+   "excluded_teams": []
+  },
+  {
+   "id": 2026020157,
+   "away": "ANA",
+   "home": "NJD",
+   "start": "2026-10-22T19:00:00-04:00",
+   "lineups": {
+    "away": "not_checked",
+    "home": "not_checked"
+   },
+   "goalies": {
+    "away": {
+     "name": "Lukas Dostal",
+     "status": "expected"
+    },
+    "home": {
+     "name": "Nico Daws",
+     "status": "expected"
+    }
+   },
+   "started": false,
+   "picks": 0,
+   "excluded_reason": null,
+   "excluded_teams": []
+  },
+  {
+   "id": 2026020158,
+   "away": "FLA",
+   "home": "PIT",
+   "start": "2026-10-22T19:00:00-04:00",
+   "lineups": {
+    "away": "not_checked",
+    "home": "not_checked"
+   },
+   "goalies": {
+    "away": {
+     "name": "Cooper Black",
+     "status": "expected"
+    },
+    "home": {
+     "name": "Sergei Murashov",
+     "status": "expected"
+    }
+   },
+   "started": false,
+   "picks": 0,
+   "excluded_reason": null,
+   "excluded_teams": []
+  },
+  {
+   "id": 2026020159,
+   "away": "LAK",
+   "home": "NYI",
+   "start": "2026-10-22T19:30:00-04:00",
+   "lineups": {
+    "away": "not_checked",
+    "home": "not_checked"
+   },
+   "goalies": {
+    "away": {
+     "name": "Anton Forsberg",
+     "status": "expected"
+    },
+    "home": {
+     "name": "Ilya Sorokin",
+     "status": "expected"
+    }
+   },
+   "started": false,
+   "picks": 0,
+   "excluded_reason": null,
+   "excluded_teams": []
+  },
+  {
+   "id": 2026020160,
+   "away": "VGK",
+   "home": "STL",
+   "start": "2026-10-22T20:00:00-04:00",
+   "lineups": {
+    "away": "not_checked",
+    "home": "not_checked"
+   },
+   "goalies": {
+    "away": {
+     "name": "Adin Hill",
+     "status": "expected"
+    },
+    "home": {
+     "name": "Joel Hofer",
+     "status": "expected"
+    }
+   },
+   "started": false,
+   "picks": 0,
+   "excluded_reason": null,
+   "excluded_teams": []
+  },
+  {
+   "id": 2026020161,
+   "away": "WPG",
+   "home": "DAL",
+   "start": "2026-10-22T20:00:00-04:00",
+   "lineups": {
+    "away": "not_checked",
+    "home": "not_checked"
+   },
+   "goalies": {
+    "away": {
+     "name": "Stuart Skinner",
+     "status": "expected"
+    },
+    "home": {
+     "name": "Jake Oettinger",
+     "status": "expected"
+    }
+   },
+   "started": false,
+   "picks": 0,
+   "excluded_reason": null,
+   "excluded_teams": []
+  },
+  {
+   "id": 2026020162,
+   "away": "MIN",
+   "home": "CGY",
+   "start": "2026-10-22T21:00:00-04:00",
+   "lineups": {
+    "away": "not_checked",
+    "home": "not_checked"
+   },
+   "goalies": {
+    "away": {
+     "name": "Jesper Wallstedt",
+     "status": "expected"
+    },
+    "home": {
+     "name": "Devin Cooley",
+     "status": "expected"
+    }
+   },
+   "started": false,
+   "picks": 0,
+   "excluded_reason": null,
+   "excluded_teams": []
+  },
+  {
+   "id": 2026020163,
+   "away": "CAR",
+   "home": "EDM",
+   "start": "2026-10-22T21:00:00-04:00",
+   "lineups": {
+    "away": "not_checked",
+    "home": "not_checked"
+   },
+   "goalies": {
+    "away": {
+     "name": "Brandon Bussi",
+     "status": "expected"
+    },
+    "home": {
+     "name": "Devon Levi",
+     "status": "expected"
+    }
+   },
+   "started": false,
+   "picks": 0,
+   "excluded_reason": null,
+   "excluded_teams": []
+  },
+  {
+   "id": 2026020164,
+   "away": "UTA",
+   "home": "SEA",
+   "start": "2026-10-22T22:00:00-04:00",
+   "lineups": {
+    "away": "not_checked",
+    "home": "not_checked"
+   },
+   "goalies": {
+    "away": {
+     "name": "Karel Vejmelka",
+     "status": "expected"
+    },
+    "home": {
+     "name": "Joey Daccord",
+     "status": "expected"
+    }
+   },
+   "started": false,
+   "picks": 0,
+   "excluded_reason": null,
+   "excluded_teams": []
+  },
+  {
+   "id": 2026020165,
+   "away": "DET",
+   "home": "VAN",
+   "start": "2026-10-22T22:00:00-04:00",
+   "lineups": {
+    "away": "not_checked",
+    "home": "not_checked"
+   },
+   "goalies": {
+    "away": {
+     "name": "John Gibson",
+     "status": "expected"
+    },
+    "home": {
+     "name": "Kevin Lankinen",
+     "status": "expected"
+    }
+   },
+   "started": false,
    "picks": 0,
    "excluded_reason": null,
    "excluded_teams": []
