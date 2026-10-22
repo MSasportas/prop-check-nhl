@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-10-21T01:20:00-04:00",
+ "generated_at": "2026-10-22T17:30:00-04:00",
  "summary": {
   "headline": {
    "w": 2,
@@ -39,6 +39,61 @@
   ]
  },
  "nights": [
+  {
+   "date": "2026-10-22",
+   "graded": false,
+   "w": 0,
+   "l": 0,
+   "units": 0,
+   "entries": [
+    {
+     "id": "2026-10-22:2026020158:8479314:shots:2.5:under",
+     "kind": "single",
+     "player": "M. Tkachuk",
+     "bet": "Under 2.5 shots on goal",
+     "market": "shots",
+     "team": "FLA",
+     "game": "FLA at PIT",
+     "price": 105,
+     "first_price": 105,
+     "last_price": 105,
+     "prices": [
+      {
+       "price": 105,
+       "at": "2026-10-22T17:30:00-04:00"
+      }
+     ],
+     "result": null,
+     "actual": null,
+     "units": null,
+     "pulled": null,
+     "legs": []
+    },
+    {
+     "id": "2026-10-22:2026020157:8484153:shots:2.5:under",
+     "kind": "single",
+     "player": "L. Carlsson",
+     "bet": "Under 2.5 shots on goal",
+     "market": "shots",
+     "team": "ANA",
+     "game": "ANA at NJD",
+     "price": -130,
+     "first_price": -130,
+     "last_price": -130,
+     "prices": [
+      {
+       "price": -130,
+       "at": "2026-10-22T17:30:00-04:00"
+      }
+     ],
+     "result": null,
+     "actual": null,
+     "units": null,
+     "pulled": null,
+     "legs": []
+    }
+   ]
+  },
   {
    "date": "2026-10-20",
    "graded": true,
