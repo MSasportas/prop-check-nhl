@@ -42,7 +42,7 @@
    "status": "expected"
   },
   "NYI": {
-   "name": "Ilya Sorokin",
+   "name": "Semyon Varlamov",
    "status": "expected"
   },
   "LAK": {
@@ -98,5 +98,5 @@
    "status": "expected"
   }
  },
- "checked_at": "2026-10-22T05:00:00-04:00"
+ "checked_at": "2026-10-22T10:30:00-04:00"
 }
