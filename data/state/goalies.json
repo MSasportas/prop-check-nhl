@@ -43,7 +43,7 @@
   },
   "NYI": {
    "name": "Semyon Varlamov",
-   "status": "expected"
+   "status": "confirmed"
   },
   "LAK": {
    "name": "Anton Forsberg",
@@ -98,5 +98,5 @@
    "status": "expected"
   }
  },
- "checked_at": "2026-10-22T10:50:00-04:00"
+ "checked_at": "2026-10-22T10:50:15-04:00"
 }
