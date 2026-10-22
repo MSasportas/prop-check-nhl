@@ -1,5 +1,22 @@
 # LOG.md: Researcher runs (newest first)
 
+- 2026-10-22 ~8:10 AM ET (Researcher run 8, daily; SHOTS ON GOAL ONLY). No key used, no historical odds pull. U1-U5 registered and pushed
+  (902c4a0) before any test ran. Free NHL stats REST logs refetched to scratch (r6/fetch6.py; lockbox months not fetched). Script
+  research/code/r8/u8.py, output u8_results.txt. 10,405 graded Nov-Feb lines.
+  - U1 template prices (lines posted at Hard Rock's most common default price pairs = untouched by a trader?): -15.3% n147. No.
+  - U2 start time (matinee / late West-coast games): logistic -9.0% n119; matinee UNDERS -6.8% n1,141 [-12.1,-1.5]. Priced in.
+  - U3 opponent positional allowance (does the opponent give its shots to defensemen or forwards?): -10.6% n194; weight ~0.
+  - U4 division games: -13.0% n178. Division games lean slightly over (stable small weight) but nowhere near the hold.
+  - U5 player vs this opponent ("he owns this team"): logistic -7.3% n171; fading the "owner" +8.5% n50 [-12.5,+29.8] (tiny n).
+  - Forward re-score (score_fwd.py, nights Oct 19-21; Oct 21 = 2 games): Q1a (Hard Rock >= consensus fair) +7.4% n90 [-8,+24] p .23;
+    Q1f (4+ books) +13.8% n70 p .14; Q1k Pinnacle +3.0% n74; mean CLV ~= EV (+2.9%). Q2a/b 0 bets. Too small (bar n >= 300, p < 0.0033).
+  17 variants (~0.85 false positives expected); all-time historical 309. Lockbox looks: 2 (unchanged; next needs p < 0.0167). Forward 15.
+  **Verdict: nothing passed; no candidate for the Sharp.** Start time, divisions, opponent positional mix, head-to-head history and
+  default-price lines are all inside Hard Rock's price; the book's own fair keeps weight ~1.0 and nothing moves it 3.5 pts.
+  Next: (1) Q6, registered with a clean start date before looking: Q1a split by read (A vs B/C) and by side (unders), scored from the
+  first night after registration; (2) Q7 returners' overs forward (needs a missed-games field per live shadow line: derive in research
+  code from NHL boxscores + data/shadow); (3) a frozen stack of the small STABLE weights seen so far (K9 attempts, N1 team gap, N3 skew,
+  U4 division) walk-forward, stated as using already-seen features, lockbox only if n >= 300 and positive.
 - 2026-10-21 ~8:15 AM ET (Researcher run 7, daily; SHOTS ON GOAL ONLY). No key used, no historical odds pull. T1-T5 registered and pushed
   (810c48b) before any test ran; LB2 frozen and pushed (9da1bcb) before the lockbox was looked at. Free NHL stats REST logs refetched to
   scratch (r6/fetch6.py; Mar-Apr logs only after LB2 was frozen, r7/fetch_lb.py). Script research/code/r7/t7.py, output t7_results.txt.
