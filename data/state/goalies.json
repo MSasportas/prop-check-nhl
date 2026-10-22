@@ -75,7 +75,7 @@
   },
   "CGY": {
    "name": "Devin Cooley",
-   "status": "expected"
+   "status": "confirmed"
   },
   "MIN": {
    "name": "Jesper Wallstedt",
@@ -98,5 +98,5 @@
    "status": "expected"
   }
  },
- "checked_at": "2026-10-22T13:00:02-04:00"
+ "checked_at": "2026-10-22T13:20:01-04:00"
 }
