@@ -1,7 +1,7 @@
 {
  "slate_date": "2026-10-22",
- "generated_at": "2026-10-22T09:50:01-04:00",
- "status_at": "2026-10-22T09:50:01-04:00",
+ "generated_at": "2026-10-22T10:00:13-04:00",
+ "status_at": "2026-10-22T10:00:13-04:00",
  "valid_until": "2026-10-23T05:00:00-04:00",
  "status": {
   "prices_state": "not_yet",
@@ -16,31 +16,22 @@
   "stats_state": "ok",
   "last_run": {
    "ok": true,
-   "at": "2026-10-22T09:50:01-04:00",
+   "at": "2026-10-22T10:00:13-04:00",
    "failed_step": null
   },
   "pool": {
-   "pulls_left": 120,
-   "keys": 4,
-   "game_days_left": 8,
-   "days_left": 5,
-   "low": true
+   "pulls_left": 823,
+   "keys": 7,
+   "game_days_left": 10,
+   "days_left": 10,
+   "low": false
   },
   "excluded_teams": [],
   "lines_checked": 0,
   "flag_reads": 0,
-  "tier": 1
+  "tier": 4
  },
- "banners": [
-  {
-   "level": "warn",
-   "text": "Shots only today. One price check at 1:00 PM. Odds keys low."
-  },
-  {
-   "level": "warn",
-   "text": "Odds pulls are running low: about 5 days left. Fewer price checks until more keys are added."
-  }
- ],
+ "banners": [],
  "empty": {
   "code": "not_yet",
   "text": "No picks yet today",

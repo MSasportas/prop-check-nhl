@@ -1,10 +1,10 @@
 {
  "ok": true,
  "slate_date": "2026-10-22",
- "started_at": "2026-10-22T10:00:00-04:00",
- "status_at": "2026-10-22T10:00:00-04:00",
- "finished_at": "2026-10-22T10:00:01-04:00",
- "last_ok_at": "2026-10-22T10:00:00-04:00",
+ "started_at": "2026-10-22T10:00:13-04:00",
+ "status_at": "2026-10-22T10:00:13-04:00",
+ "finished_at": "2026-10-22T10:00:20-04:00",
+ "last_ok_at": "2026-10-22T10:00:13-04:00",
  "failed_step": null,
  "steps": [
   {
@@ -69,8 +69,8 @@
   },
   {
    "step": "slate",
-   "status": "skipped",
-   "note": "unchanged"
+   "status": "ok",
+   "note": "0 open pick(s)"
   },
   {
    "step": "record",
@@ -88,25 +88,37 @@
  "keys": [
   {
    "n": 1,
-   "left": 120
+   "left": 0
   },
   {
    "n": 2,
-   "left": 0
+   "left": 288
   },
   {
    "n": 3,
-   "left": 0
+   "left": 415
   },
   {
    "n": 4,
+   "left": 120
+  },
+  {
+   "n": 5,
+   "left": 0
+  },
+  {
+   "n": 6,
+   "left": 0
+  },
+  {
+   "n": 7,
    "left": 0
   }
  ],
- "pool_total": 120,
- "allowance": 1.6438,
- "tier": 1,
- "budget_today": 19,
+ "pool_total": 823,
+ "allowance": 11.274,
+ "tier": 4,
+ "budget_today": 135,
  "budget_used_today": 0,
  "prices_state": "not_yet",
  "prices_at": null,
@@ -123,10 +135,10 @@
  "odds_notes": [],
  "runner": {
   "event": "workflow_dispatch",
-  "run_id": "39784476937",
-  "iteration": 6,
-  "chain_link": 198,
+  "run_id": "39791897834",
+  "iteration": 1,
+  "chain_link": 199,
   "chain_started_at": "2026-10-16T10:00:13-04:00",
-  "run_started_at": "2026-10-22T09:10:14-04:00"
+  "run_started_at": "2026-10-22T10:00:12-04:00"
  }
 }
