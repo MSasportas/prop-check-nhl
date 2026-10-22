@@ -14,8 +14,8 @@
    "status": "confirmed"
   },
   "NSH": {
-   "name": "Juuse Saros",
-   "status": "expected"
+   "name": "Justus Annunen",
+   "status": "confirmed"
   },
   "TOR": {
    "name": "Sergei Bobrovsky",
@@ -98,5 +98,5 @@
    "status": "expected"
   }
  },
- "checked_at": "2026-10-22T17:40:01-04:00"
+ "checked_at": "2026-10-22T18:40:01-04:00"
 }
