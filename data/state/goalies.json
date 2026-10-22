@@ -35,7 +35,7 @@
   },
   "NJD": {
    "name": "Nico Daws",
-   "status": "expected"
+   "status": "confirmed"
   },
   "ANA": {
    "name": "Lukas Dostal",
@@ -98,5 +98,5 @@
    "status": "expected"
   }
  },
- "checked_at": "2026-10-22T11:10:00-04:00"
+ "checked_at": "2026-10-22T11:40:00-04:00"
 }
