@@ -183,6 +183,26 @@ Cumulative historical variants: 292. Lockbox looks: 2 (the next look needs one-s
 |---|---|---|---|---|---|
 | LB2 | 2026-10-21 | **Lockbox look #2, FROZEN before looking: T5 at T = .01** (the only run-7 variant positive Nov-Feb with n >= 300: +1.8% n405, 90% [-5.8, +9.3]; placebo 0 of 200 shuffles >= real, shuffled mean -8.5% sd 3.1). Exact rule unchanged: wf.py logistic with terms new*[g < 20] and dn, L2 2, standardised on training rows; walk-forward test months 2026-03 (train Oct-Feb) and 2026-04 (train Oct-Mar); bet side with p - BE >= .01, price >= -200. Pass = one-sided game-clustered bootstrap p < 0.05/2 = 0.025 on all lockbox bets (and ROI > 0). Lockbox logs fetched with research/code/r7/fetch_lb.py | shots45 Mar-Apr + logs | **-7.5% n179 [-18.6,+4.3], one-sided p 0.85** (Mar -7.8% n145, Apr -6.1% n34) | failed (lockbox look #2) |
 
+## Run 8 (Researcher, 2026-10-22 AM, daily). SHOTS ON GOAL ONLY. Registered before any of these were tested.
+No odds key, no historical odds pull. Free NHL stats REST per-game logs refetched to scratch with research/code/r6/fetch6.py (skater,
+team, goalie; 2024-25 + 2025-26 through Feb 28; lockbox not fetched). Every feature for a line dated d uses only games dated < d
+(start time and opponent/division are schedule facts known in advance). Common as runs 4/6/7: shots45_lines, every two-way Hard Rock
+line, proportional de-vig fair f, side price >= -200, 1u flat, regulation + OT, VOID = no bet, game-clustered bootstrap.
+Logistic = research/code/wf.py (a + a15 + a35 + b*logit(f) + standardised terms, L2 2, fit on all months before the test month), bet
+the side with p - BE >= T, T in {.01, .02, .03} (3 variants). Fixed rules report every Nov-Feb bet with folds. Placebo (shuffle the
+feature(s) within date x line, 200 times) for any variant positive Nov-Feb with n >= 300; lockbox (Mar 1+) only for such a frozen
+variant, once, needing one-sided p < 0.05/3 = 0.0167 (look #3).
+
+| id | date | rule (exact) | data | result | status |
+|---|---|---|---|---|---|
+| U1 | 2026-10-22 | **Template prices (untouched lines).** For each test month, count (line, over price, under price) triples over all training rows (months before); tmpl = 1 if the row's triple is one of the 3 most frequent triples for its line in training. Idea: a line posted at a default price pair was not worked by a trader, so its fair carries less information. Terms c1*tmpl + c2*tmpl*logit(f) (3 T) | shots45 | pending | registered |
+| U2 | 2026-10-22 | **Start time.** et = puck time in US Eastern (from `start`). matinee = [et hour < 17]; late = [et hour >= 21] (West-coast late games). Logistic terms c1*matinee + c2*late (3 T). Fixed rule U2r: UNDER on every matinee line (1 variant). 4 variants | shots45 | pending | registered |
+| U3 | 2026-10-22 | **Opponent positional allowance.** From skater logs (2024-25 + 2025-26 before d): for the opponent O, dsh = share of the SOG its opponents' DEFENSEMEN took, over O's last 20 games (>= 5, else training-row mean); dev = dsh - mean dsh over training rows. Terms c1*dev*[D] + c2*dev*[F] (does Hard Rock price the opponent only by total shots allowed, not by who gets them?) (3 T) | skater logs + shots45 | pending | registered |
+| U4 | 2026-10-22 | **Division game.** div = both teams in the same 2025-26 division (Atlantic BOS BUF DET FLA MTL OTT TBL TOR; Metro CAR CBJ NJD NYI NYR PHI PIT WSH; Central CHI COL DAL MIN NSH STL UTA WPG; Pacific ANA CGY EDM LAK SEA SJS VAN VGK). Terms c1*div + c2*div*[D] (3 T) | shots45 | pending | registered |
+| U5 | 2026-10-22 | **Player vs this opponent (retail "history vs team").** From his prior games (2024-25 + 2025-26 before d): k = games vs this opponent, m_o = his SOG/g in them, m = his SOG/g in all prior games; dev = (m_o - m) x k/(k + 5) (0 if k = 0). Terms c1*dev + c2*[k >= 3] (3 T). Fixed rule U5r: UNDER when dev >= +1.0 (the public backs a player who "owns" this team) (1 variant). 4 variants | skater logs + shots45 | pending | registered |
+
+Run 8 planned count: 17 variants (U1 3, U2 4, U3 3, U4 3, U5 4). Forward Q1/Q2 re-scored as every run (no new forward variants).
+
 ## Queued (not yet tested)
 | id | rule idea | data | status |
 |---|---|---|---|
