@@ -1,13 +1,13 @@
 {
  "slate_date": "2026-10-22",
- "generated_at": "2026-10-23T01:00:01-04:00",
- "status_at": "2026-10-23T01:00:01-04:00",
+ "generated_at": "2026-10-23T01:10:00-04:00",
+ "status_at": "2026-10-23T01:10:00-04:00",
  "valid_until": "2026-10-23T05:00:00-04:00",
  "status": {
   "prices_state": "ok",
   "prices_at": "2026-10-22T21:20:01-04:00",
   "next_price_read_at": null,
-  "stats_built_at": "2026-10-23T00:40:01-04:00",
+  "stats_built_at": "2026-10-23T01:10:00-04:00",
   "stats_through": "2026-10-21",
   "lineups_at": "2026-10-22T21:40:01-04:00",
   "goalies_at": null,
@@ -16,7 +16,7 @@
   "stats_state": "ok",
   "last_run": {
    "ok": true,
-   "at": "2026-10-23T01:00:01-04:00",
+   "at": "2026-10-23T01:10:00-04:00",
    "failed_step": null
   },
   "pool": {
@@ -28,19 +28,11 @@
   },
   "excluded_teams": [
    {
-    "team": "DET",
-    "reason": "stats behind"
-   },
-   {
     "team": "SEA",
     "reason": "stats behind"
    },
    {
     "team": "UTA",
-    "reason": "stats behind"
-   },
-   {
-    "team": "VAN",
     "reason": "stats behind"
    }
   ],
@@ -51,7 +43,7 @@
  "banners": [
   {
    "level": "warn",
-   "text": "Not covered tonight: DET, SEA, UTA, VAN (stats behind)."
+   "text": "Not covered tonight: SEA, UTA (stats behind)."
   }
  ],
  "empty": {
@@ -348,11 +340,8 @@
    },
    "started": true,
    "picks": 2,
-   "excluded_reason": "stats behind",
-   "excluded_teams": [
-    "DET",
-    "VAN"
-   ]
+   "excluded_reason": null,
+   "excluded_teams": []
   }
  ],
  "picks": [
