@@ -1,10 +1,10 @@
 {
  "ok": true,
  "slate_date": "2026-10-22",
- "started_at": "2026-10-22T22:00:00-04:00",
- "status_at": "2026-10-22T22:00:00-04:00",
- "finished_at": "2026-10-22T22:00:03-04:00",
- "last_ok_at": "2026-10-22T22:00:00-04:00",
+ "started_at": "2026-10-22T22:10:01-04:00",
+ "status_at": "2026-10-22T22:10:01-04:00",
+ "finished_at": "2026-10-22T22:10:03-04:00",
+ "last_ok_at": "2026-10-22T22:10:01-04:00",
  "failed_step": null,
  "steps": [
   {
@@ -20,7 +20,7 @@
   {
    "step": "stats",
    "status": "ok",
-   "note": "1 window(s) read, 10 team-games still missing"
+   "note": "1 window(s) read, 8 team-games still missing"
   },
   {
    "step": "lineups",
@@ -50,22 +50,22 @@
   {
    "step": "engine",
    "status": "ok",
-   "note": "2 new event(s), 0 newly shown"
+   "note": "no change"
   },
   {
    "step": "grade",
-   "status": "skipped",
-   "note": "nothing to grade"
+   "status": "ok",
+   "note": "2 graded"
   },
   {
    "step": "shadow",
-   "status": "skipped",
-   "note": "nothing new"
+   "status": "ok",
+   "note": "35 graded"
   },
   {
    "step": "gg_grade",
    "status": "ok",
-   "note": "gap+guard: nothing new"
+   "note": "gap+guard: 3 grade"
   },
   {
    "step": "slate",
@@ -139,19 +139,11 @@
  ],
  "excluded_teams": [
   {
-   "team": "ANA",
-   "reason": "stats behind"
-  },
-  {
    "team": "BOS",
    "reason": "stats behind"
   },
   {
    "team": "FLA",
-   "reason": "stats behind"
-  },
-  {
-   "team": "NJD",
    "reason": "stats behind"
   },
   {
@@ -183,12 +175,12 @@
  "lineups_at": "2026-10-22T21:40:01-04:00",
  "lineups_note": "17 of 24 team line pages are dated today.",
  "games_today": 12,
- "record_events": 25,
+ "record_events": 27,
  "odds_notes": [],
  "runner": {
   "event": "workflow_dispatch",
   "run_id": "39884337022",
-  "iteration": 4,
+  "iteration": 5,
   "chain_link": 213,
   "chain_started_at": "2026-10-16T10:00:13-04:00",
   "run_started_at": "2026-10-22T21:30:16-04:00"
