@@ -206,6 +206,33 @@ U5r +8.5% n50: n < 300, CIs span 0. No variant positive with n >= 300, so no pla
 Forward variants unchanged at 15. Lockbox looks: still 2. Output: research/code/r8/u8_results.txt. Forward (3 nights, Oct 19-21): Q1a +7.4% n90
 [-8,+24] p .23, Q1f +13.8% n70 p .14, Q1k +3.0% n74, Q2a/b 0 bets: too small to judge.
 
+## Run 9 (Researcher, 2026-10-23 AM, daily). SHOTS ON GOAL ONLY. Registered before any of these were tested.
+No odds key, no historical odds pull. Free NHL stats REST per-game logs fetched to scratch with research/code/r9/fetch9.py (team summary,
+skater summary, team powerplay: 2024-25 + 2025-26 through Feb 28; skater timeonice + realtime 2025-26 through Feb 28; lockbox not fetched).
+Every feature for a line dated d uses only games dated < d (schedule facts known in advance). Common as runs 4/6/7/8: shots45_lines, every
+two-way Hard Rock line, proportional de-vig fair f, side price >= -200, 1u flat, regulation + OT, VOID = no bet, game-clustered bootstrap.
+Logistic = research/code/wf.py (a + a15 + a35 + b*logit(f) + standardised terms, L2 2, fit on all months before the test month), bet the
+side with p - BE >= T, T in {.01, .02, .03} (3 variants). Fixed rules report every Nov-Feb bet with folds. Placebo (shuffle the feature(s)
+within date x line, 200 times) for any variant positive Nov-Feb with n >= 300; lockbox (Mar 1+) only for such a frozen variant, once,
+needing one-sided p < 0.05/3 = 0.0167 (look #3).
+
+| id | date | rule (exact) | data | result | status |
+|---|---|---|---|---|---|
+| W1 | 2026-10-23 | **Penalty environment x PP role.** pps = his PP TOI per game over his last 10 games (2025-26 timeonice, >= 3 games, else 0) / his team's PP TOI per game over its last 10 games (team powerplay ppTimeOnIcePerGame, 2025-26; 0 if team PP TOI 0). opp_give = mean ppOpportunities of the opponent O's opponents over O's last 20 games (2024-25 + 2025-26, >= 5, else training mean); own_draw = mean ppOpportunities of his own team over its last 20. dev = value - training-row mean. Terms c1*pps*opp_dev + c2*pps*own_dev (does Hard Rock price PP specialists for how much PP time this matchup will bring?) (3 T) | team powerplay + timeonice + shots45 | | registered |
+| W2 | 2026-10-23 | **Hot shooter (public chases goals, book shades the over).** From skater logs (2024-25 + 2025-26 before d): g5 = goals in his last 5 games; luck = (goals/shots over last 10 games) - (goals + 0.1*100)/(shots + 100) over all his prior games (shrunk shooting %; 0 if < 5 prior games or 0 shots in last 10). Terms c1*g5 + c2*luck (3 T). Fixed rule W2r: UNDER when goals in his last 3 games >= 3 (1 variant). 4 variants | skater logs + shots45 | | registered |
+| W3 | 2026-10-23 | **New to the league (book has least information).** rook = no 2024-25 regular-season game in the skater logs (approximation: also catches vets who missed all of 2024-25 or came from Europe). g = his 2025-26 games before d. Terms c1*rook + c2*rook*[g < 20] + c3*rook*logit(f) (is Hard Rock's price less calibrated on new players?) (3 T) | skater logs + shots45 | | registered |
+| W4 | 2026-10-23 | **Rematch (home-and-home / same opponent within 3 days).** rem = his team's previous game was vs this same opponent, dated 1-3 days before d. last = his SOG in that previous game (if he played it) minus his prior mean SOG/g (all prior games before that game). Terms c1*rem + c2*rem*last (3 T). Fixed rule W4r: UNDER on rematch lines where his SOG in the first game >= line + 2 (book/public anchoring to the game everyone just saw) (1 variant). 4 variants | team + skater logs + shots45 | | registered |
+| W5 | 2026-10-23 | **Frozen stack of already-seen small stable weights (stated: features seen before, so walk-forward here is NOT clean and only the lockbox could confirm).** Terms together: N3 skew and hold (exact run-6 definitions), U4 div and div*[D] (run 8), K9 attempts surplus att20*conv_pos - SOG per game over the same last 20 (run 4; conv_pos from training rows; 0 if < 5 games). One fit, L2 2 (3 T) | shots45 + realtime 2025-26 + skater logs | | registered |
+
+Forward (registered now, scored only on nights dated 2026-10-23 or later; nothing from those nights exists yet):
+| id | date | rule (exact) | data | result | status |
+|---|---|---|---|---|---|
+| Q6a | 2026-10-23 | Q1a bets (exact run-5 definition, as in research/fwd/scores.json) whose frozen read is pull A, nights >= 2026-10-23 | score_fwd output | | forward, open |
+| Q6b | 2026-10-23 | Q1a bets whose frozen read is pull B or C, nights >= 2026-10-23 | same | | forward, open |
+| Q6c | 2026-10-23 | Q1a bets on the UNDER side (any read), nights >= 2026-10-23 | same | | forward, open |
+Q6 bar: as the run-5 forward bar (n >= 300 graded, ROI > 0, mean CLV > 0) with one-sided p < 0.05/18 = 0.0028 (15 + 3 forward variants).
+Scored by research/code/r9/score_q6.py (reads research/fwd/scores.json after score_fwd.py runs).
+
 ## Queued (not yet tested)
 | id | rule idea | data | status |
 |---|---|---|---|
