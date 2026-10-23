@@ -1,10 +1,10 @@
 {
  "ok": true,
  "slate_date": "2026-10-22",
- "started_at": "2026-10-22T21:50:00-04:00",
- "status_at": "2026-10-22T21:50:00-04:00",
- "finished_at": "2026-10-22T21:50:01-04:00",
- "last_ok_at": "2026-10-22T21:50:00-04:00",
+ "started_at": "2026-10-22T22:00:00-04:00",
+ "status_at": "2026-10-22T22:00:00-04:00",
+ "finished_at": "2026-10-22T22:00:03-04:00",
+ "last_ok_at": "2026-10-22T22:00:00-04:00",
  "failed_step": null,
  "steps": [
   {
@@ -19,13 +19,13 @@
   },
   {
    "step": "stats",
-   "status": "skipped",
-   "note": "waiting to retry"
+   "status": "ok",
+   "note": "1 window(s) read, 10 team-games still missing"
   },
   {
    "step": "lineups",
    "status": "skipped",
-   "note": "checked in the last 20 minutes"
+   "note": "no game close enough"
   },
   {
    "step": "lineup_history",
@@ -50,7 +50,7 @@
   {
    "step": "engine",
    "status": "ok",
-   "note": "no change"
+   "note": "2 new event(s), 0 newly shown"
   },
   {
    "step": "grade",
@@ -70,12 +70,12 @@
   {
    "step": "slate",
    "status": "ok",
-   "note": "2 open pick(s)"
+   "note": "0 open pick(s)"
   },
   {
    "step": "record",
-   "status": "skipped",
-   "note": "unchanged"
+   "status": "ok",
+   "note": "record.json"
   }
  ],
  "sources": {
@@ -159,6 +159,10 @@
    "reason": "stats behind"
   },
   {
+   "team": "NYR",
+   "reason": "stats behind"
+  },
+  {
    "team": "OTT",
    "reason": "stats behind"
   },
@@ -169,18 +173,22 @@
   {
    "team": "SJS",
    "reason": "stats behind"
+  },
+  {
+   "team": "TOR",
+   "reason": "stats behind"
   }
  ],
  "stats_through": "2026-10-21",
  "lineups_at": "2026-10-22T21:40:01-04:00",
  "lineups_note": "17 of 24 team line pages are dated today.",
  "games_today": 12,
- "record_events": 23,
+ "record_events": 25,
  "odds_notes": [],
  "runner": {
   "event": "workflow_dispatch",
   "run_id": "39884337022",
-  "iteration": 3,
+  "iteration": 4,
   "chain_link": 213,
   "chain_started_at": "2026-10-16T10:00:13-04:00",
   "run_started_at": "2026-10-22T21:30:16-04:00"
