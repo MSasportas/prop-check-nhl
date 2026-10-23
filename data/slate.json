@@ -1,42 +1,38 @@
 {
  "slate_date": "2026-10-22",
- "generated_at": "2026-10-22T20:20:01-04:00",
- "status_at": "2026-10-22T20:20:01-04:00",
+ "generated_at": "2026-10-22T20:30:00-04:00",
+ "status_at": "2026-10-22T20:30:00-04:00",
  "valid_until": "2026-10-23T05:00:00-04:00",
  "status": {
   "prices_state": "ok",
-  "prices_at": "2026-10-22T20:20:01-04:00",
-  "next_price_read_at": "2026-10-22T20:30:00-04:00",
+  "prices_at": "2026-10-22T20:30:00-04:00",
+  "next_price_read_at": "2026-10-22T21:15:00-04:00",
   "stats_built_at": "2026-10-21T23:30:01-04:00",
   "stats_through": "2026-10-21",
-  "lineups_at": "2026-10-22T20:20:01-04:00",
+  "lineups_at": "2026-10-22T20:30:00-04:00",
   "goalies_at": null,
   "lineups_note": "17 of 24 team line pages are dated today.",
   "lineups_state": "ok",
   "stats_state": "ok",
   "last_run": {
    "ok": true,
-   "at": "2026-10-22T20:20:01-04:00",
+   "at": "2026-10-22T20:30:00-04:00",
    "failed_step": null
   },
   "pool": {
-   "pulls_left": 791,
+   "pulls_left": 789,
    "keys": 7,
    "game_days_left": 10,
    "days_left": 10,
    "low": false
   },
   "excluded_teams": [],
-  "lines_checked": 168,
-  "flag_reads": 10,
+  "lines_checked": 203,
+  "flag_reads": 12,
   "tier": 4
  },
  "banners": [],
- "empty": {
-  "code": "none_qualified",
-  "text": "No picks yet today",
-  "sub": "168 lines read, none cleared both checks. 1 had a gap but our model said no. Today's earlier picks are under Started. Next read at 8:30 PM."
- },
+ "empty": null,
  "games": [
   {
    "id": 2026020154,
@@ -322,12 +318,122 @@
     }
    },
    "started": false,
-   "picks": 0,
+   "picks": 2,
    "excluded_reason": null,
    "excluded_teams": []
   }
  ],
  "picks": [
+  {
+   "id": "2026-10-22:2026020165:8477429:shots:1.5:under",
+   "price": -105,
+   "first_price": -105,
+   "first_price_at": "2026-10-22T20:30:00-04:00",
+   "worst_price": -105,
+   "p": 0.5392,
+   "breakeven": 0.5122,
+   "p_pct": 53,
+   "breakeven_pct": 51,
+   "state": "early",
+   "history": [
+    {
+     "at": "2026-10-22T20:30:00-04:00",
+     "text": "Early: lineup not confirmed"
+    }
+   ],
+   "prices": [
+    {
+     "at": "2026-10-22T20:30:00-04:00",
+     "price": -105
+    }
+   ],
+   "pulled": null,
+   "price_final": false,
+   "graded": null,
+   "rank": 1,
+   "tier": "main",
+   "game_id": 2026020165,
+   "player": "A. Copp",
+   "player_id": 8477429,
+   "team": "DET",
+   "opp": "VAN",
+   "home": false,
+   "start": "2026-10-22T22:00:00-04:00",
+   "market": "shots",
+   "line": 1.5,
+   "side": "under",
+   "bet": "Under 1.5 shots on goal",
+   "price_at": "2026-10-22T20:30:00-04:00",
+   "gap_pct": 8.2,
+   "market_fair_pct": 55.4,
+   "n_books": 5,
+   "guard": {
+    "verdict": "agrees",
+    "ours_pct": 53.9,
+    "model_pct": 49.7
+   },
+   "settled": "early",
+   "settled_label": "Early",
+   "reason": "5 other books say 55.4%; Hard Rock's -105 only needs 51.2%. Our model agrees (our blend: 53.9%).",
+   "thin": false,
+   "games_used": 88,
+   "games_this_season": 9
+  },
+  {
+   "id": "2026-10-22:2026020165:8484471:shots:1.5:under",
+   "price": 120,
+   "first_price": 120,
+   "first_price_at": "2026-10-22T20:30:00-04:00",
+   "worst_price": 120,
+   "p": 0.4655,
+   "breakeven": 0.4545,
+   "p_pct": 46,
+   "breakeven_pct": 45,
+   "state": "early",
+   "history": [
+    {
+     "at": "2026-10-22T20:30:00-04:00",
+     "text": "Early: lineup not confirmed"
+    }
+   ],
+   "prices": [
+    {
+     "at": "2026-10-22T20:30:00-04:00",
+     "price": 120
+    }
+   ],
+   "pulled": null,
+   "price_final": false,
+   "graded": null,
+   "rank": 2,
+   "tier": "main",
+   "game_id": 2026020165,
+   "player": "E. Finnie",
+   "player_id": 8484471,
+   "team": "DET",
+   "opp": "VAN",
+   "home": false,
+   "start": "2026-10-22T22:00:00-04:00",
+   "market": "shots",
+   "line": 1.5,
+   "side": "under",
+   "bet": "Under 1.5 shots on goal",
+   "price_at": "2026-10-22T20:30:00-04:00",
+   "gap_pct": 4.4,
+   "market_fair_pct": 47.4,
+   "n_books": 5,
+   "guard": {
+    "verdict": "agrees",
+    "ours_pct": 46.6,
+    "model_pct": 44.8
+   },
+   "settled": "early",
+   "settled_label": "Early",
+   "reason": "5 other books say 47.4%; Hard Rock's +120 only needs 45.5%. Our model agrees (our blend: 46.5%).",
+   "thin": false,
+   "games_used": 91,
+   "games_this_season": 9
+  },
   {
    "id": "2026-10-22:2026020157:8484153:shots:2.5:under",
    "price": -130,

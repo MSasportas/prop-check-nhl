@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-10-22T20:00:00-04:00",
+ "generated_at": "2026-10-22T20:30:00-04:00",
  "summary": {
   "headline": {
    "w": 2,
@@ -70,6 +70,29 @@
      "legs": []
     },
     {
+     "id": "2026-10-22:2026020165:8477429:shots:1.5:under",
+     "kind": "single",
+     "player": "A. Copp",
+     "bet": "Under 1.5 shots on goal",
+     "market": "shots",
+     "team": "DET",
+     "game": "DET at VAN",
+     "price": -105,
+     "first_price": -105,
+     "last_price": -105,
+     "prices": [
+      {
+       "price": -105,
+       "at": "2026-10-22T20:30:00-04:00"
+      }
+     ],
+     "result": null,
+     "actual": null,
+     "units": null,
+     "pulled": null,
+     "legs": []
+    },
+    {
      "id": "2026-10-22:2026020157:8484153:shots:2.5:under",
      "kind": "single",
      "player": "L. Carlsson",
@@ -107,6 +130,29 @@
       {
        "price": -105,
        "at": "2026-10-22T18:30:01-04:00"
+      }
+     ],
+     "result": null,
+     "actual": null,
+     "units": null,
+     "pulled": null,
+     "legs": []
+    },
+    {
+     "id": "2026-10-22:2026020165:8484471:shots:1.5:under",
+     "kind": "single",
+     "player": "E. Finnie",
+     "bet": "Under 1.5 shots on goal",
+     "market": "shots",
+     "team": "DET",
+     "game": "DET at VAN",
+     "price": 120,
+     "first_price": 120,
+     "last_price": 120,
+     "prices": [
+      {
+       "price": 120,
+       "at": "2026-10-22T20:30:00-04:00"
       }
      ],
      "result": null,
