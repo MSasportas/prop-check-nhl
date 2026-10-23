@@ -1,10 +1,10 @@
 {
  "ok": true,
  "slate_date": "2026-10-23",
- "started_at": "2026-10-23T12:40:00-04:00",
- "status_at": "2026-10-23T12:40:00-04:00",
- "finished_at": "2026-10-23T12:40:01-04:00",
- "last_ok_at": "2026-10-23T12:40:00-04:00",
+ "started_at": "2026-10-23T13:00:00-04:00",
+ "status_at": "2026-10-23T13:00:00-04:00",
+ "finished_at": "2026-10-23T13:00:01-04:00",
+ "last_ok_at": "2026-10-23T13:00:00-04:00",
  "failed_step": null,
  "steps": [
   {
@@ -35,7 +35,7 @@
   {
    "step": "odds",
    "status": "ok",
-   "note": "no pull due"
+   "note": "2 game(s) priced"
   },
   {
    "step": "market_menu",
@@ -59,8 +59,8 @@
   },
   {
    "step": "shadow",
-   "status": "skipped",
-   "note": "nothing new"
+   "status": "ok",
+   "note": "33 line read(s) logged"
   },
   {
    "step": "gg_grade",
@@ -69,8 +69,8 @@
   },
   {
    "step": "slate",
-   "status": "skipped",
-   "note": "unchanged"
+   "status": "ok",
+   "note": "0 open pick(s)"
   },
   {
    "step": "record",
@@ -92,7 +92,7 @@
   },
   {
    "n": 2,
-   "left": 252
+   "left": 250
   },
   {
    "n": 3,
@@ -115,14 +115,14 @@
    "left": 0
   }
  ],
- "pool_total": 787,
+ "pool_total": 785,
  "allowance": 12.9016,
  "tier": 4,
  "budget_today": 25,
- "budget_used_today": 0,
- "prices_state": "not_yet",
- "prices_at": null,
- "next_price_read_at": "2026-10-23T13:00:00-04:00",
+ "budget_used_today": 2,
+ "prices_state": "ok",
+ "prices_at": "2026-10-23T13:00:00-04:00",
+ "next_price_read_at": "2026-10-23T18:30:00-04:00",
  "unmatched_names": [],
  "unknown_teams": [],
  "lineup_unmatched_names": [],
@@ -136,7 +136,7 @@
  "runner": {
   "event": "workflow_dispatch",
   "run_id": "39984496982",
-  "iteration": 4,
+  "iteration": 6,
   "chain_link": 236,
   "chain_started_at": "2026-10-16T10:00:13-04:00",
   "run_started_at": "2026-10-23T12:10:13-04:00"
