@@ -1,102 +1,22 @@
 {
- "date": "2026-10-22",
+ "date": "2026-10-23",
  "teams": {
-  "OTT": {
-   "name": "Samuel Ersson",
-   "status": "confirmed"
+  "CHI": {
+   "name": "Spencer Knight",
+   "status": "expected"
   },
-  "SJS": {
-   "name": "Yaroslav Askarov",
-   "status": "confirmed"
+  "MTL": {
+   "name": "Jacob Fowler",
+   "status": "expected"
   },
-  "BOS": {
-   "name": "Michael DiPietro",
-   "status": "confirmed"
+  "COL": {
+   "name": "Mackenzie Blackwood",
+   "status": "expected"
   },
-  "NSH": {
-   "name": "Justus Annunen",
-   "status": "confirmed"
-  },
-  "TOR": {
-   "name": "Sergei Bobrovsky",
-   "status": "confirmed"
-  },
-  "NYR": {
-   "name": "Dylan Garand",
-   "status": "confirmed"
-  },
-  "PIT": {
-   "name": "Arturs Silovs",
-   "status": "confirmed"
-  },
-  "FLA": {
-   "name": "Cooper Black",
-   "status": "confirmed"
-  },
-  "NJD": {
-   "name": "Nico Daws",
-   "status": "confirmed"
-  },
-  "ANA": {
-   "name": "Ville Husso",
-   "status": "confirmed"
-  },
-  "NYI": {
-   "name": "Semyon Varlamov",
-   "status": "confirmed"
-  },
-  "LAK": {
-   "name": "Darcy Kuemper",
-   "status": "confirmed"
-  },
-  "STL": {
-   "name": "Joel Hofer",
-   "status": "confirmed"
-  },
-  "VGK": {
-   "name": "Adin Hill",
-   "status": "confirmed"
-  },
-  "DAL": {
-   "name": "Jake Oettinger",
-   "status": "confirmed"
-  },
-  "WPG": {
-   "name": "Stuart Skinner",
-   "status": "confirmed"
-  },
-  "EDM": {
-   "name": "Devon Levi",
-   "status": "confirmed"
-  },
-  "CAR": {
-   "name": "Brandon Bussi",
-   "status": "confirmed"
-  },
-  "CGY": {
-   "name": "Devin Cooley",
-   "status": "confirmed"
-  },
-  "MIN": {
-   "name": "Jesper Wallstedt",
-   "status": "confirmed"
-  },
-  "SEA": {
-   "name": "Philipp Grubauer",
-   "status": "confirmed"
-  },
-  "UTA": {
-   "name": "Karel Vejmelka",
-   "status": "confirmed"
-  },
-  "VAN": {
-   "name": "Kevin Lankinen",
-   "status": "confirmed"
-  },
-  "DET": {
-   "name": "John Gibson",
-   "status": "confirmed"
+  "TBL": {
+   "name": "Andrei Vasilevskiy",
+   "status": "expected"
   }
  },
- "checked_at": "2026-10-22T21:40:01-04:00"
+ "checked_at": "2026-10-23T05:00:01-04:00"
 }
