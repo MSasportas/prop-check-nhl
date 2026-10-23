@@ -1,10 +1,10 @@
 {
  "ok": true,
  "slate_date": "2026-10-22",
- "started_at": "2026-10-22T22:20:01-04:00",
- "status_at": "2026-10-22T22:20:01-04:00",
- "finished_at": "2026-10-22T22:20:02-04:00",
- "last_ok_at": "2026-10-22T22:20:01-04:00",
+ "started_at": "2026-10-22T22:30:01-04:00",
+ "status_at": "2026-10-22T22:30:01-04:00",
+ "finished_at": "2026-10-22T22:30:15-04:00",
+ "last_ok_at": "2026-10-22T22:30:01-04:00",
  "failed_step": null,
  "steps": [
   {
@@ -20,7 +20,7 @@
   {
    "step": "stats",
    "status": "ok",
-   "note": "1 window(s) read, 6 team-games still missing"
+   "note": "1 window(s) read, 4 team-games still missing"
   },
   {
    "step": "lineups",
@@ -59,8 +59,8 @@
   },
   {
    "step": "shadow",
-   "status": "ok",
-   "note": "57 graded"
+   "status": "skipped",
+   "note": "nothing new"
   },
   {
    "step": "gg_grade",
@@ -151,14 +151,6 @@
    "reason": "stats behind"
   },
   {
-   "team": "OTT",
-   "reason": "stats behind"
-  },
-  {
-   "team": "SJS",
-   "reason": "stats behind"
-  },
-  {
    "team": "TOR",
    "reason": "stats behind"
   }
@@ -171,10 +163,10 @@
  "odds_notes": [],
  "runner": {
   "event": "workflow_dispatch",
-  "run_id": "39884337022",
-  "iteration": 6,
-  "chain_link": 213,
+  "run_id": "39888994681",
+  "iteration": 2,
+  "chain_link": 214,
   "chain_started_at": "2026-10-16T10:00:13-04:00",
-  "run_started_at": "2026-10-22T21:30:16-04:00"
+  "run_started_at": "2026-10-22T22:20:13-04:00"
  }
 }
