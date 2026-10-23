@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-10-23T18:30:01-04:00",
+ "generated_at": "2026-10-23T19:30:00-04:00",
  "summary": {
   "headline": {
    "w": 5,
@@ -61,6 +61,29 @@
       {
        "price": 105,
        "at": "2026-10-23T18:30:01-04:00"
+      }
+     ],
+     "result": null,
+     "actual": null,
+     "units": null,
+     "pulled": null,
+     "legs": []
+    },
+    {
+     "id": "2026-10-23:2026020167:8476455:shots:2.5:under",
+     "kind": "single",
+     "player": "G. Landeskog",
+     "bet": "Under 2.5 shots on goal",
+     "market": "shots",
+     "team": "COL",
+     "game": "TBL at COL",
+     "price": -180,
+     "first_price": -180,
+     "last_price": -180,
+     "prices": [
+      {
+       "price": -180,
+       "at": "2026-10-23T19:30:00-04:00"
       }
      ],
      "result": null,
