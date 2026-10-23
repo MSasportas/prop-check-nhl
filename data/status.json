@@ -1,10 +1,10 @@
 {
  "ok": true,
  "slate_date": "2026-10-22",
- "started_at": "2026-10-23T00:00:00-04:00",
- "status_at": "2026-10-23T00:00:00-04:00",
- "finished_at": "2026-10-23T00:00:03-04:00",
- "last_ok_at": "2026-10-23T00:00:00-04:00",
+ "started_at": "2026-10-23T00:20:01-04:00",
+ "status_at": "2026-10-23T00:20:01-04:00",
+ "finished_at": "2026-10-23T00:20:02-04:00",
+ "last_ok_at": "2026-10-23T00:20:01-04:00",
  "failed_step": null,
  "steps": [
   {
@@ -20,7 +20,7 @@
   {
    "step": "stats",
    "status": "ok",
-   "note": "1 window(s) read, 4 team-games still missing"
+   "note": "1 window(s) read, 2 team-games still missing"
   },
   {
    "step": "lineups",
@@ -143,15 +143,7 @@
    "reason": "stats behind"
   },
   {
-   "team": "CGY",
-   "reason": "stats behind"
-  },
-  {
    "team": "EDM",
-   "reason": "stats behind"
-  },
-  {
-   "team": "MIN",
    "reason": "stats behind"
   }
  ],
@@ -163,10 +155,10 @@
  "odds_notes": [],
  "runner": {
   "event": "workflow_dispatch",
-  "run_id": "39893546968",
-  "iteration": 6,
-  "chain_link": 215,
+  "run_id": "39897963637",
+  "iteration": 3,
+  "chain_link": 216,
   "chain_started_at": "2026-10-16T10:00:13-04:00",
-  "run_started_at": "2026-10-22T23:10:14-04:00"
+  "run_started_at": "2026-10-23T00:00:15-04:00"
  }
 }
