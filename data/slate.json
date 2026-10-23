@@ -1,7 +1,7 @@
 {
  "slate_date": "2026-10-23",
- "generated_at": "2026-10-23T16:50:00-04:00",
- "status_at": "2026-10-23T16:50:00-04:00",
+ "generated_at": "2026-10-23T17:00:00-04:00",
+ "status_at": "2026-10-23T17:00:00-04:00",
  "valid_until": "2026-10-24T05:00:00-04:00",
  "status": {
   "prices_state": "ok",
@@ -9,14 +9,14 @@
   "next_price_read_at": "2026-10-23T18:30:00-04:00",
   "stats_built_at": "2026-10-23T01:30:00-04:00",
   "stats_through": "2026-10-22",
-  "lineups_at": null,
+  "lineups_at": "2026-10-23T17:00:00-04:00",
   "goalies_at": null,
-  "lineups_note": null,
-  "lineups_state": "not_yet",
+  "lineups_note": "1 of 2 team line pages are dated today.",
+  "lineups_state": "ok",
   "stats_state": "ok",
   "last_run": {
    "ok": true,
-   "at": "2026-10-23T16:50:00-04:00",
+   "at": "2026-10-23T17:00:00-04:00",
    "failed_step": null
   },
   "pool": {
@@ -44,8 +44,8 @@
    "home": "CHI",
    "start": "2026-10-23T20:00:00-04:00",
    "lineups": {
-    "away": "not_checked",
-    "home": "not_checked"
+    "away": "waiting",
+    "home": "confirmed"
    },
    "goalies": {
     "away": {
