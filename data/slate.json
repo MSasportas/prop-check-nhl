@@ -1,13 +1,13 @@
 {
  "slate_date": "2026-10-22",
- "generated_at": "2026-10-22T22:10:01-04:00",
- "status_at": "2026-10-22T22:10:01-04:00",
+ "generated_at": "2026-10-22T22:20:01-04:00",
+ "status_at": "2026-10-22T22:20:01-04:00",
  "valid_until": "2026-10-23T05:00:00-04:00",
  "status": {
   "prices_state": "ok",
   "prices_at": "2026-10-22T21:20:01-04:00",
   "next_price_read_at": null,
-  "stats_built_at": "2026-10-22T22:10:01-04:00",
+  "stats_built_at": "2026-10-22T22:20:01-04:00",
   "stats_through": "2026-10-21",
   "lineups_at": "2026-10-22T21:40:01-04:00",
   "goalies_at": null,
@@ -16,7 +16,7 @@
   "stats_state": "ok",
   "last_run": {
    "ok": true,
-   "at": "2026-10-22T22:10:01-04:00",
+   "at": "2026-10-22T22:20:01-04:00",
    "failed_step": null
   },
   "pool": {
@@ -28,15 +28,11 @@
   },
   "excluded_teams": [
    {
-    "team": "BOS",
+    "team": "LAK",
     "reason": "stats behind"
    },
    {
-    "team": "FLA",
-    "reason": "stats behind"
-   },
-   {
-    "team": "NSH",
+    "team": "NYI",
     "reason": "stats behind"
    },
    {
@@ -45,10 +41,6 @@
    },
    {
     "team": "OTT",
-    "reason": "stats behind"
-   },
-   {
-    "team": "PIT",
     "reason": "stats behind"
    },
    {
@@ -67,7 +59,7 @@
  "banners": [
   {
    "level": "warn",
-   "text": "Not covered tonight: BOS, FLA, NSH, NYR, OTT, PIT, SJS, TOR (stats behind)."
+   "text": "Not covered tonight: LAK, NYI, NYR, OTT, SJS, TOR (stats behind)."
   }
  ],
  "empty": {
@@ -97,11 +89,8 @@
    },
    "started": true,
    "picks": 0,
-   "excluded_reason": "stats behind",
-   "excluded_teams": [
-    "NSH",
-    "BOS"
-   ]
+   "excluded_reason": null,
+   "excluded_teams": []
   },
   {
    "id": 2026020155,
@@ -202,11 +191,8 @@
    },
    "started": true,
    "picks": 1,
-   "excluded_reason": "stats behind",
-   "excluded_teams": [
-    "FLA",
-    "PIT"
-   ]
+   "excluded_reason": null,
+   "excluded_teams": []
   },
   {
    "id": 2026020159,
@@ -229,8 +215,11 @@
    },
    "started": true,
    "picks": 0,
-   "excluded_reason": null,
-   "excluded_teams": []
+   "excluded_reason": "stats behind",
+   "excluded_teams": [
+    "LAK",
+    "NYI"
+   ]
   },
   {
    "id": 2026020160,
