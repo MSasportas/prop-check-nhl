@@ -83,20 +83,20 @@
   },
   "SEA": {
    "name": "Philipp Grubauer",
-   "status": "expected"
+   "status": "confirmed"
   },
   "UTA": {
    "name": "Karel Vejmelka",
-   "status": "expected"
+   "status": "confirmed"
   },
   "VAN": {
    "name": "Kevin Lankinen",
-   "status": "expected"
+   "status": "confirmed"
   },
   "DET": {
    "name": "John Gibson",
-   "status": "expected"
+   "status": "confirmed"
   }
  },
- "checked_at": "2026-10-22T20:40:01-04:00"
+ "checked_at": "2026-10-22T21:40:01-04:00"
 }
