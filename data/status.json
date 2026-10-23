@@ -1,10 +1,10 @@
 {
  "ok": true,
  "slate_date": "2026-10-22",
- "started_at": "2026-10-22T23:30:00-04:00",
- "status_at": "2026-10-22T23:30:00-04:00",
- "finished_at": "2026-10-22T23:30:03-04:00",
- "last_ok_at": "2026-10-22T23:30:00-04:00",
+ "started_at": "2026-10-22T23:40:01-04:00",
+ "status_at": "2026-10-22T23:40:01-04:00",
+ "finished_at": "2026-10-22T23:40:03-04:00",
+ "last_ok_at": "2026-10-22T23:40:01-04:00",
  "failed_step": null,
  "steps": [
   {
@@ -20,7 +20,7 @@
   {
    "step": "stats",
    "status": "ok",
-   "note": "1 window(s) read"
+   "note": "1 window(s) read, 2 team-games still missing"
   },
   {
    "step": "lineups",
@@ -137,8 +137,17 @@
   "Jonas Johansson",
   "Seth Jarvis"
  ],
- "excluded_teams": [],
- "stats_through": "2026-10-22",
+ "excluded_teams": [
+  {
+   "team": "CGY",
+   "reason": "stats behind"
+  },
+  {
+   "team": "MIN",
+   "reason": "stats behind"
+  }
+ ],
+ "stats_through": "2026-10-21",
  "lineups_at": "2026-10-22T21:40:01-04:00",
  "lineups_note": "17 of 24 team line pages are dated today.",
  "games_today": 12,
@@ -147,7 +156,7 @@
  "runner": {
   "event": "workflow_dispatch",
   "run_id": "39893546968",
-  "iteration": 3,
+  "iteration": 4,
   "chain_link": 215,
   "chain_started_at": "2026-10-16T10:00:13-04:00",
   "run_started_at": "2026-10-22T23:10:14-04:00"
