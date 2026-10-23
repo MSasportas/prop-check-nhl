@@ -1,7 +1,7 @@
 {
  "slate_date": "2026-10-22",
- "generated_at": "2026-10-22T19:50:15-04:00",
- "status_at": "2026-10-22T19:50:15-04:00",
+ "generated_at": "2026-10-22T20:00:00-04:00",
+ "status_at": "2026-10-22T20:00:00-04:00",
  "valid_until": "2026-10-23T05:00:00-04:00",
  "status": {
   "prices_state": "ok",
@@ -16,7 +16,7 @@
   "stats_state": "ok",
   "last_run": {
    "ok": true,
-   "at": "2026-10-22T19:50:15-04:00",
+   "at": "2026-10-22T20:00:00-04:00",
    "failed_step": null
   },
   "pool": {
@@ -32,7 +32,11 @@
   "tier": 4
  },
  "banners": [],
- "empty": null,
+ "empty": {
+  "code": "none_qualified",
+  "text": "No picks yet today",
+  "sub": "168 lines read, none cleared both checks. 1 had a gap but our model said no. Today's earlier picks are under Started. Next read at 8:15 PM."
+ },
  "games": [
   {
    "id": 2026020154,
@@ -197,7 +201,7 @@
      "status": "confirmed"
     }
    },
-   "started": false,
+   "started": true,
    "picks": 1,
    "excluded_reason": null,
    "excluded_teams": []
@@ -221,7 +225,7 @@
      "status": "confirmed"
     }
    },
-   "started": false,
+   "started": true,
    "picks": 0,
    "excluded_reason": null,
    "excluded_teams": []
@@ -324,61 +328,6 @@
   }
  ],
  "picks": [
-  {
-   "id": "2026-10-22:2026020160:8478397:shots:1.5:over",
-   "price": -105,
-   "first_price": -105,
-   "first_price_at": "2026-10-22T18:30:01-04:00",
-   "worst_price": -105,
-   "p": 0.5495,
-   "breakeven": 0.5122,
-   "p_pct": 54,
-   "breakeven_pct": 51,
-   "state": "early",
-   "history": [
-    {
-     "at": "2026-10-22T18:30:01-04:00",
-     "text": "Early: lineup not confirmed"
-    }
-   ],
-   "prices": [
-    {
-     "at": "2026-10-22T18:30:01-04:00",
-     "price": -105
-    }
-   ],
-   "pulled": null,
-   "price_final": true,
-   "graded": null,
-   "rank": 1,
-   "tier": "main",
-   "game_id": 2026020160,
-   "player": "R. Andersson",
-   "player_id": 8478397,
-   "team": "VGK",
-   "opp": "STL",
-   "home": false,
-   "start": "2026-10-22T20:00:00-04:00",
-   "market": "shots",
-   "line": 1.5,
-   "side": "over",
-   "bet": "Over 1.5 shots on goal",
-   "price_at": "2026-10-22T18:30:01-04:00",
-   "gap_pct": 8.1,
-   "market_fair_pct": 55.3,
-   "n_books": 5,
-   "guard": {
-    "verdict": "agrees",
-    "ours_pct": 54.9,
-    "model_pct": 51.6
-   },
-   "settled": "early",
-   "settled_label": "Early",
-   "reason": "5 other books say 55.3%; Hard Rock's -105 only needs 51.2%. Our model agrees (our blend: 55.0%).",
-   "thin": false,
-   "games_used": 92,
-   "games_this_season": 11
-  },
   {
    "id": "2026-10-22:2026020157:8484153:shots:2.5:under",
    "price": -130,
@@ -496,6 +445,65 @@
    "thin": false,
    "games_used": 41,
    "games_this_season": 10
+  },
+  {
+   "id": "2026-10-22:2026020160:8478397:shots:1.5:over",
+   "price": -105,
+   "first_price": -105,
+   "first_price_at": "2026-10-22T18:30:01-04:00",
+   "worst_price": -105,
+   "p": 0.5495,
+   "breakeven": 0.5122,
+   "p_pct": 54,
+   "breakeven_pct": 51,
+   "state": "locked_unconfirmed",
+   "history": [
+    {
+     "at": "2026-10-22T18:30:01-04:00",
+     "text": "Early: lineup not confirmed"
+    },
+    {
+     "at": "2026-10-22T20:00:00-04:00",
+     "text": "Locked: lineup was not confirmed"
+    }
+   ],
+   "prices": [
+    {
+     "at": "2026-10-22T18:30:01-04:00",
+     "price": -105
+    }
+   ],
+   "pulled": null,
+   "price_final": false,
+   "graded": null,
+   "rank": null,
+   "tier": "main",
+   "game_id": 2026020160,
+   "player": "R. Andersson",
+   "player_id": 8478397,
+   "team": "VGK",
+   "opp": "STL",
+   "home": false,
+   "start": "2026-10-22T20:00:00-04:00",
+   "market": "shots",
+   "line": 1.5,
+   "side": "over",
+   "bet": "Over 1.5 shots on goal",
+   "price_at": "2026-10-22T18:30:01-04:00",
+   "gap_pct": 8.1,
+   "market_fair_pct": 55.3,
+   "n_books": 5,
+   "guard": {
+    "verdict": "agrees",
+    "ours_pct": 54.9,
+    "model_pct": 51.6
+   },
+   "settled": "early",
+   "settled_label": "Early",
+   "reason": "5 other books say 55.3%; Hard Rock's -105 only needs 51.2%. Our model agrees (our blend: 55.0%).",
+   "thin": false,
+   "games_used": 92,
+   "games_this_season": 11
   }
  ],
  "parlays": [],
