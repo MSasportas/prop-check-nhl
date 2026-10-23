@@ -1,5 +1,24 @@
 # LOG.md: Researcher runs (newest first)
 
+- 2026-10-23 ~8:04 AM ET (Researcher run 9, daily; SHOTS ON GOAL ONLY). No key used, no historical odds pull. W1-W5 + forward Q6a-c registered
+  and pushed (fa577da) before any test ran. Free NHL stats REST logs fetched to scratch (r9/fetch9.py: team summary, skater summary, team
+  powerplay, skater timeonice + realtime; Feb 28 cut-off, lockbox not fetched). Script research/code/r9/w9.py, output w9_results.txt.
+  10,405 graded Nov-Feb lines.
+  - W1 penalty environment x PP role (PP specialists vs opponents that take lots of penalties): -3.4% n301 [-11.4,+4.4] best; weight ~0.
+  - W2 hot shooter (goal streaks / shooting luck; public chases goals): -13.1% n190; UNDER after 3+ goals in 3 games -4.8% n714. No shading.
+  - W3 new to the league (374 rookie lines): -3.5% n128 to -9.6% n419. Hard Rock prices rookies as well as vets.
+  - W4 rematch (same opponent within 3 days, anchoring to the last game): -15.1% n240; fixed rule -21.3% n21.
+  - W5 frozen stack of earlier small stable weights (skew/hold, division, attempts): beats the book's log loss every month Dec-Feb (a real
+    calibration fix) but bets still lose: -4.6% n615 [-10.8,+1.2], folds -11.0/-6.4/-7.8/+18.7.
+  - Forward re-score (score_fwd.py, nights Oct 19-22): Q1a (Hard Rock >= consensus fair) +7.4% n153 [-5,+20] p .16; Q1f (4+ books) +9.1%
+    n121; Q1k Pinnacle +11.8% n118 [-2,+27] p .08; mean CLV ~= EV. Q2a/b 0 bets. Q6a-c 0 bets (start tonight). Too small (n >= 300, p < .0033).
+  17 variants (~0.85 false positives expected); all-time historical 326; forward 18. Lockbox looks: 2 (unchanged; next needs p < 0.0167).
+  **Verdict: nothing passed; no candidate for the Sharp.** Penalty/PP environment, hot hands, rookies, rematches and a stack of every small
+  stable weight seen so far are all inside Hard Rock's price; the stack improves calibration but not by the ~3.5 pts per side of hold.
+  Next: (1) Q6a-c forward from tonight (A-read vs B/C, unders) via `python3 -I research/code/r9/score_q6.py .` after score_fwd.py;
+  (2) Q7 returners' overs forward (derive missed games per live shadow line from NHL boxscores in research code, register a start date);
+  (3) live-only idea: does Q1a's edge concentrate in lines where only Hard Rock and 1-3 books post (thin market) vs 6+ books? register
+  as a forward split before looking at results by book count.
 - 2026-10-22 ~8:10 AM ET (Researcher run 8, daily; SHOTS ON GOAL ONLY). No key used, no historical odds pull. U1-U5 registered and pushed
   (902c4a0) before any test ran. Free NHL stats REST logs refetched to scratch (r6/fetch6.py; lockbox months not fetched). Script
   research/code/r8/u8.py, output u8_results.txt. 10,405 graded Nov-Feb lines.
