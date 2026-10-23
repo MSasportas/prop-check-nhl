@@ -1,42 +1,38 @@
 {
  "slate_date": "2026-10-23",
- "generated_at": "2026-10-23T18:20:01-04:00",
- "status_at": "2026-10-23T18:20:01-04:00",
+ "generated_at": "2026-10-23T18:30:01-04:00",
+ "status_at": "2026-10-23T18:30:01-04:00",
  "valid_until": "2026-10-24T05:00:00-04:00",
  "status": {
   "prices_state": "ok",
-  "prices_at": "2026-10-23T13:00:00-04:00",
-  "next_price_read_at": "2026-10-23T18:30:00-04:00",
+  "prices_at": "2026-10-23T18:30:01-04:00",
+  "next_price_read_at": "2026-10-23T19:15:00-04:00",
   "stats_built_at": "2026-10-23T01:30:00-04:00",
   "stats_through": "2026-10-22",
-  "lineups_at": "2026-10-23T18:20:01-04:00",
+  "lineups_at": "2026-10-23T18:30:01-04:00",
   "goalies_at": null,
   "lineups_note": "1 of 4 team line pages are dated today.",
   "lineups_state": "ok",
   "stats_state": "ok",
   "last_run": {
    "ok": true,
-   "at": "2026-10-23T18:20:01-04:00",
+   "at": "2026-10-23T18:30:01-04:00",
    "failed_step": null
   },
   "pool": {
-   "pulls_left": 785,
+   "pulls_left": 784,
    "keys": 7,
    "game_days_left": 9,
    "days_left": 9,
    "low": false
   },
   "excluded_teams": [],
-  "lines_checked": 0,
-  "flag_reads": 0,
+  "lines_checked": 15,
+  "flag_reads": 1,
   "tier": 4
  },
  "banners": [],
- "empty": {
-  "code": "none_qualified",
-  "text": "No picks yet today",
-  "sub": "Picks come from the price read 90 minutes before each game. Next read at 6:30 PM."
- },
+ "empty": null,
  "games": [
   {
    "id": 2026020166,
@@ -58,7 +54,7 @@
     }
    },
    "started": false,
-   "picks": 0,
+   "picks": 1,
    "excluded_reason": null,
    "excluded_teams": []
   },
@@ -87,7 +83,63 @@
    "excluded_teams": []
   }
  ],
- "picks": [],
+ "picks": [
+  {
+   "id": "2026-10-23:2026020166:8475184:shots:1.5:under",
+   "price": 105,
+   "first_price": 105,
+   "first_price_at": "2026-10-23T18:30:01-04:00",
+   "worst_price": 105,
+   "p": 0.5158,
+   "breakeven": 0.4878,
+   "p_pct": 51,
+   "breakeven_pct": 49,
+   "state": "early",
+   "history": [
+    {
+     "at": "2026-10-23T18:30:01-04:00",
+     "text": "Early: lineup not confirmed"
+    }
+   ],
+   "prices": [
+    {
+     "at": "2026-10-23T18:30:01-04:00",
+     "price": 105
+    }
+   ],
+   "pulled": null,
+   "price_final": false,
+   "graded": null,
+   "rank": 1,
+   "tier": "main",
+   "game_id": 2026020166,
+   "player": "C. Kreider",
+   "player_id": 8475184,
+   "team": "MTL",
+   "opp": "CHI",
+   "home": false,
+   "start": "2026-10-23T20:00:00-04:00",
+   "market": "shots",
+   "line": 1.5,
+   "side": "under",
+   "bet": "Under 1.5 shots on goal",
+   "price_at": "2026-10-23T18:30:01-04:00",
+   "gap_pct": 5.0,
+   "market_fair_pct": 51.2,
+   "n_books": 7,
+   "guard": {
+    "verdict": "agrees",
+    "ours_pct": 51.6,
+    "model_pct": 54.8
+   },
+   "settled": "early",
+   "settled_label": "Early",
+   "reason": "7 other books say 51.2%; Hard Rock's +105 only needs 48.8%. Our model agrees (our blend: 51.6%).",
+   "thin": true,
+   "games_used": 84,
+   "games_this_season": 9
+  }
+ ],
  "parlays": [],
  "parlays_note": "Parlays are not offered: there is no evidence for them yet."
 }

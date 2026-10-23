@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-10-23T01:00:01-04:00",
+ "generated_at": "2026-10-23T18:30:01-04:00",
  "summary": {
   "headline": {
    "w": 5,
@@ -39,6 +39,38 @@
   ]
  },
  "nights": [
+  {
+   "date": "2026-10-23",
+   "graded": false,
+   "w": 0,
+   "l": 0,
+   "units": 0,
+   "entries": [
+    {
+     "id": "2026-10-23:2026020166:8475184:shots:1.5:under",
+     "kind": "single",
+     "player": "C. Kreider",
+     "bet": "Under 1.5 shots on goal",
+     "market": "shots",
+     "team": "MTL",
+     "game": "MTL at CHI",
+     "price": 105,
+     "first_price": 105,
+     "last_price": 105,
+     "prices": [
+      {
+       "price": 105,
+       "at": "2026-10-23T18:30:01-04:00"
+      }
+     ],
+     "result": null,
+     "actual": null,
+     "units": null,
+     "pulled": null,
+     "legs": []
+    }
+   ]
+  },
   {
    "date": "2026-10-22",
    "graded": true,

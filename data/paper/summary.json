@@ -1,7 +1,7 @@
 {
  "version": 1,
  "note": "Gap + Guard research log. Every flag here is a pick on the page and in the Record; vetoed and capped rows are research only.",
- "generated_at": "2026-10-23T18:10:00-04:00",
+ "generated_at": "2026-10-23T18:30:01-04:00",
  "slate": "2026-10-23",
  "active": true,
  "window": {
@@ -9,7 +9,42 @@
   "checkpoint": "2026-11-02"
  },
  "tonight": {
-  "flags": [],
+  "flags": [
+   {
+    "id": "2026-10-23:2026020166:8475184:1.5:under",
+    "kind": "flag",
+    "slate": "2026-10-23",
+    "game_id": 2026020166,
+    "player": "C. Kreider",
+    "team": "MTL",
+    "opp": "CHI",
+    "game": "MTL @ CHI",
+    "start": "2026-10-23T20:00:00-04:00",
+    "side": "under",
+    "line": 1.5,
+    "bet": "UNDER 1.5 shots",
+    "price": 105,
+    "gap_pct": 5.0,
+    "final_pct": 5.7,
+    "market_fair_pct": 51.2,
+    "final_p_pct": 51.6,
+    "n_books": 7,
+    "guard": "pass",
+    "cap": null,
+    "flagged_at": "2026-10-23T18:30:01-04:00",
+    "read_pull": "B",
+    "settled": "Early",
+    "frozen_settled": "Early",
+    "move30_pct": 0.0,
+    "pulled": null,
+    "locked": false,
+    "state": "open",
+    "close_fair_pct": null,
+    "clv_pct": null,
+    "result": null,
+    "units": null
+   }
+  ],
   "vetoes": [],
   "capped": []
  },
@@ -412,7 +447,7 @@
  ],
  "nov2": {
   "gaps_measured": 10,
-  "gaps_logged": 11,
+  "gaps_logged": 12,
   "graded_picks": 10,
   "w": 6,
   "l": 4,
@@ -440,7 +475,7 @@
   "clv_passed_mean": 0.05005517915630491,
   "clv_vetoed_mean": 0.04698645650723732,
   "nights": 4,
-  "nights_with_flags": 2,
+  "nights_with_flags": 3,
   "population_slope": null,
   "checkpoint": "2026-11-02"
  }
