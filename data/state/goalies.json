@@ -3,7 +3,7 @@
  "teams": {
   "CHI": {
    "name": "Spencer Knight",
-   "status": "expected"
+   "status": "confirmed"
   },
   "MTL": {
    "name": "Jacob Fowler",
@@ -15,8 +15,8 @@
   },
   "TBL": {
    "name": "Andrei Vasilevskiy",
-   "status": "expected"
+   "status": "confirmed"
   }
  },
- "checked_at": "2026-10-23T13:20:00-04:00"
+ "checked_at": "2026-10-23T13:50:01-04:00"
 }
