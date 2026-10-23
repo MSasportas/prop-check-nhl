@@ -1,6 +1,6 @@
 {
- "version": "3.2",
- "updated": "2026-10-21",
+ "version": "3.3",
+ "updated": "2026-10-23",
  "effective_from": "2026-10-20",
  "_about": "EVERY rule value lives here. The engine reads this file; data/rules.json (what the page reads) is generated from it. There is ONE rule set: Gap + Guard (ops.gap_guard). Probabilities are 0-1, prices are American integers, times are Eastern.",
  "values": {
@@ -33,7 +33,7 @@
   "picks_open": 8
  },
  "ops": {
-  "_about": "How the engine runs. None of these change which bets qualify. Markets other than shots are read and logged for the team (shadow log) only; picks are shots lines 1.5 and 2.5 (ops.gap_guard).",
+  "_about": "How the engine runs. None of these change which bets qualify. Markets other than shots are read and logged for the team (shadow log) only; picks are shots lines 1.5, 2.5 and 3.5 (ops.gap_guard).",
   "rollover_hour": 5,
   "heartbeat_min": 20,
   "safety_pause": {
@@ -50,7 +50,8 @@
    "thresholds": {
     "lines": [
      1.5,
-     2.5
+     2.5,
+     3.5
     ],
     "price_gate": -200,
     "max_price": 120,
@@ -62,7 +63,8 @@
     "model_weight": 0.2,
     "offsets": {
      "1.5": 0.0179,
-     "2.5": 0.0158
+     "2.5": 0.0158,
+     "3.5": 0.017
     },
     "final_ev": 0.02,
     "flag_pulls": [
@@ -75,16 +77,8 @@
     "max_per_game": null,
     "max_per_night": null,
     "min_history": 10
-   },
-   "watch": [
-    {
-     "id": "line35",
-     "from_slate": "2026-10-23",
-     "note": "RESEARCH ONLY (TEAM.md item 22). The 3.5 shots line run through the same Gap + Guard maths into data/paper_watch/line35/. Never a pick, never the Record. The 3.5 offset is PROVISIONAL (0.0): every row keeps model_raw_over, so the real frozen offset is applied afterwards.",
-     "lines": [3.5],
-     "offsets": {"3.5": 0.0}
-    }
-   ]
+   }
+   ,"watch": []
   },
   "bookmakers": [
    "hardrockbet"

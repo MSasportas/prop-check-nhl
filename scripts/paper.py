@@ -1,7 +1,7 @@
 """paper.py: the Gap + Guard engine, the ONLY thing that decides what is a pick (TEAM.md section 4). The file name is kept from
 the retired paper test; its log under data/paper/ is the "Gap + Guard research log" (flags, vetoes, capped, pulls, CLV, grades).
 
-A flag is a Hard Rock shots line (1.5 / 2.5) whose price beats the other books' consensus by enough (STEP 1, the gap) and
+A flag is a Hard Rock shots line (1.5 / 2.5 / 3.5, ops.gap_guard.thresholds.lines) whose price beats the other books' consensus by enough (STEP 1, the gap) and
 that our model does not contradict (STEP 2, the guard: the model can only veto, never create). Flags are logged, frozen at the
 price of their first qualifying read, followed to the 45-minute read (CLV) and graded at the frozen price, flat 1 unit.
 engine.py turns every flag into a pick on the page and in the Record (price frozen at the flag) and every pull event into a pulled
@@ -11,7 +11,7 @@ Everything is in EV% = fair_prob x Hard Rock decimal payout - 1, on unrounded fl
   STEP 1 (gap) passes iff ALL: (a) EV of Hard Rock's price against the market fair >= gap_ev (+3.0%); (b) >= books_min (4)
     OTHER books priced the same player / line with both sides (Pinnacle is one of them); (c) market fair = median of those
     books' proportionally de-vigged fair probability for the side (even count: mean of the two middle values); (d) Pinnacle
-    present with both sides AND Pinnacle's own fair EV on Hard Rock's price >= 0.0% (sign check only); (e) line 1.5 or 2.5;
+    present with both sides AND Pinnacle's own fair EV on Hard Rock's price >= 0.0% (sign check only); (e) a line in thresholds.lines (1.5, 2.5, 3.5);
     (f) Hard Rock price -200 .. +120. A book counts only if it returned fresh, two-sided prices with a sane hold
     (shadow.other_lines: the same rule as the shadow log's consensus).
   STEP 2 (guard): final = market_weight x market_fair + model_weight x calibrated model chance for the side, where the

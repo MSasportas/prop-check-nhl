@@ -102,7 +102,7 @@ class RulesSheet(unittest.TestCase):
         out = self.render("RULES", self.rules_values())
         self.assertEqual([o["t"] for o in out if o["miss"]], [], "every number comes from rules.json")
         text = " ".join(o["t"] for o in out)
-        self.assertIn("Hard Rock shots on goal at the 1.5 and 2.5 lines", text)
+        self.assertIn("Hard Rock shots on goal at the 1.5, 2.5 and 3.5 lines", text)
         self.assertIn("At least 4 of them", text)
         self.assertIn("by at least 3%", text)
         self.assertIn("80% the other books' chance with 20% our model's chance", text)

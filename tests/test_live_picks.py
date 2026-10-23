@@ -566,12 +566,13 @@ class PriceFinal(unittest.TestCase):
 
 
 # ---------------------------------------------------------------- 2026-10-23: the 3.5 watch track (research only)
-class Watch35(unittest.TestCase):
+class WatchTrack(unittest.TestCase):
+    """The research-only watch track machinery (config ops.gap_guard.watch), shown on a made-up 4.5 line: the real 3.5 track
+    graduated into the live rule on 2026-10-23."""
     def setUp(self):
         self.s = Sim(pool=12)
         c = json.load(open(os.environ["PC_CONFIG"]))
-        for tr in c["ops"]["gap_guard"]["watch"]:
-            tr["from_slate"] = "2026-10-01"
+        c["ops"]["gap_guard"]["watch"] = [{"id": "line35", "from_slate": "2026-10-01", "lines": [4.5], "offsets": {"4.5": 0.0}}]
         json.dump(c, open(os.environ["PC_CONFIG"], "w"))
         day(self.s)
         self.wdir = os.path.join(os.environ["PC_DATA_DIR"], "paper_watch", "line35")
@@ -583,18 +584,18 @@ class Watch35(unittest.TestCase):
         p = os.path.join(self.wdir, "events.jsonl")
         return [json.loads(x) for x in open(p).read().split("\n") if x] if os.path.exists(p) else []
 
-    def test_a_35_gap_is_logged_in_the_watch_and_is_never_a_pick(self):
+    def test_a_gap_on_a_watched_line_is_logged_in_the_watch_and_is_never_a_pick(self):
         s = self.s
-        hr, oth = s.gg_lines("CAR", 1, line=3.5)
+        hr, oth = s.gg_lines("CAR", 1, line=4.5)
         sl = s.read("17:31", cp=[(hr, oth)])
         self.assertEqual(sl["picks"], [])                                  # not a pick
         self.assertEqual(s.events(), [])                                    # nothing in the Record
         ev = self.wevents()
-        self.assertEqual([(e["t"], e["line"]) for e in ev if e["t"] in ("flag", "veto")], [("flag", 3.5)])
+        self.assertEqual([e["line"] for e in ev if e["t"] in ("flag", "veto")], [4.5])        # a flag or a veto: either keeps the numbers
         self.assertIsNotNone(ev[0]["model_raw_over"])                       # kept, so the real offset can be applied afterwards
         live = [json.loads(x) for x in open(os.path.join(os.environ["PC_DATA_DIR"], "paper", "events.jsonl")).read().split("\n") if x] \
             if os.path.exists(os.path.join(os.environ["PC_DATA_DIR"], "paper", "events.jsonl")) else []
-        self.assertEqual([e for e in live if e.get("line") == 3.5], [])      # the live research log never sees 3.5
+        self.assertEqual([e for e in live if e.get("line") == 4.5], [])      # the live research log never sees 3.5
 
     def test_a_15_pick_is_a_pick_and_not_in_the_watch(self):
         s = self.s
@@ -604,7 +605,7 @@ class Watch35(unittest.TestCase):
 
     def test_the_watch_follows_to_the_close_and_grades(self):
         s = self.s
-        hr, oth = s.gg_lines("CAR", 1, line=3.5)
+        hr, oth = s.gg_lines("CAR", 1, line=4.5)
         s.read("17:31", cp=[(hr, oth)])
         s.read("18:16", cp=[(hr, oth)])
         self.assertIn("close", [e["t"] for e in self.wevents()])
@@ -617,3 +618,25 @@ class Watch35(unittest.TestCase):
         sl = self.s.read("17:31", cp=[self.s.gg_lines("CAR", 1)])
         self.assertEqual(len(sl["picks"]), 1)                              # the live pick still shows
         self.assertEqual(paper._LOG, ("paper",))                            # and the log folder was put back
+
+
+# ---------------------------------------------------------------- 2026-10-23: 3.5 is a live line
+class Line35Live(unittest.TestCase):
+    def test_a_35_line_that_clears_both_steps_is_a_pick_in_the_record(self):
+        s = Sim(pool=12)
+        try:
+            day(s)
+            sl = s.read("17:31", cp=[s.gg_lines("CAR", 1, line=3.5, side="under")])
+            self.assertEqual([(p["line"], p["side"]) for p in sl["picks"]], [(3.5, "under")])
+            self.assertEqual(kinds(s), ["shown"])
+            self.assertIn("3.5", s.events()[0]["pick"]["bet"])
+        finally:
+            s.close()
+
+    def test_a_45_line_is_still_never_a_pick(self):
+        s = Sim(pool=12)
+        try:
+            day(s)
+            self.assertEqual(s.read("17:31", cp=[s.gg_lines("CAR", 1, line=4.5)])["picks"], [])
+        finally:
+            s.close()

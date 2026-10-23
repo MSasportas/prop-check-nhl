@@ -57,7 +57,7 @@ class Maths(unittest.TestCase):
         self.assertEqual((T["gap_ev"], T["books_min"], T["final_ev"], T["pull_ev"], T["pin_ev_min"]),
                          (0.03, 4, 0.02, 0.015, 0.0))
         self.assertEqual((T["market_weight"], T["model_weight"]), (0.8, 0.2))
-        self.assertEqual((T["price_gate"], T["max_price"], T["lines"]), (-200, 120, [1.5, 2.5]))
+        self.assertEqual((T["price_gate"], T["max_price"], T["lines"]), (-200, 120, [1.5, 2.5, 3.5]))
         self.assertEqual((T["max_per_player"], T["max_per_game"], T["max_per_night"]), (1, None, None))
         self.assertEqual(T["flag_pulls"], ["B", "C"])
         self.assertAlmostEqual(OFF15, 0.0179)
@@ -138,7 +138,7 @@ class Maths(unittest.TestCase):
         hi = {b: 0.50 for b in BOOKS}
         self.assertNotIn("price", self.a("over", 1.5, 120, hi, 0.5)["fails"])
         self.assertIn("price", self.a("over", 1.5, 121, hi, 0.5)["fails"])
-        self.assertIn("line", self.a("over", 3.5, 100, {b: 0.54 for b in BOOKS}, 0.5)["fails"])
+        self.assertIn("line", self.a("over", 4.5, 100, {b: 0.54 for b in BOOKS}, 0.5)["fails"])
         self.assertIn("line", self.a("over", 0.5, 100, {b: 0.54 for b in BOOKS}, 0.5)["fails"])
 
     def test_the_model_can_veto_but_never_create(self):
@@ -156,7 +156,8 @@ class Maths(unittest.TestCase):
     def test_offsets_are_per_line_and_additive_on_the_over(self):
         self.assertAlmostEqual(paper.calibrated_over(0.50, 1.5, T), 0.50 + OFF15)
         self.assertAlmostEqual(paper.calibrated_over(0.50, 2.5, T), 0.50 + OFF25)
-        self.assertIsNone(paper.calibrated_over(0.50, 3.5, T))
+        self.assertAlmostEqual(paper.calibrated_over(0.50, 3.5, T), 0.50 + T["offsets"]["3.5"])
+        self.assertIsNone(paper.calibrated_over(0.50, 4.5, T))
 
 
 # ---------------------------------------------------------------- flags, pulls, caps, CLV, grading (made-up reads)
@@ -359,7 +360,7 @@ class Flags(Base):
 
     def test_price_outside_the_gate_or_wrong_line_never_flags(self):
         hi = self.lines(101, "AAA", "Ann Aa", 1.5, 0.50, hr=(125, -160))     # +125 is longer than +120
-        l35 = self.lines(102, "AAA", "Bo Bb", 3.5, 0.55)
+        l35 = self.lines(102, "AAA", "Bo Bb", 4.5, 0.55)
         self.read(1, "B", "17:30", [hi, l35])
         self.step("17:31")
         self.assertEqual(self.events(), [])
