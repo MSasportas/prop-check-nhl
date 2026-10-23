@@ -1,10 +1,10 @@
 {
  "ok": true,
  "slate_date": "2026-10-22",
- "started_at": "2026-10-22T21:40:01-04:00",
- "status_at": "2026-10-22T21:40:01-04:00",
- "finished_at": "2026-10-22T21:40:07-04:00",
- "last_ok_at": "2026-10-22T21:40:01-04:00",
+ "started_at": "2026-10-22T21:50:00-04:00",
+ "status_at": "2026-10-22T21:50:00-04:00",
+ "finished_at": "2026-10-22T21:50:01-04:00",
+ "last_ok_at": "2026-10-22T21:50:00-04:00",
  "failed_step": null,
  "steps": [
   {
@@ -19,13 +19,13 @@
   },
   {
    "step": "stats",
-   "status": "ok",
-   "note": "1 window(s) read, 4 team-games still missing"
+   "status": "skipped",
+   "note": "waiting to retry"
   },
   {
    "step": "lineups",
-   "status": "ok",
-   "note": "4 of 4 team pages read"
+   "status": "skipped",
+   "note": "checked in the last 20 minutes"
   },
   {
    "step": "lineup_history",
@@ -147,11 +147,27 @@
    "reason": "stats behind"
   },
   {
+   "team": "FLA",
+   "reason": "stats behind"
+  },
+  {
    "team": "NJD",
    "reason": "stats behind"
   },
   {
    "team": "NSH",
+   "reason": "stats behind"
+  },
+  {
+   "team": "OTT",
+   "reason": "stats behind"
+  },
+  {
+   "team": "PIT",
+   "reason": "stats behind"
+  },
+  {
+   "team": "SJS",
    "reason": "stats behind"
   }
  ],
@@ -164,7 +180,7 @@
  "runner": {
   "event": "workflow_dispatch",
   "run_id": "39884337022",
-  "iteration": 2,
+  "iteration": 3,
   "chain_link": 213,
   "chain_started_at": "2026-10-16T10:00:13-04:00",
   "run_started_at": "2026-10-22T21:30:16-04:00"

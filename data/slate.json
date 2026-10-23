@@ -1,7 +1,7 @@
 {
  "slate_date": "2026-10-22",
- "generated_at": "2026-10-22T21:40:01-04:00",
- "status_at": "2026-10-22T21:40:01-04:00",
+ "generated_at": "2026-10-22T21:50:00-04:00",
+ "status_at": "2026-10-22T21:50:00-04:00",
  "valid_until": "2026-10-23T05:00:00-04:00",
  "status": {
   "prices_state": "ok",
@@ -16,7 +16,7 @@
   "stats_state": "ok",
   "last_run": {
    "ok": true,
-   "at": "2026-10-22T21:40:01-04:00",
+   "at": "2026-10-22T21:50:00-04:00",
    "failed_step": null
   },
   "pool": {
@@ -36,11 +36,27 @@
     "reason": "stats behind"
    },
    {
+    "team": "FLA",
+    "reason": "stats behind"
+   },
+   {
     "team": "NJD",
     "reason": "stats behind"
    },
    {
     "team": "NSH",
+    "reason": "stats behind"
+   },
+   {
+    "team": "OTT",
+    "reason": "stats behind"
+   },
+   {
+    "team": "PIT",
+    "reason": "stats behind"
+   },
+   {
+    "team": "SJS",
     "reason": "stats behind"
    }
   ],
@@ -51,7 +67,7 @@
  "banners": [
   {
    "level": "warn",
-   "text": "Not covered tonight: ANA, BOS, NJD, NSH (stats behind)."
+   "text": "Not covered tonight: ANA, BOS, FLA, NJD, NSH, OTT, PIT, SJS (stats behind)."
   }
  ],
  "empty": null,
@@ -128,8 +144,11 @@
    },
    "started": true,
    "picks": 0,
-   "excluded_reason": null,
-   "excluded_teams": []
+   "excluded_reason": "stats behind",
+   "excluded_teams": [
+    "SJS",
+    "OTT"
+   ]
   },
   {
    "id": 2026020157,
@@ -179,8 +198,11 @@
    },
    "started": true,
    "picks": 1,
-   "excluded_reason": null,
-   "excluded_teams": []
+   "excluded_reason": "stats behind",
+   "excluded_teams": [
+    "FLA",
+    "PIT"
+   ]
   },
   {
    "id": 2026020159,
