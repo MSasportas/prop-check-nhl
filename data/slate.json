@@ -1,7 +1,7 @@
 {
  "slate_date": "2026-10-22",
- "generated_at": "2026-10-22T23:40:01-04:00",
- "status_at": "2026-10-22T23:40:01-04:00",
+ "generated_at": "2026-10-23T00:00:00-04:00",
+ "status_at": "2026-10-23T00:00:00-04:00",
  "valid_until": "2026-10-23T05:00:00-04:00",
  "status": {
   "prices_state": "ok",
@@ -16,7 +16,7 @@
   "stats_state": "ok",
   "last_run": {
    "ok": true,
-   "at": "2026-10-22T23:40:01-04:00",
+   "at": "2026-10-23T00:00:00-04:00",
    "failed_step": null
   },
   "pool": {
@@ -28,7 +28,15 @@
   },
   "excluded_teams": [
    {
+    "team": "CAR",
+    "reason": "stats behind"
+   },
+   {
     "team": "CGY",
+    "reason": "stats behind"
+   },
+   {
+    "team": "EDM",
     "reason": "stats behind"
    },
    {
@@ -43,7 +51,7 @@
  "banners": [
   {
    "level": "warn",
-   "text": "Not covered tonight: CGY, MIN (stats behind)."
+   "text": "Not covered tonight: CAR, CGY, EDM, MIN (stats behind)."
   }
  ],
  "empty": {
@@ -292,8 +300,11 @@
    },
    "started": true,
    "picks": 0,
-   "excluded_reason": null,
-   "excluded_teams": []
+   "excluded_reason": "stats behind",
+   "excluded_teams": [
+    "CAR",
+    "EDM"
+   ]
   },
   {
    "id": 2026020164,
