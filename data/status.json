@@ -1,10 +1,10 @@
 {
  "ok": true,
  "slate_date": "2026-10-22",
- "started_at": "2026-10-23T01:10:00-04:00",
- "status_at": "2026-10-23T01:10:00-04:00",
- "finished_at": "2026-10-23T01:10:02-04:00",
- "last_ok_at": "2026-10-23T01:10:00-04:00",
+ "started_at": "2026-10-23T01:30:00-04:00",
+ "status_at": "2026-10-23T01:30:00-04:00",
+ "finished_at": "2026-10-23T01:30:02-04:00",
+ "last_ok_at": "2026-10-23T01:30:00-04:00",
  "failed_step": null,
  "steps": [
   {
@@ -20,7 +20,7 @@
   {
    "step": "stats",
    "status": "ok",
-   "note": "1 window(s) read, 2 team-games still missing"
+   "note": "1 window(s) read"
   },
   {
    "step": "lineups",
@@ -59,8 +59,8 @@
   },
   {
    "step": "shadow",
-   "status": "skipped",
-   "note": "nothing new"
+   "status": "ok",
+   "note": "20 graded"
   },
   {
    "step": "gg_grade",
@@ -137,17 +137,8 @@
   "Jonas Johansson",
   "Seth Jarvis"
  ],
- "excluded_teams": [
-  {
-   "team": "SEA",
-   "reason": "stats behind"
-  },
-  {
-   "team": "UTA",
-   "reason": "stats behind"
-  }
- ],
- "stats_through": "2026-10-21",
+ "excluded_teams": [],
+ "stats_through": "2026-10-22",
  "lineups_at": "2026-10-22T21:40:01-04:00",
  "lineups_note": "17 of 24 team line pages are dated today.",
  "games_today": 12,
@@ -156,7 +147,7 @@
  "runner": {
   "event": "workflow_dispatch",
   "run_id": "39902429604",
-  "iteration": 3,
+  "iteration": 5,
   "chain_link": 217,
   "chain_started_at": "2026-10-16T10:00:13-04:00",
   "run_started_at": "2026-10-23T00:50:11-04:00"
