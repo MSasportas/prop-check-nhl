@@ -1,6 +1,6 @@
 {
- "version": "3.2",
- "updated": "2026-10-21",
+ "version": "3.3",
+ "updated": "2026-10-23",
  "values": {
   "min_history": 10,
   "absence_games": 3,
@@ -27,7 +27,8 @@
   "gap_guard": {
    "lines": [
     1.5,
-    2.5
+    2.5,
+    3.5
    ],
    "price_gate": -200,
    "max_price": 120,
