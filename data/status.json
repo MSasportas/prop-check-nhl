@@ -1,10 +1,10 @@
 {
  "ok": true,
  "slate_date": "2026-10-22",
- "started_at": "2026-10-22T22:40:01-04:00",
- "status_at": "2026-10-22T22:40:01-04:00",
- "finished_at": "2026-10-22T22:40:03-04:00",
- "last_ok_at": "2026-10-22T22:40:01-04:00",
+ "started_at": "2026-10-22T22:50:01-04:00",
+ "status_at": "2026-10-22T22:50:01-04:00",
+ "finished_at": "2026-10-22T22:50:03-04:00",
+ "last_ok_at": "2026-10-22T22:50:01-04:00",
  "failed_step": null,
  "steps": [
   {
@@ -20,7 +20,7 @@
   {
    "step": "stats",
    "status": "ok",
-   "note": "1 window(s) read, 4 team-games still missing"
+   "note": "1 window(s) read, 6 team-games still missing"
   },
   {
    "step": "lineups",
@@ -59,8 +59,8 @@
   },
   {
    "step": "shadow",
-   "status": "skipped",
-   "note": "nothing new"
+   "status": "ok",
+   "note": "16 graded"
   },
   {
    "step": "gg_grade",
@@ -139,6 +139,10 @@
  ],
  "excluded_teams": [
   {
+   "team": "DAL",
+   "reason": "stats behind"
+  },
+  {
    "team": "LAK",
    "reason": "stats behind"
   },
@@ -153,6 +157,10 @@
   {
    "team": "VGK",
    "reason": "stats behind"
+  },
+  {
+   "team": "WPG",
+   "reason": "stats behind"
   }
  ],
  "stats_through": "2026-10-21",
@@ -164,7 +172,7 @@
  "runner": {
   "event": "workflow_dispatch",
   "run_id": "39888994681",
-  "iteration": 3,
+  "iteration": 4,
   "chain_link": 214,
   "chain_started_at": "2026-10-16T10:00:13-04:00",
   "run_started_at": "2026-10-22T22:20:13-04:00"
