@@ -359,9 +359,27 @@ probability x Hard Rock decimal payout - 1, on unrounded numbers; every threshol
     secret `ODDS_API_KEYS_2`. Keys reset Nov 1. Oct 22 overnight the outside drain hit again (key 2 66 -> 0, key 3 2 -> 0; pool 120, tier 1).
     **Resolved 2026-10-22 10 AM:** Matt updated the secrets; the 10:00 run reads 7 keys (2 with 288 and 415 credits, the old 120 key, 4 empty), pool 823, tier 4, allowance 11.3. Key numbers changed order.
 
+23. **3.5 watch (Matt's order 2026-10-23; the first rung of the volume ladder).** `ops.gap_guard.watch` = research tracks: the same Gap + Guard
+    maths on the same odds reads (0 extra credits) into `data/paper_watch/<id>/` (events, summary, cursor). Never a pick, never the Record, page,
+    Discord or status.json; a failing track can't touch the live step (`paper._watch_one`, `_LOG` restored in `finally`). Track `line35`:
+    line 3.5, base thresholds, from slate 2026-10-23, **provisional offset 0.0** (every row keeps `model_raw_over`, so the real offset is applied
+    afterwards, exactly). Not covered by `guard_paper.py` across commits (in-process prefix check only; accepted, research).
+    - **Matt's gate:** after the slates of Oct 23, 24, 25 (graded), if >= 1 3.5 candidate PASSES FULL Gap + Guard (>= 4 books incl. Pinnacle, gap
+      >= 3.0%, guard with the frozen 3.5 offset, eligible) then 3.5 goes live as picks (lines 1.5, 2.5, 3.5) from slate 2026-10-26. One pass proves
+      the mechanism fires, not that it earns; 3.5 is judged on its own line at the Nov 2 checkpoint and can be cut. Zero passes: extend 3 more slates.
+    - **3.5 offset:** refit from the 2025-26 bundle (model from prior games only, Hard Rock 3.5 at -45 min; same method as item 21), frozen and logged
+      here BEFORE the gate is read. Independent of the live sample. No frozen offset = 3.5 cannot go live (`engine.check_config`).
+    - **Expected volume:** Oct 20-22 shadow: 33 reads with >= 4 books on a 3.5 line (178 for 1.5, 132 for 2.5); 0 sides at gap >= 3% at 3.5 (6 at 1.5, 4 at 2.5).
+      3.5 is a thin source: do not expect it to move sample size much.
+    - **Volume ladder (each rung tracked in `watch` first, promoted only on a gate pre-registered here; rungs not started until Matt says go):**
+      (1) 3.5 line (above); (2) near-miss band: gap 2.0-3.0% on 1.5/2.5; (3) books_min 4 -> 3 (Pinnacle still required); (4) more books quoting
+      (only 6 of 9 asked return NHL shots; a 7th book costs no credits if it returns). Never: dropping the guard, dropping Pinnacle, tuning a
+      threshold on the live sample, promoting on fewer than the rung's gate.
+
 ## 8. Rule-change log
 | Date | Change | Why | Sample |
 |---|---|---|---|
+| 2026-10-23 (CEO, Matt; Builder, QA SHIP) | **Watch track `line35` added (research only), no pick or Record change.** 3.5 shots lines run through Gap + Guard in `data/paper_watch/line35/` from slate 2026-10-23; gate and offset plan in section 7 item 23 | Matt: track 3.5 for 3 days, add it if >= 1 Hard Rock lag, and grow volume methodically | Item 23; Oct 20-22 shadow shows 0 of 33 3.5 reads at gap >= 3% |
 | 2026-10-21 (CEO, Matt's question; Builder, QA SHIP) | **v3.2 wording only, no qualifying value changed.** Pulls judged again at the shown price and say what it means if already bet; "Price final" chip + Discord ping after the last price read; Discord cap 6 -> 12/day. Old label "Our model no longer backs this price" retired (Record keeps the two Oct 20 events as written) | Matt: if he bets and it gets pulled an hour later, is he stuck? Both Oct 20 pulls (Thomas, Beniers) were labeled "model" but the model never changed: Beniers was Hard Rock -105 -> -110 (still +4.0% at -105), Thomas was a 0.6 pt market drift (+1.3% at -105) | Oct 20: 5 picks, 2 pulled (1-1). Bet-early vs wait-for-final is checked at Nov 2 (item 22) |
 | 2026-10-19 (CEO, Matt's order; Builder) | **One engine: Gap + Guard goes live as the only rule (v3.0), first slate 2026-10-20.** Real picks on the page, in the Record and in Discord (NEW PICK / PULLED). Removed: v1.0 and v2.0 selection code, the "previous" rules block, `rules_for`, `ops.pause` / pause banner / "no proven edge" text, `ops.paper` and paper mode (page section, Discord PAPER messages), parlays and goal watch UI. Parlays stay off. Kept: frozen offsets, the research log in `data/paper/`, the -10 unit safety pause (`ops.safety_pause`) | Matt: "Unpause ... There is no more 'old' version. There should only be one version which is the gap + model part." Gap + Guard is the only angle with a mechanism (Hard Rock lags the other books); v2.0 failed its pre-registered bar (item 20) | Item 21; Oct 19 replay on the real reads: Killorn O1.5 +100 shown at the 90-minute read, Michkov O1.5 -120 vetoed |
 | 2026-10-19 (Builder) | Pick price is frozen at the flag read; the Record gets no `price` events for these picks; engine ranks by rounded final EV (4 dp) so the rank is stable between runs; research log is graded in a second soft step `gg_grade` after the shadow step so a finished game is graded in the same run | Keeps the page, the Record and the log on the same price and avoids a one-run lag | Tests |
@@ -379,6 +397,7 @@ probability x Hard Rock decimal payout - 1, on unrounded numbers; every threshol
 | 2026-10-11 | v1.0 set (section 4) | First build: Sharp standard from the DS backtest (2024-25 fit, 2025-26 out of sample) and one live Hard Rock pull | Backtest only; 0 graded live legs |
 
 ## 9. Session log (newest first, one line each)
+- 2026-10-23 ~10 AM (Matt: track 3.5 for 3 days, add it on >= 1 lag, grow volume methodically): watch track `line35` built (paper.py watch tracks, config, 4 tests, 343 pass), QA SHIP (2 minors fixed: note kept out of status.json, track skipped before its first slate). Gate, offset refit and the volume ladder in item 23.
 - 2026-10-23 ~8:04 AM Researcher run 9 (daily, shots): W1-W5 registered before testing (penalty/PP environment, hot shooters, rookies, rematches, stack of earlier stable weights); 17 variants, none positive (best W1 -3.4% n301), no lockbox look (still 2). Forward Q1a +7.4% n153, Q1k +11.8% n118 (4 nights, too small); Q6a-c (A vs B/C read, unders) registered forward from tonight. Nothing passed.
 - 2026-10-22 1:45 PM daily check: chain alive (link 203, run 429 in progress, 1:50 PM commit, Pages builds ok), all steps/sources ok, pull A ran 1 PM (12 games, 12 credits). Keys 811 (3 live keys), tier 4, allowance 11.3, budget 135. Oct 21: 2 games, B read, 0 flags/vetoes, no C (tier was 1-2), shadow graded 34/34; Record = Oct 20 only (5 graded). No excluded teams. Unmatched: Pettersson (known), Seth Jarvis (not on CAR roster), Chinakhov -> fixed: transliteration list in `names.py` (Yegor = Egor); 806 names re-matched Oct 20-22, only change is Chinakhov; no page change; 339 tests.
 - 2026-10-22 ~8:10 AM Researcher run 8 (daily, shots): U1-U5 registered before testing (template prices, start time, opponent D/F shot mix, division games, player vs opponent); 17 variants, none positive with n >= 300 (best U5r +8.5% n50), no lockbox look (still 2). Forward Q1a +7.4% n90 (3 nights). Nothing passed.

@@ -75,7 +75,16 @@
     "max_per_game": null,
     "max_per_night": null,
     "min_history": 10
-   }
+   },
+   "watch": [
+    {
+     "id": "line35",
+     "from_slate": "2026-10-23",
+     "note": "RESEARCH ONLY (TEAM.md item 22). The 3.5 shots line run through the same Gap + Guard maths into data/paper_watch/line35/. Never a pick, never the Record. The 3.5 offset is PROVISIONAL (0.0): every row keeps model_raw_over, so the real frozen offset is applied afterwards.",
+     "lines": [3.5],
+     "offsets": {"3.5": 0.0}
+    }
+   ]
   },
   "bookmakers": [
    "hardrockbet"

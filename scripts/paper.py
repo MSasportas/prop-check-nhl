@@ -46,8 +46,11 @@ SUMMARY_NIGHTS = 7
 
 
 # ---------------------------------------------------------------- paths and the append-only log
+_LOG = ("paper",)           # the live log. A watch track (see watch_tracks) swaps this for its own folder while it runs
+
+
 def pdir():
-    return common.dpath("paper")
+    return common.dpath(*_LOG)
 
 
 def events_path():
@@ -602,7 +605,58 @@ def write_summary(summary, now, heartbeat_min):
 
 def step(now, slate, cfg, inp, sched_cache, games, allow_new=True):
     """Called by run.py before the engine (after odds). Never raises past run.py's wrapper.
-    allow_new=False: flag nothing new (stats behind, safety pause); pulls, closes and grades still run."""
+    allow_new=False: flag nothing new (stats behind, safety pause); pulls, closes and grades still run.
+    After the live log, every watch track runs the same maths on the same reads into its own folder (never the Record)."""
+    out = _step_one(now, slate, cfg, inp, sched_cache, games, allow_new)
+    for tr in watch_tracks(cfg):
+        if tr.get("from_slate") and slate < tr["from_slate"]:
+            continue                                     # not started: no folder, no file
+        _watch_one(tr, now, slate, cfg, inp, sched_cache, games, allow_new)   # its note stays out of status.json on purpose
+    return out
+
+
+def watch_tracks(cfg):
+    """ops.gap_guard.watch: [{id, from_slate, lines, offsets, ...threshold overrides}]. Research only: no pick, no Record, no page,
+    no Discord, no credits (it reads the odds already pulled). Adding a track is a config change, nothing else."""
+    return [t for t in (common.gap_guard(cfg).get("watch") or []) if isinstance(t, dict) and t.get("id")]
+
+
+def watch_cfg(cfg, tr):
+    """A copy of cfg whose gap_guard is the live rule with the track's overrides, live from the track's own first slate."""
+    import copy
+    c2 = copy.deepcopy(cfg)
+    g = c2["ops"]["gap_guard"]
+    T = g.setdefault("thresholds", {})
+    for k, v in tr.items():
+        if k in ("id", "from_slate", "note") or k.startswith("_"):
+            continue
+        if k == "offsets":
+            T["offsets"] = dict(T.get("offsets") or {}, **v)
+        else:
+            T[k] = v
+    g["live_from"] = tr.get("from_slate") or g.get("live_from")
+    g.pop("watch", None)
+    return c2
+
+
+def watch_dir(tr):
+    return ("paper_watch", str(tr["id"]))
+
+
+def _watch_one(tr, now, slate, cfg, inp, sched_cache, games, allow_new):
+    global _LOG
+    saved = _LOG
+    _LOG = watch_dir(tr)
+    try:
+        r = _step_one(now, slate, watch_cfg(cfg, tr), inp, sched_cache, games, allow_new)
+        return "%s %s" % (tr["id"], (r.get("note") or r.get("status") or "").replace("gap+guard: ", ""))
+    except Exception as e:                      # a watch track can never hurt the live step: say so and carry on
+        return "%s failed (%s)" % (tr["id"], type(e).__name__)
+    finally:
+        _LOG = saved
+
+
+def _step_one(now, slate, cfg, inp, sched_cache, games, allow_new=True):
     P = common.gap_guard(cfg)
     if not P:
         return {"status": "skipped", "note": "no ops.gap_guard in the config"}

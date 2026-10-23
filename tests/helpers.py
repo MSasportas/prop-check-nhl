@@ -32,6 +32,8 @@ def made_up_slate_config(root):
     live_from is 2026-10-20, the first slate it covers)."""
     c = json.loads(slurp(common.CONFIG_PATH, "r"))
     c["ops"]["gap_guard"]["live_from"] = "2026-10-01"
+    for tr in c["ops"]["gap_guard"].get("watch") or []:
+        tr["from_slate"] = "2999-01-01"                      # off for every test except the ones that switch it on
     path = os.path.join(root, "rules_made_up_slate.json")
     with open(path, "w", encoding="utf-8") as f:
         json.dump(c, f)
@@ -181,7 +183,7 @@ def _gg_methods():
         fair chance F (default: the model's own calibrated chance, so the guard agrees), Hard Rock pays +ev (EV%) on it."""
         T = common.gap_guard(common.load_config())["thresholds"]
         raw = self.model_over(team, i, "shots", line)
-        cal = min(0.999, max(0.001, raw + T["offsets"]["%g" % line]))
+        cal = min(0.999, max(0.001, raw + T["offsets"].get("%g" % line, 0.0)))
         F_over = (min(0.66, max(0.48, cal)) if side == "over" else 1.0 - min(0.66, max(0.48, 1.0 - cal))) if fair is None else fair
         F = F_over if side == "over" else 1.0 - F_over                  # fair chance of the side we bet
         b = F / (1.0 + ev)                                               # Hard Rock's break-even for that side

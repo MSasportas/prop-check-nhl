@@ -563,3 +563,57 @@ class PriceFinal(unittest.TestCase):
     def test_a_slipped_90_minute_read_at_45_and_a_half_minutes_is_not_final(self):
         sl = self.s.read("18:14", cp=[self.gg])                         # 46 min to a 7 PM puck: the log's close, not the last check
         self.assertFalse(self.s.pick("CAR", 1, sl)["price_final"])
+
+
+# ---------------------------------------------------------------- 2026-10-23: the 3.5 watch track (research only)
+class Watch35(unittest.TestCase):
+    def setUp(self):
+        self.s = Sim(pool=12)
+        c = json.load(open(os.environ["PC_CONFIG"]))
+        for tr in c["ops"]["gap_guard"]["watch"]:
+            tr["from_slate"] = "2026-10-01"
+        json.dump(c, open(os.environ["PC_CONFIG"], "w"))
+        day(self.s)
+        self.wdir = os.path.join(os.environ["PC_DATA_DIR"], "paper_watch", "line35")
+
+    def tearDown(self):
+        self.s.close()
+
+    def wevents(self):
+        p = os.path.join(self.wdir, "events.jsonl")
+        return [json.loads(x) for x in open(p).read().split("\n") if x] if os.path.exists(p) else []
+
+    def test_a_35_gap_is_logged_in_the_watch_and_is_never_a_pick(self):
+        s = self.s
+        hr, oth = s.gg_lines("CAR", 1, line=3.5)
+        sl = s.read("17:31", cp=[(hr, oth)])
+        self.assertEqual(sl["picks"], [])                                  # not a pick
+        self.assertEqual(s.events(), [])                                    # nothing in the Record
+        ev = self.wevents()
+        self.assertEqual([(e["t"], e["line"]) for e in ev if e["t"] in ("flag", "veto")], [("flag", 3.5)])
+        self.assertIsNotNone(ev[0]["model_raw_over"])                       # kept, so the real offset can be applied afterwards
+        live = [json.loads(x) for x in open(os.path.join(os.environ["PC_DATA_DIR"], "paper", "events.jsonl")).read().split("\n") if x] \
+            if os.path.exists(os.path.join(os.environ["PC_DATA_DIR"], "paper", "events.jsonl")) else []
+        self.assertEqual([e for e in live if e.get("line") == 3.5], [])      # the live research log never sees 3.5
+
+    def test_a_15_pick_is_a_pick_and_not_in_the_watch(self):
+        s = self.s
+        sl = s.read("17:31", cp=[s.gg_lines("CAR", 1)])
+        self.assertEqual(len(sl["picks"]), 1)
+        self.assertEqual([e for e in self.wevents() if e["t"] == "flag"], [])
+
+    def test_the_watch_follows_to_the_close_and_grades(self):
+        s = self.s
+        hr, oth = s.gg_lines("CAR", 1, line=3.5)
+        s.read("17:31", cp=[(hr, oth)])
+        s.read("18:16", cp=[(hr, oth)])
+        self.assertIn("close", [e["t"] for e in self.wevents()])
+
+    def test_a_broken_watch_never_stops_the_live_step(self):
+        import paper
+        c = json.load(open(os.environ["PC_CONFIG"]))
+        c["ops"]["gap_guard"]["watch"][0]["lines"] = "oops"
+        json.dump(c, open(os.environ["PC_CONFIG"], "w"))
+        sl = self.s.read("17:31", cp=[self.s.gg_lines("CAR", 1)])
+        self.assertEqual(len(sl["picks"]), 1)                              # the live pick still shows
+        self.assertEqual(paper._LOG, ("paper",))                            # and the log folder was put back
