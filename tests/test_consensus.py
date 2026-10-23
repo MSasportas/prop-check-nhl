@@ -17,8 +17,7 @@ from test_odds import real_matcher
 
 UPD = "2026-10-11T17:00:00Z"
 CAR_PHI, VAN_NYR = 2026020901, 2026020902
-OTHERS9 = ["draftkings", "fanduel", "betmgm", "williamhill_us", "espnbet", "betrivers", "fanatics", "pinnacle",
-           "betonlineag"]
+OTHERS9 = ["draftkings", "fanduel", "betmgm", "espnbet", "pinnacle", "betonlineag", "lowvig", "novig", "prophetx"]
 
 
 def shifted(lines, d):
