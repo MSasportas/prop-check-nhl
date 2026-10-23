@@ -1,10 +1,10 @@
 {
  "ok": true,
  "slate_date": "2026-10-22",
- "started_at": "2026-10-23T00:40:01-04:00",
- "status_at": "2026-10-23T00:40:01-04:00",
- "finished_at": "2026-10-23T00:40:02-04:00",
- "last_ok_at": "2026-10-23T00:40:01-04:00",
+ "started_at": "2026-10-23T01:00:01-04:00",
+ "status_at": "2026-10-23T01:00:01-04:00",
+ "finished_at": "2026-10-23T01:00:01-04:00",
+ "last_ok_at": "2026-10-23T01:00:01-04:00",
  "failed_step": null,
  "steps": [
   {
@@ -19,8 +19,8 @@
   },
   {
    "step": "stats",
-   "status": "ok",
-   "note": "1 window(s) read, 2 team-games still missing"
+   "status": "skipped",
+   "note": "waiting to retry"
   },
   {
    "step": "lineups",
@@ -54,18 +54,18 @@
   },
   {
    "step": "grade",
-   "status": "skipped",
-   "note": "nothing to grade"
+   "status": "ok",
+   "note": "2 graded"
   },
   {
    "step": "shadow",
-   "status": "skipped",
-   "note": "nothing new"
+   "status": "ok",
+   "note": "16 graded"
   },
   {
    "step": "gg_grade",
    "status": "ok",
-   "note": "gap+guard: nothing new"
+   "note": "gap+guard: 2 grade"
   },
   {
    "step": "slate",
@@ -74,8 +74,8 @@
   },
   {
    "step": "record",
-   "status": "skipped",
-   "note": "unchanged"
+   "status": "ok",
+   "note": "record.json"
   }
  ],
  "sources": {
@@ -143,6 +143,14 @@
    "reason": "stats behind"
   },
   {
+   "team": "SEA",
+   "reason": "stats behind"
+  },
+  {
+   "team": "UTA",
+   "reason": "stats behind"
+  },
+  {
    "team": "VAN",
    "reason": "stats behind"
   }
@@ -151,14 +159,14 @@
  "lineups_at": "2026-10-22T21:40:01-04:00",
  "lineups_note": "17 of 24 team line pages are dated today.",
  "games_today": 12,
- "record_events": 28,
+ "record_events": 30,
  "odds_notes": [],
  "runner": {
   "event": "workflow_dispatch",
-  "run_id": "39897963637",
-  "iteration": 5,
-  "chain_link": 216,
+  "run_id": "39902429604",
+  "iteration": 2,
+  "chain_link": 217,
   "chain_started_at": "2026-10-16T10:00:13-04:00",
-  "run_started_at": "2026-10-23T00:00:15-04:00"
+  "run_started_at": "2026-10-23T00:50:11-04:00"
  }
 }

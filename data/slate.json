@@ -1,7 +1,7 @@
 {
  "slate_date": "2026-10-22",
- "generated_at": "2026-10-23T00:40:01-04:00",
- "status_at": "2026-10-23T00:40:01-04:00",
+ "generated_at": "2026-10-23T01:00:01-04:00",
+ "status_at": "2026-10-23T01:00:01-04:00",
  "valid_until": "2026-10-23T05:00:00-04:00",
  "status": {
   "prices_state": "ok",
@@ -16,7 +16,7 @@
   "stats_state": "ok",
   "last_run": {
    "ok": true,
-   "at": "2026-10-23T00:40:01-04:00",
+   "at": "2026-10-23T01:00:01-04:00",
    "failed_step": null
   },
   "pool": {
@@ -32,6 +32,14 @@
     "reason": "stats behind"
    },
    {
+    "team": "SEA",
+    "reason": "stats behind"
+   },
+   {
+    "team": "UTA",
+    "reason": "stats behind"
+   },
+   {
     "team": "VAN",
     "reason": "stats behind"
    }
@@ -43,7 +51,7 @@
  "banners": [
   {
    "level": "warn",
-   "text": "Not covered tonight: DET, VAN (stats behind)."
+   "text": "Not covered tonight: DET, SEA, UTA, VAN (stats behind)."
   }
  ],
  "empty": {
@@ -313,8 +321,11 @@
    },
    "started": true,
    "picks": 0,
-   "excluded_reason": null,
-   "excluded_teams": []
+   "excluded_reason": "stats behind",
+   "excluded_teams": [
+    "UTA",
+    "SEA"
+   ]
   },
   {
    "id": 2026020165,
@@ -563,7 +574,11 @@
    ],
    "pulled": null,
    "price_final": false,
-   "graded": null,
+   "graded": {
+    "result": "W",
+    "actual": "had 1",
+    "units": 0.9524
+   },
    "rank": null,
    "tier": "main",
    "game_id": 2026020165,
@@ -622,7 +637,11 @@
    ],
    "pulled": null,
    "price_final": false,
-   "graded": null,
+   "graded": {
+    "result": "L",
+    "actual": "had 2",
+    "units": -1.0
+   },
    "rank": null,
    "tier": "main",
    "game_id": 2026020165,
