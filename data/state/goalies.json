@@ -39,7 +39,7 @@
   },
   "NYR": {
    "name": "Dylan Garand",
-   "status": "expected"
+   "status": "confirmed"
   },
   "BOS": {
    "name": "Jeremy Swayman",
@@ -51,7 +51,7 @@
   },
   "CBJ": {
    "name": "Cam Talbot",
-   "status": "expected"
+   "status": "confirmed"
   },
   "VGK": {
    "name": "Carter Hart",
@@ -98,5 +98,5 @@
    "status": "expected"
   }
  },
- "checked_at": "2026-10-24T11:20:00-04:00"
+ "checked_at": "2026-10-24T11:40:01-04:00"
 }
