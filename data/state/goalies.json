@@ -19,7 +19,7 @@
   },
   "STL": {
    "name": "Joel Hofer",
-   "status": "expected"
+   "status": "confirmed"
   },
   "CAR": {
    "name": "Pyotr Kochetkov",
@@ -63,7 +63,7 @@
   },
   "BUF": {
    "name": "Ukko-Pekka Luukkonen",
-   "status": "expected"
+   "status": "confirmed"
   },
   "EDM": {
    "name": "Tristan Jarry",
@@ -98,5 +98,5 @@
    "status": "expected"
   }
  },
- "checked_at": "2026-10-24T11:40:01-04:00"
+ "checked_at": "2026-10-24T11:50:00-04:00"
 }
