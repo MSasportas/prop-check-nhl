@@ -1,12 +1,12 @@
 {
  "slate_date": "2026-10-23",
- "generated_at": "2026-10-23T20:00:01-04:00",
- "status_at": "2026-10-23T20:00:01-04:00",
+ "generated_at": "2026-10-23T20:20:00-04:00",
+ "status_at": "2026-10-23T20:20:00-04:00",
  "valid_until": "2026-10-24T05:00:00-04:00",
  "status": {
   "prices_state": "ok",
-  "prices_at": "2026-10-23T19:30:00-04:00",
-  "next_price_read_at": "2026-10-23T20:15:00-04:00",
+  "prices_at": "2026-10-23T20:20:00-04:00",
+  "next_price_read_at": null,
   "stats_built_at": "2026-10-23T01:30:00-04:00",
   "stats_through": "2026-10-22",
   "lineups_at": "2026-10-23T20:00:01-04:00",
@@ -16,11 +16,11 @@
   "stats_state": "ok",
   "last_run": {
    "ok": true,
-   "at": "2026-10-23T20:00:01-04:00",
+   "at": "2026-10-23T20:20:00-04:00",
    "failed_step": null
   },
   "pool": {
-   "pulls_left": 782,
+   "pulls_left": 781,
    "keys": 7,
    "game_days_left": 9,
    "days_left": 9,
@@ -32,7 +32,11 @@
   "tier": 4
  },
  "banners": [],
- "empty": null,
+ "empty": {
+  "code": "none_qualified",
+  "text": "No picks yet today",
+  "sub": "34 lines read, none cleared both checks. Today's earlier pick is under Started."
+ },
  "games": [
   {
    "id": 2026020166,
@@ -78,7 +82,7 @@
     }
    },
    "started": false,
-   "picks": 1,
+   "picks": 0,
    "excluded_reason": null,
    "excluded_teams": []
   }
@@ -99,6 +103,10 @@
     {
      "at": "2026-10-23T19:30:00-04:00",
      "text": "Early: lineup not confirmed"
+    },
+    {
+     "at": "2026-10-23T20:20:00-04:00",
+     "text": "Pulled: Too few other books to check it against"
     }
    ],
    "prices": [
@@ -107,10 +115,14 @@
      "price": -180
     }
    ],
-   "pulled": null,
+   "pulled": {
+    "at": "2026-10-23T20:20:00-04:00",
+    "reason": "Too few other books to check it against",
+    "if_bet": "Got -180? Nothing says it got worse. Haven't bet? Skip it."
+   },
    "price_final": false,
    "graded": null,
-   "rank": 1,
+   "rank": null,
    "tier": "main",
    "game_id": 2026020167,
    "player": "G. Landeskog",

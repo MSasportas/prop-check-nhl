@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-10-23T20:00:01-04:00",
+ "generated_at": "2026-10-23T20:20:00-04:00",
  "summary": {
   "headline": {
    "w": 5,
@@ -89,7 +89,10 @@
      "result": null,
      "actual": null,
      "units": null,
-     "pulled": null,
+     "pulled": {
+      "at": "2026-10-23T20:20:00-04:00",
+      "reason": "Too few other books to check it against"
+     },
      "legs": []
     }
    ]
