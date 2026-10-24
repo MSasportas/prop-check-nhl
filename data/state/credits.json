@@ -11,14 +11,14 @@
   {
    "n": 2,
    "left": 245,
-   "status": "limited",
+   "status": "ok",
    "checked_at": "2026-10-24T10:00:01-04:00",
    "month": "2026-10"
   },
   {
    "n": 3,
    "left": 414,
-   "status": "limited",
+   "status": "ok",
    "checked_at": "2026-10-24T10:00:01-04:00",
    "month": "2026-10"
   },
