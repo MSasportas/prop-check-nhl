@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-10-24T19:00:00-04:00",
+ "generated_at": "2026-10-24T19:30:00-04:00",
  "summary": {
   "headline": {
    "w": 6,
@@ -61,6 +61,29 @@
       {
        "price": -105,
        "at": "2026-10-24T17:30:00-04:00"
+      }
+     ],
+     "result": null,
+     "actual": null,
+     "units": null,
+     "pulled": null,
+     "legs": []
+    },
+    {
+     "id": "2026-10-24:2026020177:8478519:shots:1.5:under",
+     "kind": "single",
+     "player": "A. Cirelli",
+     "bet": "Under 1.5 shots on goal",
+     "market": "shots",
+     "team": "TBL",
+     "game": "TBL at UTA",
+     "price": -120,
+     "first_price": -120,
+     "last_price": -120,
+     "prices": [
+      {
+       "price": -120,
+       "at": "2026-10-24T19:30:00-04:00"
       }
      ],
      "result": null,
