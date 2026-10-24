@@ -14,8 +14,8 @@
    "status": "confirmed"
   },
   "LAK": {
-   "name": "Darcy Kuemper",
-   "status": "expected"
+   "name": "Anton Forsberg",
+   "status": "confirmed"
   },
   "STL": {
    "name": "Joel Hofer",
@@ -98,5 +98,5 @@
    "status": "confirmed"
   }
  },
- "checked_at": "2026-10-24T14:40:00-04:00"
+ "checked_at": "2026-10-24T15:10:01-04:00"
 }
