@@ -1,7 +1,7 @@
 {
  "slate_date": "2026-10-24",
- "generated_at": "2026-10-24T18:20:01-04:00",
- "status_at": "2026-10-24T18:20:01-04:00",
+ "generated_at": "2026-10-24T18:40:01-04:00",
+ "status_at": "2026-10-24T18:40:01-04:00",
  "valid_until": "2026-10-25T05:00:00-04:00",
  "status": {
   "prices_state": "ok",
@@ -9,14 +9,14 @@
   "next_price_read_at": "2026-10-24T19:30:00-04:00",
   "stats_built_at": "2026-10-24T18:00:00-04:00",
   "stats_through": "2026-10-23",
-  "lineups_at": "2026-10-24T18:20:01-04:00",
+  "lineups_at": "2026-10-24T18:40:01-04:00",
   "goalies_at": null,
-  "lineups_note": "13 of 20 team line pages are dated today.",
+  "lineups_note": "14 of 20 team line pages are dated today.",
   "lineups_state": "ok",
   "stats_state": "ok",
   "last_run": {
    "ok": true,
-   "at": "2026-10-24T18:20:01-04:00",
+   "at": "2026-10-24T18:40:01-04:00",
    "failed_step": null
   },
   "pool": {
@@ -207,7 +207,7 @@
    "goalies": {
     "away": {
      "name": "Carter Hart",
-     "status": "expected"
+     "status": "confirmed"
     },
     "home": {
      "name": "Cam Talbot",
@@ -225,13 +225,13 @@
    "home": "STL",
    "start": "2026-10-24T19:00:00-04:00",
    "lineups": {
-    "away": "waiting",
+    "away": "confirmed",
     "home": "confirmed"
    },
    "goalies": {
     "away": {
      "name": "Pyotr Kochetkov",
-     "status": "expected"
+     "status": "confirmed"
     },
     "home": {
      "name": "Joel Hofer",
@@ -554,8 +554,8 @@
     "ours_pct": 54.2,
     "model_pct": 55.8
    },
-   "settled": "lineup",
-   "settled_label": "Lineup confirmed",
+   "settled": "goalie",
+   "settled_label": "Goalie confirmed",
    "reason": "7 other books say 54.3%; Hard Rock's -110 only needs 52.4%. Our model agrees (our blend: 54.2%).",
    "thin": false,
    "games_used": 90,
@@ -609,8 +609,8 @@
     "ours_pct": 47.9,
     "model_pct": 45.5
    },
-   "settled": "lineup",
-   "settled_label": "Lineup confirmed",
+   "settled": "goalie",
+   "settled_label": "Goalie confirmed",
    "reason": "8 other books say 48.2%; Hard Rock's +115 only needs 46.5%. Our model agrees (our blend: 47.9%).",
    "thin": false,
    "games_used": 90,

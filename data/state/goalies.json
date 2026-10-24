@@ -23,7 +23,7 @@
   },
   "CAR": {
    "name": "Pyotr Kochetkov",
-   "status": "expected"
+   "status": "confirmed"
   },
   "PIT": {
    "name": "Arturs Silovs",
@@ -55,7 +55,7 @@
   },
   "VGK": {
    "name": "Carter Hart",
-   "status": "expected"
+   "status": "confirmed"
   },
   "WSH": {
    "name": "Charlie Lindgren",
@@ -98,5 +98,5 @@
    "status": "confirmed"
   }
  },
- "checked_at": "2026-10-24T17:00:00-04:00"
+ "checked_at": "2026-10-24T18:40:01-04:00"
 }
