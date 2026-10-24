@@ -1,7 +1,7 @@
 {
  "slate_date": "2026-10-24",
- "generated_at": "2026-10-24T10:40:01-04:00",
- "status_at": "2026-10-24T10:40:01-04:00",
+ "generated_at": "2026-10-24T10:50:00-04:00",
+ "status_at": "2026-10-24T10:50:00-04:00",
  "valid_until": "2026-10-25T05:00:00-04:00",
  "status": {
   "prices_state": "ok",
@@ -9,14 +9,14 @@
   "next_price_read_at": "2026-10-24T11:30:00-04:00",
   "stats_built_at": "2026-10-24T01:20:01-04:00",
   "stats_through": "2026-10-23",
-  "lineups_at": "2026-10-24T10:30:00-04:00",
+  "lineups_at": "2026-10-24T10:50:00-04:00",
   "goalies_at": null,
   "lineups_note": "0 of 2 team line pages are dated today.",
   "lineups_state": "ok",
   "stats_state": "ok",
   "last_run": {
    "ok": true,
-   "at": "2026-10-24T10:40:01-04:00",
+   "at": "2026-10-24T10:50:00-04:00",
    "failed_step": null
   },
   "pool": {
@@ -174,7 +174,7 @@
     },
     "home": {
      "name": "Charlie Lindgren",
-     "status": "expected"
+     "status": "confirmed"
     }
    },
    "started": false,

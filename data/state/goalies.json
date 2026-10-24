@@ -59,7 +59,7 @@
   },
   "WSH": {
    "name": "Charlie Lindgren",
-   "status": "expected"
+   "status": "confirmed"
   },
   "BUF": {
    "name": "Ukko-Pekka Luukkonen",
@@ -98,5 +98,5 @@
    "status": "expected"
   }
  },
- "checked_at": "2026-10-24T10:40:01-04:00"
+ "checked_at": "2026-10-24T10:50:00-04:00"
 }
