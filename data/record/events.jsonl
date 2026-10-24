@@ -33,3 +33,4 @@
 {"at":"2026-10-23T20:00:01-04:00","id":"2026-10-23:2026020166:8475184:shots:1.5:under","state":"locked_unconfirmed","t":"locked"}
 {"at":"2026-10-23T20:20:00-04:00","code":"books_low","id":"2026-10-23:2026020167:8476455:shots:2.5:under","if_bet":"Got -180? Nothing says it got worse. Haven't bet? Skip it.","reason":"Too few other books to check it against","t":"pulled"}
 {"actual":1,"actual_text":"had 1","at":"2026-10-23T23:30:01-04:00","id":"2026-10-23:2026020166:8475184:shots:1.5:under","price":105,"result":"W","t":"graded","units":1.05}
+{"actual":1,"actual_text":"had 1","at":"2026-10-24T01:10:01-04:00","id":"2026-10-23:2026020167:8476455:shots:2.5:under","price":-180,"result":"W","t":"graded","units":0.5556}

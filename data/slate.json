@@ -1,7 +1,7 @@
 {
  "slate_date": "2026-10-23",
- "generated_at": "2026-10-24T01:00:00-04:00",
- "status_at": "2026-10-24T01:00:00-04:00",
+ "generated_at": "2026-10-24T01:10:01-04:00",
+ "status_at": "2026-10-24T01:10:01-04:00",
  "valid_until": "2026-10-24T05:00:00-04:00",
  "status": {
   "prices_state": "ok",
@@ -16,7 +16,7 @@
   "stats_state": "behind",
   "last_run": {
    "ok": true,
-   "at": "2026-10-24T01:00:00-04:00",
+   "at": "2026-10-24T01:10:01-04:00",
    "failed_step": null
   },
   "pool": {
@@ -138,7 +138,11 @@
     "if_bet": "Got -180? Nothing says it got worse. Haven't bet? Skip it."
    },
    "price_final": false,
-   "graded": null,
+   "graded": {
+    "result": "W",
+    "actual": "had 1",
+    "units": 0.5556
+   },
    "rank": null,
    "tier": "main",
    "game_id": 2026020167,

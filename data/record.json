@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-10-23T23:30:01-04:00",
+ "generated_at": "2026-10-24T01:10:01-04:00",
  "summary": {
   "headline": {
    "w": 6,
@@ -27,21 +27,21 @@
    {
     "key": "pulled",
     "label": "Pulled (not counted above)",
-    "w": 1,
+    "w": 2,
     "l": 1,
     "push": 0,
     "void": 0,
-    "units": -0.05,
-    "hit_rate": 0.5,
-    "needed": 0.5122,
-    "n": 2
+    "units": 0.51,
+    "hit_rate": 0.6667,
+    "needed": 0.5557,
+    "n": 3
    }
   ]
  },
  "nights": [
   {
    "date": "2026-10-23",
-   "graded": false,
+   "graded": true,
    "w": 1,
    "l": 0,
    "units": 1.05,
@@ -86,9 +86,9 @@
        "at": "2026-10-23T19:30:00-04:00"
       }
      ],
-     "result": null,
-     "actual": null,
-     "units": null,
+     "result": "W",
+     "actual": "had 1",
+     "units": 0.5556,
      "pulled": {
       "at": "2026-10-23T20:20:00-04:00",
       "reason": "Too few other books to check it against"
