@@ -1,22 +1,102 @@
 {
- "date": "2026-10-23",
+ "date": "2026-10-24",
  "teams": {
-  "CHI": {
-   "name": "Spencer Knight",
+  "PHI": {
+   "name": "Joseph Woll",
+   "status": "expected"
+  },
+  "ANA": {
+   "name": "Lukas Dostal",
+   "status": "expected"
+  },
+  "NJD": {
+   "name": "Jake Allen",
+   "status": "expected"
+  },
+  "LAK": {
+   "name": "Darcy Kuemper",
+   "status": "expected"
+  },
+  "STL": {
+   "name": "Joel Hofer",
+   "status": "expected"
+  },
+  "CAR": {
+   "name": "Pyotr Kochetkov",
+   "status": "expected"
+  },
+  "PIT": {
+   "name": "Arturs Silovs",
+   "status": "expected"
+  },
+  "NSH": {
+   "name": "Juuse Saros",
+   "status": "expected"
+  },
+  "OTT": {
+   "name": "Samuel Ersson",
+   "status": "expected"
+  },
+  "NYR": {
+   "name": "Dylan Garand",
+   "status": "expected"
+  },
+  "BOS": {
+   "name": "Jeremy Swayman",
+   "status": "expected"
+  },
+  "SJS": {
+   "name": "Yaroslav Askarov",
+   "status": "expected"
+  },
+  "CBJ": {
+   "name": "Jet Greaves",
+   "status": "expected"
+  },
+  "VGK": {
+   "name": "Carter Hart",
+   "status": "expected"
+  },
+  "WSH": {
+   "name": "Charlie Lindgren",
+   "status": "expected"
+  },
+  "BUF": {
+   "name": "Ukko-Pekka Luukkonen",
+   "status": "expected"
+  },
+  "EDM": {
+   "name": "Tristan Jarry",
    "status": "confirmed"
   },
-  "MTL": {
-   "name": "Jacob Fowler",
-   "status": "confirmed"
+  "TOR": {
+   "name": "Anthony Stolarz",
+   "status": "expected"
   },
-  "COL": {
-   "name": "Mackenzie Blackwood",
-   "status": "confirmed"
+  "UTA": {
+   "name": "Karel Vejmelka",
+   "status": "expected"
   },
   "TBL": {
    "name": "Andrei Vasilevskiy",
-   "status": "confirmed"
+   "status": "expected"
+  },
+  "SEA": {
+   "name": "Philipp Grubauer",
+   "status": "expected"
+  },
+  "MIN": {
+   "name": "Jesper Wallstedt",
+   "status": "expected"
+  },
+  "CGY": {
+   "name": "Devin Cooley",
+   "status": "expected"
+  },
+  "DET": {
+   "name": "John Gibson",
+   "status": "expected"
   }
  },
- "checked_at": "2026-10-23T13:50:01-04:00"
+ "checked_at": "2026-10-24T05:00:00-04:00"
 }

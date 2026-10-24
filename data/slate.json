@@ -1,224 +1,333 @@
 {
- "slate_date": "2026-10-23",
- "generated_at": "2026-10-24T04:30:00-04:00",
- "status_at": "2026-10-24T04:30:00-04:00",
- "valid_until": "2026-10-24T05:00:00-04:00",
+ "slate_date": "2026-10-24",
+ "generated_at": "2026-10-24T05:00:00-04:00",
+ "status_at": "2026-10-24T05:00:00-04:00",
+ "valid_until": "2026-10-25T05:00:00-04:00",
  "status": {
-  "prices_state": "ok",
-  "prices_at": "2026-10-23T20:20:00-04:00",
-  "next_price_read_at": null,
+  "prices_state": "not_yet",
+  "prices_at": null,
+  "next_price_read_at": "2026-10-24T10:00:00-04:00",
   "stats_built_at": "2026-10-24T01:20:01-04:00",
   "stats_through": "2026-10-23",
-  "lineups_at": "2026-10-23T20:30:01-04:00",
+  "lineups_at": null,
   "goalies_at": null,
-  "lineups_note": "1 of 4 team line pages are dated today.",
-  "lineups_state": "ok",
+  "lineups_note": null,
+  "lineups_state": "not_yet",
   "stats_state": "ok",
   "last_run": {
    "ok": true,
-   "at": "2026-10-24T04:30:00-04:00",
+   "at": "2026-10-24T05:00:00-04:00",
    "failed_step": null
   },
   "pool": {
    "pulls_left": 781,
    "keys": 7,
-   "game_days_left": 9,
-   "days_left": 9,
+   "game_days_left": 8,
+   "days_left": 8,
    "low": false
   },
   "excluded_teams": [],
-  "lines_checked": 34,
-  "flag_reads": 2,
+  "lines_checked": 0,
+  "flag_reads": 0,
   "tier": 4
  },
  "banners": [],
  "empty": {
-  "code": "all_started",
-  "text": "Every game has started.",
-  "sub": "Tonight's picks are under Started."
+  "code": "not_yet",
+  "text": "No picks yet today",
+  "sub": "First read is due at 10:00 AM."
  },
  "games": [
   {
-   "id": 2026020166,
-   "away": "MTL",
-   "home": "CHI",
-   "start": "2026-10-23T20:00:00-04:00",
+   "id": 2026020168,
+   "away": "ANA",
+   "home": "PHI",
+   "start": "2026-10-24T13:00:00-04:00",
    "lineups": {
-    "away": "waiting",
-    "home": "confirmed"
+    "away": "not_checked",
+    "home": "not_checked"
    },
    "goalies": {
     "away": {
-     "name": "Jacob Fowler",
-     "status": "confirmed"
+     "name": "Lukas Dostal",
+     "status": "expected"
     },
     "home": {
-     "name": "Spencer Knight",
-     "status": "confirmed"
+     "name": "Joseph Woll",
+     "status": "expected"
     }
    },
-   "started": true,
-   "picks": 1,
+   "started": false,
+   "picks": 0,
    "excluded_reason": null,
    "excluded_teams": []
   },
   {
-   "id": 2026020167,
-   "away": "TBL",
-   "home": "COL",
-   "start": "2026-10-23T21:00:00-04:00",
+   "id": 2026020169,
+   "away": "LAK",
+   "home": "NJD",
+   "start": "2026-10-24T15:30:00-04:00",
    "lineups": {
-    "away": "waiting",
-    "home": "waiting"
+    "away": "not_checked",
+    "home": "not_checked"
+   },
+   "goalies": {
+    "away": {
+     "name": "Darcy Kuemper",
+     "status": "expected"
+    },
+    "home": {
+     "name": "Jake Allen",
+     "status": "expected"
+    }
+   },
+   "started": false,
+   "picks": 0,
+   "excluded_reason": null,
+   "excluded_teams": []
+  },
+  {
+   "id": 2026020170,
+   "away": "SJS",
+   "home": "BOS",
+   "start": "2026-10-24T19:00:00-04:00",
+   "lineups": {
+    "away": "not_checked",
+    "home": "not_checked"
+   },
+   "goalies": {
+    "away": {
+     "name": "Yaroslav Askarov",
+     "status": "expected"
+    },
+    "home": {
+     "name": "Jeremy Swayman",
+     "status": "expected"
+    }
+   },
+   "started": false,
+   "picks": 0,
+   "excluded_reason": null,
+   "excluded_teams": []
+  },
+  {
+   "id": 2026020171,
+   "away": "NYR",
+   "home": "OTT",
+   "start": "2026-10-24T19:00:00-04:00",
+   "lineups": {
+    "away": "not_checked",
+    "home": "not_checked"
+   },
+   "goalies": {
+    "away": {
+     "name": "Dylan Garand",
+     "status": "expected"
+    },
+    "home": {
+     "name": "Samuel Ersson",
+     "status": "expected"
+    }
+   },
+   "started": false,
+   "picks": 0,
+   "excluded_reason": null,
+   "excluded_teams": []
+  },
+  {
+   "id": 2026020172,
+   "away": "NSH",
+   "home": "PIT",
+   "start": "2026-10-24T19:00:00-04:00",
+   "lineups": {
+    "away": "not_checked",
+    "home": "not_checked"
+   },
+   "goalies": {
+    "away": {
+     "name": "Juuse Saros",
+     "status": "expected"
+    },
+    "home": {
+     "name": "Arturs Silovs",
+     "status": "expected"
+    }
+   },
+   "started": false,
+   "picks": 0,
+   "excluded_reason": null,
+   "excluded_teams": []
+  },
+  {
+   "id": 2026020173,
+   "away": "BUF",
+   "home": "WSH",
+   "start": "2026-10-24T19:00:00-04:00",
+   "lineups": {
+    "away": "not_checked",
+    "home": "not_checked"
+   },
+   "goalies": {
+    "away": {
+     "name": "Ukko-Pekka Luukkonen",
+     "status": "expected"
+    },
+    "home": {
+     "name": "Charlie Lindgren",
+     "status": "expected"
+    }
+   },
+   "started": false,
+   "picks": 0,
+   "excluded_reason": null,
+   "excluded_teams": []
+  },
+  {
+   "id": 2026020174,
+   "away": "VGK",
+   "home": "CBJ",
+   "start": "2026-10-24T19:00:00-04:00",
+   "lineups": {
+    "away": "not_checked",
+    "home": "not_checked"
+   },
+   "goalies": {
+    "away": {
+     "name": "Carter Hart",
+     "status": "expected"
+    },
+    "home": {
+     "name": "Jet Greaves",
+     "status": "expected"
+    }
+   },
+   "started": false,
+   "picks": 0,
+   "excluded_reason": null,
+   "excluded_teams": []
+  },
+  {
+   "id": 2026020175,
+   "away": "CAR",
+   "home": "STL",
+   "start": "2026-10-24T19:00:00-04:00",
+   "lineups": {
+    "away": "not_checked",
+    "home": "not_checked"
+   },
+   "goalies": {
+    "away": {
+     "name": "Pyotr Kochetkov",
+     "status": "expected"
+    },
+    "home": {
+     "name": "Joel Hofer",
+     "status": "expected"
+    }
+   },
+   "started": false,
+   "picks": 0,
+   "excluded_reason": null,
+   "excluded_teams": []
+  },
+  {
+   "id": 2026020176,
+   "away": "TOR",
+   "home": "EDM",
+   "start": "2026-10-24T19:00:00-04:00",
+   "lineups": {
+    "away": "not_checked",
+    "home": "not_checked"
+   },
+   "goalies": {
+    "away": {
+     "name": "Anthony Stolarz",
+     "status": "expected"
+    },
+    "home": {
+     "name": "Tristan Jarry",
+     "status": "confirmed"
+    }
+   },
+   "started": false,
+   "picks": 0,
+   "excluded_reason": null,
+   "excluded_teams": []
+  },
+  {
+   "id": 2026020177,
+   "away": "TBL",
+   "home": "UTA",
+   "start": "2026-10-24T21:00:00-04:00",
+   "lineups": {
+    "away": "not_checked",
+    "home": "not_checked"
    },
    "goalies": {
     "away": {
      "name": "Andrei Vasilevskiy",
-     "status": "confirmed"
+     "status": "expected"
     },
     "home": {
-     "name": "Mackenzie Blackwood",
-     "status": "confirmed"
+     "name": "Karel Vejmelka",
+     "status": "expected"
     }
    },
-   "started": true,
+   "started": false,
+   "picks": 0,
+   "excluded_reason": null,
+   "excluded_teams": []
+  },
+  {
+   "id": 2026020178,
+   "away": "DET",
+   "home": "CGY",
+   "start": "2026-10-24T22:00:00-04:00",
+   "lineups": {
+    "away": "not_checked",
+    "home": "not_checked"
+   },
+   "goalies": {
+    "away": {
+     "name": "John Gibson",
+     "status": "expected"
+    },
+    "home": {
+     "name": "Devin Cooley",
+     "status": "expected"
+    }
+   },
+   "started": false,
+   "picks": 0,
+   "excluded_reason": null,
+   "excluded_teams": []
+  },
+  {
+   "id": 2026020179,
+   "away": "MIN",
+   "home": "SEA",
+   "start": "2026-10-24T22:00:00-04:00",
+   "lineups": {
+    "away": "not_checked",
+    "home": "not_checked"
+   },
+   "goalies": {
+    "away": {
+     "name": "Jesper Wallstedt",
+     "status": "expected"
+    },
+    "home": {
+     "name": "Philipp Grubauer",
+     "status": "expected"
+    }
+   },
+   "started": false,
    "picks": 0,
    "excluded_reason": null,
    "excluded_teams": []
   }
  ],
- "picks": [
-  {
-   "id": "2026-10-23:2026020167:8476455:shots:2.5:under",
-   "price": -180,
-   "first_price": -180,
-   "first_price_at": "2026-10-23T19:30:00-04:00",
-   "worst_price": -180,
-   "p": 0.6723,
-   "breakeven": 0.6429,
-   "p_pct": 67,
-   "breakeven_pct": 64,
-   "state": "early",
-   "history": [
-    {
-     "at": "2026-10-23T19:30:00-04:00",
-     "text": "Early: lineup not confirmed"
-    },
-    {
-     "at": "2026-10-23T20:20:00-04:00",
-     "text": "Pulled: Too few other books to check it against"
-    }
-   ],
-   "prices": [
-    {
-     "at": "2026-10-23T19:30:00-04:00",
-     "price": -180
-    }
-   ],
-   "pulled": {
-    "at": "2026-10-23T20:20:00-04:00",
-    "reason": "Too few other books to check it against",
-    "if_bet": "Got -180? Nothing says it got worse. Haven't bet? Skip it."
-   },
-   "price_final": false,
-   "graded": {
-    "result": "W",
-    "actual": "had 1",
-    "units": 0.5556
-   },
-   "rank": null,
-   "tier": "main",
-   "game_id": 2026020167,
-   "player": "G. Landeskog",
-   "player_id": 8476455,
-   "team": "COL",
-   "opp": "TBL",
-   "home": true,
-   "start": "2026-10-23T21:00:00-04:00",
-   "market": "shots",
-   "line": 2.5,
-   "side": "under",
-   "bet": "Under 2.5 shots on goal",
-   "price_at": "2026-10-23T19:30:00-04:00",
-   "gap_pct": 3.9,
-   "market_fair_pct": 66.8,
-   "n_books": 4,
-   "guard": {
-    "verdict": "agrees",
-    "ours_pct": 67.2,
-    "model_pct": 70.6
-   },
-   "settled": "early",
-   "settled_label": "Early",
-   "reason": "4 other books say 66.8%; Hard Rock's -180 only needs 64.3%. Our model agrees (our blend: 67.2%).",
-   "thin": false,
-   "games_used": 70,
-   "games_this_season": 10
-  },
-  {
-   "id": "2026-10-23:2026020166:8475184:shots:1.5:under",
-   "price": 105,
-   "first_price": 105,
-   "first_price_at": "2026-10-23T18:30:01-04:00",
-   "worst_price": 105,
-   "p": 0.5158,
-   "breakeven": 0.4878,
-   "p_pct": 51,
-   "breakeven_pct": 49,
-   "state": "locked_unconfirmed",
-   "history": [
-    {
-     "at": "2026-10-23T18:30:01-04:00",
-     "text": "Early: lineup not confirmed"
-    },
-    {
-     "at": "2026-10-23T20:00:01-04:00",
-     "text": "Locked: lineup was not confirmed"
-    }
-   ],
-   "prices": [
-    {
-     "at": "2026-10-23T18:30:01-04:00",
-     "price": 105
-    }
-   ],
-   "pulled": null,
-   "price_final": false,
-   "graded": {
-    "result": "W",
-    "actual": "had 1",
-    "units": 1.05
-   },
-   "rank": null,
-   "tier": "main",
-   "game_id": 2026020166,
-   "player": "C. Kreider",
-   "player_id": 8475184,
-   "team": "MTL",
-   "opp": "CHI",
-   "home": false,
-   "start": "2026-10-23T20:00:00-04:00",
-   "market": "shots",
-   "line": 1.5,
-   "side": "under",
-   "bet": "Under 1.5 shots on goal",
-   "price_at": "2026-10-23T18:30:01-04:00",
-   "gap_pct": 5.0,
-   "market_fair_pct": 51.2,
-   "n_books": 7,
-   "guard": {
-    "verdict": "agrees",
-    "ours_pct": 51.6,
-    "model_pct": 54.8
-   },
-   "settled": "early",
-   "settled_label": "Early",
-   "reason": "7 other books say 51.2%; Hard Rock's +105 only needs 48.8%. Our model agrees (our blend: 51.6%).",
-   "thin": true,
-   "games_used": 84,
-   "games_this_season": 9
-  }
- ],
+ "picks": [],
  "parlays": [],
  "parlays_note": "Parlays are not offered: there is no evidence for them yet."
 }
