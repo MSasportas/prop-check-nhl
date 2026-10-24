@@ -1,10 +1,10 @@
 {
  "ok": true,
  "slate_date": "2026-10-24",
- "started_at": "2026-10-24T17:30:17-04:00",
- "status_at": "2026-10-24T17:30:17-04:00",
- "finished_at": "2026-10-24T17:30:19-04:00",
- "last_ok_at": "2026-10-24T17:30:17-04:00",
+ "started_at": "2026-10-24T18:00:00-04:00",
+ "status_at": "2026-10-24T18:00:00-04:00",
+ "finished_at": "2026-10-24T18:00:04-04:00",
+ "last_ok_at": "2026-10-24T18:00:00-04:00",
  "failed_step": null,
  "steps": [
   {
@@ -19,18 +19,18 @@
   },
   {
    "step": "stats",
-   "status": "skipped",
-   "note": "nothing new"
+   "status": "ok",
+   "note": "1 window(s) read, 2 team-games still missing"
   },
   {
    "step": "lineups",
    "status": "ok",
-   "note": "14 of 14 team pages read"
+   "note": "16 of 16 team pages read"
   },
   {
    "step": "lineup_history",
-   "status": "skipped",
-   "note": "no change"
+   "status": "ok",
+   "note": "2 team(s) changed"
   },
   {
    "step": "odds",
@@ -131,17 +131,26 @@
   "Avery Hayes",
   "Mitchell Gibson"
  ],
- "excluded_teams": [],
- "stats_through": "2026-10-24",
- "lineups_at": "2026-10-24T17:30:17-04:00",
- "lineups_note": "11 of 18 team line pages are dated today.",
+ "excluded_teams": [
+  {
+   "team": "LAK",
+   "reason": "stats behind"
+  },
+  {
+   "team": "NJD",
+   "reason": "stats behind"
+  }
+ ],
+ "stats_through": "2026-10-23",
+ "lineups_at": "2026-10-24T18:00:00-04:00",
+ "lineups_note": "13 of 20 team line pages are dated today.",
  "games_today": 12,
  "record_events": 41,
  "odds_notes": [],
  "runner": {
   "event": "workflow_dispatch",
   "run_id": "40134488231",
-  "iteration": 1,
+  "iteration": 4,
   "chain_link": 275,
   "chain_started_at": "2026-10-16T10:00:13-04:00",
   "run_started_at": "2026-10-24T17:30:16-04:00"
