@@ -47,7 +47,7 @@
   },
   "SJS": {
    "name": "Alex Nedeljkovic",
-   "status": "expected"
+   "status": "confirmed"
   },
   "CBJ": {
    "name": "Cam Talbot",
@@ -98,5 +98,5 @@
    "status": "expected"
   }
  },
- "checked_at": "2026-10-24T12:00:01-04:00"
+ "checked_at": "2026-10-24T12:10:01-04:00"
 }
