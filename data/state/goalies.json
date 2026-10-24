@@ -11,7 +11,7 @@
   },
   "NJD": {
    "name": "Jake Allen",
-   "status": "expected"
+   "status": "confirmed"
   },
   "LAK": {
    "name": "Darcy Kuemper",
@@ -98,5 +98,5 @@
    "status": "expected"
   }
  },
- "checked_at": "2026-10-24T12:40:01-04:00"
+ "checked_at": "2026-10-24T13:40:00-04:00"
 }
