@@ -71,7 +71,7 @@
   },
   "TOR": {
    "name": "Anthony Stolarz",
-   "status": "expected"
+   "status": "confirmed"
   },
   "UTA": {
    "name": "Karel Vejmelka",
@@ -98,5 +98,5 @@
    "status": "confirmed"
   }
  },
- "checked_at": "2026-10-24T16:40:00-04:00"
+ "checked_at": "2026-10-24T17:00:00-04:00"
 }
