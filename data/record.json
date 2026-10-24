@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-10-24T01:10:01-04:00",
+ "generated_at": "2026-10-24T17:30:00-04:00",
  "summary": {
   "headline": {
    "w": 6,
@@ -39,6 +39,130 @@
   ]
  },
  "nights": [
+  {
+   "date": "2026-10-24",
+   "graded": false,
+   "w": 0,
+   "l": 0,
+   "units": 0,
+   "entries": [
+    {
+     "id": "2026-10-24:2026020172:8471675:shots:2.5:under",
+     "kind": "single",
+     "player": "S. Crosby",
+     "bet": "Under 2.5 shots on goal",
+     "market": "shots",
+     "team": "PIT",
+     "game": "NSH at PIT",
+     "price": -105,
+     "first_price": -105,
+     "last_price": -105,
+     "prices": [
+      {
+       "price": -105,
+       "at": "2026-10-24T17:30:00-04:00"
+      }
+     ],
+     "result": null,
+     "actual": null,
+     "units": null,
+     "pulled": null,
+     "legs": []
+    },
+    {
+     "id": "2026-10-24:2026020171:8482105:shots:2.5:under",
+     "kind": "single",
+     "player": "J. Sanderson",
+     "bet": "Under 2.5 shots on goal",
+     "market": "shots",
+     "team": "OTT",
+     "game": "NYR at OTT",
+     "price": -140,
+     "first_price": -140,
+     "last_price": -140,
+     "prices": [
+      {
+       "price": -140,
+       "at": "2026-10-24T17:30:00-04:00"
+      }
+     ],
+     "result": null,
+     "actual": null,
+     "units": null,
+     "pulled": null,
+     "legs": []
+    },
+    {
+     "id": "2026-10-24:2026020170:8482175:shots:2.5:under",
+     "kind": "single",
+     "player": "J. Peterka",
+     "bet": "Under 2.5 shots on goal",
+     "market": "shots",
+     "team": "BOS",
+     "game": "SJS at BOS",
+     "price": -145,
+     "first_price": -145,
+     "last_price": -145,
+     "prices": [
+      {
+       "price": -145,
+       "at": "2026-10-24T17:30:00-04:00"
+      }
+     ],
+     "result": null,
+     "actual": null,
+     "units": null,
+     "pulled": null,
+     "legs": []
+    },
+    {
+     "id": "2026-10-24:2026020173:8482097:shots:2.5:under",
+     "kind": "single",
+     "player": "J. Quinn",
+     "bet": "Under 2.5 shots on goal",
+     "market": "shots",
+     "team": "BUF",
+     "game": "BUF at WSH",
+     "price": 100,
+     "first_price": 100,
+     "last_price": 100,
+     "prices": [
+      {
+       "price": 100,
+       "at": "2026-10-24T17:30:00-04:00"
+      }
+     ],
+     "result": null,
+     "actual": null,
+     "units": null,
+     "pulled": null,
+     "legs": []
+    },
+    {
+     "id": "2026-10-24:2026020175:8477402:shots:1.5:under",
+     "kind": "single",
+     "player": "P. Buchnevich",
+     "bet": "Under 1.5 shots on goal",
+     "market": "shots",
+     "team": "STL",
+     "game": "CAR at STL",
+     "price": -110,
+     "first_price": -110,
+     "last_price": -110,
+     "prices": [
+      {
+       "price": -110,
+       "at": "2026-10-24T17:30:00-04:00"
+      }
+     ],
+     "result": null,
+     "actual": null,
+     "units": null,
+     "pulled": null,
+     "legs": []
+    }
+   ]
+  },
   {
    "date": "2026-10-23",
    "graded": true,
