@@ -1,26 +1,26 @@
 {
  "slate_date": "2026-10-24",
- "generated_at": "2026-10-24T18:00:00-04:00",
- "status_at": "2026-10-24T18:00:00-04:00",
+ "generated_at": "2026-10-24T18:20:01-04:00",
+ "status_at": "2026-10-24T18:20:01-04:00",
  "valid_until": "2026-10-25T05:00:00-04:00",
  "status": {
   "prices_state": "ok",
-  "prices_at": "2026-10-24T17:30:00-04:00",
-  "next_price_read_at": "2026-10-24T18:15:00-04:00",
+  "prices_at": "2026-10-24T18:20:01-04:00",
+  "next_price_read_at": "2026-10-24T19:30:00-04:00",
   "stats_built_at": "2026-10-24T18:00:00-04:00",
   "stats_through": "2026-10-23",
-  "lineups_at": "2026-10-24T18:00:00-04:00",
+  "lineups_at": "2026-10-24T18:20:01-04:00",
   "goalies_at": null,
   "lineups_note": "13 of 20 team line pages are dated today.",
   "lineups_state": "ok",
   "stats_state": "ok",
   "last_run": {
    "ok": true,
-   "at": "2026-10-24T18:00:00-04:00",
+   "at": "2026-10-24T18:20:01-04:00",
    "failed_step": null
   },
   "pool": {
-   "pulls_left": 758,
+   "pulls_left": 751,
    "keys": 7,
    "game_days_left": 8,
    "days_left": 8,
@@ -215,7 +215,7 @@
     }
    },
    "started": false,
-   "picks": 0,
+   "picks": 1,
    "excluded_reason": null,
    "excluded_teams": []
   },
@@ -365,7 +365,7 @@
     }
    ],
    "pulled": null,
-   "price_final": false,
+   "price_final": true,
    "graded": null,
    "rank": 1,
    "tier": "main",
@@ -397,61 +397,6 @@
    "games_this_season": 11
   },
   {
-   "id": "2026-10-24:2026020171:8482105:shots:2.5:under",
-   "price": -140,
-   "first_price": -140,
-   "first_price_at": "2026-10-24T17:30:00-04:00",
-   "worst_price": -140,
-   "p": 0.6176,
-   "breakeven": 0.5833,
-   "p_pct": 61,
-   "breakeven_pct": 58,
-   "state": "lineup",
-   "history": [
-    {
-     "at": "2026-10-24T17:30:00-04:00",
-     "text": "Lineup confirmed"
-    }
-   ],
-   "prices": [
-    {
-     "at": "2026-10-24T17:30:00-04:00",
-     "price": -140
-    }
-   ],
-   "pulled": null,
-   "price_final": false,
-   "graded": null,
-   "rank": 2,
-   "tier": "main",
-   "game_id": 2026020171,
-   "player": "J. Sanderson",
-   "player_id": 8482105,
-   "team": "OTT",
-   "opp": "NYR",
-   "home": true,
-   "start": "2026-10-24T19:00:00-04:00",
-   "market": "shots",
-   "line": 2.5,
-   "side": "under",
-   "bet": "Under 2.5 shots on goal",
-   "price_at": "2026-10-24T17:30:00-04:00",
-   "gap_pct": 3.4,
-   "market_fair_pct": 60.3,
-   "n_books": 8,
-   "guard": {
-    "verdict": "agrees",
-    "ours_pct": 61.8,
-    "model_pct": 69.2
-   },
-   "settled": "goalie",
-   "settled_label": "Goalie confirmed",
-   "reason": "8 other books say 60.3%; Hard Rock's -140 only needs 58.3%. Our model agrees (our blend: 61.8%).",
-   "thin": false,
-   "games_used": 70,
-   "games_this_season": 3
-  },
-  {
    "id": "2026-10-24:2026020170:8482175:shots:2.5:under",
    "price": -145,
    "first_price": -145,
@@ -475,9 +420,9 @@
     }
    ],
    "pulled": null,
-   "price_final": false,
+   "price_final": true,
    "graded": null,
-   "rank": 3,
+   "rank": 2,
    "tier": "main",
    "game_id": 2026020170,
    "player": "J. Peterka",
@@ -530,9 +475,9 @@
     }
    ],
    "pulled": null,
-   "price_final": false,
+   "price_final": true,
    "graded": null,
-   "rank": 4,
+   "rank": 3,
    "tier": "main",
    "game_id": 2026020173,
    "player": "J. Quinn",
@@ -585,9 +530,9 @@
     }
    ],
    "pulled": null,
-   "price_final": false,
+   "price_final": true,
    "graded": null,
-   "rank": 5,
+   "rank": 4,
    "tier": "main",
    "game_id": 2026020175,
    "player": "P. Buchnevich",
@@ -615,6 +560,179 @@
    "thin": false,
    "games_used": 90,
    "games_this_season": 9
+  },
+  {
+   "id": "2026-10-24:2026020174:8484166:shots:2.5:over",
+   "price": 115,
+   "first_price": 115,
+   "first_price_at": "2026-10-24T18:20:01-04:00",
+   "worst_price": 115,
+   "p": 0.4794,
+   "breakeven": 0.4651,
+   "p_pct": 47,
+   "breakeven_pct": 47,
+   "state": "lineup",
+   "history": [
+    {
+     "at": "2026-10-24T18:20:01-04:00",
+     "text": "Lineup confirmed"
+    }
+   ],
+   "prices": [
+    {
+     "at": "2026-10-24T18:20:01-04:00",
+     "price": 115
+    }
+   ],
+   "pulled": null,
+   "price_final": true,
+   "graded": null,
+   "rank": 5,
+   "tier": "main",
+   "game_id": 2026020174,
+   "player": "A. Fantilli",
+   "player_id": 8484166,
+   "team": "CBJ",
+   "opp": "VGK",
+   "home": true,
+   "start": "2026-10-24T19:00:00-04:00",
+   "market": "shots",
+   "line": 2.5,
+   "side": "over",
+   "bet": "Over 2.5 shots on goal",
+   "price_at": "2026-10-24T18:20:01-04:00",
+   "gap_pct": 3.6,
+   "market_fair_pct": 48.2,
+   "n_books": 8,
+   "guard": {
+    "verdict": "agrees",
+    "ours_pct": 47.9,
+    "model_pct": 45.5
+   },
+   "settled": "lineup",
+   "settled_label": "Lineup confirmed",
+   "reason": "8 other books say 48.2%; Hard Rock's +115 only needs 46.5%. Our model agrees (our blend: 47.9%).",
+   "thin": false,
+   "games_used": 90,
+   "games_this_season": 8
+  },
+  {
+   "id": "2026-10-24:2026020171:8481604:shots:2.5:over",
+   "price": 120,
+   "first_price": 120,
+   "first_price_at": "2026-10-24T18:20:01-04:00",
+   "worst_price": 120,
+   "p": 0.4685,
+   "breakeven": 0.4545,
+   "p_pct": 46,
+   "breakeven_pct": 45,
+   "state": "early",
+   "history": [
+    {
+     "at": "2026-10-24T18:20:01-04:00",
+     "text": "Early: lineup not confirmed"
+    }
+   ],
+   "prices": [
+    {
+     "at": "2026-10-24T18:20:01-04:00",
+     "price": 120
+    }
+   ],
+   "pulled": null,
+   "price_final": true,
+   "graded": null,
+   "rank": 6,
+   "tier": "main",
+   "game_id": 2026020171,
+   "player": "P. Dorofeyev",
+   "player_id": 8481604,
+   "team": "NYR",
+   "opp": "OTT",
+   "home": false,
+   "start": "2026-10-24T19:00:00-04:00",
+   "market": "shots",
+   "line": 2.5,
+   "side": "over",
+   "bet": "Over 2.5 shots on goal",
+   "price_at": "2026-10-24T18:20:01-04:00",
+   "gap_pct": 3.1,
+   "market_fair_pct": 46.8,
+   "n_books": 8,
+   "guard": {
+    "verdict": "agrees",
+    "ours_pct": 46.9,
+    "model_pct": 45.3
+   },
+   "settled": "early",
+   "settled_label": "Early",
+   "reason": "8 other books say 46.8%; Hard Rock's +120 only needs 45.5%. Our model agrees (our blend: 46.8%).",
+   "thin": false,
+   "games_used": 94,
+   "games_this_season": 12
+  },
+  {
+   "id": "2026-10-24:2026020171:8482105:shots:2.5:under",
+   "price": -140,
+   "first_price": -140,
+   "first_price_at": "2026-10-24T17:30:00-04:00",
+   "worst_price": -140,
+   "p": 0.6176,
+   "breakeven": 0.5833,
+   "p_pct": 61,
+   "breakeven_pct": 58,
+   "state": "lineup",
+   "history": [
+    {
+     "at": "2026-10-24T17:30:00-04:00",
+     "text": "Lineup confirmed"
+    },
+    {
+     "at": "2026-10-24T18:20:01-04:00",
+     "text": "Pulled: Hard Rock moved it to -180"
+    }
+   ],
+   "prices": [
+    {
+     "at": "2026-10-24T17:30:00-04:00",
+     "price": -140
+    }
+   ],
+   "pulled": {
+    "at": "2026-10-24T18:20:01-04:00",
+    "reason": "Hard Rock moved it to -180",
+    "if_bet": "Got -140? Still a good bet. Don't bet it at -180."
+   },
+   "price_final": false,
+   "graded": null,
+   "rank": null,
+   "tier": "main",
+   "game_id": 2026020171,
+   "player": "J. Sanderson",
+   "player_id": 8482105,
+   "team": "OTT",
+   "opp": "NYR",
+   "home": true,
+   "start": "2026-10-24T19:00:00-04:00",
+   "market": "shots",
+   "line": 2.5,
+   "side": "under",
+   "bet": "Under 2.5 shots on goal",
+   "price_at": "2026-10-24T17:30:00-04:00",
+   "gap_pct": 3.4,
+   "market_fair_pct": 60.3,
+   "n_books": 8,
+   "guard": {
+    "verdict": "agrees",
+    "ours_pct": 61.8,
+    "model_pct": 69.2
+   },
+   "settled": "goalie",
+   "settled_label": "Goalie confirmed",
+   "reason": "8 other books say 60.3%; Hard Rock's -140 only needs 58.3%. Our model agrees (our blend: 61.8%).",
+   "thin": false,
+   "games_used": 70,
+   "games_this_season": 3
   }
  ],
  "parlays": [],

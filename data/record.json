@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-10-24T17:30:00-04:00",
+ "generated_at": "2026-10-24T18:20:01-04:00",
  "summary": {
   "headline": {
    "w": 6,
@@ -89,7 +89,10 @@
      "result": null,
      "actual": null,
      "units": null,
-     "pulled": null,
+     "pulled": {
+      "at": "2026-10-24T18:20:01-04:00",
+      "reason": "Hard Rock moved it to -180"
+     },
      "legs": []
     },
     {
@@ -153,6 +156,52 @@
       {
        "price": -110,
        "at": "2026-10-24T17:30:00-04:00"
+      }
+     ],
+     "result": null,
+     "actual": null,
+     "units": null,
+     "pulled": null,
+     "legs": []
+    },
+    {
+     "id": "2026-10-24:2026020174:8484166:shots:2.5:over",
+     "kind": "single",
+     "player": "A. Fantilli",
+     "bet": "Over 2.5 shots on goal",
+     "market": "shots",
+     "team": "CBJ",
+     "game": "VGK at CBJ",
+     "price": 115,
+     "first_price": 115,
+     "last_price": 115,
+     "prices": [
+      {
+       "price": 115,
+       "at": "2026-10-24T18:20:01-04:00"
+      }
+     ],
+     "result": null,
+     "actual": null,
+     "units": null,
+     "pulled": null,
+     "legs": []
+    },
+    {
+     "id": "2026-10-24:2026020171:8481604:shots:2.5:over",
+     "kind": "single",
+     "player": "P. Dorofeyev",
+     "bet": "Over 2.5 shots on goal",
+     "market": "shots",
+     "team": "NYR",
+     "game": "NYR at OTT",
+     "price": 120,
+     "first_price": 120,
+     "last_price": 120,
+     "prices": [
+      {
+       "price": 120,
+       "at": "2026-10-24T18:20:01-04:00"
       }
      ],
      "result": null,

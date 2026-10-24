@@ -1,10 +1,10 @@
 {
  "ok": true,
  "slate_date": "2026-10-24",
- "started_at": "2026-10-24T18:00:00-04:00",
- "status_at": "2026-10-24T18:00:00-04:00",
- "finished_at": "2026-10-24T18:00:04-04:00",
- "last_ok_at": "2026-10-24T18:00:00-04:00",
+ "started_at": "2026-10-24T18:20:01-04:00",
+ "status_at": "2026-10-24T18:20:01-04:00",
+ "finished_at": "2026-10-24T18:20:07-04:00",
+ "last_ok_at": "2026-10-24T18:20:01-04:00",
  "failed_step": null,
  "steps": [
   {
@@ -29,13 +29,13 @@
   },
   {
    "step": "lineup_history",
-   "status": "ok",
-   "note": "2 team(s) changed"
+   "status": "skipped",
+   "note": "no change"
   },
   {
    "step": "odds",
    "status": "ok",
-   "note": "no pull due"
+   "note": "7 game(s) priced"
   },
   {
    "step": "market_menu",
@@ -45,12 +45,12 @@
   {
    "step": "gapguard",
    "status": "ok",
-   "note": "gap+guard: nothing new"
+   "note": "gap+guard: 7 close, 2 flag, 1 pull"
   },
   {
    "step": "engine",
    "status": "ok",
-   "note": "no change"
+   "note": "3 new event(s), 2 newly shown"
   },
   {
    "step": "grade",
@@ -59,8 +59,8 @@
   },
   {
    "step": "shadow",
-   "status": "skipped",
-   "note": "nothing new"
+   "status": "ok",
+   "note": "117 line read(s) logged"
   },
   {
    "step": "gg_grade",
@@ -70,12 +70,12 @@
   {
    "step": "slate",
    "status": "ok",
-   "note": "5 open pick(s)"
+   "note": "6 open pick(s)"
   },
   {
    "step": "record",
-   "status": "skipped",
-   "note": "unchanged"
+   "status": "ok",
+   "note": "record.json"
   }
  ],
  "sources": {
@@ -92,7 +92,7 @@
   },
   {
    "n": 2,
-   "left": 234
+   "left": 227
   },
   {
    "n": 3,
@@ -115,14 +115,14 @@
    "left": 0
   }
  ],
- "pool_total": 758,
+ "pool_total": 751,
  "allowance": 13.2373,
  "tier": 4,
  "budget_today": 158,
- "budget_used_today": 23,
+ "budget_used_today": 30,
  "prices_state": "ok",
- "prices_at": "2026-10-24T17:30:00-04:00",
- "next_price_read_at": "2026-10-24T18:15:00-04:00",
+ "prices_at": "2026-10-24T18:20:01-04:00",
+ "next_price_read_at": "2026-10-24T19:30:00-04:00",
  "unmatched_names": [
   "Avery Hayes"
  ],
@@ -142,15 +142,15 @@
   }
  ],
  "stats_through": "2026-10-23",
- "lineups_at": "2026-10-24T18:00:00-04:00",
+ "lineups_at": "2026-10-24T18:20:01-04:00",
  "lineups_note": "13 of 20 team line pages are dated today.",
  "games_today": 12,
- "record_events": 41,
+ "record_events": 44,
  "odds_notes": [],
  "runner": {
   "event": "workflow_dispatch",
   "run_id": "40134488231",
-  "iteration": 4,
+  "iteration": 6,
   "chain_link": 275,
   "chain_started_at": "2026-10-16T10:00:13-04:00",
   "run_started_at": "2026-10-24T17:30:16-04:00"
