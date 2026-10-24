@@ -1,10 +1,10 @@
 {
  "ok": true,
  "slate_date": "2026-10-24",
- "started_at": "2026-10-24T16:20:01-04:00",
- "status_at": "2026-10-24T16:20:01-04:00",
- "finished_at": "2026-10-24T16:20:03-04:00",
- "last_ok_at": "2026-10-24T16:20:01-04:00",
+ "started_at": "2026-10-24T16:30:01-04:00",
+ "status_at": "2026-10-24T16:30:01-04:00",
+ "finished_at": "2026-10-24T16:30:03-04:00",
+ "last_ok_at": "2026-10-24T16:30:01-04:00",
  "failed_step": null,
  "steps": [
   {
@@ -20,12 +20,12 @@
   {
    "step": "stats",
    "status": "ok",
-   "note": "1 window(s) read, 2 team-games still missing"
+   "note": "1 window(s) read"
   },
   {
    "step": "lineups",
-   "status": "ok",
-   "note": "14 of 14 team pages read"
+   "status": "skipped",
+   "note": "checked in the last 20 minutes"
   },
   {
    "step": "lineup_history",
@@ -59,8 +59,8 @@
   },
   {
    "step": "shadow",
-   "status": "skipped",
-   "note": "nothing new"
+   "status": "ok",
+   "note": "14 graded"
   },
   {
    "step": "gg_grade",
@@ -129,17 +129,8 @@
   "Avery Hayes",
   "Mitchell Gibson"
  ],
- "excluded_teams": [
-  {
-   "team": "ANA",
-   "reason": "stats behind"
-  },
-  {
-   "team": "PHI",
-   "reason": "stats behind"
-  }
- ],
- "stats_through": "2026-10-23",
+ "excluded_teams": [],
+ "stats_through": "2026-10-24",
  "lineups_at": "2026-10-24T16:20:01-04:00",
  "lineups_note": "11 of 18 team line pages are dated today.",
  "games_today": 12,
@@ -148,7 +139,7 @@
  "runner": {
   "event": "workflow_dispatch",
   "run_id": "40127080900",
-  "iteration": 4,
+  "iteration": 5,
   "chain_link": 273,
   "chain_started_at": "2026-10-16T10:00:13-04:00",
   "run_started_at": "2026-10-24T15:50:12-04:00"
