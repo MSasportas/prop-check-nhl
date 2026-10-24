@@ -1,41 +1,41 @@
 {
  "slate_date": "2026-10-24",
- "generated_at": "2026-10-24T11:20:00-04:00",
- "status_at": "2026-10-24T11:20:00-04:00",
+ "generated_at": "2026-10-24T11:30:01-04:00",
+ "status_at": "2026-10-24T11:30:01-04:00",
  "valid_until": "2026-10-25T05:00:00-04:00",
  "status": {
   "prices_state": "ok",
-  "prices_at": "2026-10-24T10:00:01-04:00",
-  "next_price_read_at": "2026-10-24T11:30:00-04:00",
+  "prices_at": "2026-10-24T11:30:01-04:00",
+  "next_price_read_at": "2026-10-24T12:15:00-04:00",
   "stats_built_at": "2026-10-24T01:20:01-04:00",
   "stats_through": "2026-10-23",
-  "lineups_at": "2026-10-24T11:10:01-04:00",
+  "lineups_at": "2026-10-24T11:30:01-04:00",
   "goalies_at": null,
   "lineups_note": "0 of 2 team line pages are dated today.",
   "lineups_state": "ok",
   "stats_state": "ok",
   "last_run": {
    "ok": true,
-   "at": "2026-10-24T11:20:00-04:00",
+   "at": "2026-10-24T11:30:01-04:00",
    "failed_step": null
   },
   "pool": {
-   "pulls_left": 769,
+   "pulls_left": 768,
    "keys": 7,
    "game_days_left": 8,
    "days_left": 8,
    "low": false
   },
   "excluded_teams": [],
-  "lines_checked": 0,
-  "flag_reads": 0,
+  "lines_checked": 14,
+  "flag_reads": 1,
   "tier": 4
  },
  "banners": [],
  "empty": {
   "code": "none_qualified",
   "text": "No picks yet today",
-  "sub": "Picks come from the price read 90 minutes before each game. Next read at 11:30 AM."
+  "sub": "14 lines read, none cleared both checks. Next read at 12:15 PM."
  },
  "games": [
   {
