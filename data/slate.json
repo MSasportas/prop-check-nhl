@@ -1,12 +1,12 @@
 {
  "slate_date": "2026-10-24",
- "generated_at": "2026-10-24T13:50:01-04:00",
- "status_at": "2026-10-24T13:50:01-04:00",
+ "generated_at": "2026-10-24T14:00:00-04:00",
+ "status_at": "2026-10-24T14:00:00-04:00",
  "valid_until": "2026-10-25T05:00:00-04:00",
  "status": {
   "prices_state": "ok",
-  "prices_at": "2026-10-24T12:20:00-04:00",
-  "next_price_read_at": "2026-10-24T14:00:00-04:00",
+  "prices_at": "2026-10-24T14:00:00-04:00",
+  "next_price_read_at": "2026-10-24T14:45:00-04:00",
   "stats_built_at": "2026-10-24T01:20:01-04:00",
   "stats_through": "2026-10-23",
   "lineups_at": "2026-10-24T13:50:01-04:00",
@@ -16,26 +16,26 @@
   "stats_state": "ok",
   "last_run": {
    "ok": true,
-   "at": "2026-10-24T13:50:01-04:00",
+   "at": "2026-10-24T14:00:00-04:00",
    "failed_step": null
   },
   "pool": {
-   "pulls_left": 767,
+   "pulls_left": 766,
    "keys": 7,
    "game_days_left": 8,
    "days_left": 8,
    "low": false
   },
   "excluded_teams": [],
-  "lines_checked": 14,
-  "flag_reads": 1,
+  "lines_checked": 30,
+  "flag_reads": 2,
   "tier": 4
  },
  "banners": [],
  "empty": {
   "code": "none_qualified",
   "text": "No picks yet today",
-  "sub": "14 lines read, none cleared both checks. Next read at 2:00 PM."
+  "sub": "30 lines read, none cleared both checks. Next read at 2:45 PM."
  },
  "games": [
   {
@@ -289,8 +289,8 @@
    },
    "goalies": {
     "away": {
-     "name": "Michal Postava",
-     "status": "expected"
+     "name": "John Gibson",
+     "status": "confirmed"
     },
     "home": {
      "name": "Devin Cooley",
