@@ -7,7 +7,7 @@
   },
   "ANA": {
    "name": "Lukas Dostal",
-   "status": "expected"
+   "status": "confirmed"
   },
   "NJD": {
    "name": "Jake Allen",
@@ -98,5 +98,5 @@
    "status": "expected"
   }
  },
- "checked_at": "2026-10-24T12:30:01-04:00"
+ "checked_at": "2026-10-24T12:40:01-04:00"
 }
