@@ -1,0 +1,237 @@
+{
+ "done": {
+  "at": "2026-10-25T13:00:00-04:00",
+  "game_id": 2026020180,
+  "away": "FLA",
+  "home": "CHI",
+  "minutes_to_puck": 120,
+  "regions": [
+   "us",
+   "us2",
+   "us_ex",
+   "eu",
+   "uk"
+  ],
+  "cost": 5
+ },
+ "tries": 1,
+ "last_try_at": "2026-10-25T13:00:00-04:00",
+ "books": {
+  "fanduel": {
+   "title": "FanDuel",
+   "pairs": 7,
+   "players": 7,
+   "by_line": {
+    "1.5": 0,
+    "2.5": 6,
+    "3.5": 1
+   },
+   "other_lines": 0,
+   "hold_mean": 0.0652,
+   "hold_min": 0.0641,
+   "hold_max": 0.0664,
+   "age_min": 1.0,
+   "shared_with_pinnacle": 6,
+   "gap_abs": 0.0226,
+   "gap_signed": -0.0195
+  },
+  "draftkings": {
+   "title": "DraftKings",
+   "pairs": 14,
+   "players": 14,
+   "by_line": {
+    "1.5": 7,
+    "2.5": 6,
+    "3.5": 1
+   },
+   "other_lines": 0,
+   "hold_mean": 0.0774,
+   "hold_min": 0.0699,
+   "hold_max": 0.0833,
+   "age_min": 0.1,
+   "shared_with_pinnacle": 12,
+   "gap_abs": 0.0194,
+   "gap_signed": -0.0124
+  },
+  "betonlineag": {
+   "title": "BetOnline.ag",
+   "pairs": 14,
+   "players": 14,
+   "by_line": {
+    "1.5": 7,
+    "2.5": 6,
+    "3.5": 1
+   },
+   "other_lines": 0,
+   "hold_mean": 0.0641,
+   "hold_min": 0.0619,
+   "hold_max": 0.0658,
+   "age_min": 0.9,
+   "shared_with_pinnacle": 12,
+   "gap_abs": 0.016,
+   "gap_signed": -0.0128
+  },
+  "betmgm": {
+   "title": "BetMGM",
+   "pairs": 14,
+   "players": 14,
+   "by_line": {
+    "1.5": 5,
+    "2.5": 8,
+    "3.5": 1
+   },
+   "other_lines": 0,
+   "hold_mean": 0.0916,
+   "hold_min": 0.0847,
+   "hold_max": 0.0983,
+   "age_min": 0.6,
+   "shared_with_pinnacle": 10,
+   "gap_abs": 0.0253,
+   "gap_signed": -0.0018
+  },
+  "novig": {
+   "title": "Novig",
+   "pairs": 60,
+   "players": 16,
+   "by_line": {
+    "1.5": 15,
+    "2.5": 15,
+    "3.5": 11
+   },
+   "other_lines": 19,
+   "hold_mean": 0.3607,
+   "hold_min": 0.0043,
+   "hold_max": 0.934,
+   "age_min": 0.2,
+   "shared_with_pinnacle": 12,
+   "gap_abs": 0.0176,
+   "gap_signed": -0.0097
+  },
+  "ballybet": {
+   "title": "Bally Bet",
+   "pairs": 18,
+   "players": 18,
+   "by_line": {
+    "1.5": 11,
+    "2.5": 6,
+    "3.5": 1
+   },
+   "other_lines": 0,
+   "hold_mean": 0.0817,
+   "hold_min": 0.0782,
+   "hold_max": 0.0848,
+   "age_min": 0.5,
+   "shared_with_pinnacle": 12,
+   "gap_abs": 0.0194,
+   "gap_signed": 0.0094
+  },
+  "prophetx": {
+   "title": "ProphetX",
+   "pairs": 22,
+   "players": 14,
+   "by_line": {
+    "1.5": 7,
+    "2.5": 7,
+    "3.5": 4
+   },
+   "other_lines": 4,
+   "hold_mean": 0.1497,
+   "hold_min": 0.0553,
+   "hold_max": 0.5322,
+   "age_min": 0.4,
+   "shared_with_pinnacle": 12,
+   "gap_abs": 0.0208,
+   "gap_signed": -0.0201
+  },
+  "hardrockbet": {
+   "title": "Hard Rock Bet",
+   "pairs": 15,
+   "players": 15,
+   "by_line": {
+    "1.5": 8,
+    "2.5": 6,
+    "3.5": 1
+   },
+   "other_lines": 0,
+   "hold_mean": 0.0725,
+   "hold_min": 0.0624,
+   "hold_max": 0.0909,
+   "age_min": 0.5,
+   "shared_with_pinnacle": 12,
+   "gap_abs": 0.0157,
+   "gap_signed": -0.0049
+  },
+  "bovada": {
+   "title": "Bovada",
+   "pairs": 12,
+   "players": 12,
+   "by_line": {
+    "1.5": 6,
+    "2.5": 5,
+    "3.5": 1
+   },
+   "other_lines": 0,
+   "hold_mean": 0.0664,
+   "hold_min": 0.0623,
+   "hold_max": 0.0698,
+   "age_min": 1.7,
+   "shared_with_pinnacle": 11,
+   "gap_abs": 0.0164,
+   "gap_signed": 0.0041
+  },
+  "espnbet": {
+   "title": "theScore Bet",
+   "pairs": 45,
+   "players": 15,
+   "by_line": {
+    "1.5": 14,
+    "2.5": 15,
+    "3.5": 8
+   },
+   "other_lines": 8,
+   "hold_mean": 0.0725,
+   "hold_min": 0.0595,
+   "hold_max": 0.0842,
+   "age_min": 0.8,
+   "shared_with_pinnacle": 12,
+   "gap_abs": 0.0168,
+   "gap_signed": -0.0037
+  },
+  "pinnacle": {
+   "title": "Pinnacle",
+   "pairs": 12,
+   "players": 12,
+   "by_line": {
+    "1.5": 6,
+    "2.5": 6,
+    "3.5": 0
+   },
+   "other_lines": 0,
+   "hold_mean": 0.0711,
+   "hold_min": 0.0688,
+   "hold_max": 0.0794,
+   "age_min": 0.8,
+   "shared_with_pinnacle": 12,
+   "gap_abs": 0.0,
+   "gap_signed": 0.0
+  },
+  "coolbet": {
+   "title": "Coolbet",
+   "pairs": 11,
+   "players": 11,
+   "by_line": {
+    "1.5": 4,
+    "2.5": 6,
+    "3.5": 1
+   },
+   "other_lines": 0,
+   "hold_mean": 0.0703,
+   "hold_min": 0.069,
+   "hold_max": 0.0713,
+   "age_min": 1.2,
+   "shared_with_pinnacle": 10,
+   "gap_abs": 0.017,
+   "gap_signed": 0.0046
+  }
+ }
+}
