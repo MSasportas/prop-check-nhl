@@ -1,10 +1,10 @@
 {
  "ok": true,
  "slate_date": "2026-10-25",
- "started_at": "2026-10-25T17:20:01-04:00",
- "status_at": "2026-10-25T17:20:01-04:00",
- "finished_at": "2026-10-25T17:20:02-04:00",
- "last_ok_at": "2026-10-25T17:20:01-04:00",
+ "started_at": "2026-10-25T17:30:00-04:00",
+ "status_at": "2026-10-25T17:30:00-04:00",
+ "finished_at": "2026-10-25T17:30:01-04:00",
+ "last_ok_at": "2026-10-25T17:30:00-04:00",
  "failed_step": null,
  "steps": [
   {
@@ -24,8 +24,8 @@
   },
   {
    "step": "lineups",
-   "status": "ok",
-   "note": "2 of 2 team pages read"
+   "status": "skipped",
+   "note": "checked in the last 20 minutes"
   },
   {
    "step": "lineup_history",
@@ -65,7 +65,7 @@
   {
    "step": "shadow",
    "status": "ok",
-   "note": "15 line read(s) logged"
+   "note": "19 line read(s) logged"
   },
   {
    "step": "gg_grade",
@@ -101,7 +101,7 @@
   },
   {
    "n": 3,
-   "left": 92
+   "left": 90
   },
   {
    "n": 4,
@@ -132,14 +132,14 @@
    "left": 221
   }
  ],
- "pool_total": 1727,
+ "pool_total": 1725,
  "allowance": 37.1277,
  "tier": 4,
  "budget_today": 185,
- "budget_used_today": 18,
+ "budget_used_today": 20,
  "prices_state": "ok",
- "prices_at": "2026-10-25T17:20:01-04:00",
- "next_price_read_at": "2026-10-25T17:30:00-04:00",
+ "prices_at": "2026-10-25T17:30:00-04:00",
+ "next_price_read_at": "2026-10-25T18:15:00-04:00",
  "unmatched_names": [
   "Elias Pettersson"
  ],
@@ -160,7 +160,7 @@
  "runner": {
   "event": "workflow_dispatch",
   "run_id": "40231837640",
-  "iteration": 5,
+  "iteration": 6,
   "chain_link": 307,
   "chain_started_at": "2026-10-16T10:00:13-04:00",
   "run_started_at": "2026-10-25T16:40:11-04:00"
