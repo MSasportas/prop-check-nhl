@@ -1,10 +1,10 @@
 {
  "ok": true,
  "slate_date": "2026-10-24",
- "started_at": "2026-10-24T23:50:01-04:00",
- "status_at": "2026-10-24T23:50:01-04:00",
- "finished_at": "2026-10-24T23:50:01-04:00",
- "last_ok_at": "2026-10-24T23:50:01-04:00",
+ "started_at": "2026-10-25T00:10:00-04:00",
+ "status_at": "2026-10-25T00:10:00-04:00",
+ "finished_at": "2026-10-25T00:10:13-04:00",
+ "last_ok_at": "2026-10-25T00:10:00-04:00",
  "failed_step": null,
  "steps": [
   {
@@ -19,8 +19,8 @@
   },
   {
    "step": "stats",
-   "status": "skipped",
-   "note": "nothing new"
+   "status": "ok",
+   "note": "1 window(s) read, 2 team-games still missing"
   },
   {
    "step": "lineups",
@@ -69,8 +69,8 @@
   },
   {
    "step": "slate",
-   "status": "skipped",
-   "note": "unchanged"
+   "status": "ok",
+   "note": "0 open pick(s)"
   },
   {
    "step": "record",
@@ -131,8 +131,17 @@
   "Avery Hayes",
   "Mitchell Gibson"
  ],
- "excluded_teams": [],
- "stats_through": "2026-10-24",
+ "excluded_teams": [
+  {
+   "team": "TBL",
+   "reason": "stats behind"
+  },
+  {
+   "team": "UTA",
+   "reason": "stats behind"
+  }
+ ],
+ "stats_through": "2026-10-23",
  "lineups_at": "2026-10-24T21:40:01-04:00",
  "lineups_note": "16 of 24 team line pages are dated today.",
  "games_today": 12,
@@ -141,7 +150,7 @@
  "runner": {
   "event": "workflow_dispatch",
   "run_id": "40157816234",
-  "iteration": 4,
+  "iteration": 6,
   "chain_link": 282,
   "chain_started_at": "2026-10-16T10:00:13-04:00",
   "run_started_at": "2026-10-24T23:20:12-04:00"
