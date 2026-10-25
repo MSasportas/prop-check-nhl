@@ -1,10 +1,10 @@
 {
  "ok": true,
  "slate_date": "2026-10-25",
- "started_at": "2026-10-25T14:00:01-04:00",
- "status_at": "2026-10-25T14:00:01-04:00",
- "finished_at": "2026-10-25T14:00:01-04:00",
- "last_ok_at": "2026-10-25T14:00:01-04:00",
+ "started_at": "2026-10-25T14:20:01-04:00",
+ "status_at": "2026-10-25T14:20:01-04:00",
+ "finished_at": "2026-10-25T14:20:02-04:00",
+ "last_ok_at": "2026-10-25T14:20:01-04:00",
  "failed_step": null,
  "steps": [
   {
@@ -35,7 +35,7 @@
   {
    "step": "odds",
    "status": "ok",
-   "note": "no pull due"
+   "note": "1 game(s) priced"
   },
   {
    "step": "market_menu",
@@ -64,8 +64,8 @@
   },
   {
    "step": "shadow",
-   "status": "skipped",
-   "note": "nothing new"
+   "status": "ok",
+   "note": "16 line read(s) logged"
   },
   {
    "step": "gg_grade",
@@ -101,7 +101,7 @@
   },
   {
    "n": 3,
-   "left": 98
+   "left": 96
   },
   {
    "n": 4,
@@ -132,14 +132,14 @@
    "left": 221
   }
  ],
- "pool_total": 1733,
+ "pool_total": 1731,
  "allowance": 37.1277,
  "tier": 4,
  "budget_today": 185,
- "budget_used_today": 12,
+ "budget_used_today": 14,
  "prices_state": "ok",
- "prices_at": "2026-10-25T13:30:00-04:00",
- "next_price_read_at": "2026-10-25T14:15:00-04:00",
+ "prices_at": "2026-10-25T14:20:01-04:00",
+ "next_price_read_at": "2026-10-25T16:30:00-04:00",
  "unmatched_names": [
   "Elias Pettersson"
  ],
@@ -147,7 +147,7 @@
  "lineup_unmatched_names": [],
  "excluded_teams": [],
  "stats_through": "2026-10-24",
- "lineups_at": "2026-10-25T14:00:01-04:00",
+ "lineups_at": "2026-10-25T14:20:01-04:00",
  "lineups_note": "0 of 2 team line pages are dated today.",
  "games_today": 5,
  "record_events": 63,
@@ -156,10 +156,10 @@
  ],
  "runner": {
   "event": "workflow_dispatch",
-  "run_id": "40215952417",
-  "iteration": 5,
-  "chain_link": 303,
+  "run_id": "40219942885",
+  "iteration": 2,
+  "chain_link": 304,
   "chain_started_at": "2026-10-16T10:00:13-04:00",
-  "run_started_at": "2026-10-25T13:20:12-04:00"
+  "run_started_at": "2026-10-25T14:10:14-04:00"
  }
 }
