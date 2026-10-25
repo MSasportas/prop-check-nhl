@@ -1,102 +1,46 @@
 {
- "date": "2026-10-24",
+ "date": "2026-10-25",
  "teams": {
-  "PHI": {
-   "name": "Joseph Woll",
+  "CHI": {
+   "name": "Spencer Knight",
+   "status": "expected"
+  },
+  "FLA": {
+   "name": "Akira Schmid",
    "status": "confirmed"
   },
-  "ANA": {
-   "name": "Lukas Dostal",
-   "status": "confirmed"
+  "DAL": {
+   "name": "Jake Oettinger",
+   "status": "expected"
   },
-  "NJD": {
-   "name": "Jake Allen",
-   "status": "confirmed"
+  "NYI": {
+   "name": "Ilya Sorokin",
+   "status": "expected"
   },
-  "LAK": {
-   "name": "Anton Forsberg",
-   "status": "confirmed"
+  "WPG": {
+   "name": "Stuart Skinner",
+   "status": "expected"
   },
-  "STL": {
-   "name": "Joel Hofer",
-   "status": "confirmed"
-  },
-  "CAR": {
-   "name": "Pyotr Kochetkov",
-   "status": "confirmed"
-  },
-  "PIT": {
-   "name": "Arturs Silovs",
+  "MTL": {
+   "name": "Jacob Fowler",
    "status": "expected"
   },
   "NSH": {
    "name": "Juuse Saros",
-   "status": "confirmed"
+   "status": "expected"
   },
-  "OTT": {
-   "name": "Jonas Johansson",
-   "status": "confirmed"
+  "COL": {
+   "name": "Mackenzie Blackwood",
+   "status": "expected"
   },
-  "NYR": {
-   "name": "Dylan Garand",
-   "status": "confirmed"
-  },
-  "BOS": {
-   "name": "Jeremy Swayman",
-   "status": "confirmed"
-  },
-  "SJS": {
-   "name": "Alex Nedeljkovic",
-   "status": "confirmed"
-  },
-  "CBJ": {
-   "name": "Cam Talbot",
-   "status": "confirmed"
-  },
-  "VGK": {
-   "name": "Carter Hart",
-   "status": "confirmed"
-  },
-  "WSH": {
-   "name": "Charlie Lindgren",
-   "status": "confirmed"
-  },
-  "BUF": {
-   "name": "Ukko-Pekka Luukkonen",
-   "status": "confirmed"
-  },
-  "EDM": {
-   "name": "Tristan Jarry",
-   "status": "confirmed"
-  },
-  "TOR": {
-   "name": "Anthony Stolarz",
-   "status": "confirmed"
-  },
-  "UTA": {
-   "name": "Karel Vejmelka",
-   "status": "confirmed"
-  },
-  "TBL": {
-   "name": "Dennis Hildeby",
-   "status": "confirmed"
-  },
-  "SEA": {
-   "name": "Joey Daccord",
-   "status": "confirmed"
+  "VAN": {
+   "name": "Leevi Merilainen",
+   "status": "expected"
   },
   "MIN": {
-   "name": "Jesper Wallstedt",
-   "status": "confirmed"
-  },
-  "CGY": {
-   "name": "Devin Cooley",
-   "status": "confirmed"
-  },
-  "DET": {
-   "name": "John Gibson",
+   "name": "Calvin Pickard",
    "status": "confirmed"
   }
  },
- "checked_at": "2026-10-24T21:50:01-04:00"
+ "checked_at": "2026-10-25T05:00:01-04:00"
 }
