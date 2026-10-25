@@ -83,7 +83,7 @@
   },
   "SEA": {
    "name": "Joey Daccord",
-   "status": "expected"
+   "status": "confirmed"
   },
   "MIN": {
    "name": "Jesper Wallstedt",
@@ -98,5 +98,5 @@
    "status": "confirmed"
   }
  },
- "checked_at": "2026-10-24T20:40:01-04:00"
+ "checked_at": "2026-10-24T21:50:01-04:00"
 }

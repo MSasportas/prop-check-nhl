@@ -1,10 +1,10 @@
 {
  "ok": true,
  "slate_date": "2026-10-24",
- "started_at": "2026-10-24T21:40:01-04:00",
- "status_at": "2026-10-24T21:40:01-04:00",
- "finished_at": "2026-10-24T21:40:05-04:00",
- "last_ok_at": "2026-10-24T21:40:01-04:00",
+ "started_at": "2026-10-24T21:50:01-04:00",
+ "status_at": "2026-10-24T21:50:01-04:00",
+ "finished_at": "2026-10-24T21:50:03-04:00",
+ "last_ok_at": "2026-10-24T21:50:01-04:00",
  "failed_step": null,
  "steps": [
   {
@@ -20,12 +20,12 @@
   {
    "step": "stats",
    "status": "ok",
-   "note": "1 window(s) read, 2 team-games still missing"
+   "note": "1 window(s) read, 14 team-games still missing"
   },
   {
    "step": "lineups",
-   "status": "ok",
-   "note": "4 of 4 team pages read"
+   "status": "skipped",
+   "note": "checked in the last 20 minutes"
   },
   {
    "step": "lineup_history",
@@ -133,11 +133,59 @@
  ],
  "excluded_teams": [
   {
+   "team": "BOS",
+   "reason": "stats behind"
+  },
+  {
+   "team": "BUF",
+   "reason": "stats behind"
+  },
+  {
    "team": "CAR",
    "reason": "stats behind"
   },
   {
+   "team": "CBJ",
+   "reason": "stats behind"
+  },
+  {
+   "team": "EDM",
+   "reason": "stats behind"
+  },
+  {
+   "team": "NSH",
+   "reason": "stats behind"
+  },
+  {
+   "team": "NYR",
+   "reason": "stats behind"
+  },
+  {
+   "team": "OTT",
+   "reason": "stats behind"
+  },
+  {
+   "team": "PIT",
+   "reason": "stats behind"
+  },
+  {
+   "team": "SJS",
+   "reason": "stats behind"
+  },
+  {
    "team": "STL",
+   "reason": "stats behind"
+  },
+  {
+   "team": "TOR",
+   "reason": "stats behind"
+  },
+  {
+   "team": "VGK",
+   "reason": "stats behind"
+  },
+  {
+   "team": "WSH",
    "reason": "stats behind"
   }
  ],
@@ -149,10 +197,10 @@
  "odds_notes": [],
  "runner": {
   "event": "workflow_dispatch",
-  "run_id": "40148230002",
-  "iteration": 6,
-  "chain_link": 279,
+  "run_id": "40151534455",
+  "iteration": 2,
+  "chain_link": 280,
   "chain_started_at": "2026-10-16T10:00:13-04:00",
-  "run_started_at": "2026-10-24T20:50:11-04:00"
+  "run_started_at": "2026-10-24T21:40:16-04:00"
  }
 }

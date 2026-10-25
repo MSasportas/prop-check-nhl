@@ -1,7 +1,7 @@
 {
  "slate_date": "2026-10-24",
- "generated_at": "2026-10-24T21:40:01-04:00",
- "status_at": "2026-10-24T21:40:01-04:00",
+ "generated_at": "2026-10-24T21:50:01-04:00",
+ "status_at": "2026-10-24T21:50:01-04:00",
  "valid_until": "2026-10-25T05:00:00-04:00",
  "status": {
   "prices_state": "ok",
@@ -13,10 +13,10 @@
   "goalies_at": null,
   "lineups_note": "16 of 24 team line pages are dated today.",
   "lineups_state": "ok",
-  "stats_state": "ok",
+  "stats_state": "behind",
   "last_run": {
    "ok": true,
-   "at": "2026-10-24T21:40:01-04:00",
+   "at": "2026-10-24T21:50:01-04:00",
    "failed_step": null
   },
   "pool": {
@@ -28,11 +28,59 @@
   },
   "excluded_teams": [
    {
+    "team": "BOS",
+    "reason": "stats behind"
+   },
+   {
+    "team": "BUF",
+    "reason": "stats behind"
+   },
+   {
     "team": "CAR",
     "reason": "stats behind"
    },
    {
+    "team": "CBJ",
+    "reason": "stats behind"
+   },
+   {
+    "team": "EDM",
+    "reason": "stats behind"
+   },
+   {
+    "team": "NSH",
+    "reason": "stats behind"
+   },
+   {
+    "team": "NYR",
+    "reason": "stats behind"
+   },
+   {
+    "team": "OTT",
+    "reason": "stats behind"
+   },
+   {
+    "team": "PIT",
+    "reason": "stats behind"
+   },
+   {
+    "team": "SJS",
+    "reason": "stats behind"
+   },
+   {
     "team": "STL",
+    "reason": "stats behind"
+   },
+   {
+    "team": "TOR",
+    "reason": "stats behind"
+   },
+   {
+    "team": "VGK",
+    "reason": "stats behind"
+   },
+   {
+    "team": "WSH",
     "reason": "stats behind"
    }
   ],
@@ -43,7 +91,7 @@
  "banners": [
   {
    "level": "warn",
-   "text": "Not covered tonight: CAR, STL (stats behind)."
+   "text": "Not covered tonight: BOS, BUF, CAR, CBJ, EDM, NSH, NYR, OTT, PIT, SJS, STL, TOR, VGK, WSH (stats behind)."
   }
  ],
  "empty": null,
@@ -117,8 +165,11 @@
    },
    "started": true,
    "picks": 1,
-   "excluded_reason": null,
-   "excluded_teams": []
+   "excluded_reason": "stats behind",
+   "excluded_teams": [
+    "SJS",
+    "BOS"
+   ]
   },
   {
    "id": 2026020171,
@@ -141,8 +192,11 @@
    },
    "started": true,
    "picks": 1,
-   "excluded_reason": null,
-   "excluded_teams": []
+   "excluded_reason": "stats behind",
+   "excluded_teams": [
+    "NYR",
+    "OTT"
+   ]
   },
   {
    "id": 2026020172,
@@ -165,8 +219,11 @@
    },
    "started": true,
    "picks": 1,
-   "excluded_reason": null,
-   "excluded_teams": []
+   "excluded_reason": "stats behind",
+   "excluded_teams": [
+    "NSH",
+    "PIT"
+   ]
   },
   {
    "id": 2026020173,
@@ -189,8 +246,11 @@
    },
    "started": true,
    "picks": 1,
-   "excluded_reason": null,
-   "excluded_teams": []
+   "excluded_reason": "stats behind",
+   "excluded_teams": [
+    "BUF",
+    "WSH"
+   ]
   },
   {
    "id": 2026020174,
@@ -213,8 +273,11 @@
    },
    "started": true,
    "picks": 1,
-   "excluded_reason": null,
-   "excluded_teams": []
+   "excluded_reason": "stats behind",
+   "excluded_teams": [
+    "VGK",
+    "CBJ"
+   ]
   },
   {
    "id": 2026020175,
@@ -264,8 +327,11 @@
    },
    "started": true,
    "picks": 0,
-   "excluded_reason": null,
-   "excluded_teams": []
+   "excluded_reason": "stats behind",
+   "excluded_teams": [
+    "TOR",
+    "EDM"
+   ]
   },
   {
    "id": 2026020177,
@@ -331,7 +397,7 @@
     },
     "home": {
      "name": "Joey Daccord",
-     "status": "expected"
+     "status": "confirmed"
     }
    },
    "started": false,
@@ -389,8 +455,8 @@
     "ours_pct": 56.5,
     "model_pct": 58.5
    },
-   "settled": "lineup",
-   "settled_label": "Lineup confirmed",
+   "settled": "goalie",
+   "settled_label": "Goalie confirmed",
    "reason": "7 other books say 55.5%; Hard Rock's -110 only needs 52.4%. Our model agrees (our blend: 56.4%).",
    "thin": false,
    "games_used": 91,
