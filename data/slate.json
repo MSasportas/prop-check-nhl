@@ -1,22 +1,22 @@
 {
  "slate_date": "2026-10-24",
- "generated_at": "2026-10-24T21:20:01-04:00",
- "status_at": "2026-10-24T21:20:01-04:00",
+ "generated_at": "2026-10-24T21:40:01-04:00",
+ "status_at": "2026-10-24T21:40:01-04:00",
  "valid_until": "2026-10-25T05:00:00-04:00",
  "status": {
   "prices_state": "ok",
   "prices_at": "2026-10-24T21:20:01-04:00",
   "next_price_read_at": null,
   "stats_built_at": "2026-10-24T18:50:01-04:00",
-  "stats_through": "2026-10-24",
-  "lineups_at": "2026-10-24T21:10:01-04:00",
+  "stats_through": "2026-10-23",
+  "lineups_at": "2026-10-24T21:40:01-04:00",
   "goalies_at": null,
   "lineups_note": "16 of 24 team line pages are dated today.",
   "lineups_state": "ok",
   "stats_state": "ok",
   "last_run": {
    "ok": true,
-   "at": "2026-10-24T21:20:01-04:00",
+   "at": "2026-10-24T21:40:01-04:00",
    "failed_step": null
   },
   "pool": {
@@ -26,12 +26,26 @@
    "days_left": 8,
    "low": false
   },
-  "excluded_teams": [],
+  "excluded_teams": [
+   {
+    "team": "CAR",
+    "reason": "stats behind"
+   },
+   {
+    "team": "STL",
+    "reason": "stats behind"
+   }
+  ],
   "lines_checked": 190,
   "flag_reads": 12,
   "tier": 4
  },
- "banners": [],
+ "banners": [
+  {
+   "level": "warn",
+   "text": "Not covered tonight: CAR, STL (stats behind)."
+  }
+ ],
  "empty": null,
  "games": [
   {
@@ -223,8 +237,11 @@
    },
    "started": true,
    "picks": 1,
-   "excluded_reason": null,
-   "excluded_teams": []
+   "excluded_reason": "stats behind",
+   "excluded_teams": [
+    "CAR",
+    "STL"
+   ]
   },
   {
    "id": 2026020176,
