@@ -1,7 +1,7 @@
 {
  "slate_date": "2026-10-25",
- "generated_at": "2026-10-25T09:10:00-04:00",
- "status_at": "2026-10-25T09:10:00-04:00",
+ "generated_at": "2026-10-25T09:10:11-04:00",
+ "status_at": "2026-10-25T09:10:11-04:00",
  "valid_until": "2026-10-26T05:00:00-04:00",
  "status": {
   "prices_state": "not_yet",
@@ -16,12 +16,12 @@
   "stats_state": "ok",
   "last_run": {
    "ok": true,
-   "at": "2026-10-25T09:10:00-04:00",
+   "at": "2026-10-25T09:10:11-04:00",
    "failed_step": null
   },
   "pool": {
-   "pulls_left": 745,
-   "keys": 7,
+   "pulls_left": 1745,
+   "keys": 10,
    "game_days_left": 7,
    "days_left": 7,
    "low": false

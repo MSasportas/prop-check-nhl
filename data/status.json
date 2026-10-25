@@ -1,10 +1,10 @@
 {
  "ok": true,
  "slate_date": "2026-10-25",
- "started_at": "2026-10-25T09:10:00-04:00",
- "status_at": "2026-10-25T09:10:00-04:00",
- "finished_at": "2026-10-25T09:10:01-04:00",
- "last_ok_at": "2026-10-25T09:10:00-04:00",
+ "started_at": "2026-10-25T09:10:11-04:00",
+ "status_at": "2026-10-25T09:10:11-04:00",
+ "finished_at": "2026-10-25T09:10:13-04:00",
+ "last_ok_at": "2026-10-25T09:10:11-04:00",
  "failed_step": null,
  "steps": [
   {
@@ -93,19 +93,19 @@
  "keys": [
   {
    "n": 1,
-   "left": 0
+   "left": null
   },
   {
    "n": 2,
-   "left": 221
+   "left": 0
   },
   {
    "n": 3,
-   "left": 414
+   "left": 110
   },
   {
    "n": 4,
-   "left": 110
+   "left": 0
   },
   {
    "n": 5,
@@ -113,17 +113,29 @@
   },
   {
    "n": 6,
-   "left": 0
+   "left": 414
   },
   {
    "n": 7,
    "left": 0
+  },
+  {
+   "n": 8,
+   "left": 500
+  },
+  {
+   "n": 9,
+   "left": 500
+  },
+  {
+   "n": 10,
+   "left": 221
   }
  ],
- "pool_total": 745,
- "allowance": 15.8511,
+ "pool_total": 1745,
+ "allowance": 37.1277,
  "tier": 4,
- "budget_today": 79,
+ "budget_today": 185,
  "budget_used_today": 0,
  "prices_state": "not_yet",
  "prices_at": null,
@@ -137,13 +149,15 @@
  "lineups_note": null,
  "games_today": 5,
  "record_events": 63,
- "odds_notes": [],
+ "odds_notes": [
+  "key 1 refused (401)"
+ ],
  "runner": {
   "event": "workflow_dispatch",
-  "run_id": "40194123497",
-  "iteration": 4,
-  "chain_link": 297,
+  "run_id": "40196369179",
+  "iteration": 1,
+  "chain_link": 298,
   "chain_started_at": "2026-10-16T10:00:13-04:00",
-  "run_started_at": "2026-10-25T08:40:14-04:00"
+  "run_started_at": "2026-10-25T09:10:11-04:00"
  }
 }
