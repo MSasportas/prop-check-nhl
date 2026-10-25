@@ -1,10 +1,10 @@
 {
  "ok": true,
  "slate_date": "2026-10-25",
- "started_at": "2026-10-25T08:20:01-04:00",
- "status_at": "2026-10-25T08:20:01-04:00",
- "finished_at": "2026-10-25T08:20:01-04:00",
- "last_ok_at": "2026-10-25T08:20:01-04:00",
+ "started_at": "2026-10-25T08:40:01-04:00",
+ "status_at": "2026-10-25T08:40:01-04:00",
+ "finished_at": "2026-10-25T08:40:01-04:00",
+ "last_ok_at": "2026-10-25T08:40:01-04:00",
  "failed_step": null,
  "steps": [
   {
@@ -41,6 +41,11 @@
    "step": "market_menu",
    "status": "skipped",
    "note": "read this week"
+  },
+  {
+   "step": "book_probe",
+   "status": "skipped",
+   "note": "waits for pull A"
   },
   {
    "step": "gapguard",
@@ -135,10 +140,10 @@
  "odds_notes": [],
  "runner": {
   "event": "workflow_dispatch",
-  "run_id": "40189116408",
-  "iteration": 4,
-  "chain_link": 295,
+  "run_id": "40192636689",
+  "iteration": 3,
+  "chain_link": 296,
   "chain_started_at": "2026-10-16T10:00:13-04:00",
-  "run_started_at": "2026-10-25T07:30:11-04:00"
+  "run_started_at": "2026-10-25T08:20:13-04:00"
  }
 }
