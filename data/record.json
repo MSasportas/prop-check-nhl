@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-10-24T19:30:00-04:00",
+ "generated_at": "2026-10-24T20:30:00-04:00",
  "summary": {
   "headline": {
    "w": 6,
@@ -84,6 +84,29 @@
       {
        "price": -120,
        "at": "2026-10-24T19:30:00-04:00"
+      }
+     ],
+     "result": null,
+     "actual": null,
+     "units": null,
+     "pulled": null,
+     "legs": []
+    },
+    {
+     "id": "2026-10-24:2026020179:8474586:shots:1.5:over",
+     "kind": "single",
+     "player": "J. Eberle",
+     "bet": "Over 1.5 shots on goal",
+     "market": "shots",
+     "team": "SEA",
+     "game": "MIN at SEA",
+     "price": -110,
+     "first_price": -110,
+     "last_price": -110,
+     "prices": [
+      {
+       "price": -110,
+       "at": "2026-10-24T20:30:00-04:00"
       }
      ],
      "result": null,

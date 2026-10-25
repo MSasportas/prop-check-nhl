@@ -1,7 +1,7 @@
 {
  "version": 1,
  "note": "Gap + Guard research log. Every flag here is a pick on the page and in the Record; vetoed and capped rows are research only.",
- "generated_at": "2026-10-24T20:20:00-04:00",
+ "generated_at": "2026-10-24T20:30:00-04:00",
  "slate": "2026-10-24",
  "active": true,
  "window": {
@@ -10,6 +10,40 @@
  },
  "tonight": {
   "flags": [
+   {
+    "id": "2026-10-24:2026020179:8474586:1.5:over",
+    "kind": "flag",
+    "slate": "2026-10-24",
+    "game_id": 2026020179,
+    "player": "J. Eberle",
+    "team": "SEA",
+    "opp": "MIN",
+    "game": "SEA vs MIN",
+    "start": "2026-10-24T22:00:00-04:00",
+    "side": "over",
+    "line": 1.5,
+    "bet": "OVER 1.5 shots",
+    "price": -110,
+    "gap_pct": 5.9,
+    "final_pct": 7.8,
+    "market_fair_pct": 55.5,
+    "final_p_pct": 56.4,
+    "n_books": 7,
+    "guard": "pass",
+    "cap": null,
+    "flagged_at": "2026-10-24T20:30:00-04:00",
+    "read_pull": "B",
+    "settled": "Lineup confirmed",
+    "frozen_settled": "Lineup confirmed",
+    "move30_pct": 1.4,
+    "pulled": null,
+    "locked": false,
+    "state": "open",
+    "close_fair_pct": null,
+    "clv_pct": null,
+    "result": null,
+    "units": null
+   },
    {
     "id": "2026-10-24:2026020172:8471675:2.5:under",
     "kind": "flag",
@@ -767,7 +801,7 @@
  ],
  "nov2": {
   "gaps_measured": 18,
-  "gaps_logged": 21,
+  "gaps_logged": 22,
   "graded_picks": 12,
   "w": 8,
   "l": 4,
