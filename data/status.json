@@ -1,10 +1,10 @@
 {
  "ok": true,
  "slate_date": "2026-10-25",
- "started_at": "2026-10-25T18:20:00-04:00",
- "status_at": "2026-10-25T18:20:00-04:00",
- "finished_at": "2026-10-25T18:20:02-04:00",
- "last_ok_at": "2026-10-25T18:20:00-04:00",
+ "started_at": "2026-10-25T18:30:01-04:00",
+ "status_at": "2026-10-25T18:30:01-04:00",
+ "finished_at": "2026-10-25T18:30:03-04:00",
+ "last_ok_at": "2026-10-25T18:30:01-04:00",
  "failed_step": null,
  "steps": [
   {
@@ -20,7 +20,7 @@
   {
    "step": "stats",
    "status": "ok",
-   "note": "1 window(s) read, 2 team-games still missing"
+   "note": "1 window(s) read"
   },
   {
    "step": "lineups",
@@ -65,7 +65,7 @@
   {
    "step": "shadow",
    "status": "ok",
-   "note": "19 line read(s) logged"
+   "note": "21 line read(s) logged; 16 graded"
   },
   {
    "step": "gg_grade",
@@ -101,7 +101,7 @@
   },
   {
    "n": 3,
-   "left": 88
+   "left": 86
   },
   {
    "n": 4,
@@ -132,14 +132,14 @@
    "left": 221
   }
  ],
- "pool_total": 1723,
+ "pool_total": 1721,
  "allowance": 37.1277,
  "tier": 4,
  "budget_today": 185,
- "budget_used_today": 22,
+ "budget_used_today": 24,
  "prices_state": "ok",
- "prices_at": "2026-10-25T18:20:00-04:00",
- "next_price_read_at": "2026-10-25T18:30:00-04:00",
+ "prices_at": "2026-10-25T18:30:01-04:00",
+ "next_price_read_at": "2026-10-25T19:15:00-04:00",
  "unmatched_names": [
   "Elias Pettersson"
  ],
@@ -148,18 +148,9 @@
   "Dylan Hryckowian",
   "Matthew Seminoff"
  ],
- "excluded_teams": [
-  {
-   "team": "CHI",
-   "reason": "stats behind"
-  },
-  {
-   "team": "FLA",
-   "reason": "stats behind"
-  }
- ],
- "stats_through": "2026-10-24",
- "lineups_at": "2026-10-25T18:20:00-04:00",
+ "excluded_teams": [],
+ "stats_through": "2026-10-25",
+ "lineups_at": "2026-10-25T18:30:01-04:00",
  "lineups_note": "3 of 8 team line pages are dated today.",
  "games_today": 5,
  "record_events": 63,
@@ -168,10 +159,10 @@
  ],
  "runner": {
   "event": "workflow_dispatch",
-  "run_id": "40235775965",
-  "iteration": 6,
-  "chain_link": 308,
+  "run_id": "40239697479",
+  "iteration": 2,
+  "chain_link": 309,
   "chain_started_at": "2026-10-16T10:00:13-04:00",
-  "run_started_at": "2026-10-25T17:30:12-04:00"
+  "run_started_at": "2026-10-25T18:20:14-04:00"
  }
 }
