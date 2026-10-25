@@ -407,6 +407,11 @@ probability x Hard Rock decimal payout - 1, on unrounded numbers; every threshol
     > 0 with 80% bootstrap lower bound > 0. **Stop early (track off, page says so):** mean CLV <= 0 at >= 50 measured flags, or units <= -10.
     Promotion is a section 8 entry by the Sharp after the DS names the sample. No threshold tuning on this sample.
 
+26. **NHL scope is closed (CEO, 2026-10-25).** The product is shots on goal (live) plus saves (behind the scenes, item 25). If saves fails
+    its gates, the product is shots only. **Sides and totals are out, and no other NHL market gets added.** Evidence: Researcher run 3 (2026-10-19):
+    Hard Rock moneyline was within 0.5 pts of the 9-book consensus with no Florida-team shading, so there is no gap to buy. Don't reopen this
+    without new evidence.
+
 ## 8. Rule-change log
 | Date | Change | Why | Sample |
 |---|---|---|---|
