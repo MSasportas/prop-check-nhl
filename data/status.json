@@ -1,10 +1,10 @@
 {
  "ok": true,
  "slate_date": "2026-10-24",
- "started_at": "2026-10-24T22:00:01-04:00",
- "status_at": "2026-10-24T22:00:01-04:00",
- "finished_at": "2026-10-24T22:00:03-04:00",
- "last_ok_at": "2026-10-24T22:00:01-04:00",
+ "started_at": "2026-10-24T22:10:01-04:00",
+ "status_at": "2026-10-24T22:10:01-04:00",
+ "finished_at": "2026-10-24T22:10:02-04:00",
+ "last_ok_at": "2026-10-24T22:10:01-04:00",
  "failed_step": null,
  "steps": [
   {
@@ -20,7 +20,7 @@
   {
    "step": "stats",
    "status": "ok",
-   "note": "1 window(s) read, 14 team-games still missing"
+   "note": "1 window(s) read, 12 team-games still missing"
   },
   {
    "step": "lineups",
@@ -50,22 +50,22 @@
   {
    "step": "engine",
    "status": "ok",
-   "note": "1 new event(s), 0 newly shown"
+   "note": "no change"
   },
   {
    "step": "grade",
-   "status": "skipped",
-   "note": "nothing to grade"
+   "status": "ok",
+   "note": "2 graded"
   },
   {
    "step": "shadow",
-   "status": "skipped",
-   "note": "nothing new"
+   "status": "ok",
+   "note": "39 graded"
   },
   {
    "step": "gg_grade",
    "status": "ok",
-   "note": "gap+guard: nothing new"
+   "note": "gap+guard: 2 grade"
   },
   {
    "step": "slate",
@@ -137,10 +137,6 @@
    "reason": "stats behind"
   },
   {
-   "team": "BUF",
-   "reason": "stats behind"
-  },
-  {
    "team": "CAR",
    "reason": "stats behind"
   },
@@ -183,22 +179,18 @@
   {
    "team": "VGK",
    "reason": "stats behind"
-  },
-  {
-   "team": "WSH",
-   "reason": "stats behind"
   }
  ],
  "stats_through": "2026-10-23",
  "lineups_at": "2026-10-24T21:40:01-04:00",
  "lineups_note": "16 of 24 team line pages are dated today.",
  "games_today": 12,
- "record_events": 54,
+ "record_events": 56,
  "odds_notes": [],
  "runner": {
   "event": "workflow_dispatch",
   "run_id": "40151534455",
-  "iteration": 3,
+  "iteration": 4,
   "chain_link": 280,
   "chain_started_at": "2026-10-16T10:00:13-04:00",
   "run_started_at": "2026-10-24T21:40:16-04:00"
