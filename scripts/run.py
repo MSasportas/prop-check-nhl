@@ -425,7 +425,7 @@ class Run:
         budget_ok = bool(plan) and plan["budget_today"] - sum(e["cost"] for e in led.get("spent", [])
                                                               if e["date"] == self.slate) > 0
         ls_now = self.lineup_state or lineups.load(self.slate)
-        paper_on = common.gap_guard_active(cfg, self.slate)
+        paper_on = odds.paper_markets(cfg, self.slate)
         nxt = odds.next_read_at(now, self.games, odds.eff_tier(plan, paper_on), v, fetched, self.started, budget_ok,
                                 lineups_ok=odds.lineups_confirmed(ls_now, self.games), paper=paper_on) \
             if plan and not (refused or no_keys or all_used_up) else None   # no key can read: promise no check

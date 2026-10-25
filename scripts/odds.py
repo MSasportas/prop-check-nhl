@@ -432,7 +432,7 @@ def markets_for(tier, pull, live_markets=(), c_every_game=None, paper=False):
         return ["shots"]                                   # cheapest market only; points wait for confirmed lineups
     if pull == "B":
         if paper:
-            return ["shots"] if tier >= 1 else []
+            return (_paper_list(paper) if tier >= 3 else ["shots"]) if tier >= 1 else []
         if tier == 2:
             return ["shots"]                               # points picks are off (2026-10-18 focus): shots re-price only
         if tier == 3:
@@ -446,8 +446,32 @@ def markets_for(tier, pull, live_markets=(), c_every_game=None, paper=False):
         if tier < 2:
             return []
         every = tier >= 3 if c_every_game is None else c_every_game
+        if every and paper:
+            return _paper_list(paper)                      # watch markets (e.g. saves) get a close too, research only
         return ["shots"] if every or "shots" in (live_markets or ()) else []
     return []
+
+
+def _paper_list(paper):
+    """paper may be True (shots only) or the list paper_markets() returns (shots + watch-track markets)."""
+    return list(paper) if isinstance(paper, (list, tuple)) and paper else ["shots"]
+
+
+def paper_markets(cfg, slate=None):
+    """False when Gap + Guard is off. Otherwise the markets the B and C reads ask for: shots, plus every market a
+    started watch track follows (ops.gap_guard.watch[].market, e.g. saves since 2026-10-25). Watch markets are research
+    only (data/paper_watch/), asked at tier 3+ so a tight budget keeps shots whole. About 1 credit per extra market per read."""
+    if not common.gap_guard_active(cfg, slate):
+        return False
+    ms = ["shots"]
+    for t in (common.gap_guard(cfg).get("watch") or []):
+        m = t.get("market") if isinstance(t, dict) else None
+        if not m or m in ms or m not in ((cfg.get("ops") or {}).get("markets") or {}):
+            continue
+        if t.get("from_slate") and slate and slate < t["from_slate"]:
+            continue
+        ms.append(m)
+    return ms
 
 
 PAPER_TIER_FLOOR_ALLOWANCE = 3.0     # paper test: tier 3 (C on every game) once the allowance is at least this
@@ -581,12 +605,12 @@ def due_pulls(now, games, tier, v, fetched, live_markets, started, retry_min=30,
             m = need(b_markets, b_due) if b_markets else []
             if m and now >= c_due and tier >= 2 and left >= v["pull_c_latest_min"]:
                 # B and C fall due together (45 minute mark): one read for both, not two
-                m = m + [x for x in need(markets_for(tier, "C", live_markets.get(g["id"], ()), c_every_game), c_due)
+                m = m + [x for x in need(markets_for(tier, "C", live_markets.get(g["id"], ()), c_every_game, paper=paper), c_due)
                          if x not in m]
             if m:
                 choice = ("B", m)
         if choice is None and tier >= 2 and now >= c_due and left >= v["pull_c_latest_min"]:
-            m = need(markets_for(tier, "C", live_markets.get(g["id"], ()), c_every_game), c_due)
+            m = need(markets_for(tier, "C", live_markets.get(g["id"], ()), c_every_game, paper=paper), c_due)
             if m:
                 choice = ("C", m)
         if choice is None and now >= t["A"] and left >= v["pull_latest_min"]:
@@ -918,7 +942,7 @@ def run_pulls(now, slate, games, sched_left, cfg, rosters_for, live_markets, sta
 
     # 3. which pulls are due
     # closing read for every game only while today's budget left covers every B and C read still owed today
-    paper = common.gap_guard_active(cfg, slate)
+    paper = paper_markets(cfg, slate)
     tier = eff_tier(plan, paper)
     fetched = fetched_map(day)
     c_every = c_for_every_game(now, games, tier, v, fetched, started, plan["budget_today"] - pool.spent_on(slate),

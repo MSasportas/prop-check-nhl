@@ -34,14 +34,16 @@ import common
 import goalies
 import guard_record
 import lineups
+import names
 import odds
 import sched
 import shadow
 
 EPS = 1e-9
 VERSION = 1
-MARKET = "shots"
+MARKET = "shots"            # the live log's market. A watch track with "market" (e.g. saves) swaps it while it runs, like _LOG
 NOTE = "Gap + Guard research log. Every flag here is a pick on the page and in the Record; vetoed and capped rows are research only."
+WATCH_NOTE = "Behind the scenes: research only. Not picks, not on the Record, never sent to Discord."
 SUMMARY_NIGHTS = 7
 
 
@@ -123,8 +125,15 @@ def inside_gate(price, T):
     return odds.decimal(T["price_gate"]) - EPS <= d <= odds.decimal(T["max_price"]) + EPS
 
 
+def line_ok(line, T):
+    """thresholds.lines: a list of lines, or "any" (a watch market whose lines move every night, e.g. saves)."""
+    ls = T.get("lines")
+    return ls == "any" or fmt_line(line) in {fmt_line(x) for x in (ls or [])}
+
+
 def calibrated_over(raw_over, line, T):
-    off = (T.get("offsets") or {}).get(fmt_line(line))
+    offs = T.get("offsets") or {}
+    off = offs.get(fmt_line(line), offs.get("*"))
     if off is None:
         return None
     return min(0.999, max(0.001, raw_over + off))
@@ -149,7 +158,7 @@ def assess(side, line, price, entry, raw_over_fn, T, guard_anyway=False):
            "market_fair": None, "gap_ev": None, "pin_fair": None, "pin_ev": None, "model_raw_over": None,
            "model_cal_over": None, "model_side": None, "final": None, "final_ev": None, "step1": False,
            "guard": None, "fails": []}
-    if fmt_line(line) not in {fmt_line(x) for x in T["lines"]}:
+    if not line_ok(line, T):
         out["fails"].append("line")
     if not inside_gate(price, T):
         out["fails"].append("price")
@@ -240,7 +249,19 @@ def base_of(it):
     return it.get("flag") or it.get("veto") or it.get("capped")
 
 
-def settled_level(ls, goalie_state, team, opp, pid):
+def goalie_starts(goalie_state, team, name):
+    """True when Daily Faceoff lists `name` as the CONFIRMED starter for `team` (last name + first initial)."""
+    g = ((goalie_state or {}).get("teams") or {}).get(team) or {}
+    if g.get("status") != "confirmed" or not g.get("name") or not name:
+        return False
+    f1, l1 = names.split_name(g["name"])
+    f2, l2 = names.split_name(name)
+    return l1 == l2 and (not f1 or not f2 or f1[:1] == f2[:1])
+
+
+def settled_level(ls, goalie_state, team, opp, pid, name=None):
+    if MARKET == "saves":
+        return "Goalie confirmed" if goalie_starts(goalie_state, team, name) else "Early"
     st = lineups.player_status(ls or {}, team, pid)
     if st != "in":
         return "Early"
@@ -284,12 +305,19 @@ class Paper:
         home = team == g["home"]
 
         def run():
-            m = self.inp.model(pid, team, opp, home, MARKET, line)
+            if MARKET == "saves":                         # team-level saves model (shadow log's), valid once the starter is known
+                fn, _ = shadow.model_over(self.inp, "saves", pid, team, opp, home)
+                m = fn(line) if fn else None
+            else:
+                m = self.inp.model(pid, team, opp, home, MARKET, line)
             return None if m is None else m["p_over"]
         return run
 
-    def eligible(self, pid, team):
-        """Same footing as the engine: history, not sitting, not out per Daily Faceoff, missed-last needs a lineup."""
+    def eligible(self, pid, team, name=None):
+        """Same footing as the engine: history, not sitting, not out per Daily Faceoff, missed-last needs a lineup.
+        Saves: only Daily Faceoff's CONFIRMED starter for his team (a backup start breaks the bet)."""
+        if MARKET == "saves":
+            return goalie_starts(self.goalie_state, team, name)
         pv = self.inp.player(pid, team)
         if pv["n"] < self.T.get("min_history", 10) or pv["sitting"]:
             return False
@@ -336,7 +364,7 @@ class Paper:
         for (pid, line), pair in sorted(view["pairs"].items() if allow_new else []):
             if pair["over"] is None or pair["under"] is None or pair["why"] is not None:
                 continue
-            if pair["team"] not in (g["away"], g["home"]) or fmt_line(line) not in {fmt_line(x) for x in T["lines"]}:
+            if pair["team"] not in (g["away"], g["home"]) or not line_ok(line, T):
                 continue
             team = pair["team"]
             if team in behind:
@@ -354,7 +382,7 @@ class Paper:
                     continue
                 if a["guard"] is None:
                     continue                              # no model for him: the guard cannot run
-                if not self.eligible(pid, team):
+                if not self.eligible(pid, team, pair.get("name")):
                     continue
                 a.update(id=i, pid=pid, team=team, name=pair["name"])
                 if not a["guard"]:
@@ -421,7 +449,7 @@ class Paper:
              "lineup": lineups.player_status(self.ls, a["team"], a["pid"]),
              "goalie_own": ((self.goalie_state.get("teams") or {}).get(a["team"]) or {}).get("status"),
              "goalie_opp": ((self.goalie_state.get("teams") or {}).get(e_opp(g, a["team"])) or {}).get("status"),
-             "settled": settled_level(self.ls, self.goalie_state, a["team"], e_opp(g, a["team"]), a["pid"]),
+             "settled": settled_level(self.ls, self.goalie_state, a["team"], e_opp(g, a["team"]), a["pid"], name),
              "move30": move, "move30_from": prev_at}
         if reason:
             e["cap"] = reason
@@ -474,6 +502,12 @@ class Paper:
             it = self.items[fl["id"]]
             g = next((x for x in self.games if x["id"] == fl["game_id"]), None)
             if "pull" in it or g is None or sched.started(g, self.now):
+                continue
+            if MARKET == "saves":
+                gs = ((self.goalie_state.get("teams") or {}).get(fl["team"]) or {})
+                if gs.get("status") == "confirmed" and not goalie_starts(self.goalie_state, fl["team"], fl["player"]):
+                    self.emit({"t": "pull", "id": fl["id"], "read_at": None, "reason": "not the starter",
+                               "detail": "Daily Faceoff confirms %s in net" % gs.get("name")})
                 continue
             if lineups.player_status(self.ls, fl["team"], fl["pid"]) == "out":
                 self.emit({"t": "pull", "id": fl["id"], "read_at": None, "reason": "out per Daily Faceoff",
@@ -531,11 +565,11 @@ def view_item(it, ls, goalie_state, now):
     out = {"id": b["id"], "kind": "flag" if "flag" in it else ("veto" if "veto" in it else "capped"),
            "slate": b["slate"], "game_id": b["game_id"], "player": b["player"], "team": b["team"], "opp": b["opp"],
            "game": ("%s vs %s" if b["home"] else "%s @ %s") % (b["team"], b["opp"]), "start": b["start"],
-           "side": b["side"], "line": b["line"], "bet": "%s %s shots" % (b["side"].upper(), fmt_line(b["line"])),
+           "side": b["side"], "line": b["line"], "bet": "%s %s %s" % (b["side"].upper(), fmt_line(b["line"]), b.get("market") or "shots"),
            "price": b["price"], "gap_pct": round(100 * b["gap_ev"], 1), "final_pct": round(100 * b["final_ev"], 1),
            "market_fair_pct": round(100 * b["market_fair"], 1), "final_p_pct": round(100 * b["final"], 1),
            "n_books": b["n_books"], "guard": b["guard"], "cap": b.get("cap"), "flagged_at": b["read_at"],
-           "read_pull": b["read_pull"], "settled": settled_level(ls, goalie_state, b["team"], b["opp"], b["pid"]),
+           "read_pull": b["read_pull"], "settled": settled_level(ls, goalie_state, b["team"], b["opp"], b["pid"], b["player"]),
            "frozen_settled": b["settled"], "move30_pct": None if b.get("move30") is None else round(100 * b["move30"], 1),
            "pulled": None if not pull else {"reason": pull["reason"], "detail": pull.get("detail"), "at": pull["at"]},
            "locked": started, "state": "pulled" if pull else ("locked" if started else "open"),
@@ -555,7 +589,8 @@ def build_summary(now, slate, cfg, events, ls=None, goalie_state=None, nights=()
     goalie_state = goalie_state if goalie_state is not None else goalies.load(slate)
     views = [view_item(it, ls, goalie_state, now) for it in items.values() if base_of(it)]
     views.sort(key=lambda x: (x["slate"], -(x["final_pct"] or 0), x["id"]))
-    slates = sorted({x["slate"] for x in views}, reverse=True)[:SUMMARY_NIGHTS]
+    slates = sorted({x["slate"] for x in views}, reverse=True)
+    slates = slates[:SUMMARY_NIGHTS] if _LOG == ("paper",) else slates      # a watch track keeps every night (its whole record)
     tonight = [x for x in views if x["slate"] == slate]
     flags = [i for i, it in items.items() if "flag" in it]
     graded = [items[i]["grade"] for i in flags if "grade" in items[i] and items[i]["grade"]["result"] in ("W", "L")]
@@ -582,7 +617,8 @@ def build_summary(now, slate, cfg, events, ls=None, goalie_state=None, nights=()
         "population_slope": None,
         "checkpoint": P.get("checkpoint"),
     }
-    return {"version": VERSION, "note": NOTE, "generated_at": common.iso(now), "slate": slate,
+    note = NOTE if _LOG == ("paper",) else WATCH_NOTE
+    return {"version": VERSION, "note": note, "market": MARKET, "generated_at": common.iso(now), "slate": slate,
             "active": common.gap_guard_active(cfg, slate), "window": {"live_from": P.get("live_from"),
                                                                       "checkpoint": P.get("checkpoint")},
             "tonight": {"flags": [x for x in tonight if x["kind"] == "flag"],
@@ -632,7 +668,7 @@ def watch_cfg(cfg, tr):
     g = c2["ops"]["gap_guard"]
     T = g.setdefault("thresholds", {})
     for k, v in tr.items():
-        if k in ("id", "from_slate", "note") or k.startswith("_"):
+        if k in ("id", "from_slate", "note", "market", "label") or k.startswith("_"):
             continue
         if k == "offsets":
             T["offsets"] = dict(T.get("offsets") or {}, **v)
@@ -648,16 +684,17 @@ def watch_dir(tr):
 
 
 def _watch_one(tr, now, slate, cfg, inp, sched_cache, games, allow_new):
-    global _LOG
-    saved = _LOG
+    global _LOG, MARKET
+    saved, saved_m = _LOG, MARKET
     _LOG = watch_dir(tr)
+    MARKET = tr.get("market") or "shots"
     try:
         r = _step_one(now, slate, watch_cfg(cfg, tr), inp, sched_cache, games, allow_new)
         return "%s %s" % (tr["id"], (r.get("note") or r.get("status") or "").replace("gap+guard: ", ""))
     except Exception as e:                      # a watch track can never hurt the live step: say so and carry on
         return "%s failed (%s)" % (tr["id"], type(e).__name__)
     finally:
-        _LOG = saved
+        _LOG, MARKET = saved, saved_m
 
 
 def _step_one(now, slate, cfg, inp, sched_cache, games, allow_new=True):

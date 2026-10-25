@@ -248,12 +248,12 @@ var SEEN_KEY = FIX ? 'pc_seen_fx' : 'pc_seen';
 var UI_DEF = { stale_after_min: 75, refresh_sec: 120, picks_open: 8 };
 
 var S = {
-  slate: null, record: null, rules: null, recordErr: null,
+  slate: null, record: null, rules: null, recordErr: null, watch: null, watchErr: null,
   loaded: false, loadErr: false, fetchFail: false, loadedAt: null, busy: false,
   view: 'tonight', expanded: {}, open: {}, moreOpen: false, filter: 'all', legsOpen: {},
   older: [], olderIdx: 0, olderBusy: false, olderErr: false,
   newIds: {}, since: null, seenDone: false,
-  sheet: null, sheetFocus: null, key: '', scroll: { tonight: 0, record: 0 }
+  sheet: null, sheetFocus: null, key: '', scroll: { tonight: 0, record: 0, backstage: 0 }
 };
 
 var app = document.getElementById('app');
@@ -433,8 +433,9 @@ function load() {
   if (S.busy) return Promise.resolve();
   S.busy = true;
   return Promise.all([settle(getJSON(BASE + 'slate.json')), settle(getJSON(BASE + 'record.json')), settle(getJSON(BASE + 'rules.json')),
-                      settle(getJSON(BASE + 'record/resets.json', true))])
+                      settle(getJSON(BASE + 'record/resets.json', true)), settle(getJSON(BASE + 'paper_watch/saves/summary.json'))])
     .then(function (r) {
+      if (r[4].ok && isObj(r[4].v)) { S.watch = r[4].v; S.watchErr = null; } else if (!S.watch) S.watchErr = r[4].kind;
       if (r[3].ok && Array.isArray(r[3].v) && r[3].v.length) S.reset = true;
       S.busy = false; S.loaded = true;
       if (r[1].ok) { S.record = r[1].v; S.recordErr = null; } else if (!S.record) S.recordErr = r[1].kind;
@@ -480,7 +481,7 @@ function writeSeen() {
 /* ---------- render control ---------- */
 function calcKey() {
   var d = S.slate ? split() : null;
-  return JSON.stringify([S.loaded, S.loadErr, S.fetchFail, S.recordErr, S.slate && S.slate.generated_at, S.slate && S.slate.status_at, S.record && S.record.generated_at,
+  return JSON.stringify([S.loaded, S.loadErr, S.fetchFail, S.recordErr, S.slate && S.slate.generated_at, S.slate && S.slate.status_at, S.record && S.record.generated_at, S.watch && S.watch.generated_at, S.view,
     S.rules && S.rules.version, S.rules && S.rules.updated, S.slate && expired(), S.slate && stale(),
     d ? d.started.length : 0, S.slate ? dayKey(now()) : 0]);
 }
@@ -491,7 +492,7 @@ function render() {
     S.key = calcKey();
     readSeen();
     clear(app);
-    if (S.view === 'record') renderRecord(); else renderTonight();
+    if (S.view === 'record') renderRecord(); else if (S.view === 'backstage') renderBackstage(); else renderTonight();
     renderTabs();
     if (S.sheet) fillSheet();
   } catch (err) {
@@ -986,21 +987,71 @@ function loadOlder() {
   }, function () { S.olderBusy = false; S.olderErr = true; rerender(); });
 }
 
+/* ---------- Behind the scenes (research only: data/paper_watch/saves/, never the Record or Discord) ---------- */
+function bsRow(x) {
+  var res = x.result == null ? null : str(x.result), known = { W: 1, L: 1, PUSH: 1, VOID: 1 };
+  var tag = h('span', { class: 'tg ' + (res && known[res] ? res : 'none'), text: res || '–' });
+  var l1 = h('div', { class: 'e1' }, x.state === 'pulled' ? h('span', { class: 'ptag', text: 'PULLED' }) : null,
+    h('span', { class: 'pn', text: x.player || 'Goalie not named' }), ' ' + (x.bet || '').replace(/^(\w)(\w*)/, function (m, a, b) { return a + b.toLowerCase(); }));
+  var l2 = [odds(x.price), str(x.game)];
+  if (num(x.gap_pct) != null) l2.push('gap ' + (x.gap_pct > 0 ? '+' : '') + x.gap_pct + '%');
+  if (x.kind === 'veto') l2.push('model vetoed');
+  if (x.pulled) l2.push('pulled: ' + str(x.pulled.reason));
+  if (num(x.clv_pct) != null) l2.push('CLV ' + (x.clv_pct > 0 ? '+' : '') + x.clv_pct + '%');
+  if (res && units(x.units, 2)) l2.push(units(x.units, 2));
+  else if (!res && x.state !== 'pulled') l2.push(x.locked ? 'Awaiting result' : (x.settled || 'Early'));
+  return h('div', { class: 'ent' }, tag, h('div', { class: 'bd' }, l1, h('div', { class: 'e2', text: l2.join(' · ') })));
+}
+function renderBackstage() {
+  app.appendChild(header('Behind the scenes', null));
+  app.appendChild(h('p', { class: 'mu', style: 'margin:8px 0 0', text: 'Goalie saves, same Gap + Guard maths as shots. Research only: not picks, not on the Record, never sent to Discord. Confirmed starters only.' }));
+  if (!S.loaded) { app.appendChild(h('div', { class: 'stack' }, h('div', { class: 'skel sm' }), h('div', { class: 'skel' }))); return; }
+  var w = S.watch;
+  if (!w) {
+    app.appendChild(h('div', { class: 'card empty', style: 'margin-top:12px' },
+      h('div', { class: 't', text: S.watchErr === 'file' ? 'Nothing logged yet. The first saves reads come 90 minutes before each game.' : "Can't load this right now." })));
+    app.appendChild(footer()); return;
+  }
+  var t = isObj(w.nov2) ? w.nov2 : {}, n = (num(t.w) || 0) + (num(t.l) || 0), clv = isObj(t.clv_flags) ? t.clv_flags : {};
+  if (n) {
+    app.appendChild(h('div', { class: 'big' }, h('span', { class: 'wl', text: (num(t.w) || 0) + '-' + (num(t.l) || 0) }),
+      h('span', { class: 'un ' + signCls(t.units), text: units(t.units, 1) || '' })));
+  } else {
+    app.appendChild(h('div', { class: 'card empty', style: 'margin-top:8px' }, h('div', { class: 't', text: 'No graded saves legs yet.' })));
+  }
+  var sub = [n + ' graded' + (num(t.void) ? ', ' + t.void + ' void' : ''), '1 unit each at the flagged Hard Rock price'];
+  if (num(clv.n)) sub.push('avg CLV ' + (clv.mean > 0 ? '+' : '') + (100 * clv.mean).toFixed(1) + '% (' + clv.n + ')');
+  app.appendChild(h('div', { class: 'subline', text: sub.join(' · ') }));
+  app.appendChild(h('p', { class: 'note', text: 'Goes live only after a big enough sample proves it (the team sets the bar). Until then it is just watched.' }));
+  var tn = isObj(w.tonight) ? w.tonight : {}, rows = arr(tn.flags).concat(arr(tn.vetoes)).filter(isObj);
+  var sec = h('section', { class: 'night' }, h('h3', null, (fDateLong(w.slate) || 'Tonight') + ' · tonight'));
+  if (rows.length) rows.forEach(function (x) { sec.appendChild(bsRow(x)); });
+  else sec.appendChild(h('p', { class: 'mu', style: 'margin-top:8px', text: 'No saves lines cleared the gap yet tonight.' }));
+  app.appendChild(sec);
+  arr(w.nights).filter(isObj).forEach(function (nt) {
+    var fl = arr(nt.flags).filter(isObj); if (!fl.length) return;
+    var s2 = h('section', { class: 'night' }, h('h3', { text: fDateLong(nt.date) }));
+    fl.forEach(function (x) { s2.appendChild(bsRow(x)); });
+    app.appendChild(s2);
+  });
+  app.appendChild(footer());
+}
+
 /* ---------- tabs + routing ---------- */
 function renderTabs() {
   clear(tabsEl);
   var mk = function (v, label) {
     return h('button', { class: 'tab', type: 'button', 'aria-current': S.view === v ? 'page' : null, text: label, on: { click: function () { go(v); } } });
   };
-  tabsEl.appendChild(h('div', { class: 'in' }, mk('tonight', 'Tonight'), mk('record', 'Record')));
+  tabsEl.appendChild(h('div', { class: 'in' }, mk('tonight', 'Tonight'), mk('record', 'Record'), mk('backstage', 'Backstage')));
 }
-function viewFromHash() { return location.hash === '#record' ? 'record' : 'tonight'; }
+function viewFromHash() { return location.hash === '#record' ? 'record' : (location.hash === '#backstage' ? 'backstage' : 'tonight'); }
 function go(v) {
   if (v === S.view) { window.scrollTo(0, 0); return; }
   try {
-    if (v === 'record') history.pushState(null, '', location.pathname + location.search + '#record');
+    if (v === 'record' || v === 'backstage') history.pushState(null, '', location.pathname + location.search + '#' + v);
     else history.pushState(null, '', location.pathname + location.search);
-  } catch (e) { location.hash = v === 'record' ? '#record' : ''; }
+  } catch (e) { location.hash = (v === 'record' || v === 'backstage') ? '#' + v : ''; }
   route();
 }
 function route() {

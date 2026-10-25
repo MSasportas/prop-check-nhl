@@ -77,8 +77,20 @@
     "max_per_game": null,
     "max_per_night": null,
     "min_history": 10
-   }
-   ,"watch": []
+   },
+   "watch": [
+    {
+     "id": "saves",
+     "market": "saves",
+     "label": "Goalie saves",
+     "from_slate": "2026-10-25",
+     "note": "Behind the scenes (Matt 2026-10-25): goalie saves through the exact Gap + Guard maths of shots. Research only: data/paper_watch/saves/, shown on the page's Behind the scenes tab, never the Record, Discord or status.json. Confirmed starters only. Lines: any. Model offset 0 (uncalibrated team-level saves model, 20% weight, can only veto).",
+     "lines": "any",
+     "offsets": {
+      "*": 0.0
+     }
+    }
+   ]
   },
   "bookmakers": [
    "hardrockbet"
