@@ -21,10 +21,81 @@
  },
  "events_at": "2026-10-25T09:10:11-04:00",
  "unknown_teams": [],
- "done": {},
+ "done": {
+  "2026020180": [
+   {
+    "game_id": 2026020180,
+    "pull": "A",
+    "at": "2026-10-25T12:00:01-04:00",
+    "markets": [
+     "shots"
+    ],
+    "returned": [
+     "shots"
+    ],
+    "cost": 1
+   }
+  ],
+  "2026020181": [
+   {
+    "game_id": 2026020181,
+    "pull": "A",
+    "at": "2026-10-25T12:00:01-04:00",
+    "markets": [
+     "shots"
+    ],
+    "returned": [
+     "shots"
+    ],
+    "cost": 1
+   }
+  ],
+  "2026020182": [
+   {
+    "game_id": 2026020182,
+    "pull": "A",
+    "at": "2026-10-25T12:00:01-04:00",
+    "markets": [
+     "shots"
+    ],
+    "returned": [
+     "shots"
+    ],
+    "cost": 1
+   }
+  ],
+  "2026020183": [
+   {
+    "game_id": 2026020183,
+    "pull": "A",
+    "at": "2026-10-25T12:00:01-04:00",
+    "markets": [
+     "shots"
+    ],
+    "returned": [
+     "shots"
+    ],
+    "cost": 1
+   }
+  ],
+  "2026020184": [
+   {
+    "game_id": 2026020184,
+    "pull": "A",
+    "at": "2026-10-25T12:00:01-04:00",
+    "markets": [
+     "shots"
+    ],
+    "returned": [
+     "shots"
+    ],
+    "cost": 1
+   }
+  ]
+ },
  "stage": null,
  "skipped": {},
- "last_fail_at": "2026-10-25T11:50:00-04:00",
- "fail_note": "The odds feed did not answer.",
+ "last_fail_at": null,
+ "fail_note": null,
  "key_count": 10
 }
