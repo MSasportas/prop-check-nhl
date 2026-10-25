@@ -207,7 +207,7 @@
  },
  "stage": null,
  "skipped": {},
- "last_fail_at": null,
- "fail_note": null,
+ "last_fail_at": "2026-10-25T19:30:01-04:00",
+ "fail_note": "The odds feed did not answer.",
  "key_count": 10
 }
