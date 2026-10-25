@@ -11,7 +11,7 @@
   },
   "DAL": {
    "name": "Jake Oettinger",
-   "status": "expected"
+   "status": "confirmed"
   },
   "NYI": {
    "name": "Ilya Sorokin",
@@ -42,5 +42,5 @@
    "status": "confirmed"
   }
  },
- "checked_at": "2026-10-25T16:50:00-04:00"
+ "checked_at": "2026-10-25T17:00:00-04:00"
 }
