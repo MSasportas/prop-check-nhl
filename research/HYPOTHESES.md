@@ -237,6 +237,30 @@ Run 9 count: 17 variants tested (W1 3, W2 4, W3 3, W4 4, W5 3). Expected false p
 No placebo needed, no lockbox look. Cumulative historical: 326. Forward variants: 18 (Q6a-c added, 0 nights yet). Lockbox looks: still 2.
 Output: research/code/r9/w9_results.txt. Forward (4 nights, Oct 19-22): Q1a +7.4% n153 [-5,+20] p .16; Q1k Pinnacle +11.8% n118 p .08: too small.
 
+## Run 10 (Researcher, 2026-10-25 AM, daily). SHOTS ON GOAL ONLY. Registered before any of these were tested.
+No odds key, no historical odds pull. Free NHL stats REST skater per-game logs fetched to scratch with research/code/r10/fetch10.py
+(skater summary 2024-25 + 2025-26 through Feb 28; lockbox not fetched). Every feature for a line dated d uses only data dated < d
+(day of week is a schedule fact). Common as runs 4/6-9: shots45_lines, every two-way Hard Rock line, proportional de-vig fair f, side
+price >= -200, 1u flat, regulation + OT, VOID = no bet, game-clustered bootstrap. Logistic = research/code/wf.py (a + a15 + a35 +
+b*logit(f) + standardised terms, L2 2, fit on all months before the test month), bet the side with p - BE >= T, T in {.01, .02, .03}.
+Fixed rules report every Nov-Feb bet with folds. Placebo (shuffle the feature(s) within date x line, 200 times) for any variant
+positive Nov-Feb with n >= 300; lockbox (Mar 1+) only for such a frozen variant, once, needing one-sided p < 0.05/3 = 0.0167 (look #3).
+
+| id | date | rule (exact) | data | result | status |
+|---|---|---|---|---|---|
+| X1 | 2026-10-25 | **Book chasing its own number.** For each Hard Rock -45 line (player, date d): m = Poisson mean solving P(X > line) = f, using the player's line with f nearest 0.5 that game (as N1). prev = his most recent earlier Hard Rock game in shots45_lines (date < d, within 14 days, else no prev -> terms 0). dm = log(m_now / m_prev); z = (his SOG in that prev game - m_prev) / sqrt(m_prev). Terms c1*dm + c2*dm*z (does Hard Rock move its number too far after a big/small game?) (3 T). Fixed rule X1r: UNDER when dm >= log(1.15) and z >= 1.5 (book raised the number after a big game) (1 variant). 4 variants | shots45 | | registered |
+| X2 | 2026-10-25 | **Public nights (day of week).** sat = [date d is a Saturday]; fs = [Friday or Sunday]. Logistic terms c1*sat + c2*fs + c3*sat*logit(f) (3 T). Fixed rule X2r: UNDER on every Saturday line (retail money on overs on the big TV night) (1 variant). 4 variants | shots45 | | registered |
+| X3 | 2026-10-25 | **Prior-season anchor (book over-trusts the current season early).** r24 = his 2024-25 SOG/g (needs >= 20 games, else terms 0); g = his 2025-26 games before d, r25 = his 2025-26 SOG/g before d (needs g >= 3, else terms 0). anc = (r24 - r25) x 20/(20 + g). Terms c1*anc + c2*anc*[D] (3 T) | skater logs + shots45 | | registered |
+
+Forward (registered now, scored only on nights dated 2026-10-25 or later; Q1a has NOT been looked at by book count before this commit):
+| id | date | rule (exact) | data | result | status |
+|---|---|---|---|---|---|
+| Q8a | 2026-10-25 | Q1a bets (exact run-5 definition, research/fwd/scores.json) whose frozen read had books 1-3 (thin market), nights >= 2026-10-25 | score_fwd output | | forward, open |
+| Q8b | 2026-10-25 | Q1a bets with books 4-5, nights >= 2026-10-25 | same | | forward, open |
+| Q8c | 2026-10-25 | Q1a bets with books >= 6, nights >= 2026-10-25 | same | | forward, open |
+Q8 bar: run-5 forward bar (n >= 300 graded, ROI > 0, mean CLV > 0) with one-sided p < 0.05/21 = 0.0024 (18 + 3 forward variants).
+Scored by research/code/r10/score_q8.py (reads research/fwd/scores.json after score_fwd.py runs).
+
 ## Queued (not yet tested)
 | id | rule idea | data | status |
 |---|---|---|---|
