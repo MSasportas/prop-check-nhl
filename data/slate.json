@@ -1,7 +1,7 @@
 {
  "slate_date": "2026-10-25",
- "generated_at": "2026-10-25T14:20:01-04:00",
- "status_at": "2026-10-25T14:20:01-04:00",
+ "generated_at": "2026-10-25T14:40:01-04:00",
+ "status_at": "2026-10-25T14:40:01-04:00",
  "valid_until": "2026-10-26T05:00:00-04:00",
  "status": {
   "prices_state": "ok",
@@ -9,14 +9,14 @@
   "next_price_read_at": "2026-10-25T16:30:00-04:00",
   "stats_built_at": "2026-10-25T01:20:01-04:00",
   "stats_through": "2026-10-24",
-  "lineups_at": "2026-10-25T14:20:01-04:00",
+  "lineups_at": "2026-10-25T14:40:01-04:00",
   "goalies_at": null,
-  "lineups_note": "0 of 2 team line pages are dated today.",
+  "lineups_note": "2 of 2 team line pages are dated today.",
   "lineups_state": "ok",
   "stats_state": "ok",
   "last_run": {
    "ok": true,
-   "at": "2026-10-25T14:20:01-04:00",
+   "at": "2026-10-25T14:40:01-04:00",
    "failed_step": null
   },
   "pool": {
@@ -44,8 +44,8 @@
    "home": "CHI",
    "start": "2026-10-25T15:00:00-04:00",
    "lineups": {
-    "away": "waiting",
-    "home": "waiting"
+    "away": "confirmed",
+    "home": "confirmed"
    },
    "goalies": {
     "away": {
@@ -54,7 +54,7 @@
     },
     "home": {
      "name": "Spencer Knight",
-     "status": "expected"
+     "status": "confirmed"
     }
    },
    "started": false,
