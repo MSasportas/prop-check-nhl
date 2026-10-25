@@ -246,8 +246,10 @@ def pairs_of(mk):
         if o.get("pid") is None or o.get("line") is None:
             continue
         p = out.setdefault((o["pid"], o["line"]), {"over": None, "under": None, "name": o.get("name"),
-                                                   "team": o.get("team"), "line": o["line"]})
+                                                   "team": o.get("team"), "line": o["line"], "links": {}})
         p[o["side"]] = o["price"]
+        if o.get("link"):
+            p["links"][o["side"]] = o["link"]
     return out
 
 

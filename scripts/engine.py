@@ -309,7 +309,7 @@ def evaluate(inp, gg_events=(), block_new=False):
             "market_fair_pct": round(100 * fl["market_fair"], 1), "n_books": fl["n_books"],
             "final_ev": round(fl["final_ev"], 4), "final_ev_pct": round(100 * fl["final_ev"], 1),
             "guard": "agrees", "model": round(raw_side, 4), "model_side_cal": round(fl["model_side"], 4),
-            "reason": reason_text(fl),
+            "reason": reason_text(fl), "link": fl.get("link"),
             "state": "lineup" if status == "in" else "early", "thin": pv["thin"],
             "games_used": pv["n"], "games_this_season": pv["n_season"],
         }
@@ -393,7 +393,7 @@ def build_slate(inp, events, extra):
             "guard": {"verdict": sh.get("guard", "agrees"), "ours_pct": round(100 * it["p"], 1) if it["p"] is not None else None,
                       "model_pct": round(100 * sh["model"], 1) if sh.get("model") is not None else None},
             "settled": SETTLED.get(settled, "early"), "settled_label": settled,
-            "reason": it["reason"], "thin": sh.get("thin"), "games_used": sh.get("games_used"),
+            "reason": it["reason"], "link": sh.get("link"), "thin": sh.get("thin"), "games_used": sh.get("games_used"),
             "games_this_season": sh.get("games_this_season")})
     order = {"open": 0, "pulled": 1, "locked": 2}
     bucket = lambda p: "pulled" if p["pulled"] else ("open" if p["state"] in ("early", "lineup") and not p["graded"] else "locked")

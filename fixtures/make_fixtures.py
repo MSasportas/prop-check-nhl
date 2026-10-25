@@ -385,6 +385,9 @@ def build():
         if not p["pulled"] and not p["state"].startswith("locked"):
             p["price_final"] = True
             break
+    for p in s["picks"]:
+        if p.get("price_final"):
+            p["link"] = "https://www.hardrock.bet/betslip?selection=example"
     out["final"] = (s, rec)
 
     s = base_slate()

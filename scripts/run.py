@@ -18,6 +18,7 @@ Steps, in order, each allowed to fail without stopping the others:
     lineups   Daily Faceoff, for games close to puck drop
     lineup_history  first today-dated page and last state before puck  -> data/state/lineup_history/
     market_menu     once a week: every market key Hard Rock lists      -> data/state/market_menu.json
+    book_probe      once: every book with NHL shots (~5 credits)       -> data/state/book_probe.json
     gapguard  Gap + Guard: flags, vetoes, pulls, CLV, grades        -> data/paper/ (the Gap + Guard research log)
     engine    flags -> picks: show / pull / lock                     -> appends to the Record
     grade     results for games that are final                       -> appends to the Record
@@ -45,6 +46,7 @@ import grade       # noqa: E402
 import lineup_history  # noqa: E402
 import lineups     # noqa: E402
 import market_menu  # noqa: E402
+import book_probe   # noqa: E402
 import names       # noqa: E402
 import nhl         # noqa: E402
 import notify      # noqa: E402
@@ -55,9 +57,9 @@ import sched       # noqa: E402
 import shadow      # noqa: E402
 import stats       # noqa: E402
 
-STEPS = ["rules", "schedule", "stats", "lineups", "lineup_history", "odds", "market_menu", "gapguard", "engine", "grade",
+STEPS = ["rules", "schedule", "stats", "lineups", "lineup_history", "odds", "market_menu", "book_probe", "gapguard", "engine", "grade",
          "shadow", "gg_grade", "slate", "record", "status"]
-SOFT = ("lineup_history", "market_menu", "shadow", "gg_grade")              # team logs: a failure is a "warn", never a failed run
+SOFT = ("lineup_history", "market_menu", "book_probe", "shadow", "gg_grade")              # team logs: a failure is a "warn", never a failed run
 
 
 class Run:
@@ -239,6 +241,10 @@ class Run:
     def do_market_menu(self):
         self.load_schedule()
         return market_menu.check(self.now, self.slate, self.games, self.started, self.cfg, dry_run=self.dry_run)
+
+    def do_book_probe(self):
+        self.load_schedule()
+        return book_probe.check(self.now, self.slate, self.games, self.started, self.cfg, dry_run=self.dry_run)
 
     def block_new(self):
         """No NEW picks this run: stats missing or behind for half the slate, or the safety pause. Shown picks are still
@@ -623,6 +629,7 @@ def run(only=None, dry_run=False):
     r.soft_step("lineup_history", r.do_lineup_history)
     r.step("odds", r.do_odds)
     r.soft_step("market_menu", r.do_market_menu)
+    r.soft_step("book_probe", r.do_book_probe)               # once: every book the feed has for NHL shots (TEAM.md item 24)
     r.step("gapguard", r.do_gapguard)                       # the Gap + Guard log: where every pick comes from
     # m8: a pick enters the Record in the same commit that first shows it. Events are appended by the engine and
     # grade steps; if slate.json is then NOT written, this run's events are rolled back to the exact bytes the

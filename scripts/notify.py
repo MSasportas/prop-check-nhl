@@ -29,6 +29,7 @@ import urllib.error
 import urllib.request
 
 import common
+import odds
 
 PAGE = "https://msasportas.github.io/prop-check-nhl/"
 MAX_PER_DAY = 12
@@ -164,8 +165,12 @@ def pick_line(p):
     when = " · ".join(x for x in (_game(p), _t(p["start"]), _state_label(p), "✅ Price final" if p.get("price_final") else "") if x)
     gap = p.get("gap_pct")
     gap_txt = ("Gap %+.1f%% vs market" % gap) if isinstance(gap, (int, float)) else "Gap vs market"
-    return "\n".join(["**%s %s  %s**" % (p["player"], _bet(p), common.fmt_price(p["price"])), when,
-                      "%s, we say %s%%, price needs %s%%" % (gap_txt, p["p_pct"], p["breakeven_pct"])])
+    lines = ["**%s %s  %s**" % (p["player"], _bet(p), common.fmt_price(p["price"])), when,
+             "%s, we say %s%%, price needs %s%%" % (gap_txt, p["p_pct"], p["breakeven_pct"])]
+    link = p.get("link")
+    if odds.safe_link(link):
+        lines.append("Bet slip: <%s>" % link)               # <> keeps Discord from unfurling a preview
+    return "\n".join(lines)
 
 
 def _open(x, now):

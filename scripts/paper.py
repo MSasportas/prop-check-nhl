@@ -425,6 +425,10 @@ class Paper:
              "move30": move, "move30_from": prev_at}
         if reason:
             e["cap"] = reason
+        link = odds.safe_link((((view["pairs"] or {}).get((a["pid"], a["line"])) or {}).get("links") or {}).get(a["side"])) \
+            if kind == "flag" else None                       # only a pick needs it (vetoes and capped rows do not)
+        if link:
+            e["link"] = link                                  # Hard Rock's bet-slip link for this side at this read
         self.emit(e)
 
     # ---- pulls

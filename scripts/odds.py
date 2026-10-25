@@ -19,6 +19,7 @@ Other books' prices sit beside it under "others" (shadow log only).
 With PC_ODDS_FIXTURE_DIR set nothing here touches the network (see _fixture_* below).
 """
 import json
+import re
 import math
 import os
 import urllib.parse
@@ -313,7 +314,32 @@ class Client:
             return js, cost
         params = {"regions": self.cfg["ops"]["odds_region"], "bookmakers": ",".join(books),
                   "markets": ",".join(market_keys), "oddsFormat": "american", "dateFormat": "iso"}
+        if wants_links(pull) and (self.cfg["ops"].get("odds_links", True)):
+            params["includeLinks"] = "true"                # bet-slip links (only Hard Rock's are kept); no extra credits documented
+            js, cost = self._get("/events/%s/odds" % event_id, params, len(market_keys), slate, pull, game_id)
+            if js:
+                return js, cost
+            if js is None and self.errors and self.errors[-1].startswith("odds feed sent an unreadable"):
+                return js, cost                            # a 200 we could not read was probably billed: do not ask (and pay) twice
+            params.pop("includeLinks")                     # never let the links option cost a price read: ask again without it
+            self.errors.append("odds read without bet-slip links after a failed or empty read with them")
         return self._get("/events/%s/odds" % event_id, params, len(market_keys), slate, pull, game_id)
+
+    def event_all_books(self, event_id, away, home, regions, slate, game_id):
+        """Shots prices from EVERY book in these regions for one game (no bookmakers= filter), once, to learn which books exist.
+        Costs markets (1) x regions. Returns (payload or None, cost). Fixtures: <dir>/books_all_<event>.json or books_all.json;
+        no file means (None, 0) and no failure is counted."""
+        if self.pool.fixture:
+            js = self._fixture_json("books_all_%s.json" % event_id) or self._fixture_json("books_all.json")
+            if js is None:
+                return None, 0
+            if not self._fixture_spend(len(regions), slate, "P", game_id):
+                self.errors.append("no odds key with credits left")
+                return None, 0
+            SOURCE["ok"] += 1
+            return js, len(regions)
+        params = {"regions": ",".join(regions), "markets": "player_shots_on_goal", "oddsFormat": "american", "dateFormat": "iso"}
+        return self._get("/events/%s/odds" % event_id, params, len(regions), slate, "P", game_id, flat_cost=len(regions))
 
     def event_markets(self, event_id, away, home, slate, game_id):
         """Every market key the book lists for one game (the feed's event-markets endpoint, about 1 credit).
@@ -331,6 +357,11 @@ class Client:
         params = {"regions": self.cfg["ops"]["odds_region"], "bookmakers": ",".join(self.cfg["ops"]["bookmakers"]),
                   "dateFormat": "iso"}
         return self._get("/events/%s/markets" % event_id, params, 1, slate, "M", game_id, flat_cost=1)
+
+
+def wants_links(pull):
+    """Bet-slip links are asked on the reads a pick can come from (B and C), not on the 1 PM baseline."""
+    return pull in ("B", "C")
 
 
 def request_books(cfg, others=True):
@@ -624,9 +655,22 @@ def match_events(events, games, hours):
     return out, unknown
 
 
-def _outcome_rows(m, find, unmatched):
+_LINK_RE = re.compile(r"https://[^\s<>\"'\\\x00-\x1f\x7f\u200e\u200f\u202a-\u202e\u2066-\u2069]{4,590}")
+
+
+def safe_link(x):
+    """A bet-slip link we are willing to keep, show or post: https only, bounded, no whitespace / control / bidi characters and
+    none of < > " ' \\ (so it can never close a Discord <...> or an HTML attribute). Anything else is None."""
+    return x if isinstance(x, str) and _LINK_RE.fullmatch(x) else None
+
+
+_safe_link = safe_link
+
+
+def _outcome_rows(m, find, unmatched, links=False):
     """One market's feed outcomes -> our rows (over/under with a price only). find(name) -> player or None.
-    unmatched: list that collects names no roster player matched (None = do not collect)."""
+    unmatched: list that collects names no roster player matched (None = do not collect).
+    links: also keep the feed's bet-slip link for the outcome (Hard Rock only: other books' links are never stored)."""
     rows = []
     for o in m.get("outcomes", []) or []:
         who = o.get("description") or ""
@@ -641,8 +685,11 @@ def _outcome_rows(m, find, unmatched):
             line = float(o["point"]) if o.get("point") is not None else None
         except (TypeError, ValueError):
             continue
-        rows.append({"name": who, "pid": p["id"] if p else None, "team": p["team"] if p else None,
-                     "side": side, "line": line, "price": price})
+        row = {"name": who, "pid": p["id"] if p else None, "team": p["team"] if p else None,
+               "side": side, "line": line, "price": price}
+        if links and _safe_link(o.get("link")):
+            row["link"] = o["link"]
+        rows.append(row)
     return rows
 
 
@@ -670,7 +717,8 @@ def normalize(payload, game, matcher, requested_keys, pull, at, cost, cfg, other
 
     for m in (book or {}).get("markets", []) or []:
         name = key_to_market.get(m.get("key"), m.get("key"))
-        out["markets"][name] = {"last_update": m.get("last_update"), "outcomes": _outcome_rows(m, find, out["unmatched"])}
+        out["markets"][name] = {"last_update": m.get("last_update"),
+                                "outcomes": _outcome_rows(m, find, out["unmatched"], links=wants_links(pull))}
     if others:
         oth = {}
         for b in (payload or {}).get("bookmakers", []) or []:

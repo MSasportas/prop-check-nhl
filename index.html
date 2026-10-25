@@ -83,7 +83,7 @@ button{font:inherit;color:inherit;background:none;border:0;padding:0;margin:0;te
 .rank{font:600 17px/22px var(--display);color:var(--accent);flex:none;min-width:12px}
 .name{font:600 17px/22px var(--display);letter-spacing:.01em;flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .meta{font-size:12px;line-height:16px;color:var(--muted);white-space:nowrap;flex:none}
-.own{color:var(--fg);font-weight:600}
+.own{color:var(--accent);border:1px solid var(--accent);border-radius:4px;padding:0 4px;font-weight:600;letter-spacing:.02em}
 .r2{display:flex;align-items:flex-start;gap:8px;margin-top:2px}
 .bet{font:600 20px/24px var(--display);letter-spacing:.01em;flex:1;min-width:0;overflow-wrap:anywhere;padding-top:1px}
 .price{font:600 26px/26px var(--display);min-width:76px;text-align:right;flex:none;white-space:nowrap}
@@ -97,6 +97,9 @@ button{font:inherit;color:inherit;background:none;border:0;padding:0;margin:0;te
 .bar u{position:absolute;top:-3px;bottom:-3px;width:2px;margin-left:-1px;background:var(--fg);border-radius:1px}
 .reason{font-size:14px;line-height:20px;margin-top:6px;overflow-wrap:anywhere}
 .clamp3{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:3;overflow:hidden}
+.betlink{display:flex;align-items:center;justify-content:center;gap:6px;min-height:44px;margin-top:10px;border-radius:8px;background:var(--accent);
+  color:#06202e;font-weight:600;font-size:15px;text-decoration:none}
+.betlink:focus-visible{outline:2px solid var(--fg);outline-offset:2px}
 .chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px}
 .chip{display:inline-flex;align-items:center;gap:5px;height:24px;padding:0 9px 0 7px;border-radius:12px;font-size:12px;line-height:16px;
   background:var(--raise);border:1px solid var(--line);color:var(--fg);max-width:100%;white-space:nowrap}
@@ -381,17 +384,16 @@ function matchup(p, games) {
   return { text: away ? str(away) + ' at ' + str(home) : '', start: start, time: fTime(start),
            away: away, home: home, own: p.team };
 }
-/* The matchup as nodes: the player's own team is set in the main text colour, the opponent stays muted. */
+/* The matchup as nodes, the way Discord says it: HIS team first as a pill, then "@ opponent" (away) or "vs opponent" (home). */
 function muNodes(mu, withTime) {
-  var out = [];
-  if (mu.away) {
-    var own = str(mu.own);
-    [str(mu.away), str(mu.home)].forEach(function (t, i) {
-      if (i) out.push(' at ');
-      out.push(t && t === own ? h('span', { class: 'own', title: 'His team', text: t }) : t);
-    });
+  var out = [], own = str(mu.own), away = str(mu.away), home = str(mu.home);
+  if (mu.away && own && (own === away || own === home)) {
+    var isHome = own === home;
+    out.push(h('span', { class: 'own', title: 'His team', text: own }), (isHome ? ' vs ' : ' @ ') + (isHome ? away : home));
+  } else if (mu.away) {
+    out.push(away + ' at ' + home);
   }
-  if (withTime && mu.time) out.push((out.length ? ' · ' : '') + mu.time);
+  if (withTime && mu.time) out.push((out.length ? ' \u00b7 ' : '') + mu.time);
   return out;
 }
 function hasStarted(p, games) {
@@ -608,6 +610,12 @@ function pickCard(p, d, opts) {
     tp ? h('span', { class: 'chip hollow', text: tp }) : null,
     (S.newIds[id] && !opts.noNew && !stale()) ? h('span', { class: 'chip new', text: 'New' }) : null));
   var res = resultLine(p.graded); if (res) card.insertBefore(res, card.firstChild);
+  /* Hard Rock's own bet-slip link for this bet (only when the feed sent one). It opens in a new tab and never toggles the card. */
+  if (typeof p.link === 'string' && /^https:\/\/[^\s<>"'\\\u0000-\u001f\u007f\u200e\u200f\u202a-\u202e\u2066-\u2069]{4,590}$/.test(p.link) &&
+      !p.pulled && !isObj(p.graded) && !/^locked/.test(str(p.state)) && !stale()) {
+    card.appendChild(h('a', { class: 'betlink', href: p.link, target: '_blank', rel: 'noopener noreferrer', 'aria-label': 'Bet this on Hard Rock',
+      on: { click: function (e) { e.stopPropagation(); }, keydown: function (e) { e.stopPropagation(); } } }, 'Bet on Hard Rock \u2197'));
+  }
 
   if (isOpen) {
     var more = h('div', { class: 'more' });

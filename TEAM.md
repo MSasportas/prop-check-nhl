@@ -140,6 +140,17 @@ probability x Hard Rock decimal payout - 1, on unrounded numbers; every threshol
   be thin or stale: the existing freshness, two-sided and hold 0-15% rules apply, the median limits one odd book, and a book that proves noisy comes out
   (a section 8 entry). Next candidates if one is silent (all keys from the-odds-api.com bookmaker list): bovada, betanysports, kalshi, matchbook. Never
   go past 10 books a request (a second billed region).
+- **Bet-slip links, team pill, all-books probe (2026-10-25, Matt):**
+  (1) `Client.event_odds` adds `includeLinks=true` on B and C reads (not A; `ops.odds_links` false switches it off); a failed OR empty read with it is asked again once
+  without it (never an unreadable 200, which was probably billed). Only Hard Rock's outcome links are kept (`odds.safe_link`: https, <= 590 chars, no whitespace,
+  control, bidi or `< > " ' \\`), only on B/C rows; other books' links are never stored. The flag event carries `link` (flags only), the pick body freezes it in the
+  Record `shown` event, slate.json has `link`, the page shows a "Bet on Hard Rock" button (not for pulled, locked, graded or stale picks), Discord adds `Bet slip: <url>`.
+  **Unverified until the first live B read** whether Hard Rock player props come back with links and whether credits per read stay the same (check `data/odds/<date>.json`
+  outcomes for `link` and the ledger cost per fetch); no link = no button, nothing breaks. About +0.4 MB/day of odds data if links come.
+  (2) Page: the player's team is a pill first, like Discord ("[COL] @ DAL" away, "[COL] vs DAL" home).
+  (3) `scripts/book_probe.py`, a ONE-TIME soft step: no `bookmakers=` filter, `ops.book_probe.regions` (default us, us2, us_ex, eu, uk), about 5 credits (ledger pull "P"),
+  for one game 35-120 min from puck after pull A, budget-guarded, 3 tries. Writes `data/state/book_probe.json` (per book: two-sided pairs, players, lines, hold, age,
+  gap to Pinnacle) and `book_probe_pairs.json.gz`. Used to choose the sharp-book list (item 24). Research only.
 - **Gap + Guard (live from 2026-10-20).** `scripts/paper.py` is the single source of the maths and writes the research log
   (`data/paper/`); `scripts/engine.py` turns each flag into a Record `shown` event (`pick.gg_id` = the flag id) with the
   price frozen, then looks after it (state, pull, lock). Spec: section 4. Config `ops.gap_guard` {active, live_from
@@ -376,13 +387,14 @@ probability x Hard Rock decimal payout - 1, on unrounded numbers; every threshol
     **Watch tracks stay as machinery** (`ops.gap_guard.watch`, empty now): the same Gap + Guard maths on the same reads into `data/paper_watch/<id>/`,
     research only, 0 credits, can't touch picks, the Record, page, Discord or status.json (`paper._watch_one`, QA SHIP 2026-10-23). The `line35` log
     (Oct 23 morning) stays in the repo untouched. **Volume ladder (rungs tracked in `watch` first, promoted only on a gate pre-registered here; not started until
-    Matt says go):** (2) near-miss band, gap 2.0-3.0% on 1.5/2.5/3.5; (3) books_min 4 -> 3 (Pinnacle still required); (4) more books (see section 5, "Other books":
+    Matt says go):** (2) near-miss band, gap 2.0-3.0% on 1.5/2.5/3.5; (3) books_min 4 -> 3 (Pinnacle still required); (4) better books, in progress: after the 2026-10-23 swap novig and prophetx return NHL shots, lowvig returned nothing (Oct 23-24 reads); Matt wants QUALITY SHARP books over a bigger count, so the list is chosen from the one-time all-books probe (section 5) by hold, gap to Pinnacle, coverage of 1.5/2.5/3.5 and freshness, not from guesses; (see section 5, "Other books":
     asking is free up to 10 books per read; only 6 of the 9 asked return NHL shots, so 3 slots are dead weight). Never: dropping the guard or Pinnacle, tuning a
     threshold on the live sample.
 
 ## 8. Rule-change log
 | Date | Change | Why | Sample |
 |---|---|---|---|
+| 2026-10-25 (CEO, Matt; Builder, QA SHIP WITH FIXES, fixed) | **No qualifying value changed.** Bet-slip link on picks (button + Discord), player's team pill on the page, one-time all-books probe to choose sharp books | Matt: hard to tell which team the player is on; wants a Hard Rock bet-slip link like Winnable; wants to compare against quality sharp books, not a count | Items 24; Oct 23-24 reads: novig, prophetx return shots, lowvig none |
 | 2026-10-23 (CEO, Matt's order; Builder) | **Other-books list swapped (rung 4):** williamhill_us, betrivers, fanatics out (they return nothing for NHL shots); lowvig, novig, prophetx in. Same 9 + Hard Rock, same credits. Step 1's market fair = median of whichever books return fresh two-sided prices, so this changes the market estimate once they return | Matt: replace the 3 dead ones with historically sharp books. More returning books = more lines reach 4 books and Pinnacle-weighted consensus is less dependent on one source | Oct 20-22 shadow: 71% of 1.5 lines had >= 4 books, Pinnacle on 61%; no data yet on the new three |
 | 2026-10-23 (CEO, Matt's order; Builder, QA) | **3.5 goes live as a pick line (v3.3): `lines` [1.5, 2.5, 3.5], offset 3.5 +0.017 provisional; watch machinery kept, tracks empty.** (Earlier the same morning a research-only `line35` watch track was added.) The `line35` watch log (Oct 23 morning) stays in the repo; offset refit and the volume ladder are in section 7 item 24 | Matt: first "track 3.5 for 3 days", then "add the 3.5 to the live process, no more behind the scenes"; grow volume methodically | Item 24; Oct 20-22 shadow: 35 lines at 3.5, 0 at gap >= 3% |
 | 2026-10-21 (CEO, Matt's question; Builder, QA SHIP) | **v3.2 wording only, no qualifying value changed.** Pulls judged again at the shown price and say what it means if already bet; "Price final" chip + Discord ping after the last price read; Discord cap 6 -> 12/day. Old label "Our model no longer backs this price" retired (Record keeps the two Oct 20 events as written) | Matt: if he bets and it gets pulled an hour later, is he stuck? Both Oct 20 pulls (Thomas, Beniers) were labeled "model" but the model never changed: Beniers was Hard Rock -105 -> -110 (still +4.0% at -105), Thomas was a 0.6 pt market drift (+1.3% at -105) | Oct 20: 5 picks, 2 pulled (1-1). Bet-early vs wait-for-final is checked at Nov 2 (item 22) |
@@ -402,6 +414,7 @@ probability x Hard Rock decimal payout - 1, on unrounded numbers; every threshol
 | 2026-10-11 | v1.0 set (section 4) | First build: Sharp standard from the DS backtest (2024-25 fit, 2025-26 out of sample) and one live Hard Rock pull | Backtest only; 0 graded live legs |
 
 ## 9. Session log (newest first, one line each)
+- 2026-10-25 ~9 AM (Matt: ask all books and choose sharp ones; team on the page; bet-slip link): book_probe step, team pill, includeLinks + Bet on Hard Rock button + Discord link; QA found 5 (pulled picks showed the button, 422 fallback, double-spend, link characters, size) and all fixed; 358 tests. Open: read the probe when it runs (first game 35-120 min out after 1 PM with budget) and set `consensus_books`; confirm links come back for Hard Rock props.
 - 2026-10-25 ~8:05 AM Researcher run 10 (daily, shots): X1-X3 registered before testing (Hard Rock chasing its own number, weekend public nights, prior-season anchor); 11 variants, none positive with n >= 300 (best X1 +2.1% n96), no lockbox look (still 2). Forward Q1a +7.3% n237, Q1c +13.4% n124 (6 nights, too small); Q8a-c (Q1a by book count) registered forward from tonight. Nothing passed.
 - 2026-10-23 ~10:30 AM (Matt: replace the 3 dead books with sharp ones): consensus_books swapped (lowvig, novig, prophetx in; 345 tests). Check after the 1 PM read that the new books returned NHL shots and that no pull failed.
 - 2026-10-23 ~10 AM (Matt: track 3.5 for 3 days, then "add the 3.5 to the live process"): watch track machinery built and QA'd (SHIP), then 3.5 made a live line (v3.3, provisional offset +0.017), 345 tests. The 3-day gate and its scheduled Monday task were dropped. Refit of the 3.5 offset still open (item 24).
