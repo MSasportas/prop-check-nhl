@@ -1,22 +1,22 @@
 {
  "slate_date": "2026-10-24",
- "generated_at": "2026-10-24T22:20:00-04:00",
- "status_at": "2026-10-24T22:20:00-04:00",
+ "generated_at": "2026-10-24T22:30:00-04:00",
+ "status_at": "2026-10-24T22:30:00-04:00",
  "valid_until": "2026-10-25T05:00:00-04:00",
  "status": {
   "prices_state": "ok",
   "prices_at": "2026-10-24T21:20:01-04:00",
   "next_price_read_at": null,
-  "stats_built_at": "2026-10-24T22:10:01-04:00",
+  "stats_built_at": "2026-10-24T22:30:00-04:00",
   "stats_through": "2026-10-23",
   "lineups_at": "2026-10-24T21:40:01-04:00",
   "goalies_at": null,
   "lineups_note": "16 of 24 team line pages are dated today.",
   "lineups_state": "ok",
-  "stats_state": "behind",
+  "stats_state": "ok",
   "last_run": {
    "ok": true,
-   "at": "2026-10-24T22:20:00-04:00",
+   "at": "2026-10-24T22:30:00-04:00",
    "failed_step": null
   },
   "pool": {
@@ -32,19 +32,7 @@
     "reason": "stats behind"
    },
    {
-    "team": "CAR",
-    "reason": "stats behind"
-   },
-   {
-    "team": "CBJ",
-    "reason": "stats behind"
-   },
-   {
     "team": "EDM",
-    "reason": "stats behind"
-   },
-   {
-    "team": "NSH",
     "reason": "stats behind"
    },
    {
@@ -56,23 +44,11 @@
     "reason": "stats behind"
    },
    {
-    "team": "PIT",
-    "reason": "stats behind"
-   },
-   {
     "team": "SJS",
     "reason": "stats behind"
    },
    {
-    "team": "STL",
-    "reason": "stats behind"
-   },
-   {
     "team": "TOR",
-    "reason": "stats behind"
-   },
-   {
-    "team": "VGK",
     "reason": "stats behind"
    }
   ],
@@ -83,13 +59,13 @@
  "banners": [
   {
    "level": "warn",
-   "text": "Not covered tonight: BOS, CAR, CBJ, EDM, NSH, NYR, OTT, PIT, SJS, STL, TOR, VGK (stats behind)."
+   "text": "Not covered tonight: BOS, EDM, NYR, OTT, SJS, TOR (stats behind)."
   }
  ],
  "empty": {
-  "code": "stats_behind",
-  "text": "Stats are behind, so no picks until they catch up.",
-  "sub": null
+  "code": "all_started",
+  "text": "Every game has started.",
+  "sub": "Tonight's picks are under Started."
  },
  "games": [
   {
@@ -215,11 +191,8 @@
    },
    "started": true,
    "picks": 1,
-   "excluded_reason": "stats behind",
-   "excluded_teams": [
-    "NSH",
-    "PIT"
-   ]
+   "excluded_reason": null,
+   "excluded_teams": []
   },
   {
    "id": 2026020173,
@@ -266,11 +239,8 @@
    },
    "started": true,
    "picks": 1,
-   "excluded_reason": "stats behind",
-   "excluded_teams": [
-    "VGK",
-    "CBJ"
-   ]
+   "excluded_reason": null,
+   "excluded_teams": []
   },
   {
    "id": 2026020175,
@@ -293,11 +263,8 @@
    },
    "started": true,
    "picks": 1,
-   "excluded_reason": "stats behind",
-   "excluded_teams": [
-    "CAR",
-    "STL"
-   ]
+   "excluded_reason": null,
+   "excluded_teams": []
   },
   {
    "id": 2026020176,
@@ -799,7 +766,11 @@
    ],
    "pulled": null,
    "price_final": false,
-   "graded": null,
+   "graded": {
+    "result": "W",
+    "actual": "had 0",
+    "units": 0.9091
+   },
    "rank": null,
    "tier": "main",
    "game_id": 2026020175,
