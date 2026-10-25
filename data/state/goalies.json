@@ -15,7 +15,7 @@
   },
   "NYI": {
    "name": "Ilya Sorokin",
-   "status": "expected"
+   "status": "confirmed"
   },
   "WPG": {
    "name": "Stuart Skinner",
@@ -42,5 +42,5 @@
    "status": "confirmed"
   }
  },
- "checked_at": "2026-10-25T16:40:00-04:00"
+ "checked_at": "2026-10-25T16:50:00-04:00"
 }
