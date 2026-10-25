@@ -1,10 +1,10 @@
 {
  "ok": true,
  "slate_date": "2026-10-25",
- "started_at": "2026-10-25T19:00:01-04:00",
- "status_at": "2026-10-25T19:00:01-04:00",
- "finished_at": "2026-10-25T19:00:02-04:00",
- "last_ok_at": "2026-10-25T19:00:01-04:00",
+ "started_at": "2026-10-25T19:20:01-04:00",
+ "status_at": "2026-10-25T19:20:01-04:00",
+ "finished_at": "2026-10-25T19:20:02-04:00",
+ "last_ok_at": "2026-10-25T19:20:01-04:00",
  "failed_step": null,
  "steps": [
   {
@@ -29,13 +29,13 @@
   },
   {
    "step": "lineup_history",
-   "status": "ok",
-   "note": "2 team(s) changed"
+   "status": "skipped",
+   "note": "no change"
   },
   {
    "step": "odds",
    "status": "ok",
-   "note": "no pull due"
+   "note": "1 game(s) priced"
   },
   {
    "step": "market_menu",
@@ -64,8 +64,8 @@
   },
   {
    "step": "shadow",
-   "status": "skipped",
-   "note": "nothing new"
+   "status": "ok",
+   "note": "21 line read(s) logged"
   },
   {
    "step": "gg_grade",
@@ -101,7 +101,7 @@
   },
   {
    "n": 3,
-   "left": 86
+   "left": 84
   },
   {
    "n": 4,
@@ -132,14 +132,14 @@
    "left": 221
   }
  ],
- "pool_total": 1721,
+ "pool_total": 1719,
  "allowance": 37.1277,
  "tier": 4,
  "budget_today": 185,
- "budget_used_today": 24,
+ "budget_used_today": 26,
  "prices_state": "ok",
- "prices_at": "2026-10-25T18:30:01-04:00",
- "next_price_read_at": "2026-10-25T19:15:00-04:00",
+ "prices_at": "2026-10-25T19:20:01-04:00",
+ "next_price_read_at": "2026-10-25T20:30:00-04:00",
  "unmatched_names": [
   "Elias Pettersson"
  ],
@@ -152,7 +152,7 @@
  ],
  "excluded_teams": [],
  "stats_through": "2026-10-25",
- "lineups_at": "2026-10-25T19:00:01-04:00",
+ "lineups_at": "2026-10-25T19:20:01-04:00",
  "lineups_note": "6 of 10 team line pages are dated today.",
  "games_today": 5,
  "record_events": 63,
@@ -161,10 +161,10 @@
  ],
  "runner": {
   "event": "workflow_dispatch",
-  "run_id": "40239697479",
-  "iteration": 5,
-  "chain_link": 309,
+  "run_id": "40243515357",
+  "iteration": 2,
+  "chain_link": 310,
   "chain_started_at": "2026-10-16T10:00:13-04:00",
-  "run_started_at": "2026-10-25T18:20:14-04:00"
+  "run_started_at": "2026-10-25T19:10:13-04:00"
  }
 }
