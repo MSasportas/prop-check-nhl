@@ -26,11 +26,11 @@
    "status": "expected"
   },
   "NSH": {
-   "name": "Juuse Saros",
+   "name": "Justus Annunen",
    "status": "expected"
   },
   "COL": {
-   "name": "Mackenzie Blackwood",
+   "name": "Scott Wedgewood",
    "status": "expected"
   },
   "VAN": {
@@ -42,5 +42,5 @@
    "status": "confirmed"
   }
  },
- "checked_at": "2026-10-25T05:00:01-04:00"
+ "checked_at": "2026-10-25T07:30:01-04:00"
 }
