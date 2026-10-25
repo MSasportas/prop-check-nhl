@@ -59,3 +59,4 @@
 {"actual":2,"actual_text":"had 2","at":"2026-10-24T22:40:00-04:00","id":"2026-10-24:2026020170:8482175:shots:2.5:under","price":-145,"result":"W","t":"graded","units":0.6897}
 {"actual":4,"actual_text":"had 4","at":"2026-10-24T22:50:00-04:00","id":"2026-10-24:2026020171:8481604:shots:2.5:over","price":120,"result":"W","t":"graded","units":1.2}
 {"actual":2,"actual_text":"had 2","at":"2026-10-24T22:50:00-04:00","id":"2026-10-24:2026020171:8482105:shots:2.5:under","price":-140,"result":"W","t":"graded","units":0.7143}
+{"actual":2,"actual_text":"had 2","at":"2026-10-25T00:30:01-04:00","id":"2026-10-24:2026020177:8478519:shots:1.5:under","price":-120,"result":"L","t":"graded","units":-1.0}
