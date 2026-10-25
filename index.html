@@ -47,7 +47,7 @@ button{font:inherit;color:inherit;background:none;border:0;padding:0;margin:0;te
 .rowbtn{display:flex;align-items:center;gap:8px;width:100%;min-height:44px;padding:4px 0}
 .rowbtn .grow{flex:1;min-width:0}
 .chev{flex:none;color:var(--muted);display:flex}
-.statusline{font-size:12px;line-height:17px;color:var(--muted);display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;overflow:hidden}
+.statusline{font-size:12px;line-height:17px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .statusline .lowpool{color:var(--warn);font-weight:500}
 .strip{border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
 .strip .grow{font:600 18px/22px var(--display);letter-spacing:.01em}
@@ -79,9 +79,9 @@ button{font:inherit;color:inherit;background:none;border:0;padding:0;margin:0;te
 .card{display:block;width:100%;background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:10px 12px;overflow:hidden}
 .card[role=button]{cursor:pointer}
 .card[aria-expanded="true"]{border-color:#35485c}
-.r1{display:flex;align-items:baseline;gap:8px}
+.r1{display:flex;flex-wrap:wrap;align-items:baseline;column-gap:8px}
 .rank{font:600 17px/22px var(--display);color:var(--accent);flex:none;min-width:12px}
-.name{font:600 17px/22px var(--display);letter-spacing:.01em;flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.name{font:600 17px/22px var(--display);letter-spacing:.01em;flex:1 1 auto;min-width:0;white-space:normal;overflow-wrap:anywhere}
 .meta{font-size:12px;line-height:16px;color:var(--muted);white-space:nowrap;flex:none}
 .own{color:var(--accent);border:1px solid var(--accent);border-radius:4px;padding:0 4px;font-weight:600;letter-spacing:.02em}
 .r2{display:flex;align-items:flex-start;gap:8px;margin-top:2px}
@@ -129,8 +129,8 @@ button{font:inherit;color:inherit;background:none;border:0;padding:0;margin:0;te
 .dim{opacity:.6}
 .dim .meta,.dim .note,.dim .stamp,.dim .mu{color:var(--fg)}
 .strike{text-decoration:line-through;text-decoration-thickness:2px}
-.lastprice{flex:none;text-align:right;font-size:12px;line-height:16px;white-space:nowrap;padding-top:5px}
-.lastprice span{font:600 17px/20px var(--display)}
+.lastprice{flex:none;text-align:right;font-size:12px;line-height:16px;white-space:nowrap;padding-top:2px}
+.lastprice span{display:block;font:600 17px/20px var(--display)}
 
 /* games */
 .list{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:2px 12px}
@@ -352,8 +352,8 @@ function pctB(o) { return pctGiven(o.breakeven_pct) || pctNear(o.breakeven); }
 function units(v, dp) {
   var n = num(v); if (n == null) return null;
   var s = Math.abs(n).toFixed(dp);
-  if (parseFloat(s) === 0) return s + 'u';
-  return (n > 0 ? '+' : '-') + s + 'u';
+  if (parseFloat(s) === 0) return s + ' units';
+  return (n > 0 ? '+' : '-') + s + ' units';
 }
 function signCls(v) { var n = num(v); return n == null || n === 0 ? '' : (n > 0 ? 'pos' : 'neg'); }
 function payout(a) { var n = num(a); if (n == null || n === 0) return null; return n > 0 ? n / 100 : 100 / Math.abs(n); }
@@ -552,10 +552,18 @@ function stateChip(state) {
   return h('span', { class: 'chip ' + s[0] }, icon(s[1], 13), s[2]);
 }
 var RESULT = { W: ['Hit', 'W'], L: ['Miss', 'L'], PUSH: ['Push', 'PUSH'], VOID: ['Void', 'VOID'] };
-function resultLine(g) {
+/* "had 0" -> "had 0 shots" / "had 31 saves", from the bet or market */
+function actualText(a, kind) {
+  var t = str(a), m = /^had (\d+)$/.exec(t); if (!m) return t;
+  var k = str(kind).toLowerCase(), one = m[1] === '1';
+  if (/save/.test(k)) return t + (one ? ' save' : ' saves');
+  if (/shot/.test(k)) return t + (one ? ' shot' : ' shots');
+  return t;
+}
+function resultLine(g, kind) {
   if (!isObj(g) || g.result == null) return null;
   var r = RESULT[str(g.result)], word = r ? r[0] : str(g.result);
-  var act = g.actual == null ? '' : str(g.actual);
+  var act = g.actual == null ? '' : actualText(g.actual, kind);
   return h('div', { class: 'result' }, h('span', { class: 'tg ' + (r ? r[1] : 'none'), text: word }), act ? h('span', { text: ' \u00b7 ' + act }) : null);
 }
 function toggleBtnKeys(fn) {
@@ -597,20 +605,18 @@ function pickCard(p, d, opts) {
     ' · bet at this price or better' : 'read time not posted';
   card.appendChild(stamp);
 
-  var gap = signedPct(p.gap_pct), nb = num(p.n_books), mf = num(p.market_fair_pct);
-  card.appendChild(h('div', { class: 'chance' }, 'Gap ', h('b', { text: gap || 'not posted' }), ' vs market',
-    (nb != null && mf != null) ? ' (' + nb + ' books say ' + mf.toFixed(1) + '%)' : ''));
   var pc = pctP(p), be = pctB(p), gd = isObj(p.guard) ? p.guard : {};
   card.appendChild(h('div', { class: 'chance' }, gd.verdict === 'agrees' ? 'Model agrees · ' : '', 'We say ', h('b', { text: pc || 'not posted' }), be ? ' · price needs ' + be : ''));
   var bar = chanceBar(p.p, p.breakeven); if (bar) card.appendChild(bar);
-  if (p.reason) card.appendChild(h('div', { class: 'reason', text: str(p.reason) }));
+  var rsn = str(p.reason).replace(/\s*\(our blend:\s*[\d.]+%\)/gi, '');   /* the % is already on the "We say" line */
+  if (rsn) card.appendChild(h('div', { class: 'reason', text: rsn }));
   var tp = (!isObj(p.graded) && !/^locked/.test(str(p.state))) ? toPuck(p.start || (d.games[p.game_id] && d.games[p.game_id].start)) : '';
   card.appendChild(h('div', { class: 'chips' },
     settledChip(p),
     (p.price_final && !/^locked/.test(str(p.state))) ? h('span', { class: 'chip ok' }, icon('check', 13), 'Price final') : null,
     tp ? h('span', { class: 'chip hollow', text: tp }) : null,
     (S.newIds[id] && !opts.noNew && !stale()) ? h('span', { class: 'chip new', text: 'New' }) : null));
-  var res = resultLine(p.graded); if (res) card.insertBefore(res, card.firstChild);
+  var res = resultLine(p.graded, p.market || p.bet); if (res) card.insertBefore(res, card.firstChild);
   /* Hard Rock's own bet-slip link for this bet (only when the feed sent one). It opens in a new tab and never toggles the card. */
   if (typeof p.link === 'string' && /^https:\/\/[^\s<>"'\\\u0000-\u001f\u007f\u200e\u200f\u202a-\u202e\u2066-\u2069]{4,590}$/.test(p.link) &&
       !p.pulled && !isObj(p.graded) && !/^locked/.test(str(p.state)) && !stale()) {
@@ -620,6 +626,9 @@ function pickCard(p, d, opts) {
 
   if (isOpen) {
     var more = h('div', { class: 'more' });
+    var gap = signedPct(p.gap_pct), nb = num(p.n_books), mf = num(p.market_fair_pct);
+    more.appendChild(h('div', null, 'Gap ', h('b', { text: gap || 'not posted' }), ' vs market',
+      (nb != null && mf != null) ? ' (' + nb + ' books say ' + mf.toFixed(1) + '%)' : ''));
     more.appendChild(h('div', { text: 'Price ' + odds(p.price) + (fTime(p.first_price_at || p.price_at) ? ' read ' + fTime(p.first_price_at || p.price_at) : '') + '. It is frozen: this is the price graded on the Record.' }));
     var gu = num(p.games_used), gs = num(p.games_this_season);
     more.appendChild(h('div', { text: 'Games used: ' + (gu == null ? 'not posted' : gu) + (gs == null ? '' : ' (' + gs + ' this season)') }));
@@ -638,35 +647,42 @@ function pulledBar(pulled) {
   return h('div', { class: 'pullbar' }, h('span', { class: 'ic' }, icon('stop', 16)),
     h('div', { class: 'why' }, h('b', { text: 'PULLED' + (at ? ' ' + at : '') }), why ? ' · ' + why : ''));
 }
-var PULL_NOTE = 'If you already bet it, it still counts on the Record under Pulled.';
+/* one "already bet" line per pull: a scratch voids at Hard Rock; anything else keeps the engine's advice, or the Record note */
+function ifBetText(pl) {
+  pl = isObj(pl) ? pl : {};
+  if (pl.code === 'out' || /void|no ice time/i.test(str(pl.if_bet)) || /scratch|out of the lineup|no ice time/i.test(str(pl.reason)))
+    return 'Already bet it? Hard Rock voids it, so you get your stake back.';
+  return pl.if_bet ? str(pl.if_bet) : "Already bet it? It's still graded on the Record under Pulled.";
+}
 function pulledCard(p, d) {
   var mu = matchup(p, d.games);
   return h('div', { class: 'card', 'data-id': str(p.id) },
     pulledBar(p.pulled),
-    (isObj(p.pulled) && p.pulled.if_bet) ? h('div', { class: 'ifbet', text: str(p.pulled.if_bet) }) : null,
+    h('div', { class: 'ifbet', text: ifBetText(p.pulled) }),
     h('div', { class: 'dim' },
       h('div', { class: 'r1' }, h('span', { class: 'name', text: p.player || 'Player not named' }),
         h('span', { class: 'meta' }, muNodes(mu, true))),
-      h('div', { class: 'r2' }, h('div', { class: 'bet strike', text: p.bet || 'Bet not posted' }),
-        h('div', { class: 'lastprice' }, 'Last price shown ', h('span', { text: odds(p.price) }))),
-      resultLine(p.graded),
-      h('div', { class: 'note', text: PULL_NOTE })));
+      h('div', { class: 'r2' }, h('div', { class: 'bet', text: p.bet || 'Bet not posted' }),
+        h('div', { class: 'lastprice' }, 'Last price shown ', h('span', { class: 'strike', text: odds(p.price) }))),
+      resultLine(p.graded, p.market || p.bet)));
 }
 
 /* ---------- Tonight ---------- */
+/* One line: warnings first, so the ellipsis only ever cuts routine times (the full list is in the Update status sheet). */
 function statusText(st, exp) {
-  var out = [];
+  var warn = [], out = [];
   if (exp) out.push('Prices not read yet');
-  else if (st.prices_state === 'keys_refused') out.push('Prices off: odds keys refused');
-  else if (st.prices_state === 'pool_empty' || st.prices_state === 'feed_down') out.push('No prices today');
+  else if (st.prices_state === 'keys_refused') warn.push('Prices off: odds keys refused');
+  else if (st.prices_state === 'pool_empty' || st.prices_state === 'feed_down') warn.push('No prices today');
   else out.push(fStamp(st.prices_at) ? 'Prices ' + fStamp(st.prices_at) : 'Prices not read yet');
   if (!exp) {
-    out.push(lineupShort(st));
+    (st.lineups_state === 'failed' ? warn : out).push(lineupShort(st));
     if (fStamp(st.goalies_at)) out.push('Goalies ' + fStamp(st.goalies_at));
   }
-  if (st.stats_through) out.push((st.stats_state === 'behind' ? 'Stats behind, through ' : 'Stats ') + fDateShort(st.stats_through));
-  else out.push(st.stats_state === 'behind' ? 'Stats behind' : 'Stats not built yet');
-  return { text: out.join(' \u00b7 '), odds: oddsShort(st) };
+  /* stats only when they need saying: behind, or not built at all */
+  if (st.stats_state === 'behind') warn.push(st.stats_through ? 'Stats behind, through ' + fDateShort(st.stats_through) : 'Stats behind');
+  else if (!st.stats_through) warn.push('Stats not built yet');
+  return { warn: warn, text: out.join(' \u00b7 '), odds: oddsShort(st) };
 }
 function lineupShort(st) {
   var at = fStamp(st.lineups_at);
@@ -684,11 +700,16 @@ function oddsShort(st) {
   if (n == null) return null;
   n = Math.max(0, Math.floor(n));
   var t = 'about ' + n + (n === 1 ? ' day' : ' days') + ' left';
-  return pool.low === true ? { low: true, text: 'Odds low: ' + t, days: t } : { low: false, text: 'Odds: ' + t, days: t };
+  return pool.low === true ? { low: true, n: n, text: 'Odds low: ' + t, days: t } : { low: false, n: n, text: 'Odds: ' + t, days: t };
 }
 function statusLineEl(s) {
-  var el = h('span', { class: 'grow statusline' }, s.text);
-  if (s.odds) { el.appendChild(node(' \u00b7 ')); el.appendChild(h('span', { class: s.odds.low ? 'lowpool' : null, text: s.odds.text.replace(/ /g, '\u00a0') })); }
+  var el = h('span', { class: 'grow statusline' }), bits = [];
+  var od = s.odds ? h('span', { class: s.odds.low ? 'lowpool' : null, text: (s.odds.low ? 'Odds keys low: ' : 'Odds keys: ') + s.odds.n + (s.odds.n === 1 ? ' day' : ' days') }) : null;
+  if (od && s.odds.low) bits.push(od);
+  s.warn.forEach(function (w) { bits.push(w); });
+  if (s.text) bits.push(s.text);
+  if (od && !s.odds.low) bits.push(od);
+  bits.forEach(function (b, i) { if (i) el.appendChild(node(' \u00b7 ')); el.appendChild(node(b)); });
   return el;
 }
 /* the summary row for graded parlays, or null when none is graded yet */
@@ -752,7 +773,7 @@ function renderTonight() {
   }
   if (S.fetchFail === 'file') app.appendChild(banner('warn', "The picks file couldn't be read.", 'Trying again. Showing what loaded at ' + (fTime(S.loadedAt) || 'an earlier time') + '.'));
   else if (S.fetchFail) app.appendChild(banner('warn', "Can't reach the picks right now.", 'Showing what loaded at ' + (fTime(S.loadedAt) || 'an earlier time') + '.'));
-  if (!exp) arr(sl.banners).forEach(function (b) { var e = engineBanner(b); if (e) app.appendChild(e); });
+  if (!exp) arr(sl.banners).forEach(function (b) { var e = engineBanner(notCovered(b, d.games)); if (e) app.appendChild(e); });
   if (exp) { app.appendChild(footer()); return; }
 
   if (S.since && !stale()) {                     /* nothing is "new" while updates have stopped */
@@ -817,6 +838,20 @@ function renderTonight() {
 
   app.appendChild(footer());
 }
+/* The engine's "Not covered tonight: DAL, COL (stats behind)." lists only teams whose game has not started; null when none is left. */
+function notCovered(b, games) {
+  var text = str(isObj(b) ? b.text : b), m = /^Not covered tonight: (.+?) \((.+)\)\.?$/.exec(text);
+  if (!m) return b;
+  var gs = Object.keys(games).map(function (k) { return games[k]; });
+  var teams = m[1].split(/,\s*/).filter(function (t) {
+    var mine = gs.filter(function (g) { return g.away === t || g.home === t; });
+    if (!mine.length) return true;
+    return mine.some(function (g) { var x = ms(g.start); return !g.started && (x == null || now() < x); });
+  });
+  if (!teams.length) return null;
+  var why = m[2] === 'stats behind' ? "their stats aren't updated." : (m[2] === 'stats check failed' ? "their stats couldn't be checked." : m[2] + '.');
+  return { level: isObj(b) ? b.level : 'warn', text: 'No picks for ' + teams.join(', ') + ' tonight: ' + why };
+}
 /* per-game lineup + goalie status lines: "CBJ: ✅ lineup · G Korpisalo ✅" */
 function lastName(n) { var w = str(n).trim().split(/\s+/); return w[w.length - 1] || ''; }
 function gameStatus(g) {
@@ -873,18 +908,18 @@ function renderRecord() {
       var all = Math.round((Math.round(hd.units * 10) + Math.round(pr.units * 10))) / 10;
       app.appendChild(h('div', { class: 'allbets' }, 'All bets: ', h('span', { class: signCls(all), text: units(all, 1) })));
     }
+    var rows = arr(sum.rows).filter(function (r) { return isObj(r) && ((num(r.w) || 0) + (num(r.l) || 0) + (num(r.push) || 0) + (num(r.void) || 0)) > 0; });
+    var anyBig = rows.some(function (r) { return !few(sampleN(r)); });
     if (few(n)) {
       app.appendChild(h('div', { class: 'chance', style: 'margin-top:10px' }, 'Hit ', h('b', { text: (num(hd.w) || 0) + ' of ' + n })));
-      app.appendChild(h('div', { class: 'subline', text: fewTag }));
+      if (!rows.length || anyBig) app.appendChild(h('div', { class: 'subline', text: fewTag }));   /* else the note under the table says it */
     } else {
       app.appendChild(h('div', { class: 'chance', style: 'margin-top:10px' }, 'Hit ', h('b', { text: pctNear(hd.hit_rate) || 'not posted' }),
         pctNear(hd.needed) ? ' · needed ' + pctNear(hd.needed) : ''));
       var bar = chanceBar(hd.hit_rate, hd.needed); if (bar) app.appendChild(bar);
     }
-    var rows = arr(sum.rows).filter(function (r) { return isObj(r) && ((num(r.w) || 0) + (num(r.l) || 0) + (num(r.push) || 0) + (num(r.void) || 0)) > 0; });
     if (rows.length) {
       /* no market judgeable yet: W-L and Units only, one note under the table */
-      var anyBig = rows.some(function (r) { return !few(sampleN(r)); });
       var tbl = h('div', { class: 'tbl', role: 'table', 'aria-label': 'Record by market' });
       tbl.appendChild(h('div', { class: 'tr th' + (anyBig ? '' : ' c2'), role: 'row' }, h('span', { role: 'columnheader', text: '' }), h('span', { role: 'columnheader', text: 'W-L' }),
         anyBig ? h('span', { role: 'columnheader', text: 'Hit' }) : null, anyBig ? h('span', { role: 'columnheader', text: 'Needed' }) : null,
@@ -899,7 +934,7 @@ function renderRecord() {
           else if (few(k)) tr.appendChild(h('span', { class: 'span2', role: 'cell', text: (num(r.w) || 0) + ' of ' + k }));
           else { tr.appendChild(h('span', { role: 'cell', text: pctNear(r.hit_rate) || '—' })); tr.appendChild(h('span', { role: 'cell', text: pctNear(r.needed) || '—' })); }
         }
-        tr.appendChild(h('span', { class: 'num ' + signCls(u), role: 'cell', text: u == null ? '—' : (units(u, 1) || '').replace(/u$/, '') }));
+        tr.appendChild(h('span', { class: 'num ' + signCls(u), role: 'cell', text: u == null ? '—' : (units(u, 1) || '').replace(/ units$/, '') }));
         if (anyBig && k && few(k)) tr.appendChild(h('span', { class: 'few', text: fewTag }));
         tbl.appendChild(tr);
       });
@@ -974,7 +1009,7 @@ function entryRow(e, nt, isLeg) {
   l2.push(odds(e.price));
   if (e.pulled) l2.push('pulled' + (fTime(e.pulled.at) ? ' ' + fTime(e.pulled.at) : '') + (e.pulled.reason ? ': ' + str(e.pulled.reason) : ''));
   if (!res) l2.push('Awaiting result');
-  else { if (e.actual) l2.push(str(e.actual)); if (!isLeg && units(e.units, 2)) l2.push(units(e.units, 2)); }
+  else { if (e.actual) l2.push(actualText(e.actual, e.market || e.bet)); if (!isLeg && units(e.units, 2)) l2.push(units(e.units, 2)); }
   return [h('div', { class: 'ent' }, tag, h('div', { class: 'bd' }, l1, h('div', { class: 'e2', text: l2.join(' · ') })))];
 }
 function loadOlder() {
@@ -1004,7 +1039,7 @@ function bsRow(x) {
 }
 function renderBackstage() {
   app.appendChild(header('Behind the scenes', null));
-  app.appendChild(h('p', { class: 'mu', style: 'margin:8px 0 0', text: 'Goalie saves, same Gap + Guard maths as shots. Research only: not picks, not on the Record, never sent to Discord. Confirmed starters only.' }));
+  app.appendChild(h('p', { class: 'mu', style: 'margin:8px 0 0', text: 'Goalie saves. Same method as the shots picks. Research only: not picks, not on the Record, never sent to Discord. Confirmed starters only.' }));
   if (!S.loaded) { app.appendChild(h('div', { class: 'stack' }, h('div', { class: 'skel sm' }), h('div', { class: 'skel' }))); return; }
   var w = S.watch;
   if (!w) {
@@ -1017,7 +1052,7 @@ function renderBackstage() {
     app.appendChild(h('div', { class: 'big' }, h('span', { class: 'wl', text: (num(t.w) || 0) + '-' + (num(t.l) || 0) }),
       h('span', { class: 'un ' + signCls(t.units), text: units(t.units, 1) || '' })));
   } else {
-    app.appendChild(h('div', { class: 'card empty', style: 'margin-top:8px' }, h('div', { class: 't', text: 'No graded saves legs yet.' })));
+    app.appendChild(h('div', { class: 'card empty', style: 'margin-top:8px' }, h('div', { class: 't', text: 'No saves results yet.' })));
   }
   var sub = [n + ' graded' + (num(t.void) ? ', ' + t.void + ' void' : ''), '1 unit each at the flagged Hard Rock price'];
   if (num(clv.n)) sub.push('avg CLV ' + (clv.mean > 0 ? '+' : '') + (100 * clv.mean).toFixed(1) + '% (' + clv.n + ')');
@@ -1026,7 +1061,7 @@ function renderBackstage() {
   var tn = isObj(w.tonight) ? w.tonight : {}, rows = arr(tn.flags).concat(arr(tn.vetoes)).filter(isObj);
   var sec = h('section', { class: 'night' }, h('h3', null, (fDateLong(w.slate) || 'Tonight') + ' · tonight'));
   if (rows.length) rows.forEach(function (x) { sec.appendChild(bsRow(x)); });
-  else sec.appendChild(h('p', { class: 'mu', style: 'margin-top:8px', text: 'No saves lines cleared the gap yet tonight.' }));
+  else sec.appendChild(h('p', { class: 'mu', style: 'margin-top:8px', text: 'No saves lines good enough yet tonight.' }));
   app.appendChild(sec);
   arr(w.nights).filter(isObj).forEach(function (nt) {
     var fl = arr(nt.flags).filter(isObj); if (!fl.length) return;

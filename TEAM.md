@@ -11,7 +11,7 @@ The page updates through the day; each pick shows how settled it is (Early / Lin
 pulled picks stay visible with the reason. Dark, phone first (~380px). The Record is the scoreboard.
 
 **Customer facts (fixed):** Matt; Hard Rock Florida only; no leg worse than -200 (plus money fine); parlays 2-3 legs;
-player props are the core (sides/totals allowed); bets any time from morning to puck drop.
+markets are player shots on goal and goalie saves only (no sides, totals or other props); bets any time from morning to puck drop.
 **Fixed:** the Record. Every pick and parlay exactly as shown, graded after the game at the posted price,
 append-only, pulled picks kept and marked. Nothing edited or dropped. It is the only reporting Matt wants.
 **Come to Matt only for:** more odds keys, paying for something, a GitHub setting we can't reach. Exact taps, one
@@ -180,7 +180,7 @@ probability x Hard Rock decimal payout - 1, on unrounded numbers; every threshol
   Discord: PULLED lists each with its `if_bet` line ("Don't bet these now"); ✅ PRICE FINAL once per told pick; a pick first shown at
   the last read says "✅ Price final" in its NEW block. **Max 12 messages per ET day; FINAL pings only while < 9 sent** (replaces the 6/day
   wording above). `notified.json` gains `final`.
-- Tests: `python -m unittest discover -s tests`, 339 tests (`tests/test_live_picks.py` end to end; `tests/test_paper.py` research-log maths; `tests/fixtures/paper_oct19/` = real Oct 19 reads). Fixtures: `python3 fixtures/make_fixtures.py`.
+- Tests: `python -m unittest discover -s tests`, 366 tests (`tests/test_live_picks.py` end to end; `tests/test_paper.py` research-log maths; `tests/fixtures/paper_oct19/` = real Oct 19 reads). Fixtures: `python3 fixtures/make_fixtures.py`.
 
 - **Files:** `index.html` (page; reads `data/slate.json`, `data/record.json`, `data/rules.json`), `data/odds/<date>.json`
   (every price pulled: Hard Rock in `markets`, 9 other books in `others`; ~10x bigger: ~1.5 MB on a 16-game night, ~2.5-3 MB
@@ -233,8 +233,7 @@ probability x Hard Rock decimal payout - 1, on unrounded numbers; every threshol
 11. Regular season only; playoffs say "Only regular-season games are covered."
 12. ~~Empty state promised "Next price check" with no keys~~ Fixed 2026-10-18 (run.py, 2 tests).
 
-14. Late night, the "Not covered tonight: … (stats behind)" banner names teams whose game is already final. Misleading,
-    minor; UX/Builder ticket. Also open (QA minors): strip wraps to 2 lines when records are long; one-sentence reason
+14. ~~Late night, the "Not covered tonight" banner names teams whose game already started; strip wraps to 2 lines~~ Fixed 2026-10-25 weekly (banner lists only unstarted games, strip one line, warnings first). Still open: one-sentence reason
     would show no reason (engine never makes one).
 15. (2026-10-18: pull C now runs for every game at tier 3+ when the budget allows (live picks only at tier 2), so every shots line gets a close ~45 min out; the shadow log
     measures CLV on every line.) Closing-price check is weak: most picks get no price pull after they're shown (13 of 18 "flat"). Week 1: 3 moved
@@ -412,9 +411,19 @@ probability x Hard Rock decimal payout - 1, on unrounded numbers; every threshol
     Hard Rock moneyline was within 0.5 pts of the 9-book consensus with no Florida-team shading, so there is no gap to buy. Don't reopen this
     without new evidence.
 
+27. **Weekly review 2026-10-25 (DS read, Oct 20-24).** Record: 21 shots legs graded, headline 11-6 +4.58u (64.7% vs 50.4% BE), pulled 3-1 +1.22u,
+    16 of 21 unders, no 3.5 or saves legs; calibration within noise (wins z +1.17); one zero-pick night (Oct 21, 2 games, low tier). Nov 2 status:
+    19 of 30 measured gaps, other GO bars met, no STOP triggered. **CLV caveat (DS):** logged CLV (our price vs the books' median at close) is
+    close to the original gap by construction, because the median barely moves (toward us 1, flat 11, against 6 of 18; Hard Rock's own price
+    moved our way 4, against 3). At Nov 2 the DS also reports the median's move from our read to close and Hard Rock's own move; the gates are not changed.
+    **Parlays stay off (Sharp):** 3 hypothetical top-2 parlays went 1-2 (+0.73u), no evidence; a parlay multiplies any missing edge and hits ~30%,
+    which cuts against "picks hit". Revisit only if the Nov 2 checkpoint is GO: then 2-leg parlays from the top 2 headline legs (different games)
+    are a section 8 entry. Key 1 refuses (401) since this week; pool 1,745 without it, no action needed.
+
 ## 8. Rule-change log
 | Date | Change | Why | Sample |
 |---|---|---|---|
+| 2026-10-25 (weekly; Sharp, UX, Builder, QA SHIP at 380px) | **No rule changed.** Page readability only: Gap line into tap-to-expand, blend % hidden, one "already bet" line on pulled cards, not-covered banner only for unstarted games, long names wrap, one-line status strip ("Odds keys: N days"), "units"/"had N shots" wording, "too few to judge" once. Parlays stay off (item 27) | DS: 21 graded legs, 19 measured gaps: below 50/150 and Nov 2 sizes; UX: cards repeated numbers, pulled cards gave conflicting advice | Item 27 |
 | 2026-10-25 (CEO, Matt; Builder, QA browser pass at 380px) | **No live rule changed.** Saves added as a research-only watch track (Gap + Guard maths, confirmed starters, any line), saves asked at B and C at tier 3+, Backstage tab on the page | Matt: expand to goalie saves with the same logic, gather sample, see it build on the site but keep it out of the Record and Discord; more keys added | Item 25 (gates registered before any flag) |
 | 2026-10-25 (CEO, Matt; Builder, QA SHIP WITH FIXES, fixed) | **No qualifying value changed.** Bet-slip link on picks (button + Discord), player's team pill on the page, one-time all-books probe to choose sharp books | Matt: hard to tell which team the player is on; wants a Hard Rock bet-slip link like Winnable; wants to compare against quality sharp books, not a count | Items 24; Oct 23-24 reads: novig, prophetx return shots, lowvig none |
 | 2026-10-23 (CEO, Matt's order; Builder) | **Other-books list swapped (rung 4):** williamhill_us, betrivers, fanatics out (they return nothing for NHL shots); lowvig, novig, prophetx in. Same 9 + Hard Rock, same credits. Step 1's market fair = median of whichever books return fresh two-sided prices, so this changes the market estimate once they return | Matt: replace the 3 dead ones with historically sharp books. More returning books = more lines reach 4 books and Pinnacle-weighted consensus is less dependent on one source | Oct 20-22 shadow: 71% of 1.5 lines had >= 4 books, Pinnacle on 61%; no data yet on the new three |
@@ -436,6 +445,7 @@ probability x Hard Rock decimal payout - 1, on unrounded numbers; every threshol
 | 2026-10-11 | v1.0 set (section 4) | First build: Sharp standard from the DS backtest (2024-25 fit, 2025-26 out of sample) and one live Hard Rock pull | Backtest only; 0 graded live legs |
 
 ## 9. Session log (newest first, one line each)
+- 2026-10-25 ~11:15 AM weekly team review: DS (item 27) 21 graded, +5.80u all-in, no STOP, Nov 2 short on gaps (19/30), CLV caveat noted; Sharp no rule change, parlays stay off until Nov 2 GO; UX 8 findings, Builder shipped 7 page fixes, QA SHIP (366 tests, all 23 fixtures at 380px, no overflow/errors); QA minors open: poolempty strip repeats "no prices", Backstage rows say "gap +x%", reason repeats "model agrees". Health: chain link 299+ alive (11:10 run), all sources ok, Oct 24 fully graded, keys 1,745 (key 1 refused 401), tier 4. Tonight check: first saves reads at B/C, bet-slip links, book probe.
 - 2026-10-25 ~9 AM (Matt: saves with the same logic, watch it behind the scenes; keys updated): saves watch track + Backstage tab + saves at B/C tier 3+; 366 tests; page checked at 380px in Chromium (no overflow, no script errors). Item 25 gates registered. Check tonight: saves came back at B/C, `data/paper_watch/saves/` filling, new keys in status.json.
 - 2026-10-25 ~9 AM (Matt: ask all books and choose sharp ones; team on the page; bet-slip link): book_probe step, team pill, includeLinks + Bet on Hard Rock button + Discord link; QA found 5 (pulled picks showed the button, 422 fallback, double-spend, link characters, size) and all fixed; 358 tests. Open: read the probe when it runs (first game 35-120 min out after 1 PM with budget) and set `consensus_books`; confirm links come back for Hard Rock props.
 - 2026-10-25 ~8:05 AM Researcher run 10 (daily, shots): X1-X3 registered before testing (Hard Rock chasing its own number, weekend public nights, prior-season anchor); 11 variants, none positive with n >= 300 (best X1 +2.1% n96), no lockbox look (still 2). Forward Q1a +7.3% n237, Q1c +13.4% n124 (6 nights, too small); Q8a-c (Q1a by book count) registered forward from tonight. Nothing passed.
