@@ -1,5 +1,21 @@
 # LOG.md: Researcher runs (newest first)
 
+- 2026-10-25 ~8:05 AM ET (Researcher run 10, daily; SHOTS ON GOAL ONLY). No key used, no historical odds pull. X1-X3 + forward Q8a-c registered
+  and pushed (8077cba) before any test ran. Free NHL stats REST skater logs fetched to scratch (r10/fetch10.py; Feb 28 cut-off, lockbox not
+  fetched). Script research/code/r10/x10.py, output x10_results.txt. 10,405 graded Nov-Feb lines.
+  - X1 book chasing its own number (Hard Rock moves a player's number after a big/small game): best T=.02 +2.1% n96 [-13.9,+18.2], T=.01
+    -6.2% n199; fade-the-raise rule -1.9% n99. Hard Rock's moves overshoot a hair (small stable negative weight), not enough to beat the hold.
+  - X2 public nights (Saturday/Fri/Sun): -8.2% n732; Saturday UNDERS -9.9% n2,588, every fold negative. No weekend shading.
+  - X3 prior-season anchor (book over-trusting the new season early): -15.5% n163; weight small and stable, far below the hold.
+  - Forward re-score (score_fwd.py, 6 nights Oct 19-24): Q1a (Hard Rock >= consensus fair) +7.3% n237 [-2,+18] p .12; Q1c (EV >= 2%)
+    +13.4% n124 [+0,+26] p .048; Q1k Pinnacle +5.4% n178; Q1m gap lookalike +23.4% n28; mean CLV ~= EV. Q6a (1 PM read) +8.2% n55,
+    Q6b (B/C) +5.3% n29, Q6c (unders) +15.1% n68. Q2a/b 0 bets. Q8a-c (Q1a by book count) start tonight. All too small (n >= 300, p < .0024).
+  11 variants (~0.55 false positives expected); all-time historical 337; forward 21. Lockbox looks: 2 (unchanged; next needs p < 0.0167).
+  **Verdict: nothing passed; no candidate for the Sharp.** Hard Rock's own line moves, weekend public money and last-season anchoring are
+  all inside its price. The live Hard Rock-vs-consensus test (Q1) stays the only lead; it is positive 6 nights in but far from the bar.
+  Next: (1) Q8a-c forward from tonight (`python3 -I research/code/r10/score_q8.py .` after score_fwd.py); (2) Q7 returners' overs forward
+  (needs a missed-games field per live shadow line, derived in research code from NHL boxscores; register a start date first); (3) a
+  forward Q1 split by line (1.5 vs 2.5 vs 3.5, 3.5 live since Oct 23), registered before looking.
 - 2026-10-23 ~8:04 AM ET (Researcher run 9, daily; SHOTS ON GOAL ONLY). No key used, no historical odds pull. W1-W5 + forward Q6a-c registered
   and pushed (fa577da) before any test ran. Free NHL stats REST logs fetched to scratch (r9/fetch9.py: team summary, skater summary, team
   powerplay, skater timeonice + realtime; Feb 28 cut-off, lockbox not fetched). Script research/code/r9/w9.py, output w9_results.txt.

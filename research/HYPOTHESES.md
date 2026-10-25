@@ -248,9 +248,9 @@ positive Nov-Feb with n >= 300; lockbox (Mar 1+) only for such a frozen variant,
 
 | id | date | rule (exact) | data | result | status |
 |---|---|---|---|---|---|
-| X1 | 2026-10-25 | **Book chasing its own number.** For each Hard Rock -45 line (player, date d): m = Poisson mean solving P(X > line) = f, using the player's line with f nearest 0.5 that game (as N1). prev = his most recent earlier Hard Rock game in shots45_lines (date < d, within 14 days, else no prev -> terms 0). dm = log(m_now / m_prev); z = (his SOG in that prev game - m_prev) / sqrt(m_prev). Terms c1*dm + c2*dm*z (does Hard Rock move its number too far after a big/small game?) (3 T). Fixed rule X1r: UNDER when dm >= log(1.15) and z >= 1.5 (book raised the number after a big game) (1 variant). 4 variants | shots45 | | registered |
-| X2 | 2026-10-25 | **Public nights (day of week).** sat = [date d is a Saturday]; fs = [Friday or Sunday]. Logistic terms c1*sat + c2*fs + c3*sat*logit(f) (3 T). Fixed rule X2r: UNDER on every Saturday line (retail money on overs on the big TV night) (1 variant). 4 variants | shots45 | | registered |
-| X3 | 2026-10-25 | **Prior-season anchor (book over-trusts the current season early).** r24 = his 2024-25 SOG/g (needs >= 20 games, else terms 0); g = his 2025-26 games before d, r25 = his 2025-26 SOG/g before d (needs g >= 3, else terms 0). anc = (r24 - r25) x 20/(20 + g). Terms c1*anc + c2*anc*[D] (3 T) | skater logs + shots45 | | registered |
+| X1 | 2026-10-25 | **Book chasing its own number.** For each Hard Rock -45 line (player, date d): m = Poisson mean solving P(X > line) = f, using the player's line with f nearest 0.5 that game (as N1). prev = his most recent earlier Hard Rock game in shots45_lines (date < d, within 14 days, else no prev -> terms 0). dm = log(m_now / m_prev); z = (his SOG in that prev game - m_prev) / sqrt(m_prev). Terms c1*dm + c2*dm*z (does Hard Rock move its number too far after a big/small game?) (3 T). Fixed rule X1r: UNDER when dm >= log(1.15) and z >= 1.5 (book raised the number after a big game) (1 variant). 4 variants | shots45 | 9,867 of 10,405 lines have a prev game. T=.01 -6.2% n199 [-16.8,+4.1]; .02 +2.1% n96 [-13.9,+18.2]; .03 +9.5% n36 (Nov-Dec only). dm weight small negative every fold (-0.06..-0.02 std: Hard Rock's moves slightly overshoot) but far below the hold. X1r -1.9% n99 [-18.5,+14.9] | failed |
+| X2 | 2026-10-25 | **Public nights (day of week).** sat = [date d is a Saturday]; fs = [Friday or Sunday]. Logistic terms c1*sat + c2*fs + c3*sat*logit(f) (3 T). Fixed rule X2r: UNDER on every Saturday line (retail money on overs on the big TV night) (1 variant). 4 variants | shots45 | T=.01 -8.2% n732 [-13.7,-2.5]; .02 -2.7% n99; .03 -6.1% n41 (Nov only); weights ~0. X2r Saturday UNDERS -9.9% n2,588 [-13.2,-6.9], every fold negative. No Saturday over shading | failed |
+| X3 | 2026-10-25 | **Prior-season anchor (book over-trusts the current season early).** r24 = his 2024-25 SOG/g (needs >= 20 games, else terms 0); g = his 2025-26 games before d, r25 = his 2025-26 SOG/g before d (needs g >= 3, else terms 0). anc = (r24 - r25) x 20/(20 + g). Terms c1*anc + c2*anc*[D] (3 T) | skater logs + shots45 | T=.01 -15.5% n163 [-26.5,-3.7]; .02 -13.5% n75; .03 -12.4% n34 (Nov only). anc weight +0.05 stable every fold (last season still carries a little information) but nowhere near the hold | failed |
 
 Forward (registered now, scored only on nights dated 2026-10-25 or later; Q1a has NOT been looked at by book count before this commit):
 | id | date | rule (exact) | data | result | status |
@@ -260,6 +260,10 @@ Forward (registered now, scored only on nights dated 2026-10-25 or later; Q1a ha
 | Q8c | 2026-10-25 | Q1a bets with books >= 6, nights >= 2026-10-25 | same | | forward, open |
 Q8 bar: run-5 forward bar (n >= 300 graded, ROI > 0, mean CLV > 0) with one-sided p < 0.05/21 = 0.0024 (18 + 3 forward variants).
 Scored by research/code/r10/score_q8.py (reads research/fwd/scores.json after score_fwd.py runs).
+
+Run 10 count: 11 variants tested (X1 4, X2 4, X3 3). Expected false positives at 5%: ~0.55. Positives seen: X1 T=.02 +2.1% n96, T=.03 +9.5% n36:
+n < 300, CIs span 0. No placebo needed, no lockbox look. Cumulative historical: 337. Forward variants: 21 (Q8a-c added, 0 nights yet).
+Lockbox looks: still 2. Output: research/code/r10/x10_results.txt. Forward (6 nights, Oct 19-24): Q1a +7.3% n237 [-2,+18] p .12; Q1c +13.4% n124 p .048: too small.
 
 ## Queued (not yet tested)
 | id | rule idea | data | status |
