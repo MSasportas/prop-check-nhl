@@ -75,11 +75,11 @@
   },
   "UTA": {
    "name": "Karel Vejmelka",
-   "status": "expected"
+   "status": "confirmed"
   },
   "TBL": {
    "name": "Dennis Hildeby",
-   "status": "expected"
+   "status": "confirmed"
   },
   "SEA": {
    "name": "Joey Daccord",
@@ -98,5 +98,5 @@
    "status": "confirmed"
   }
  },
- "checked_at": "2026-10-24T18:40:01-04:00"
+ "checked_at": "2026-10-24T20:40:01-04:00"
 }

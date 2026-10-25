@@ -1,7 +1,7 @@
 {
  "slate_date": "2026-10-24",
- "generated_at": "2026-10-24T20:30:00-04:00",
- "status_at": "2026-10-24T20:30:00-04:00",
+ "generated_at": "2026-10-24T20:40:01-04:00",
+ "status_at": "2026-10-24T20:40:01-04:00",
  "valid_until": "2026-10-25T05:00:00-04:00",
  "status": {
   "prices_state": "ok",
@@ -16,7 +16,7 @@
   "stats_state": "ok",
   "last_run": {
    "ok": true,
-   "at": "2026-10-24T20:30:00-04:00",
+   "at": "2026-10-24T20:40:01-04:00",
    "failed_step": null
   },
   "pool": {
@@ -262,11 +262,11 @@
    "goalies": {
     "away": {
      "name": "Dennis Hildeby",
-     "status": "expected"
+     "status": "confirmed"
     },
     "home": {
      "name": "Karel Vejmelka",
-     "status": "expected"
+     "status": "confirmed"
     }
    },
    "started": false,
@@ -427,8 +427,8 @@
     "ours_pct": 57.2,
     "model_pct": 57.4
    },
-   "settled": "lineup",
-   "settled_label": "Lineup confirmed",
+   "settled": "goalie",
+   "settled_label": "Goalie confirmed",
    "reason": "7 other books say 57.6%; Hard Rock's -120 only needs 54.5%. Our model agrees (our blend: 57.2%).",
    "thin": false,
    "games_used": 81,
