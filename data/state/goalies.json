@@ -27,11 +27,11 @@
   },
   "NSH": {
    "name": "Justus Annunen",
-   "status": "expected"
+   "status": "confirmed"
   },
   "COL": {
    "name": "Scott Wedgewood",
-   "status": "expected"
+   "status": "confirmed"
   },
   "VAN": {
    "name": "Leevi Merilainen",
@@ -42,5 +42,5 @@
    "status": "confirmed"
   }
  },
- "checked_at": "2026-10-25T18:50:00-04:00"
+ "checked_at": "2026-10-25T19:40:00-04:00"
 }
