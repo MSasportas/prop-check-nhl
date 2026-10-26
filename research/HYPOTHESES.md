@@ -265,6 +265,30 @@ Run 10 count: 11 variants tested (X1 4, X2 4, X3 3). Expected false positives at
 n < 300, CIs span 0. No placebo needed, no lockbox look. Cumulative historical: 337. Forward variants: 21 (Q8a-c added, 0 nights yet).
 Lockbox looks: still 2. Output: research/code/r10/x10_results.txt. Forward (6 nights, Oct 19-24): Q1a +7.3% n237 [-2,+18] p .12; Q1c +13.4% n124 p .048: too small.
 
+## Run 11 (Researcher, 2026-10-26 AM, daily). SHOTS ON GOAL ONLY. Registered before any of these were tested.
+No odds key, no historical odds pull. Free NHL stats REST skater per-game logs fetched to scratch with research/code/r11/fetch11.py
+(skater summary 2024-25 + 2025-26 through Feb 28; lockbox not fetched). Every feature for a line dated d uses only data dated < d.
+Common as runs 4/6-10: shots45_lines, every two-way Hard Rock line, proportional de-vig fair f, side price >= -200, 1u flat,
+regulation + OT, VOID = no bet, game-clustered bootstrap. Logistic = research/code/wf.py (a + a15 + a35 + b*logit(f) + standardised
+terms, L2 2, fit on all months before the test month), bet the side with p - BE >= T, T in {.01, .02, .03}. Fixed rules report every
+Nov-Feb bet with folds. Placebo (shuffle the feature(s) within date x line, 200 times) for any variant positive Nov-Feb with n >= 300;
+lockbox (Mar 1+) only for such a frozen variant, once, needing one-sided p < 0.05/3 = 0.0167 (look #3).
+
+| id | date | rule (exact) | data | result | status |
+|---|---|---|---|---|---|
+| Y1 | 2026-10-26 | **Opponent's missing regulars (injury proxy).** For the opponent O on date d: regulars = O skaters (2025-26 logs, team = O) who played >= 5 of O's last 10 games before d but NOT O's last game before d. missD = sum of the missing defensemen's 2025-26 TOI per game (minutes, their games for O before d); missF = same for forwards. Terms c1*missD + c2*missF (does Hard Rock price a shorthanded opponent D corps?) (3 T). Fixed rule Y1r: OVER when missD >= 20 (about one top-4 D out) (1 variant). 4 variants | skater logs + shots45 | | registered |
+| Y2 | 2026-10-26 | **Schedule-strength-adjusted form.** oppf(T) = team T's shots against per game over its 2025-26 games before d (from summed skater SOG of its opponents; >= 5 games, else 1.0 after dividing) / league mean of the same. For his last 10 games before d (2024-25 + 2025-26 logs; 2024-25 games use oppf 1.0): adj = mean(SOG / oppf(opponent)) - mean(SOG) (positive = his recent raw numbers were deflated by tough defenses). Needs >= 5 games, else 0. Terms c1*adj + c2*adj*[D] (3 T) | skater logs + shots45 | | registered |
+| Y3 | 2026-10-26 | **First Hard Rock postings (book attention).** nHR = number of distinct earlier dates (date < d, 2025-26) on which the player had a Hard Rock -45 shots line in shots45_lines. Terms c1*[nHR = 0] + c2*[1 <= nHR <= 4] (3 T). Fixed rule Y3r: UNDER on a player's first Hard Rock line (nHR = 0), test months only (1 variant). 4 variants | shots45 | | registered |
+| Y4 | 2026-10-26 | **Line-specific calibration of the book's fair.** Terms c1*[1.5]*logit(f) + c2*[>= 3.5]*logit(f) + c3*logit(f)^2 (is Hard Rock's fair too steep or too flat at the tails of a given line, e.g. heavily juiced 1.5 overs?) (3 T) | shots45 | | registered |
+
+Forward (registered now, scored only on nights dated 2026-10-26 or later; Q1a has NOT been looked at by line before this commit):
+| id | date | rule (exact) | data | result | status |
+|---|---|---|---|---|---|
+| Q9a | 2026-10-26 | Q1a bets (exact run-5 definition, research/fwd/scores.json) on line 1.5, nights >= 2026-10-26 | score_fwd output | | forward, open |
+| Q9b | 2026-10-26 | Q1a bets on line 2.5, nights >= 2026-10-26 | same | | forward, open |
+| Q9c | 2026-10-26 | Q1a bets on line 3.5, nights >= 2026-10-26 | same | | forward, open |
+Q9 bar: run-5 forward bar (n >= 300 graded, ROI > 0, mean CLV > 0) with one-sided p < 0.05/24 = 0.0021 (21 + 3 forward variants).
+
 ## Queued (not yet tested)
 | id | rule idea | data | status |
 |---|---|---|---|
