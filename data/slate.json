@@ -1,13 +1,13 @@
 {
  "slate_date": "2026-10-25",
- "generated_at": "2026-10-25T22:20:01-04:00",
- "status_at": "2026-10-25T22:20:01-04:00",
+ "generated_at": "2026-10-25T22:50:00-04:00",
+ "status_at": "2026-10-25T22:50:00-04:00",
  "valid_until": "2026-10-26T05:00:00-04:00",
  "status": {
   "prices_state": "ok",
   "prices_at": "2026-10-25T21:20:01-04:00",
   "next_price_read_at": null,
-  "stats_built_at": "2026-10-25T21:00:01-04:00",
+  "stats_built_at": "2026-10-25T22:50:00-04:00",
   "stats_through": "2026-10-24",
   "lineups_at": "2026-10-25T21:40:12-04:00",
   "goalies_at": null,
@@ -16,7 +16,7 @@
   "stats_state": "ok",
   "last_run": {
    "ok": true,
-   "at": "2026-10-25T22:20:01-04:00",
+   "at": "2026-10-25T22:50:00-04:00",
    "failed_step": null
   },
   "pool": {
@@ -28,11 +28,11 @@
   },
   "excluded_teams": [
    {
-    "team": "MTL",
+    "team": "COL",
     "reason": "stats behind"
    },
    {
-    "team": "WPG",
+    "team": "NSH",
     "reason": "stats behind"
    }
   ],
@@ -43,7 +43,7 @@
  "banners": [
   {
    "level": "warn",
-   "text": "Not covered tonight: MTL, WPG (stats behind)."
+   "text": "Not covered tonight: COL, NSH (stats behind)."
   }
  ],
  "empty": {
@@ -121,11 +121,8 @@
    },
    "started": true,
    "picks": 0,
-   "excluded_reason": "stats behind",
-   "excluded_teams": [
-    "MTL",
-    "WPG"
-   ]
+   "excluded_reason": null,
+   "excluded_teams": []
   },
   {
    "id": 2026020183,
@@ -148,8 +145,11 @@
    },
    "started": true,
    "picks": 0,
-   "excluded_reason": null,
-   "excluded_teams": []
+   "excluded_reason": "stats behind",
+   "excluded_teams": [
+    "COL",
+    "NSH"
+   ]
   },
   {
    "id": 2026020184,
