@@ -1,14 +1,14 @@
 {
  "slate_date": "2026-10-25",
- "generated_at": "2026-10-26T01:00:01-04:00",
- "status_at": "2026-10-26T01:00:01-04:00",
+ "generated_at": "2026-10-26T01:10:01-04:00",
+ "status_at": "2026-10-26T01:10:01-04:00",
  "valid_until": "2026-10-26T05:00:00-04:00",
  "status": {
   "prices_state": "ok",
   "prices_at": "2026-10-25T21:20:01-04:00",
   "next_price_read_at": null,
-  "stats_built_at": "2026-10-25T23:10:01-04:00",
-  "stats_through": "2026-10-24",
+  "stats_built_at": "2026-10-26T01:10:01-04:00",
+  "stats_through": "2026-10-25",
   "lineups_at": "2026-10-25T21:40:12-04:00",
   "goalies_at": null,
   "lineups_note": "6 of 10 team line pages are dated today.",
@@ -16,7 +16,7 @@
   "stats_state": "ok",
   "last_run": {
    "ok": true,
-   "at": "2026-10-26T01:00:01-04:00",
+   "at": "2026-10-26T01:10:01-04:00",
    "failed_step": null
   },
   "pool": {
@@ -26,26 +26,12 @@
    "days_left": 7,
    "low": false
   },
-  "excluded_teams": [
-   {
-    "team": "MIN",
-    "reason": "stats behind"
-   },
-   {
-    "team": "VAN",
-    "reason": "stats behind"
-   }
-  ],
+  "excluded_teams": [],
   "lines_checked": 75,
   "flag_reads": 5,
   "tier": 4
  },
- "banners": [
-  {
-   "level": "warn",
-   "text": "Not covered tonight: MIN, VAN (stats behind)."
-  }
- ],
+ "banners": [],
  "empty": {
   "code": "all_started",
   "text": "Every game has started.",
@@ -169,11 +155,8 @@
    },
    "started": true,
    "picks": 0,
-   "excluded_reason": "stats behind",
-   "excluded_teams": [
-    "MIN",
-    "VAN"
-   ]
+   "excluded_reason": null,
+   "excluded_teams": []
   }
  ],
  "picks": [],

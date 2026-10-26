@@ -1,10 +1,10 @@
 {
  "ok": true,
  "slate_date": "2026-10-25",
- "started_at": "2026-10-26T00:40:00-04:00",
- "status_at": "2026-10-26T00:40:00-04:00",
- "finished_at": "2026-10-26T00:41:04-04:00",
- "last_ok_at": "2026-10-26T00:40:00-04:00",
+ "started_at": "2026-10-26T01:10:01-04:00",
+ "status_at": "2026-10-26T01:10:01-04:00",
+ "finished_at": "2026-10-26T01:10:02-04:00",
+ "last_ok_at": "2026-10-26T01:10:01-04:00",
  "failed_step": null,
  "steps": [
   {
@@ -20,7 +20,7 @@
   {
    "step": "stats",
    "status": "ok",
-   "note": "1 window(s) read, 2 team-games still missing"
+   "note": "1 window(s) read"
   },
   {
    "step": "lineups",
@@ -64,8 +64,8 @@
   },
   {
    "step": "shadow",
-   "status": "skipped",
-   "note": "nothing new"
+   "status": "ok",
+   "note": "14 graded"
   },
   {
    "step": "gg_grade",
@@ -150,17 +150,8 @@
   "Elias Pettersson",
   "Matthew Seminoff"
  ],
- "excluded_teams": [
-  {
-   "team": "MIN",
-   "reason": "stats behind"
-  },
-  {
-   "team": "VAN",
-   "reason": "stats behind"
-  }
- ],
- "stats_through": "2026-10-24",
+ "excluded_teams": [],
+ "stats_through": "2026-10-25",
  "lineups_at": "2026-10-25T21:40:12-04:00",
  "lineups_note": "6 of 10 team line pages are dated today.",
  "games_today": 5,
@@ -170,10 +161,10 @@
  ],
  "runner": {
   "event": "workflow_dispatch",
-  "run_id": "40267652582",
-  "iteration": 4,
-  "chain_link": 316,
+  "run_id": "40271923162",
+  "iteration": 2,
+  "chain_link": 317,
   "chain_started_at": "2026-10-16T10:00:13-04:00",
-  "run_started_at": "2026-10-26T00:10:16-04:00"
+  "run_started_at": "2026-10-26T01:00:23-04:00"
  }
 }
