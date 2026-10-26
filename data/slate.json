@@ -1,159 +1,111 @@
 {
- "slate_date": "2026-10-25",
- "generated_at": "2026-10-26T04:30:03-04:00",
- "status_at": "2026-10-26T04:30:03-04:00",
- "valid_until": "2026-10-26T05:00:00-04:00",
+ "slate_date": "2026-10-26",
+ "generated_at": "2026-10-26T05:00:01-04:00",
+ "status_at": "2026-10-26T05:00:01-04:00",
+ "valid_until": "2026-10-27T05:00:00-04:00",
  "status": {
-  "prices_state": "ok",
-  "prices_at": "2026-10-25T21:20:01-04:00",
-  "next_price_read_at": null,
+  "prices_state": "not_yet",
+  "prices_at": null,
+  "next_price_read_at": "2026-10-26T13:00:00-04:00",
   "stats_built_at": "2026-10-26T01:10:01-04:00",
   "stats_through": "2026-10-25",
-  "lineups_at": "2026-10-25T21:40:12-04:00",
+  "lineups_at": null,
   "goalies_at": null,
-  "lineups_note": "6 of 10 team line pages are dated today.",
-  "lineups_state": "ok",
+  "lineups_note": null,
+  "lineups_state": "not_yet",
   "stats_state": "ok",
   "last_run": {
    "ok": true,
-   "at": "2026-10-26T04:30:03-04:00",
+   "at": "2026-10-26T05:00:01-04:00",
    "failed_step": null
   },
   "pool": {
    "pulls_left": 1715,
    "keys": 10,
-   "game_days_left": 7,
-   "days_left": 7,
+   "game_days_left": 6,
+   "days_left": 6,
    "low": false
   },
   "excluded_teams": [],
-  "lines_checked": 75,
-  "flag_reads": 5,
+  "lines_checked": 0,
+  "flag_reads": 0,
   "tier": 4
  },
  "banners": [],
  "empty": {
-  "code": "all_started",
-  "text": "Every game has started.",
-  "sub": "No picks were posted tonight."
+  "code": "not_yet",
+  "text": "No picks yet today",
+  "sub": "First read is due at 1:00 PM."
  },
  "games": [
   {
-   "id": 2026020180,
-   "away": "FLA",
-   "home": "CHI",
-   "start": "2026-10-25T15:00:00-04:00",
+   "id": 2026020185,
+   "away": "LAK",
+   "home": "NYR",
+   "start": "2026-10-26T19:00:00-04:00",
    "lineups": {
-    "away": "confirmed",
-    "home": "confirmed"
+    "away": "not_checked",
+    "home": "not_checked"
    },
    "goalies": {
     "away": {
-     "name": "Akira Schmid",
-     "status": "confirmed"
+     "name": "Darcy Kuemper",
+     "status": "expected"
     },
     "home": {
-     "name": "Spencer Knight",
-     "status": "confirmed"
+     "name": "Dylan Garand",
+     "status": "expected"
     }
    },
-   "started": true,
+   "started": false,
    "picks": 0,
    "excluded_reason": null,
    "excluded_teams": []
   },
   {
-   "id": 2026020181,
-   "away": "NYI",
-   "home": "DAL",
-   "start": "2026-10-25T18:00:00-04:00",
+   "id": 2026020186,
+   "away": "TOR",
+   "home": "CGY",
+   "start": "2026-10-26T20:30:00-04:00",
    "lineups": {
-    "away": "waiting",
-    "home": "waiting"
+    "away": "not_checked",
+    "home": "not_checked"
    },
    "goalies": {
     "away": {
-     "name": "Ilya Sorokin",
-     "status": "confirmed"
+     "name": "Sergei Bobrovsky",
+     "status": "expected"
     },
     "home": {
-     "name": "Jake Oettinger",
-     "status": "confirmed"
+     "name": "Devin Cooley",
+     "status": "expected"
     }
    },
-   "started": true,
+   "started": false,
    "picks": 0,
    "excluded_reason": null,
    "excluded_teams": []
   },
   {
-   "id": 2026020182,
-   "away": "MTL",
-   "home": "WPG",
-   "start": "2026-10-25T19:00:00-04:00",
+   "id": 2026020187,
+   "away": "DET",
+   "home": "EDM",
+   "start": "2026-10-26T21:30:00-04:00",
    "lineups": {
-    "away": "confirmed",
-    "home": "waiting"
+    "away": "not_checked",
+    "home": "not_checked"
    },
    "goalies": {
     "away": {
-     "name": "Jacob Fowler",
-     "status": "confirmed"
+     "name": "John Gibson",
+     "status": "expected"
     },
     "home": {
-     "name": "Stuart Skinner",
-     "status": "confirmed"
+     "name": "Tristan Jarry",
+     "status": "expected"
     }
    },
-   "started": true,
-   "picks": 0,
-   "excluded_reason": null,
-   "excluded_teams": []
-  },
-  {
-   "id": 2026020183,
-   "away": "COL",
-   "home": "NSH",
-   "start": "2026-10-25T20:00:00-04:00",
-   "lineups": {
-    "away": "waiting",
-    "home": "confirmed"
-   },
-   "goalies": {
-    "away": {
-     "name": "Scott Wedgewood",
-     "status": "confirmed"
-    },
-    "home": {
-     "name": "Justus Annunen",
-     "status": "confirmed"
-    }
-   },
-   "started": true,
-   "picks": 0,
-   "excluded_reason": null,
-   "excluded_teams": []
-  },
-  {
-   "id": 2026020184,
-   "away": "MIN",
-   "home": "VAN",
-   "start": "2026-10-25T22:00:00-04:00",
-   "lineups": {
-    "away": "confirmed",
-    "home": "confirmed"
-   },
-   "goalies": {
-    "away": {
-     "name": "Calvin Pickard",
-     "status": "confirmed"
-    },
-    "home": {
-     "name": "Leevi Merilainen",
-     "status": "confirmed"
-    }
-   },
-   "started": true,
+   "started": false,
    "picks": 0,
    "excluded_reason": null,
    "excluded_teams": []

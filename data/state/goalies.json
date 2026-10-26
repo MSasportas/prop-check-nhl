@@ -1,46 +1,30 @@
 {
- "date": "2026-10-25",
+ "date": "2026-10-26",
  "teams": {
-  "CHI": {
-   "name": "Spencer Knight",
-   "status": "confirmed"
+  "NYR": {
+   "name": "Dylan Garand",
+   "status": "expected"
   },
-  "FLA": {
-   "name": "Akira Schmid",
-   "status": "confirmed"
+  "LAK": {
+   "name": "Darcy Kuemper",
+   "status": "expected"
   },
-  "DAL": {
-   "name": "Jake Oettinger",
-   "status": "confirmed"
+  "CGY": {
+   "name": "Devin Cooley",
+   "status": "expected"
   },
-  "NYI": {
-   "name": "Ilya Sorokin",
-   "status": "confirmed"
+  "TOR": {
+   "name": "Sergei Bobrovsky",
+   "status": "expected"
   },
-  "WPG": {
-   "name": "Stuart Skinner",
-   "status": "confirmed"
+  "EDM": {
+   "name": "Tristan Jarry",
+   "status": "expected"
   },
-  "MTL": {
-   "name": "Jacob Fowler",
-   "status": "confirmed"
-  },
-  "NSH": {
-   "name": "Justus Annunen",
-   "status": "confirmed"
-  },
-  "COL": {
-   "name": "Scott Wedgewood",
-   "status": "confirmed"
-  },
-  "VAN": {
-   "name": "Leevi Merilainen",
-   "status": "confirmed"
-  },
-  "MIN": {
-   "name": "Calvin Pickard",
-   "status": "confirmed"
+  "DET": {
+   "name": "John Gibson",
+   "status": "expected"
   }
  },
- "checked_at": "2026-10-25T21:40:00-04:00"
+ "checked_at": "2026-10-26T05:00:01-04:00"
 }
