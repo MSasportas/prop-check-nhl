@@ -3,7 +3,7 @@
  "teams": {
   "NYR": {
    "name": "James Reimer",
-   "status": "expected"
+   "status": "confirmed"
   },
   "LAK": {
    "name": "Darcy Kuemper",
@@ -26,5 +26,5 @@
    "status": "expected"
   }
  },
- "checked_at": "2026-10-26T11:30:00-04:00"
+ "checked_at": "2026-10-26T11:50:01-04:00"
 }
