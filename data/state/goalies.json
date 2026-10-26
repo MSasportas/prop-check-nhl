@@ -7,7 +7,7 @@
   },
   "LAK": {
    "name": "Darcy Kuemper",
-   "status": "expected"
+   "status": "confirmed"
   },
   "CGY": {
    "name": "Devin Cooley",
@@ -26,5 +26,5 @@
    "status": "confirmed"
   }
  },
- "checked_at": "2026-10-26T14:00:01-04:00"
+ "checked_at": "2026-10-26T18:40:00-04:00"
 }
