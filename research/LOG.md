@@ -1,5 +1,23 @@
 # LOG.md: Researcher runs (newest first)
 
+- 2026-10-26 ~8:10 AM ET (Researcher run 11, daily; SHOTS ON GOAL ONLY). No key used, no historical odds pull. Y1-Y4 + forward Q9a-c registered
+  and pushed (55727c6) before any test ran. Free NHL stats REST skater logs fetched to scratch (r11/fetch11.py; Feb 28 cut-off, lockbox not
+  fetched). Script research/code/r11/y11.py, output y11_results.txt. 10,413 graded Nov-Feb lines.
+  - Y1 opponent's missing regulars (D and F who usually play but sat the opponent's last game): best T=.02 -6.7% n149; OVER vs an opponent
+    missing 20+ min of D -3.0% n2,025 [-6.3,+0.7], p .92. Hard Rock prices short-handed opponents.
+  - Y2 schedule-strength-adjusted form (recent raw shots deflated by tough defenses): -11.6% n230; weight ~0.
+  - Y3 first Hard Rock postings (call-ups/new names the book has least attention on): -9.9% n209; UNDER on first lines -16.1% n93.
+  - Y4 line-specific calibration (is the fair too steep at the tails of 1.5/2.5/3.5?): -8.0% n145; tails a touch extreme, far below the hold.
+  - Forward re-score (score_fwd.py, 7 nights Oct 19-25): Q1a (Hard Rock >= consensus fair) +7.3% n252 [-2,+17] p .10; Q1b (EV >= 1%)
+    +10.8% n180 p .048; Q1c (EV >= 2%) +15.9% n132 [+3,+28] p .03; Q1k Pinnacle +8.0% n192; Q1m +23.4% n28; mean CLV ~= EV. Q6a (1 PM)
+    +10.0% n60, Q6b (B/C) +2.4% n39, Q6c (unders) +12.7% n78. Q8a-c n3/n2/n10 (1 night). Q9a-c start tonight. Q2a/b 0 bets.
+    All too small (bar n >= 300 and p < .0021-.0033).
+  14 variants (~0.7 false positives expected); all-time historical 351; forward 24. Lockbox looks: 2 (unchanged; next needs p < 0.0167).
+  **Verdict: nothing passed; no candidate for the Sharp.** Opponent injuries, schedule-adjusted form, new-name attention and tail calibration
+  are all inside Hard Rock's price. Main-line shots history with free data is exhausted 351 variants deep; the live Q1 gap is the only lead.
+  Next: (1) Q9a-c forward from tonight (`python3 -I research/code/r11/score_q9.py .` after score_fwd.py); (2) Q7 returners' overs forward
+  (missed-games field per live shadow line from NHL boxscores; register a start date); (3) Q1c by read time vs news (goalie confirmation
+  window), registered forward before looking.
 - 2026-10-25 ~8:05 AM ET (Researcher run 10, daily; SHOTS ON GOAL ONLY). No key used, no historical odds pull. X1-X3 + forward Q8a-c registered
   and pushed (8077cba) before any test ran. Free NHL stats REST skater logs fetched to scratch (r10/fetch10.py; Feb 28 cut-off, lockbox not
   fetched). Script research/code/r10/x10.py, output x10_results.txt. 10,405 graded Nov-Feb lines.
