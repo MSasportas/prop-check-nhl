@@ -2,7 +2,7 @@
  "date": "2026-10-26",
  "teams": {
   "NYR": {
-   "name": "Dylan Garand",
+   "name": "James Reimer",
    "status": "expected"
   },
   "LAK": {
@@ -26,5 +26,5 @@
    "status": "expected"
   }
  },
- "checked_at": "2026-10-26T05:00:01-04:00"
+ "checked_at": "2026-10-26T11:00:00-04:00"
 }
