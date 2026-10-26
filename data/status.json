@@ -1,10 +1,10 @@
 {
  "ok": true,
  "slate_date": "2026-10-25",
- "started_at": "2026-10-25T21:40:12-04:00",
- "status_at": "2026-10-25T21:40:12-04:00",
- "finished_at": "2026-10-25T21:40:13-04:00",
- "last_ok_at": "2026-10-25T21:40:12-04:00",
+ "started_at": "2026-10-25T22:00:00-04:00",
+ "status_at": "2026-10-25T22:00:00-04:00",
+ "finished_at": "2026-10-25T22:00:02-04:00",
+ "last_ok_at": "2026-10-25T22:00:00-04:00",
  "failed_step": null,
  "steps": [
   {
@@ -19,13 +19,13 @@
   },
   {
    "step": "stats",
-   "status": "skipped",
-   "note": "nothing new"
+   "status": "ok",
+   "note": "1 window(s) read, 2 team-games still missing"
   },
   {
    "step": "lineups",
-   "status": "ok",
-   "note": "2 of 2 team pages read"
+   "status": "skipped",
+   "note": "no game close enough"
   },
   {
    "step": "lineup_history",
@@ -150,8 +150,17 @@
   "Elias Pettersson",
   "Matthew Seminoff"
  ],
- "excluded_teams": [],
- "stats_through": "2026-10-25",
+ "excluded_teams": [
+  {
+   "team": "MTL",
+   "reason": "stats behind"
+  },
+  {
+   "team": "WPG",
+   "reason": "stats behind"
+  }
+ ],
+ "stats_through": "2026-10-24",
  "lineups_at": "2026-10-25T21:40:12-04:00",
  "lineups_note": "6 of 10 team line pages are dated today.",
  "games_today": 5,
@@ -162,7 +171,7 @@
  "runner": {
   "event": "workflow_dispatch",
   "run_id": "40255332447",
-  "iteration": 1,
+  "iteration": 3,
   "chain_link": 313,
   "chain_started_at": "2026-10-16T10:00:13-04:00",
   "run_started_at": "2026-10-25T21:40:12-04:00"
