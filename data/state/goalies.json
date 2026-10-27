@@ -14,7 +14,7 @@
    "status": "expected"
   },
   "LAK": {
-   "name": "Darcy Kuemper",
+   "name": "Anton Forsberg",
    "status": "expected"
   },
   "CAR": {
@@ -66,7 +66,7 @@
    "status": "expected"
   },
   "VGK": {
-   "name": "Carter Hart",
+   "name": "Adin Hill",
    "status": "expected"
   },
   "OTT": {
@@ -90,5 +90,5 @@
    "status": "expected"
   }
  },
- "checked_at": "2026-10-27T05:00:01-04:00"
+ "checked_at": "2026-10-27T08:00:01-04:00"
 }
