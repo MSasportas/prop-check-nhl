@@ -1,10 +1,10 @@
 {
  "ok": true,
  "slate_date": "2026-10-26",
- "started_at": "2026-10-27T01:10:01-04:00",
- "status_at": "2026-10-27T01:10:01-04:00",
- "finished_at": "2026-10-27T01:10:02-04:00",
- "last_ok_at": "2026-10-27T01:10:01-04:00",
+ "started_at": "2026-10-27T01:40:00-04:00",
+ "status_at": "2026-10-27T01:40:00-04:00",
+ "finished_at": "2026-10-27T01:40:01-04:00",
+ "last_ok_at": "2026-10-27T01:40:00-04:00",
  "failed_step": null,
  "steps": [
   {
@@ -19,8 +19,8 @@
   },
   {
    "step": "stats",
-   "status": "ok",
-   "note": "1 window(s) read"
+   "status": "skipped",
+   "note": "nothing new"
   },
   {
    "step": "lineups",
@@ -74,8 +74,8 @@
   },
   {
    "step": "slate",
-   "status": "ok",
-   "note": "0 open pick(s)"
+   "status": "skipped",
+   "note": "unchanged"
   },
   {
    "step": "record",
@@ -155,7 +155,7 @@
  "runner": {
   "event": "workflow_dispatch",
   "run_id": "40451905938",
-  "iteration": 3,
+  "iteration": 6,
   "chain_link": 349,
   "chain_started_at": "2026-10-16T10:00:13-04:00",
   "run_started_at": "2026-10-27T00:50:15-04:00"
