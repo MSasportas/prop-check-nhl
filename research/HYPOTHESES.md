@@ -295,6 +295,28 @@ No variant positive with n >= 300, so no placebo and no lockbox look. Cumulative
 Lockbox looks: still 2. Output: research/code/r11/y11_results.txt (10,413 graded Nov-Feb lines; run 10 counted 10,405, its rows dropped 8 lines
 with a void previous game for X1 only). Forward (7 nights, Oct 19-25): Q1a +7.3% n252 [-2,+17] p .10; Q1c +15.9% n132 p .03: too small.
 
+## Run 12 (Researcher, 2026-10-27 AM, daily). SHOTS ON GOAL ONLY. Registered before any of these were tested.
+No odds key, no historical odds pull. Free NHL stats REST skater per-game logs fetched to scratch with research/code/r12/fetch12.py
+(skater summary + skater realtime, 2024-25 + 2025-26 through Feb 28; lockbox not fetched). Every feature for a line dated d uses only
+data dated < d. Common as runs 4/6-11: shots45_lines, every two-way Hard Rock line, proportional de-vig fair f, side price >= -200,
+1u flat, regulation + OT, VOID = no bet, game-clustered bootstrap. Logistic = research/code/wf.py (a + a15 + a35 + b*logit(f) +
+standardised terms, L2 2, fit on all months before the test month), bet the side with p - BE >= T, T in {.01, .02, .03}. Fixed rules
+report every Nov-Feb bet with folds. Placebo (shuffle the feature(s) within date x line, 200 times) for any variant positive Nov-Feb
+with n >= 300; lockbox (Mar 1+) only for such a frozen variant, once, needing one-sided p < 0.05/3 = 0.0167 (look #3).
+
+| id | date | rule (exact) | data | result | status |
+|---|---|---|---|---|---|
+| Z1 | 2026-10-27 | **Team-level shot form (book adjusts players one by one, not the team).** Team SOG for a game = sum of its skaters' shots (2025-26 logs). tsf5 = his team's SOG/g over its last 5 games before d minus its SOG/g over all its 2025-26 games before d; osa5 = the opponent's shots-against/g over its last 5 games minus its season shots-against/g. Each needs >= 10 team games before d, else 0. Terms c1*tsf5 + c2*osa5 (3 T). Fixed rule Z1r: OVER when tsf5 + osa5 >= +5 (1 variant). 4 variants | skater logs + shots45 | | registered |
+| Z2 | 2026-10-27 | **Accuracy luck (on-target rate regresses).** From skater summary (shots) + realtime (missedShots), 2024-25 + 2025-26 before d: acc10 = SOG/(SOG + missed) over his last 10 games (needs >= 10 unblocked attempts in them, else dev 0); accL = same over ALL his prior games in both seasons; dev = acc10 - accL; att10 = unblocked attempts per game over the last 10. luck = dev x att10 (SOG per game his recent accuracy added beyond his norm). Terms c1*luck + c2*dev (3 T). Fixed rule Z2r: UNDER when luck >= +0.4 (1 variant). 4 variants. (Different from K9, which used position on-target rates, not his own.) | skater summary + realtime + shots45 | | registered |
+| Z3 | 2026-10-27 | **Role instability (TOI volatility).** cv = sd / mean of his TOI over his last 10 2025-26 games before d (>= 5 games, else the training-row mean). Terms c1*cv + c2*cv*logit(f) (is the book's fair less reliable, too extreme or too flat, for players whose ice time swings?) (3 T). 3 variants | skater summary + shots45 | | registered |
+| Z4 | 2026-10-27 | **Stuck line (book keeps the same integer line while his volume drifts).** prior = his Hard Rock lines on earlier dates (date < d, one per date: the line with f nearest 0.5); k = number of his most recent consecutive prior dates whose line equals today's line (0 if none). gap = his SOG/g over his last 10 games before d (both seasons) - today's line. Terms c1*gap*[k >= 4] + c2*[k >= 4] + c3*gap (3 T). Fixed rule Z4r: when k >= 4, OVER if gap >= +0.7, UNDER if gap <= -0.7 (1 variant). 4 variants | shots45 + skater logs | | registered |
+
+Forward (registered now; scored on every shadow night in data/shadow, Oct 12 onward; no outcome of these rows has been looked at):
+| id | date | rule (exact) | data | result | status |
+|---|---|---|---|---|---|
+| Q10 | 2026-10-27 | **Q7 returners' overs, forward.** Every data/shadow shots row with ctx.missed_last = true (missed his team's last game; known pre-game): OVER at the row's `close` read price (last pre-game Hard Rock read), over price >= -200; graded on row.result.over (W/L/P; VOID or no result = no bet). 1 variant | data/shadow | | forward, open |
+Q10 bar: n >= 300 graded, ROI > 0, one-sided p < 0.05/25 = 0.0020 (24 + 1 forward variants). Scored by research/code/r12/score_q10.py.
+
 ## Queued (not yet tested)
 | id | rule idea | data | status |
 |---|---|---|---|
