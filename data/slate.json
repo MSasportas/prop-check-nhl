@@ -1,7 +1,7 @@
 {
  "slate_date": "2026-10-27",
- "generated_at": "2026-10-27T19:30:00-04:00",
- "status_at": "2026-10-27T19:30:00-04:00",
+ "generated_at": "2026-10-27T19:40:01-04:00",
+ "status_at": "2026-10-27T19:40:01-04:00",
  "valid_until": "2026-10-28T05:00:00-04:00",
  "status": {
   "prices_state": "ok",
@@ -9,14 +9,14 @@
   "next_price_read_at": "2026-10-27T20:15:00-04:00",
   "stats_built_at": "2026-10-27T01:10:01-04:00",
   "stats_through": "2026-10-26",
-  "lineups_at": "2026-10-27T19:30:00-04:00",
+  "lineups_at": "2026-10-27T19:40:01-04:00",
   "goalies_at": null,
   "lineups_note": "17 of 22 team line pages are dated today.",
   "lineups_state": "ok",
   "stats_state": "ok",
   "last_run": {
    "ok": true,
-   "at": "2026-10-27T19:30:00-04:00",
+   "at": "2026-10-27T19:40:01-04:00",
    "failed_step": null
   },
   "pool": {
@@ -74,7 +74,7 @@
     },
     "home": {
      "name": "Pyotr Kochetkov",
-     "status": "expected"
+     "status": "confirmed"
     }
    },
    "started": false,
@@ -94,7 +94,7 @@
    "goalies": {
     "away": {
      "name": "Anton Forsberg",
-     "status": "expected"
+     "status": "confirmed"
     },
     "home": {
      "name": "Spencer Knight",
@@ -146,7 +146,7 @@
     },
     "home": {
      "name": "Juuse Saros",
-     "status": "expected"
+     "status": "confirmed"
     }
    },
    "started": false,
@@ -404,8 +404,8 @@
     "ours_pct": 54.9,
     "model_pct": 55.7
    },
-   "settled": "lineup",
-   "settled_label": "Lineup confirmed",
+   "settled": "goalie",
+   "settled_label": "Goalie confirmed",
    "reason": "6 other books say 55.2%; Hard Rock's -110 only needs 52.4%. Our model agrees (our blend: 54.9%).",
    "link": null,
    "thin": false,

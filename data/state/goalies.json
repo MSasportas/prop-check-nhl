@@ -15,11 +15,11 @@
   },
   "LAK": {
    "name": "Anton Forsberg",
-   "status": "expected"
+   "status": "confirmed"
   },
   "CAR": {
    "name": "Pyotr Kochetkov",
-   "status": "expected"
+   "status": "confirmed"
   },
   "BOS": {
    "name": "Jeremy Swayman",
@@ -35,7 +35,7 @@
   },
   "NSH": {
    "name": "Juuse Saros",
-   "status": "expected"
+   "status": "confirmed"
   },
   "NYI": {
    "name": "Semyon Varlamov",
@@ -90,5 +90,5 @@
    "status": "expected"
   }
  },
- "checked_at": "2026-10-27T15:10:00-04:00"
+ "checked_at": "2026-10-27T19:40:01-04:00"
 }
