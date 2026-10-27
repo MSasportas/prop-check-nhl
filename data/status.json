@@ -1,10 +1,10 @@
 {
  "ok": true,
  "slate_date": "2026-10-27",
- "started_at": "2026-10-27T19:00:01-04:00",
- "status_at": "2026-10-27T19:00:01-04:00",
- "finished_at": "2026-10-27T19:00:03-04:00",
- "last_ok_at": "2026-10-27T19:00:01-04:00",
+ "started_at": "2026-10-27T19:20:01-04:00",
+ "status_at": "2026-10-27T19:20:01-04:00",
+ "finished_at": "2026-10-27T19:20:04-04:00",
+ "last_ok_at": "2026-10-27T19:20:01-04:00",
  "failed_step": null,
  "steps": [
   {
@@ -29,13 +29,13 @@
   },
   {
    "step": "lineup_history",
-   "status": "ok",
-   "note": "4 team(s) changed"
+   "status": "skipped",
+   "note": "no change"
   },
   {
    "step": "odds",
    "status": "ok",
-   "note": "no pull due"
+   "note": "6 game(s) priced"
   },
   {
    "step": "market_menu",
@@ -50,7 +50,7 @@
   {
    "step": "gapguard",
    "status": "ok",
-   "note": "gap+guard: nothing new"
+   "note": "gap+guard: 3 close"
   },
   {
    "step": "engine",
@@ -64,8 +64,8 @@
   },
   {
    "step": "shadow",
-   "status": "skipped",
-   "note": "nothing new"
+   "status": "ok",
+   "note": "115 line read(s) logged"
   },
   {
    "step": "gg_grade",
@@ -101,7 +101,7 @@
   },
   {
    "n": 3,
-   "left": 39
+   "left": 27
   },
   {
    "n": 4,
@@ -132,14 +132,14 @@
    "left": 221
   }
  ],
- "pool_total": 1672,
+ "pool_total": 1660,
  "allowance": 43.5641,
  "tier": 4,
  "budget_today": 479,
- "budget_used_today": 27,
+ "budget_used_today": 39,
  "prices_state": "ok",
- "prices_at": "2026-10-27T18:30:00-04:00",
- "next_price_read_at": "2026-10-27T19:15:00-04:00",
+ "prices_at": "2026-10-27T19:20:01-04:00",
+ "next_price_read_at": "2026-10-27T19:30:00-04:00",
  "unmatched_names": [
   "Elias Pettersson"
  ],
@@ -150,7 +150,7 @@
  ],
  "excluded_teams": [],
  "stats_through": "2026-10-26",
- "lineups_at": "2026-10-27T19:00:01-04:00",
+ "lineups_at": "2026-10-27T19:20:01-04:00",
  "lineups_note": "15 of 20 team line pages are dated today.",
  "games_today": 11,
  "record_events": 69,
@@ -159,10 +159,10 @@
  ],
  "runner": {
   "event": "workflow_dispatch",
-  "run_id": "40594006785",
-  "iteration": 5,
-  "chain_link": 374,
+  "run_id": "40600209035",
+  "iteration": 2,
+  "chain_link": 375,
   "chain_started_at": "2026-10-16T10:00:13-04:00",
-  "run_started_at": "2026-10-27T18:20:14-04:00"
+  "run_started_at": "2026-10-27T19:10:11-04:00"
  }
 }
