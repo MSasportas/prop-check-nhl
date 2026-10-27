@@ -1,10 +1,10 @@
 {
  "ok": true,
  "slate_date": "2026-10-27",
- "started_at": "2026-10-27T13:00:01-04:00",
- "status_at": "2026-10-27T13:00:01-04:00",
- "finished_at": "2026-10-27T13:00:07-04:00",
- "last_ok_at": "2026-10-27T13:00:01-04:00",
+ "started_at": "2026-10-27T13:20:17-04:00",
+ "status_at": "2026-10-27T13:20:17-04:00",
+ "finished_at": "2026-10-27T13:20:18-04:00",
+ "last_ok_at": "2026-10-27T13:20:17-04:00",
  "failed_step": null,
  "steps": [
   {
@@ -35,7 +35,7 @@
   {
    "step": "odds",
    "status": "ok",
-   "note": "11 game(s) priced"
+   "note": "no pull due"
   },
   {
    "step": "market_menu",
@@ -64,8 +64,8 @@
   },
   {
    "step": "shadow",
-   "status": "ok",
-   "note": "197 line read(s) logged"
+   "status": "skipped",
+   "note": "nothing new"
   },
   {
    "step": "gg_grade",
@@ -74,8 +74,8 @@
   },
   {
    "step": "slate",
-   "status": "ok",
-   "note": "0 open pick(s)"
+   "status": "skipped",
+   "note": "unchanged"
   },
   {
    "step": "record",
@@ -156,10 +156,10 @@
  ],
  "runner": {
   "event": "workflow_dispatch",
-  "run_id": "40541519904",
-  "iteration": 4,
-  "chain_link": 367,
+  "run_id": "40549581395",
+  "iteration": 1,
+  "chain_link": 368,
   "chain_started_at": "2026-10-16T10:00:13-04:00",
-  "run_started_at": "2026-10-27T12:30:14-04:00"
+  "run_started_at": "2026-10-27T13:20:16-04:00"
  }
 }
