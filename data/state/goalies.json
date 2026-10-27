@@ -23,11 +23,11 @@
   },
   "BOS": {
    "name": "Jeremy Swayman",
-   "status": "expected"
+   "status": "confirmed"
   },
   "WPG": {
    "name": "Clay Stevenson",
-   "status": "expected"
+   "status": "confirmed"
   },
   "FLA": {
    "name": "Akira Schmid",
@@ -90,5 +90,5 @@
    "status": "expected"
   }
  },
- "checked_at": "2026-10-27T11:40:01-04:00"
+ "checked_at": "2026-10-27T12:00:00-04:00"
 }
