@@ -15,7 +15,7 @@
   },
   "TOR": {
    "name": "Sergei Bobrovsky",
-   "status": "expected"
+   "status": "confirmed"
   },
   "EDM": {
    "name": "Tristan Jarry",
@@ -26,5 +26,5 @@
    "status": "confirmed"
   }
  },
- "checked_at": "2026-10-26T18:40:00-04:00"
+ "checked_at": "2026-10-26T20:10:01-04:00"
 }
