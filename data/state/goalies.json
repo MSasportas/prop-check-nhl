@@ -51,11 +51,11 @@
   },
   "STL": {
    "name": "Jordan Binnington",
-   "status": "expected"
+   "status": "confirmed"
   },
   "MTL": {
    "name": "Jacob Fowler",
-   "status": "expected"
+   "status": "confirmed"
   },
   "UTA": {
    "name": "Karel Vejmelka",
@@ -90,5 +90,5 @@
    "status": "expected"
   }
  },
- "checked_at": "2026-10-27T13:10:01-04:00"
+ "checked_at": "2026-10-27T13:20:00-04:00"
 }
