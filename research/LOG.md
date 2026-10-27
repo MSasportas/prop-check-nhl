@@ -1,5 +1,26 @@
 # LOG.md: Researcher runs (newest first)
 
+- 2026-10-27 ~8:15 AM ET (Researcher run 12, daily; SHOTS ON GOAL ONLY). No key used, no historical odds pull. Z1-Z4 + forward Q10 registered
+  and pushed (3100297) before any test ran. Free NHL stats REST skater summary + realtime logs fetched to scratch (r12/fetch12.py; Feb 28
+  cut-off, lockbox not fetched). Script research/code/r12/z12.py, output z12_results.txt. 10,413 graded Nov-Feb lines.
+  - Z1 team-level shot form (team's last-5 shots vs its season; opponent's last-5 shots allowed): best T=.03 -12.4% n247; fixed OVER rule
+    -3.8% n758 [-9.6,+1.8], p .87. Hard Rock already folds team form into each player's number.
+  - Z2 accuracy luck (recent shots-on-target rate above his norm should regress): best T=.02 -2.8% n90; UNDER on the luckiest -4.3% n505
+    [-11.2,+3.0]. Recent accuracy partly carries over; nothing to fade.
+  - Z3 role instability (ice-time swings): -9.7% n353 to -11.7% n168; weight ~0. The book is no worse on volatile-role players.
+  - Z4 stuck line (same integer line 4+ straight games while his volume drifts): -11.0% n223; fixed rule -9.6% n1,716, every fold -8..-11.
+    Hard Rock moves the price instead of the line, and does it well.
+  - Forward re-score (score_fwd.py, 8 nights Oct 19-26; clone unshallowed first so Q2 lineup events count): Q1a (Hard Rock >= consensus
+    fair) +8.8% n269 [-1,+19] p .07; Q1b (EV >= 1%) +12.7% n192 p .024; Q1c (EV >= 2%) +15.6% n140 [+4,+27] p .022; Q1k Pinnacle +9.2%
+    n206; Q1m +25.1% n29; mean CLV ~= EV. Q6a (1 PM) +16.5% n65, Q6b (B/C) +3.3% n51, Q6c (unders) +17.4% n94. Q8a-c n6/n4/n22, Q9a-c
+    n10/n5/n2 (1-2 nights). Q2a/b 0 bets. Q10 returners' overs (new, all shadow nights Oct 12-26): +20.3% n26, p .14. All too small
+    (bar n >= 300 and p < .0020).
+  15 variants (~0.75 false positives expected); all-time historical 366; forward 25. Lockbox looks: 2 (unchanged; next needs p < 0.0167).
+  **Verdict: nothing passed; no candidate for the Sharp.** Team shot form, shooting-accuracy luck, ice-time volatility and stuck lines are
+  all inside Hard Rock's price. History with free data stays exhausted (366 variants); the live Q1 gap (Hard Rock at or above the other
+  books' fair price) is still the only lead and is trending the right way (Q1c p .022 at n140), but needs ~2 more weeks for n 300.
+  Next: (1) Q1c run to n >= 300 (about Nov 10 at this pace) and check CLV stays ~EV; (2) Q10 forward, ~2 bets per night (slow, judge by
+  season end); (3) a forward test of Q1c split by goalie status at read time (both goalies confirmed vs not), registered before looking.
 - 2026-10-26 ~8:10 AM ET (Researcher run 11, daily; SHOTS ON GOAL ONLY). No key used, no historical odds pull. Y1-Y4 + forward Q9a-c registered
   and pushed (55727c6) before any test ran. Free NHL stats REST skater logs fetched to scratch (r11/fetch11.py; Feb 28 cut-off, lockbox not
   fetched). Script research/code/r11/y11.py, output y11_results.txt. 10,413 graded Nov-Feb lines.
