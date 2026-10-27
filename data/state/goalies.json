@@ -42,15 +42,15 @@
    "status": "expected"
   },
   "DAL": {
-   "name": "Jake Oettinger",
-   "status": "expected"
+   "name": "Casey DeSmith",
+   "status": "confirmed"
   },
   "NJD": {
    "name": "Jake Allen",
    "status": "expected"
   },
   "STL": {
-   "name": "Joel Hofer",
+   "name": "Jordan Binnington",
    "status": "expected"
   },
   "MTL": {
@@ -90,5 +90,5 @@
    "status": "expected"
   }
  },
- "checked_at": "2026-10-27T11:30:00-04:00"
+ "checked_at": "2026-10-27T11:40:01-04:00"
 }
