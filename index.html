@@ -617,12 +617,6 @@ function pickCard(p, d, opts) {
     tp ? h('span', { class: 'chip hollow', text: tp }) : null,
     (S.newIds[id] && !opts.noNew && !stale()) ? h('span', { class: 'chip new', text: 'New' }) : null));
   var res = resultLine(p.graded, p.market || p.bet); if (res) card.insertBefore(res, card.firstChild);
-  /* Hard Rock's own bet-slip link for this bet (only when the feed sent one). It opens in a new tab and never toggles the card. */
-  if (typeof p.link === 'string' && /^https:\/\/[^\s<>"'\\\u0000-\u001f\u007f\u200e\u200f\u202a-\u202e\u2066-\u2069]{4,590}$/.test(p.link) &&
-      !p.pulled && !isObj(p.graded) && !/^locked/.test(str(p.state)) && !stale()) {
-    card.appendChild(h('a', { class: 'betlink', href: p.link, target: '_blank', rel: 'noopener noreferrer', 'aria-label': 'Bet this on Hard Rock',
-      on: { click: function (e) { e.stopPropagation(); }, keydown: function (e) { e.stopPropagation(); } } }, 'Bet on Hard Rock \u2197'));
-  }
 
   if (isOpen) {
     var more = h('div', { class: 'more' });

@@ -50,7 +50,7 @@ class Links(unittest.TestCase):
     def test_discord_block_has_the_slip_link_and_the_page_gets_it(self):
         base = {"player": "P. X", "side": "over", "line": 1.5, "market": "shots", "price": -110, "team": "CAR", "opp": "PHI",
                 "home": False, "start": "2026-10-25T19:00:00-04:00", "p_pct": 55, "breakeven_pct": 52, "gap_pct": 4.0, "state": "early"}
-        self.assertIn("Bet slip: <https://hardrock.example/slip/1>", notify.pick_line(dict(base, link="https://hardrock.example/slip/1")))
+        self.assertNotIn("Bet slip", notify.pick_line(dict(base, link="https://hardrock.example/slip/1")))   # feature removed 2026-10-26
         self.assertNotIn("Bet slip", notify.pick_line(base))
         self.assertNotIn("Bet slip", notify.pick_line(dict(base, link="http://nope")))
 
@@ -61,7 +61,9 @@ class _FakePool:
 
 class LinkFallback(unittest.TestCase):
     def client(self, answers):
-        c = odds.Client(_FakePool(), helpers.cfg())
+        cfg = helpers.cfg()
+        cfg["ops"]["odds_links"] = True                      # the option still works; production has it off since 2026-10-26
+        c = odds.Client(_FakePool(), cfg)
         calls = []
 
         def fake_get(path, params, need, slate=None, pull=None, game_id=None, flat_cost=None):

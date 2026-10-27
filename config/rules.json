@@ -108,6 +108,7 @@
   ],
   "_consensus_about": "Other books asked on every price read beside Hard Rock (max 9: the feed bills up to 10 books as one region, so no extra credits). They are the 'market' in Gap + Guard step 1 (Pinnacle must be one; 4 must quote). 2026-10-23: williamhill_us and fanatics are paid-plan-only keys and betrivers sent no NHL shots, so all three returned nothing; replaced by lowvig (reduced-juice), novig and prophetx (exchanges), historically sharp. UNVERIFIED that they return NHL shots until the first read: a book that returns nothing costs nothing. [] = Hard Rock only.",
   "odds_region": "us2",
+  "odds_links": false,
   "markets": {
    "shots": {
     "feed_key": "player_shots_on_goal",

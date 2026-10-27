@@ -167,9 +167,6 @@ def pick_line(p):
     gap_txt = ("Gap %+.1f%% vs market" % gap) if isinstance(gap, (int, float)) else "Gap vs market"
     lines = ["**%s %s  %s**" % (p["player"], _bet(p), common.fmt_price(p["price"])), when,
              "%s, we say %s%%, price needs %s%%" % (gap_txt, p["p_pct"], p["breakeven_pct"])]
-    link = p.get("link")
-    if odds.safe_link(link):
-        lines.append("Bet slip: <%s>" % link)               # <> keeps Discord from unfurling a preview
     return "\n".join(lines)
 
 
