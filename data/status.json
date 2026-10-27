@@ -1,10 +1,10 @@
 {
  "ok": true,
  "slate_date": "2026-10-27",
- "started_at": "2026-10-27T17:10:02-04:00",
- "status_at": "2026-10-27T17:10:02-04:00",
- "finished_at": "2026-10-27T17:10:03-04:00",
- "last_ok_at": "2026-10-27T17:10:02-04:00",
+ "started_at": "2026-10-27T17:30:00-04:00",
+ "status_at": "2026-10-27T17:30:00-04:00",
+ "finished_at": "2026-10-27T17:30:04-04:00",
+ "last_ok_at": "2026-10-27T17:30:00-04:00",
  "failed_step": null,
  "steps": [
   {
@@ -25,7 +25,7 @@
   {
    "step": "lineups",
    "status": "ok",
-   "note": "2 of 2 team pages read"
+   "note": "12 of 12 team pages read"
   },
   {
    "step": "lineup_history",
@@ -35,7 +35,7 @@
   {
    "step": "odds",
    "status": "ok",
-   "note": "no pull due"
+   "note": "1 game(s) priced"
   },
   {
    "step": "market_menu",
@@ -64,8 +64,8 @@
   },
   {
    "step": "shadow",
-   "status": "skipped",
-   "note": "nothing new"
+   "status": "ok",
+   "note": "22 line read(s) logged"
   },
   {
    "step": "gg_grade",
@@ -101,7 +101,7 @@
   },
   {
    "n": 3,
-   "left": 55
+   "left": 53
   },
   {
    "n": 4,
@@ -132,14 +132,14 @@
    "left": 221
   }
  ],
- "pool_total": 1688,
+ "pool_total": 1686,
  "allowance": 43.5641,
  "tier": 4,
  "budget_today": 479,
- "budget_used_today": 11,
+ "budget_used_today": 13,
  "prices_state": "ok",
- "prices_at": "2026-10-27T13:00:01-04:00",
- "next_price_read_at": "2026-10-27T17:30:00-04:00",
+ "prices_at": "2026-10-27T17:30:00-04:00",
+ "next_price_read_at": "2026-10-27T18:15:00-04:00",
  "unmatched_names": [
   "Elias Pettersson"
  ],
@@ -147,7 +147,7 @@
  "lineup_unmatched_names": [],
  "excluded_teams": [],
  "stats_through": "2026-10-26",
- "lineups_at": "2026-10-27T17:10:02-04:00",
+ "lineups_at": "2026-10-27T17:30:00-04:00",
  "lineups_note": "11 of 14 team line pages are dated today.",
  "games_today": 11,
  "record_events": 66,
@@ -157,7 +157,7 @@
  "runner": {
   "event": "workflow_dispatch",
   "run_id": "40580080780",
-  "iteration": 4,
+  "iteration": 6,
   "chain_link": 372,
   "chain_started_at": "2026-10-16T10:00:13-04:00",
   "run_started_at": "2026-10-27T16:40:14-04:00"
