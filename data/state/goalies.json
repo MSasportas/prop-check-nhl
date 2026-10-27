@@ -75,7 +75,7 @@
   },
   "ANA": {
    "name": "Lukas Dostal",
-   "status": "expected"
+   "status": "confirmed"
   },
   "VAN": {
    "name": "Leevi Merilainen",
@@ -83,12 +83,12 @@
   },
   "SJS": {
    "name": "Yaroslav Askarov",
-   "status": "expected"
+   "status": "confirmed"
   },
   "BUF": {
    "name": "Colten Ellis",
    "status": "expected"
   }
  },
- "checked_at": "2026-10-27T13:50:01-04:00"
+ "checked_at": "2026-10-27T14:00:01-04:00"
 }
