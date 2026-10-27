@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-10-25T01:10:01-04:00",
+ "generated_at": "2026-10-26T20:00:01-04:00",
  "summary": {
   "headline": {
    "w": 11,
@@ -39,6 +39,38 @@
   ]
  },
  "nights": [
+  {
+   "date": "2026-10-26",
+   "graded": false,
+   "w": 0,
+   "l": 0,
+   "units": 0,
+   "entries": [
+    {
+     "id": "2026-10-26:2026020187:8478854:shots:1.5:under",
+     "kind": "single",
+     "player": "R. Shea",
+     "bet": "Under 1.5 shots on goal",
+     "market": "shots",
+     "team": "EDM",
+     "game": "DET at EDM",
+     "price": -140,
+     "first_price": -140,
+     "last_price": -140,
+     "prices": [
+      {
+       "price": -140,
+       "at": "2026-10-26T20:00:01-04:00"
+      }
+     ],
+     "result": null,
+     "actual": null,
+     "units": null,
+     "pulled": null,
+     "legs": []
+    }
+   ]
+  },
   {
    "date": "2026-10-24",
    "graded": true,

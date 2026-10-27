@@ -1,42 +1,38 @@
 {
  "slate_date": "2026-10-26",
- "generated_at": "2026-10-26T19:50:00-04:00",
- "status_at": "2026-10-26T19:50:00-04:00",
+ "generated_at": "2026-10-26T20:00:01-04:00",
+ "status_at": "2026-10-26T20:00:01-04:00",
  "valid_until": "2026-10-27T05:00:00-04:00",
  "status": {
   "prices_state": "ok",
-  "prices_at": "2026-10-26T19:50:00-04:00",
-  "next_price_read_at": "2026-10-26T20:00:00-04:00",
+  "prices_at": "2026-10-26T20:00:01-04:00",
+  "next_price_read_at": "2026-10-26T20:45:00-04:00",
   "stats_built_at": "2026-10-26T01:10:01-04:00",
   "stats_through": "2026-10-25",
-  "lineups_at": "2026-10-26T19:40:00-04:00",
+  "lineups_at": "2026-10-26T20:00:01-04:00",
   "goalies_at": null,
   "lineups_note": "5 of 6 team line pages are dated today.",
   "lineups_state": "ok",
   "stats_state": "ok",
   "last_run": {
    "ok": true,
-   "at": "2026-10-26T19:50:00-04:00",
+   "at": "2026-10-26T20:00:01-04:00",
    "failed_step": null
   },
   "pool": {
-   "pulls_left": 1703,
+   "pulls_left": 1701,
    "keys": 10,
    "game_days_left": 6,
    "days_left": 6,
    "low": false
   },
   "excluded_teams": [],
-  "lines_checked": 32,
-  "flag_reads": 2,
+  "lines_checked": 48,
+  "flag_reads": 3,
   "tier": 4
  },
  "banners": [],
- "empty": {
-  "code": "none_qualified",
-  "text": "No picks yet today",
-  "sub": "32 lines read, none cleared both checks. Next read at 8:00 PM."
- },
+ "empty": null,
  "games": [
   {
    "id": 2026020185,
@@ -106,12 +102,69 @@
     }
    },
    "started": false,
-   "picks": 0,
+   "picks": 1,
    "excluded_reason": null,
    "excluded_teams": []
   }
  ],
- "picks": [],
+ "picks": [
+  {
+   "id": "2026-10-26:2026020187:8478854:shots:1.5:under",
+   "price": -140,
+   "first_price": -140,
+   "first_price_at": "2026-10-26T20:00:01-04:00",
+   "worst_price": -140,
+   "p": 0.645,
+   "breakeven": 0.5833,
+   "p_pct": 64,
+   "breakeven_pct": 58,
+   "state": "lineup",
+   "history": [
+    {
+     "at": "2026-10-26T20:00:01-04:00",
+     "text": "Lineup confirmed"
+    }
+   ],
+   "prices": [
+    {
+     "at": "2026-10-26T20:00:01-04:00",
+     "price": -140
+    }
+   ],
+   "pulled": null,
+   "price_final": false,
+   "graded": null,
+   "rank": 1,
+   "tier": "main",
+   "game_id": 2026020187,
+   "player": "R. Shea",
+   "player_id": 8478854,
+   "team": "EDM",
+   "opp": "DET",
+   "home": true,
+   "start": "2026-10-26T21:30:00-04:00",
+   "market": "shots",
+   "line": 1.5,
+   "side": "under",
+   "bet": "Under 1.5 shots on goal",
+   "price_at": "2026-10-26T20:00:01-04:00",
+   "gap_pct": 7.7,
+   "market_fair_pct": 62.8,
+   "n_books": 4,
+   "guard": {
+    "verdict": "agrees",
+    "ours_pct": 64.5,
+    "model_pct": 73.1
+   },
+   "settled": "goalie",
+   "settled_label": "Goalie confirmed",
+   "reason": "4 other books say 62.8%; Hard Rock's -140 only needs 58.3%. Our model agrees (our blend: 64.5%).",
+   "link": "https://app.hardrock.bet/?deep_link_value=betslip/2040757836744622509",
+   "thin": false,
+   "games_used": 91,
+   "games_this_season": 11
+  }
+ ],
  "parlays": [],
  "parlays_note": "Parlays are not offered: there is no evidence for them yet."
 }

@@ -2,7 +2,7 @@
  "version": 1,
  "note": "Gap + Guard research log. Every flag here is a pick on the page and in the Record; vetoed and capped rows are research only.",
  "market": "shots",
- "generated_at": "2026-10-26T19:40:00-04:00",
+ "generated_at": "2026-10-26T20:00:01-04:00",
  "slate": "2026-10-26",
  "active": true,
  "window": {
@@ -10,7 +10,42 @@
   "checkpoint": "2026-11-02"
  },
  "tonight": {
-  "flags": [],
+  "flags": [
+   {
+    "id": "2026-10-26:2026020187:8478854:1.5:under",
+    "kind": "flag",
+    "slate": "2026-10-26",
+    "game_id": 2026020187,
+    "player": "R. Shea",
+    "team": "EDM",
+    "opp": "DET",
+    "game": "EDM vs DET",
+    "start": "2026-10-26T21:30:00-04:00",
+    "side": "under",
+    "line": 1.5,
+    "bet": "UNDER 1.5 shots",
+    "price": -140,
+    "gap_pct": 7.7,
+    "final_pct": 10.6,
+    "market_fair_pct": 62.8,
+    "final_p_pct": 64.5,
+    "n_books": 4,
+    "guard": "pass",
+    "cap": null,
+    "flagged_at": "2026-10-26T20:00:01-04:00",
+    "read_pull": "B",
+    "settled": "Goalie confirmed",
+    "frozen_settled": "Goalie confirmed",
+    "move30_pct": 5.0,
+    "pulled": null,
+    "locked": false,
+    "state": "open",
+    "close_fair_pct": null,
+    "clv_pct": null,
+    "result": null,
+    "units": null
+   }
+  ],
   "vetoes": [],
   "capped": []
  },
@@ -807,7 +842,7 @@
  ],
  "nov2": {
   "gaps_measured": 19,
-  "gaps_logged": 22,
+  "gaps_logged": 23,
   "graded_picks": 21,
   "w": 14,
   "l": 7,
@@ -835,7 +870,7 @@
   "clv_passed_mean": 0.04668658627199724,
   "clv_vetoed_mean": 0.04698645650723732,
   "nights": 7,
-  "nights_with_flags": 4,
+  "nights_with_flags": 5,
   "population_slope": null,
   "checkpoint": "2026-11-02"
  }
