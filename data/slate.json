@@ -1,7 +1,7 @@
 {
  "slate_date": "2026-10-26",
- "generated_at": "2026-10-26T21:10:00-04:00",
- "status_at": "2026-10-26T21:10:00-04:00",
+ "generated_at": "2026-10-26T21:30:00-04:00",
+ "status_at": "2026-10-26T21:30:00-04:00",
  "valid_until": "2026-10-27T05:00:00-04:00",
  "status": {
   "prices_state": "ok",
@@ -16,7 +16,7 @@
   "stats_state": "ok",
   "last_run": {
    "ok": true,
-   "at": "2026-10-26T21:10:00-04:00",
+   "at": "2026-10-26T21:30:00-04:00",
    "failed_step": null
   },
   "pool": {
@@ -32,7 +32,11 @@
   "tier": 4
  },
  "banners": [],
- "empty": null,
+ "empty": {
+  "code": "all_started",
+  "text": "Every game has started.",
+  "sub": "Tonight's picks are under Started."
+ },
  "games": [
   {
    "id": 2026020185,
@@ -101,7 +105,7 @@
      "status": "confirmed"
     }
    },
-   "started": false,
+   "started": true,
    "picks": 1,
    "excluded_reason": null,
    "excluded_teams": []
@@ -118,11 +122,15 @@
    "breakeven": 0.5833,
    "p_pct": 64,
    "breakeven_pct": 58,
-   "state": "lineup",
+   "state": "locked",
    "history": [
     {
      "at": "2026-10-26T20:00:01-04:00",
      "text": "Lineup confirmed"
+    },
+    {
+     "at": "2026-10-26T21:30:00-04:00",
+     "text": "Locked"
     }
    ],
    "prices": [
@@ -132,9 +140,9 @@
     }
    ],
    "pulled": null,
-   "price_final": true,
+   "price_final": false,
    "graded": null,
-   "rank": 1,
+   "rank": null,
    "tier": "main",
    "game_id": 2026020187,
    "player": "R. Shea",
