@@ -67,7 +67,7 @@
   },
   "VGK": {
    "name": "Adin Hill",
-   "status": "expected"
+   "status": "confirmed"
   },
   "OTT": {
    "name": "Jonas Johansson",
@@ -90,5 +90,5 @@
    "status": "expected"
   }
  },
- "checked_at": "2026-10-27T14:00:01-04:00"
+ "checked_at": "2026-10-27T14:50:00-04:00"
 }
