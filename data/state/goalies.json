@@ -39,7 +39,7 @@
   },
   "NYI": {
    "name": "Semyon Varlamov",
-   "status": "expected"
+   "status": "confirmed"
   },
   "DAL": {
    "name": "Casey DeSmith",
@@ -90,5 +90,5 @@
    "status": "expected"
   }
  },
- "checked_at": "2026-10-27T14:50:00-04:00"
+ "checked_at": "2026-10-27T15:10:00-04:00"
 }
