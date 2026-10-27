@@ -1,34 +1,34 @@
 {
  "slate_date": "2026-10-27",
- "generated_at": "2026-10-27T19:20:01-04:00",
- "status_at": "2026-10-27T19:20:01-04:00",
+ "generated_at": "2026-10-27T19:30:00-04:00",
+ "status_at": "2026-10-27T19:30:00-04:00",
  "valid_until": "2026-10-28T05:00:00-04:00",
  "status": {
   "prices_state": "ok",
-  "prices_at": "2026-10-27T19:20:01-04:00",
-  "next_price_read_at": "2026-10-27T19:30:00-04:00",
+  "prices_at": "2026-10-27T19:30:00-04:00",
+  "next_price_read_at": "2026-10-27T20:15:00-04:00",
   "stats_built_at": "2026-10-27T01:10:01-04:00",
   "stats_through": "2026-10-26",
-  "lineups_at": "2026-10-27T19:20:01-04:00",
+  "lineups_at": "2026-10-27T19:30:00-04:00",
   "goalies_at": null,
-  "lineups_note": "15 of 20 team line pages are dated today.",
+  "lineups_note": "17 of 22 team line pages are dated today.",
   "lineups_state": "ok",
   "stats_state": "ok",
   "last_run": {
    "ok": true,
-   "at": "2026-10-27T19:20:01-04:00",
+   "at": "2026-10-27T19:30:00-04:00",
    "failed_step": null
   },
   "pool": {
-   "pulls_left": 1660,
+   "pulls_left": 1658,
    "keys": 10,
    "game_days_left": 5,
    "days_left": 5,
    "low": false
   },
   "excluded_teams": [],
-  "lines_checked": 125,
-  "flag_reads": 7,
+  "lines_checked": 142,
+  "flag_reads": 8,
   "tier": 4
  },
  "banners": [],
@@ -280,8 +280,8 @@
    "home": "SJS",
    "start": "2026-10-27T22:30:00-04:00",
    "lineups": {
-    "away": "not_checked",
-    "home": "not_checked"
+    "away": "confirmed",
+    "home": "confirmed"
    },
    "goalies": {
     "away": {
