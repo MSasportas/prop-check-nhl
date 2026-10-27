@@ -81,6 +81,20 @@
      "shots"
     ],
     "cost": 1
+   },
+   {
+    "game_id": 2026020189,
+    "pull": "B",
+    "at": "2026-10-27T18:30:00-04:00",
+    "markets": [
+     "saves",
+     "shots"
+    ],
+    "returned": [
+     "saves",
+     "shots"
+    ],
+    "cost": 2
    }
   ],
   "2026020190": [
@@ -95,6 +109,20 @@
      "shots"
     ],
     "cost": 1
+   },
+   {
+    "game_id": 2026020190,
+    "pull": "B",
+    "at": "2026-10-27T18:30:00-04:00",
+    "markets": [
+     "saves",
+     "shots"
+    ],
+    "returned": [
+     "saves",
+     "shots"
+    ],
+    "cost": 2
    }
   ],
   "2026020191": [
@@ -109,6 +137,20 @@
      "shots"
     ],
     "cost": 1
+   },
+   {
+    "game_id": 2026020191,
+    "pull": "B",
+    "at": "2026-10-27T18:30:00-04:00",
+    "markets": [
+     "saves",
+     "shots"
+    ],
+    "returned": [
+     "saves",
+     "shots"
+    ],
+    "cost": 2
    }
   ],
   "2026020192": [
@@ -123,6 +165,20 @@
      "shots"
     ],
     "cost": 1
+   },
+   {
+    "game_id": 2026020192,
+    "pull": "B",
+    "at": "2026-10-27T18:30:00-04:00",
+    "markets": [
+     "saves",
+     "shots"
+    ],
+    "returned": [
+     "saves",
+     "shots"
+    ],
+    "cost": 2
    }
   ],
   "2026020193": [
@@ -137,6 +193,20 @@
      "shots"
     ],
     "cost": 1
+   },
+   {
+    "game_id": 2026020193,
+    "pull": "B",
+    "at": "2026-10-27T18:30:00-04:00",
+    "markets": [
+     "saves",
+     "shots"
+    ],
+    "returned": [
+     "saves",
+     "shots"
+    ],
+    "cost": 2
    }
   ],
   "2026020194": [
@@ -151,6 +221,20 @@
      "shots"
     ],
     "cost": 1
+   },
+   {
+    "game_id": 2026020194,
+    "pull": "B",
+    "at": "2026-10-27T18:30:00-04:00",
+    "markets": [
+     "saves",
+     "shots"
+    ],
+    "returned": [
+     "saves",
+     "shots"
+    ],
+    "cost": 2
    }
   ],
   "2026020195": [
@@ -212,7 +296,7 @@
  },
  "stage": null,
  "skipped": {},
- "last_fail_at": "2026-10-27T18:20:15-04:00",
- "fail_note": "The odds feed did not answer.",
+ "last_fail_at": null,
+ "fail_note": null,
  "key_count": 10
 }

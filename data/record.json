@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-10-27T00:50:01-04:00",
+ "generated_at": "2026-10-27T18:30:00-04:00",
  "summary": {
   "headline": {
    "w": 12,
@@ -39,6 +39,84 @@
   ]
  },
  "nights": [
+  {
+   "date": "2026-10-27",
+   "graded": false,
+   "w": 0,
+   "l": 0,
+   "units": 0,
+   "entries": [
+    {
+     "id": "2026-10-27:2026020194:8479314:shots:2.5:under",
+     "kind": "single",
+     "player": "M. Tkachuk",
+     "bet": "Under 2.5 shots on goal",
+     "market": "shots",
+     "team": "FLA",
+     "game": "FLA at WPG",
+     "price": 105,
+     "first_price": 105,
+     "last_price": 105,
+     "prices": [
+      {
+       "price": 105,
+       "at": "2026-10-27T18:30:00-04:00"
+      }
+     ],
+     "result": null,
+     "actual": null,
+     "units": null,
+     "pulled": null,
+     "legs": []
+    },
+    {
+     "id": "2026-10-27:2026020189:8476921:shots:1.5:under",
+     "kind": "single",
+     "player": "J. Martinook",
+     "bet": "Under 1.5 shots on goal",
+     "market": "shots",
+     "team": "CAR",
+     "game": "BOS at CAR",
+     "price": -110,
+     "first_price": -110,
+     "last_price": -110,
+     "prices": [
+      {
+       "price": -110,
+       "at": "2026-10-27T18:30:00-04:00"
+      }
+     ],
+     "result": null,
+     "actual": null,
+     "units": null,
+     "pulled": null,
+     "legs": []
+    },
+    {
+     "id": "2026-10-27:2026020191:8480023:shots:1.5:under",
+     "kind": "single",
+     "player": "R. Thomas",
+     "bet": "Under 1.5 shots on goal",
+     "market": "shots",
+     "team": "STL",
+     "game": "MTL at STL",
+     "price": 105,
+     "first_price": 105,
+     "last_price": 105,
+     "prices": [
+      {
+       "price": 105,
+       "at": "2026-10-27T18:30:00-04:00"
+      }
+     ],
+     "result": null,
+     "actual": null,
+     "units": null,
+     "pulled": null,
+     "legs": []
+    }
+   ]
+  },
   {
    "date": "2026-10-26",
    "graded": true,
