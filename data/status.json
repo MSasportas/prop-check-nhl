@@ -1,10 +1,10 @@
 {
  "ok": true,
  "slate_date": "2026-10-26",
- "started_at": "2026-10-26T20:00:01-04:00",
- "status_at": "2026-10-26T20:00:01-04:00",
- "finished_at": "2026-10-26T20:00:04-04:00",
- "last_ok_at": "2026-10-26T20:00:01-04:00",
+ "started_at": "2026-10-26T20:00:19-04:00",
+ "status_at": "2026-10-26T20:00:19-04:00",
+ "finished_at": "2026-10-26T20:00:20-04:00",
+ "last_ok_at": "2026-10-26T20:00:19-04:00",
  "failed_step": null,
  "steps": [
   {
@@ -24,8 +24,8 @@
   },
   {
    "step": "lineups",
-   "status": "ok",
-   "note": "4 of 4 team pages read"
+   "status": "skipped",
+   "note": "checked in the last 20 minutes"
   },
   {
    "step": "lineup_history",
@@ -35,7 +35,7 @@
   {
    "step": "odds",
    "status": "ok",
-   "note": "1 game(s) priced"
+   "note": "no pull due"
   },
   {
    "step": "market_menu",
@@ -50,12 +50,12 @@
   {
    "step": "gapguard",
    "status": "ok",
-   "note": "gap+guard: 1 flag"
+   "note": "gap+guard: nothing new"
   },
   {
    "step": "engine",
    "status": "ok",
-   "note": "1 new event(s), 1 newly shown"
+   "note": "no change"
   },
   {
    "step": "grade",
@@ -64,8 +64,8 @@
   },
   {
    "step": "shadow",
-   "status": "ok",
-   "note": "17 line read(s) logged"
+   "status": "skipped",
+   "note": "nothing new"
   },
   {
    "step": "gg_grade",
@@ -74,13 +74,13 @@
   },
   {
    "step": "slate",
-   "status": "ok",
-   "note": "1 open pick(s)"
+   "status": "skipped",
+   "note": "unchanged"
   },
   {
    "step": "record",
-   "status": "ok",
-   "note": "record.json"
+   "status": "skipped",
+   "note": "unchanged"
   }
  ],
  "sources": {
@@ -150,16 +150,14 @@
  "games_today": 3,
  "record_events": 64,
  "odds_notes": [
-  "key 1 refused (401)",
-  "key 3 refused (429), trying the next",
-  "key 6 refused (429), trying the next"
+  "key 1 refused (401)"
  ],
  "runner": {
   "event": "workflow_dispatch",
-  "run_id": "40417860020",
-  "iteration": 6,
-  "chain_link": 342,
+  "run_id": "40423510924",
+  "iteration": 1,
+  "chain_link": 343,
   "chain_started_at": "2026-10-16T10:00:13-04:00",
-  "run_started_at": "2026-10-26T19:10:16-04:00"
+  "run_started_at": "2026-10-26T20:00:17-04:00"
  }
 }
