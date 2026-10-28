@@ -433,7 +433,7 @@ function load() {
   if (S.busy) return Promise.resolve();
   S.busy = true;
   return Promise.all([settle(getJSON(BASE + 'slate.json')), settle(getJSON(BASE + 'record.json')), settle(getJSON(BASE + 'rules.json')),
-                      settle(getJSON(BASE + 'record/resets.json', true)), settle(getJSON(BASE + 'paper_watch/saves/summary.json'))])
+                      settle(getJSON(BASE + 'record/resets.json', true)), settle(getJSON(BASE + 'paper_watch/points/summary.json'))])
     .then(function (r) {
       if (r[4].ok && isObj(r[4].v)) { S.watch = r[4].v; S.watchErr = null; } else if (!S.watch) S.watchErr = r[4].kind;
       if (r[3].ok && Array.isArray(r[3].v) && r[3].v.length) S.reset = true;
@@ -1016,12 +1016,12 @@ function loadOlder() {
   }, function () { S.olderBusy = false; S.olderErr = true; rerender(); });
 }
 
-/* ---------- Behind the scenes (research only: data/paper_watch/saves/, never the Record or Discord) ---------- */
+/* ---------- Behind the scenes (research only: data/paper_watch/points/, never the Record or Discord) ---------- */
 function bsRow(x) {
   var res = x.result == null ? null : str(x.result), known = { W: 1, L: 1, PUSH: 1, VOID: 1 };
   var tag = h('span', { class: 'tg ' + (res && known[res] ? res : 'none'), text: res || '–' });
   var l1 = h('div', { class: 'e1' }, x.state === 'pulled' ? h('span', { class: 'ptag', text: 'PULLED' }) : null,
-    h('span', { class: 'pn', text: x.player || 'Goalie not named' }), ' ' + (x.bet || '').replace(/^(\w)(\w*)/, function (m, a, b) { return a + b.toLowerCase(); }));
+    h('span', { class: 'pn', text: x.player || 'Player not named' }), ' ' + (x.bet || '').replace(/^(\w)(\w*)/, function (m, a, b) { return a + b.toLowerCase(); }));
   var l2 = [odds(x.price), str(x.game)];
   if (num(x.gap_pct) != null) l2.push('gap ' + (x.gap_pct > 0 ? '+' : '') + x.gap_pct + '%');
   if (x.kind === 'veto') l2.push('model vetoed');
@@ -1033,12 +1033,12 @@ function bsRow(x) {
 }
 function renderBackstage() {
   app.appendChild(header('Behind the scenes', null));
-  app.appendChild(h('p', { class: 'mu', style: 'margin:8px 0 0', text: 'Goalie saves. Same method as the shots picks. Research only: not picks, not on the Record, never sent to Discord. Confirmed starters only.' }));
+  app.appendChild(h('p', { class: 'mu', style: 'margin:8px 0 0', text: 'Player points. Same method as the shots picks. Research only: not picks, not on the Record, never sent to Discord. Goalie saves were watched Oct 25-28 and stopped.' }));
   if (!S.loaded) { app.appendChild(h('div', { class: 'stack' }, h('div', { class: 'skel sm' }), h('div', { class: 'skel' }))); return; }
   var w = S.watch;
   if (!w) {
     app.appendChild(h('div', { class: 'card empty', style: 'margin-top:12px' },
-      h('div', { class: 't', text: S.watchErr === 'file' ? 'Nothing logged yet. The first saves reads come 90 minutes before each game.' : "Can't load this right now." })));
+      h('div', { class: 't', text: S.watchErr === 'file' ? 'Nothing logged yet. The first points reads come 90 minutes before each game.' : "Can't load this right now." })));
     app.appendChild(footer()); return;
   }
   var t = isObj(w.nov2) ? w.nov2 : {}, n = (num(t.w) || 0) + (num(t.l) || 0), clv = isObj(t.clv_flags) ? t.clv_flags : {};
@@ -1046,7 +1046,7 @@ function renderBackstage() {
     app.appendChild(h('div', { class: 'big' }, h('span', { class: 'wl', text: (num(t.w) || 0) + '-' + (num(t.l) || 0) }),
       h('span', { class: 'un ' + signCls(t.units), text: units(t.units, 1) || '' })));
   } else {
-    app.appendChild(h('div', { class: 'card empty', style: 'margin-top:8px' }, h('div', { class: 't', text: 'No saves results yet.' })));
+    app.appendChild(h('div', { class: 'card empty', style: 'margin-top:8px' }, h('div', { class: 't', text: 'No points results yet.' })));
   }
   var sub = [n + ' graded' + (num(t.void) ? ', ' + t.void + ' void' : ''), '1 unit each at the flagged Hard Rock price'];
   if (num(clv.n)) sub.push('avg CLV ' + (clv.mean > 0 ? '+' : '') + (100 * clv.mean).toFixed(1) + '% (' + clv.n + ')');
@@ -1055,7 +1055,7 @@ function renderBackstage() {
   var tn = isObj(w.tonight) ? w.tonight : {}, rows = arr(tn.flags).concat(arr(tn.vetoes)).filter(isObj);
   var sec = h('section', { class: 'night' }, h('h3', null, (fDateLong(w.slate) || 'Tonight') + ' · tonight'));
   if (rows.length) rows.forEach(function (x) { sec.appendChild(bsRow(x)); });
-  else sec.appendChild(h('p', { class: 'mu', style: 'margin-top:8px', text: 'No saves lines good enough yet tonight.' }));
+  else sec.appendChild(h('p', { class: 'mu', style: 'margin-top:8px', text: 'No points lines good enough yet tonight.' }));
   app.appendChild(sec);
   arr(w.nights).filter(isObj).forEach(function (nt) {
     var fl = arr(nt.flags).filter(isObj); if (!fl.length) return;

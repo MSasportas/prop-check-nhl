@@ -11,7 +11,7 @@ The page updates through the day; each pick shows how settled it is (Early / Lin
 pulled picks stay visible with the reason. Dark, phone first (~380px). The Record is the scoreboard.
 
 **Customer facts (fixed):** Matt; Hard Rock Florida only; no leg worse than -200 (plus money fine); parlays 2-3 legs;
-markets are player shots on goal and goalie saves only (no sides, totals or other props); bets any time from morning to puck drop.
+markets are player shots on goal and goalie saves only (no sides, totals or other props); bets any time from morning to puck drop. **2026-10-28 (Matt): the second market is now PLAYER POINTS, not goalie saves, research-only until it shows an edge (item 28); shots stays the only live market.**
 **Fixed:** the Record. Every pick and parlay exactly as shown, graded after the game at the posted price,
 append-only, pulled picks kept and marked. Nothing edited or dropped. It is the only reporting Matt wants.
 **Come to Matt only for:** more odds keys, paying for something, a GitHub setting we can't reach. Exact taps, one
@@ -36,7 +36,7 @@ probability x Hard Rock decimal payout - 1, on unrounded numbers; every threshol
 
 | Area | Rule |
 |---|---|
-| Markets | **Hard Rock shots on goal only, lines 1.5, 2.5 and 3.5 (3.5 live from 2026-10-23, Matt), over and under.** Everything else (points, goals, saves, 4.5+) is not picked. **Saves run behind the scenes (watch track `saves`, item 25): same Gap + Guard maths, research only, Backstage tab, never the Record or Discord** |
+| Markets | **Hard Rock shots on goal only, lines 1.5, 2.5 and 3.5 (3.5 live from 2026-10-23, Matt), over and under.** Everything else (points, goals, saves, 4.5+) is not picked. **Points run behind the scenes (watch track `points`, item 28, from slate 2026-10-28): same Gap + Guard maths, research only, Backstage tab, never the Record or Discord. Saves STOPPED 2026-10-28 (item 25)** |
 | Step 1: the gap | All of: Hard Rock EV vs the market fair >= **+3.0%**; >= **4 other books** priced the same player, line and side with both sides quoted (Pinnacle counts and must be one; each read fresh, hold 0-15%); **market fair = median** of the books' proportionally de-vigged fair chance (even count: mean of the middle two); Pinnacle present with both sides and Pinnacle-fair EV on Hard Rock's price >= 0.0% (sign check only); Hard Rock price -200 to +120 |
 | Step 2: the guard | final = 0.8 x market fair + 0.2 x (model chance + frozen offset on the over: 1.5 +0.0179, 2.5 +0.0158, 3.5 +0.017 PROVISIONAL (mean of the two measured, not yet refit; refit from the 2025-26 bundle, then the DS names the sample and the Sharp logs it); under = 1 - over). Passes iff final EV >= **+2.0%**. The model can only veto, never create. No model for the player = no pick. Offsets are frozen: changing them needs the DS to name the sample and the Sharp to log it in section 8 |
 | Which reads can pick | Only the 90-minute (B) and 45-minute (C) reads that carry `others` (the other books). The 1 PM (A) read is a baseline only. A read with no other books is skipped |
@@ -152,7 +152,8 @@ probability x Hard Rock decimal payout - 1, on unrounded numbers; every threshol
   (3) `scripts/book_probe.py`, a ONE-TIME soft step: no `bookmakers=` filter, `ops.book_probe.regions` (default us, us2, us_ex, eu, uk), about 5 credits (ledger pull "P"),
   for one game 35-120 min from puck after pull A, budget-guarded, 3 tries. Writes `data/state/book_probe.json` (per book: two-sided pairs, players, lines, hold, age,
   gap to Pinnacle) and `book_probe_pairs.json.gz`. Used to choose the sharp-book list (item 24). Research only.
-- **Saves behind the scenes (2026-10-25, Matt):** watch track `saves` in `ops.gap_guard.watch` (`market: saves`, `lines: "any"`, `offsets {"*": 0.0}`,
+- **Points behind the scenes (2026-10-28, Matt; replaces saves):** watch track `points` in `ops.gap_guard.watch` (`market: points`, `lines: "any"`, `offsets {"*": 0.0}`, `from_slate` 2026-10-28), same machinery as the saves track below: log in `data/paper_watch/points/`, page tab **Backstage** reads `data/paper_watch/points/summary.json`, never the Record, Discord or status.json. Skater eligibility (not the goalie gate): >= 10 games, not sitting, lineup rules as shots. B and C ask points at tier 3+ (~1 credit a game per read, what saves cost); A stays shots. Model = `model.py` points (own calibration table, offset 0 here, 20% weight, can only veto). Tests: `tests/test_points_watch.py`.
+- **Saves behind the scenes (2026-10-25, Matt; STOPPED 2026-10-28, track removed from `watch`, log kept in `data/paper_watch/saves/`, no longer asked or shown):** watch track `saves` in `ops.gap_guard.watch` (`market: saves`, `lines: "any"`, `offsets {"*": 0.0}`,
   from slate 2026-10-25). `paper.py` swaps `MARKET` with `_LOG` for the track, so the exact live maths runs on Hard Rock saves into
   `data/paper_watch/saves/` (events, summary with every night, cursor). Saves only: the model is `shadow.model_over` (team-level), eligibility =
   Daily Faceoff lists that goalie as CONFIRMED starter (`paper.goalie_starts`, last name + first initial), a flagged goalie is pulled "not the
@@ -410,11 +411,12 @@ probability x Hard Rock decimal payout - 1, on unrounded numbers; every threshol
     well under one flag a night. **Promote to live picks only when ALL:** >= 150 graded W/L saves flags; units > 0 at the flagged price; mean CLV
     > 0 with 80% bootstrap lower bound > 0. **Stop early (track off, page says so):** mean CLV <= 0 at >= 50 measured flags, or units <= -10.
     Promotion is a section 8 entry by the Sharp after the DS names the sample. No threshold tuning on this sample.
+    **STOPPED 2026-10-28 (Matt, replaced by points, item 28).** Result when stopped: 4 nights, 0 flags, 0 vetoes. Oct 25-27: Hard Rock saves prices sat on the market (of 13 lines with >= 4 books, 1 cleared +3%; Hard Rock posts ~1-2 goalies a game; Pinnacle is on ~1 in 3 of Hard Rock's lines). The one line that cleared (Skinner U25.5 Oct 25, +4.8% vs the median, +15% vs Pinnacle) was dropped by the confirmed-starter gate (Daily Faceoff still said "expected" at the 45-min read) and won. Hard Rock posted a line for a goalie who then did not play: 0 of 44. If saves ever restarts: treat "Hard Rock posted a line" as the starter, not Daily Faceoff "confirmed".
 
 26. **NHL scope is closed (CEO, 2026-10-25).** The product is shots on goal (live) plus saves (behind the scenes, item 25). If saves fails
     its gates, the product is shots only. **Sides and totals are out, and no other NHL market gets added.** Evidence: Researcher run 3 (2026-10-19):
     Hard Rock moneyline was within 0.5 pts of the 9-book consensus with no Florida-team shading, so there is no gap to buy. Don't reopen this
-    without new evidence.
+    without new evidence. **2026-10-28: Matt ordered saves out and PLAYER POINTS in as the research market (item 28). Sides and totals stay out.**
 
 27. **Weekly review 2026-10-25 (DS read, Oct 20-24).** Record: 21 shots legs graded, headline 11-6 +4.58u (64.7% vs 50.4% BE), pulled 3-1 +1.22u,
     16 of 21 unders, no 3.5 or saves legs; calibration within noise (wins z +1.17); one zero-pick night (Oct 21, 2 games, low tier). Nov 2 status:
@@ -425,9 +427,27 @@ probability x Hard Rock decimal payout - 1, on unrounded numbers; every threshol
     which cuts against "picks hit". Revisit only if the Nov 2 checkpoint is GO: then 2-leg parlays from the top 2 headline legs (different games)
     are a section 8 entry. Key 1 refuses (401) since this week; pool 1,745 without it, no action needed.
 
+28. **Points research (CEO, Matt's order 2026-10-28: "stop pulling saves and replace them with points; let's see if we can find an edge on points").** Points is research-only
+    behind the scenes, like saves was; shots stays the only live market. Points can go live only by Matt's explicit order after the gates below. Scope note: the earlier
+    "no other NHL market gets added" (item 26) is reopened for points only.
+    - **Built (QA: 376 tests pass, Backstage tab checked at 380px in Chromium, no overflow):** watch track `points` (section 5), saves removed from `watch`, page tab reads points. Data
+      accrues from tonight's 90- and 45-minute reads (Hard Rock + the 9 other books, Pinnacle required, same thresholds as shots), also into `data/shadow/` (market points) and `data/odds/`.
+    - **What we already had (Oct 12-17, Hard Rock only, no other books, 850 graded points lines, 793 on the 0.5 line):** blind over 0.5 369-417 -5.6%, blind under 0.5 417-369 -9.2% (Hard Rock's vig, no free edge);
+      book fair over 46.0% vs actual 46.9% on 0.5 (calibrated). **Lead (post-hoc, six nights, so hypothesis Q14 forward only):** when the model's chance of the OVER on the 0.5 line beats the book's fair, overs went 171-156 +7.4%
+      (n327); by gap >= 3% 81-80 +7.6%, >= 6% 31-29 +19.4% (n60). Model-side unders -2.0%. Points lines are mostly 0.5 and many overs price above +120 (outside the -200..+120 window), so volume may be thin.
+    - **Gates (registered before any points flag; same as saves, item 25):** promote to live picks only when ALL: >= 150 graded W/L points flags; units > 0 at the flagged price; mean CLV > 0 with 80% bootstrap
+      lower bound > 0. Stop early (track off): mean CLV <= 0 at >= 50 measured flags, or units <= -10. Promotion is a section 8 entry by the Sharp after the DS names the sample, plus Matt's order. No threshold tuning on this sample.
+      The Researcher also runs points hypotheses on the forward data daily (research/RESEARCH.md scope updated; Q12-Q14 registered in HYPOTHESES.md).
+    - **Open:** points model offsets are 0 (no 2026-27 calibration; refit from history needs a historical points pull, which costs credits, and a paid source is Matt's call); points need lineups for power-play roles (Daily Faceoff
+      often never confirms, item 4); Pinnacle must price the player (not checked for points yet: check `others` in `data/odds/<date>.json` after tonight's B read).
+    - **Pinnacle backtests run 2026-10-28 (Matt's questions; `research/code/pin_move.py`; Oct 19-27; hypotheses Q12, Q13, forward only):** (a) at the 45-min read, Hard Rock beating Pinnacle's no-vig fair by >= 5% on shots: 18-7 +11.47u (n25), >= 3%: 29-21 +7.83u (n51);
+      cutoffs chosen after looking, so optimistic; overlap with live Gap + Guard picks not yet checked. (b) Pinnacle moving >= 2 pts between reads with Hard Rock flat: shots 5-2 +1.92u (n7) but 14-13 -2.33u at >= 1 pt (n28): no edge shown; Hard Rock's flat price was ~5% worse than Pinnacle's new fair.
+      (c) saves: 28 goalies at both reads, 1 move >= 2 pts (Skinner above), too thin to test.
+
 ## 8. Rule-change log
 | Date | Change | Why | Sample |
 |---|---|---|---|
+| 2026-10-28 (CEO, Matt's order; Builder, QA: 376 tests, Backstage at 380px) | **No live rule changed.** Goalie saves watch track stopped and removed from `watch`; player points added as a research-only watch track (Gap + Guard maths, lines any, offset 0), Backstage tab now shows points. Matt's second market is now points (research), shots stays the only live market | Matt: "stop pulling saves and replace them with points; let's see if we can find an edge on points". Saves: 4 nights, 0 flags, Hard Rock priced on the market | Item 28 (gates registered before any flag); item 25 stop note |
 | 2026-10-25 (weekly; Sharp, UX, Builder, QA SHIP at 380px) | **No rule changed.** Page readability only: Gap line into tap-to-expand, blend % hidden, one "already bet" line on pulled cards, not-covered banner only for unstarted games, long names wrap, one-line status strip ("Odds keys: N days"), "units"/"had N shots" wording, "too few to judge" once. Parlays stay off (item 27) | DS: 21 graded legs, 19 measured gaps: below 50/150 and Nov 2 sizes; UX: cards repeated numbers, pulled cards gave conflicting advice | Item 27 |
 | 2026-10-25 (CEO, Matt; Builder, QA browser pass at 380px) | **No live rule changed.** Saves added as a research-only watch track (Gap + Guard maths, confirmed starters, any line), saves asked at B and C at tier 3+, Backstage tab on the page | Matt: expand to goalie saves with the same logic, gather sample, see it build on the site but keep it out of the Record and Discord; more keys added | Item 25 (gates registered before any flag) |
 | 2026-10-25 (CEO, Matt; Builder, QA SHIP WITH FIXES, fixed) | **No qualifying value changed.** Bet-slip link on picks (button + Discord), player's team pill on the page, one-time all-books probe to choose sharp books | Matt: hard to tell which team the player is on; wants a Hard Rock bet-slip link like Winnable; wants to compare against quality sharp books, not a count | Items 24; Oct 23-24 reads: novig, prophetx return shots, lowvig none |
@@ -451,6 +471,7 @@ probability x Hard Rock decimal payout - 1, on unrounded numbers; every threshol
 | 2026-10-11 | v1.0 set (section 4) | First build: Sharp standard from the DS backtest (2024-25 fit, 2025-26 out of sample) and one live Hard Rock pull | Backtest only; 0 graded live legs |
 
 ## 9. Session log (newest first, one line each)
+- 2026-10-28 ~4:30 PM (Matt: why does saves show nothing, Pinnacle moves, then "stop saves, replace with points"): found saves empty because Hard Rock prices sit on the market and the confirmed-starter gate drops "expected" goalies (Skinner U25.5 Oct 25 lost to it); ran Pinnacle-move and Hard Rock-vs-Pinnacle backtests (item 28, Q12-Q13); Builder swapped the saves track for points (config, page Backstage, tests: `test_points_watch.py`, saves test updated), 376 tests, page checked at 380px; Researcher scope + Q12-Q14 registered. Check tonight: points came back at the 90-min read with other books incl. Pinnacle (`others` in data/odds/2026-10-28.json), `data/paper_watch/points/` filling, Backstage tab.
 - 2026-10-28 1:55 PM daily check: chain alive (run 663, link 4 since 10 AM, 1:50 PM commit, Pages builds ok), all steps/sources ok. Pull A ran 1 PM (4 games, 4 credits); 0 open picks, next read 6 PM (correct). Oct 27: 6 picks all graded (5-1); shadow 237/237 graded; Record 84 events. Saves watch 0 flags. Keys 1,640 (key 1 still 401), tier 4, 4 game days to the Nov 1 reset. Unmatched none; no excluded teams. Fixed: refused key 1 re-asked every cycle -> false feed-fail stamp + a commit every 10 min (item 9b); Builder -> QA SHIP (7 fixtures at 380px, text identical to main), 374 tests.
 - 2026-10-28 ~8:10 AM Researcher run 13 (daily, shots): AA1-AA4 registered before testing (player fatigue load, board depth, own-goalie score effects, D calibration); 14 variants, none positive with n >= 300 (best AA3 -3.3% n1,094), no lockbox look (still 2). Forward Q1c +20.4% n177 p < .001, Q1b +15.3% n241, Q1a +9.0% n332 p .053 (9 nights, bar n >= 300 + p < .0033); Q11 (Q1c by goalie status) registered: unconfirmed-goalie reads +24.6% n124 vs confirmed +10.6% n53. Nothing passed.
 - 2026-10-27 1:45 PM daily check: chain alive (link 368, run 627 in progress, 1:40 PM commit, Pages builds ok), all steps/sources ok. Pull A ran 1 PM (11 games, 11 credits); page says "No picks yet today, next read 5:30 PM" (correct). Oct 26: 1 pick (U1.5 -140) graded W; shadow 57/57 graded; Record 66 events. Saves watch: 0 flags. Keys 1,688 (key 1 still 401; 5 live keys), tier 4, budget 479. Unmatched: Pettersson only; no excluded teams. Nothing broken, no code change. Note: the Actions page WebFetch needs a permission nobody answers in unattended runs; use the GitHub MCP `actions_list` instead.

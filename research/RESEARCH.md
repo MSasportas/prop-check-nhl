@@ -4,7 +4,7 @@ Read TEAM.md first (sections 4, 7 items 17-20), then this file, then research/HY
 Update HYPOTHESES.md and LOG.md last, then add one line to TEAM.md section 9.
 
 ## The job
-**Scope (Matt, 2026-10-19): SHOTS ON GOAL ONLY.** Find the edge in Hard Rock shots on goal props (main lines, over
+**Scope (Matt, 2026-10-19: SHOTS ON GOAL ONLY; 2026-10-28: PLAYER POINTS ADDED, saves dropped, see TEAM.md item 28).** Shots stays the live market; points is research-only and gets the same daily run on the forward data in `data/paper_watch/points/`, `data/shadow/` (market points) and `data/odds/`. Original scope text follows. **SHOTS ON GOAL ONLY.** Find the edge in Hard Rock shots on goal props (main lines, over
 and under). Do not test other markets. Try different IDEAS (models, features, player types, timing, structure, price
 selection) on the saved historical shots data and the live shadow log. No new historical pulls (191 credits left; ask
 the CEO only if an idea truly needs one).

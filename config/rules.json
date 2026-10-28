@@ -80,11 +80,11 @@
    },
    "watch": [
     {
-     "id": "saves",
-     "market": "saves",
-     "label": "Goalie saves",
-     "from_slate": "2026-10-25",
-     "note": "Behind the scenes (Matt 2026-10-25): goalie saves through the exact Gap + Guard maths of shots. Research only: data/paper_watch/saves/, shown on the page's Behind the scenes tab, never the Record, Discord or status.json. Confirmed starters only. Lines: any. Model offset 0 (uncalibrated team-level saves model, 20% weight, can only veto).",
+     "id": "points",
+     "market": "points",
+     "label": "Points",
+     "from_slate": "2026-10-28",
+     "note": "Behind the scenes (Matt 2026-10-28, replaces the saves track): player points through the exact Gap + Guard maths of shots. Research only: data/paper_watch/points/, shown on the page's Behind the scenes tab, never the Record, Discord or status.json. Lines: any (0.5 is ~94% of Hard Rock's points lines). Model offset 0 (uncalibrated for the 2026-27 season, 20% weight, can only veto). Saves stopped 2026-10-28; its log stays in data/paper_watch/saves/.",
      "lines": "any",
      "offsets": {
       "*": 0.0

@@ -55,10 +55,17 @@ class Pure(unittest.TestCase):
         self.assertEqual(odds.markets_for(4, "A", paper=pm), ["shots"])               # the 1 PM baseline stays shots only
         self.assertEqual(odds.markets_for(4, "B", paper=True), ["shots"])             # no watch market: unchanged
 
-    def test_the_live_config_has_the_saves_track(self):
-        tr = [t for t in common.gap_guard(common.load_config())["watch"] if t.get("id") == "saves"]
+    def test_the_live_config_has_the_points_track_and_saves_is_off(self):
+        # 2026-10-28 (Matt): saves stopped, points research track in its place. The saves machinery above stays tested
+        # with a made-up track, so it can be switched on again by config.
+        cfg = common.load_config()
+        watch = common.gap_guard(cfg)["watch"]
+        tr = [t for t in watch if t.get("id") == "points"]
         self.assertEqual(len(tr), 1)
-        self.assertEqual((tr[0]["market"], tr[0]["lines"]), ("saves", "any"))
+        self.assertEqual((tr[0]["market"], tr[0]["lines"]), ("points", "any"))
+        self.assertFalse([t for t in watch if t.get("market") == "saves"])
+        self.assertEqual(odds.paper_markets(cfg, "2026-10-28"), ["shots", "points"])
+        self.assertEqual(odds.paper_markets(cfg, "2026-10-27"), ["shots"])           # before from_slate
 
 
 class EndToEnd(unittest.TestCase):
