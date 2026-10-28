@@ -1,26 +1,26 @@
 {
  "slate_date": "2026-10-28",
- "generated_at": "2026-10-28T18:20:01-04:00",
- "status_at": "2026-10-28T18:20:01-04:00",
+ "generated_at": "2026-10-28T18:50:00-04:00",
+ "status_at": "2026-10-28T18:50:00-04:00",
  "valid_until": "2026-10-29T05:00:00-04:00",
  "status": {
   "prices_state": "ok",
-  "prices_at": "2026-10-28T18:00:00-04:00",
-  "next_price_read_at": "2026-10-28T18:45:00-04:00",
+  "prices_at": "2026-10-28T18:50:00-04:00",
+  "next_price_read_at": "2026-10-28T19:00:00-04:00",
   "stats_built_at": "2026-10-28T02:00:01-04:00",
   "stats_through": "2026-10-27",
-  "lineups_at": "2026-10-28T18:20:01-04:00",
+  "lineups_at": "2026-10-28T18:50:00-04:00",
   "goalies_at": null,
   "lineups_note": "5 of 6 team line pages are dated today.",
   "lineups_state": "ok",
   "stats_state": "ok",
   "last_run": {
    "ok": true,
-   "at": "2026-10-28T18:20:01-04:00",
+   "at": "2026-10-28T18:50:00-04:00",
    "failed_step": null
   },
   "pool": {
-   "pulls_left": 1638,
+   "pulls_left": 1636,
    "keys": 10,
    "game_days_left": 4,
    "days_left": 4,
@@ -35,7 +35,7 @@
  "empty": {
   "code": "none_qualified",
   "text": "No picks yet today",
-  "sub": "18 lines read, none cleared both checks. Next read at 6:45 PM."
+  "sub": "18 lines read, none cleared both checks. Next read at 7:00 PM."
  },
  "games": [
   {
