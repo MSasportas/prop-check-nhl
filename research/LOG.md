@@ -1,5 +1,28 @@
 # LOG.md: Researcher runs (newest first)
 
+- 2026-10-28 ~8:10 AM ET (Researcher run 13, daily; SHOTS ON GOAL ONLY). No key used, no historical odds pull. AA1-AA4 + forward Q11a-b registered
+  and pushed (9bc8805) before any test ran. Free NHL stats REST skater + goalie per-game logs fetched to scratch (r13/fetch13.py; Feb 28
+  cut-off, lockbox not fetched). Script research/code/r13/aa13.py, output aa13_results.txt. 10,413 graded Nov-Feb lines.
+  - AA1 player fatigue load (minutes in the last 3 days, 3rd game in 4 nights, heavy last game): best T=.03 -11.8% n238; UNDER on a
+    player's 3rd game in 4 nights -7.3% n2,116 [-10.7,-3.8], every fold negative. Tired legs are not an under at Hard Rock's price.
+  - AA2 board depth (how many Hard Rock lines the team/game has = trader attention): -14.1% n211 to -25.9% n71; weight ~0.
+  - AA3 own goalie (weak/backup own goalie -> trailing -> more shots): -3.3% n1,094 to -4.0% n1,204 (Nov only); OVER when his team starts
+    its backup -7.6% n4,036 [-9.9,-5.3]. The weight even points the other way (backup -> slightly fewer shots).
+  - AA4 position calibration (book too extreme/flat on defensemen): -8.8% n274; D x book weight -0.03..-0.05 every fold (real, tiny).
+  - Forward re-score (score_fwd.py, 9 nights Oct 19-27; clone unshallowed): Q1a (Hard Rock >= consensus fair) +9.0% n332 [-0,+18] p .053;
+    Q1b (EV >= 1%) +15.3% n241 [+6,+24] p .0025; Q1c (EV >= 2%) +20.4% n177 [+11,+30] p < .001; Q1k Pinnacle +10.2% n254; Q1m +31.9%
+    n35; mean CLV ~= EV (+2.5..4.1%). Q6a (1 PM) +14.9% n98, Q6b (B/C) +5.0% n81, Q6c (unders) +16.3% n147. Q8a-c +42.6% n13 / -21.6% n22
+    / +19.8% n60. Q9a-c +20.3% n45 / +1.4% n28 / +31.2% n7. Q10 returners' overs +15.8% n27. Q2a/b 0 bets.
+    New Q11 (Q1c by goalie status at the read): both goalies confirmed +10.6% n53 p .20; NOT both confirmed +24.6% n124 [+13,+37] p .002
+    (78 of the 124 from the 1 PM read). Fits the idea that Hard Rock's edge-sides appear before news, but n is far below 300.
+    Nothing has n >= 300 with p under its bar yet (Q1a n332 has p .053 vs .0033).
+  14 variants (~0.7 false positives expected); all-time historical 380; forward 27. Lockbox looks: 2 (unchanged; next needs p < 0.0167).
+  **Verdict: nothing passed; no candidate for the Sharp.** Player fatigue, board depth, own-goalie score effects and position calibration
+  are all inside Hard Rock's price. History with free data stays exhausted (380 variants). The live Q1 gap keeps strengthening: Q1c
+  +20.4% on 177 bets with CLV matching EV; at ~20 bets/night it reaches n 300 around Nov 3-4.
+  Next: (1) Q1c to n >= 300 (~Nov 4), then the Sharp decision is a forward-bar call, not a lockbox one; (2) Q11 split keeps running
+  (does the gap live mostly at the 1 PM read before goalies? the product picks only at B/C); (3) a forward Q1c-at-1-PM-only variant
+  if the Sharp would consider moving picks earlier, registered before looking further.
 - 2026-10-27 ~8:15 AM ET (Researcher run 12, daily; SHOTS ON GOAL ONLY). No key used, no historical odds pull. Z1-Z4 + forward Q10 registered
   and pushed (3100297) before any test ran. Free NHL stats REST skater summary + realtime logs fetched to scratch (r12/fetch12.py; Feb 28
   cut-off, lockbox not fetched). Script research/code/r12/z12.py, output z12_results.txt. 10,413 graded Nov-Feb lines.
