@@ -1,22 +1,22 @@
 {
  "slate_date": "2026-10-27",
- "generated_at": "2026-10-27T22:40:00-04:00",
- "status_at": "2026-10-27T22:40:00-04:00",
+ "generated_at": "2026-10-27T22:50:01-04:00",
+ "status_at": "2026-10-27T22:50:01-04:00",
  "valid_until": "2026-10-28T05:00:00-04:00",
  "status": {
   "prices_state": "ok",
   "prices_at": "2026-10-27T21:50:01-04:00",
   "next_price_read_at": null,
   "stats_built_at": "2026-10-27T22:30:01-04:00",
-  "stats_through": "2026-10-27",
+  "stats_through": "2026-10-26",
   "lineups_at": "2026-10-27T22:00:01-04:00",
   "goalies_at": null,
   "lineups_note": "17 of 22 team line pages are dated today.",
   "lineups_state": "ok",
-  "stats_state": "ok",
+  "stats_state": "behind",
   "last_run": {
    "ok": true,
-   "at": "2026-10-27T22:40:00-04:00",
+   "at": "2026-10-27T22:50:01-04:00",
    "failed_step": null
   },
   "pool": {
@@ -28,6 +28,14 @@
   },
   "excluded_teams": [
    {
+    "team": "BOS",
+    "reason": "stats behind"
+   },
+   {
+    "team": "CAR",
+    "reason": "stats behind"
+   },
+   {
     "team": "CHI",
     "reason": "stats behind"
    },
@@ -36,11 +44,35 @@
     "reason": "stats behind"
    },
    {
+    "team": "FLA",
+    "reason": "stats behind"
+   },
+   {
     "team": "LAK",
     "reason": "stats behind"
    },
    {
+    "team": "MTL",
+    "reason": "stats behind"
+   },
+   {
     "team": "NJD",
+    "reason": "stats behind"
+   },
+   {
+    "team": "NSH",
+    "reason": "stats behind"
+   },
+   {
+    "team": "NYI",
+    "reason": "stats behind"
+   },
+   {
+    "team": "STL",
+    "reason": "stats behind"
+   },
+   {
+    "team": "WPG",
     "reason": "stats behind"
    }
   ],
@@ -51,13 +83,13 @@
  "banners": [
   {
    "level": "warn",
-   "text": "Not covered tonight: CHI, DAL, LAK, NJD (stats behind)."
+   "text": "Not covered tonight: BOS, CAR, CHI, DAL, FLA, LAK, MTL, NJD, NSH, NYI, STL, WPG (stats behind)."
   }
  ],
  "empty": {
-  "code": "all_started",
-  "text": "Every game has started.",
-  "sub": "Tonight's picks are under Started."
+  "code": "stats_behind",
+  "text": "Stats are behind, so no picks until they catch up.",
+  "sub": null
  },
  "games": [
   {
@@ -105,8 +137,11 @@
    },
    "started": true,
    "picks": 1,
-   "excluded_reason": null,
-   "excluded_teams": []
+   "excluded_reason": "stats behind",
+   "excluded_teams": [
+    "BOS",
+    "CAR"
+   ]
   },
   {
    "id": 2026020190,
@@ -156,8 +191,11 @@
    },
    "started": true,
    "picks": 1,
-   "excluded_reason": null,
-   "excluded_teams": []
+   "excluded_reason": "stats behind",
+   "excluded_teams": [
+    "MTL",
+    "STL"
+   ]
   },
   {
    "id": 2026020192,
@@ -180,8 +218,11 @@
    },
    "started": true,
    "picks": 0,
-   "excluded_reason": null,
-   "excluded_teams": []
+   "excluded_reason": "stats behind",
+   "excluded_teams": [
+    "NYI",
+    "NSH"
+   ]
   },
   {
    "id": 2026020193,
@@ -231,8 +272,11 @@
    },
    "started": true,
    "picks": 1,
-   "excluded_reason": null,
-   "excluded_teams": []
+   "excluded_reason": "stats behind",
+   "excluded_teams": [
+    "FLA",
+    "WPG"
+   ]
   },
   {
    "id": 2026020195,
