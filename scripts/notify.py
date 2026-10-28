@@ -144,7 +144,7 @@ def _state_label(p):
     return "%s %s" % (SETTLED_ICON.get(lvl, "⏳"), label)
 
 
-SHORT = {"shots": "shots", "points": "points", "goals": "goals", "saves": "saves"}
+SHORT = {"shots": "shots", "points": "points", "goals": "goals"}
 
 
 def _bet(p):

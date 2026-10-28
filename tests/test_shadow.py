@@ -202,19 +202,6 @@ class ShadowUnits(unittest.TestCase):
         self.assertEqual(shadow.add_reads(doc, self.inp, odoc, self.games, {}, now), 1)
         self.assertEqual(shadow.add_reads(doc, self.inp, odoc, self.games, {}, now), 0)   # same read twice: once
 
-    def test_saves_line_gets_the_goalie_model(self):
-        gid = 8489000 + world.TEAM_ID["CAR"]
-        doc = {"date": world.SLATE, "rows": []}
-        odoc = {"fetches": [self.fetch("2026-10-11T17:30:00-04:00", self.pair(gid, "CAR", 25.5, -115, -105), "saves")]}
-        shadow.add_reads(doc, self.inp, odoc, self.games, {}, common.parse_iso("2026-10-11T17:31:00-04:00"),
-                         goalie_state={"teams": {"CAR": {"name": "Goalie CAR", "status": "confirmed"}}})
-        r = doc["rows"][0]
-        self.assertEqual((r["market"], r["ctx"]["pos"]), ("saves", "G"))
-        self.assertTrue(0 < r["open"]["model_p_over"] < 1)
-        self.assertIn("saves model", r["model_note"])
-        self.assertEqual(r["open"]["goalie_own"], {"name": "Goalie CAR", "status": "confirmed"})
-        self.assertIsNone(r["open"]["lineup"])
-
     def test_unknown_market_logged_without_a_model(self):
         doc = {"date": world.SLATE, "rows": []}
         odoc = {"fetches": [self.fetch("2026-10-11T17:30:00-04:00",
@@ -474,11 +461,11 @@ class ClosingRead(unittest.TestCase):
         s = Sim(pool=20)                                      # 5 a game: tier 3, budget 10 today
         try:
             s.at("09:00")
-            s.set_odds("CAR", "PHI", [("player_total_saves", "Goalie CAR", 25.5, -115, -105)], UPD)
+            s.set_odds("CAR", "PHI", [("player_shots_on_goal", world.name_of("CAR", 1), 2.5, -115, -105)], UPD)
             s.at("13:02")
             s.set_lineup("CAR", "2026-10-11T17:00:00-04:00")
             s.set_lineup("PHI", "2026-10-11T17:00:00-04:00")
-            s.at("17:31")                                     # lineups confirmed: B (shots + saves at tier 3)
+            s.at("17:31")                                     # lineups confirmed: B (shots at tier 3)
             s.at("18:15")                                     # C: closing read although no pick is live
             led = common.read_json(s.path("state", "credits.json"))
             pulls = [e["pull"] for e in led["spent"] if e["game_id"] == CAR_PHI]

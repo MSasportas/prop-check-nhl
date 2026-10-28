@@ -3,7 +3,7 @@ import math
 import unittest
 
 import helpers  # noqa: F401  (puts scripts/ on the path)
-from model import (break_even, nb_sf, skater_mu, skater_prob, naive_last10, team_factor, goalie_prob,
+from model import (break_even, nb_sf, skater_mu, skater_prob, naive_last10, team_factor,
                    skater_detail, calibrate)
 
 
@@ -42,11 +42,6 @@ class ModelSelfTest(unittest.TestCase):
         f = team_factor(tr, "sa", 28.0, 10.0)
         assert 1.0 < f < 33 / 28.0
         assert team_factor([], "sa", 28.0, 10.0) == 1.0
-        g = goalie_prob(24.5, dict(home=False, league_sf=28.0, team_sa_f=1.0, opp_sf_f=1.0))
-        g2 = goalie_prob(24.5, dict(home=False, league_sf=28.0, team_sa_f=1.1, opp_sf_f=1.1))
-        assert 0.3 < g["p"] < 0.6 < g2["p"], (g, g2)
-        for ln in (20.5, 22.5, 26.5):
-            assert goalie_prob(ln, dict(home=True, league_sf=28.0))["p"] > goalie_prob(ln + 1, dict(home=True, league_sf=28.0))["p"]
 
     def test_detail_matches_mu(self):
         """skater_detail (added for the reason sentence) must return exactly skater_mu's number."""

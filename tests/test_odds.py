@@ -53,13 +53,13 @@ class RealPayload(unittest.TestCase):
         self.payload = helpers.load(os.path.join(FIX, "odds_car_phi.json"))
         self.game = {"id": 2026020086, "away": "CAR", "home": "PHI"}
         self.at = common.parse_iso("2026-10-11T18:26:00-04:00")
-        keys = ["player_shots_on_goal", "player_points", "player_goals", "player_total_saves", "player_shots_alternate"]
+        keys = ["player_shots_on_goal", "player_points", "player_goals", "player_shots_alternate"]
         self.fetch = odds.normalize(self.payload, self.game, real_matcher(), keys, "A", self.at, 5, self.cfg)
 
     def test_parse(self):
         f = self.fetch
         self.assertEqual(f["book"], "hardrockbet")
-        self.assertEqual(sorted(f["markets"]), ["goals", "player_shots_alternate", "points", "saves", "shots"])
+        self.assertEqual(sorted(f["markets"]), ["goals", "player_shots_alternate", "points", "shots"])
         self.assertEqual(len(f["markets"]["shots"]["outcomes"]), 28)
         self.assertEqual(len(f["markets"]["points"]["outcomes"]), 36)
         self.assertEqual(f["unmatched"], [], "every name in the real payload should match an NHL player")
@@ -73,10 +73,6 @@ class RealPayload(unittest.TestCase):
         view = odds.build_view({"date": "2026-10-11", "fetches": [self.fetch]}, self.cfg)[2026020086]
         self.assertEqual((view["shots"]["checked"], view["shots"]["failed"]), (14, 0))
         self.assertEqual((view["points"]["checked"], view["points"]["failed"]), (18, 0))
-        # Kochetkov saves 20.5: -115 / -140 -> hold 0.5349 + 0.5833 - 1 = 0.118 > 0.11 -> skipped
-        # Woll saves 25.5:      -150 / -105 -> hold 0.6000 + 0.5122 - 1 = 0.112 > 0.11 -> skipped
-        saves = view["saves"]["pairs"]
-        self.assertEqual([p["why"] for p in saves.values()], ["hold out of range", "hold out of range"])
         # one-sided goals market: every pair fails "one side missing"
         self.assertTrue(all(p["why"] == "one side missing" for p in view["goals"]["pairs"].values()))
 
@@ -149,8 +145,8 @@ class Plan(unittest.TestCase):
         self.assertEqual(odds.markets_for(2, "A"), ["shots"])           # A is shots only at every tier
         self.assertEqual(odds.markets_for(4, "A"), ["shots"])
         self.assertEqual(odds.markets_for(2, "B"), ["shots"])               # points picks are off (2026-10-18)
-        self.assertEqual(odds.markets_for(3, "B"), ["shots", "saves"])      # saves logged to build the 2nd market
-        self.assertEqual(odds.markets_for(4, "B"), ["shots", "saves", "goals"])
+        self.assertEqual(odds.markets_for(3, "B"), ["shots"])               # shots re-price only (saves stopped 2026-10-28)
+        self.assertEqual(odds.markets_for(4, "B"), ["shots", "goals"])
         for t in (0, 1, 2, 3, 4):
             for pull in ("A", "B", "C"):
                 self.assertNotIn("points", odds.markets_for(t, pull, {"shots", "points"}))
@@ -221,7 +217,7 @@ class Schedule(unittest.TestCase):
         self.assertEqual(self.due("21:41", 1, started={1: True}), [])
 
     def test_b_waits_for_lineups_and_the_window(self):
-        sh, sp = ["shots"], ["shots", "saves"]
+        sh, sp = ["shots"], ["shots"]
         done = {1: [("A", "13:02", sh, sh)], 2: [("A", "13:02", sh, sh)]}
         ok = {1: True, 2: True}
         self.assertEqual(self.due("17:29", 3, done, lineups_ok=ok), [])                  # before the window
@@ -231,7 +227,7 @@ class Schedule(unittest.TestCase):
         self.assertEqual(self.due("20:29", 3, {1: b1, 2: done[2]}, lineups_ok=ok), [])
         self.assertEqual(self.due("20:30", 3, {1: b1, 2: done[2]}, lineups_ok=ok), [("B", 2, sp)])
         self.assertEqual(self.due("17:30", 2, done, lineups_ok=ok), [("B", 1, ["shots"])])    # tier 2: shots re-price once
-        self.assertEqual(self.due("17:30", 4, done, lineups_ok=ok)[0], ("B", 1, ["shots", "saves", "goals"]))
+        self.assertEqual(self.due("17:30", 4, done, lineups_ok=ok)[0], ("B", 1, ["shots", "goals"]))
         self.assertEqual(self.due("17:30", 1, done, lineups_ok=ok), [])                  # lower tiers: no B
         self.assertEqual(self.due("17:30", 0, done, lineups_ok=ok), [])
 
@@ -245,13 +241,13 @@ class Schedule(unittest.TestCase):
         # one team confirmed is not enough
         self.assertEqual(self.due("17:40", 3, done, lineups_ok={1: False}), [])
         # confirmed late inside the window: pulled on the very next cycle
-        self.assertEqual(self.due("17:52", 3, done, lineups_ok={1: True}), [("B", 1, ["shots", "saves"])])
+        self.assertEqual(self.due("17:52", 3, done, lineups_ok={1: True}), [("B", 1, ["shots"])])
 
     def test_fallback_shots_at_45_minutes_when_lineups_never_confirm(self):
         sh = ["shots"]
         done = {1: [("A", "13:02", sh, sh)], 2: [("A", "13:02", sh, sh)]}
         self.assertEqual(self.due("18:14", 4, done), [])
-        self.assertEqual(self.due("18:15", 4, done), [("B", 1, ["shots"])])              # shots re-price only, no saves/goals
+        self.assertEqual(self.due("18:15", 4, done), [("B", 1, ["shots"])])              # shots re-price only, no goals
         self.assertEqual(self.due("18:15", 2, done), [("B", 1, ["shots"])])
         self.assertEqual(self.due("18:15", 1, done), [])                                 # lower tiers get no B
         # with a live pick the 45 minute read is one combined read, not two
@@ -274,7 +270,7 @@ class Schedule(unittest.TestCase):
     def test_late_confirmation_after_fallback_allows_the_rest(self):
         sh = ["shots"]
         done = {1: [("A", "13:02", sh, sh), ("B", "18:16", ["shots"], ["shots"])], 2: [("A", "13:02", sh, sh)]}
-        self.assertEqual(self.due("18:30", 4, done, lineups_ok={1: True}), [("B", 1, ["saves", "goals"])])
+        self.assertEqual(self.due("18:30", 4, done, lineups_ok={1: True}), [("B", 1, ["goals"])])
         self.assertEqual(self.due("18:41", 4, done, lineups_ok={1: True}), [])
 
     def test_started_games_never_pulled(self):

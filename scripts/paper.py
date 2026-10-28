@@ -41,7 +41,7 @@ import shadow
 
 EPS = 1e-9
 VERSION = 1
-MARKET = "shots"            # the live log's market. A watch track with "market" (e.g. saves) swaps it while it runs, like _LOG
+MARKET = "shots"            # the live log's market. A watch track with "market" (e.g. points) swaps it while it runs, like _LOG
 NOTE = "Gap + Guard research log. Every flag here is a pick on the page and in the Record; vetoed and capped rows are research only."
 WATCH_NOTE = "Behind the scenes: research only. Not picks, not on the Record, never sent to Discord."
 SUMMARY_NIGHTS = 7
@@ -126,7 +126,7 @@ def inside_gate(price, T):
 
 
 def line_ok(line, T):
-    """thresholds.lines: a list of lines, or "any" (a watch market whose lines move every night, e.g. saves)."""
+    """thresholds.lines: a list of lines, or "any" (a watch market whose lines vary, e.g. points)."""
     ls = T.get("lines")
     return ls == "any" or fmt_line(line) in {fmt_line(x) for x in (ls or [])}
 
@@ -249,19 +249,7 @@ def base_of(it):
     return it.get("flag") or it.get("veto") or it.get("capped")
 
 
-def goalie_starts(goalie_state, team, name):
-    """True when Daily Faceoff lists `name` as the CONFIRMED starter for `team` (last name + first initial)."""
-    g = ((goalie_state or {}).get("teams") or {}).get(team) or {}
-    if g.get("status") != "confirmed" or not g.get("name") or not name:
-        return False
-    f1, l1 = names.split_name(g["name"])
-    f2, l2 = names.split_name(name)
-    return l1 == l2 and (not f1 or not f2 or f1[:1] == f2[:1])
-
-
 def settled_level(ls, goalie_state, team, opp, pid, name=None):
-    if MARKET == "saves":
-        return "Goalie confirmed" if goalie_starts(goalie_state, team, name) else "Early"
     st = lineups.player_status(ls or {}, team, pid)
     if st != "in":
         return "Early"
@@ -305,19 +293,12 @@ class Paper:
         home = team == g["home"]
 
         def run():
-            if MARKET == "saves":                         # team-level saves model (shadow log's), valid once the starter is known
-                fn, _ = shadow.model_over(self.inp, "saves", pid, team, opp, home)
-                m = fn(line) if fn else None
-            else:
-                m = self.inp.model(pid, team, opp, home, MARKET, line)
+            m = self.inp.model(pid, team, opp, home, MARKET, line)
             return None if m is None else m["p_over"]
         return run
 
     def eligible(self, pid, team, name=None):
-        """Same footing as the engine: history, not sitting, not out per Daily Faceoff, missed-last needs a lineup.
-        Saves: only Daily Faceoff's CONFIRMED starter for his team (a backup start breaks the bet)."""
-        if MARKET == "saves":
-            return goalie_starts(self.goalie_state, team, name)
+        """Same footing as the engine: history, not sitting, not out per Daily Faceoff, missed-last needs a lineup."""
         pv = self.inp.player(pid, team)
         if pv["n"] < self.T.get("min_history", 10) or pv["sitting"]:
             return False
@@ -502,12 +483,6 @@ class Paper:
             it = self.items[fl["id"]]
             g = next((x for x in self.games if x["id"] == fl["game_id"]), None)
             if "pull" in it or g is None or sched.started(g, self.now):
-                continue
-            if MARKET == "saves":
-                gs = ((self.goalie_state.get("teams") or {}).get(fl["team"]) or {})
-                if gs.get("status") == "confirmed" and not goalie_starts(self.goalie_state, fl["team"], fl["player"]):
-                    self.emit({"t": "pull", "id": fl["id"], "read_at": None, "reason": "not the starter",
-                               "detail": "Daily Faceoff confirms %s in net" % gs.get("name")})
                 continue
             if lineups.player_status(self.ls, fl["team"], fl["pid"]) == "out":
                 self.emit({"t": "pull", "id": fl["id"], "read_at": None, "reason": "out per Daily Faceoff",

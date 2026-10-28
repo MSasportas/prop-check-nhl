@@ -13,7 +13,7 @@ import common
 import nhl
 import record
 
-FIELD = {"shots": "sog", "points": "points", "goals": "goals", "assists": "assists", "saves": "saves"}
+FIELD = {"shots": "sog", "points": "points", "goals": "goals", "assists": "assists"}
 
 
 def result_for(side, line, actual):

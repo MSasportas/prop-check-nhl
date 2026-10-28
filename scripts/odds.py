@@ -428,7 +428,7 @@ def keys_refused(key_state, key_count):
 
 # ---------------------------------------------------------------- the plan (pure functions, easy to test)
 def tier_of(allowance, v):
-    """0: some games, shots only. 1: shots, all games. 2: + B (shots) and C (closing shots, every game). 3: + saves (logged). 4: + goals."""
+    """0: some games, shots only. 1: shots, all games. 2: + B (shots) and C (closing shots, every game). 3: + watch markets (research). 4: + goals."""
     if allowance < v["tier_shots_all"]:
         return 0
     if allowance < v["tier_points"]:
@@ -442,7 +442,7 @@ def tier_of(allowance, v):
 
 def markets_for(tier, pull, live_markets=(), c_every_game=None, paper=False):
     """Which markets a pull asks for at a tier. [] = this pull does not run at this tier.
-    paper (= Gap + Guard live: ops.gap_guard active, TEAM.md section 4): B is shots only at EVERY tier >= 1 (no saves / goals pulls).
+    paper (= Gap + Guard live: ops.gap_guard active, TEAM.md section 4): B is shots only at EVERY tier >= 1 (no goals pulls; watch markets only at tier 3+).
     C (closing shots read): every game at tier 3+, only games holding a live shots pick at tier 2.
     c_every_game overrides that (run_pulls passes False when today's budget is tight)."""
     if pull == "A":
@@ -450,12 +450,10 @@ def markets_for(tier, pull, live_markets=(), c_every_game=None, paper=False):
     if pull == "B":
         if paper:
             return (_paper_list(paper) if tier >= 3 else ["shots"]) if tier >= 1 else []
-        if tier == 2:
-            return ["shots"]                               # points picks are off (2026-10-18 focus): shots re-price only
-        if tier == 3:
-            return ["shots", "saves"]                      # saves: logged to build the second market's sample
+        if tier in (2, 3):
+            return ["shots"]                               # shots re-price only
         if tier >= 4:
-            return ["shots", "saves", "goals"]
+            return ["shots", "goals"]
         return []
     if pull == "C":
         # closing price for EVERY unstarted game (2026-10-18, TEAM.md item 17: the shadow log needs a close on every
@@ -464,7 +462,7 @@ def markets_for(tier, pull, live_markets=(), c_every_game=None, paper=False):
             return []
         every = tier >= 3 if c_every_game is None else c_every_game
         if every and paper:
-            return _paper_list(paper)                      # watch markets (e.g. saves) get a close too, research only
+            return _paper_list(paper)                      # watch markets (e.g. points) get a close too, research only
         return ["shots"] if every or "shots" in (live_markets or ()) else []
     return []
 
@@ -476,7 +474,7 @@ def _paper_list(paper):
 
 def paper_markets(cfg, slate=None):
     """False when Gap + Guard is off. Otherwise the markets the B and C reads ask for: shots, plus every market a
-    started watch track follows (ops.gap_guard.watch[].market, e.g. saves since 2026-10-25). Watch markets are research
+    started watch track follows (ops.gap_guard.watch[].market, e.g. points since 2026-10-28). Watch markets are research
     only (data/paper_watch/), asked at tier 3+ so a tight budget keeps shots whole. About 1 credit per extra market per read."""
     if not common.gap_guard_active(cfg, slate):
         return False
@@ -585,7 +583,7 @@ def due_pulls(now, games, tier, v, fetched, live_markets, started, retry_min=30,
     A pull is "done" for a game once every market it wants has been RETURNED by a read made at or after the
     pull's due time. A market the book has not posted yet costs nothing to ask for, so it is asked again
     (at most every `retry_min` minutes) until the pull's window closes.
-    lineups_ok: {game_id: bool}, both teams' lineups confirmed. Pull B (shots re-price, saves, goals) needs it; if it is
+    lineups_ok: {game_id: bool}, both teams' lineups confirmed. Pull B (shots re-price, goals) needs it; if it is
     still False at pull_c_min before puck, B falls back to shots only so Daily Faceoff being down does not
     kill shots picks. Pull A is shots only.
     paper: B does not wait for lineups (Gap + Guard paper test: the 90 minute read is the flag read).

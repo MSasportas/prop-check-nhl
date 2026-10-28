@@ -552,11 +552,10 @@ function stateChip(state) {
   return h('span', { class: 'chip ' + s[0] }, icon(s[1], 13), s[2]);
 }
 var RESULT = { W: ['Hit', 'W'], L: ['Miss', 'L'], PUSH: ['Push', 'PUSH'], VOID: ['Void', 'VOID'] };
-/* "had 0" -> "had 0 shots" / "had 31 saves", from the bet or market */
+/* "had 0" -> "had 0 shots", from the bet or market */
 function actualText(a, kind) {
   var t = str(a), m = /^had (\d+)$/.exec(t); if (!m) return t;
   var k = str(kind).toLowerCase(), one = m[1] === '1';
-  if (/save/.test(k)) return t + (one ? ' save' : ' saves');
   if (/shot/.test(k)) return t + (one ? ' shot' : ' shots');
   return t;
 }
@@ -870,7 +869,7 @@ function footer() {
 }
 
 /* ---------- Record ---------- */
-var ROW_LABEL = { shots: 'Shots on goal', points: 'Points', saves: 'Saves', goals: 'Anytime goal', parlays: 'Parlays', pulled: 'Pulled' };
+var ROW_LABEL = { shots: 'Shots on goal', points: 'Points', goals: 'Anytime goal', parlays: 'Parlays', pulled: 'Pulled' };
 function sampleN(r) { var n = num(r.n); return n != null ? n : (num(r.w) || 0) + (num(r.l) || 0); }
 function renderRecord() {
   app.appendChild(header('The Record', null));
@@ -1033,7 +1032,7 @@ function bsRow(x) {
 }
 function renderBackstage() {
   app.appendChild(header('Behind the scenes', null));
-  app.appendChild(h('p', { class: 'mu', style: 'margin:8px 0 0', text: 'Player points. Same method as the shots picks. Research only: not picks, not on the Record, never sent to Discord. Goalie saves were watched Oct 25-28 and stopped.' }));
+  app.appendChild(h('p', { class: 'mu', style: 'margin:8px 0 0', text: 'Player points. Same method as the shots picks. Research only: not picks, not on the Record, never sent to Discord.' }));
   if (!S.loaded) { app.appendChild(h('div', { class: 'stack' }, h('div', { class: 'skel sm' }), h('div', { class: 'skel' }))); return; }
   var w = S.watch;
   if (!w) {

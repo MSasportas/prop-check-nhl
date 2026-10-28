@@ -107,10 +107,6 @@ def context(inp, sched_games, g, pid, team, market):
     ctx = {"home": home, "team": team, "opp": opp, "start": g.get("start"),
            "team_rest_days": t_rest, "opp_rest_days": o_rest,
            "team_b2b": None if t_rest is None else t_rest == 0, "opp_b2b": None if o_rest is None else o_rest == 0}
-    if market == "saves":
-        ctx.update(pos="G", n_hist=None, n_season=None, n_team=None, thin=None, sitting=None, missed_last=None,
-                   toi_drop=None, toi_last5=None, toi_season=None)
-        return ctx
     pv = inp.player(pid, team)
     rows = pv["rows"]
     last5 = [r["toi"] for r in rows[-5:]]
@@ -124,23 +120,11 @@ def context(inp, sched_games, g, pid, team, market):
 
 # ---------------------------------------------------------------- the model on one line
 def model_over(inp, market, pid, team, opp, home):
-    """Returns (fn(line) -> dict(p_over, mu) or None, note). Skater markets use the engine's own Inputs.model; saves use
-    model.goalie_prob with the team-level inputs (it assumes this goalie starts)."""
+    """Returns (fn(line) -> dict(p_over, mu) or None, note). Skater markets use the engine's own Inputs.model."""
     if market in model.SK:
         def run(line):
             return inp.model(pid, team, opp, home, market, line)
         return run, None
-    if market == "saves":
-        lg = inp.league()[0]
-        tsa = model.team_factor([r for r in inp.store.teams.get(team, []) if r["date"] < inp.slate], "sa", lg,
-                                model.GK["K"])
-        osf = model.team_factor([r for r in inp.store.teams.get(opp, []) if r["date"] < inp.slate], "sf", lg,
-                                model.GK["K"])
-
-        def run(line):
-            gp = model.goalie_prob(line, {"home": home, "league_sf": lg, "team_sa_f": tsa, "opp_sf_f": osf})
-            return {"p_over": gp["p"], "mu": gp["mu"]}
-        return run, "team-level saves model (assumes this goalie starts)"
     return None, "no model for this market"
 
 
@@ -229,8 +213,7 @@ def snapshot(inp, f, market, pair, pid, team, opp, home, thin, model_fn, lineup_
     if m is not None:
         s["model_p_over"], s["mu"] = _r(m["p_over"]), _r(m["mu"], 3)
     if not historical:
-        if market != "saves":
-            s["lineup"] = lineups.player_status(lineup_state, team, pid)
+        s["lineup"] = lineups.player_status(lineup_state, team, pid)
         page = ((lineup_state.get("teams") or {}).get(team) or {}).get("page") or {}
         s["lineup_page_today"] = bool(page.get("today"))
         gt = (goalie_state or {}).get("teams") or {}

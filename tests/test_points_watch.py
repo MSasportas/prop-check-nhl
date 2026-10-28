@@ -72,5 +72,26 @@ class EndToEnd(unittest.TestCase):
         self.assertNotIn("saves", odds.paper_markets(common.load_config(), world.SLATE))
 
 
+class LiveConfig(unittest.TestCase):
+    def test_the_live_config_has_the_points_track_and_no_saves(self):
+        # 2026-10-28 (Matt): saves removed everywhere, points is the research market.
+        cfg = common.load_config()
+        watch = common.gap_guard(cfg)["watch"]
+        tr = [t for t in watch if t.get("id") == "points"]
+        self.assertEqual(len(tr), 1)
+        self.assertEqual((tr[0]["market"], tr[0]["lines"]), ("points", "any"))
+        self.assertEqual([t.get("market") for t in watch], ["points"])
+        self.assertNotIn("saves", cfg["ops"]["markets"])
+        self.assertEqual(odds.paper_markets(cfg, "2026-10-28"), ["shots", "points"])
+        self.assertEqual(odds.paper_markets(cfg, "2026-10-27"), ["shots"])           # before from_slate
+
+    def test_points_any_line_and_the_star_offset(self):
+        import paper
+        T = {"lines": "any", "offsets": {"*": 0.0}}
+        self.assertTrue(paper.line_ok(0.5, T))
+        self.assertEqual(paper.calibrated_over(0.5, 0.5, T), 0.5)
+        self.assertFalse(paper.line_ok(0.5, {"lines": [1.5, 2.5]}))
+
+
 if __name__ == "__main__":
     unittest.main()

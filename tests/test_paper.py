@@ -748,9 +748,9 @@ class Plan(unittest.TestCase):
         self.assertEqual(odds.markets_for(0, "B", paper=True), [])
         self.assertEqual(odds.markets_for(1, "B"), [])                                   # unchanged without paper
         self.assertEqual(odds.markets_for(2, "B"), ["shots"])
-        self.assertEqual(odds.markets_for(3, "B"), ["shots", "saves"])
-        self.assertEqual(odds.markets_for(4, "B"), ["shots", "saves", "goals"])
-        self.assertEqual(odds.markets_for(4, "B", paper=True), ["shots"])                # no saves / goals pulls
+        self.assertEqual(odds.markets_for(3, "B"), ["shots"])
+        self.assertEqual(odds.markets_for(4, "B"), ["shots", "goals"])
+        self.assertEqual(odds.markets_for(4, "B", paper=True), ["shots"])                # no goals pulls
         self.assertEqual(odds.markets_for(1, "A", paper=True), ["shots"])
 
     def test_markets_for_c_every_game_at_tier_3_and_up_or_when_asked(self):
@@ -894,7 +894,7 @@ class FullDay(unittest.TestCase):
                 fs = [(f["pull"], f["requested"], f["cost"]) for f in doc["fetches"] if f["game_id"] == gid]
                 self.assertEqual(fs, [("A", ["shots"], 1), ("B", ["shots"], 1), ("C", ["shots"], 1)], gid)
             self.assertEqual(sum(f["cost"] for f in doc["fetches"]), 6)
-            self.assertTrue(all(f["requested"] == ["shots"] for f in doc["fetches"]))       # no saves / goals / points
+            self.assertTrue(all(f["requested"] == ["shots"] for f in doc["fetches"]))       # no goals / points
             self.assertEqual({st["step"]: st["status"] for st in s.status()["steps"]}["gapguard"], "ok")
         finally:
             s.close()

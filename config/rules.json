@@ -127,12 +127,6 @@
     "noun": "goals",
     "short": "goals",
     "label": "Anytime goal"
-   },
-   "saves": {
-    "feed_key": "player_total_saves",
-    "noun": "saves",
-    "short": "saves",
-    "label": "Saves"
    }
   },
   "event_match_hours": 6,

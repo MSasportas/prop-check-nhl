@@ -14,7 +14,6 @@ Team-game row (dict):          date, gid, sf (shots for), sa (shots against), ga
 API
   skater_prob(rows, pos, season, market, line, ctx)  -> dict(mu, p_raw, p, n, n_season, thin)
                                                         P(under) = 1 - p
-  goalie_prob(line, ctx)                             -> dict(mu, p_raw, p)
   team_factor(team_rows, key, league_avg, K)         -> shrunk opponent/team multiplier
   naive_last10(rows, market, line)                   -> old tool's hit count / 10 (comparison only)
   break_even(american_price)                         -> probability needed to break even
@@ -45,16 +44,12 @@ SK = {  # H: half-life (games); g: weight on prior-season games; K: prior weight
     "goals":   dict(H=80.0, g=1.0, K=20.0, prior60={"F": 0.88, "D": 0.23}, scale=0.964, opp="ga", oppK=20.0,
                     home=(1.0, 1.0), r=None),
 }
-# Goalie saves: mu = league shots/game * GK_BASE[home?] * team shots-against factor * opp shots-for factor
-GK = dict(base_home=0.845, base_road=0.868, K=20.0, r=24.3)
-
 # Calibration: p = sigmoid(a + b*logit(p_raw)), fit on 2024-25. Identity (0,1) when not listed.
 CALIB = {
     ("shots", 0.5): (-0.103, 1.080), ("shots", 1.5): (0.013, 1.054), ("shots", 2.5): (0.066, 1.051),
     ("shots", 3.5): (0.046, 1.014), ("shots", 4.5): (0.040, 0.998),
     ("points", 0.5): (0.044, 1.092), ("points", 1.5): (0.122, 1.045),
     ("assists", 0.5): (0.138, 1.140), ("goals", 0.5): (0.046, 1.028),
-    "saves": (0.105, 1.122),
 }
 
 # Thin history: backtest shows OVER picks run 1-4 points below the stated chance for these players
@@ -163,16 +158,3 @@ def naive_last10(rows, market, line):
         return None
     return sum(1 for r in rows if r[market] > line) / 10.0
 
-# ---------------------------------------------------------------- goalies
-def goalie_mu(ctx):
-    """ctx: {'home': bool, 'league_sf': float (league avg shots per team-game),
-             'team_sa_f': team_factor(own team rows,'sa',...,K=20), 'opp_sf_f': team_factor(opp rows,'sf',...,K=20)}"""
-    base = GK["base_home"] if ctx["home"] else GK["base_road"]
-    return ctx["league_sf"] * base * ctx.get("team_sa_f", 1.0) * ctx.get("opp_sf_f", 1.0)
-
-
-def goalie_prob(line, ctx):
-    """Probability the STARTING goalie goes over `line` saves. Only valid once the starter is known."""
-    mu = goalie_mu(ctx)
-    p_raw = nb_sf(math.floor(line) + 1, mu, GK["r"])
-    return dict(mu=mu, p_raw=p_raw, p=calibrate(p_raw, "saves", line))
