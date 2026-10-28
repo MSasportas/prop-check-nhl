@@ -1,13 +1,13 @@
 {
  "slate_date": "2026-10-27",
- "generated_at": "2026-10-28T01:40:00-04:00",
- "status_at": "2026-10-28T01:40:00-04:00",
+ "generated_at": "2026-10-28T01:50:00-04:00",
+ "status_at": "2026-10-28T01:50:00-04:00",
  "valid_until": "2026-10-28T05:00:00-04:00",
  "status": {
   "prices_state": "ok",
   "prices_at": "2026-10-27T21:50:01-04:00",
   "next_price_read_at": null,
-  "stats_built_at": "2026-10-28T00:40:01-04:00",
+  "stats_built_at": "2026-10-28T01:50:00-04:00",
   "stats_through": "2026-10-26",
   "lineups_at": "2026-10-27T22:00:01-04:00",
   "goalies_at": null,
@@ -16,7 +16,7 @@
   "stats_state": "ok",
   "last_run": {
    "ok": true,
-   "at": "2026-10-28T01:40:00-04:00",
+   "at": "2026-10-28T01:50:00-04:00",
    "failed_step": null
   },
   "pool": {
@@ -28,27 +28,11 @@
   },
   "excluded_teams": [
    {
-    "team": "ANA",
-    "reason": "stats behind"
-   },
-   {
     "team": "BUF",
     "reason": "stats behind"
    },
    {
-    "team": "OTT",
-    "reason": "stats behind"
-   },
-   {
     "team": "SJS",
-    "reason": "stats behind"
-   },
-   {
-    "team": "VAN",
-    "reason": "stats behind"
-   },
-   {
-    "team": "VGK",
     "reason": "stats behind"
    }
   ],
@@ -59,7 +43,7 @@
  "banners": [
   {
    "level": "warn",
-   "text": "Not covered tonight: ANA, BUF, OTT, SJS, VAN, VGK (stats behind)."
+   "text": "Not covered tonight: BUF, SJS (stats behind)."
   }
  ],
  "empty": {
@@ -281,11 +265,8 @@
    },
    "started": true,
    "picks": 0,
-   "excluded_reason": "stats behind",
-   "excluded_teams": [
-    "OTT",
-    "VGK"
-   ]
+   "excluded_reason": null,
+   "excluded_teams": []
   },
   {
    "id": 2026020197,
@@ -308,11 +289,8 @@
    },
    "started": true,
    "picks": 2,
-   "excluded_reason": "stats behind",
-   "excluded_teams": [
-    "VAN",
-    "ANA"
-   ]
+   "excluded_reason": null,
+   "excluded_teams": []
   },
   {
    "id": 2026020198,
@@ -692,7 +670,11 @@
    ],
    "pulled": null,
    "price_final": false,
-   "graded": null,
+   "graded": {
+    "result": "L",
+    "actual": "had 1",
+    "units": -1.0
+   },
    "rank": null,
    "tier": "main",
    "game_id": 2026020198,
