@@ -79,7 +79,7 @@
   },
   "VAN": {
    "name": "Leevi Merilainen",
-   "status": "expected"
+   "status": "confirmed"
   },
   "SJS": {
    "name": "Yaroslav Askarov",
@@ -90,5 +90,5 @@
    "status": "expected"
   }
  },
- "checked_at": "2026-10-27T19:40:01-04:00"
+ "checked_at": "2026-10-27T21:40:01-04:00"
 }
