@@ -1,10 +1,10 @@
 {
  "ok": true,
  "slate_date": "2026-10-27",
- "started_at": "2026-10-27T22:00:01-04:00",
- "status_at": "2026-10-27T22:00:01-04:00",
- "finished_at": "2026-10-27T22:00:05-04:00",
- "last_ok_at": "2026-10-27T22:00:01-04:00",
+ "started_at": "2026-10-27T22:30:01-04:00",
+ "status_at": "2026-10-27T22:30:01-04:00",
+ "finished_at": "2026-10-27T22:30:04-04:00",
+ "last_ok_at": "2026-10-27T22:30:01-04:00",
  "failed_step": null,
  "steps": [
   {
@@ -20,12 +20,12 @@
   {
    "step": "stats",
    "status": "ok",
-   "note": "1 window(s) read, 2 team-games still missing"
+   "note": "1 window(s) read"
   },
   {
    "step": "lineups",
-   "status": "ok",
-   "note": "2 of 2 team pages read"
+   "status": "skipped",
+   "note": "no game close enough"
   },
   {
    "step": "lineup_history",
@@ -55,7 +55,7 @@
   {
    "step": "engine",
    "status": "ok",
-   "note": "2 new event(s), 0 newly shown"
+   "note": "1 new event(s), 0 newly shown"
   },
   {
    "step": "grade",
@@ -75,7 +75,7 @@
   {
    "step": "slate",
    "status": "ok",
-   "note": "1 open pick(s)"
+   "note": "0 open pick(s)"
   },
   {
    "step": "record",
@@ -149,28 +149,19 @@
   "Elias Nils Pettersson",
   "Elias Pettersson"
  ],
- "excluded_teams": [
-  {
-   "team": "CBJ",
-   "reason": "stats behind"
-  },
-  {
-   "team": "PHI",
-   "reason": "stats behind"
-  }
- ],
- "stats_through": "2026-10-26",
+ "excluded_teams": [],
+ "stats_through": "2026-10-27",
  "lineups_at": "2026-10-27T22:00:01-04:00",
  "lineups_note": "17 of 22 team line pages are dated today.",
  "games_today": 11,
- "record_events": 77,
+ "record_events": 78,
  "odds_notes": [
   "key 1 refused (401)"
  ],
  "runner": {
   "event": "workflow_dispatch",
   "run_id": "40616405928",
-  "iteration": 3,
+  "iteration": 6,
   "chain_link": 378,
   "chain_started_at": "2026-10-16T10:00:13-04:00",
   "run_started_at": "2026-10-27T21:40:17-04:00"

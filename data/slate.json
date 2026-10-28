@@ -1,14 +1,14 @@
 {
  "slate_date": "2026-10-27",
- "generated_at": "2026-10-27T22:10:01-04:00",
- "status_at": "2026-10-27T22:10:01-04:00",
+ "generated_at": "2026-10-27T22:30:01-04:00",
+ "status_at": "2026-10-27T22:30:01-04:00",
  "valid_until": "2026-10-28T05:00:00-04:00",
  "status": {
   "prices_state": "ok",
   "prices_at": "2026-10-27T21:50:01-04:00",
   "next_price_read_at": null,
-  "stats_built_at": "2026-10-27T21:40:01-04:00",
-  "stats_through": "2026-10-26",
+  "stats_built_at": "2026-10-27T22:30:01-04:00",
+  "stats_through": "2026-10-27",
   "lineups_at": "2026-10-27T22:00:01-04:00",
   "goalies_at": null,
   "lineups_note": "17 of 22 team line pages are dated today.",
@@ -16,7 +16,7 @@
   "stats_state": "ok",
   "last_run": {
    "ok": true,
-   "at": "2026-10-27T22:10:01-04:00",
+   "at": "2026-10-27T22:30:01-04:00",
    "failed_step": null
   },
   "pool": {
@@ -26,27 +26,17 @@
    "days_left": 5,
    "low": false
   },
-  "excluded_teams": [
-   {
-    "team": "CBJ",
-    "reason": "stats behind"
-   },
-   {
-    "team": "PHI",
-    "reason": "stats behind"
-   }
-  ],
+  "excluded_teams": [],
   "lines_checked": 200,
   "flag_reads": 11,
   "tier": 4
  },
- "banners": [
-  {
-   "level": "warn",
-   "text": "Not covered tonight: CBJ, PHI (stats behind)."
-  }
- ],
- "empty": null,
+ "banners": [],
+ "empty": {
+  "code": "all_started",
+  "text": "Every game has started.",
+  "sub": "Tonight's picks are under Started."
+ },
  "games": [
   {
    "id": 2026020188,
@@ -69,11 +59,8 @@
    },
    "started": true,
    "picks": 0,
-   "excluded_reason": "stats behind",
-   "excluded_teams": [
-    "CBJ",
-    "PHI"
-   ]
+   "excluded_reason": null,
+   "excluded_teams": []
   },
   {
    "id": 2026020189,
@@ -310,69 +297,13 @@
      "status": "confirmed"
     }
    },
-   "started": false,
+   "started": true,
    "picks": 1,
    "excluded_reason": null,
    "excluded_teams": []
   }
  ],
  "picks": [
-  {
-   "id": "2026-10-27:2026020198:8476885:shots:1.5:over",
-   "price": 105,
-   "first_price": 105,
-   "first_price_at": "2026-10-27T21:00:00-04:00",
-   "worst_price": 105,
-   "p": 0.5131,
-   "breakeven": 0.4878,
-   "p_pct": 51,
-   "breakeven_pct": 49,
-   "state": "lineup",
-   "history": [
-    {
-     "at": "2026-10-27T21:00:00-04:00",
-     "text": "Lineup confirmed"
-    }
-   ],
-   "prices": [
-    {
-     "at": "2026-10-27T21:00:00-04:00",
-     "price": 105
-    }
-   ],
-   "pulled": null,
-   "price_final": true,
-   "graded": null,
-   "rank": 1,
-   "tier": "main",
-   "game_id": 2026020198,
-   "player": "J. Trouba",
-   "player_id": 8476885,
-   "team": "SJS",
-   "opp": "BUF",
-   "home": true,
-   "start": "2026-10-27T22:30:00-04:00",
-   "market": "shots",
-   "line": 1.5,
-   "side": "over",
-   "bet": "Over 1.5 shots on goal",
-   "price_at": "2026-10-27T21:00:00-04:00",
-   "gap_pct": 4.0,
-   "market_fair_pct": 50.7,
-   "n_books": 6,
-   "guard": {
-    "verdict": "agrees",
-    "ours_pct": 51.3,
-    "model_pct": 51.9
-   },
-   "settled": "goalie",
-   "settled_label": "Goalie confirmed",
-   "reason": "6 other books say 50.7%; Hard Rock's +105 only needs 48.8%. Our model agrees (our blend: 51.3%).",
-   "link": null,
-   "thin": false,
-   "games_used": 93,
-   "games_this_season": 12
-  },
   {
    "id": "2026-10-27:2026020189:8476921:shots:1.5:under",
    "price": -110,
@@ -672,6 +603,66 @@
    "thin": false,
    "games_used": 93,
    "games_this_season": 11
+  },
+  {
+   "id": "2026-10-27:2026020198:8476885:shots:1.5:over",
+   "price": 105,
+   "first_price": 105,
+   "first_price_at": "2026-10-27T21:00:00-04:00",
+   "worst_price": 105,
+   "p": 0.5131,
+   "breakeven": 0.4878,
+   "p_pct": 51,
+   "breakeven_pct": 49,
+   "state": "locked",
+   "history": [
+    {
+     "at": "2026-10-27T21:00:00-04:00",
+     "text": "Lineup confirmed"
+    },
+    {
+     "at": "2026-10-27T22:30:01-04:00",
+     "text": "Locked"
+    }
+   ],
+   "prices": [
+    {
+     "at": "2026-10-27T21:00:00-04:00",
+     "price": 105
+    }
+   ],
+   "pulled": null,
+   "price_final": false,
+   "graded": null,
+   "rank": null,
+   "tier": "main",
+   "game_id": 2026020198,
+   "player": "J. Trouba",
+   "player_id": 8476885,
+   "team": "SJS",
+   "opp": "BUF",
+   "home": true,
+   "start": "2026-10-27T22:30:00-04:00",
+   "market": "shots",
+   "line": 1.5,
+   "side": "over",
+   "bet": "Over 1.5 shots on goal",
+   "price_at": "2026-10-27T21:00:00-04:00",
+   "gap_pct": 4.0,
+   "market_fair_pct": 50.7,
+   "n_books": 6,
+   "guard": {
+    "verdict": "agrees",
+    "ours_pct": 51.3,
+    "model_pct": 51.9
+   },
+   "settled": "goalie",
+   "settled_label": "Goalie confirmed",
+   "reason": "6 other books say 50.7%; Hard Rock's +105 only needs 48.8%. Our model agrees (our blend: 51.3%).",
+   "link": null,
+   "thin": false,
+   "games_used": 93,
+   "games_this_season": 12
   }
  ],
  "parlays": [],
