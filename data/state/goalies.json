@@ -11,7 +11,7 @@
   },
   "EDM": {
    "name": "Tristan Jarry",
-   "status": "expected"
+   "status": "confirmed"
   },
   "CGY": {
    "name": "Devin Cooley",
@@ -30,9 +30,9 @@
    "status": "expected"
   },
   "TOR": {
-   "name": "Anthony Stolarz",
+   "name": "Sergei Bobrovsky",
    "status": "expected"
   }
  },
- "checked_at": "2026-10-28T13:30:01-04:00"
+ "checked_at": "2026-10-28T14:50:00-04:00"
 }
