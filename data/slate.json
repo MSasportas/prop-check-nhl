@@ -1,12 +1,12 @@
 {
  "slate_date": "2026-10-28",
- "generated_at": "2026-10-28T12:40:01-04:00",
- "status_at": "2026-10-28T12:40:01-04:00",
+ "generated_at": "2026-10-28T13:00:01-04:00",
+ "status_at": "2026-10-28T13:00:01-04:00",
  "valid_until": "2026-10-29T05:00:00-04:00",
  "status": {
-  "prices_state": "not_yet",
-  "prices_at": null,
-  "next_price_read_at": "2026-10-28T13:00:00-04:00",
+  "prices_state": "ok",
+  "prices_at": "2026-10-28T13:00:01-04:00",
+  "next_price_read_at": "2026-10-28T18:00:00-04:00",
   "stats_built_at": "2026-10-28T02:00:01-04:00",
   "stats_through": "2026-10-27",
   "lineups_at": null,
@@ -16,11 +16,11 @@
   "stats_state": "ok",
   "last_run": {
    "ok": true,
-   "at": "2026-10-28T12:40:01-04:00",
+   "at": "2026-10-28T13:00:01-04:00",
    "failed_step": null
   },
   "pool": {
-   "pulls_left": 1644,
+   "pulls_left": 1640,
    "keys": 10,
    "game_days_left": 4,
    "days_left": 4,
@@ -33,9 +33,9 @@
  },
  "banners": [],
  "empty": {
-  "code": "not_yet",
+  "code": "none_qualified",
   "text": "No picks yet today",
-  "sub": "First read is due at 1:00 PM."
+  "sub": "Picks come from the price read 90 minutes before each game. Next read at 6:00 PM."
  },
  "games": [
   {
