@@ -1,94 +1,38 @@
 {
- "date": "2026-10-27",
+ "date": "2026-10-28",
  "teams": {
+  "WSH": {
+   "name": "Logan Thompson",
+   "status": "expected"
+  },
   "PHI": {
-   "name": "Dan Vladar",
-   "status": "confirmed"
+   "name": "Joseph Woll",
+   "status": "expected"
   },
-  "CBJ": {
-   "name": "Cam Talbot",
-   "status": "confirmed"
+  "EDM": {
+   "name": "Tristan Jarry",
+   "status": "expected"
   },
-  "CHI": {
-   "name": "Spencer Knight",
-   "status": "confirmed"
+  "CGY": {
+   "name": "Devin Cooley",
+   "status": "expected"
   },
-  "LAK": {
-   "name": "Anton Forsberg",
-   "status": "confirmed"
-  },
-  "CAR": {
-   "name": "Pyotr Kochetkov",
-   "status": "confirmed"
-  },
-  "BOS": {
-   "name": "Jeremy Swayman",
-   "status": "confirmed"
-  },
-  "WPG": {
-   "name": "Clay Stevenson",
-   "status": "confirmed"
-  },
-  "FLA": {
-   "name": "Akira Schmid",
-   "status": "confirmed"
-  },
-  "NSH": {
-   "name": "Juuse Saros",
-   "status": "confirmed"
-  },
-  "NYI": {
-   "name": "Semyon Varlamov",
-   "status": "confirmed"
-  },
-  "DAL": {
-   "name": "Casey DeSmith",
-   "status": "confirmed"
+  "COL": {
+   "name": "Mackenzie Blackwood",
+   "status": "expected"
   },
   "NJD": {
-   "name": "Connor Hellebuyck",
+   "name": "Jake Allen",
    "status": "confirmed"
   },
-  "STL": {
-   "name": "Jordan Binnington",
-   "status": "confirmed"
+  "SEA": {
+   "name": "Philipp Grubauer",
+   "status": "expected"
   },
-  "MTL": {
-   "name": "Jacob Fowler",
-   "status": "confirmed"
-  },
-  "UTA": {
-   "name": "Karel Vejmelka",
-   "status": "confirmed"
-  },
-  "MIN": {
-   "name": "Jesper Wallstedt",
-   "status": "confirmed"
-  },
-  "VGK": {
-   "name": "Adin Hill",
-   "status": "confirmed"
-  },
-  "OTT": {
-   "name": "Jonas Johansson",
-   "status": "confirmed"
-  },
-  "ANA": {
-   "name": "Lukas Dostal",
-   "status": "confirmed"
-  },
-  "VAN": {
-   "name": "Leevi Merilainen",
-   "status": "confirmed"
-  },
-  "SJS": {
-   "name": "Yaroslav Askarov",
-   "status": "confirmed"
-  },
-  "BUF": {
-   "name": "Colten Ellis",
-   "status": "confirmed"
+  "TOR": {
+   "name": "Anthony Stolarz",
+   "status": "expected"
   }
  },
- "checked_at": "2026-10-27T22:10:01-04:00"
+ "checked_at": "2026-10-28T05:00:00-04:00"
 }

@@ -1,10 +1,10 @@
 {
  "ok": true,
- "slate_date": "2026-10-27",
- "started_at": "2026-10-28T04:30:00-04:00",
- "status_at": "2026-10-28T04:30:00-04:00",
- "finished_at": "2026-10-28T04:30:01-04:00",
- "last_ok_at": "2026-10-28T04:30:00-04:00",
+ "slate_date": "2026-10-28",
+ "started_at": "2026-10-28T05:00:00-04:00",
+ "status_at": "2026-10-28T05:00:00-04:00",
+ "finished_at": "2026-10-28T05:00:04-04:00",
+ "last_ok_at": "2026-10-28T05:00:00-04:00",
  "failed_step": null,
  "steps": [
   {
@@ -15,7 +15,7 @@
   {
    "step": "schedule",
    "status": "ok",
-   "note": "11 game(s) today"
+   "note": "4 game(s) today"
   },
   {
    "step": "stats",
@@ -133,37 +133,31 @@
   }
  ],
  "pool_total": 1644,
- "allowance": 43.5641,
+ "allowance": 58.7143,
  "tier": 4,
- "budget_today": 479,
- "budget_used_today": 55,
- "prices_state": "ok",
- "prices_at": "2026-10-27T21:50:01-04:00",
- "next_price_read_at": null,
- "unmatched_names": [
-  "Elias Pettersson"
- ],
+ "budget_today": 234,
+ "budget_used_today": 0,
+ "prices_state": "not_yet",
+ "prices_at": null,
+ "next_price_read_at": "2026-10-28T13:00:00-04:00",
+ "unmatched_names": [],
  "unknown_teams": [],
- "lineup_unmatched_names": [
-  "Cameron Whitehead",
-  "Elias Nils Pettersson",
-  "Elias Pettersson"
- ],
+ "lineup_unmatched_names": [],
  "excluded_teams": [],
  "stats_through": "2026-10-27",
- "lineups_at": "2026-10-27T22:00:01-04:00",
- "lineups_note": "17 of 22 team line pages are dated today.",
- "games_today": 11,
+ "lineups_at": null,
+ "lineups_note": null,
+ "games_today": 4,
  "record_events": 84,
  "odds_notes": [
   "key 1 refused (401)"
  ],
  "runner": {
   "event": "workflow_dispatch",
-  "run_id": "40653707259",
+  "run_id": "40657236503",
   "iteration": 2,
-  "chain_link": 386,
+  "chain_link": 387,
   "chain_started_at": "2026-10-16T10:00:13-04:00",
-  "run_started_at": "2026-10-28T04:00:18-04:00"
+  "run_started_at": "2026-10-28T04:30:21-04:00"
  }
 }
