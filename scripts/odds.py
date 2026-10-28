@@ -196,6 +196,7 @@ class Client:
     def __init__(self, pool, cfg):
         self.pool, self.cfg = pool, cfg
         self.errors = []                                   # short, key-free notes for status.json
+        self.refresh_failed = False                        # last refresh_keys: the feed did not answer
 
     # -- network
     def _get(self, path, params, need, slate=None, pull=None, game_id=None, flat_cost=None):
@@ -259,18 +260,24 @@ class Client:
     # -- public
     def refresh_keys(self, only_unknown=False):
         """Ask the free events endpoint once per key so we know what each key has left.
-        only_unknown: ask only keys whose number we do not know yet. Returns the events list (or None)."""
+        only_unknown: ask only keys whose number we do not know yet; a refused (401) key is asked again at most
+        every INVALID_RECHECK_MIN minutes. Returns the events list (or None).
+        Sets self.refresh_failed: True only when the feed itself did not answer (a key refusal is not that)."""
+        self.refresh_failed = False
         if self.pool.fixture:
             ev = self._fixture_json("events.json")
             SOURCE["ok" if ev is not None else "failed"] += 1
             if ev is None:
                 self.errors.append("odds feed did not answer (fixture has no events.json)")
+                self.refresh_failed = True
             return ev
         events = None
         for i in range(self.pool.count()):
             st = self.pool.state[i]
             if only_unknown and st["left"] is not None and st["status"] != "invalid":
                 continue
+            if only_unknown and st["status"] == "invalid" and recently_checked(st, self.pool.now):
+                continue                                   # refused under an hour ago: ask it again next hour
             q = urllib.parse.urlencode({"apiKey": self.pool.keys[i], "dateFormat": "iso"})
             r = common.http_get("%s/events?%s" % (API, q), timeout=30)
             st = self.pool.state[i]
@@ -289,6 +296,7 @@ class Client:
             else:
                 self.errors.append("odds feed did not answer (%s)" % (r.error or r.status))
                 SOURCE["failed"] += 1
+                self.refresh_failed = True
         return events
 
     def event_odds(self, event_id, away, home, market_keys, slate, pull, game_id, others=True):
@@ -397,6 +405,15 @@ def cost_estimate(js, books):
     With up to 10 books that is markets returned x 1."""
     books = [b for b in books or [] if b]
     return _markets_returned(js) * regions_billed(len(books) or 1)
+
+
+INVALID_RECHECK_MIN = 60                                   # a refused key is asked again at most this often
+
+
+def recently_checked(st, now):
+    """True when a key was last asked under INVALID_RECHECK_MIN minutes ago (a future time counts as not recent)."""
+    at = common.parse_iso(st.get("checked_at")) if st.get("checked_at") else None
+    return at is not None and at <= now < at + timedelta(minutes=INVALID_RECHECK_MIN)
 
 
 def keys_refused(key_state, key_count):
@@ -909,7 +926,7 @@ def run_pulls(now, slate, games, sched_left, cfg, rosters_for, live_markets, sta
             day["unknown_teams"] = unknown
             day["events_at"] = common.iso(now)
             day["key_count"] = pool.count()
-        else:
+        elif client.refresh_failed:                        # key refusals alone are not a feed failure
             day["last_fail_at"], day["fail_note"] = common.iso(now), "The odds feed did not answer."
 
     # 2. the plan for today. Made only once a key has reported a number. Fixed once made, except that it is
