@@ -1,12 +1,12 @@
 {
  "slate_date": "2026-10-27",
- "generated_at": "2026-10-27T20:50:15-04:00",
- "status_at": "2026-10-27T20:50:15-04:00",
+ "generated_at": "2026-10-27T21:00:00-04:00",
+ "status_at": "2026-10-27T21:00:00-04:00",
  "valid_until": "2026-10-28T05:00:00-04:00",
  "status": {
   "prices_state": "ok",
-  "prices_at": "2026-10-27T20:30:01-04:00",
-  "next_price_read_at": "2026-10-27T21:00:00-04:00",
+  "prices_at": "2026-10-27T21:00:00-04:00",
+  "next_price_read_at": "2026-10-27T21:15:00-04:00",
   "stats_built_at": "2026-10-27T01:10:01-04:00",
   "stats_through": "2026-10-26",
   "lineups_at": "2026-10-27T20:50:15-04:00",
@@ -16,19 +16,19 @@
   "stats_state": "ok",
   "last_run": {
    "ok": true,
-   "at": "2026-10-27T20:50:15-04:00",
+   "at": "2026-10-27T21:00:00-04:00",
    "failed_step": null
   },
   "pool": {
-   "pulls_left": 1652,
+   "pulls_left": 1650,
    "keys": 10,
    "game_days_left": 5,
    "days_left": 5,
    "low": false
   },
   "excluded_teams": [],
-  "lines_checked": 180,
-  "flag_reads": 10,
+  "lines_checked": 200,
+  "flag_reads": 11,
   "tier": 4
  },
  "banners": [],
@@ -221,7 +221,7 @@
      "status": "confirmed"
     }
    },
-   "started": false,
+   "started": true,
    "picks": 0,
    "excluded_reason": null,
    "excluded_teams": []
@@ -294,7 +294,7 @@
     }
    },
    "started": false,
-   "picks": 0,
+   "picks": 1,
    "excluded_reason": null,
    "excluded_teams": []
   }
@@ -357,6 +357,62 @@
    "games_this_season": 11
   },
   {
+   "id": "2026-10-27:2026020198:8476885:shots:1.5:over",
+   "price": 105,
+   "first_price": 105,
+   "first_price_at": "2026-10-27T21:00:00-04:00",
+   "worst_price": 105,
+   "p": 0.5131,
+   "breakeven": 0.4878,
+   "p_pct": 51,
+   "breakeven_pct": 49,
+   "state": "lineup",
+   "history": [
+    {
+     "at": "2026-10-27T21:00:00-04:00",
+     "text": "Lineup confirmed"
+    }
+   ],
+   "prices": [
+    {
+     "at": "2026-10-27T21:00:00-04:00",
+     "price": 105
+    }
+   ],
+   "pulled": null,
+   "price_final": false,
+   "graded": null,
+   "rank": 2,
+   "tier": "main",
+   "game_id": 2026020198,
+   "player": "J. Trouba",
+   "player_id": 8476885,
+   "team": "SJS",
+   "opp": "BUF",
+   "home": true,
+   "start": "2026-10-27T22:30:00-04:00",
+   "market": "shots",
+   "line": 1.5,
+   "side": "over",
+   "bet": "Over 1.5 shots on goal",
+   "price_at": "2026-10-27T21:00:00-04:00",
+   "gap_pct": 4.0,
+   "market_fair_pct": 50.7,
+   "n_books": 6,
+   "guard": {
+    "verdict": "agrees",
+    "ours_pct": 51.3,
+    "model_pct": 51.9
+   },
+   "settled": "lineup",
+   "settled_label": "Lineup confirmed",
+   "reason": "6 other books say 50.7%; Hard Rock's +105 only needs 48.8%. Our model agrees (our blend: 51.3%).",
+   "link": null,
+   "thin": false,
+   "games_used": 93,
+   "games_this_season": 12
+  },
+  {
    "id": "2026-10-27:2026020197:8475798:shots:2.5:under",
    "price": -145,
    "first_price": -145,
@@ -382,7 +438,7 @@
    "pulled": null,
    "price_final": false,
    "graded": null,
-   "rank": 2,
+   "rank": 3,
    "tier": "main",
    "game_id": 2026020197,
    "player": "M. Granlund",

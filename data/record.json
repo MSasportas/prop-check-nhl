@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-10-27T20:30:01-04:00",
+ "generated_at": "2026-10-27T21:00:00-04:00",
  "summary": {
   "headline": {
    "w": 12,
@@ -130,6 +130,29 @@
       {
        "price": -145,
        "at": "2026-10-27T20:30:01-04:00"
+      }
+     ],
+     "result": null,
+     "actual": null,
+     "units": null,
+     "pulled": null,
+     "legs": []
+    },
+    {
+     "id": "2026-10-27:2026020198:8476885:shots:1.5:over",
+     "kind": "single",
+     "player": "J. Trouba",
+     "bet": "Over 1.5 shots on goal",
+     "market": "shots",
+     "team": "SJS",
+     "game": "BUF at SJS",
+     "price": 105,
+     "first_price": 105,
+     "last_price": 105,
+     "prices": [
+      {
+       "price": 105,
+       "at": "2026-10-27T21:00:00-04:00"
       }
      ],
      "result": null,

@@ -431,12 +431,26 @@
      "shots"
     ],
     "cost": 1
+   },
+   {
+    "game_id": 2026020198,
+    "pull": "B",
+    "at": "2026-10-27T21:00:00-04:00",
+    "markets": [
+     "saves",
+     "shots"
+    ],
+    "returned": [
+     "saves",
+     "shots"
+    ],
+    "cost": 2
    }
   ]
  },
  "stage": null,
  "skipped": {},
- "last_fail_at": "2026-10-27T20:50:15-04:00",
- "fail_note": "The odds feed did not answer.",
+ "last_fail_at": null,
+ "fail_note": null,
  "key_count": 10
 }
