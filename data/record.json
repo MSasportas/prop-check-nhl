@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-10-27T20:00:00-04:00",
+ "generated_at": "2026-10-27T20:30:01-04:00",
  "summary": {
   "headline": {
    "w": 12,
@@ -70,6 +70,29 @@
      "legs": []
     },
     {
+     "id": "2026-10-27:2026020197:8481605:shots:1.5:under",
+     "kind": "single",
+     "player": "J. LaCombe",
+     "bet": "Under 1.5 shots on goal",
+     "market": "shots",
+     "team": "ANA",
+     "game": "VAN at ANA",
+     "price": 120,
+     "first_price": 120,
+     "last_price": 120,
+     "prices": [
+      {
+       "price": 120,
+       "at": "2026-10-27T20:30:01-04:00"
+      }
+     ],
+     "result": null,
+     "actual": null,
+     "units": null,
+     "pulled": null,
+     "legs": []
+    },
+    {
      "id": "2026-10-27:2026020189:8476921:shots:1.5:under",
      "kind": "single",
      "player": "J. Martinook",
@@ -84,6 +107,29 @@
       {
        "price": -110,
        "at": "2026-10-27T18:30:00-04:00"
+      }
+     ],
+     "result": null,
+     "actual": null,
+     "units": null,
+     "pulled": null,
+     "legs": []
+    },
+    {
+     "id": "2026-10-27:2026020197:8475798:shots:2.5:under",
+     "kind": "single",
+     "player": "M. Granlund",
+     "bet": "Under 2.5 shots on goal",
+     "market": "shots",
+     "team": "ANA",
+     "game": "VAN at ANA",
+     "price": -145,
+     "first_price": -145,
+     "last_price": -145,
+     "prices": [
+      {
+       "price": -145,
+       "at": "2026-10-27T20:30:01-04:00"
       }
      ],
      "result": null,
