@@ -1,7 +1,7 @@
 {
  "slate_date": "2026-10-27",
- "generated_at": "2026-10-27T22:00:01-04:00",
- "status_at": "2026-10-27T22:00:01-04:00",
+ "generated_at": "2026-10-27T22:10:01-04:00",
+ "status_at": "2026-10-27T22:10:01-04:00",
  "valid_until": "2026-10-28T05:00:00-04:00",
  "status": {
   "prices_state": "ok",
@@ -16,7 +16,7 @@
   "stats_state": "ok",
   "last_run": {
    "ok": true,
-   "at": "2026-10-27T22:00:01-04:00",
+   "at": "2026-10-27T22:10:01-04:00",
    "failed_step": null
   },
   "pool": {
@@ -303,7 +303,7 @@
    "goalies": {
     "away": {
      "name": "Colten Ellis",
-     "status": "expected"
+     "status": "confirmed"
     },
     "home": {
      "name": "Yaroslav Askarov",
@@ -365,8 +365,8 @@
     "ours_pct": 51.3,
     "model_pct": 51.9
    },
-   "settled": "lineup",
-   "settled_label": "Lineup confirmed",
+   "settled": "goalie",
+   "settled_label": "Goalie confirmed",
    "reason": "6 other books say 50.7%; Hard Rock's +105 only needs 48.8%. Our model agrees (our blend: 51.3%).",
    "link": null,
    "thin": false,
