@@ -1,10 +1,10 @@
 {
  "ok": true,
  "slate_date": "2026-10-27",
- "started_at": "2026-10-28T01:30:01-04:00",
- "status_at": "2026-10-28T01:30:01-04:00",
- "finished_at": "2026-10-28T01:30:02-04:00",
- "last_ok_at": "2026-10-28T01:30:01-04:00",
+ "started_at": "2026-10-28T01:40:00-04:00",
+ "status_at": "2026-10-28T01:40:00-04:00",
+ "finished_at": "2026-10-28T01:40:01-04:00",
+ "last_ok_at": "2026-10-28T01:40:00-04:00",
  "failed_step": null,
  "steps": [
   {
@@ -19,8 +19,8 @@
   },
   {
    "step": "stats",
-   "status": "ok",
-   "note": "1 window(s) read, 6 team-games still missing"
+   "status": "skipped",
+   "note": "waiting to retry"
   },
   {
    "step": "lineups",
@@ -59,18 +59,18 @@
   },
   {
    "step": "grade",
-   "status": "skipped",
-   "note": "nothing to grade"
+   "status": "ok",
+   "note": "2 graded"
   },
   {
    "step": "shadow",
-   "status": "skipped",
-   "note": "nothing new"
+   "status": "ok",
+   "note": "46 graded"
   },
   {
    "step": "gg_grade",
    "status": "ok",
-   "note": "gap+guard: nothing new"
+   "note": "gap+guard: 2 grade"
   },
   {
    "step": "slate",
@@ -79,8 +79,8 @@
   },
   {
    "step": "record",
-   "status": "skipped",
-   "note": "unchanged"
+   "status": "ok",
+   "note": "record.json"
   }
  ],
  "sources": {
@@ -179,14 +179,14 @@
  "lineups_at": "2026-10-27T22:00:01-04:00",
  "lineups_note": "17 of 22 team line pages are dated today.",
  "games_today": 11,
- "record_events": 81,
+ "record_events": 83,
  "odds_notes": [
   "key 1 refused (401)"
  ],
  "runner": {
   "event": "workflow_dispatch",
   "run_id": "40635432075",
-  "iteration": 4,
+  "iteration": 5,
   "chain_link": 382,
   "chain_started_at": "2026-10-16T10:00:13-04:00",
   "run_started_at": "2026-10-28T01:00:15-04:00"
