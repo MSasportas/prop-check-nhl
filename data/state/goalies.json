@@ -3,7 +3,7 @@
  "teams": {
   "WSH": {
    "name": "Logan Thompson",
-   "status": "expected"
+   "status": "confirmed"
   },
   "PHI": {
    "name": "Joseph Woll",
@@ -34,5 +34,5 @@
    "status": "confirmed"
   }
  },
- "checked_at": "2026-10-28T18:00:00-04:00"
+ "checked_at": "2026-10-28T19:10:01-04:00"
 }
