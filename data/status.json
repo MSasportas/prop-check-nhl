@@ -1,10 +1,10 @@
 {
  "ok": true,
  "slate_date": "2026-10-27",
- "started_at": "2026-10-27T23:10:00-04:00",
- "status_at": "2026-10-27T23:10:00-04:00",
- "finished_at": "2026-10-27T23:10:02-04:00",
- "last_ok_at": "2026-10-27T23:10:00-04:00",
+ "started_at": "2026-10-27T23:20:01-04:00",
+ "status_at": "2026-10-27T23:20:01-04:00",
+ "finished_at": "2026-10-27T23:20:05-04:00",
+ "last_ok_at": "2026-10-27T23:20:01-04:00",
  "failed_step": null,
  "steps": [
   {
@@ -20,7 +20,7 @@
   {
    "step": "stats",
    "status": "ok",
-   "note": "1 window(s) read, 10 team-games still missing"
+   "note": "1 window(s) read, 6 team-games still missing"
   },
   {
    "step": "lineups",
@@ -60,17 +60,17 @@
   {
    "step": "grade",
    "status": "ok",
-   "note": "2 graded"
+   "note": "1 graded"
   },
   {
    "step": "shadow",
    "status": "ok",
-   "note": "37 graded"
+   "note": "44 graded"
   },
   {
    "step": "gg_grade",
    "status": "ok",
-   "note": "gap+guard: 2 grade"
+   "note": "gap+guard: 1 grade"
   },
   {
    "step": "slate",
@@ -163,14 +163,6 @@
    "reason": "stats behind"
   },
   {
-   "team": "FLA",
-   "reason": "stats behind"
-  },
-  {
-   "team": "MTL",
-   "reason": "stats behind"
-  },
-  {
    "team": "NJD",
    "reason": "stats behind"
   },
@@ -181,28 +173,20 @@
   {
    "team": "NYI",
    "reason": "stats behind"
-  },
-  {
-   "team": "STL",
-   "reason": "stats behind"
-  },
-  {
-   "team": "WPG",
-   "reason": "stats behind"
   }
  ],
  "stats_through": "2026-10-26",
  "lineups_at": "2026-10-27T22:00:01-04:00",
  "lineups_note": "17 of 22 team line pages are dated today.",
  "games_today": 11,
- "record_events": 80,
+ "record_events": 81,
  "odds_notes": [
   "key 1 refused (401)"
  ],
  "runner": {
   "event": "workflow_dispatch",
   "run_id": "40621302445",
-  "iteration": 5,
+  "iteration": 6,
   "chain_link": 379,
   "chain_started_at": "2026-10-16T10:00:13-04:00",
   "run_started_at": "2026-10-27T22:30:19-04:00"
