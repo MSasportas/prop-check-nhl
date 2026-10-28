@@ -1,7 +1,7 @@
 {
  "slate_date": "2026-10-27",
- "generated_at": "2026-10-27T19:50:00-04:00",
- "status_at": "2026-10-27T19:50:00-04:00",
+ "generated_at": "2026-10-27T20:00:00-04:00",
+ "status_at": "2026-10-27T20:00:00-04:00",
  "valid_until": "2026-10-28T05:00:00-04:00",
  "status": {
   "prices_state": "ok",
@@ -16,7 +16,7 @@
   "stats_state": "ok",
   "last_run": {
    "ok": true,
-   "at": "2026-10-27T19:50:00-04:00",
+   "at": "2026-10-27T20:00:00-04:00",
    "failed_step": null
   },
   "pool": {
@@ -32,7 +32,11 @@
   "tier": 4
  },
  "banners": [],
- "empty": null,
+ "empty": {
+  "code": "none_qualified",
+  "text": "No picks yet today",
+  "sub": "142 lines read, none cleared both checks. Today's earlier picks are under Started. Next read at 8:15 PM."
+ },
  "games": [
   {
    "id": 2026020188,
@@ -77,7 +81,7 @@
      "status": "confirmed"
     }
    },
-   "started": false,
+   "started": true,
    "picks": 1,
    "excluded_reason": null,
    "excluded_teams": []
@@ -101,7 +105,7 @@
      "status": "confirmed"
     }
    },
-   "started": false,
+   "started": true,
    "picks": 0,
    "excluded_reason": null,
    "excluded_teams": []
@@ -125,7 +129,7 @@
      "status": "confirmed"
     }
    },
-   "started": false,
+   "started": true,
    "picks": 1,
    "excluded_reason": null,
    "excluded_teams": []
@@ -149,7 +153,7 @@
      "status": "confirmed"
     }
    },
-   "started": false,
+   "started": true,
    "picks": 0,
    "excluded_reason": null,
    "excluded_teams": []
@@ -173,7 +177,7 @@
      "status": "confirmed"
     }
    },
-   "started": false,
+   "started": true,
    "picks": 0,
    "excluded_reason": null,
    "excluded_teams": []
@@ -197,7 +201,7 @@
      "status": "confirmed"
     }
    },
-   "started": false,
+   "started": true,
    "picks": 1,
    "excluded_reason": null,
    "excluded_teams": []
@@ -301,62 +305,6 @@
  ],
  "picks": [
   {
-   "id": "2026-10-27:2026020194:8479314:shots:2.5:under",
-   "price": 105,
-   "first_price": 105,
-   "first_price_at": "2026-10-27T18:30:00-04:00",
-   "worst_price": 105,
-   "p": 0.5205,
-   "breakeven": 0.4878,
-   "p_pct": 52,
-   "breakeven_pct": 49,
-   "state": "lineup",
-   "history": [
-    {
-     "at": "2026-10-27T18:30:00-04:00",
-     "text": "Lineup confirmed"
-    }
-   ],
-   "prices": [
-    {
-     "at": "2026-10-27T18:30:00-04:00",
-     "price": 105
-    }
-   ],
-   "pulled": null,
-   "price_final": true,
-   "graded": null,
-   "rank": 1,
-   "tier": "main",
-   "game_id": 2026020194,
-   "player": "M. Tkachuk",
-   "player_id": 8479314,
-   "team": "FLA",
-   "opp": "WPG",
-   "home": false,
-   "start": "2026-10-27T20:00:00-04:00",
-   "market": "shots",
-   "line": 2.5,
-   "side": "under",
-   "bet": "Under 2.5 shots on goal",
-   "price_at": "2026-10-27T18:30:00-04:00",
-   "gap_pct": 4.2,
-   "market_fair_pct": 50.8,
-   "n_books": 8,
-   "guard": {
-    "verdict": "agrees",
-    "ours_pct": 52.0,
-    "model_pct": 58.5
-   },
-   "settled": "goalie",
-   "settled_label": "Goalie confirmed",
-   "reason": "8 other books say 50.8%; Hard Rock's +105 only needs 48.8%. Our model agrees (our blend: 52.0%).",
-   "link": null,
-   "thin": false,
-   "games_used": 43,
-   "games_this_season": 12
-  },
-  {
    "id": "2026-10-27:2026020189:8476921:shots:1.5:under",
    "price": -110,
    "first_price": -110,
@@ -366,11 +314,15 @@
    "breakeven": 0.5238,
    "p_pct": 54,
    "breakeven_pct": 52,
-   "state": "lineup",
+   "state": "locked",
    "history": [
     {
      "at": "2026-10-27T18:30:00-04:00",
      "text": "Lineup confirmed"
+    },
+    {
+     "at": "2026-10-27T20:00:00-04:00",
+     "text": "Locked"
     }
    ],
    "prices": [
@@ -380,9 +332,9 @@
     }
    ],
    "pulled": null,
-   "price_final": true,
+   "price_final": false,
    "graded": null,
-   "rank": 2,
+   "rank": null,
    "tier": "main",
    "game_id": 2026020189,
    "player": "J. Martinook",
@@ -422,11 +374,15 @@
    "breakeven": 0.4878,
    "p_pct": 50,
    "breakeven_pct": 49,
-   "state": "lineup",
+   "state": "locked",
    "history": [
     {
      "at": "2026-10-27T18:30:00-04:00",
      "text": "Lineup confirmed"
+    },
+    {
+     "at": "2026-10-27T20:00:00-04:00",
+     "text": "Locked"
     }
    ],
    "prices": [
@@ -436,9 +392,9 @@
     }
    ],
    "pulled": null,
-   "price_final": true,
+   "price_final": false,
    "graded": null,
-   "rank": 3,
+   "rank": null,
    "tier": "main",
    "game_id": 2026020191,
    "player": "R. Thomas",
@@ -467,6 +423,66 @@
    "thin": false,
    "games_used": 75,
    "games_this_season": 11
+  },
+  {
+   "id": "2026-10-27:2026020194:8479314:shots:2.5:under",
+   "price": 105,
+   "first_price": 105,
+   "first_price_at": "2026-10-27T18:30:00-04:00",
+   "worst_price": 105,
+   "p": 0.5205,
+   "breakeven": 0.4878,
+   "p_pct": 52,
+   "breakeven_pct": 49,
+   "state": "locked",
+   "history": [
+    {
+     "at": "2026-10-27T18:30:00-04:00",
+     "text": "Lineup confirmed"
+    },
+    {
+     "at": "2026-10-27T20:00:00-04:00",
+     "text": "Locked"
+    }
+   ],
+   "prices": [
+    {
+     "at": "2026-10-27T18:30:00-04:00",
+     "price": 105
+    }
+   ],
+   "pulled": null,
+   "price_final": false,
+   "graded": null,
+   "rank": null,
+   "tier": "main",
+   "game_id": 2026020194,
+   "player": "M. Tkachuk",
+   "player_id": 8479314,
+   "team": "FLA",
+   "opp": "WPG",
+   "home": false,
+   "start": "2026-10-27T20:00:00-04:00",
+   "market": "shots",
+   "line": 2.5,
+   "side": "under",
+   "bet": "Under 2.5 shots on goal",
+   "price_at": "2026-10-27T18:30:00-04:00",
+   "gap_pct": 4.2,
+   "market_fair_pct": 50.8,
+   "n_books": 8,
+   "guard": {
+    "verdict": "agrees",
+    "ours_pct": 52.0,
+    "model_pct": 58.5
+   },
+   "settled": "goalie",
+   "settled_label": "Goalie confirmed",
+   "reason": "8 other books say 50.8%; Hard Rock's +105 only needs 48.8%. Our model agrees (our blend: 52.0%).",
+   "link": null,
+   "thin": false,
+   "games_used": 43,
+   "games_this_season": 12
   }
  ],
  "parlays": [],
