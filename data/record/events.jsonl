@@ -76,3 +76,5 @@
 {"at":"2026-10-27T22:00:01-04:00","id":"2026-10-27:2026020197:8481605:shots:1.5:under","state":"locked","t":"locked"}
 {"at":"2026-10-27T22:00:01-04:00","id":"2026-10-27:2026020197:8475798:shots:2.5:under","state":"locked","t":"locked"}
 {"at":"2026-10-27T22:30:01-04:00","id":"2026-10-27:2026020198:8476885:shots:1.5:over","state":"locked","t":"locked"}
+{"actual":0,"actual_text":"had 0","at":"2026-10-27T23:10:00-04:00","id":"2026-10-27:2026020191:8480023:shots:1.5:under","price":105,"result":"W","t":"graded","units":1.05}
+{"actual":1,"actual_text":"had 1","at":"2026-10-27T23:10:00-04:00","id":"2026-10-27:2026020194:8479314:shots:2.5:under","price":105,"result":"W","t":"graded","units":1.05}

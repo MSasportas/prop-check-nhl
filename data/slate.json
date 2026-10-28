@@ -1,22 +1,22 @@
 {
  "slate_date": "2026-10-27",
- "generated_at": "2026-10-27T22:50:01-04:00",
- "status_at": "2026-10-27T22:50:01-04:00",
+ "generated_at": "2026-10-27T23:10:00-04:00",
+ "status_at": "2026-10-27T23:10:00-04:00",
  "valid_until": "2026-10-28T05:00:00-04:00",
  "status": {
   "prices_state": "ok",
   "prices_at": "2026-10-27T21:50:01-04:00",
   "next_price_read_at": null,
-  "stats_built_at": "2026-10-27T22:30:01-04:00",
+  "stats_built_at": "2026-10-27T23:10:00-04:00",
   "stats_through": "2026-10-26",
   "lineups_at": "2026-10-27T22:00:01-04:00",
   "goalies_at": null,
   "lineups_note": "17 of 22 team line pages are dated today.",
   "lineups_state": "ok",
-  "stats_state": "behind",
+  "stats_state": "ok",
   "last_run": {
    "ok": true,
-   "at": "2026-10-27T22:50:01-04:00",
+   "at": "2026-10-27T23:10:00-04:00",
    "failed_step": null
   },
   "pool": {
@@ -36,19 +36,11 @@
     "reason": "stats behind"
    },
    {
-    "team": "CHI",
-    "reason": "stats behind"
-   },
-   {
     "team": "DAL",
     "reason": "stats behind"
    },
    {
     "team": "FLA",
-    "reason": "stats behind"
-   },
-   {
-    "team": "LAK",
     "reason": "stats behind"
    },
    {
@@ -83,13 +75,13 @@
  "banners": [
   {
    "level": "warn",
-   "text": "Not covered tonight: BOS, CAR, CHI, DAL, FLA, LAK, MTL, NJD, NSH, NYI, STL, WPG (stats behind)."
+   "text": "Not covered tonight: BOS, CAR, DAL, FLA, MTL, NJD, NSH, NYI, STL, WPG (stats behind)."
   }
  ],
  "empty": {
-  "code": "stats_behind",
-  "text": "Stats are behind, so no picks until they catch up.",
-  "sub": null
+  "code": "all_started",
+  "text": "Every game has started.",
+  "sub": "Tonight's picks are under Started."
  },
  "games": [
   {
@@ -164,11 +156,8 @@
    },
    "started": true,
    "picks": 0,
-   "excluded_reason": "stats behind",
-   "excluded_teams": [
-    "LAK",
-    "CHI"
-   ]
+   "excluded_reason": null,
+   "excluded_teams": []
   },
   {
    "id": 2026020191,
@@ -465,7 +454,11 @@
    ],
    "pulled": null,
    "price_final": false,
-   "graded": null,
+   "graded": {
+    "result": "W",
+    "actual": "had 0",
+    "units": 1.05
+   },
    "rank": null,
    "tier": "main",
    "game_id": 2026020191,
@@ -525,7 +518,11 @@
    ],
    "pulled": null,
    "price_final": false,
-   "graded": null,
+   "graded": {
+    "result": "W",
+    "actual": "had 1",
+    "units": 1.05
+   },
    "rank": null,
    "tier": "main",
    "game_id": 2026020194,
