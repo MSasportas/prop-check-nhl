@@ -181,7 +181,7 @@ probability x Hard Rock decimal payout - 1, on unrounded numbers; every threshol
   Discord: PULLED lists each with its `if_bet` line ("Don't bet these now"); ✅ PRICE FINAL once per told pick; a pick first shown at
   the last read says "✅ Price final" in its NEW block. **Max 12 messages per ET day; FINAL pings only while < 9 sent** (replaces the 6/day
   wording above). `notified.json` gains `final`.
-- Tests: `python -m unittest discover -s tests`, 366 tests (`tests/test_live_picks.py` end to end; `tests/test_paper.py` research-log maths; `tests/fixtures/paper_oct19/` = real Oct 19 reads). Fixtures: `python3 fixtures/make_fixtures.py`.
+- Tests: `python -m unittest discover -s tests`, 374 tests (`tests/test_live_picks.py` end to end; `tests/test_paper.py` research-log maths; `tests/fixtures/paper_oct19/` = real Oct 19 reads). Fixtures: `python3 fixtures/make_fixtures.py`.
 
 - **Files:** `index.html` (page; reads `data/slate.json`, `data/record.json`, `data/rules.json`), `data/odds/<date>.json`
   (every price pulled: Hard Rock in `markets`, 9 other books in `others`; ~10x bigger: ~1.5 MB on a 16-game night, ~2.5-3 MB
@@ -228,6 +228,10 @@ probability x Hard Rock decimal payout - 1, on unrounded numbers; every threshol
    Open minors: it does not count a pull A still owed (Hard Rock posts late; can only under-reserve, never overspend);
    `scripts/market_menu.py` still uses a flat 3 per game reserve.
 9. If a cycle pulled prices but its push failed, that cycle's credits are spent again next cycle. Rare.
+9b. **Refused odds keys (fixed 2026-10-28):** a 401 key was re-asked every cycle and stamped a false "The odds feed did not answer." in
+   `odds_day.json`, so the timer committed (and Pages rebuilt) every 10 min. Now a refused key is re-asked at most hourly (`odds.INVALID_RECHECK_MIN`)
+   and only a real non-answer sets `last_fail_at` (`Client.refresh_failed`). Open minors (QA): while a game has no matched event the full refresh
+   still asks every key every 30 min; 429-limited keys are re-asked every cycle (not saved as limited).
 10. Discord: `notified.json` lives in the repo, so a cycle that fails after sending (run/push failure resets data/ to
    origin) can re-send that cycle's batch once. Rare, accepted. A webhook deleted in Discord gives 404: silently
    retried each cycle, no alert. Quiet hours also hold hello and action messages.
@@ -447,6 +451,7 @@ probability x Hard Rock decimal payout - 1, on unrounded numbers; every threshol
 | 2026-10-11 | v1.0 set (section 4) | First build: Sharp standard from the DS backtest (2024-25 fit, 2025-26 out of sample) and one live Hard Rock pull | Backtest only; 0 graded live legs |
 
 ## 9. Session log (newest first, one line each)
+- 2026-10-28 1:55 PM daily check: chain alive (run 663, link 4 since 10 AM, 1:50 PM commit, Pages builds ok), all steps/sources ok. Pull A ran 1 PM (4 games, 4 credits); 0 open picks, next read 6 PM (correct). Oct 27: 6 picks all graded (5-1); shadow 237/237 graded; Record 84 events. Saves watch 0 flags. Keys 1,640 (key 1 still 401), tier 4, 4 game days to the Nov 1 reset. Unmatched none; no excluded teams. Fixed: refused key 1 re-asked every cycle -> false feed-fail stamp + a commit every 10 min (item 9b); Builder -> QA SHIP (7 fixtures at 380px, text identical to main), 374 tests.
 - 2026-10-28 ~8:10 AM Researcher run 13 (daily, shots): AA1-AA4 registered before testing (player fatigue load, board depth, own-goalie score effects, D calibration); 14 variants, none positive with n >= 300 (best AA3 -3.3% n1,094), no lockbox look (still 2). Forward Q1c +20.4% n177 p < .001, Q1b +15.3% n241, Q1a +9.0% n332 p .053 (9 nights, bar n >= 300 + p < .0033); Q11 (Q1c by goalie status) registered: unconfirmed-goalie reads +24.6% n124 vs confirmed +10.6% n53. Nothing passed.
 - 2026-10-27 1:45 PM daily check: chain alive (link 368, run 627 in progress, 1:40 PM commit, Pages builds ok), all steps/sources ok. Pull A ran 1 PM (11 games, 11 credits); page says "No picks yet today, next read 5:30 PM" (correct). Oct 26: 1 pick (U1.5 -140) graded W; shadow 57/57 graded; Record 66 events. Saves watch: 0 flags. Keys 1,688 (key 1 still 401; 5 live keys), tier 4, budget 479. Unmatched: Pettersson only; no excluded teams. Nothing broken, no code change. Note: the Actions page WebFetch needs a permission nobody answers in unattended runs; use the GitHub MCP `actions_list` instead.
 - 2026-10-27 ~8:15 AM Researcher run 12 (daily, shots): Z1-Z4 registered before testing (team shot form, accuracy luck, ice-time volatility, stuck lines); 15 variants, none positive with n >= 300 (best Z1r -3.8% n758), no lockbox look (still 2). Forward Q1a +8.8% n269, Q1c +15.6% n140 p .022 (8 nights, too small); Q10 returners' overs registered forward (+20.3% n26). Nothing passed.
