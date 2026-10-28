@@ -2,7 +2,7 @@
  "version": 1,
  "note": "Gap + Guard research log. Every flag here is a pick on the page and in the Record; vetoed and capped rows are research only.",
  "market": "shots",
- "generated_at": "2026-10-28T16:20:01-04:00",
+ "generated_at": "2026-10-28T16:30:01-04:00",
  "slate": "2026-10-28",
  "active": true,
  "window": {
@@ -896,7 +896,7 @@
      "cap": null,
      "flagged_at": "2026-10-20T17:30:02-04:00",
      "read_pull": "B",
-     "settled": "Early",
+     "settled": "Lineup confirmed",
      "frozen_settled": "Lineup confirmed",
      "move30_pct": 0.2,
      "pulled": null,
