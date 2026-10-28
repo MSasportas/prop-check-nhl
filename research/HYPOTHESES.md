@@ -322,6 +322,33 @@ Run 12 count: 15 variants tested (Z1 4, Z2 4, Z3 3, Z4 4). Expected false positi
 Lockbox looks: still 2. Output: research/code/r12/z12_results.txt (10,413 graded Nov-Feb lines). Forward (8 nights, Oct 19-26): Q1a +8.8%
 n269 [-1,+19] p .07; Q1b +12.7% n192 p .024; Q1c +15.6% n140 [+4,+27] p .022: too small for the bar (n >= 300, p < .0020).
 
+## Run 13 (Researcher, 2026-10-28 AM, daily). SHOTS ON GOAL ONLY. Registered before any of these were tested.
+No odds key, no historical odds pull. Free NHL stats REST per-game logs fetched to scratch with research/code/r13/fetch13.py
+(skater summary + goalie summary, 2024-25 + 2025-26 through Feb 28; lockbox not fetched). Every feature for a line dated d uses only
+data dated < d, except AA3's identity of tonight's starting goalie (actual starter from the log, as N2 did: starters are normally
+confirmed by -45; stated as a mild timing assumption). Common as runs 4/6-12: shots45_lines, every two-way Hard Rock line, proportional
+de-vig fair f, side price >= -200, 1u flat, regulation + OT, VOID = no bet, game-clustered bootstrap. Logistic = research/code/wf.py
+(a + a15 + a35 + b*logit(f) + standardised terms, L2 2, fit on all months before the test month), bet the side with p - BE >= T,
+T in {.01, .02, .03}. Fixed rules report every Nov-Feb bet with folds. Placebo (shuffle the feature(s) within date x line, 200 times)
+for any variant positive Nov-Feb with n >= 300; lockbox (Mar 1+) only for such a frozen variant, once, needing one-sided p < 0.05/3 =
+0.0167 (look #3).
+
+| id | date | rule (exact) | data | result | status |
+|---|---|---|---|---|---|
+| AA1 | 2026-10-28 | **Player fatigue load (player level, not team B2B).** From his 2025-26 skater logs before d (needs >= 5 prior games, else all terms 0): avg = his mean TOI (min); g4 = his games dated d-3..d-1; load = TOI summed over those games - g4 x avg; lastx = TOI of his last game - avg if that game was d-1, else 0. Terms c1*load + c2*[g4 >= 2] + c3*lastx (3 T). Fixed rule AA1r: UNDER when g4 >= 2 (his 3rd game in 4 nights) (1 variant). 4 variants | skater logs + shots45 | | registered |
+| AA2 | 2026-10-28 | **Board depth = trader attention.** At the -45 snapshot: nT = distinct players with a Hard Rock shots line for his team in this game; nG = same for the game; rel = nT - mean nT of his team over its earlier dates (date < d; 0 if none). Terms c1*nG + c2*rel + c3*rel*logit(f) (is the fair less sharp, too extreme or too flat, on thin or unusually thin boards?) (3 T). 3 variants | shots45 | | registered |
+| AA3 | 2026-10-28 | **Own goalie -> score effects.** Own starter = his team's goalie with gamesStarted 1 in this game. osv = that goalie's save % over his 2024-25 + 2025-26 games before d (shots-weighted; < 300 shots against -> league mean of the training rows) minus the league mean; obk = 1 if he started < 40% of his team's 2025-26 games before d (needs >= 10 team games, else 0). A weak/backup own goalie means his team trails more and shoots more. Terms c1*osv + c2*obk (3 T). Fixed rule AA3r: OVER when obk = 1 (1 variant). 4 variants. (N2 used the OPPONENT's goalie only.) | goalie + skater logs + shots45 | | registered |
+| AA4 | 2026-10-28 | **Position-specific calibration.** isD = 1 for defensemen (shots45 pos). Terms c1*isD + c2*isD*logit(f) + c3*isD*[line >= 2.5] (does Hard Rock price D shots too extreme / too flat, separately from forwards?) (3 T). (R3/K7 had D as a main effect only.) 3 variants | shots45 | | registered |
+
+Forward (registered now; no split of these rows by goalie status has been looked at):
+| id | date | rule (exact) | data | result | status |
+|---|---|---|---|---|---|
+| Q11a | 2026-10-28 | **Q1c split by goalie status at read time: both confirmed.** Every Q1c bet exactly as score_fwd.py makes it (all nights with `others`), kept when, in the latest version of data/state/goalies.json committed at or before the read's `at` (git history, same date), BOTH teams of that game have status "confirmed". 1 variant | score_fwd.py bets + goalies.json git history | | forward, open |
+| Q11b | 2026-10-28 | **Same, NOT both confirmed** (either team expected/unknown/missing, or no goalies.json version that day before the read). 1 variant | same | | forward, open |
+Q11 bar: n >= 300 graded, ROI > 0, one-sided p < 0.05/27 = 0.00185 (25 + 2 forward variants). Scored by research/code/r13/score_q11.py.
+
+Run 13 count: 14 variants registered (AA1 4, AA2 3, AA3 4, AA4 3). Expected false positives at 5%: ~0.7.
+
 ## Queued (not yet tested)
 | id | rule idea | data | status |
 |---|---|---|---|
