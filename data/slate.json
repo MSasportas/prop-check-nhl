@@ -1,7 +1,7 @@
 {
  "slate_date": "2026-10-27",
- "generated_at": "2026-10-28T01:00:01-04:00",
- "status_at": "2026-10-28T01:00:01-04:00",
+ "generated_at": "2026-10-28T01:30:01-04:00",
+ "status_at": "2026-10-28T01:30:01-04:00",
  "valid_until": "2026-10-28T05:00:00-04:00",
  "status": {
   "prices_state": "ok",
@@ -16,7 +16,7 @@
   "stats_state": "ok",
   "last_run": {
    "ok": true,
-   "at": "2026-10-28T01:00:01-04:00",
+   "at": "2026-10-28T01:30:01-04:00",
    "failed_step": null
   },
   "pool": {
@@ -32,7 +32,15 @@
     "reason": "stats behind"
    },
    {
+    "team": "BUF",
+    "reason": "stats behind"
+   },
+   {
     "team": "OTT",
+    "reason": "stats behind"
+   },
+   {
+    "team": "SJS",
     "reason": "stats behind"
    },
    {
@@ -51,7 +59,7 @@
  "banners": [
   {
    "level": "warn",
-   "text": "Not covered tonight: ANA, OTT, VAN, VGK (stats behind)."
+   "text": "Not covered tonight: ANA, BUF, OTT, SJS, VAN, VGK (stats behind)."
   }
  ],
  "empty": {
@@ -327,8 +335,11 @@
    },
    "started": true,
    "picks": 1,
-   "excluded_reason": null,
-   "excluded_teams": []
+   "excluded_reason": "stats behind",
+   "excluded_teams": [
+    "BUF",
+    "SJS"
+   ]
   }
  ],
  "picks": [
