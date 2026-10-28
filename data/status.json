@@ -1,10 +1,10 @@
 {
  "ok": true,
  "slate_date": "2026-10-27",
- "started_at": "2026-10-28T00:50:00-04:00",
- "status_at": "2026-10-28T00:50:00-04:00",
- "finished_at": "2026-10-28T00:50:01-04:00",
- "last_ok_at": "2026-10-28T00:50:00-04:00",
+ "started_at": "2026-10-28T01:00:01-04:00",
+ "status_at": "2026-10-28T01:00:01-04:00",
+ "finished_at": "2026-10-28T01:00:03-04:00",
+ "last_ok_at": "2026-10-28T01:00:01-04:00",
  "failed_step": null,
  "steps": [
   {
@@ -19,8 +19,8 @@
   },
   {
    "step": "stats",
-   "status": "skipped",
-   "note": "waiting to retry"
+   "status": "ok",
+   "note": "1 window(s) read, 4 team-games still missing"
   },
   {
    "step": "lineups",
@@ -151,7 +151,15 @@
  ],
  "excluded_teams": [
   {
+   "team": "ANA",
+   "reason": "stats behind"
+  },
+  {
    "team": "OTT",
+   "reason": "stats behind"
+  },
+  {
+   "team": "VAN",
    "reason": "stats behind"
   },
   {
@@ -159,7 +167,7 @@
    "reason": "stats behind"
   }
  ],
- "stats_through": "2026-10-27",
+ "stats_through": "2026-10-26",
  "lineups_at": "2026-10-27T22:00:01-04:00",
  "lineups_note": "17 of 22 team line pages are dated today.",
  "games_today": 11,
@@ -170,7 +178,7 @@
  "runner": {
   "event": "workflow_dispatch",
   "run_id": "40630784100",
-  "iteration": 5,
+  "iteration": 6,
   "chain_link": 381,
   "chain_started_at": "2026-10-16T10:00:13-04:00",
   "run_started_at": "2026-10-28T00:10:16-04:00"
