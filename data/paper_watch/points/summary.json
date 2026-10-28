@@ -2,7 +2,7 @@
  "version": 1,
  "note": "Behind the scenes: research only. Not picks, not on the Record, never sent to Discord.",
  "market": "points",
- "generated_at": "2026-10-28T17:50:01-04:00",
+ "generated_at": "2026-10-28T18:00:00-04:00",
  "slate": "2026-10-28",
  "active": true,
  "window": {
@@ -10,14 +10,49 @@
   "checkpoint": "2026-11-02"
  },
  "tonight": {
-  "flags": [],
+  "flags": [
+   {
+    "id": "2026-10-28:2026020199:8484387:0.5:over",
+    "kind": "flag",
+    "slate": "2026-10-28",
+    "game_id": 2026020199,
+    "player": "M. Michkov",
+    "team": "PHI",
+    "opp": "WSH",
+    "game": "PHI @ WSH",
+    "start": "2026-10-28T19:30:00-04:00",
+    "side": "over",
+    "line": 0.5,
+    "bet": "OVER 0.5 points",
+    "price": 105,
+    "gap_pct": 3.5,
+    "final_pct": 3.5,
+    "market_fair_pct": 50.5,
+    "final_p_pct": 50.5,
+    "n_books": 7,
+    "guard": "pass",
+    "cap": null,
+    "flagged_at": "2026-10-28T18:00:00-04:00",
+    "read_pull": "B",
+    "settled": "Lineup confirmed",
+    "frozen_settled": "Lineup confirmed",
+    "move30_pct": null,
+    "pulled": null,
+    "locked": false,
+    "state": "open",
+    "close_fair_pct": null,
+    "clv_pct": null,
+    "result": null,
+    "units": null
+   }
+  ],
   "vetoes": [],
   "capped": []
  },
  "nights": [],
  "nov2": {
   "gaps_measured": 0,
-  "gaps_logged": 0,
+  "gaps_logged": 1,
   "graded_picks": 0,
   "w": 0,
   "l": 0,
@@ -45,7 +80,7 @@
   "clv_passed_mean": null,
   "clv_vetoed_mean": null,
   "nights": 1,
-  "nights_with_flags": 0,
+  "nights_with_flags": 1,
   "population_slope": null,
   "checkpoint": "2026-11-02"
  }
