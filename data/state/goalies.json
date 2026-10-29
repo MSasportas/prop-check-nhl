@@ -39,7 +39,7 @@
   },
   "WSH": {
    "name": "Charlie Lindgren",
-   "status": "expected"
+   "status": "confirmed"
   },
   "MIN": {
    "name": "Jesper Wallstedt",
@@ -74,7 +74,7 @@
    "status": "confirmed"
   },
   "ANA": {
-   "name": "Ville Husso",
+   "name": "Lukas Dostal",
    "status": "expected"
   },
   "BUF": {
@@ -90,5 +90,5 @@
    "status": "confirmed"
   }
  },
- "checked_at": "2026-10-29T18:40:00-04:00"
+ "checked_at": "2026-10-29T19:00:00-04:00"
 }

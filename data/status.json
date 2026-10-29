@@ -1,10 +1,10 @@
 {
  "ok": true,
  "slate_date": "2026-10-29",
- "started_at": "2026-10-29T18:50:01-04:00",
- "status_at": "2026-10-29T18:50:01-04:00",
- "finished_at": "2026-10-29T18:50:06-04:00",
- "last_ok_at": "2026-10-29T18:50:01-04:00",
+ "started_at": "2026-10-29T19:00:00-04:00",
+ "status_at": "2026-10-29T19:00:00-04:00",
+ "finished_at": "2026-10-29T19:00:03-04:00",
+ "last_ok_at": "2026-10-29T19:00:00-04:00",
  "failed_step": null,
  "steps": [
   {
@@ -25,17 +25,17 @@
   {
    "step": "lineups",
    "status": "ok",
-   "note": "16 of 16 team pages read"
+   "note": "6 of 6 team pages read"
   },
   {
    "step": "lineup_history",
    "status": "ok",
-   "note": "3 team(s) changed"
+   "note": "6 team(s) changed"
   },
   {
    "step": "odds",
    "status": "ok",
-   "note": "1 game(s) priced"
+   "note": "no pull due"
   },
   {
    "step": "market_menu",
@@ -64,8 +64,8 @@
   },
   {
    "step": "shadow",
-   "status": "ok",
-   "note": "31 line read(s) logged"
+   "status": "skipped",
+   "note": "nothing new"
   },
   {
    "step": "gg_grade",
@@ -146,19 +146,21 @@
  "unknown_teams": [],
  "lineup_unmatched_names": [
   "Artem Duda",
+  "Elias Nils Pettersson",
+  "Elias Pettersson",
   "Trey Taylor"
  ],
  "excluded_teams": [],
  "stats_through": "2026-10-28",
- "lineups_at": "2026-10-29T18:50:01-04:00",
- "lineups_note": "15 of 16 team line pages are dated today.",
+ "lineups_at": "2026-10-29T19:00:00-04:00",
+ "lineups_note": "20 of 22 team line pages are dated today.",
  "games_today": 11,
  "record_events": 88,
  "odds_notes": [],
  "runner": {
   "event": "workflow_dispatch",
   "run_id": "40965057868",
-  "iteration": 4,
+  "iteration": 5,
   "chain_link": 43,
   "chain_started_at": "2026-10-28T10:00:15-04:00",
   "run_started_at": "2026-10-29T18:20:15-04:00"
