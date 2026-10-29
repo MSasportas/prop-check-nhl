@@ -47,11 +47,11 @@
   },
   "NYI": {
    "name": "Ilya Sorokin",
-   "status": "expected"
+   "status": "confirmed"
   },
   "STL": {
    "name": "Joel Hofer",
-   "status": "expected"
+   "status": "confirmed"
   },
   "BOS": {
    "name": "Jeremy Swayman",
@@ -90,5 +90,5 @@
    "status": "expected"
   }
  },
- "checked_at": "2026-10-29T13:00:00-04:00"
+ "checked_at": "2026-10-29T13:10:00-04:00"
 }
