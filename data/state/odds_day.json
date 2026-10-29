@@ -26,7 +26,162 @@
  },
  "events_at": "2026-10-29T05:00:01-04:00",
  "unknown_teams": [],
- "done": {},
+ "done": {
+  "2026020204": [
+   {
+    "game_id": 2026020204,
+    "pull": "A",
+    "at": "2026-10-29T13:00:00-04:00",
+    "markets": [
+     "shots"
+    ],
+    "returned": [
+     "shots"
+    ],
+    "cost": 1
+   }
+  ],
+  "2026020205": [
+   {
+    "game_id": 2026020205,
+    "pull": "A",
+    "at": "2026-10-29T13:00:00-04:00",
+    "markets": [
+     "shots"
+    ],
+    "returned": [
+     "shots"
+    ],
+    "cost": 1
+   }
+  ],
+  "2026020206": [
+   {
+    "game_id": 2026020206,
+    "pull": "A",
+    "at": "2026-10-29T13:00:00-04:00",
+    "markets": [
+     "shots"
+    ],
+    "returned": [
+     "shots"
+    ],
+    "cost": 1
+   }
+  ],
+  "2026020203": [
+   {
+    "game_id": 2026020203,
+    "pull": "A",
+    "at": "2026-10-29T13:00:00-04:00",
+    "markets": [
+     "shots"
+    ],
+    "returned": [
+     "shots"
+    ],
+    "cost": 1
+   }
+  ],
+  "2026020207": [
+   {
+    "game_id": 2026020207,
+    "pull": "A",
+    "at": "2026-10-29T13:00:00-04:00",
+    "markets": [
+     "shots"
+    ],
+    "returned": [
+     "shots"
+    ],
+    "cost": 1
+   }
+  ],
+  "2026020208": [
+   {
+    "game_id": 2026020208,
+    "pull": "A",
+    "at": "2026-10-29T13:00:00-04:00",
+    "markets": [
+     "shots"
+    ],
+    "returned": [
+     "shots"
+    ],
+    "cost": 1
+   }
+  ],
+  "2026020209": [
+   {
+    "game_id": 2026020209,
+    "pull": "A",
+    "at": "2026-10-29T13:00:00-04:00",
+    "markets": [
+     "shots"
+    ],
+    "returned": [
+     "shots"
+    ],
+    "cost": 1
+   }
+  ],
+  "2026020210": [
+   {
+    "game_id": 2026020210,
+    "pull": "A",
+    "at": "2026-10-29T13:00:00-04:00",
+    "markets": [
+     "shots"
+    ],
+    "returned": [
+     "shots"
+    ],
+    "cost": 1
+   }
+  ],
+  "2026020211": [
+   {
+    "game_id": 2026020211,
+    "pull": "A",
+    "at": "2026-10-29T13:00:00-04:00",
+    "markets": [
+     "shots"
+    ],
+    "returned": [
+     "shots"
+    ],
+    "cost": 1
+   }
+  ],
+  "2026020212": [
+   {
+    "game_id": 2026020212,
+    "pull": "A",
+    "at": "2026-10-29T13:00:00-04:00",
+    "markets": [
+     "shots"
+    ],
+    "returned": [
+     "shots"
+    ],
+    "cost": 1
+   }
+  ],
+  "2026020213": [
+   {
+    "game_id": 2026020213,
+    "pull": "A",
+    "at": "2026-10-29T13:00:00-04:00",
+    "markets": [
+     "shots"
+    ],
+    "returned": [
+     "shots"
+    ],
+    "cost": 1
+   }
+  ]
+ },
  "stage": null,
  "skipped": {},
  "last_fail_at": null,
