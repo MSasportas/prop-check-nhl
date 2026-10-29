@@ -1,0 +1,134 @@
+{
+ "nights": [
+  {
+   "date": "2026-10-20",
+   "graded": true,
+   "w": 2,
+   "l": 1,
+   "units": 1.1,
+   "entries": [
+    {
+     "id": "2026-10-20:2026020144:8471214:shots:2.5:under",
+     "kind": "single",
+     "player": "A. Ovechkin",
+     "bet": "Under 2.5 shots on goal",
+     "market": "shots",
+     "team": "WSH",
+     "game": "LAK at WSH",
+     "price": 105,
+     "first_price": 105,
+     "last_price": 105,
+     "prices": [
+      {
+       "price": 105,
+       "at": "2026-10-20T17:30:02-04:00"
+      }
+     ],
+     "result": "W",
+     "actual": "had 2",
+     "units": 1.05,
+     "pulled": null,
+     "legs": []
+    },
+    {
+     "id": "2026-10-20:2026020147:8482175:shots:1.5:under",
+     "kind": "single",
+     "player": "J. Peterka",
+     "bet": "Under 1.5 shots on goal",
+     "market": "shots",
+     "team": "BOS",
+     "game": "BOS at DAL",
+     "price": 105,
+     "first_price": 105,
+     "last_price": 105,
+     "prices": [
+      {
+       "price": 105,
+       "at": "2026-10-20T19:20:01-04:00"
+      }
+     ],
+     "result": "W",
+     "actual": "had 1",
+     "units": 1.05,
+     "pulled": null,
+     "legs": []
+    },
+    {
+     "id": "2026-10-20:2026020149:8482665:shots:1.5:under",
+     "kind": "single",
+     "player": "M. Beniers",
+     "bet": "Under 1.5 shots on goal",
+     "market": "shots",
+     "team": "SEA",
+     "game": "DET at SEA",
+     "price": -105,
+     "first_price": -105,
+     "last_price": -105,
+     "prices": [
+      {
+       "price": -105,
+       "at": "2026-10-20T20:10:01-04:00"
+      }
+     ],
+     "result": "L",
+     "actual": "had 2",
+     "units": -1.0,
+     "pulled": {
+      "at": "2026-10-20T21:00:01-04:00",
+      "reason": "Our model no longer backs this price"
+     },
+     "legs": []
+    },
+    {
+     "id": "2026-10-20:2026020150:8478427:shots:2.5:under",
+     "kind": "single",
+     "player": "S. Aho",
+     "bet": "Under 2.5 shots on goal",
+     "market": "shots",
+     "team": "CAR",
+     "game": "CAR at VAN",
+     "price": 120,
+     "first_price": 120,
+     "last_price": 120,
+     "prices": [
+      {
+       "price": 120,
+       "at": "2026-10-20T20:30:01-04:00"
+      }
+     ],
+     "result": "L",
+     "actual": "had 4",
+     "units": -1.0,
+     "pulled": null,
+     "legs": []
+    },
+    {
+     "id": "2026-10-20:2026020146:8480023:shots:1.5:under",
+     "kind": "single",
+     "player": "R. Thomas",
+     "bet": "Under 1.5 shots on goal",
+     "market": "shots",
+     "team": "STL",
+     "game": "WPG at STL",
+     "price": -105,
+     "first_price": -105,
+     "last_price": -105,
+     "prices": [
+      {
+       "price": -105,
+       "at": "2026-10-20T18:30:00-04:00"
+      }
+     ],
+     "result": "W",
+     "actual": "had 0",
+     "units": 0.9524,
+     "pulled": {
+      "at": "2026-10-20T19:20:01-04:00",
+      "reason": "Our model no longer backs this price"
+     },
+     "legs": []
+    }
+   ]
+  }
+ ]
+}
