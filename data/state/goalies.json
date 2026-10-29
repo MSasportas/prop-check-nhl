@@ -1,38 +1,94 @@
 {
- "date": "2026-10-28",
+ "date": "2026-10-29",
  "teams": {
+  "PIT": {
+   "name": "Arturs Silovs",
+   "status": "expected"
+  },
+  "UTA": {
+   "name": "Karel Vejmelka",
+   "status": "expected"
+  },
+  "CAR": {
+   "name": "Pyotr Kochetkov",
+   "status": "expected"
+  },
+  "CBJ": {
+   "name": "Jet Greaves",
+   "status": "expected"
+  },
+  "TBL": {
+   "name": "Andrei Vasilevskiy",
+   "status": "expected"
+  },
+  "WPG": {
+   "name": "Stuart Skinner",
+   "status": "expected"
+  },
+  "DET": {
+   "name": "John Gibson",
+   "status": "expected"
+  },
+  "CHI": {
+   "name": "Spencer Knight",
+   "status": "expected"
+  },
+  "NSH": {
+   "name": "Juuse Saros",
+   "status": "expected"
+  },
   "WSH": {
    "name": "Logan Thompson",
+   "status": "expected"
+  },
+  "MIN": {
+   "name": "Jesper Wallstedt",
+   "status": "expected"
+  },
+  "NYI": {
+   "name": "Ilya Sorokin",
+   "status": "expected"
+  },
+  "STL": {
+   "name": "Joel Hofer",
+   "status": "expected"
+  },
+  "BOS": {
+   "name": "Jeremy Swayman",
+   "status": "expected"
+  },
+  "DAL": {
+   "name": "Jake Oettinger",
+   "status": "expected"
+  },
+  "MTL": {
+   "name": "Jakub Dobes",
    "status": "confirmed"
   },
-  "PHI": {
-   "name": "Joseph Woll",
-   "status": "confirmed"
+  "LAK": {
+   "name": "Darcy Kuemper",
+   "status": "expected"
   },
-  "EDM": {
-   "name": "Tristan Jarry",
-   "status": "confirmed"
+  "OTT": {
+   "name": "Samuel Ersson",
+   "status": "expected"
   },
-  "CGY": {
-   "name": "Devin Cooley",
-   "status": "confirmed"
+  "ANA": {
+   "name": "Lukas Dostal",
+   "status": "expected"
   },
-  "COL": {
-   "name": "Mackenzie Blackwood",
-   "status": "confirmed"
+  "BUF": {
+   "name": "Ukko-Pekka Luukkonen",
+   "status": "expected"
   },
-  "NJD": {
-   "name": "Jake Allen",
-   "status": "confirmed"
+  "SJS": {
+   "name": "Alex Nedeljkovic",
+   "status": "expected"
   },
-  "SEA": {
-   "name": "Philipp Grubauer",
-   "status": "confirmed"
-  },
-  "TOR": {
-   "name": "Sergei Bobrovsky",
-   "status": "confirmed"
+  "VAN": {
+   "name": "Leevi Merilainen",
+   "status": "expected"
   }
  },
- "checked_at": "2026-10-28T21:50:01-04:00"
+ "checked_at": "2026-10-29T05:00:01-04:00"
 }
