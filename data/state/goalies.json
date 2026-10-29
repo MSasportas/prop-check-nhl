@@ -23,7 +23,7 @@
   },
   "WPG": {
    "name": "Stuart Skinner",
-   "status": "expected"
+   "status": "confirmed"
   },
   "DET": {
    "name": "John Gibson",
@@ -35,7 +35,7 @@
   },
   "NSH": {
    "name": "Juuse Saros",
-   "status": "expected"
+   "status": "confirmed"
   },
   "WSH": {
    "name": "Charlie Lindgren",
@@ -59,7 +59,7 @@
   },
   "DAL": {
    "name": "Jake Oettinger",
-   "status": "expected"
+   "status": "confirmed"
   },
   "MTL": {
    "name": "Jakub Dobes",
@@ -90,5 +90,5 @@
    "status": "expected"
   }
  },
- "checked_at": "2026-10-29T11:30:01-04:00"
+ "checked_at": "2026-10-29T12:00:00-04:00"
 }
