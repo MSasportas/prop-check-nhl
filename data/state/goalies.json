@@ -30,7 +30,7 @@
    "status": "expected"
   },
   "CHI": {
-   "name": "Spencer Knight",
+   "name": "Arvid Soderblom",
    "status": "expected"
   },
   "NSH": {
@@ -38,7 +38,7 @@
    "status": "expected"
   },
   "WSH": {
-   "name": "Logan Thompson",
+   "name": "Charlie Lindgren",
    "status": "expected"
   },
   "MIN": {
@@ -70,19 +70,19 @@
    "status": "expected"
   },
   "OTT": {
-   "name": "Samuel Ersson",
+   "name": "Jonas Johansson",
    "status": "expected"
   },
   "ANA": {
-   "name": "Lukas Dostal",
+   "name": "Ville Husso",
    "status": "expected"
   },
   "BUF": {
-   "name": "Ukko-Pekka Luukkonen",
+   "name": "Colten Ellis",
    "status": "expected"
   },
   "SJS": {
-   "name": "Alex Nedeljkovic",
+   "name": "Yaroslav Askarov",
    "status": "expected"
   },
   "VAN": {
@@ -90,5 +90,5 @@
    "status": "expected"
   }
  },
- "checked_at": "2026-10-29T05:00:01-04:00"
+ "checked_at": "2026-10-29T09:30:00-04:00"
 }

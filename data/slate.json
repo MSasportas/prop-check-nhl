@@ -1,7 +1,7 @@
 {
  "slate_date": "2026-10-29",
- "generated_at": "2026-10-29T09:10:01-04:00",
- "status_at": "2026-10-29T09:10:01-04:00",
+ "generated_at": "2026-10-29T09:30:00-04:00",
+ "status_at": "2026-10-29T09:30:00-04:00",
  "valid_until": "2026-10-30T05:00:00-04:00",
  "status": {
   "prices_state": "not_yet",
@@ -16,7 +16,7 @@
   "stats_state": "ok",
   "last_run": {
    "ok": true,
-   "at": "2026-10-29T09:10:01-04:00",
+   "at": "2026-10-29T09:30:00-04:00",
    "failed_step": null
   },
   "pool": {
@@ -121,7 +121,7 @@
    },
    "goalies": {
     "away": {
-     "name": "Spencer Knight",
+     "name": "Arvid Soderblom",
      "status": "expected"
     },
     "home": {
@@ -169,7 +169,7 @@
    },
    "goalies": {
     "away": {
-     "name": "Logan Thompson",
+     "name": "Charlie Lindgren",
      "status": "expected"
     },
     "home": {
@@ -241,11 +241,11 @@
    },
    "goalies": {
     "away": {
-     "name": "Ukko-Pekka Luukkonen",
+     "name": "Colten Ellis",
      "status": "expected"
     },
     "home": {
-     "name": "Lukas Dostal",
+     "name": "Ville Husso",
      "status": "expected"
     }
    },
@@ -265,7 +265,7 @@
    },
    "goalies": {
     "away": {
-     "name": "Samuel Ersson",
+     "name": "Jonas Johansson",
      "status": "expected"
     },
     "home": {
@@ -293,7 +293,7 @@
      "status": "expected"
     },
     "home": {
-     "name": "Alex Nedeljkovic",
+     "name": "Yaroslav Askarov",
      "status": "expected"
     }
    },
