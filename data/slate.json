@@ -1,12 +1,12 @@
 {
  "slate_date": "2026-10-29",
- "generated_at": "2026-10-29T18:00:01-04:00",
- "status_at": "2026-10-29T18:00:01-04:00",
+ "generated_at": "2026-10-29T18:20:00-04:00",
+ "status_at": "2026-10-29T18:20:00-04:00",
  "valid_until": "2026-10-30T05:00:00-04:00",
  "status": {
   "prices_state": "ok",
-  "prices_at": "2026-10-29T18:00:01-04:00",
-  "next_price_read_at": "2026-10-29T18:15:00-04:00",
+  "prices_at": "2026-10-29T18:20:00-04:00",
+  "next_price_read_at": "2026-10-29T18:30:00-04:00",
   "stats_built_at": "2026-10-29T01:40:01-04:00",
   "stats_through": "2026-10-28",
   "lineups_at": "2026-10-29T18:00:01-04:00",
@@ -16,11 +16,11 @@
   "stats_state": "ok",
   "last_run": {
    "ok": true,
-   "at": "2026-10-29T18:00:01-04:00",
+   "at": "2026-10-29T18:20:00-04:00",
    "failed_step": null
   },
   "pool": {
-   "pulls_left": 1605,
+   "pulls_left": 1599,
    "keys": 10,
    "game_days_left": 3,
    "days_left": 3,
@@ -35,7 +35,7 @@
  "empty": {
   "code": "none_qualified",
   "text": "No picks yet today",
-  "sub": "62 lines read, none cleared both checks. Next read at 6:15 PM."
+  "sub": "62 lines read, none cleared both checks. Next read at 6:30 PM."
  },
  "games": [
   {
