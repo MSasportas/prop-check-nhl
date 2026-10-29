@@ -15,7 +15,7 @@
   },
   "CBJ": {
    "name": "Jet Greaves",
-   "status": "expected"
+   "status": "confirmed"
   },
   "TBL": {
    "name": "Andrei Vasilevskiy",
@@ -90,5 +90,5 @@
    "status": "expected"
   }
  },
- "checked_at": "2026-10-29T12:00:00-04:00"
+ "checked_at": "2026-10-29T12:10:01-04:00"
 }
