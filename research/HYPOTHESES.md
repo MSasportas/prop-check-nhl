@@ -352,6 +352,30 @@ only. No variant positive with n >= 300, so no placebo and no lockbox look. Cumu
 Lockbox looks: still 2. Output: research/code/r13/aa13_results.txt (10,413 graded Nov-Feb lines). Forward (9 nights, Oct 19-27): Q1a +9.0%
 n332 p .053; Q1b +15.3% n241 p .0025; Q1c +20.4% n177 [+11,+30] p < .001: Q1c still short of n >= 300.
 
+## Run 14 (Researcher, 2026-10-29 AM, daily). SHOTS ON GOAL ONLY. Registered before any of these were tested.
+No odds key, no historical odds pull. Free NHL stats REST skater summary per-game logs (2025-26 through Feb 28; lockbox not fetched),
+fetched to scratch with research/code/r14/fetch14.py. Team game table = per (gameId, team): goals and SOG summed over its skaters,
+home/road from the logs; opponent's from the other team of the same gameId. Every feature for a line dated d uses only games dated < d,
+except tonight's home/road flag (known from the schedule). Common as runs 4/6-13: shots45_lines, every two-way Hard Rock line,
+proportional de-vig fair f, side price >= -200, 1u flat, regulation + OT, VOID = no bet, game-clustered bootstrap. Logistic =
+research/code/wf.py (a + a15 + a35 + b*logit(f) + standardised terms, L2 2, fit on all months before the test month), bet the side with
+p - BE >= T, T in {.01, .02, .03}. Fixed rules report every Nov-Feb bet with folds. Placebo (shuffle within date x line, 200 times) for
+any variant positive Nov-Feb with n >= 300; lockbox (Mar 1+) only for such a frozen variant, once, needing one-sided p < 0.05/3 = 0.0167
+(look #3).
+
+| id | date | rule (exact) | data | result | status |
+|---|---|---|---|---|---|
+| BB1 | 2026-10-29 | **Team bounce-back after a bad game (coach demands more shots; book prices players off season form).** Team's last 2025-26 game before d, only if dated d-4..d-1 (else all terms 0): gd = team goals - opponent goals (capped +-5); sdf = team SOG - opponent SOG (capped +-25); L3 = 1 if gd <= -3. Terms c1*gd + c2*sdf + c3*L3 (3 T). Fixed rule BB1r: OVER when L3 = 1 (1 variant). 4 variants | skater logs + shots45 | pending | registered |
+| BB2 | 2026-10-29 | **Streak vs his own Hard Rock number (public chases streaks, book follows).** His earlier Hard Rock dates in shots45 (date < d; one line per date: f nearest 0.5; VOID dates skipped); outcome +1 over / -1 under; s = signed length of the run of equal outcomes ending at his most recent earlier date (capped +-6; 0 if none). Terms c1*s + c2*sign(s)*[abs(s) >= 3] (3 T). Fixed rule BB2r: UNDER when s >= +3 (fade a 3+ over streak) (1 variant). 4 variants. (X1/K5 used one last game, not a streak vs the posted line.) | shots45 | pending | registered |
+| BB3 | 2026-10-29 | **Road trip / homecoming.** From the team game table: rt = if tonight is a road game, the number of consecutive road games ending with tonight (1 = trip opener), else 0; hc = 1 if tonight is home and the team's previous 3 games were all road. Terms c1*min(rt, 6) + c2*hc + c3*[rt = 1] (3 T). Fixed rule BB3r: UNDER when rt >= 4 (4th+ straight road game) (1 variant). 4 variants. (T3 = time zones, WF1 = rest days; neither used trip length.) | skater logs + shots45 | pending | registered |
+
+Forward (registered now, scored only on slates from 2026-10-29 onward; none of those nights exist yet):
+| id | date | rule (exact) | data | result | status |
+|---|---|---|---|---|---|
+| Q15a | 2026-10-29 | **Q1c at the 1 PM read only.** Every Q1c bet exactly as score_fwd.py makes it with pull = "A", nights >= 2026-10-29. (Q11b hinted the gap lives before goalie news; Q6a is Q1a, not Q1c, and its nights are seen.) 1 variant | research/fwd/scores.json | pending | forward, open |
+| Q15b | 2026-10-29 | **Q1c at the B/C reads only** (pull "B" or "C"; what the product can bet today), nights >= 2026-10-29. 1 variant | same | pending | forward, open |
+Q15 bar: n >= 300 graded, ROI > 0, one-sided p < 0.05/29 = 0.0017 (27 + 2 forward variants), mean CLV > 0. Scored by research/code/r14/score_q15.py.
+
 ## Queued (not yet tested)
 | id | rule idea | data | status |
 |---|---|---|---|
