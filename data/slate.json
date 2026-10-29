@@ -1,7 +1,7 @@
 {
  "slate_date": "2026-10-28",
- "generated_at": "2026-10-28T23:20:01-04:00",
- "status_at": "2026-10-28T23:20:01-04:00",
+ "generated_at": "2026-10-28T23:50:00-04:00",
+ "status_at": "2026-10-28T23:50:00-04:00",
  "valid_until": "2026-10-29T05:00:00-04:00",
  "status": {
   "prices_state": "ok",
@@ -13,10 +13,10 @@
   "goalies_at": null,
   "lineups_note": "6 of 8 team line pages are dated today.",
   "lineups_state": "ok",
-  "stats_state": "ok",
+  "stats_state": "behind",
   "last_run": {
    "ok": true,
-   "at": "2026-10-28T23:20:01-04:00",
+   "at": "2026-10-28T23:50:00-04:00",
    "failed_step": null
   },
   "pool": {
@@ -32,7 +32,15 @@
     "reason": "stats behind"
    },
    {
+    "team": "COL",
+    "reason": "stats behind"
+   },
+   {
     "team": "EDM",
+    "reason": "stats behind"
+   },
+   {
+    "team": "NJD",
     "reason": "stats behind"
    }
   ],
@@ -43,13 +51,13 @@
  "banners": [
   {
    "level": "warn",
-   "text": "Not covered tonight: CGY, EDM (stats behind)."
+   "text": "Not covered tonight: CGY, COL, EDM, NJD (stats behind)."
   }
  ],
  "empty": {
-  "code": "all_started",
-  "text": "Every game has started.",
-  "sub": "Tonight's picks are under Started."
+  "code": "stats_behind",
+  "text": "Stats are behind, so no picks until they catch up.",
+  "sub": null
  },
  "games": [
   {
@@ -124,8 +132,11 @@
    },
    "started": true,
    "picks": 0,
-   "excluded_reason": null,
-   "excluded_teams": []
+   "excluded_reason": "stats behind",
+   "excluded_teams": [
+    "NJD",
+    "COL"
+   ]
   },
   {
    "id": 2026020202,
