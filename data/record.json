@@ -1,28 +1,28 @@
 {
- "generated_at": "2026-10-28T20:30:01-04:00",
+ "generated_at": "2026-10-29T00:00:01-04:00",
  "summary": {
   "headline": {
    "w": 17,
-   "l": 7,
+   "l": 8,
    "push": 0,
    "void": 0,
-   "units": 9.2,
-   "hit_rate": 0.7083,
-   "needed": 0.5077,
-   "n": 24
+   "units": 8.2,
+   "hit_rate": 0.68,
+   "needed": 0.5059,
+   "n": 25
   },
   "rows": [
    {
     "key": "shots",
     "label": "Shots on goal",
     "w": 17,
-    "l": 7,
+    "l": 8,
     "push": 0,
     "void": 0,
-    "units": 9.2,
-    "hit_rate": 0.7083,
-    "needed": 0.5077,
-    "n": 24
+    "units": 8.2,
+    "hit_rate": 0.68,
+    "needed": 0.5059,
+    "n": 25
    },
    {
     "key": "pulled",
@@ -41,10 +41,10 @@
  "nights": [
   {
    "date": "2026-10-28",
-   "graded": false,
+   "graded": true,
    "w": 0,
-   "l": 0,
-   "units": 0,
+   "l": 1,
+   "units": -1.0,
    "entries": [
     {
      "id": "2026-10-28:2026020200:8477953:shots:1.5:under",
@@ -63,9 +63,9 @@
        "at": "2026-10-28T19:00:01-04:00"
       }
      ],
-     "result": null,
-     "actual": null,
-     "units": null,
+     "result": "L",
+     "actual": "had 2",
+     "units": -1.0,
      "pulled": null,
      "legs": []
     }
