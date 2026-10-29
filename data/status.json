@@ -1,10 +1,10 @@
 {
  "ok": true,
  "slate_date": "2026-10-28",
- "started_at": "2026-10-29T00:00:01-04:00",
- "status_at": "2026-10-29T00:00:01-04:00",
- "finished_at": "2026-10-29T00:00:02-04:00",
- "last_ok_at": "2026-10-29T00:00:01-04:00",
+ "started_at": "2026-10-29T00:10:01-04:00",
+ "status_at": "2026-10-29T00:10:01-04:00",
+ "finished_at": "2026-10-29T00:10:02-04:00",
+ "last_ok_at": "2026-10-29T00:10:01-04:00",
  "failed_step": null,
  "steps": [
   {
@@ -20,7 +20,7 @@
   {
    "step": "stats",
    "status": "ok",
-   "note": "1 window(s) read, 4 team-games still missing"
+   "note": "1 window(s) read, 2 team-games still missing"
   },
   {
    "step": "lineups",
@@ -59,18 +59,18 @@
   },
   {
    "step": "grade",
-   "status": "ok",
-   "note": "1 graded"
+   "status": "skipped",
+   "note": "nothing to grade"
   },
   {
    "step": "shadow",
    "status": "ok",
-   "note": "34 graded"
+   "note": "38 graded"
   },
   {
    "step": "gg_grade",
    "status": "ok",
-   "note": "gap+guard: 1 grade"
+   "note": "gap+guard: nothing new"
   },
   {
    "step": "slate",
@@ -79,8 +79,8 @@
   },
   {
    "step": "record",
-   "status": "ok",
-   "note": "record.json"
+   "status": "skipped",
+   "note": "unchanged"
   }
  ],
  "sources": {
@@ -145,15 +145,7 @@
  "lineup_unmatched_names": [],
  "excluded_teams": [
   {
-   "team": "CGY",
-   "reason": "stats behind"
-  },
-  {
    "team": "COL",
-   "reason": "stats behind"
-  },
-  {
-   "team": "EDM",
    "reason": "stats behind"
   },
   {
@@ -170,7 +162,7 @@
  "runner": {
   "event": "workflow_dispatch",
   "run_id": "40811676945",
-  "iteration": 5,
+  "iteration": 6,
   "chain_link": 17,
   "chain_started_at": "2026-10-28T10:00:15-04:00",
   "run_started_at": "2026-10-28T23:21:40-04:00"
