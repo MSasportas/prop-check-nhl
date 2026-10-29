@@ -2,7 +2,7 @@
  "version": 1,
  "note": "Gap + Guard research log. Every flag here is a pick on the page and in the Record; vetoed and capped rows are research only.",
  "market": "shots",
- "generated_at": "2026-10-29T19:00:00-04:00",
+ "generated_at": "2026-10-29T19:20:00-04:00",
  "slate": "2026-10-29",
  "active": true,
  "window": {
@@ -40,8 +40,8 @@
     "pulled": null,
     "locked": false,
     "state": "open",
-    "close_fair_pct": null,
-    "clv_pct": null,
+    "close_fair_pct": 46.7,
+    "clv_pct": 0.4,
     "result": null,
     "units": null
    }
@@ -947,7 +947,7 @@
   }
  ],
  "nov2": {
-  "gaps_measured": 27,
+  "gaps_measured": 28,
   "gaps_logged": 31,
   "graded_picks": 29,
   "w": 20,
@@ -956,15 +956,15 @@
   "units": 9.417083682600923,
   "wins_z": 1.6203926049135704,
   "clv_gaps": {
-   "n": 27,
-   "mean": 0.046169395918471884,
-   "lb80": 0.04184765553067598,
+   "n": 28,
+   "mean": 0.04466005376535727,
+   "lb80": 0.04042357295854054,
    "pos_share": 1.0
   },
   "clv_flags": {
-   "n": 26,
-   "mean": 0.04613797051121168,
-   "lb80": 0.04155557265151588,
+   "n": 27,
+   "mean": 0.044573890700843194,
+   "lb80": 0.039906038036191756,
    "pos_share": 1.0
   },
   "clv_vetoed": {
@@ -973,7 +973,7 @@
    "lb80": 0.04698645650723732,
    "pos_share": 1.0
   },
-  "clv_passed_mean": 0.04613797051121168,
+  "clv_passed_mean": 0.044573890700843194,
   "clv_vetoed_mean": 0.04698645650723732,
   "nights": 10,
   "nights_with_flags": 8,
