@@ -1,5 +1,27 @@
 # LOG.md: Researcher runs (newest first)
 
+- 2026-10-29 ~8:15 AM ET (Researcher run 14, daily; SHOTS ON GOAL ONLY). No key used, no historical odds pull. BB1-BB3 + forward Q15a-b registered
+  and pushed (399b42c) before any test ran. Free NHL stats REST skater per-game logs fetched to scratch (r14/fetch14.py; Feb 28 cut-off,
+  lockbox not fetched). Script research/code/r14/bb14.py, output bb14_results.txt. 10,413 graded Nov-Feb lines.
+  - BB1 team bounce-back after a bad game (lost by 3+, outshot): best T=.02 -14.7% n92; OVER after a 3+ goal loss -3.0% n1,953 [-6.6,+0.4],
+    p .92. Small stable weight: a team that outshot its last opponent leans over (+0.05..0.08 std), far below the hold.
+  - BB2 streak vs his own Hard Rock number (3+ straight overs/unders): -19.4% n120 to -60% n16; UNDER after 3+ straight overs -3.7% n1,401.
+  - BB3 road trip / homecoming: best T=.02 -4.7% n98; UNDER on the 4th+ straight road game -9.3% n963 [-14.5,-4.1], every fold negative.
+  - Forward re-score (score_fwd.py + Q6/Q8/Q9/Q10/Q11 scorers, 10 nights Oct 19-28; clone unshallowed): Q1a (Hard Rock >= consensus fair)
+    +9.6% n354 [+1,+18] p .025, n now past 300 but p misses its bar (.0033): not a pass; Q1b (EV >= 1%) +14.8% n258 p .001; Q1c (EV >= 2%)
+    +18.2% n188 [+9,+28] p .001; Q1k Pinnacle +10.4% n274; Q1m +28.2% n36; mean CLV ~= EV (+2.4..4.2%). Q6a (1 PM) +12.2% n112, Q6b (B/C)
+    +9.9% n89, Q6c (unders) +17.0% n165. Q8a-c +17.9% n17 / -5.5% n28 / +20.7% n72. Q9a-c +24.7% n57 / +4.2% n34 / +0.2% n11. Q10 +14.4% n29.
+    Q11a (both goalies confirmed) +8.9% n57 p .22; Q11b (not both) +22.3% n131 p .003. Q2a/b 0 bets. Q15a-b (Q1c at 1 PM vs at B/C) start
+    tonight, 0 bets. Oct 28 (2 nights' worth of games at 1 PM only) pulled Q1c from +20.4% to +18.2%: still strong, but shrinking toward Q1a.
+  - Points (Q12-Q14) not scored: this task's prompt is shots only; RESEARCH.md says points also runs daily, so the CEO should either widen
+    this task's prompt or give points its own run.
+  12 variants (~0.6 false positives expected); all-time historical 392; forward 29. Lockbox looks: 2 (unchanged; next needs p < 0.0167).
+  **Verdict: nothing passed; no candidate for the Sharp.** Bounce-backs, over/under streaks and road-trip length are all inside Hard Rock's
+  price; history with free data stays exhausted (392 variants). Q1a is the first forward test past n 300 and it does NOT clear its bar
+  (p .025 vs .0033); Q1b/Q1c (the stricter EV cuts) are the live leads, ~300 by about Nov 4-7.
+  Next: (1) Q1b to n >= 300 (~Nov 2) and Q1c (~Nov 6), judged at the forward bar, CLV checked; (2) Q15a vs Q15b from tonight: if the edge sits
+  at the 1 PM read the product cannot use it yet (CEO decision on an earlier read); (3) a forward test of Q1c on Pinnacle-present lines only
+  vs Pinnacle-absent, registered before looking.
 - 2026-10-28 ~8:10 AM ET (Researcher run 13, daily; SHOTS ON GOAL ONLY). No key used, no historical odds pull. AA1-AA4 + forward Q11a-b registered
   and pushed (9bc8805) before any test ran. Free NHL stats REST skater + goalie per-game logs fetched to scratch (r13/fetch13.py; Feb 28
   cut-off, lockbox not fetched). Script research/code/r13/aa13.py, output aa13_results.txt. 10,413 graded Nov-Feb lines.
