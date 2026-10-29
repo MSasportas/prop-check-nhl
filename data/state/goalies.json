@@ -43,7 +43,7 @@
   },
   "MIN": {
    "name": "Jesper Wallstedt",
-   "status": "expected"
+   "status": "confirmed"
   },
   "NYI": {
    "name": "Ilya Sorokin",
@@ -90,5 +90,5 @@
    "status": "confirmed"
   }
  },
- "checked_at": "2026-10-29T15:10:01-04:00"
+ "checked_at": "2026-10-29T17:00:00-04:00"
 }
