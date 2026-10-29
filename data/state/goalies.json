@@ -6,12 +6,12 @@
    "status": "confirmed"
   },
   "UTA": {
-   "name": "Karel Vejmelka",
-   "status": "expected"
+   "name": "Sebastian Cossa",
+   "status": "confirmed"
   },
   "CAR": {
    "name": "Pyotr Kochetkov",
-   "status": "expected"
+   "status": "confirmed"
   },
   "CBJ": {
    "name": "Jet Greaves",
@@ -90,5 +90,5 @@
    "status": "confirmed"
   }
  },
- "checked_at": "2026-10-29T17:00:00-04:00"
+ "checked_at": "2026-10-29T18:40:00-04:00"
 }
