@@ -27,10 +27,10 @@
   },
   "DET": {
    "name": "John Gibson",
-   "status": "expected"
+   "status": "confirmed"
   },
   "CHI": {
-   "name": "Arvid Soderblom",
+   "name": "Spencer Knight",
    "status": "expected"
   },
   "NSH": {
@@ -90,5 +90,5 @@
    "status": "expected"
   }
  },
- "checked_at": "2026-10-29T11:20:00-04:00"
+ "checked_at": "2026-10-29T11:30:01-04:00"
 }
