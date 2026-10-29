@@ -3,7 +3,7 @@
  "teams": {
   "PIT": {
    "name": "Arturs Silovs",
-   "status": "expected"
+   "status": "confirmed"
   },
   "UTA": {
    "name": "Karel Vejmelka",
@@ -90,5 +90,5 @@
    "status": "expected"
   }
  },
- "checked_at": "2026-10-29T10:50:01-04:00"
+ "checked_at": "2026-10-29T11:20:00-04:00"
 }
