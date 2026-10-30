@@ -3,7 +3,7 @@
  "teams": {
   "VGK": {
    "name": "Adin Hill",
-   "status": "expected"
+   "status": "confirmed"
   },
   "NJD": {
    "name": "Connor Hellebuyck",
@@ -26,5 +26,5 @@
    "status": "expected"
   }
  },
- "checked_at": "2026-10-30T16:10:00-04:00"
+ "checked_at": "2026-10-30T17:40:00-04:00"
 }
