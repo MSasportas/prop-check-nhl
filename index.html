@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="theme-color" content="#000000">
+<meta name="theme-color" content="#0b1c2c">
 <meta name="color-scheme" content="dark">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
@@ -41,8 +41,10 @@ button{font:inherit;color:inherit;background:none;border:0;padding:0;margin:0;te
 
 /* the scene behind the glass */
 /* a dim light field far behind the glass, so the glass has something to bend */
-.canvas{position:fixed;inset:0;z-index:0;overflow:hidden;pointer-events:none;background:#000}
-.canvas i{position:absolute;border-radius:50%;filter:blur(60px);opacity:.55;will-change:transform}
+.canvas{position:fixed;inset:0;z-index:0;overflow:hidden;pointer-events:none;background:linear-gradient(160deg,#2a0a3a 0%,#0b1c2c 45%,#06261f 100%)}
+.canvas::before{content:"";position:absolute;width:300px;height:300px;border-radius:50%;border:34px solid rgba(255,255,255,.38);top:30%;right:-110px;animation:dr2 18s ease-in-out infinite alternate}
+.canvas::after{content:"";position:absolute;inset:-20% -10%;background:repeating-linear-gradient(115deg,transparent 0 46px,rgba(255,255,255,.16) 46px 52px);opacity:.6}
+.canvas i{position:absolute;border-radius:50%;filter:blur(46px);opacity:.6;z-index:1;will-change:transform}
 .canvas .b1{width:240px;height:240px;top:6%;left:-70px;background:#f9a01b;animation:dr1 14s ease-in-out infinite alternate}
 .canvas .b2{width:260px;height:260px;top:34%;right:-90px;background:#ff2e93;animation:dr2 17s ease-in-out infinite alternate}
 .canvas .b3{width:240px;height:240px;top:62%;left:-60px;background:#19f0d2;animation:dr2 19s ease-in-out infinite alternate}
@@ -50,10 +52,6 @@ button{font:inherit;color:inherit;background:none;border:0;padding:0;margin:0;te
 @keyframes dr1{to{transform:translate(70px,90px)}}
 @keyframes dr2{to{transform:translate(-80px,-70px)}}
 @media (prefers-reduced-motion:reduce){.canvas i{animation:none}}
-.canvas i{position:absolute;border-radius:50%;filter:blur(110px);will-change:transform}
-.canvas .b1{width:420px;height:420px;top:-140px;right:-160px;background:rgba(249,160,27,.55)}
-.canvas .b2{width:400px;height:400px;top:34%;left:-200px;background:rgba(255,46,147,.5)}
-.canvas .b3{width:460px;height:460px;bottom:-200px;right:-120px;background:rgba(25,240,210,.42)}
 
 /* the glass wall: one frosted pane, a light streak, four standoff screws */
 .wrap{position:relative;z-index:1;max-width:500px;margin:calc(var(--sat) + 10px) auto calc(72px + var(--sab) + 14px);padding:0 14px 18px;
@@ -73,8 +71,9 @@ button{font:inherit;color:inherit;background:none;border:0;padding:0;margin:0;te
     0 30px 60px -12px rgba(0,0,0,.85)}
 /* the lens: clear glass that blurs, brightens and saturates whatever is behind it */
 .wrap::after{content:"";position:absolute;inset:0;border-radius:inherit;z-index:-1;pointer-events:none;
-  background:linear-gradient(135deg,rgba(255,255,255,.16),rgba(255,255,255,.04) 40%,rgba(255,255,255,.04) 60%,rgba(255,255,255,.12));
-  -webkit-backdrop-filter:blur(10px) saturate(2) brightness(1.25);backdrop-filter:blur(10px) saturate(2) brightness(1.25)}
+  background:linear-gradient(135deg,rgba(255,255,255,.14),rgba(255,255,255,.02) 35%,rgba(255,255,255,.02) 65%,rgba(255,255,255,.1));
+  -webkit-backdrop-filter:blur(3px) saturate(1.7) brightness(1.1);backdrop-filter:blur(3px) saturate(1.7) brightness(1.1)}
+.wrap{text-shadow:0 1px 5px rgba(0,0,0,.75),0 0 2px rgba(0,0,0,.5)}
 /* a glint sweeps across the glass once when the page opens */
 .wrap::before{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;z-index:7;
   background:linear-gradient(105deg,transparent 40%,rgba(255,255,255,.28) 50%,transparent 60%) -150% 0/250% 100% no-repeat;
@@ -84,7 +83,7 @@ button{font:inherit;color:inherit;background:none;border:0;padding:0;margin:0;te
 
 /* header */
 .hdr{position:sticky;top:calc(var(--sat) + 8px);z-index:6;display:flex;align-items:center;gap:8px;min-height:60px;margin:0 -14px;padding:6px 14px 0;
-  border-radius:28px 28px 16px 16px;background:rgba(14,14,16,.5);-webkit-backdrop-filter:blur(18px) saturate(1.6);backdrop-filter:blur(18px) saturate(1.6)}
+  border-radius:28px 28px 16px 16px;background:rgba(0,0,0,.28);-webkit-backdrop-filter:blur(8px) saturate(1.6);backdrop-filter:blur(8px) saturate(1.6)}
 .hdr::after{content:"";position:absolute;left:14px;right:14px;bottom:6px;height:8px;background:var(--swoosh-t) center/100% 8px no-repeat}
 .hdr h1{font:400 25px/28px var(--mk);margin:0;flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .hdr .date{font:600 20px/22px var(--hand);color:var(--muted);white-space:nowrap}
@@ -162,6 +161,7 @@ button{font:inherit;color:inherit;background:none;border:0;padding:0;margin:0;te
 .chip{display:inline-flex;align-items:center;gap:5px;height:26px;padding:0 10px 0 8px;border-radius:13px;font-size:12px;line-height:16px;
   background:rgba(255,255,255,.1);border:1.5px solid rgba(255,255,255,.3);color:var(--fg);max-width:100%;white-space:nowrap}
 .chip svg{flex:none}
+.chip{background:rgba(0,0,0,.45)}
 .chip.ok{color:var(--good);border-color:rgba(25,240,210,.6)}
 .chip.early{color:var(--warn);border-color:rgba(255,194,71,.6)}
 .chip.lock{color:var(--muted)}
@@ -217,7 +217,7 @@ button{font:inherit;color:inherit;background:none;border:0;padding:0;margin:0;te
 .foot p{margin:6px 0}
 
 /* bottom bar: marker words on a glass strip */
-.tabs{position:fixed;left:0;right:0;bottom:0;z-index:5;background:rgba(14,14,16,.45);-webkit-backdrop-filter:blur(16px) saturate(1.6);backdrop-filter:blur(16px) saturate(1.6);
+.tabs{position:fixed;left:0;right:0;bottom:0;z-index:5;background:rgba(0,0,0,.3);-webkit-backdrop-filter:blur(16px) saturate(1.6);backdrop-filter:blur(16px) saturate(1.6);
   border-top:1px solid rgba(255,255,255,.28);box-shadow:inset 0 1.5px 0 rgba(255,255,255,.25);padding-bottom:var(--sab)}
 .tabs .in{max-width:500px;margin:0 auto;display:flex;height:58px}
 .tab{flex:1;display:flex;align-items:center;justify-content:center;height:58px;color:var(--muted);font:400 19px/22px var(--mk);position:relative}
