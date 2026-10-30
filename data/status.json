@@ -1,10 +1,10 @@
 {
  "ok": true,
  "slate_date": "2026-10-30",
- "started_at": "2026-10-30T16:10:00-04:00",
- "status_at": "2026-10-30T16:10:00-04:00",
- "finished_at": "2026-10-30T16:10:01-04:00",
- "last_ok_at": "2026-10-30T16:10:00-04:00",
+ "started_at": "2026-10-30T16:30:01-04:00",
+ "status_at": "2026-10-30T16:30:01-04:00",
+ "finished_at": "2026-10-30T16:30:02-04:00",
+ "last_ok_at": "2026-10-30T16:30:01-04:00",
  "failed_step": null,
  "steps": [
   {
@@ -25,17 +25,17 @@
   {
    "step": "lineups",
    "status": "ok",
-   "note": "2 of 2 team pages read"
+   "note": "4 of 4 team pages read"
   },
   {
    "step": "lineup_history",
-   "status": "skipped",
-   "note": "no change"
+   "status": "ok",
+   "note": "2 team(s) changed"
   },
   {
    "step": "odds",
    "status": "ok",
-   "note": "no pull due"
+   "note": "1 game(s) priced"
   },
   {
    "step": "market_menu",
@@ -64,8 +64,8 @@
   },
   {
    "step": "shadow",
-   "status": "skipped",
-   "note": "nothing new"
+   "status": "ok",
+   "note": "41 line read(s) logged"
   },
   {
    "step": "gg_grade",
@@ -113,7 +113,7 @@
   },
   {
    "n": 6,
-   "left": 347
+   "left": 345
   },
   {
    "n": 7,
@@ -132,28 +132,30 @@
    "left": 221
   }
  ],
- "pool_total": 1566,
+ "pool_total": 1564,
  "allowance": 120.6923,
  "tier": 4,
  "budget_today": 362,
- "budget_used_today": 3,
+ "budget_used_today": 5,
  "prices_state": "ok",
- "prices_at": "2026-10-30T13:00:00-04:00",
- "next_price_read_at": "2026-10-30T16:30:00-04:00",
+ "prices_at": "2026-10-30T16:30:01-04:00",
+ "next_price_read_at": "2026-10-30T17:15:00-04:00",
  "unmatched_names": [],
  "unknown_teams": [],
- "lineup_unmatched_names": [],
+ "lineup_unmatched_names": [
+  "Jonas Rondbjerg"
+ ],
  "excluded_teams": [],
  "stats_through": "2026-10-29",
- "lineups_at": "2026-10-30T16:10:00-04:00",
- "lineups_note": "1 of 4 team line pages are dated today.",
+ "lineups_at": "2026-10-30T16:30:01-04:00",
+ "lineups_note": "3 of 4 team line pages are dated today.",
  "games_today": 3,
  "record_events": 93,
  "odds_notes": [],
  "runner": {
   "event": "workflow_dispatch",
   "run_id": "41118455692",
-  "iteration": 3,
+  "iteration": 5,
   "chain_link": 72,
   "chain_started_at": "2026-10-28T10:00:15-04:00",
   "run_started_at": "2026-10-30T15:50:13-04:00"
