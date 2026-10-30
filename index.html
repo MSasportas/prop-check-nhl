@@ -42,7 +42,7 @@ button{font:inherit;color:inherit;background:none;border:0;padding:0;margin:0;te
 /* the scene behind the glass */
 /* the wallpaper behind the glass: Matt's Hot Drop Homies patch, like a home-screen wallpaper */
 .canvas{position:fixed;inset:0;z-index:0;overflow:hidden;pointer-events:none;
-  background:linear-gradient(rgba(0,0,0,.3),rgba(0,0,0,.3)),url("bg.jpg") center center/cover no-repeat #000}
+  background:url("bg.jpg") center 45%/min(88vw,440px) auto no-repeat #000}
 .canvas i{display:none}
 
 /* the glass wall: one frosted pane, a light streak, four standoff screws */
@@ -63,8 +63,8 @@ button{font:inherit;color:inherit;background:none;border:0;padding:0;margin:0;te
     0 30px 60px -12px rgba(0,0,0,.85)}
 /* the lens: clear glass that blurs, brightens and saturates whatever is behind it */
 .wrap::after{content:"";position:absolute;inset:0;border-radius:inherit;z-index:-1;pointer-events:none;
-  background:linear-gradient(135deg,rgba(255,255,255,.14),rgba(255,255,255,.02) 35%,rgba(255,255,255,.02) 65%,rgba(255,255,255,.1));
-  -webkit-backdrop-filter:blur(7px) saturate(1.7) brightness(1.1);backdrop-filter:blur(7px) saturate(1.7) brightness(1.1)}
+  background:linear-gradient(160deg,rgba(255,255,255,.24),rgba(255,255,255,.12) 45%,rgba(255,255,255,.16));
+  -webkit-backdrop-filter:blur(26px) saturate(1.9) brightness(1.05);backdrop-filter:blur(26px) saturate(1.9) brightness(1.05)}
 .wrap{text-shadow:0 1px 5px rgba(0,0,0,.75),0 0 2px rgba(0,0,0,.5)}
 /* a glint sweeps across the glass once when the page opens */
 .wrap::before{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;z-index:7;
@@ -75,7 +75,7 @@ button{font:inherit;color:inherit;background:none;border:0;padding:0;margin:0;te
 
 /* header */
 .hdr{position:sticky;top:calc(var(--sat) + 8px);z-index:6;display:flex;align-items:center;gap:8px;min-height:60px;margin:0 -14px;padding:6px 14px 0;
-  border-radius:28px 28px 16px 16px;background:rgba(0,0,0,.28);-webkit-backdrop-filter:blur(8px) saturate(1.6);backdrop-filter:blur(8px) saturate(1.6)}
+  border-radius:28px 28px 16px 16px;background:rgba(255,255,255,.1);-webkit-backdrop-filter:blur(26px) saturate(1.8);backdrop-filter:blur(26px) saturate(1.8)}
 .hdr::after{content:"";position:absolute;left:14px;right:14px;bottom:6px;height:8px;background:var(--swoosh-t) center/100% 8px no-repeat}
 .hdr h1{font:400 25px/28px var(--mk);margin:0;flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .hdr .date{font:600 20px/22px var(--hand);color:var(--muted);white-space:nowrap}
@@ -209,7 +209,7 @@ button{font:inherit;color:inherit;background:none;border:0;padding:0;margin:0;te
 .foot p{margin:6px 0}
 
 /* bottom bar: marker words on a glass strip */
-.tabs{position:fixed;left:0;right:0;bottom:0;z-index:5;background:rgba(0,0,0,.3);-webkit-backdrop-filter:blur(16px) saturate(1.6);backdrop-filter:blur(16px) saturate(1.6);
+.tabs{position:fixed;left:0;right:0;bottom:0;z-index:5;background:rgba(255,255,255,.12);-webkit-backdrop-filter:blur(16px) saturate(1.6);backdrop-filter:blur(16px) saturate(1.6);
   border-top:1px solid rgba(255,255,255,.28);box-shadow:inset 0 1.5px 0 rgba(255,255,255,.25);padding-bottom:var(--sab)}
 .tabs .in{max-width:500px;margin:0 auto;display:flex;height:58px}
 .tab{flex:1;display:flex;align-items:center;justify-content:center;height:58px;color:var(--muted);font:400 19px/22px var(--mk);position:relative}
