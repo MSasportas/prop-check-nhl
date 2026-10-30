@@ -1,13 +1,13 @@
 {
  "slate_date": "2026-10-29",
- "generated_at": "2026-10-29T22:50:00-04:00",
- "status_at": "2026-10-29T22:50:00-04:00",
+ "generated_at": "2026-10-29T23:00:01-04:00",
+ "status_at": "2026-10-29T23:00:01-04:00",
  "valid_until": "2026-10-30T05:00:00-04:00",
  "status": {
   "prices_state": "ok",
   "prices_at": "2026-10-29T21:20:00-04:00",
   "next_price_read_at": null,
-  "stats_built_at": "2026-10-29T22:30:00-04:00",
+  "stats_built_at": "2026-10-29T23:00:01-04:00",
   "stats_through": "2026-10-28",
   "lineups_at": "2026-10-29T21:40:01-04:00",
   "goalies_at": null,
@@ -16,7 +16,7 @@
   "stats_state": "ok",
   "last_run": {
    "ok": true,
-   "at": "2026-10-29T22:50:00-04:00",
+   "at": "2026-10-29T23:00:01-04:00",
    "failed_step": null
   },
   "pool": {
@@ -32,15 +32,7 @@
     "reason": "stats behind"
    },
    {
-    "team": "CHI",
-    "reason": "stats behind"
-   },
-   {
     "team": "DAL",
-    "reason": "stats behind"
-   },
-   {
-    "team": "DET",
     "reason": "stats behind"
    },
    {
@@ -52,11 +44,11 @@
     "reason": "stats behind"
    },
    {
-    "team": "NYI",
+    "team": "NSH",
     "reason": "stats behind"
    },
    {
-    "team": "PIT",
+    "team": "NYI",
     "reason": "stats behind"
    },
    {
@@ -64,7 +56,7 @@
     "reason": "stats behind"
    },
    {
-    "team": "UTA",
+    "team": "WSH",
     "reason": "stats behind"
    }
   ],
@@ -75,7 +67,7 @@
  "banners": [
   {
    "level": "warn",
-   "text": "Not covered tonight: BOS, CHI, DAL, DET, MIN, MTL, NYI, PIT, STL, UTA (stats behind)."
+   "text": "Not covered tonight: BOS, DAL, MIN, MTL, NSH, NYI, STL, WSH (stats behind)."
   }
  ],
  "empty": {
@@ -129,11 +121,8 @@
    },
    "started": true,
    "picks": 0,
-   "excluded_reason": "stats behind",
-   "excluded_teams": [
-    "UTA",
-    "PIT"
-   ]
+   "excluded_reason": null,
+   "excluded_teams": []
   },
   {
    "id": 2026020206,
@@ -180,11 +169,8 @@
    },
    "started": true,
    "picks": 0,
-   "excluded_reason": "stats behind",
-   "excluded_teams": [
-    "CHI",
-    "DET"
-   ]
+   "excluded_reason": null,
+   "excluded_teams": []
   },
   {
    "id": 2026020207,
@@ -234,8 +220,11 @@
    },
    "started": true,
    "picks": 0,
-   "excluded_reason": null,
-   "excluded_teams": []
+   "excluded_reason": "stats behind",
+   "excluded_teams": [
+    "WSH",
+    "NSH"
+   ]
   },
   {
    "id": 2026020209,
