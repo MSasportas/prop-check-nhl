@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="theme-color" content="#0b1c2c">
+<meta name="theme-color" content="#000000">
 <meta name="color-scheme" content="dark">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
@@ -40,18 +40,10 @@ button{font:inherit;color:inherit;background:none;border:0;padding:0;margin:0;te
 .mu{color:var(--muted)}
 
 /* the scene behind the glass */
-/* a dim light field far behind the glass, so the glass has something to bend */
-.canvas{position:fixed;inset:0;z-index:0;overflow:hidden;pointer-events:none;background:linear-gradient(160deg,#2a0a3a 0%,#0b1c2c 45%,#06261f 100%)}
-.canvas::before{content:"";position:absolute;width:300px;height:300px;border-radius:50%;border:34px solid rgba(255,255,255,.38);top:30%;right:-110px;animation:dr2 18s ease-in-out infinite alternate}
-.canvas::after{content:"";position:absolute;inset:-20% -10%;background:repeating-linear-gradient(115deg,transparent 0 46px,rgba(255,255,255,.16) 46px 52px);opacity:.6}
-.canvas i{position:absolute;border-radius:50%;filter:blur(46px);opacity:.6;z-index:1;will-change:transform}
-.canvas .b1{width:240px;height:240px;top:6%;left:-70px;background:#f9a01b;animation:dr1 14s ease-in-out infinite alternate}
-.canvas .b2{width:260px;height:260px;top:34%;right:-90px;background:#ff2e93;animation:dr2 17s ease-in-out infinite alternate}
-.canvas .b3{width:240px;height:240px;top:62%;left:-60px;background:#19f0d2;animation:dr2 19s ease-in-out infinite alternate}
-.canvas .b4{width:200px;height:200px;bottom:-40px;right:-30px;background:#f9a01b;animation:dr1 16s ease-in-out infinite alternate}
-@keyframes dr1{to{transform:translate(70px,90px)}}
-@keyframes dr2{to{transform:translate(-80px,-70px)}}
-@media (prefers-reduced-motion:reduce){.canvas i{animation:none}}
+/* the wallpaper behind the glass: Matt's Hot Drop Homies patch, like a home-screen wallpaper */
+.canvas{position:fixed;inset:0;z-index:0;overflow:hidden;pointer-events:none;
+  background:linear-gradient(rgba(0,0,0,.3),rgba(0,0,0,.3)),url("bg.jpg") center center/cover no-repeat #000}
+.canvas i{display:none}
 
 /* the glass wall: one frosted pane, a light streak, four standoff screws */
 .wrap{position:relative;z-index:1;max-width:500px;margin:calc(var(--sat) + 10px) auto calc(72px + var(--sab) + 14px);padding:0 14px 18px;
@@ -72,7 +64,7 @@ button{font:inherit;color:inherit;background:none;border:0;padding:0;margin:0;te
 /* the lens: clear glass that blurs, brightens and saturates whatever is behind it */
 .wrap::after{content:"";position:absolute;inset:0;border-radius:inherit;z-index:-1;pointer-events:none;
   background:linear-gradient(135deg,rgba(255,255,255,.14),rgba(255,255,255,.02) 35%,rgba(255,255,255,.02) 65%,rgba(255,255,255,.1));
-  -webkit-backdrop-filter:blur(3px) saturate(1.7) brightness(1.1);backdrop-filter:blur(3px) saturate(1.7) brightness(1.1)}
+  -webkit-backdrop-filter:blur(7px) saturate(1.7) brightness(1.1);backdrop-filter:blur(7px) saturate(1.7) brightness(1.1)}
 .wrap{text-shadow:0 1px 5px rgba(0,0,0,.75),0 0 2px rgba(0,0,0,.5)}
 /* a glint sweeps across the glass once when the page opens */
 .wrap::before{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;z-index:7;
