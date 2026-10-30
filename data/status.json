@@ -1,10 +1,10 @@
 {
  "ok": true,
  "slate_date": "2026-10-29",
- "started_at": "2026-10-29T21:50:00-04:00",
- "status_at": "2026-10-29T21:50:00-04:00",
- "finished_at": "2026-10-29T21:50:03-04:00",
- "last_ok_at": "2026-10-29T21:50:00-04:00",
+ "started_at": "2026-10-29T22:00:00-04:00",
+ "status_at": "2026-10-29T22:00:00-04:00",
+ "finished_at": "2026-10-29T22:00:04-04:00",
+ "last_ok_at": "2026-10-29T22:00:00-04:00",
  "failed_step": null,
  "steps": [
   {
@@ -20,12 +20,12 @@
   {
    "step": "stats",
    "status": "ok",
-   "note": "1 window(s) read, 4 team-games still missing"
+   "note": "1 window(s) read, 6 team-games still missing"
   },
   {
    "step": "lineups",
    "status": "skipped",
-   "note": "checked in the last 20 minutes"
+   "note": "no game close enough"
   },
   {
    "step": "lineup_history",
@@ -55,7 +55,7 @@
   {
    "step": "engine",
    "status": "ok",
-   "note": "no change"
+   "note": "1 new event(s), 0 newly shown"
   },
   {
    "step": "grade",
@@ -75,12 +75,12 @@
   {
    "step": "slate",
    "status": "ok",
-   "note": "1 open pick(s)"
+   "note": "0 open pick(s)"
   },
   {
    "step": "record",
-   "status": "skipped",
-   "note": "unchanged"
+   "status": "ok",
+   "note": "record.json"
   }
  ],
  "sources": {
@@ -160,7 +160,15 @@
    "reason": "stats behind"
   },
   {
+   "team": "PIT",
+   "reason": "stats behind"
+  },
+  {
    "team": "TBL",
+   "reason": "stats behind"
+  },
+  {
+   "team": "UTA",
    "reason": "stats behind"
   },
   {
@@ -172,12 +180,14 @@
  "lineups_at": "2026-10-29T21:40:01-04:00",
  "lineups_note": "20 of 22 team line pages are dated today.",
  "games_today": 11,
- "record_events": 90,
- "odds_notes": [],
+ "record_events": 91,
+ "odds_notes": [
+  "key 1 refused (401)"
+ ],
  "runner": {
   "event": "workflow_dispatch",
   "run_id": "40987192309",
-  "iteration": 2,
+  "iteration": 3,
   "chain_link": 47,
   "chain_started_at": "2026-10-28T10:00:15-04:00",
   "run_started_at": "2026-10-29T21:40:14-04:00"

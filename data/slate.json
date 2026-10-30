@@ -1,7 +1,7 @@
 {
  "slate_date": "2026-10-29",
- "generated_at": "2026-10-29T21:50:00-04:00",
- "status_at": "2026-10-29T21:50:00-04:00",
+ "generated_at": "2026-10-29T22:00:00-04:00",
+ "status_at": "2026-10-29T22:00:00-04:00",
  "valid_until": "2026-10-30T05:00:00-04:00",
  "status": {
   "prices_state": "ok",
@@ -16,7 +16,7 @@
   "stats_state": "ok",
   "last_run": {
    "ok": true,
-   "at": "2026-10-29T21:50:00-04:00",
+   "at": "2026-10-29T22:00:00-04:00",
    "failed_step": null
   },
   "pool": {
@@ -36,7 +36,15 @@
     "reason": "stats behind"
    },
    {
+    "team": "PIT",
+    "reason": "stats behind"
+   },
+   {
     "team": "TBL",
+    "reason": "stats behind"
+   },
+   {
+    "team": "UTA",
     "reason": "stats behind"
    },
    {
@@ -51,10 +59,14 @@
  "banners": [
   {
    "level": "warn",
-   "text": "Not covered tonight: CAR, CBJ, TBL, WPG (stats behind)."
+   "text": "Not covered tonight: CAR, CBJ, PIT, TBL, UTA, WPG (stats behind)."
   }
  ],
- "empty": null,
+ "empty": {
+  "code": "all_started",
+  "text": "Every game has started.",
+  "sub": "Tonight's picks are under Started."
+ },
  "games": [
   {
    "id": 2026020204,
@@ -104,8 +116,11 @@
    },
    "started": true,
    "picks": 0,
-   "excluded_reason": null,
-   "excluded_teams": []
+   "excluded_reason": "stats behind",
+   "excluded_teams": [
+    "UTA",
+    "PIT"
+   ]
   },
   {
    "id": 2026020206,
@@ -273,7 +288,7 @@
      "status": "confirmed"
     }
    },
-   "started": false,
+   "started": true,
    "picks": 0,
    "excluded_reason": null,
    "excluded_teams": []
@@ -297,7 +312,7 @@
      "status": "confirmed"
     }
    },
-   "started": false,
+   "started": true,
    "picks": 1,
    "excluded_reason": null,
    "excluded_teams": []
@@ -321,69 +336,13 @@
      "status": "confirmed"
     }
    },
-   "started": false,
+   "started": true,
    "picks": 0,
    "excluded_reason": null,
    "excluded_teams": []
   }
  ],
  "picks": [
-  {
-   "id": "2026-10-29:2026020212:8473512:shots:1.5:under",
-   "price": 105,
-   "first_price": 105,
-   "first_price_at": "2026-10-29T20:30:00-04:00",
-   "worst_price": 105,
-   "p": 0.5132,
-   "breakeven": 0.4878,
-   "p_pct": 51,
-   "breakeven_pct": 49,
-   "state": "lineup",
-   "history": [
-    {
-     "at": "2026-10-29T20:30:00-04:00",
-     "text": "Lineup confirmed"
-    }
-   ],
-   "prices": [
-    {
-     "at": "2026-10-29T20:30:00-04:00",
-     "price": 105
-    }
-   ],
-   "pulled": null,
-   "price_final": true,
-   "graded": null,
-   "rank": 1,
-   "tier": "main",
-   "game_id": 2026020212,
-   "player": "C. Giroux",
-   "player_id": 8473512,
-   "team": "OTT",
-   "opp": "LAK",
-   "home": false,
-   "start": "2026-10-29T22:00:00-04:00",
-   "market": "shots",
-   "line": 1.5,
-   "side": "under",
-   "bet": "Under 1.5 shots on goal",
-   "price_at": "2026-10-29T20:30:00-04:00",
-   "gap_pct": 5.1,
-   "market_fair_pct": 51.3,
-   "n_books": 7,
-   "guard": {
-    "verdict": "agrees",
-    "ours_pct": 51.3,
-    "model_pct": 53.3
-   },
-   "settled": "goalie",
-   "settled_label": "Goalie confirmed",
-   "reason": "7 other books say 51.3%; Hard Rock's +105 only needs 48.8%. Our model agrees (our blend: 51.3%).",
-   "link": null,
-   "thin": false,
-   "games_used": 95,
-   "games_this_season": 13
-  },
   {
    "id": "2026-10-29:2026020207:8481598:shots:1.5:under",
    "price": 115,
@@ -443,6 +402,66 @@
    "thin": false,
    "games_used": 93,
    "games_this_season": 12
+  },
+  {
+   "id": "2026-10-29:2026020212:8473512:shots:1.5:under",
+   "price": 105,
+   "first_price": 105,
+   "first_price_at": "2026-10-29T20:30:00-04:00",
+   "worst_price": 105,
+   "p": 0.5132,
+   "breakeven": 0.4878,
+   "p_pct": 51,
+   "breakeven_pct": 49,
+   "state": "locked",
+   "history": [
+    {
+     "at": "2026-10-29T20:30:00-04:00",
+     "text": "Lineup confirmed"
+    },
+    {
+     "at": "2026-10-29T22:00:00-04:00",
+     "text": "Locked"
+    }
+   ],
+   "prices": [
+    {
+     "at": "2026-10-29T20:30:00-04:00",
+     "price": 105
+    }
+   ],
+   "pulled": null,
+   "price_final": false,
+   "graded": null,
+   "rank": null,
+   "tier": "main",
+   "game_id": 2026020212,
+   "player": "C. Giroux",
+   "player_id": 8473512,
+   "team": "OTT",
+   "opp": "LAK",
+   "home": false,
+   "start": "2026-10-29T22:00:00-04:00",
+   "market": "shots",
+   "line": 1.5,
+   "side": "under",
+   "bet": "Under 1.5 shots on goal",
+   "price_at": "2026-10-29T20:30:00-04:00",
+   "gap_pct": 5.1,
+   "market_fair_pct": 51.3,
+   "n_books": 7,
+   "guard": {
+    "verdict": "agrees",
+    "ours_pct": 51.3,
+    "model_pct": 53.3
+   },
+   "settled": "goalie",
+   "settled_label": "Goalie confirmed",
+   "reason": "7 other books say 51.3%; Hard Rock's +105 only needs 48.8%. Our model agrees (our blend: 51.3%).",
+   "link": null,
+   "thin": false,
+   "games_used": 95,
+   "games_this_season": 13
   }
  ],
  "parlays": [],
