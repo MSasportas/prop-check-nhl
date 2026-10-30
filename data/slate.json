@@ -1,13 +1,13 @@
 {
  "slate_date": "2026-10-29",
- "generated_at": "2026-10-30T01:10:01-04:00",
- "status_at": "2026-10-30T01:10:01-04:00",
+ "generated_at": "2026-10-30T01:30:01-04:00",
+ "status_at": "2026-10-30T01:30:01-04:00",
  "valid_until": "2026-10-30T05:00:00-04:00",
  "status": {
   "prices_state": "ok",
   "prices_at": "2026-10-29T21:20:00-04:00",
   "next_price_read_at": null,
-  "stats_built_at": "2026-10-30T01:10:01-04:00",
+  "stats_built_at": "2026-10-30T01:30:01-04:00",
   "stats_through": "2026-10-28",
   "lineups_at": "2026-10-29T21:40:01-04:00",
   "goalies_at": null,
@@ -16,7 +16,7 @@
   "stats_state": "ok",
   "last_run": {
    "ok": true,
-   "at": "2026-10-30T01:10:01-04:00",
+   "at": "2026-10-30T01:30:01-04:00",
    "failed_step": null
   },
   "pool": {
@@ -27,14 +27,6 @@
    "low": false
   },
   "excluded_teams": [
-   {
-    "team": "ANA",
-    "reason": "stats behind"
-   },
-   {
-    "team": "BUF",
-    "reason": "stats behind"
-   },
    {
     "team": "LAK",
     "reason": "stats behind"
@@ -51,7 +43,7 @@
  "banners": [
   {
    "level": "warn",
-   "text": "Not covered tonight: ANA, BUF, LAK, OTT (stats behind)."
+   "text": "Not covered tonight: LAK, OTT (stats behind)."
   }
  ],
  "empty": {
@@ -273,11 +265,8 @@
    },
    "started": true,
    "picks": 0,
-   "excluded_reason": "stats behind",
-   "excluded_teams": [
-    "BUF",
-    "ANA"
-   ]
+   "excluded_reason": null,
+   "excluded_teams": []
   },
   {
    "id": 2026020212,
@@ -425,7 +414,11 @@
    ],
    "pulled": null,
    "price_final": false,
-   "graded": null,
+   "graded": {
+    "result": "W",
+    "actual": "had 0",
+    "units": 1.05
+   },
    "rank": null,
    "tier": "main",
    "game_id": 2026020212,
