@@ -1,14 +1,14 @@
 {
  "slate_date": "2026-10-29",
- "generated_at": "2026-10-30T00:10:14-04:00",
- "status_at": "2026-10-30T00:10:14-04:00",
+ "generated_at": "2026-10-30T00:30:01-04:00",
+ "status_at": "2026-10-30T00:30:01-04:00",
  "valid_until": "2026-10-30T05:00:00-04:00",
  "status": {
   "prices_state": "ok",
   "prices_at": "2026-10-29T21:20:00-04:00",
   "next_price_read_at": null,
   "stats_built_at": "2026-10-29T23:50:01-04:00",
-  "stats_through": "2026-10-29",
+  "stats_through": "2026-10-28",
   "lineups_at": "2026-10-29T21:40:01-04:00",
   "goalies_at": null,
   "lineups_note": "20 of 22 team line pages are dated today.",
@@ -16,7 +16,7 @@
   "stats_state": "ok",
   "last_run": {
    "ok": true,
-   "at": "2026-10-30T00:10:14-04:00",
+   "at": "2026-10-30T00:30:01-04:00",
    "failed_step": null
   },
   "pool": {
@@ -26,12 +26,26 @@
    "days_left": 3,
    "low": false
   },
-  "excluded_teams": [],
+  "excluded_teams": [
+   {
+    "team": "SJS",
+    "reason": "stats behind"
+   },
+   {
+    "team": "VAN",
+    "reason": "stats behind"
+   }
+  ],
   "lines_checked": 181,
   "flag_reads": 11,
   "tier": 4
  },
- "banners": [],
+ "banners": [
+  {
+   "level": "warn",
+   "text": "Not covered tonight: SJS, VAN (stats behind)."
+  }
+ ],
  "empty": {
   "code": "all_started",
   "text": "Every game has started.",
@@ -299,8 +313,11 @@
    },
    "started": true,
    "picks": 0,
-   "excluded_reason": null,
-   "excluded_teams": []
+   "excluded_reason": "stats behind",
+   "excluded_teams": [
+    "VAN",
+    "SJS"
+   ]
   }
  ],
  "picks": [
