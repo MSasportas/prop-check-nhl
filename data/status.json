@@ -1,10 +1,10 @@
 {
  "ok": true,
  "slate_date": "2026-10-29",
- "started_at": "2026-10-29T22:30:00-04:00",
- "status_at": "2026-10-29T22:30:00-04:00",
- "finished_at": "2026-10-29T22:30:04-04:00",
- "last_ok_at": "2026-10-29T22:30:00-04:00",
+ "started_at": "2026-10-29T22:40:00-04:00",
+ "status_at": "2026-10-29T22:40:00-04:00",
+ "finished_at": "2026-10-29T22:40:05-04:00",
+ "last_ok_at": "2026-10-29T22:40:00-04:00",
  "failed_step": null,
  "steps": [
   {
@@ -20,7 +20,7 @@
   {
    "step": "stats",
    "status": "ok",
-   "note": "1 window(s) read, 4 team-games still missing"
+   "note": "1 window(s) read, 6 team-games still missing"
   },
   {
    "step": "lineups",
@@ -156,7 +156,15 @@
    "reason": "stats behind"
   },
   {
+   "team": "DAL",
+   "reason": "stats behind"
+  },
+  {
    "team": "DET",
+   "reason": "stats behind"
+  },
+  {
+   "team": "MTL",
    "reason": "stats behind"
   },
   {
@@ -176,10 +184,10 @@
  "odds_notes": [],
  "runner": {
   "event": "workflow_dispatch",
-  "run_id": "40987192309",
-  "iteration": 6,
-  "chain_link": 47,
+  "run_id": "40992046433",
+  "iteration": 2,
+  "chain_link": 48,
   "chain_started_at": "2026-10-28T10:00:15-04:00",
-  "run_started_at": "2026-10-29T21:40:14-04:00"
+  "run_started_at": "2026-10-29T22:30:15-04:00"
  }
 }
