@@ -1,7 +1,7 @@
 {
  "slate_date": "2026-10-29",
- "generated_at": "2026-10-29T22:40:00-04:00",
- "status_at": "2026-10-29T22:40:00-04:00",
+ "generated_at": "2026-10-29T22:50:00-04:00",
+ "status_at": "2026-10-29T22:50:00-04:00",
  "valid_until": "2026-10-30T05:00:00-04:00",
  "status": {
   "prices_state": "ok",
@@ -16,7 +16,7 @@
   "stats_state": "ok",
   "last_run": {
    "ok": true,
-   "at": "2026-10-29T22:40:00-04:00",
+   "at": "2026-10-29T22:50:00-04:00",
    "failed_step": null
   },
   "pool": {
@@ -27,6 +27,10 @@
    "low": false
   },
   "excluded_teams": [
+   {
+    "team": "BOS",
+    "reason": "stats behind"
+   },
    {
     "team": "CHI",
     "reason": "stats behind"
@@ -40,11 +44,23 @@
     "reason": "stats behind"
    },
    {
+    "team": "MIN",
+    "reason": "stats behind"
+   },
+   {
     "team": "MTL",
     "reason": "stats behind"
    },
    {
+    "team": "NYI",
+    "reason": "stats behind"
+   },
+   {
     "team": "PIT",
+    "reason": "stats behind"
+   },
+   {
+    "team": "STL",
     "reason": "stats behind"
    },
    {
@@ -59,7 +75,7 @@
  "banners": [
   {
    "level": "warn",
-   "text": "Not covered tonight: CHI, DAL, DET, MTL, PIT, UTA (stats behind)."
+   "text": "Not covered tonight: BOS, CHI, DAL, DET, MIN, MTL, NYI, PIT, STL, UTA (stats behind)."
   }
  ],
  "empty": {
@@ -191,8 +207,11 @@
    },
    "started": true,
    "picks": 1,
-   "excluded_reason": null,
-   "excluded_teams": []
+   "excluded_reason": "stats behind",
+   "excluded_teams": [
+    "BOS",
+    "STL"
+   ]
   },
   {
    "id": 2026020208,
@@ -266,8 +285,11 @@
    },
    "started": true,
    "picks": 0,
-   "excluded_reason": null,
-   "excluded_teams": []
+   "excluded_reason": "stats behind",
+   "excluded_teams": [
+    "NYI",
+    "MIN"
+   ]
   },
   {
    "id": 2026020211,

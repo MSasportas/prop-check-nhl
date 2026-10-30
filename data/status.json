@@ -1,10 +1,10 @@
 {
  "ok": true,
  "slate_date": "2026-10-29",
- "started_at": "2026-10-29T22:40:00-04:00",
- "status_at": "2026-10-29T22:40:00-04:00",
- "finished_at": "2026-10-29T22:40:05-04:00",
- "last_ok_at": "2026-10-29T22:40:00-04:00",
+ "started_at": "2026-10-29T22:50:00-04:00",
+ "status_at": "2026-10-29T22:50:00-04:00",
+ "finished_at": "2026-10-29T22:50:03-04:00",
+ "last_ok_at": "2026-10-29T22:50:00-04:00",
  "failed_step": null,
  "steps": [
   {
@@ -20,7 +20,7 @@
   {
    "step": "stats",
    "status": "ok",
-   "note": "1 window(s) read, 6 team-games still missing"
+   "note": "1 window(s) read, 10 team-games still missing"
   },
   {
    "step": "lineups",
@@ -64,8 +64,8 @@
   },
   {
    "step": "shadow",
-   "status": "skipped",
-   "note": "nothing new"
+   "status": "ok",
+   "note": "33 graded"
   },
   {
    "step": "gg_grade",
@@ -152,6 +152,10 @@
  ],
  "excluded_teams": [
   {
+   "team": "BOS",
+   "reason": "stats behind"
+  },
+  {
    "team": "CHI",
    "reason": "stats behind"
   },
@@ -164,11 +168,23 @@
    "reason": "stats behind"
   },
   {
+   "team": "MIN",
+   "reason": "stats behind"
+  },
+  {
    "team": "MTL",
    "reason": "stats behind"
   },
   {
+   "team": "NYI",
+   "reason": "stats behind"
+  },
+  {
    "team": "PIT",
+   "reason": "stats behind"
+  },
+  {
+   "team": "STL",
    "reason": "stats behind"
   },
   {
@@ -185,7 +201,7 @@
  "runner": {
   "event": "workflow_dispatch",
   "run_id": "40992046433",
-  "iteration": 2,
+  "iteration": 3,
   "chain_link": 48,
   "chain_started_at": "2026-10-28T10:00:15-04:00",
   "run_started_at": "2026-10-29T22:30:15-04:00"
