@@ -1,5 +1,32 @@
 # LOG.md: Researcher runs (newest first)
 
+- 2026-10-30 ~8:20 AM ET (Researcher run 15, daily; SHOTS ON GOAL ONLY). **CANDIDATE FOR SHARP: forward Q1b.**
+  - Rule (registered 2026-10-19, run 5, unchanged): at any Hard Rock read (1 PM A, 90-min B, 45-min C) with >= 1 other book, bet the Hard Rock
+    shots side whose EV vs the median of the other books' proportional no-vig fair is >= +1.0%, price -200 or better, first qualifying read
+    per side, before puck. n 312 graded (74 games, 11 nights Oct 19-29), 181-131, +41.8u, ROI +13.4%, 90% CI +6.2..+20.5% (game-clustered,
+    20k), one-sided p .0011 (registered bar .05/15 = .0033; also under the strict .05/29 = .0017), mean CLV +3.4% (> 0). Folds = nights:
+    10 of 11 positive (Oct 20 -0.9% n45); leave-one-night-out +11.1..+15.8%. Placebo: same lines random side -6.5% (0/2000 >= actual);
+    random 312 of all 2,624 priced sides -7.3% (0/2000). Walk-forward/lockbox: n/a (live-only idea, judged on the forward bar per RESEARCH.md).
+  - Caveats the Sharp must weigh: (1) the edge sits at the 1 PM read: A +20.2% n188 vs B/C +3.2% n124 (p .35); the product picks only at
+    B/C today. (2) Unders +16.3% n260, overs -1.3% n52. (3) Realised ROI is ~4x the mean EV (+3.45%): luck on top; plan on ~+3%, not +13%.
+    (4) 11 early-season nights. (5) Lines 1.5 +12.8% n181, 2.5 +17.5% n104, 3.5 +1.2% n27; 1-3 books +2.1% n47 vs 4+ books +15%.
+    Code check of new Q16b on the SEEN nights (descriptive, not a result): flag at 1 PM, bet at the 90-min price +12.6% n173 p .021, so much of
+    the 1 PM edge may still be there at B. Script research/code/r15/check_q1b.py, output check_q1b.txt.
+  - CC1 slate size: best T=.01 -10.7% n204; UNDER on 11+ game slates -9.5% n4,086, every fold negative. Small stable weight: Hard Rock's
+    fair is slightly too flat on big slates, but it never beats the book's log loss.
+  - CC2 last slate's surprise (league/team over-rate vs fair the night before): -9.3% n206 / +6.4% n35 (Nov only); UNDER after an over-heavy
+    slate -11.3% n740. Weights ~0.
+  - CC3 team PDO luck (own and opponent): -11.7% n149 to -1.8% n66; OVER on low-PDO teams -9.3% n1,184. Weights ~0.
+  - Forward re-score (all scorers, 11 nights Oct 19-29; clone unshallowed): Q1a +7.3% n423 p .043 (bar not met); Q1b above; Q1c +16.3% n229
+    p .0015; Q1g +15.4% n265; Q1h +18.5% n191; Q1k Pinnacle +10.3% n327 p .029 (CLV only +1.3%); Q1m +29.1% n39. Q6a/b/c +6.8% n165 /
+    +7.9% n105 / +10.9% n222. Q8a-c -0.6% / -2.0% / +13.0%. Q9a-c +14.6% n98 / -0.8% n57 / -8.2% n16. Q10 +12.6% n34. Q11a +10.1% n69,
+    Q11b +19.0% n160 p .002. Q15a (Q1c at 1 PM) +8.6% n32, Q15b (B/C) +2.8% n9. Q2a/b 0 bets. New Q16a-b start tonight.
+  - Points (Q12-Q14) not scored (this task is shots only; CEO still to give points its own run).
+  12 historical variants (~0.6 false positives expected), all-time 404; forward 31. Lockbox looks: 2 (unchanged; next needs p < 0.0167).
+  **Verdict: one forward candidate (Q1b) for the Sharp; nothing passed in history.** The Sharp's real question is timing: the gap is mostly a
+  1 PM, under-side, pre-news gap; Q16a (1 PM unders) and Q16b (flag at 1 PM, bet at B) start tonight to say whether the product can use it.
+  Next: (1) Q16b to n 300 (does the B price keep the A edge?); (2) Q1c to n 300 (~Nov 4); (3) a forward test splitting Q1b by minutes
+    from the read to the first goalie confirmation, registered before looking.
 - 2026-10-29 ~8:15 AM ET (Researcher run 14, daily; SHOTS ON GOAL ONLY). No key used, no historical odds pull. BB1-BB3 + forward Q15a-b registered
   and pushed (399b42c) before any test ran. Free NHL stats REST skater per-game logs fetched to scratch (r14/fetch14.py; Feb 28 cut-off,
   lockbox not fetched). Script research/code/r14/bb14.py, output bb14_results.txt. 10,413 graded Nov-Feb lines.
