@@ -1,10 +1,10 @@
 {
  "ok": true,
  "slate_date": "2026-10-30",
- "started_at": "2026-10-30T16:50:01-04:00",
- "status_at": "2026-10-30T16:50:01-04:00",
- "finished_at": "2026-10-30T16:50:02-04:00",
- "last_ok_at": "2026-10-30T16:50:01-04:00",
+ "started_at": "2026-10-30T17:00:01-04:00",
+ "status_at": "2026-10-30T17:00:01-04:00",
+ "finished_at": "2026-10-30T17:00:02-04:00",
+ "last_ok_at": "2026-10-30T17:00:01-04:00",
  "failed_step": null,
  "steps": [
   {
@@ -25,12 +25,12 @@
   {
    "step": "lineups",
    "status": "ok",
-   "note": "4 of 4 team pages read"
+   "note": "2 of 2 team pages read"
   },
   {
    "step": "lineup_history",
-   "status": "skipped",
-   "note": "no change"
+   "status": "ok",
+   "note": "2 team(s) changed"
   },
   {
    "step": "odds",
@@ -143,19 +143,22 @@
  "unmatched_names": [],
  "unknown_teams": [],
  "lineup_unmatched_names": [
+  "Arsenii Sergeev",
   "Jonas Rondbjerg"
  ],
  "excluded_teams": [],
  "stats_through": "2026-10-29",
- "lineups_at": "2026-10-30T16:50:01-04:00",
- "lineups_note": "3 of 4 team line pages are dated today.",
+ "lineups_at": "2026-10-30T17:00:01-04:00",
+ "lineups_note": "4 of 6 team line pages are dated today.",
  "games_today": 3,
  "record_events": 93,
- "odds_notes": [],
+ "odds_notes": [
+  "key 1 refused (401)"
+ ],
  "runner": {
   "event": "workflow_dispatch",
   "run_id": "41124993401",
-  "iteration": 2,
+  "iteration": 3,
   "chain_link": 73,
   "chain_started_at": "2026-10-28T10:00:15-04:00",
   "run_started_at": "2026-10-30T16:40:11-04:00"
