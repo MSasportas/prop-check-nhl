@@ -1,12 +1,12 @@
 {
  "slate_date": "2026-10-29",
- "generated_at": "2026-10-29T21:10:01-04:00",
- "status_at": "2026-10-29T21:10:01-04:00",
+ "generated_at": "2026-10-29T21:20:00-04:00",
+ "status_at": "2026-10-29T21:20:00-04:00",
  "valid_until": "2026-10-30T05:00:00-04:00",
  "status": {
   "prices_state": "ok",
-  "prices_at": "2026-10-29T20:30:00-04:00",
-  "next_price_read_at": "2026-10-29T21:15:00-04:00",
+  "prices_at": "2026-10-29T21:20:00-04:00",
+  "next_price_read_at": null,
   "stats_built_at": "2026-10-29T01:40:01-04:00",
   "stats_through": "2026-10-28",
   "lineups_at": "2026-10-29T21:10:01-04:00",
@@ -16,11 +16,11 @@
   "stats_state": "ok",
   "last_run": {
    "ok": true,
-   "at": "2026-10-29T21:10:01-04:00",
+   "at": "2026-10-29T21:20:00-04:00",
    "failed_step": null
   },
   "pool": {
-   "pulls_left": 1575,
+   "pulls_left": 1569,
    "keys": 10,
    "game_days_left": 3,
    "days_left": 3,
@@ -324,7 +324,7 @@
     }
    ],
    "pulled": null,
-   "price_final": false,
+   "price_final": true,
    "graded": null,
    "rank": 1,
    "tier": "main",
