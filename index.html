@@ -18,7 +18,7 @@
 @font-face{font-family:"Permanent Marker";src:url("fonts/permanent-marker.woff2") format("woff2");font-weight:400;font-style:normal;font-display:swap}
 @font-face{font-family:"Caveat";src:url("fonts/caveat-600.woff2") format("woff2");font-weight:600;font-style:normal;font-display:swap}
 :root{
-  --bg:#000; --fg:#f5f2ea; --muted:#b9c4c2; --line:rgba(255,255,255,.2);
+  --bg:#000; --fg:#f5f2ea; --muted:#d3dcda; --line:rgba(255,255,255,.2);
   --surface:rgba(255,255,255,.07); --raise:rgba(255,255,255,.12);
   --accent:#19f0d2; --pink:#ff2e93; --gold:#fff2cc; --orange:#f9a01b;
   --good:#19f0d2; --warn:#ffc247; --bad:#ff7aa3;
@@ -48,20 +48,33 @@ button{font:inherit;color:inherit;background:none;border:0;padding:0;margin:0;te
 
 /* the glass wall: one frosted pane, a light streak, four standoff screws */
 .wrap{position:relative;z-index:1;max-width:500px;margin:calc(var(--sat) + 10px) auto calc(72px + var(--sab) + 14px);padding:0 14px 18px;
-  border-radius:24px;border:1px solid rgba(255,255,255,.28);
+  border-radius:26px;border:1.5px solid rgba(255,255,255,.5);
   background:
-    radial-gradient(circle at 14px 14px,rgba(255,255,255,.6) 0 4px,transparent 5px),
-    radial-gradient(circle at calc(100% - 14px) 14px,rgba(255,255,255,.6) 0 4px,transparent 5px),
-    radial-gradient(circle at 14px calc(100% - 14px),rgba(255,255,255,.6) 0 4px,transparent 5px),
-    radial-gradient(circle at calc(100% - 14px) calc(100% - 14px),rgba(255,255,255,.6) 0 4px,transparent 5px),
-    linear-gradient(115deg,transparent 26%,rgba(255,255,255,.1) 34%,rgba(255,255,255,.02) 42%,transparent 50%),
-    rgba(255,255,255,.05);
-  -webkit-backdrop-filter:blur(16px) saturate(1.6);backdrop-filter:blur(16px) saturate(1.6);
-  box-shadow:inset 0 1.5px 0 rgba(255,255,255,.6),0 24px 48px -12px rgba(0,0,0,.55)}
+    radial-gradient(circle at 15px 15px,#fff 0 3px,rgba(255,255,255,.4) 4px,transparent 6px),
+    radial-gradient(circle at calc(100% - 15px) 15px,#fff 0 3px,rgba(255,255,255,.4) 4px,transparent 6px),
+    radial-gradient(circle at 15px calc(100% - 15px),#fff 0 3px,rgba(255,255,255,.4) 4px,transparent 6px),
+    radial-gradient(circle at calc(100% - 15px) calc(100% - 15px),#fff 0 3px,rgba(255,255,255,.4) 4px,transparent 6px),
+    linear-gradient(112deg,transparent 14%,rgba(255,255,255,.2) 21%,rgba(255,255,255,.05) 30%,transparent 36%),
+    linear-gradient(112deg,transparent 52%,rgba(255,255,255,.12) 56%,transparent 62%),
+    linear-gradient(180deg,rgba(255,255,255,.17),rgba(255,255,255,.07) 35%,rgba(255,255,255,.1));
+  box-shadow:
+    inset 0 2px 0 rgba(255,255,255,.85),
+    inset 0 -2px 0 rgba(255,255,255,.28),
+    inset 0 0 0 5px rgba(255,255,255,.05),
+    inset 0 0 36px rgba(255,255,255,.12),
+    0 0 0 1px rgba(255,255,255,.07),
+    0 0 46px rgba(255,255,255,.09),
+    0 28px 50px -10px rgba(0,0,0,.9)}
+/* a glint sweeps across the glass once when the page opens */
+.wrap::before{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;z-index:7;
+  background:linear-gradient(105deg,transparent 40%,rgba(255,255,255,.28) 50%,transparent 60%) -150% 0/250% 100% no-repeat;
+  animation:glint 1.7s .5s ease-out 1 both}
+@keyframes glint{to{background-position:150% 0}}
+@media (prefers-reduced-motion:reduce){.wrap::before{animation:none}}
 
 /* header */
 .hdr{position:sticky;top:calc(var(--sat) + 8px);z-index:6;display:flex;align-items:center;gap:8px;min-height:60px;margin:0 -14px;padding:6px 14px 0;
-  border-radius:22px 22px 14px 14px;background:rgba(8,10,12,.97)}
+  border-radius:24px 24px 14px 14px;background:rgba(30,32,34,.78);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px)}
 .hdr::after{content:"";position:absolute;left:14px;right:14px;bottom:6px;height:8px;background:var(--swoosh-t) center/100% 8px no-repeat}
 .hdr h1{font:400 25px/28px var(--mk);margin:0;flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .hdr .date{font:600 20px/22px var(--hand);color:var(--muted);white-space:nowrap}
@@ -194,7 +207,7 @@ button{font:inherit;color:inherit;background:none;border:0;padding:0;margin:0;te
 .foot p{margin:6px 0}
 
 /* bottom bar: marker words on a glass strip */
-.tabs{position:fixed;left:0;right:0;bottom:0;z-index:5;background:rgba(0,0,0,.75);-webkit-backdrop-filter:blur(16px) saturate(1.6);backdrop-filter:blur(16px) saturate(1.6);
+.tabs{position:fixed;left:0;right:0;bottom:0;z-index:5;background:rgba(40,42,44,.6);-webkit-backdrop-filter:blur(16px) saturate(1.6);backdrop-filter:blur(16px) saturate(1.6);
   border-top:1px solid rgba(255,255,255,.28);box-shadow:inset 0 1.5px 0 rgba(255,255,255,.25);padding-bottom:var(--sab)}
 .tabs .in{max-width:500px;margin:0 auto;display:flex;height:58px}
 .tab{flex:1;display:flex;align-items:center;justify-content:center;height:58px;color:var(--muted);font:400 19px/22px var(--mk);position:relative}
