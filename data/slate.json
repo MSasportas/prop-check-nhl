@@ -1,7 +1,7 @@
 {
  "slate_date": "2026-10-29",
- "generated_at": "2026-10-29T22:00:00-04:00",
- "status_at": "2026-10-29T22:00:00-04:00",
+ "generated_at": "2026-10-29T22:10:01-04:00",
+ "status_at": "2026-10-29T22:10:01-04:00",
  "valid_until": "2026-10-30T05:00:00-04:00",
  "status": {
   "prices_state": "ok",
@@ -16,7 +16,7 @@
   "stats_state": "ok",
   "last_run": {
    "ok": true,
-   "at": "2026-10-29T22:00:00-04:00",
+   "at": "2026-10-29T22:10:01-04:00",
    "failed_step": null
   },
   "pool": {
@@ -33,6 +33,14 @@
    },
    {
     "team": "CBJ",
+    "reason": "stats behind"
+   },
+   {
+    "team": "CHI",
+    "reason": "stats behind"
+   },
+   {
+    "team": "DET",
     "reason": "stats behind"
    },
    {
@@ -59,7 +67,7 @@
  "banners": [
   {
    "level": "warn",
-   "text": "Not covered tonight: CAR, CBJ, PIT, TBL, UTA, WPG (stats behind)."
+   "text": "Not covered tonight: CAR, CBJ, CHI, DET, PIT, TBL, UTA, WPG (stats behind)."
   }
  ],
  "empty": {
@@ -170,8 +178,11 @@
    },
    "started": true,
    "picks": 0,
-   "excluded_reason": null,
-   "excluded_teams": []
+   "excluded_reason": "stats behind",
+   "excluded_teams": [
+    "CHI",
+    "DET"
+   ]
   },
   {
    "id": 2026020207,
