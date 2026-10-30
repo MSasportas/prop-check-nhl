@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-10-29T20:00:00-04:00",
+ "generated_at": "2026-10-29T20:30:00-04:00",
  "summary": {
   "headline": {
    "w": 17,
@@ -61,6 +61,29 @@
       {
        "price": 115,
        "at": "2026-10-29T18:30:00-04:00"
+      }
+     ],
+     "result": null,
+     "actual": null,
+     "units": null,
+     "pulled": null,
+     "legs": []
+    },
+    {
+     "id": "2026-10-29:2026020212:8473512:shots:1.5:under",
+     "kind": "single",
+     "player": "C. Giroux",
+     "bet": "Under 1.5 shots on goal",
+     "market": "shots",
+     "team": "OTT",
+     "game": "OTT at LAK",
+     "price": 105,
+     "first_price": 105,
+     "last_price": 105,
+     "prices": [
+      {
+       "price": 105,
+       "at": "2026-10-29T20:30:00-04:00"
       }
      ],
      "result": null,
