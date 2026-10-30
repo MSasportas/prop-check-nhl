@@ -1,10 +1,10 @@
 {
  "ok": true,
  "slate_date": "2026-10-29",
- "started_at": "2026-10-29T23:30:00-04:00",
- "status_at": "2026-10-29T23:30:00-04:00",
- "finished_at": "2026-10-29T23:30:02-04:00",
- "last_ok_at": "2026-10-29T23:30:00-04:00",
+ "started_at": "2026-10-29T23:50:01-04:00",
+ "status_at": "2026-10-29T23:50:01-04:00",
+ "finished_at": "2026-10-29T23:50:02-04:00",
+ "last_ok_at": "2026-10-29T23:50:01-04:00",
  "failed_step": null,
  "steps": [
   {
@@ -20,7 +20,7 @@
   {
    "step": "stats",
    "status": "ok",
-   "note": "1 window(s) read, 2 team-games still missing"
+   "note": "1 window(s) read"
   },
   {
    "step": "lineups",
@@ -64,8 +64,8 @@
   },
   {
    "step": "shadow",
-   "status": "ok",
-   "note": "37 graded"
+   "status": "skipped",
+   "note": "nothing new"
   },
   {
    "step": "gg_grade",
@@ -150,17 +150,8 @@
   "Elias Pettersson",
   "Trey Taylor"
  ],
- "excluded_teams": [
-  {
-   "team": "NSH",
-   "reason": "stats behind"
-  },
-  {
-   "team": "WSH",
-   "reason": "stats behind"
-  }
- ],
- "stats_through": "2026-10-28",
+ "excluded_teams": [],
+ "stats_through": "2026-10-29",
  "lineups_at": "2026-10-29T21:40:01-04:00",
  "lineups_note": "20 of 22 team line pages are dated today.",
  "games_today": 11,
@@ -169,7 +160,7 @@
  "runner": {
   "event": "workflow_dispatch",
   "run_id": "40996782437",
-  "iteration": 2,
+  "iteration": 4,
   "chain_link": 49,
   "chain_started_at": "2026-10-28T10:00:15-04:00",
   "run_started_at": "2026-10-29T23:20:13-04:00"
