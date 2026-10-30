@@ -1,10 +1,10 @@
 {
  "ok": true,
  "slate_date": "2026-10-29",
- "started_at": "2026-10-30T04:30:00-04:00",
- "status_at": "2026-10-30T04:30:00-04:00",
- "finished_at": "2026-10-30T04:30:01-04:00",
- "last_ok_at": "2026-10-30T04:30:00-04:00",
+ "started_at": "2026-10-30T04:30:12-04:00",
+ "status_at": "2026-10-30T04:30:12-04:00",
+ "finished_at": "2026-10-30T04:30:13-04:00",
+ "last_ok_at": "2026-10-30T04:30:12-04:00",
  "failed_step": null,
  "steps": [
   {
@@ -74,8 +74,8 @@
   },
   {
    "step": "slate",
-   "status": "ok",
-   "note": "0 open pick(s)"
+   "status": "skipped",
+   "note": "unchanged"
   },
   {
    "step": "record",
@@ -156,15 +156,13 @@
  "lineups_note": "20 of 22 team line pages are dated today.",
  "games_today": 11,
  "record_events": 93,
- "odds_notes": [
-  "key 1 refused (401)"
- ],
+ "odds_notes": [],
  "runner": {
   "event": "workflow_dispatch",
-  "run_id": "41023525519",
-  "iteration": 2,
-  "chain_link": 55,
+  "run_id": "41026848220",
+  "iteration": 1,
+  "chain_link": 56,
   "chain_started_at": "2026-10-28T10:00:15-04:00",
-  "run_started_at": "2026-10-30T04:00:13-04:00"
+  "run_started_at": "2026-10-30T04:30:11-04:00"
  }
 }
