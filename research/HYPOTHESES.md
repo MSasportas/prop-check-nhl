@@ -381,6 +381,27 @@ with n >= 300, so no placebo and no lockbox look. Cumulative historical: 392. Fo
 Output: research/code/r14/bb14_results.txt (10,413 graded Nov-Feb lines). Forward (10 nights, Oct 19-28): Q1a +9.6% n354 [+1,+18] p .025
 (bar p < .0033, not met); Q1b +14.8% n258 p .001; Q1c +18.2% n188 [+9,+28] p .001: Q1b/Q1c still short of n >= 300.
 
+## Run 15 (Researcher, 2026-10-30). Registered before any of these were tested.
+No key used, no historical odds pull. Free NHL stats REST skater summary per-game logs 2025-26 through Feb 28 (lockbox not fetched),
+fetched to scratch with research/code/r14/fetch14.py (unchanged). Common as runs 4/6-14: shots45_lines, every two-way Hard Rock line,
+proportional de-vig fair f, side price >= -200, 1u flat, regulation + OT, VOID = no bet, game-clustered bootstrap. Logistic =
+research/code/wf.py (fit on all months before the test month), bet the side with p - BE >= T, T in {.01, .02, .03}. Fixed rules report
+every Nov-Feb bet with folds. Placebo (shuffle within date x line, 200 times) for any variant positive Nov-Feb with n >= 300; lockbox
+(Mar 1+) only for such a frozen variant, once, needing one-sided p < 0.05/3 = 0.0167 (look #3).
+
+| id | date | rule (exact) | data | result | status |
+|---|---|---|---|---|---|
+| CC1 | 2026-10-30 | **Slate size = trader attention across the whole night.** nG = number of distinct games dated d in shots45 (a schedule fact). Terms c1*log(nG) + c2*log(nG)*logit(f) (is Hard Rock's fair too extreme or too flat on big nights?) (3 T). Fixed rule CC1r: UNDER on every line on dates with nG >= 11 (1 variant). 4 variants. (AA2 = per-team board depth, not the slate.) | shots45 | pending | registered |
+| CC2 | 2026-10-30 | **Last slate's surprise (book or bettors chase yesterday).** prev = the most recent earlier date in shots45 (d-3..d-1, else all terms 0). surprise = (share of prev's graded lines that went over) - (mean f of those lines); tsur = same over his own team's prev-date lines only (needs >= 3 lines, else 0). Terms c1*surprise + c2*tsur (3 T). Fixed rule CC2r: UNDER when surprise >= +0.08 (1 variant). 4 variants. (BB2 = his own streak; this is league/team level.) | shots45 | pending | registered |
+| CC3 | 2026-10-30 | **Team PDO luck.** From the skater logs' team game table (BB1 construction), team's last 20 games before d (>= 5, else 0): pdo = team goals/team SOG + (1 - opp goals/opp SOG) - 1; same for tonight's opponent. Terms c1*pdo_own + c2*pdo_opp (do public/book discount the players of an unlucky team, or inflate the players facing a hot goalie team?) (3 T). Fixed rule CC3r: OVER when pdo_own <= -0.03 (1 variant). 4 variants. (Z2 = his own shooting luck, not team PDO.) | skater logs + shots45 | pending | registered |
+
+Forward (registered now, AFTER seeing the Oct 19-29 Q1b split by read and side, so scored only on slates from 2026-10-30 onward):
+| id | date | rule (exact) | data | result | status |
+|---|---|---|---|---|---|
+| Q16a | 2026-10-30 | **Q1b unders at the 1 PM read.** Every Q1b bet exactly as score_fwd.py makes it with pull = "A" and side = under, nights >= 2026-10-30 (Oct 19-29 split, seen: A +20.2% n188, unders +16.3% n260). 1 variant | research/fwd/scores.json | pending | forward, open |
+| Q16b | 2026-10-30 | **Flag at 1 PM, bet at 90 min (what the product could do today).** Every side that is a Q1b bet at an A read, bet instead at the same side's price on the first B read of that game (any EV; price >= -200; skipped if no B read or the line is gone), nights >= 2026-10-30. (Oct 19-29 seen: B/C-only Q1b +3.2% n124.) 1 variant | data/odds + data/shadow | pending | forward, open |
+Q16 bar: n >= 300 graded, ROI > 0, one-sided p < 0.05/31 = 0.0016 (29 + 2 forward variants), mean CLV > 0. Scored by research/code/r15/score_q16.py.
+
 ## Queued (not yet tested)
 | id | rule idea | data | status |
 |---|---|---|---|
