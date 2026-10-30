@@ -74,12 +74,12 @@
    "status": "confirmed"
   },
   "ANA": {
-   "name": "Lukas Dostal",
-   "status": "expected"
+   "name": "Ville Husso",
+   "status": "confirmed"
   },
   "BUF": {
    "name": "Colten Ellis",
-   "status": "expected"
+   "status": "confirmed"
   },
   "SJS": {
    "name": "Yaroslav Askarov",
@@ -90,5 +90,5 @@
    "status": "confirmed"
   }
  },
- "checked_at": "2026-10-29T19:10:00-04:00"
+ "checked_at": "2026-10-29T21:40:01-04:00"
 }
