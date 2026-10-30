@@ -1,10 +1,10 @@
 {
  "ok": true,
  "slate_date": "2026-10-29",
- "started_at": "2026-10-29T23:20:00-04:00",
- "status_at": "2026-10-29T23:20:00-04:00",
- "finished_at": "2026-10-29T23:20:02-04:00",
- "last_ok_at": "2026-10-29T23:20:00-04:00",
+ "started_at": "2026-10-29T23:30:00-04:00",
+ "status_at": "2026-10-29T23:30:00-04:00",
+ "finished_at": "2026-10-29T23:30:02-04:00",
+ "last_ok_at": "2026-10-29T23:30:00-04:00",
  "failed_step": null,
  "steps": [
   {
@@ -20,7 +20,7 @@
   {
    "step": "stats",
    "status": "ok",
-   "note": "1 window(s) read, 4 team-games still missing"
+   "note": "1 window(s) read, 2 team-games still missing"
   },
   {
    "step": "lineups",
@@ -65,7 +65,7 @@
   {
    "step": "shadow",
    "status": "ok",
-   "note": "28 graded"
+   "note": "37 graded"
   },
   {
    "step": "gg_grade",
@@ -152,15 +152,7 @@
  ],
  "excluded_teams": [
   {
-   "team": "MIN",
-   "reason": "stats behind"
-  },
-  {
    "team": "NSH",
-   "reason": "stats behind"
-  },
-  {
-   "team": "NYI",
    "reason": "stats behind"
   },
   {
@@ -176,10 +168,10 @@
  "odds_notes": [],
  "runner": {
   "event": "workflow_dispatch",
-  "run_id": "40992046433",
-  "iteration": 6,
-  "chain_link": 48,
+  "run_id": "40996782437",
+  "iteration": 2,
+  "chain_link": 49,
   "chain_started_at": "2026-10-28T10:00:15-04:00",
-  "run_started_at": "2026-10-29T22:30:15-04:00"
+  "run_started_at": "2026-10-29T23:20:13-04:00"
  }
 }
