@@ -1,13 +1,13 @@
 {
  "slate_date": "2026-10-29",
- "generated_at": "2026-10-29T21:40:01-04:00",
- "status_at": "2026-10-29T21:40:01-04:00",
+ "generated_at": "2026-10-29T21:50:00-04:00",
+ "status_at": "2026-10-29T21:50:00-04:00",
  "valid_until": "2026-10-30T05:00:00-04:00",
  "status": {
   "prices_state": "ok",
   "prices_at": "2026-10-29T21:20:00-04:00",
   "next_price_read_at": null,
-  "stats_built_at": "2026-10-29T01:40:01-04:00",
+  "stats_built_at": "2026-10-29T21:50:00-04:00",
   "stats_through": "2026-10-28",
   "lineups_at": "2026-10-29T21:40:01-04:00",
   "goalies_at": null,
@@ -16,7 +16,7 @@
   "stats_state": "ok",
   "last_run": {
    "ok": true,
-   "at": "2026-10-29T21:40:01-04:00",
+   "at": "2026-10-29T21:50:00-04:00",
    "failed_step": null
   },
   "pool": {
@@ -26,12 +26,34 @@
    "days_left": 3,
    "low": false
   },
-  "excluded_teams": [],
+  "excluded_teams": [
+   {
+    "team": "CAR",
+    "reason": "stats behind"
+   },
+   {
+    "team": "CBJ",
+    "reason": "stats behind"
+   },
+   {
+    "team": "TBL",
+    "reason": "stats behind"
+   },
+   {
+    "team": "WPG",
+    "reason": "stats behind"
+   }
+  ],
   "lines_checked": 181,
   "flag_reads": 11,
   "tier": 4
  },
- "banners": [],
+ "banners": [
+  {
+   "level": "warn",
+   "text": "Not covered tonight: CAR, CBJ, TBL, WPG (stats behind)."
+  }
+ ],
  "empty": null,
  "games": [
   {
@@ -55,8 +77,11 @@
    },
    "started": true,
    "picks": 0,
-   "excluded_reason": null,
-   "excluded_teams": []
+   "excluded_reason": "stats behind",
+   "excluded_teams": [
+    "WPG",
+    "TBL"
+   ]
   },
   {
    "id": 2026020205,
@@ -103,8 +128,11 @@
    },
    "started": true,
    "picks": 0,
-   "excluded_reason": null,
-   "excluded_teams": []
+   "excluded_reason": "stats behind",
+   "excluded_teams": [
+    "CBJ",
+    "CAR"
+   ]
   },
   {
    "id": 2026020203,
