@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="theme-color" content="#101418">
+<meta name="theme-color" content="#000000">
 <meta name="color-scheme" content="dark">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
@@ -18,7 +18,7 @@
 @font-face{font-family:"Permanent Marker";src:url("fonts/permanent-marker.woff2") format("woff2");font-weight:400;font-style:normal;font-display:swap}
 @font-face{font-family:"Caveat";src:url("fonts/caveat-600.woff2") format("woff2");font-weight:600;font-style:normal;font-display:swap}
 :root{
-  --bg:#101418; --fg:#f5f2ea; --muted:#b9c4c2; --line:rgba(255,255,255,.2);
+  --bg:#000; --fg:#f5f2ea; --muted:#b9c4c2; --line:rgba(255,255,255,.2);
   --surface:rgba(255,255,255,.07); --raise:rgba(255,255,255,.12);
   --accent:#19f0d2; --pink:#ff2e93; --gold:#fff2cc; --orange:#f9a01b;
   --good:#19f0d2; --warn:#ffc247; --bad:#ff7aa3;
@@ -40,7 +40,7 @@ button{font:inherit;color:inherit;background:none;border:0;padding:0;margin:0;te
 .mu{color:var(--muted)}
 
 /* the scene behind the glass */
-.canvas{position:fixed;inset:0;z-index:0;overflow:hidden;pointer-events:none;background:var(--bg)}
+.canvas{display:none}
 .canvas i{position:absolute;border-radius:50%;filter:blur(110px);will-change:transform}
 .canvas .b1{width:420px;height:420px;top:-140px;right:-160px;background:rgba(249,160,27,.55)}
 .canvas .b2{width:400px;height:400px;top:34%;left:-200px;background:rgba(255,46,147,.5)}
@@ -55,13 +55,13 @@ button{font:inherit;color:inherit;background:none;border:0;padding:0;margin:0;te
     radial-gradient(circle at 14px calc(100% - 14px),rgba(255,255,255,.6) 0 4px,transparent 5px),
     radial-gradient(circle at calc(100% - 14px) calc(100% - 14px),rgba(255,255,255,.6) 0 4px,transparent 5px),
     linear-gradient(115deg,transparent 26%,rgba(255,255,255,.1) 34%,rgba(255,255,255,.02) 42%,transparent 50%),
-    rgba(255,255,255,.07);
+    rgba(255,255,255,.05);
   -webkit-backdrop-filter:blur(16px) saturate(1.6);backdrop-filter:blur(16px) saturate(1.6);
   box-shadow:inset 0 1.5px 0 rgba(255,255,255,.6),0 24px 48px -12px rgba(0,0,0,.55)}
 
 /* header */
 .hdr{position:sticky;top:calc(var(--sat) + 8px);z-index:6;display:flex;align-items:center;gap:8px;min-height:60px;margin:0 -14px;padding:6px 14px 0;
-  border-radius:22px 22px 14px 14px;background:rgba(16,20,24,.93)}
+  border-radius:22px 22px 14px 14px;background:rgba(8,10,12,.97)}
 .hdr::after{content:"";position:absolute;left:14px;right:14px;bottom:6px;height:8px;background:var(--swoosh-t) center/100% 8px no-repeat}
 .hdr h1{font:400 25px/28px var(--mk);margin:0;flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .hdr .date{font:600 20px/22px var(--hand);color:var(--muted);white-space:nowrap}
@@ -107,7 +107,9 @@ button{font:inherit;color:inherit;background:none;border:0;padding:0;margin:0;te
 .stack>*+*{margin-top:12px}
 
 /* cards: drawn in marker, no fill */
-.card{display:block;width:100%;background:transparent;border:2.5px solid var(--pink);border-radius:var(--hand-box);padding:12px 14px;overflow:hidden}
+.card{display:block;width:100%;background:transparent;border:0;border-radius:0;padding:12px 0 18px;overflow:visible;position:relative}
+.card:not(.empty):not(:last-child)::after{content:"";position:absolute;left:0;right:0;bottom:2px;height:8px;background:var(--swoosh-p) center/100% 8px no-repeat;opacity:.9}
+.card.empty{border:2.5px solid var(--pink);border-radius:var(--hand-box);padding:12px 14px;overflow:hidden}
 .card[role=button]{cursor:pointer}
 .card[aria-expanded="true"]{background:rgba(255,255,255,.05)}
 .r1{display:flex;flex-wrap:wrap;align-items:baseline;column-gap:8px}
@@ -192,7 +194,7 @@ button{font:inherit;color:inherit;background:none;border:0;padding:0;margin:0;te
 .foot p{margin:6px 0}
 
 /* bottom bar: marker words on a glass strip */
-.tabs{position:fixed;left:0;right:0;bottom:0;z-index:5;background:rgba(16,20,24,.6);-webkit-backdrop-filter:blur(16px) saturate(1.6);backdrop-filter:blur(16px) saturate(1.6);
+.tabs{position:fixed;left:0;right:0;bottom:0;z-index:5;background:rgba(0,0,0,.75);-webkit-backdrop-filter:blur(16px) saturate(1.6);backdrop-filter:blur(16px) saturate(1.6);
   border-top:1px solid rgba(255,255,255,.28);box-shadow:inset 0 1.5px 0 rgba(255,255,255,.25);padding-bottom:var(--sab)}
 .tabs .in{max-width:500px;margin:0 auto;display:flex;height:58px}
 .tab{flex:1;display:flex;align-items:center;justify-content:center;height:58px;color:var(--muted);font:400 19px/22px var(--mk);position:relative}
@@ -257,7 +259,7 @@ button{font:inherit;color:inherit;background:none;border:0;padding:0;margin:0;te
 </style>
 </head>
 <body>
-<div class="canvas" aria-hidden="true"><i class="b1"></i><i class="b2"></i><i class="b3"></i></div>
+
 <div id="app" class="wrap">
   <div class="hdr"><h1>Prop Check NHL</h1></div>
   <p class="mu" style="font-size:13px;margin:4px 0 14px">Loading tonight's picks</p>
@@ -529,6 +531,7 @@ function render() {
     if (S.view === 'record') renderRecord(); else if (S.view === 'backstage') renderBackstage(); else renderTonight();
     renderTabs();
     if (S.sheet) fillSheet();
+    rollPrices();
   } catch (err) {
     clear(app);
     app.appendChild(header('Prop Check NHL', null));
@@ -541,6 +544,28 @@ function render() {
   window.scrollTo(0, y);
 }
 function rerender() { render(); }
+/* prices roll up to their number once: on first sight or when the price changes, never on a simple re-draw */
+var rolled = {};
+function rollPrices() {
+  var els = document.querySelectorAll('.price[data-pid]');
+  var calm = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var j = 0;
+  Array.prototype.forEach.call(els, function (el) {
+    var id = el.getAttribute('data-pid'), to = parseInt(el.getAttribute('data-pv'), 10);
+    if (isNaN(to) || rolled[id] === to) return;
+    rolled[id] = to;
+    if (calm || Math.abs(to) <= 100) return;
+    var sg = to < 0 ? -1 : 1, t0 = performance.now() + (j++) * 200, mag = Math.abs(to);
+    var fin = el.textContent;
+    el.textContent = (sg < 0 ? '-' : '+') + '100';
+    (function f(n) {
+      if (!el.isConnected) return;
+      var p = Math.max(0, Math.min(1, (n - t0) / 1100)), e = 1 - Math.pow(1 - p, 3);
+      el.textContent = p >= 1 ? fin : (sg < 0 ? '-' : '+') + Math.round(100 + (mag - 100) * e);
+      if (p < 1) requestAnimationFrame(f);
+    })(performance.now());
+  });
+}
 
 /* ---------- shared pieces ---------- */
 function header(title, dateText) {
@@ -630,7 +655,7 @@ function pickCard(p, d, opts) {
     h('span', { class: 'meta' }, muNodes(mu, true).length ? muNodes(mu, true) : 'Game time not posted')));
   card.appendChild(h('div', { class: 'r2' },
     h('div', { class: 'bet', text: p.bet || 'Bet not posted' }),
-    h('div', { class: 'price', text: odds(p.price) })));
+    h('div', { class: 'price', text: odds(p.price), 'data-pv': String(num(p.price) == null ? '' : Math.round(num(p.price))), 'data-pid': id })));
 
   /* the price is frozen at the read that found the pick: say when, and that it is the price to bet */
   var stamp = h('div', { class: 'stamp' });
