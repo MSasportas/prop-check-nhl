@@ -1,94 +1,30 @@
 {
- "date": "2026-10-29",
+ "date": "2026-10-30",
  "teams": {
-  "PIT": {
-   "name": "Arturs Silovs",
-   "status": "confirmed"
+  "VGK": {
+   "name": "Adin Hill",
+   "status": "expected"
   },
-  "UTA": {
-   "name": "Sebastian Cossa",
-   "status": "confirmed"
+  "NJD": {
+   "name": "Connor Hellebuyck",
+   "status": "expected"
   },
-  "CAR": {
-   "name": "Pyotr Kochetkov",
-   "status": "confirmed"
-  },
-  "CBJ": {
-   "name": "Jet Greaves",
-   "status": "confirmed"
-  },
-  "TBL": {
-   "name": "Andrei Vasilevskiy",
-   "status": "confirmed"
+  "FLA": {
+   "name": "Akira Schmid",
+   "status": "expected"
   },
   "WPG": {
-   "name": "Stuart Skinner",
-   "status": "confirmed"
+   "name": "Nico Daws",
+   "status": "expected"
   },
-  "DET": {
-   "name": "John Gibson",
-   "status": "confirmed"
+  "CGY": {
+   "name": "Dustin Wolf",
+   "status": "expected"
   },
-  "CHI": {
-   "name": "Spencer Knight",
-   "status": "confirmed"
-  },
-  "NSH": {
-   "name": "Juuse Saros",
-   "status": "confirmed"
-  },
-  "WSH": {
-   "name": "Charlie Lindgren",
-   "status": "confirmed"
-  },
-  "MIN": {
-   "name": "Jesper Wallstedt",
-   "status": "confirmed"
-  },
-  "NYI": {
-   "name": "Ilya Sorokin",
-   "status": "confirmed"
-  },
-  "STL": {
-   "name": "Joel Hofer",
-   "status": "confirmed"
-  },
-  "BOS": {
-   "name": "Jeremy Swayman",
-   "status": "confirmed"
-  },
-  "DAL": {
-   "name": "Jake Oettinger",
-   "status": "confirmed"
-  },
-  "MTL": {
-   "name": "Jakub Dobes",
-   "status": "confirmed"
-  },
-  "LAK": {
-   "name": "Darcy Kuemper",
-   "status": "confirmed"
-  },
-  "OTT": {
-   "name": "Jonas Johansson",
-   "status": "confirmed"
-  },
-  "ANA": {
-   "name": "Ville Husso",
-   "status": "confirmed"
-  },
-  "BUF": {
-   "name": "Colten Ellis",
-   "status": "confirmed"
-  },
-  "SJS": {
-   "name": "Yaroslav Askarov",
-   "status": "confirmed"
-  },
-  "VAN": {
-   "name": "Leevi Merilainen",
-   "status": "confirmed"
+  "SEA": {
+   "name": "Joey Daccord",
+   "status": "expected"
   }
  },
- "checked_at": "2026-10-29T21:40:01-04:00"
+ "checked_at": "2026-10-30T05:00:01-04:00"
 }
