@@ -1,10 +1,10 @@
 {
  "ok": true,
  "slate_date": "2026-10-31",
- "started_at": "2026-10-31T19:10:01-04:00",
- "status_at": "2026-10-31T19:10:01-04:00",
- "finished_at": "2026-10-31T19:10:03-04:00",
- "last_ok_at": "2026-10-31T19:10:01-04:00",
+ "started_at": "2026-10-31T19:20:01-04:00",
+ "status_at": "2026-10-31T19:20:01-04:00",
+ "finished_at": "2026-10-31T19:20:03-04:00",
+ "last_ok_at": "2026-10-31T19:20:01-04:00",
  "failed_step": null,
  "steps": [
   {
@@ -24,8 +24,8 @@
   },
   {
    "step": "lineups",
-   "status": "skipped",
-   "note": "checked in the last 20 minutes"
+   "status": "ok",
+   "note": "4 of 4 team pages read"
   },
   {
    "step": "lineup_history",
@@ -35,7 +35,7 @@
   {
    "step": "odds",
    "status": "ok",
-   "note": "no pull due"
+   "note": "1 game(s) priced"
   },
   {
    "step": "market_menu",
@@ -59,18 +59,18 @@
   },
   {
    "step": "grade",
-   "status": "ok",
-   "note": "1 graded"
+   "status": "skipped",
+   "note": "nothing to grade"
   },
   {
    "step": "shadow",
    "status": "ok",
-   "note": "42 graded"
+   "note": "29 line read(s) logged; 37 graded"
   },
   {
    "step": "gg_grade",
    "status": "ok",
-   "note": "gap+guard: 1 grade"
+   "note": "gap+guard: nothing new"
   },
   {
    "step": "slate",
@@ -79,8 +79,8 @@
   },
   {
    "step": "record",
-   "status": "ok",
-   "note": "record.json"
+   "status": "skipped",
+   "note": "unchanged"
   }
  ],
  "sources": {
@@ -113,7 +113,7 @@
   },
   {
    "n": 6,
-   "left": 291
+   "left": 289
   },
   {
    "n": 7,
@@ -132,14 +132,14 @@
    "left": 79
   }
  ],
- "pool_total": 1368,
+ "pool_total": 1366,
  "allowance": 141.2,
  "tier": 4,
  "budget_today": 1412,
- "budget_used_today": 44,
+ "budget_used_today": 46,
  "prices_state": "ok",
- "prices_at": "2026-10-31T18:30:00-04:00",
- "next_price_read_at": "2026-10-31T19:15:00-04:00",
+ "prices_at": "2026-10-31T19:20:01-04:00",
+ "next_price_read_at": "2026-10-31T20:30:00-04:00",
  "unmatched_names": [
   "Elias Pettersson"
  ],
@@ -152,7 +152,7 @@
  ],
  "excluded_teams": [],
  "stats_through": "2026-10-30",
- "lineups_at": "2026-10-31T19:00:01-04:00",
+ "lineups_at": "2026-10-31T19:20:01-04:00",
  "lineups_note": "13 of 20 team line pages are dated today.",
  "games_today": 10,
  "record_events": 106,
@@ -160,7 +160,7 @@
  "runner": {
   "event": "workflow_dispatch",
   "run_id": "41250626834",
-  "iteration": 2,
+  "iteration": 3,
   "chain_link": 108,
   "chain_started_at": "2026-10-28T10:00:15-04:00",
   "run_started_at": "2026-10-31T19:00:19-04:00"
