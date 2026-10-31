@@ -2,8 +2,8 @@
  "date": "2026-10-31",
  "teams": {
   "BOS": {
-   "name": "Jeremy Swayman",
-   "status": "expected"
+   "name": "Michael DiPietro",
+   "status": "confirmed"
   },
   "CHI": {
    "name": "Arvid Soderblom",
@@ -42,7 +42,7 @@
    "status": "expected"
   },
   "LAK": {
-   "name": "Anton Forsberg",
+   "name": "Darcy Kuemper",
    "status": "expected"
   },
   "BUF": {
@@ -82,5 +82,5 @@
    "status": "expected"
   }
  },
- "checked_at": "2026-10-31T11:40:00-04:00"
+ "checked_at": "2026-10-31T11:50:00-04:00"
 }
