@@ -39,7 +39,7 @@
   },
   "OTT": {
    "name": "Samuel Ersson",
-   "status": "expected"
+   "status": "confirmed"
   },
   "LAK": {
    "name": "Darcy Kuemper",
@@ -82,5 +82,5 @@
    "status": "expected"
   }
  },
- "checked_at": "2026-10-31T13:50:00-04:00"
+ "checked_at": "2026-10-31T14:20:01-04:00"
 }
