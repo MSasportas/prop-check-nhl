@@ -1,10 +1,10 @@
 {
  "ok": true,
  "slate_date": "2026-10-31",
- "started_at": "2026-10-31T15:40:00-04:00",
- "status_at": "2026-10-31T15:40:00-04:00",
- "finished_at": "2026-10-31T15:40:03-04:00",
- "last_ok_at": "2026-10-31T15:40:00-04:00",
+ "started_at": "2026-10-31T15:50:01-04:00",
+ "status_at": "2026-10-31T15:50:01-04:00",
+ "finished_at": "2026-10-31T15:50:03-04:00",
+ "last_ok_at": "2026-10-31T15:50:01-04:00",
  "failed_step": null,
  "steps": [
   {
@@ -24,13 +24,13 @@
   },
   {
    "step": "lineups",
-   "status": "skipped",
-   "note": "checked in the last 20 minutes"
+   "status": "ok",
+   "note": "4 of 4 team pages read"
   },
   {
    "step": "lineup_history",
-   "status": "skipped",
-   "note": "no change"
+   "status": "ok",
+   "note": "3 team(s) changed"
   },
   {
    "step": "odds",
@@ -55,7 +55,7 @@
   {
    "step": "engine",
    "status": "ok",
-   "note": "no change"
+   "note": "1 new event(s), 0 newly shown"
   },
   {
    "step": "grade",
@@ -79,8 +79,8 @@
   },
   {
    "step": "record",
-   "status": "skipped",
-   "note": "unchanged"
+   "status": "ok",
+   "note": "record.json"
   }
  ],
  "sources": {
@@ -144,20 +144,23 @@
   "Elias Pettersson"
  ],
  "unknown_teams": [],
- "lineup_unmatched_names": [],
+ "lineup_unmatched_names": [
+  "Philip Tomasino",
+  "Xavier Bourgault"
+ ],
  "excluded_teams": [],
  "stats_through": "2026-10-30",
- "lineups_at": "2026-10-31T15:30:01-04:00",
- "lineups_note": "5 of 12 team line pages are dated today.",
+ "lineups_at": "2026-10-31T15:50:01-04:00",
+ "lineups_note": "8 of 12 team line pages are dated today.",
  "games_today": 10,
- "record_events": 99,
+ "record_events": 100,
  "odds_notes": [],
  "runner": {
   "event": "workflow_dispatch",
-  "run_id": "41231316352",
-  "iteration": 6,
-  "chain_link": 103,
+  "run_id": "41235291544",
+  "iteration": 2,
+  "chain_link": 104,
   "chain_started_at": "2026-10-28T10:00:15-04:00",
-  "run_started_at": "2026-10-31T14:50:13-04:00"
+  "run_started_at": "2026-10-31T15:40:13-04:00"
  }
 }

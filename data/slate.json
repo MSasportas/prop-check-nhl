@@ -1,7 +1,7 @@
 {
  "slate_date": "2026-10-31",
- "generated_at": "2026-10-31T15:40:00-04:00",
- "status_at": "2026-10-31T15:40:00-04:00",
+ "generated_at": "2026-10-31T15:50:01-04:00",
+ "status_at": "2026-10-31T15:50:01-04:00",
  "valid_until": "2026-11-01T05:00:00-05:00",
  "status": {
   "prices_state": "ok",
@@ -9,14 +9,14 @@
   "next_price_read_at": "2026-10-31T17:30:00-04:00",
   "stats_built_at": "2026-10-30T23:40:00-04:00",
   "stats_through": "2026-10-30",
-  "lineups_at": "2026-10-31T15:30:01-04:00",
+  "lineups_at": "2026-10-31T15:50:01-04:00",
   "goalies_at": null,
-  "lineups_note": "5 of 12 team line pages are dated today.",
+  "lineups_note": "8 of 12 team line pages are dated today.",
   "lineups_state": "ok",
   "stats_state": "ok",
   "last_run": {
    "ok": true,
-   "at": "2026-10-31T15:40:00-04:00",
+   "at": "2026-10-31T15:50:01-04:00",
    "failed_step": null
   },
   "pool": {
@@ -136,7 +136,7 @@
    "home": "LAK",
    "start": "2026-10-31T16:00:00-04:00",
    "lineups": {
-    "away": "waiting",
+    "away": "confirmed",
     "home": "confirmed"
    },
    "goalies": {
@@ -160,8 +160,8 @@
    "home": "SJS",
    "start": "2026-10-31T16:00:00-04:00",
    "lineups": {
-    "away": "waiting",
-    "home": "waiting"
+    "away": "confirmed",
+    "home": "confirmed"
    },
    "goalies": {
     "away": {
@@ -286,11 +286,15 @@
    "breakeven": 0.5349,
    "p_pct": 57,
    "breakeven_pct": 53,
-   "state": "early",
+   "state": "lineup",
    "history": [
     {
      "at": "2026-10-31T15:20:00-04:00",
      "text": "Early: lineup not confirmed"
+    },
+    {
+     "at": "2026-10-31T15:50:01-04:00",
+     "text": "Lineup confirmed"
     }
    ],
    "prices": [
@@ -324,8 +328,8 @@
     "ours_pct": 57.1,
     "model_pct": 64.8
    },
-   "settled": "early",
-   "settled_label": "Early",
+   "settled": "goalie",
+   "settled_label": "Goalie confirmed",
    "reason": "8 other books say 55.5%; Hard Rock's -115 only needs 53.5%. Our model agrees (our blend: 57.1%).",
    "link": null,
    "thin": false,
