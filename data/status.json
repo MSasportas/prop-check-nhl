@@ -1,10 +1,10 @@
 {
  "ok": true,
  "slate_date": "2026-10-31",
- "started_at": "2026-10-31T12:20:00-04:00",
- "status_at": "2026-10-31T12:20:00-04:00",
- "finished_at": "2026-10-31T12:20:02-04:00",
- "last_ok_at": "2026-10-31T12:20:00-04:00",
+ "started_at": "2026-10-31T12:30:00-04:00",
+ "status_at": "2026-10-31T12:30:00-04:00",
+ "finished_at": "2026-10-31T12:30:02-04:00",
+ "last_ok_at": "2026-10-31T12:30:00-04:00",
  "failed_step": null,
  "steps": [
   {
@@ -24,8 +24,8 @@
   },
   {
    "step": "lineups",
-   "status": "ok",
-   "note": "8 of 8 team pages read"
+   "status": "skipped",
+   "note": "checked in the last 20 minutes"
   },
   {
    "step": "lineup_history",
@@ -50,12 +50,12 @@
   {
    "step": "gapguard",
    "status": "ok",
-   "note": "gap+guard: 2 close, 1 flag"
+   "note": "gap+guard: nothing new"
   },
   {
    "step": "engine",
    "status": "ok",
-   "note": "1 new event(s), 1 newly shown"
+   "note": "no change"
   },
   {
    "step": "grade",
@@ -65,7 +65,7 @@
   {
    "step": "shadow",
    "status": "ok",
-   "note": "67 line read(s) logged"
+   "note": "64 line read(s) logged"
   },
   {
    "step": "gg_grade",
@@ -79,8 +79,8 @@
   },
   {
    "step": "record",
-   "status": "ok",
-   "note": "record.json"
+   "status": "skipped",
+   "note": "unchanged"
   }
  ],
  "sources": {
@@ -113,7 +113,7 @@
   },
   {
    "n": 6,
-   "left": 317
+   "left": 313
   },
   {
    "n": 7,
@@ -132,14 +132,14 @@
    "left": 79
   }
  ],
- "pool_total": 1394,
+ "pool_total": 1390,
  "allowance": 141.2,
  "tier": 4,
  "budget_today": 1412,
- "budget_used_today": 18,
+ "budget_used_today": 22,
  "prices_state": "ok",
- "prices_at": "2026-10-31T12:20:00-04:00",
- "next_price_read_at": "2026-10-31T12:30:00-04:00",
+ "prices_at": "2026-10-31T12:30:00-04:00",
+ "next_price_read_at": "2026-10-31T13:15:00-04:00",
  "unmatched_names": [
   "Elias Pettersson"
  ],
@@ -155,7 +155,7 @@
  "runner": {
   "event": "workflow_dispatch",
   "run_id": "41215939414",
-  "iteration": 5,
+  "iteration": 6,
   "chain_link": 99,
   "chain_started_at": "2026-10-28T10:00:15-04:00",
   "run_started_at": "2026-10-31T11:40:14-04:00"
