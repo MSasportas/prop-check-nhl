@@ -7,7 +7,7 @@
   },
   "CHI": {
    "name": "Arvid Soderblom",
-   "status": "expected"
+   "status": "confirmed"
   },
   "DET": {
    "name": "John Gibson",
@@ -82,5 +82,5 @@
    "status": "expected"
   }
  },
- "checked_at": "2026-10-31T12:20:00-04:00"
+ "checked_at": "2026-10-31T12:40:00-04:00"
 }
