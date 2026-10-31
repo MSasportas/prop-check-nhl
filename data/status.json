@@ -1,10 +1,10 @@
 {
  "ok": true,
  "slate_date": "2026-10-31",
- "started_at": "2026-10-31T11:30:00-04:00",
- "status_at": "2026-10-31T11:30:00-04:00",
- "finished_at": "2026-10-31T11:30:04-04:00",
- "last_ok_at": "2026-10-31T11:30:00-04:00",
+ "started_at": "2026-10-31T11:40:00-04:00",
+ "status_at": "2026-10-31T11:40:00-04:00",
+ "finished_at": "2026-10-31T11:40:02-04:00",
+ "last_ok_at": "2026-10-31T11:40:00-04:00",
  "failed_step": null,
  "steps": [
   {
@@ -24,8 +24,8 @@
   },
   {
    "step": "lineups",
-   "status": "skipped",
-   "note": "checked in the last 20 minutes"
+   "status": "ok",
+   "note": "8 of 8 team pages read"
   },
   {
    "step": "lineup_history",
@@ -35,7 +35,7 @@
   {
    "step": "odds",
    "status": "ok",
-   "note": "2 game(s) priced"
+   "note": "no pull due"
   },
   {
    "step": "market_menu",
@@ -50,12 +50,12 @@
   {
    "step": "gapguard",
    "status": "ok",
-   "note": "gap+guard: 1 flag"
+   "note": "gap+guard: nothing new"
   },
   {
    "step": "engine",
    "status": "ok",
-   "note": "1 new event(s), 1 newly shown"
+   "note": "no change"
   },
   {
    "step": "grade",
@@ -64,8 +64,8 @@
   },
   {
    "step": "shadow",
-   "status": "ok",
-   "note": "65 line read(s) logged"
+   "status": "skipped",
+   "note": "nothing new"
   },
   {
    "step": "gg_grade",
@@ -79,8 +79,8 @@
   },
   {
    "step": "record",
-   "status": "ok",
-   "note": "record.json, 2026-10.json"
+   "status": "skipped",
+   "note": "unchanged"
   }
  ],
  "sources": {
@@ -147,7 +147,7 @@
  "lineup_unmatched_names": [],
  "excluded_teams": [],
  "stats_through": "2026-10-30",
- "lineups_at": "2026-10-31T11:20:00-04:00",
+ "lineups_at": "2026-10-31T11:40:00-04:00",
  "lineups_note": "0 of 8 team line pages are dated today.",
  "games_today": 10,
  "record_events": 94,
@@ -155,7 +155,7 @@
  "runner": {
   "event": "workflow_dispatch",
   "run_id": "41211961450",
-  "iteration": 5,
+  "iteration": 6,
   "chain_link": 98,
   "chain_started_at": "2026-10-28T10:00:15-04:00",
   "run_started_at": "2026-10-31T10:50:11-04:00"
