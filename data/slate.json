@@ -1,12 +1,12 @@
 {
  "slate_date": "2026-10-31",
- "generated_at": "2026-10-31T11:20:00-04:00",
- "status_at": "2026-10-31T11:20:00-04:00",
+ "generated_at": "2026-10-31T11:30:00-04:00",
+ "status_at": "2026-10-31T11:30:00-04:00",
  "valid_until": "2026-11-01T05:00:00-05:00",
  "status": {
   "prices_state": "ok",
-  "prices_at": "2026-10-31T10:00:01-04:00",
-  "next_price_read_at": "2026-10-31T11:30:00-04:00",
+  "prices_at": "2026-10-31T11:30:00-04:00",
+  "next_price_read_at": "2026-10-31T12:15:00-04:00",
   "stats_built_at": "2026-10-30T23:40:00-04:00",
   "stats_through": "2026-10-30",
   "lineups_at": "2026-10-31T11:20:00-04:00",
@@ -16,27 +16,23 @@
   "stats_state": "ok",
   "last_run": {
    "ok": true,
-   "at": "2026-10-31T11:20:00-04:00",
+   "at": "2026-10-31T11:30:00-04:00",
    "failed_step": null
   },
   "pool": {
-   "pulls_left": 1402,
+   "pulls_left": 1398,
    "keys": 10,
    "game_days_left": 1,
    "days_left": 1,
    "low": false
   },
   "excluded_teams": [],
-  "lines_checked": 0,
-  "flag_reads": 0,
+  "lines_checked": 30,
+  "flag_reads": 2,
   "tier": 4
  },
  "banners": [],
- "empty": {
-  "code": "none_qualified",
-  "text": "No picks yet today",
-  "sub": "Picks come from the price read 90 minutes before each game. Next read at 11:30 AM."
- },
+ "empty": null,
  "games": [
   {
    "id": 2026020217,
@@ -82,7 +78,7 @@
     }
    },
    "started": false,
-   "picks": 0,
+   "picks": 1,
    "excluded_reason": null,
    "excluded_teams": []
   },
@@ -279,7 +275,64 @@
    "excluded_teams": []
   }
  ],
- "picks": [],
+ "picks": [
+  {
+   "id": "2026-10-31:2026020218:8482078:shots:2.5:under",
+   "price": 100,
+   "first_price": 100,
+   "first_price_at": "2026-10-31T11:30:00-04:00",
+   "worst_price": 100,
+   "p": 0.5206,
+   "breakeven": 0.5,
+   "p_pct": 52,
+   "breakeven_pct": 50,
+   "state": "early",
+   "history": [
+    {
+     "at": "2026-10-31T11:30:00-04:00",
+     "text": "Early: lineup not confirmed"
+    }
+   ],
+   "prices": [
+    {
+     "at": "2026-10-31T11:30:00-04:00",
+     "price": 100
+    }
+   ],
+   "pulled": null,
+   "price_final": false,
+   "graded": null,
+   "rank": 1,
+   "tier": "main",
+   "game_id": 2026020218,
+   "player": "L. Raymond",
+   "player_id": 8482078,
+   "team": "DET",
+   "opp": "STL",
+   "home": true,
+   "start": "2026-10-31T13:00:00-04:00",
+   "market": "shots",
+   "line": 2.5,
+   "side": "under",
+   "bet": "Under 2.5 shots on goal",
+   "price_at": "2026-10-31T11:30:00-04:00",
+   "gap_pct": 3.4,
+   "market_fair_pct": 51.7,
+   "n_books": 8,
+   "guard": {
+    "verdict": "agrees",
+    "ours_pct": 52.1,
+    "model_pct": 55.2
+   },
+   "settled": "early",
+   "settled_label": "Early",
+   "reason": "8 other books say 51.7%; Hard Rock's +100 only needs 50.0%. Our model agrees (our blend: 52.1%).",
+   "link": null,
+   "thin": false,
+   "games_used": 93,
+   "games_this_season": 13
+  }
+ ],
  "parlays": [],
  "parlays_note": "Parlays are not offered: there is no evidence for them yet."
 }

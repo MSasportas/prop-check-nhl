@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-10-30T01:30:01-04:00",
+ "generated_at": "2026-10-31T11:30:00-04:00",
  "summary": {
   "headline": {
    "w": 19,
@@ -39,6 +39,38 @@
   ]
  },
  "nights": [
+  {
+   "date": "2026-10-31",
+   "graded": false,
+   "w": 0,
+   "l": 0,
+   "units": 0,
+   "entries": [
+    {
+     "id": "2026-10-31:2026020218:8482078:shots:2.5:under",
+     "kind": "single",
+     "player": "L. Raymond",
+     "bet": "Under 2.5 shots on goal",
+     "market": "shots",
+     "team": "DET",
+     "game": "STL at DET",
+     "price": 100,
+     "first_price": 100,
+     "last_price": 100,
+     "prices": [
+      {
+       "price": 100,
+       "at": "2026-10-31T11:30:00-04:00"
+      }
+     ],
+     "result": null,
+     "actual": null,
+     "units": null,
+     "pulled": null,
+     "legs": []
+    }
+   ]
+  },
   {
    "date": "2026-10-29",
    "graded": true,
@@ -578,130 +610,6 @@
       "at": "2026-10-23T20:20:00-04:00",
       "reason": "Too few other books to check it against"
      },
-     "legs": []
-    }
-   ]
-  },
-  {
-   "date": "2026-10-22",
-   "graded": true,
-   "w": 3,
-   "l": 2,
-   "units": 0.77,
-   "entries": [
-    {
-     "id": "2026-10-22:2026020158:8479314:shots:2.5:under",
-     "kind": "single",
-     "player": "M. Tkachuk",
-     "bet": "Under 2.5 shots on goal",
-     "market": "shots",
-     "team": "FLA",
-     "game": "FLA at PIT",
-     "price": 105,
-     "first_price": 105,
-     "last_price": 105,
-     "prices": [
-      {
-       "price": 105,
-       "at": "2026-10-22T17:30:00-04:00"
-      }
-     ],
-     "result": "W",
-     "actual": "had 1",
-     "units": 1.05,
-     "pulled": null,
-     "legs": []
-    },
-    {
-     "id": "2026-10-22:2026020165:8477429:shots:1.5:under",
-     "kind": "single",
-     "player": "A. Copp",
-     "bet": "Under 1.5 shots on goal",
-     "market": "shots",
-     "team": "DET",
-     "game": "DET at VAN",
-     "price": -105,
-     "first_price": -105,
-     "last_price": -105,
-     "prices": [
-      {
-       "price": -105,
-       "at": "2026-10-22T20:30:00-04:00"
-      }
-     ],
-     "result": "W",
-     "actual": "had 1",
-     "units": 0.9524,
-     "pulled": null,
-     "legs": []
-    },
-    {
-     "id": "2026-10-22:2026020157:8484153:shots:2.5:under",
-     "kind": "single",
-     "player": "L. Carlsson",
-     "bet": "Under 2.5 shots on goal",
-     "market": "shots",
-     "team": "ANA",
-     "game": "ANA at NJD",
-     "price": -130,
-     "first_price": -130,
-     "last_price": -130,
-     "prices": [
-      {
-       "price": -130,
-       "at": "2026-10-22T17:30:00-04:00"
-      }
-     ],
-     "result": "W",
-     "actual": "had 1",
-     "units": 0.7692,
-     "pulled": null,
-     "legs": []
-    },
-    {
-     "id": "2026-10-22:2026020160:8478397:shots:1.5:over",
-     "kind": "single",
-     "player": "R. Andersson",
-     "bet": "Over 1.5 shots on goal",
-     "market": "shots",
-     "team": "VGK",
-     "game": "VGK at STL",
-     "price": -105,
-     "first_price": -105,
-     "last_price": -105,
-     "prices": [
-      {
-       "price": -105,
-       "at": "2026-10-22T18:30:01-04:00"
-      }
-     ],
-     "result": "L",
-     "actual": "had 0",
-     "units": -1.0,
-     "pulled": null,
-     "legs": []
-    },
-    {
-     "id": "2026-10-22:2026020165:8484471:shots:1.5:under",
-     "kind": "single",
-     "player": "E. Finnie",
-     "bet": "Under 1.5 shots on goal",
-     "market": "shots",
-     "team": "DET",
-     "game": "DET at VAN",
-     "price": 120,
-     "first_price": 120,
-     "last_price": 120,
-     "prices": [
-      {
-       "price": 120,
-       "at": "2026-10-22T20:30:00-04:00"
-      }
-     ],
-     "result": "L",
-     "actual": "had 2",
-     "units": -1.0,
-     "pulled": null,
      "legs": []
     }
    ]
