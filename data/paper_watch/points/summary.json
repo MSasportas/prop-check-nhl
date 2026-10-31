@@ -2,7 +2,7 @@
  "version": 1,
  "note": "Behind the scenes: research only. Not picks, not on the Record, never sent to Discord.",
  "market": "points",
- "generated_at": "2026-10-31T15:40:00-04:00",
+ "generated_at": "2026-10-31T16:00:00-04:00",
  "slate": "2026-10-31",
  "active": true,
  "window": {
@@ -42,7 +42,7 @@
      "detail": "gap -1.9% at +100",
      "at": "2026-10-31T15:20:00-04:00"
     },
-    "locked": false,
+    "locked": true,
     "state": "pulled",
     "close_fair_pct": 49.1,
     "clv_pct": 3.0,
