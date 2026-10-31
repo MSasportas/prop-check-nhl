@@ -42,12 +42,12 @@
    "status": "confirmed"
   },
   "LAK": {
-   "name": "Darcy Kuemper",
-   "status": "expected"
+   "name": "Anton Forsberg",
+   "status": "confirmed"
   },
   "BUF": {
    "name": "Ukko-Pekka Luukkonen",
-   "status": "expected"
+   "status": "confirmed"
   },
   "MTL": {
    "name": "Jacob Fowler",
@@ -82,5 +82,5 @@
    "status": "confirmed"
   }
  },
- "checked_at": "2026-10-31T14:40:01-04:00"
+ "checked_at": "2026-10-31T15:40:00-04:00"
 }
