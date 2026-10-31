@@ -1,12 +1,12 @@
 {
  "slate_date": "2026-10-31",
- "generated_at": "2026-10-31T18:20:01-04:00",
- "status_at": "2026-10-31T18:20:01-04:00",
+ "generated_at": "2026-10-31T18:30:00-04:00",
+ "status_at": "2026-10-31T18:30:00-04:00",
  "valid_until": "2026-11-01T05:00:00-05:00",
  "status": {
   "prices_state": "ok",
-  "prices_at": "2026-10-31T18:20:01-04:00",
-  "next_price_read_at": "2026-10-31T18:30:00-04:00",
+  "prices_at": "2026-10-31T18:30:00-04:00",
+  "next_price_read_at": "2026-10-31T19:15:00-04:00",
   "stats_built_at": "2026-10-31T17:20:00-04:00",
   "stats_through": "2026-10-31",
   "lineups_at": "2026-10-31T18:20:01-04:00",
@@ -16,19 +16,19 @@
   "stats_state": "ok",
   "last_run": {
    "ok": true,
-   "at": "2026-10-31T18:20:01-04:00",
+   "at": "2026-10-31T18:30:00-04:00",
    "failed_step": null
   },
   "pool": {
-   "pulls_left": 1370,
+   "pulls_left": 1368,
    "keys": 10,
    "game_days_left": 1,
    "days_left": 1,
    "low": false
   },
   "excluded_teams": [],
-  "lines_checked": 135,
-  "flag_reads": 8,
+  "lines_checked": 149,
+  "flag_reads": 9,
   "tier": 4
  },
  "banners": [],
