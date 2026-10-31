@@ -15,7 +15,7 @@
   },
   "STL": {
    "name": "Joel Hofer",
-   "status": "expected"
+   "status": "confirmed"
   },
   "NYI": {
    "name": "Ilya Sorokin",
@@ -82,5 +82,5 @@
    "status": "expected"
   }
  },
- "checked_at": "2026-10-31T12:50:01-04:00"
+ "checked_at": "2026-10-31T13:00:00-04:00"
 }

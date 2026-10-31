@@ -1,7 +1,7 @@
 {
  "slate_date": "2026-10-31",
- "generated_at": "2026-10-31T12:50:01-04:00",
- "status_at": "2026-10-31T12:50:01-04:00",
+ "generated_at": "2026-10-31T13:00:00-04:00",
+ "status_at": "2026-10-31T13:00:00-04:00",
  "valid_until": "2026-11-01T05:00:00-05:00",
  "status": {
   "prices_state": "ok",
@@ -9,14 +9,14 @@
   "next_price_read_at": "2026-10-31T13:15:00-04:00",
   "stats_built_at": "2026-10-30T23:40:00-04:00",
   "stats_through": "2026-10-30",
-  "lineups_at": "2026-10-31T12:40:00-04:00",
+  "lineups_at": "2026-10-31T13:00:00-04:00",
   "goalies_at": null,
-  "lineups_note": "2 of 8 team line pages are dated today.",
+  "lineups_note": "3 of 12 team line pages are dated today.",
   "lineups_state": "ok",
   "stats_state": "ok",
   "last_run": {
    "ok": true,
-   "at": "2026-10-31T12:50:01-04:00",
+   "at": "2026-10-31T13:00:00-04:00",
    "failed_step": null
   },
   "pool": {
@@ -32,7 +32,11 @@
   "tier": 4
  },
  "banners": [],
- "empty": null,
+ "empty": {
+  "code": "none_qualified",
+  "text": "No picks yet today",
+  "sub": "65 lines read, none cleared both checks. Today's earlier picks are under Started. Next read at 1:15 PM."
+ },
  "games": [
   {
    "id": 2026020217,
@@ -53,7 +57,7 @@
      "status": "confirmed"
     }
    },
-   "started": false,
+   "started": true,
    "picks": 1,
    "excluded_reason": null,
    "excluded_teams": []
@@ -70,14 +74,14 @@
    "goalies": {
     "away": {
      "name": "Joel Hofer",
-     "status": "expected"
+     "status": "confirmed"
     },
     "home": {
      "name": "John Gibson",
      "status": "confirmed"
     }
    },
-   "started": false,
+   "started": true,
    "picks": 1,
    "excluded_reason": null,
    "excluded_teams": []
@@ -136,8 +140,8 @@
    "home": "LAK",
    "start": "2026-10-31T16:00:00-04:00",
    "lineups": {
-    "away": "not_checked",
-    "home": "not_checked"
+    "away": "waiting",
+    "home": "confirmed"
    },
    "goalies": {
     "away": {
@@ -160,8 +164,8 @@
    "home": "SJS",
    "start": "2026-10-31T16:00:00-04:00",
    "lineups": {
-    "away": "not_checked",
-    "home": "not_checked"
+    "away": "waiting",
+    "home": "waiting"
    },
    "goalies": {
     "away": {
@@ -286,7 +290,7 @@
    "breakeven": 0.6491,
    "p_pct": 68,
    "breakeven_pct": 65,
-   "state": "lineup",
+   "state": "locked",
    "history": [
     {
      "at": "2026-10-31T12:20:00-04:00",
@@ -295,6 +299,10 @@
     {
      "at": "2026-10-31T12:40:00-04:00",
      "text": "Lineup confirmed"
+    },
+    {
+     "at": "2026-10-31T13:00:00-04:00",
+     "text": "Locked"
     }
    ],
    "prices": [
@@ -304,9 +312,9 @@
     }
    ],
    "pulled": null,
-   "price_final": true,
+   "price_final": false,
    "graded": null,
-   "rank": 1,
+   "rank": null,
    "tier": "main",
    "game_id": 2026020217,
    "player": "E. Lindholm",
@@ -346,11 +354,15 @@
    "breakeven": 0.5,
    "p_pct": 52,
    "breakeven_pct": 50,
-   "state": "early",
+   "state": "locked_unconfirmed",
    "history": [
     {
      "at": "2026-10-31T11:30:00-04:00",
      "text": "Early: lineup not confirmed"
+    },
+    {
+     "at": "2026-10-31T13:00:00-04:00",
+     "text": "Locked: lineup was not confirmed"
     }
    ],
    "prices": [
@@ -360,9 +372,9 @@
     }
    ],
    "pulled": null,
-   "price_final": true,
+   "price_final": false,
    "graded": null,
-   "rank": 2,
+   "rank": null,
    "tier": "main",
    "game_id": 2026020218,
    "player": "L. Raymond",
