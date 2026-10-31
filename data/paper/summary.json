@@ -2,7 +2,7 @@
  "version": 1,
  "note": "Gap + Guard research log. Every flag here is a pick on the page and in the Record; vetoed and capped rows are research only.",
  "market": "shots",
- "generated_at": "2026-10-31T13:00:00-04:00",
+ "generated_at": "2026-10-31T13:20:01-04:00",
  "slate": "2026-10-31",
  "active": true,
  "window": {
@@ -80,7 +80,42 @@
     "units": null
    }
   ],
-  "vetoes": [],
+  "vetoes": [
+   {
+    "id": "2026-10-31:2026020219:8474590:1.5:under",
+    "kind": "veto",
+    "slate": "2026-10-31",
+    "game_id": 2026020219,
+    "player": "J. Carlson",
+    "team": "TBL",
+    "opp": "NSH",
+    "game": "TBL @ NSH",
+    "start": "2026-10-31T14:00:00-04:00",
+    "side": "under",
+    "line": 1.5,
+    "bet": "UNDER 1.5 shots",
+    "price": 115,
+    "gap_pct": 3.6,
+    "final_pct": 0.3,
+    "market_fair_pct": 48.2,
+    "final_p_pct": 46.7,
+    "n_books": 7,
+    "guard": "veto",
+    "cap": null,
+    "flagged_at": "2026-10-31T13:20:01-04:00",
+    "read_pull": "C",
+    "settled": "Early",
+    "frozen_settled": "Early",
+    "move30_pct": 0.2,
+    "pulled": null,
+    "locked": false,
+    "state": "open",
+    "close_fair_pct": 48.2,
+    "clv_pct": null,
+    "result": null,
+    "units": null
+   }
+  ],
   "capped": []
  },
  "nights": [
@@ -845,7 +880,7 @@
  ],
  "nov2": {
   "gaps_measured": 30,
-  "gaps_logged": 34,
+  "gaps_logged": 35,
   "graded_picks": 31,
   "w": 22,
   "l": 9,

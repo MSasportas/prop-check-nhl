@@ -1,26 +1,26 @@
 {
  "slate_date": "2026-10-31",
- "generated_at": "2026-10-31T13:00:00-04:00",
- "status_at": "2026-10-31T13:00:00-04:00",
+ "generated_at": "2026-10-31T13:20:01-04:00",
+ "status_at": "2026-10-31T13:20:01-04:00",
  "valid_until": "2026-11-01T05:00:00-05:00",
  "status": {
   "prices_state": "ok",
-  "prices_at": "2026-10-31T12:30:00-04:00",
-  "next_price_read_at": "2026-10-31T13:15:00-04:00",
+  "prices_at": "2026-10-31T13:20:01-04:00",
+  "next_price_read_at": "2026-10-31T14:30:00-04:00",
   "stats_built_at": "2026-10-30T23:40:00-04:00",
   "stats_through": "2026-10-30",
-  "lineups_at": "2026-10-31T13:00:00-04:00",
+  "lineups_at": "2026-10-31T13:20:01-04:00",
   "goalies_at": null,
-  "lineups_note": "3 of 12 team line pages are dated today.",
+  "lineups_note": "4 of 12 team line pages are dated today.",
   "lineups_state": "ok",
   "stats_state": "ok",
   "last_run": {
    "ok": true,
-   "at": "2026-10-31T13:00:00-04:00",
+   "at": "2026-10-31T13:20:01-04:00",
    "failed_step": null
   },
   "pool": {
-   "pulls_left": 1390,
+   "pulls_left": 1386,
    "keys": 10,
    "game_days_left": 1,
    "days_left": 1,
@@ -35,7 +35,7 @@
  "empty": {
   "code": "none_qualified",
   "text": "No picks yet today",
-  "sub": "65 lines read, none cleared both checks. Today's earlier picks are under Started. Next read at 1:15 PM."
+  "sub": "65 lines read, none cleared both checks. 1 had a gap but our model said no. Today's earlier picks are under Started. Next read at 2:30 PM."
  },
  "games": [
   {
@@ -117,7 +117,7 @@
    "start": "2026-10-31T14:00:00-04:00",
    "lineups": {
     "away": "waiting",
-    "home": "waiting"
+    "home": "confirmed"
    },
    "goalies": {
     "away": {
@@ -270,7 +270,7 @@
     },
     "home": {
      "name": "Mackenzie Blackwood",
-     "status": "expected"
+     "status": "confirmed"
     }
    },
    "started": false,
