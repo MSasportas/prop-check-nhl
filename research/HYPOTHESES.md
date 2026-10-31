@@ -409,6 +409,25 @@ and no lockbox look. Cumulative historical: 404. Forward variants: 31 (Q16a-b ad
 bootstrap; also < .05/29), mean CLV +3.4%, placebos 0/2000 (research/code/r15/check_q1b.txt). Caveats: A (1 PM) read +20.2% n188 vs B/C +3.2% n124
 (p .35); unders +16.3% n260 vs overs -1.3% n52; realised ROI is ~4x mean EV (+3.45%). Sent to the Sharp as a forward-bar candidate (LOG run 15).
 
+## Run 16 (Researcher, 2026-10-31). Registered before any of these were tested.
+No key used, no historical odds pull. Free NHL api-web play-by-play + right-rail (referees, head coaches) for every 2025-26 regular-season
+game dated Oct 7 - Feb 28 (lockbox games not fetched), to scratch with research/code/r16/fetch16.py. Common as runs 4/6-15: shots45_lines, every
+two-way Hard Rock line, proportional de-vig fair f, side price >= -200, 1u flat, regulation + OT, VOID = no bet, game-clustered bootstrap.
+Logistic = research/code/wf.py (fit on all months before the test month), bet the side with p - BE >= T, T in {.01, .02, .03}. Fixed rules
+report every Nov-Feb bet with folds. Placebo (shuffle within date x line, 200 times) for any variant positive Nov-Feb with n >= 300;
+lockbox (Mar 1+) only for such a frozen variant, once, needing one-sided p < 0.05/3 = 0.0167 (look #3). All features use games dated
+strictly before d. Referees and head coaches for game d itself are public before puck (NHL officials' assignments are published the morning
+of the game; a coaching change is announced before the team's next game), so they count as known at -45.
+
+| id | date | rule (exact) | data | result | status |
+|---|---|---|---|---|---|
+| DD1 | 2026-10-31 | **Referee crew x power-play role.** crew = mean over game d's two referees of (penalty events per game in that referee's 2025-26 games before d; a referee with < 5 prior games takes the league mean); cdev = crew - league mean penalties/game before d. pps = his share of his team's power-play shots on goal (situationCode: his team has more skaters, both goalies in) over the team's last 15 games before d (>= 5 games and >= 10 team PP SOG, else 0). Terms c1*cdev + c2*cdev*pps (does Hard Rock price PP specialists for a whistle-happy crew?) (3 T). Fixed rule DD1r: OVER when pps >= 0.20 and cdev >= +1.0 (1 variant). 4 variants. (W1 = team penalty draw/give rates, not referees.) | pbp + right-rail + shots45 | | registered |
+| DD2 | 2026-10-31 | **Score-state sensitivity x expected game script.** Over the team's last 20 games before d (>= 5, else 0): sens = (his SOG while his team trails / team SOG while trailing) - (his SOG while tied or leading / team SOG while tied or leading), regulation, all strengths; each state needs >= 15 team SOG else 0. pw = no-vig consensus win prob of his team from the h2h addon's daily snapshot taken before puck (latest snapshot <= start; none -> 0.5). Terms c1*sens + c2*sens*(0.5 - pw) (do players who carry the trailing push get priced for the game script? K2 was team-level pw only) (3 T). Fixed rule DD2r: OVER when sens >= +0.03 and pw <= 0.42 (1 variant). 4 variants | pbp + h2h addon + shots45 | | registered |
+| DD3 | 2026-10-31 | **Rebound environment.** Rebound SOG = a shot on goal within 3 s after a shot attempt (SOG, missed or blocked) by the same team in the same period. reb_opp = rebound SOG per game allowed by tonight's opponent over its last 20 games before d (>= 5, else league mean); reb_own = rebound SOG per game by his team over its last 20; dev = minus the league mean before d. Terms c1*opp_dev + c2*own_dev (3 T). Fixed rule DD3r: OVER when opp_dev >= +0.6 rebound SOG/game (1 variant). 4 variants. (N2 = starting goalie quality; this is the team's rebound control, no goalie identity.) | pbp + shots45 | | registered |
+| DD4 | 2026-10-31 | **New head coach.** newc = 1 if game d's head coach of his team (right-rail) differs from the coach in any of the team's previous 10 games dated 2025-10-07 or later, else 0; also newc_opp for the opponent. Terms c1*newc + c2*newc_opp (book slow on a system change?) (3 T). Fixed rule DD4r: OVER on players of a team inside its first 10 games under a new coach (1 variant). 4 variants (n small: only mid-season changes count) | right-rail + shots45 | | registered |
+
+Run 16 total: 16 historical variants. Cumulative historical after run 16: 420. Forward variants unchanged (31).
+
 ## Queued (not yet tested)
 | id | rule idea | data | status |
 |---|---|---|---|
