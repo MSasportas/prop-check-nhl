@@ -2,7 +2,7 @@
  "version": 1,
  "note": "Gap + Guard research log. Every flag here is a pick on the page and in the Record; vetoed and capped rows are research only.",
  "market": "shots",
- "generated_at": "2026-10-31T12:00:00-04:00",
+ "generated_at": "2026-10-31T12:20:00-04:00",
  "slate": "2026-10-31",
  "active": true,
  "window": {
@@ -11,6 +11,40 @@
  },
  "tonight": {
   "flags": [
+   {
+    "id": "2026-10-31:2026020217:8477496:2.5:under",
+    "kind": "flag",
+    "slate": "2026-10-31",
+    "game_id": 2026020217,
+    "player": "E. Lindholm",
+    "team": "BOS",
+    "opp": "CHI",
+    "game": "BOS vs CHI",
+    "start": "2026-10-31T13:00:00-04:00",
+    "side": "under",
+    "line": 2.5,
+    "bet": "UNDER 2.5 shots",
+    "price": -185,
+    "gap_pct": 4.1,
+    "final_pct": 5.6,
+    "market_fair_pct": 67.6,
+    "final_p_pct": 68.5,
+    "n_books": 4,
+    "guard": "pass",
+    "cap": null,
+    "flagged_at": "2026-10-31T12:20:00-04:00",
+    "read_pull": "C",
+    "settled": "Early",
+    "frozen_settled": "Early",
+    "move30_pct": 0.5,
+    "pulled": null,
+    "locked": false,
+    "state": "open",
+    "close_fair_pct": 67.6,
+    "clv_pct": null,
+    "result": null,
+    "units": null
+   },
    {
     "id": "2026-10-31:2026020218:8482078:2.5:under",
     "kind": "flag",
@@ -40,8 +74,8 @@
     "pulled": null,
     "locked": false,
     "state": "open",
-    "close_fair_pct": null,
-    "clv_pct": null,
+    "close_fair_pct": 51.7,
+    "clv_pct": 3.5,
     "result": null,
     "units": null
    }
@@ -810,8 +844,8 @@
   }
  ],
  "nov2": {
-  "gaps_measured": 29,
-  "gaps_logged": 33,
+  "gaps_measured": 30,
+  "gaps_logged": 34,
   "graded_picks": 31,
   "w": 22,
   "l": 9,
@@ -819,15 +853,15 @@
   "units": 11.617083682600924,
   "wins_z": 1.9264276462155583,
   "clv_gaps": {
-   "n": 29,
-   "mean": 0.044472826535570706,
-   "lb80": 0.04021906046534209,
+   "n": 30,
+   "mean": 0.04415450395331985,
+   "lb80": 0.03985767219521094,
    "pos_share": 1.0
   },
   "clv_flags": {
-   "n": 28,
-   "mean": 0.04438305403658261,
-   "lb80": 0.039859581248656024,
+   "n": 29,
+   "mean": 0.04405685041697787,
+   "lb80": 0.03965149201814308,
    "pos_share": 1.0
   },
   "clv_vetoed": {
@@ -836,7 +870,7 @@
    "lb80": 0.04698645650723732,
    "pos_share": 1.0
   },
-  "clv_passed_mean": 0.04438305403658261,
+  "clv_passed_mean": 0.04405685041697787,
   "clv_vetoed_mean": 0.04698645650723732,
   "nights": 12,
   "nights_with_flags": 9,

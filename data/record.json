@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-10-31T11:30:00-04:00",
+ "generated_at": "2026-10-31T12:20:00-04:00",
  "summary": {
   "headline": {
    "w": 19,
@@ -61,6 +61,29 @@
       {
        "price": 100,
        "at": "2026-10-31T11:30:00-04:00"
+      }
+     ],
+     "result": null,
+     "actual": null,
+     "units": null,
+     "pulled": null,
+     "legs": []
+    },
+    {
+     "id": "2026-10-31:2026020217:8477496:shots:2.5:under",
+     "kind": "single",
+     "player": "E. Lindholm",
+     "bet": "Under 2.5 shots on goal",
+     "market": "shots",
+     "team": "BOS",
+     "game": "CHI at BOS",
+     "price": -185,
+     "first_price": -185,
+     "last_price": -185,
+     "prices": [
+      {
+       "price": -185,
+       "at": "2026-10-31T12:20:00-04:00"
       }
      ],
      "result": null,

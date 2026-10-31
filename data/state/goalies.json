@@ -55,7 +55,7 @@
   },
   "PIT": {
    "name": "Sergei Murashov",
-   "status": "expected"
+   "status": "confirmed"
   },
   "VAN": {
    "name": "Kevin Lankinen",
@@ -82,5 +82,5 @@
    "status": "expected"
   }
  },
- "checked_at": "2026-10-31T11:50:00-04:00"
+ "checked_at": "2026-10-31T12:20:00-04:00"
 }

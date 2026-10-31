@@ -1,33 +1,33 @@
 {
  "slate_date": "2026-10-31",
- "generated_at": "2026-10-31T12:00:00-04:00",
- "status_at": "2026-10-31T12:00:00-04:00",
+ "generated_at": "2026-10-31T12:20:00-04:00",
+ "status_at": "2026-10-31T12:20:00-04:00",
  "valid_until": "2026-11-01T05:00:00-05:00",
  "status": {
   "prices_state": "ok",
-  "prices_at": "2026-10-31T11:30:00-04:00",
-  "next_price_read_at": "2026-10-31T12:15:00-04:00",
+  "prices_at": "2026-10-31T12:20:00-04:00",
+  "next_price_read_at": "2026-10-31T12:30:00-04:00",
   "stats_built_at": "2026-10-30T23:40:00-04:00",
   "stats_through": "2026-10-30",
-  "lineups_at": "2026-10-31T12:00:00-04:00",
+  "lineups_at": "2026-10-31T12:20:00-04:00",
   "goalies_at": null,
   "lineups_note": "1 of 8 team line pages are dated today.",
   "lineups_state": "ok",
   "stats_state": "ok",
   "last_run": {
    "ok": true,
-   "at": "2026-10-31T12:00:00-04:00",
+   "at": "2026-10-31T12:20:00-04:00",
    "failed_step": null
   },
   "pool": {
-   "pulls_left": 1398,
+   "pulls_left": 1394,
    "keys": 10,
    "game_days_left": 1,
    "days_left": 1,
    "low": false
   },
   "excluded_teams": [],
-  "lines_checked": 30,
+  "lines_checked": 32,
   "flag_reads": 2,
   "tier": 4
  },
@@ -54,7 +54,7 @@
     }
    },
    "started": false,
-   "picks": 0,
+   "picks": 1,
    "excluded_reason": null,
    "excluded_teams": []
   },
@@ -190,7 +190,7 @@
    "goalies": {
     "away": {
      "name": "Sergei Murashov",
-     "status": "expected"
+     "status": "confirmed"
     },
     "home": {
      "name": "Jacob Fowler",
@@ -277,6 +277,62 @@
  ],
  "picks": [
   {
+   "id": "2026-10-31:2026020217:8477496:shots:2.5:under",
+   "price": -185,
+   "first_price": -185,
+   "first_price_at": "2026-10-31T12:20:00-04:00",
+   "worst_price": -185,
+   "p": 0.6852,
+   "breakeven": 0.6491,
+   "p_pct": 68,
+   "breakeven_pct": 65,
+   "state": "early",
+   "history": [
+    {
+     "at": "2026-10-31T12:20:00-04:00",
+     "text": "Early: lineup not confirmed"
+    }
+   ],
+   "prices": [
+    {
+     "at": "2026-10-31T12:20:00-04:00",
+     "price": -185
+    }
+   ],
+   "pulled": null,
+   "price_final": true,
+   "graded": null,
+   "rank": 1,
+   "tier": "main",
+   "game_id": 2026020217,
+   "player": "E. Lindholm",
+   "player_id": 8477496,
+   "team": "BOS",
+   "opp": "CHI",
+   "home": true,
+   "start": "2026-10-31T13:00:00-04:00",
+   "market": "shots",
+   "line": 2.5,
+   "side": "under",
+   "bet": "Under 2.5 shots on goal",
+   "price_at": "2026-10-31T12:20:00-04:00",
+   "gap_pct": 4.1,
+   "market_fair_pct": 67.6,
+   "n_books": 4,
+   "guard": {
+    "verdict": "agrees",
+    "ours_pct": 68.5,
+    "model_pct": 73.8
+   },
+   "settled": "early",
+   "settled_label": "Early",
+   "reason": "4 other books say 67.6%; Hard Rock's -185 only needs 64.9%. Our model agrees (our blend: 68.5%).",
+   "link": null,
+   "thin": false,
+   "games_used": 83,
+   "games_this_season": 14
+  },
+  {
    "id": "2026-10-31:2026020218:8482078:shots:2.5:under",
    "price": 100,
    "first_price": 100,
@@ -300,9 +356,9 @@
     }
    ],
    "pulled": null,
-   "price_final": false,
+   "price_final": true,
    "graded": null,
-   "rank": 1,
+   "rank": 2,
    "tier": "main",
    "game_id": 2026020218,
    "player": "L. Raymond",
