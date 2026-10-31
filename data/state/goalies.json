@@ -34,8 +34,8 @@
    "status": "confirmed"
   },
   "SJS": {
-   "name": "Yaroslav Askarov",
-   "status": "expected"
+   "name": "Alex Nedeljkovic",
+   "status": "confirmed"
   },
   "OTT": {
    "name": "Samuel Ersson",
@@ -71,7 +71,7 @@
   },
   "CBJ": {
    "name": "Jet Greaves",
-   "status": "expected"
+   "status": "confirmed"
   },
   "COL": {
    "name": "Mackenzie Blackwood",
@@ -82,5 +82,5 @@
    "status": "expected"
   }
  },
- "checked_at": "2026-10-31T13:40:01-04:00"
+ "checked_at": "2026-10-31T13:50:00-04:00"
 }
