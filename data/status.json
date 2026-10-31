@@ -1,10 +1,10 @@
 {
  "ok": true,
  "slate_date": "2026-10-30",
- "started_at": "2026-10-30T23:20:01-04:00",
- "status_at": "2026-10-30T23:20:01-04:00",
- "finished_at": "2026-10-30T23:20:04-04:00",
- "last_ok_at": "2026-10-30T23:20:01-04:00",
+ "started_at": "2026-10-30T23:40:00-04:00",
+ "status_at": "2026-10-30T23:40:00-04:00",
+ "finished_at": "2026-10-30T23:40:02-04:00",
+ "last_ok_at": "2026-10-30T23:40:00-04:00",
  "failed_step": null,
  "steps": [
   {
@@ -20,7 +20,7 @@
   {
    "step": "stats",
    "status": "ok",
-   "note": "1 window(s) read, 2 team-games still missing"
+   "note": "1 window(s) read"
   },
   {
    "step": "lineups",
@@ -64,8 +64,8 @@
   },
   {
    "step": "shadow",
-   "status": "skipped",
-   "note": "nothing new"
+   "status": "ok",
+   "note": "41 graded"
   },
   {
    "step": "gg_grade",
@@ -74,8 +74,8 @@
   },
   {
    "step": "slate",
-   "status": "skipped",
-   "note": "unchanged"
+   "status": "ok",
+   "note": "0 open pick(s)"
   },
   {
    "step": "record",
@@ -146,17 +146,8 @@
   "Arsenii Sergeev",
   "Jonas Rondbjerg"
  ],
- "excluded_teams": [
-  {
-   "team": "CGY",
-   "reason": "stats behind"
-  },
-  {
-   "team": "SEA",
-   "reason": "stats behind"
-  }
- ],
- "stats_through": "2026-10-29",
+ "excluded_teams": [],
+ "stats_through": "2026-10-30",
  "lineups_at": "2026-10-30T18:50:01-04:00",
  "lineups_note": "5 of 6 team line pages are dated today.",
  "games_today": 3,
@@ -164,10 +155,10 @@
  "odds_notes": [],
  "runner": {
   "event": "workflow_dispatch",
-  "run_id": "41160276128",
-  "iteration": 6,
-  "chain_link": 80,
+  "run_id": "41163919148",
+  "iteration": 3,
+  "chain_link": 81,
   "chain_started_at": "2026-10-28T10:00:15-04:00",
-  "run_started_at": "2026-10-30T22:30:13-04:00"
+  "run_started_at": "2026-10-30T23:20:15-04:00"
  }
 }
