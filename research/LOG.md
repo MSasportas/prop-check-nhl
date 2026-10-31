@@ -1,5 +1,27 @@
 # LOG.md: Researcher runs (newest first)
 
+- 2026-10-31 ~8:30 AM ET (Researcher run 16, daily; SHOTS ON GOAL ONLY). No key used, no historical odds pull. DD1-DD4 registered and pushed
+  (f6efeeb) before any test ran. Free NHL api-web play-by-play + right-rail (referees, head coaches) for all 945 games Oct 7 - Feb 28 fetched
+  to scratch (r16/fetch16.py; lockbox not fetched). Script research/code/r16/dd16.py, output dd16_results.txt. 10,413 graded Nov-Feb lines.
+  - DD1 referee crew x power-play share: best T=.03 -2.4% n178; DD1r OVER for PP-heavy shooters with a whistle-happy crew -31.2% n64.
+    The crew x PP weight is NEGATIVE every fold: a penalty-prone crew does not help PP shooters at Hard Rock's price.
+  - DD2 score-state sensitivity (his share of team shots rises when trailing) x moneyline game script: -7.6% n145 to -23.8% n32; DD2r OVER
+    (trailing-push shooters on underdogs, pw <= .42) +3.3% n269 [-5.6,+12.1] p .26, folds -12.5/+17.5/+5.5/+24.2. Under n 300 and nowhere
+    near a bar: not a candidate, no lockbox look.
+  - DD3 rebound environment (opponent's rebound shots allowed, own team's rebound rate): -10.5% n180 to +0.1% n87; DD3r OVER vs leaky-rebound
+    opponents -10.8% n1,213, every fold negative.
+  - DD4 new head coach: only one mid-season change in the window (CBJ), 72 lines; DD4r -11.8% n72. Too small to mean anything.
+  - Forward re-score (all scorers, 12 nights Oct 19-30; clone unshallowed): Q1a +7.2% n436 p .042 (bar not met); Q1b +13.1% n322 [+6,+20]
+    p < .001, mean CLV +3.4% (still over its bar); Q1c +16.3% n233 p .0005; Q1g +14.9% n270; Q1h +18.4% n193; Q1k Pinnacle +10.3% n334;
+    Q1m +29.1% n39. Q6a/b/c +6.2% n171 / +8.6% n112 / +9.7% n233. Q8a-c +4.8% / +0.5% / +10.5%. Q9a-c +13.9% n106 / -1.1% n61 / -4.6% n17.
+    Q10 +12.6% n34. Q11a +10.1% n69, Q11b +18.9% n164 p .003. Q15a +5.3% n33, Q15b +15.8% n12. Q16a 3 bets -41%, Q16b 4 bets -7.3%
+    (one 3-game night). Q2a/b 0 bets. Oct 30 was a 3-game night: Q1b moved +13.4% -> +13.1%.
+  16 historical variants (~0.8 false positives expected), all-time 420; forward 31. Lockbox looks: 2 (unchanged; next needs p < 0.0167).
+  **Verdict: nothing new passed.** Referees, score-state roles, rebound control and coaching changes are all inside Hard Rock's price; history
+  with free data stays exhausted (420 variants). Q1b (run 15 candidate) still holds at n322; the open question for the Sharp is still timing
+  (Q16a-b need weeks).
+  Next: (1) Q16b to n 300 (can the 90-min read keep the 1 PM edge?); (2) register forward: Q1b split by minutes from the read to the first
+    goalie confirmation; (3) Q1c to n 300 (~Nov 4-5).
 - 2026-10-30 ~8:20 AM ET (Researcher run 15, daily; SHOTS ON GOAL ONLY). **CANDIDATE FOR SHARP: forward Q1b.**
   - Rule (registered 2026-10-19, run 5, unchanged): at any Hard Rock read (1 PM A, 90-min B, 45-min C) with >= 1 other book, bet the Hard Rock
     shots side whose EV vs the median of the other books' proportional no-vig fair is >= +1.0%, price -200 or better, first qualifying read
