@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-10-31T13:00:00-04:00",
+ "generated_at": "2026-10-31T15:20:00-04:00",
  "summary": {
   "headline": {
    "w": 19,
@@ -84,6 +84,29 @@
       {
        "price": -185,
        "at": "2026-10-31T12:20:00-04:00"
+      }
+     ],
+     "result": null,
+     "actual": null,
+     "units": null,
+     "pulled": null,
+     "legs": []
+    },
+    {
+     "id": "2026-10-31:2026020222:8482105:shots:2.5:under",
+     "kind": "single",
+     "player": "J. Sanderson",
+     "bet": "Under 2.5 shots on goal",
+     "market": "shots",
+     "team": "OTT",
+     "game": "OTT at SJS",
+     "price": -115,
+     "first_price": -115,
+     "last_price": -115,
+     "prices": [
+      {
+       "price": -115,
+       "at": "2026-10-31T15:20:00-04:00"
       }
      ],
      "result": null,

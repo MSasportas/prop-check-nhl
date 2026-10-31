@@ -1,12 +1,12 @@
 {
  "slate_date": "2026-10-31",
- "generated_at": "2026-10-31T15:10:00-04:00",
- "status_at": "2026-10-31T15:10:00-04:00",
+ "generated_at": "2026-10-31T15:20:00-04:00",
+ "status_at": "2026-10-31T15:20:00-04:00",
  "valid_until": "2026-11-01T05:00:00-05:00",
  "status": {
   "prices_state": "ok",
-  "prices_at": "2026-10-31T14:30:00-04:00",
-  "next_price_read_at": "2026-10-31T15:15:00-04:00",
+  "prices_at": "2026-10-31T15:20:00-04:00",
+  "next_price_read_at": "2026-10-31T17:30:00-04:00",
   "stats_built_at": "2026-10-30T23:40:00-04:00",
   "stats_through": "2026-10-30",
   "lineups_at": "2026-10-31T15:10:00-04:00",
@@ -16,11 +16,11 @@
   "stats_state": "ok",
   "last_run": {
    "ok": true,
-   "at": "2026-10-31T15:10:00-04:00",
+   "at": "2026-10-31T15:20:00-04:00",
    "failed_step": null
   },
   "pool": {
-   "pulls_left": 1382,
+   "pulls_left": 1378,
    "keys": 10,
    "game_days_left": 1,
    "days_left": 1,
@@ -32,11 +32,7 @@
   "tier": 4
  },
  "banners": [],
- "empty": {
-  "code": "none_qualified",
-  "text": "No picks yet today",
-  "sub": "99 lines read, none cleared both checks. 1 had a gap but our model said no. Today's earlier picks are under Started. Next read at 3:15 PM."
- },
+ "empty": null,
  "games": [
   {
    "id": 2026020217,
@@ -178,7 +174,7 @@
     }
    },
    "started": false,
-   "picks": 0,
+   "picks": 1,
    "excluded_reason": null,
    "excluded_teams": []
   },
@@ -280,6 +276,62 @@
   }
  ],
  "picks": [
+  {
+   "id": "2026-10-31:2026020222:8482105:shots:2.5:under",
+   "price": -115,
+   "first_price": -115,
+   "first_price_at": "2026-10-31T15:20:00-04:00",
+   "worst_price": -115,
+   "p": 0.5707,
+   "breakeven": 0.5349,
+   "p_pct": 57,
+   "breakeven_pct": 53,
+   "state": "early",
+   "history": [
+    {
+     "at": "2026-10-31T15:20:00-04:00",
+     "text": "Early: lineup not confirmed"
+    }
+   ],
+   "prices": [
+    {
+     "at": "2026-10-31T15:20:00-04:00",
+     "price": -115
+    }
+   ],
+   "pulled": null,
+   "price_final": true,
+   "graded": null,
+   "rank": 1,
+   "tier": "main",
+   "game_id": 2026020222,
+   "player": "J. Sanderson",
+   "player_id": 8482105,
+   "team": "OTT",
+   "opp": "SJS",
+   "home": false,
+   "start": "2026-10-31T16:00:00-04:00",
+   "market": "shots",
+   "line": 2.5,
+   "side": "under",
+   "bet": "Under 2.5 shots on goal",
+   "price_at": "2026-10-31T15:20:00-04:00",
+   "gap_pct": 3.8,
+   "market_fair_pct": 55.5,
+   "n_books": 8,
+   "guard": {
+    "verdict": "agrees",
+    "ours_pct": 57.1,
+    "model_pct": 64.8
+   },
+   "settled": "early",
+   "settled_label": "Early",
+   "reason": "8 other books say 55.5%; Hard Rock's -115 only needs 53.5%. Our model agrees (our blend: 57.1%).",
+   "link": null,
+   "thin": false,
+   "games_used": 73,
+   "games_this_season": 6
+  },
   {
    "id": "2026-10-31:2026020217:8477496:shots:2.5:under",
    "price": -185,

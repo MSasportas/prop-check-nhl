@@ -2,7 +2,7 @@
  "version": 1,
  "note": "Behind the scenes: research only. Not picks, not on the Record, never sent to Discord.",
  "market": "points",
- "generated_at": "2026-10-31T15:10:00-04:00",
+ "generated_at": "2026-10-31T15:20:00-04:00",
  "slate": "2026-10-31",
  "active": true,
  "window": {
@@ -37,11 +37,15 @@
     "settled": "Lineup confirmed",
     "frozen_settled": "Lineup confirmed",
     "move30_pct": null,
-    "pulled": null,
+    "pulled": {
+     "reason": "price moved, gap gone",
+     "detail": "gap -1.9% at +100",
+     "at": "2026-10-31T15:20:00-04:00"
+    },
     "locked": false,
-    "state": "open",
-    "close_fair_pct": null,
-    "clv_pct": null,
+    "state": "pulled",
+    "close_fair_pct": 49.1,
+    "clv_pct": 3.0,
     "result": null,
     "units": null
    }
@@ -242,7 +246,7 @@
   }
  ],
  "nov2": {
-  "gaps_measured": 5,
+  "gaps_measured": 6,
   "gaps_logged": 6,
   "graded_picks": 5,
   "w": 2,
@@ -251,15 +255,15 @@
   "units": -0.8000000000000003,
   "wins_z": -0.501616410534316,
   "clv_gaps": {
-   "n": 5,
-   "mean": 0.04304254723159802,
-   "lb80": 0.03304254723159801,
+   "n": 6,
+   "mean": 0.04094960328113647,
+   "lb80": 0.032551510886757486,
    "pos_share": 1.0
   },
   "clv_flags": {
-   "n": 5,
-   "mean": 0.04304254723159802,
-   "lb80": 0.03304254723159801,
+   "n": 6,
+   "mean": 0.04094960328113647,
+   "lb80": 0.032551510886757486,
    "pos_share": 1.0
   },
   "clv_vetoed": {
@@ -268,7 +272,7 @@
    "lb80": null,
    "pos_share": null
   },
-  "clv_passed_mean": 0.04304254723159802,
+  "clv_passed_mean": 0.04094960328113647,
   "clv_vetoed_mean": null,
   "nights": 4,
   "nights_with_flags": 3,
