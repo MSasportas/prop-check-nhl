@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-10-31T16:20:01-04:00",
+ "generated_at": "2026-10-31T18:20:01-04:00",
  "summary": {
   "headline": {
    "w": 20,
@@ -107,6 +107,29 @@
       {
        "price": -115,
        "at": "2026-10-31T15:20:00-04:00"
+      }
+     ],
+     "result": null,
+     "actual": null,
+     "units": null,
+     "pulled": null,
+     "legs": []
+    },
+    {
+     "id": "2026-10-31:2026020223:8476981:shots:1.5:under",
+     "kind": "single",
+     "player": "J. Anderson",
+     "bet": "Under 1.5 shots on goal",
+     "market": "shots",
+     "team": "MTL",
+     "game": "PIT at MTL",
+     "price": 100,
+     "first_price": 100,
+     "last_price": 100,
+     "prices": [
+      {
+       "price": 100,
+       "at": "2026-10-31T18:20:01-04:00"
       }
      ],
      "result": null,
