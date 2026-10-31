@@ -452,6 +452,17 @@ def build():
     find(s, "maka")["graded"] = {"result": "VOID", "actual": "did not play", "units": 0.0}
     out["allstarted"] = (s, rec)
 
+    # every game has started and nothing was posted: the page gives the real reason (TEAM.md section 7 item 29)
+    s = empty_slate("all_started", "Every game has started.",
+                    "No picks were posted tonight. 59 lines read across 3 games, none cleared both checks. "
+                    "1 had a gap but our model said no.")
+    s["fixture_now"], s["generated_at"] = t("22:40"), t("22:32")
+    s["status"].update(lineups_at=t("21:40"), next_price_read_at=None, lines_checked=59, flag_reads=3)
+    s["status"]["last_run"]["at"] = t("22:32")
+    for g in s["games"]:
+        g["started"] = True
+    out["allstartednone"] = (s, rec)
+
     # lineup source down: picks stay Early, page says so
     s = base_slate()
     for p in s["picks"]:

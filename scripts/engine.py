@@ -477,8 +477,24 @@ def _empty(inp, status, picks, games, extra):
         return {"code": "stats_behind", "text": "Stats are behind, so no picks until they catch up.", "sub": None}
     if all(g["started"] for g in games):
         shown = [p for p in picks if not p["pulled"]]
-        return {"code": "all_started", "text": "Every game has started.",
-                "sub": "Tonight's picks are under Started." if shown else "No picks were posted tonight."}
+        if shown:
+            return {"code": "all_started", "text": "Every game has started.",
+                    "sub": "Tonight's picks are under Started."}
+        if picks:
+            n = len(picks)
+            return {"code": "all_started", "text": "Every game has started.",
+                    "sub": ("Tonight's pick was pulled; see Pulled today." if n == 1
+                            else "Tonight's %d picks were pulled; see Pulled today." % n)}
+        parts = ["No picks were posted tonight."]
+        reads = f.get("flag_reads") or {"games": 0, "lines": 0}
+        if reads["games"]:
+            n, k = reads["lines"], reads["games"]
+            parts.append("%d line%s read across %d game%s, none cleared both checks."
+                         % (n, "" if n == 1 else "s", k, "" if k == 1 else "s"))
+            if f.get("gg_vetoes"):
+                v = f["gg_vetoes"]
+                parts.append("%d had a gap but our model said no." % v if v != 1 else "1 had a gap but our model said no.")
+        return {"code": "all_started", "text": "Every game has started.", "sub": " ".join(parts)}
     ps = status["prices_state"]
     if ps == "keys_refused":
         text = "No picks yet today" if status["prices_at"] else "No Hard Rock prices today, so no picks."

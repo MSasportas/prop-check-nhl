@@ -246,12 +246,16 @@ def update_season(season, season_start, sched_games, now, ops):
 
 def team_status(season, sched_games, slate):
     """-> (behind: {team: reason}, through date, built_at). Uses only games dated before the slate date
-    plus anything already final: a team is behind if any of its finished games is not verified."""
+    plus anything already final: a team is behind if any of its finished games is not verified.
+    A game dated the slate date (or later) is ignored here: it was evaluated before puck and is not a stats gap
+    for tonight (update_season still fetches it). slate is "YYYY-MM-DD"."""
     meta = common.read_json(meta_path(), {}) or {}
     verified = meta.get("verified", {}) if meta.get("season") == season else {}
     bad = meta.get("bad", {})
     behind = {}
     for k, d in expected_team_games(sched_games, season).items():
+        if slate and d >= str(slate):
+            continue
         if k not in verified:
             team = k.split(":")[1]
             why = (bad.get(k) or {}).get("reason")
