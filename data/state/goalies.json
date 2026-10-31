@@ -6,7 +6,7 @@
    "status": "expected"
   },
   "CHI": {
-   "name": "Spencer Knight",
+   "name": "Arvid Soderblom",
    "status": "expected"
   },
   "DET": {
@@ -26,7 +26,7 @@
    "status": "confirmed"
   },
   "NSH": {
-   "name": "Juuse Saros",
+   "name": "Justus Annunen",
    "status": "expected"
   },
   "TBL": {
@@ -38,11 +38,11 @@
    "status": "expected"
   },
   "OTT": {
-   "name": "Jonas Johansson",
+   "name": "Samuel Ersson",
    "status": "expected"
   },
   "LAK": {
-   "name": "Darcy Kuemper",
+   "name": "Anton Forsberg",
    "status": "expected"
   },
   "BUF": {
@@ -50,15 +50,15 @@
    "status": "expected"
   },
   "MTL": {
-   "name": "Jakub Dobes",
+   "name": "Jacob Fowler",
    "status": "expected"
   },
   "PIT": {
-   "name": "Arturs Silovs",
+   "name": "Sergei Murashov",
    "status": "expected"
   },
   "VAN": {
-   "name": "Leevi Merilainen",
+   "name": "Kevin Lankinen",
    "status": "expected"
   },
   "TOR": {
@@ -82,5 +82,5 @@
    "status": "expected"
   }
  },
- "checked_at": "2026-10-31T05:00:00-04:00"
+ "checked_at": "2026-10-31T07:30:00-04:00"
 }

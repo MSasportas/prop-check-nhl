@@ -1,7 +1,7 @@
 {
  "slate_date": "2026-10-31",
- "generated_at": "2026-10-31T07:00:00-04:00",
- "status_at": "2026-10-31T07:00:00-04:00",
+ "generated_at": "2026-10-31T07:30:00-04:00",
+ "status_at": "2026-10-31T07:30:00-04:00",
  "valid_until": "2026-11-01T05:00:00-05:00",
  "status": {
   "prices_state": "not_yet",
@@ -16,7 +16,7 @@
   "stats_state": "ok",
   "last_run": {
    "ok": true,
-   "at": "2026-10-31T07:00:00-04:00",
+   "at": "2026-10-31T07:30:00-04:00",
    "failed_step": null
   },
   "pool": {
@@ -49,7 +49,7 @@
    },
    "goalies": {
     "away": {
-     "name": "Spencer Knight",
+     "name": "Arvid Soderblom",
      "status": "expected"
     },
     "home": {
@@ -101,7 +101,7 @@
      "status": "expected"
     },
     "home": {
-     "name": "Juuse Saros",
+     "name": "Justus Annunen",
      "status": "expected"
     }
    },
@@ -149,7 +149,7 @@
      "status": "expected"
     },
     "home": {
-     "name": "Darcy Kuemper",
+     "name": "Anton Forsberg",
      "status": "expected"
     }
    },
@@ -169,7 +169,7 @@
    },
    "goalies": {
     "away": {
-     "name": "Jonas Johansson",
+     "name": "Samuel Ersson",
      "status": "expected"
     },
     "home": {
@@ -193,11 +193,11 @@
    },
    "goalies": {
     "away": {
-     "name": "Arturs Silovs",
+     "name": "Sergei Murashov",
      "status": "expected"
     },
     "home": {
-     "name": "Jakub Dobes",
+     "name": "Jacob Fowler",
      "status": "expected"
     }
    },
@@ -221,7 +221,7 @@
      "status": "confirmed"
     },
     "home": {
-     "name": "Leevi Merilainen",
+     "name": "Kevin Lankinen",
      "status": "expected"
     }
    },
