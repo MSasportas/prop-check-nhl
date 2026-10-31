@@ -2,7 +2,7 @@
  "version": 1,
  "note": "Behind the scenes: research only. Not picks, not on the Record, never sent to Discord.",
  "market": "points",
- "generated_at": "2026-10-31T14:20:01-04:00",
+ "generated_at": "2026-10-31T14:30:00-04:00",
  "slate": "2026-10-31",
  "active": true,
  "window": {
@@ -10,7 +10,42 @@
   "checkpoint": "2026-11-02"
  },
  "tonight": {
-  "flags": [],
+  "flags": [
+   {
+    "id": "2026-10-31:2026020221:8482124:0.5:under",
+    "kind": "flag",
+    "slate": "2026-10-31",
+    "game_id": 2026020221,
+    "player": "Q. Byfield",
+    "team": "LAK",
+    "opp": "BUF",
+    "game": "LAK vs BUF",
+    "start": "2026-10-31T16:00:00-04:00",
+    "side": "under",
+    "line": 0.5,
+    "bet": "UNDER 0.5 points",
+    "price": 110,
+    "gap_pct": 4.0,
+    "final_pct": 7.5,
+    "market_fair_pct": 49.5,
+    "final_p_pct": 51.2,
+    "n_books": 7,
+    "guard": "pass",
+    "cap": null,
+    "flagged_at": "2026-10-31T14:30:00-04:00",
+    "read_pull": "B",
+    "settled": "Lineup confirmed",
+    "frozen_settled": "Lineup confirmed",
+    "move30_pct": null,
+    "pulled": null,
+    "locked": false,
+    "state": "open",
+    "close_fair_pct": null,
+    "clv_pct": null,
+    "result": null,
+    "units": null
+   }
+  ],
   "vetoes": [],
   "capped": []
  },
@@ -208,7 +243,7 @@
  ],
  "nov2": {
   "gaps_measured": 5,
-  "gaps_logged": 5,
+  "gaps_logged": 6,
   "graded_picks": 5,
   "w": 2,
   "l": 3,
@@ -236,7 +271,7 @@
   "clv_passed_mean": 0.04304254723159802,
   "clv_vetoed_mean": null,
   "nights": 4,
-  "nights_with_flags": 2,
+  "nights_with_flags": 3,
   "population_slope": null,
   "checkpoint": "2026-11-02"
  }
