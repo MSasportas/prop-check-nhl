@@ -100,3 +100,4 @@
 {"at":"2026-10-31T15:50:01-04:00","id":"2026-10-31:2026020222:8482105:shots:2.5:under","state":"lineup","t":"state"}
 {"at":"2026-10-31T16:00:00-04:00","id":"2026-10-31:2026020222:8482105:shots:2.5:under","state":"locked","t":"locked"}
 {"actual":4,"actual_text":"had 4","at":"2026-10-31T16:00:00-04:00","id":"2026-10-31:2026020218:8482078:shots:2.5:under","price":100,"result":"L","t":"graded","units":-1.0}
+{"actual":2,"actual_text":"had 2","at":"2026-10-31T16:20:01-04:00","id":"2026-10-31:2026020217:8477496:shots:2.5:under","price":-185,"result":"W","t":"graded","units":0.5405}
