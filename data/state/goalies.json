@@ -6,7 +6,7 @@
    "status": "expected"
   },
   "WPG": {
-   "name": "Nico Daws",
+   "name": "Stuart Skinner",
    "status": "expected"
   },
   "WSH": {
@@ -22,7 +22,7 @@
    "status": "expected"
   },
   "UTA": {
-   "name": "Sebastian Cossa",
+   "name": "Karel Vejmelka",
    "status": "expected"
   },
   "NYR": {
@@ -38,9 +38,9 @@
    "status": "confirmed"
   },
   "OTT": {
-   "name": "Samuel Ersson",
+   "name": "Jonas Johansson",
    "status": "expected"
   }
  },
- "checked_at": "2026-11-01T05:00:00-05:00"
+ "checked_at": "2026-11-01T07:00:00-05:00"
 }
