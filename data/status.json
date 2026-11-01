@@ -1,10 +1,10 @@
 {
  "ok": true,
- "slate_date": "2026-10-31",
- "started_at": "2026-11-01T04:30:12-05:00",
- "status_at": "2026-11-01T04:30:12-05:00",
- "finished_at": "2026-11-01T04:30:13-05:00",
- "last_ok_at": "2026-11-01T04:30:12-05:00",
+ "slate_date": "2026-11-01",
+ "started_at": "2026-11-01T05:00:00-05:00",
+ "status_at": "2026-11-01T05:00:00-05:00",
+ "finished_at": "2026-11-01T05:00:02-05:00",
+ "last_ok_at": "2026-11-01T05:00:00-05:00",
  "failed_step": null,
  "steps": [
   {
@@ -15,7 +15,7 @@
   {
    "step": "schedule",
    "status": "ok",
-   "note": "10 game(s) today"
+   "note": "5 game(s) today"
   },
   {
    "step": "stats",
@@ -74,8 +74,8 @@
   },
   {
    "step": "slate",
-   "status": "skipped",
-   "note": "unchanged"
+   "status": "ok",
+   "note": "0 open pick(s)"
   },
   {
    "step": "record",
@@ -133,28 +133,21 @@
   }
  ],
  "pool_total": 4496,
- "allowance": 141.2,
+ "allowance": 21.512,
  "tier": 4,
- "budget_today": 1412,
- "budget_used_today": 50,
- "prices_state": "ok",
- "prices_at": "2026-10-31T21:20:01-04:00",
- "next_price_read_at": null,
- "unmatched_names": [
-  "Elias Pettersson"
- ],
+ "budget_today": 107,
+ "budget_used_today": 0,
+ "prices_state": "not_yet",
+ "prices_at": null,
+ "next_price_read_at": "2026-11-01T10:00:00-05:00",
+ "unmatched_names": [],
  "unknown_teams": [],
- "lineup_unmatched_names": [
-  "Elias Nils Pettersson",
-  "Elias Pettersson",
-  "Philip Tomasino",
-  "Xavier Bourgault"
- ],
+ "lineup_unmatched_names": [],
  "excluded_teams": [],
  "stats_through": "2026-10-31",
- "lineups_at": "2026-10-31T21:30:14-04:00",
- "lineups_note": "14 of 20 team line pages are dated today.",
- "games_today": 10,
+ "lineups_at": null,
+ "lineups_note": null,
+ "games_today": 5,
  "record_events": 107,
  "odds_notes": [
   "key 1 refused (401)"
@@ -162,7 +155,7 @@
  "runner": {
   "event": "workflow_dispatch",
   "run_id": "41293391782",
-  "iteration": 1,
+  "iteration": 2,
   "chain_link": 122,
   "chain_started_at": "2026-10-28T10:00:15-04:00",
   "run_started_at": "2026-11-01T04:30:11-05:00"
