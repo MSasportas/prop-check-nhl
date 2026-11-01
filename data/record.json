@@ -1,50 +1,50 @@
 {
- "generated_at": "2026-11-01T13:00:01-05:00",
+ "generated_at": "2026-11-01T16:10:01-05:00",
  "summary": {
   "headline": {
    "w": 21,
-   "l": 10,
+   "l": 11,
    "push": 0,
    "void": 0,
-   "units": 9.81,
-   "hit_rate": 0.6774,
-   "needed": 0.5092,
-   "n": 31
+   "units": 8.81,
+   "hit_rate": 0.6562,
+   "needed": 0.5097,
+   "n": 32
   },
   "rows": [
    {
     "key": "shots",
     "label": "Shots on goal",
     "w": 21,
-    "l": 10,
+    "l": 11,
     "push": 0,
     "void": 0,
-    "units": 9.81,
-    "hit_rate": 0.6774,
-    "needed": 0.5092,
-    "n": 31
+    "units": 8.81,
+    "hit_rate": 0.6562,
+    "needed": 0.5097,
+    "n": 32
    },
    {
     "key": "pulled",
     "label": "Pulled (not counted above)",
     "w": 3,
-    "l": 1,
+    "l": 2,
     "push": 0,
     "void": 0,
-    "units": 1.22,
-    "hit_rate": 0.75,
-    "needed": 0.5626,
-    "n": 4
+    "units": 0.22,
+    "hit_rate": 0.6,
+    "needed": 0.5571,
+    "n": 5
    }
   ]
  },
  "nights": [
   {
    "date": "2026-11-01",
-   "graded": false,
+   "graded": true,
    "w": 0,
-   "l": 0,
-   "units": 0,
+   "l": 1,
+   "units": -1.0,
    "entries": [
     {
      "id": "2026-11-01:2026020227:8476873:shots:1.5:under",
@@ -63,9 +63,9 @@
        "at": "2026-11-01T11:30:01-05:00"
       }
      ],
-     "result": null,
-     "actual": null,
-     "units": null,
+     "result": "L",
+     "actual": "had 3",
+     "units": -1.0,
      "pulled": {
       "at": "2026-11-01T12:20:01-05:00",
       "reason": "Hard Rock moved it to -135"
@@ -89,9 +89,9 @@
        "at": "2026-11-01T11:30:01-05:00"
       }
      ],
-     "result": null,
-     "actual": null,
-     "units": null,
+     "result": "L",
+     "actual": "had 4",
+     "units": -1.0,
      "pulled": null,
      "legs": []
     }
