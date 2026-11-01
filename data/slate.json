@@ -1,7 +1,7 @@
 {
  "slate_date": "2026-10-31",
- "generated_at": "2026-10-31T21:50:00-04:00",
- "status_at": "2026-10-31T21:50:00-04:00",
+ "generated_at": "2026-10-31T22:00:01-04:00",
+ "status_at": "2026-10-31T22:00:01-04:00",
  "valid_until": "2026-11-01T05:00:00-05:00",
  "status": {
   "prices_state": "ok",
@@ -16,7 +16,7 @@
   "stats_state": "ok",
   "last_run": {
    "ok": true,
-   "at": "2026-10-31T21:50:00-04:00",
+   "at": "2026-10-31T22:00:01-04:00",
    "failed_step": null
   },
   "pool": {
@@ -33,9 +33,9 @@
  },
  "banners": [],
  "empty": {
-  "code": "none_qualified",
-  "text": "No picks yet today",
-  "sub": "166 lines read, none cleared both checks. 1 had a gap but our model said no. Today's earlier picks are under Started."
+  "code": "all_started",
+  "text": "Every game has started.",
+  "sub": "Tonight's picks are under Started."
  },
  "games": [
   {
@@ -273,7 +273,7 @@
      "status": "confirmed"
     }
    },
-   "started": false,
+   "started": true,
    "picks": 0,
    "excluded_reason": null,
    "excluded_teams": []
