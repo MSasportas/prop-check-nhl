@@ -430,6 +430,28 @@ Run 16 count: 16 variants tested (DD1-DD4 4 each). Expected false positives at 5
 no placebo and no lockbox look. Cumulative historical: 420. Forward variants: 31 (unchanged). Lockbox looks: still 2. Output: research/code/r16/dd16_results.txt.
 Forward re-score (12 nights Oct 19-30): Q1b n322 graded +13.1% [+6,+20] p < .001 CLV +3.4%, still over its bar.
 
+## Run 17 (Researcher, 2026-11-01). Registered before any of these were tested.
+No key used, no historical odds pull. Free NHL api-web play-by-play for every 2025-26 regular-season game dated Oct 7 - Feb 28 (lockbox games
+not fetched), to scratch with research/code/r17/fetch17.py (fetch16 + faceoff events kept). Common as runs 4/6-16: shots45_lines, every two-way
+Hard Rock line, proportional de-vig fair f, side price >= -200, 1u flat, regulation + OT, VOID = no bet, game-clustered bootstrap. Logistic =
+research/code/wf.py (fit on all months before the test month), bet the side with p - BE >= T, T in {.01, .02, .03}. Fixed rules report every
+Nov-Feb bet with folds. Placebo (shuffle within date x line, 200 times) for any variant positive Nov-Feb with n >= 300; lockbox (Mar 1+) only
+for such a frozen variant, once, needing one-sided p < 0.05/3 = 0.0167 (look #3). All features use games dated strictly before d.
+
+| id | date | rule (exact) | data | result | status |
+|---|---|---|---|---|---|
+| EE1 | 2026-11-01 | **Faceoff possession.** From pbp faceoff events (winner = eventOwnerTeamId), team FO% over its last 20 games before d (>= 5, else 0.5). fo = own FO% - .5; fo_opp = opponent FO% - .5. Terms c1*fo + c2*fo_opp (does Hard Rock miss puck-possession edges?) (3 T). Fixed EE1r: OVER when fo - fo_opp >= +0.04 (1 variant). 4 variants | pbp + shots45 | | registered |
+| EE2 | 2026-11-01 | **Team-level residual vs Hard Rock's own number.** res = [actual > line] - f on shots45 lines. tres = mean res over lines of his team's players in the team's last 10 game dates before d (>= 20 lines, else 0); ores = mean res over lines of players FACING tonight's opponent in the opponent's last 10 game dates before d (>= 20 lines, else 0). Terms c1*tres + c2*ores (book slow to re-rate a whole team / a whole defence?) (3 T). Fixed EE2r: OVER when ores >= +0.08 (1 variant). 4 variants. (K3 = player-level residual; Z1 = team SOG form, not vs the book) | shots45 | | registered |
+| EE3 | 2026-11-01 | **Opponent miss-inducement.** Unblocked attempts = SOG + goals + missed shots (no shootout). For the opponent O: mrate = missed / unblocked attempts by O's opponents over O's last 20 games before d (>= 5, else league mean); dev = mrate - league mean before d. att20 = his unblocked attempts in his team's last 20 games before d / 20 (team games, 0 if absent). Terms c1*dev + c2*dev*att20 (3 T). Fixed EE3r: UNDER when dev >= +0.02 and att20 >= 3.5 (1 variant). 4 variants. (K11 = blocks, not misses) | pbp + shots45 | | registered |
+
+Forward (registered now; nights >= 2026-11-01 only, none seen):
+| id | date | rule (exact) | data | result | status |
+|---|---|---|---|---|---|
+| Q17a | 2026-11-01 | **Q1b by minutes to the game's first goalie confirmation.** For every Q1b bet (exactly as score_fwd.py makes it): conf = time of the first data/state/goalies.json version (git history, commit time) on that date in which either team of the game has status "confirmed"; lead = conf - read time in minutes (if no confirmation before puck, lead = puck - read). Q17a: lead >= 60. 1 variant | research/fwd/scores.json + goalies.json history | | forward, open |
+| Q17b | 2026-11-01 | Same, 0 < lead < 60. 1 variant | same | | forward, open |
+| Q17c | 2026-11-01 | Same, lead <= 0 (read after the first confirmation). 1 variant | same | | forward, open |
+Q17 bar: n >= 300 graded, ROI > 0, one-sided p < 0.05/34 = 0.0015 (31 + 3 forward variants), mean CLV > 0. Scored by research/code/r17/score_q17.py.
+
 ## Queued (not yet tested)
 | id | rule idea | data | status |
 |---|---|---|---|
