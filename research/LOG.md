@@ -1,5 +1,27 @@
 # LOG.md: Researcher runs (newest first)
 
+- 2026-11-01 ~8:30 AM ET (Researcher run 17, daily; SHOTS ON GOAL ONLY). No key used, no historical odds pull. EE1-EE3 + forward Q17a-c registered
+  and pushed (99edae1) before any test ran. Free NHL api-web play-by-play (with faceoffs) for all 945 games Oct 7 - Feb 28 fetched to scratch
+  (r17/fetch17.py; lockbox not fetched). Script research/code/r17/ee17.py, output ee17_results.txt. 10,413 graded Nov-Feb lines.
+  - EE1 faceoff possession (team FO% vs opponent's, last 20): best T=.02 -16.3% n121; EE1r OVER on faceoff-advantage teams -7.1% n1,697,
+    3 of 4 folds negative. Winning draws is already in the shot numbers.
+  - EE2 team-level residual vs Hard Rock's own number (his team's / the opponent's opponents' recent overs minus fair): -8.4% n127 to -16.8%
+    n53; EE2r OVER vs defences that opponents have lately beaten Hard Rock against -5.4% n1,161, every fold negative. No team-level lag.
+  - EE3 opponent miss-inducement (defences that push shots wide) x shot volume: -7.8% n228 to -12.1% n137; EE3r UNDER -6.2% n471. The weight
+    even points the other way (volume shooters vs such defences lean over), tiny.
+  - Forward re-score (all scorers, 13 nights Oct 19-31; clone unshallowed): Q1a +6.4% n497 p .045 (bar not met); Q1b +11.9% n367 [+6,+19]
+    p .0015, CLV +3.5% (still under its .0033 bar, but slipping: Oct 31 +2.8% n45); Q1b by read A +19.1% n210 vs B/C +2.2% n157; unders
+    +15.1% n301 vs overs -3.1% n66. Q1c +13.7% n262 p .005; Q1g +13.9% n313 p .0045 (n past 300, p misses .0033); Q1h +16.1% n220; Q1k
+    Pinnacle +9.3% n380 p .032 (CLV +1.3%); Q1l +16.0% n219; Q1m +22.2% n44. Q6a/b/c +6.0% n196 / +5.7% n148 / +10.2% n278. Q8a-c -1.1% /
+    -4.2% / +10.3%. Q9a-c +9.6% n142 / -2.2% n81 / +7.0% n22. Q10 +12.6% n34. Q11a +9.6% n77, Q11b +15.4% n185 p .008. Q15a +10.3% n45,
+    Q15b -10.1% n29. Q16a +14.2% n18, Q16b (flag 1 PM, bet at 90 min) +8.3% n21. Q2a/b 0 bets. New Q17a-c start tonight (0 bets; seen-night
+    code check, not a result: lead >= 60 min +19.0% n63, 0-60 +22.9% n41, after first confirmation +8.4% n263).
+  12 historical variants (~0.6 false positives expected), all-time 432; forward 34. Lockbox looks: 2 (unchanged; next needs p < 0.0167).
+  **Verdict: nothing new passed.** Faceoffs, team-level misses vs the book and miss-inducing defences are inside Hard Rock's price; history
+  with free data stays exhausted (432 variants). Q1b still holds its bar at n367, but its edge keeps living at the 1 PM read and on unders,
+  and the B/C reads the product uses are ~break-even (+2.2% n157): the Sharp's timing question is unchanged.
+  Next: (1) Q16b to n 300 (can the 90-min price keep the 1 PM edge?); (2) Q17a-c forward (does the gap close at goalie news?); (3) a forward
+    test of Q1b unders on line 1.5 only at A vs B/C, registered before looking at that cell.
 - 2026-10-31 ~8:30 AM ET (Researcher run 16, daily; SHOTS ON GOAL ONLY). No key used, no historical odds pull. DD1-DD4 registered and pushed
   (f6efeeb) before any test ran. Free NHL api-web play-by-play + right-rail (referees, head coaches) for all 945 games Oct 7 - Feb 28 fetched
   to scratch (r16/fetch16.py; lockbox not fetched). Script research/code/r16/dd16.py, output dd16_results.txt. 10,413 graded Nov-Feb lines.
