@@ -1,26 +1,26 @@
 {
  "slate_date": "2026-11-01",
- "generated_at": "2026-11-01T11:50:01-05:00",
- "status_at": "2026-11-01T11:50:01-05:00",
+ "generated_at": "2026-11-01T12:20:01-05:00",
+ "status_at": "2026-11-01T12:20:01-05:00",
  "valid_until": "2026-11-02T05:00:00-05:00",
  "status": {
   "prices_state": "ok",
-  "prices_at": "2026-11-01T11:30:01-05:00",
-  "next_price_read_at": "2026-11-01T12:15:00-05:00",
+  "prices_at": "2026-11-01T12:20:01-05:00",
+  "next_price_read_at": "2026-11-01T14:00:00-05:00",
   "stats_built_at": "2026-11-01T01:20:01-05:00",
   "stats_through": "2026-10-31",
-  "lineups_at": "2026-11-01T11:50:01-05:00",
+  "lineups_at": "2026-11-01T12:20:01-05:00",
   "goalies_at": null,
   "lineups_note": "1 of 2 team line pages are dated today.",
   "lineups_state": "ok",
   "stats_state": "ok",
   "last_run": {
    "ok": true,
-   "at": "2026-11-01T11:50:01-05:00",
+   "at": "2026-11-01T12:20:01-05:00",
    "failed_step": null
   },
   "pool": {
-   "pulls_left": 4489,
+   "pulls_left": 4487,
    "keys": 10,
    "game_days_left": 28,
    "days_left": 30,
@@ -54,7 +54,7 @@
     }
    },
    "started": false,
-   "picks": 2,
+   "picks": 1,
    "excluded_reason": null,
    "excluded_teams": []
   },
@@ -157,62 +157,6 @@
  ],
  "picks": [
   {
-   "id": "2026-11-01:2026020227:8476873:shots:1.5:under",
-   "price": -115,
-   "first_price": -115,
-   "first_price_at": "2026-11-01T11:30:01-05:00",
-   "worst_price": -115,
-   "p": 0.5694,
-   "breakeven": 0.5349,
-   "p_pct": 56,
-   "breakeven_pct": 53,
-   "state": "early",
-   "history": [
-    {
-     "at": "2026-11-01T11:30:01-05:00",
-     "text": "Early: lineup not confirmed"
-    }
-   ],
-   "prices": [
-    {
-     "at": "2026-11-01T11:30:01-05:00",
-     "price": -115
-    }
-   ],
-   "pulled": null,
-   "price_final": false,
-   "graded": null,
-   "rank": 1,
-   "tier": "main",
-   "game_id": 2026020227,
-   "player": "M. Jankowski",
-   "player_id": 8476873,
-   "team": "CAR",
-   "opp": "WPG",
-   "home": true,
-   "start": "2026-11-01T13:00:00-05:00",
-   "market": "shots",
-   "line": 1.5,
-   "side": "under",
-   "bet": "Under 1.5 shots on goal",
-   "price_at": "2026-11-01T11:30:01-05:00",
-   "gap_pct": 6.5,
-   "market_fair_pct": 57.0,
-   "n_books": 6,
-   "guard": {
-    "verdict": "agrees",
-    "ours_pct": 56.9,
-    "model_pct": 58.6
-   },
-   "settled": "early",
-   "settled_label": "Early",
-   "reason": "6 other books say 57.0%; Hard Rock's -115 only needs 53.5%. Our model agrees (our blend: 56.9%).",
-   "link": null,
-   "thin": false,
-   "games_used": 79,
-   "games_this_season": 11
-  },
-  {
    "id": "2026-11-01:2026020227:8480145:shots:1.5:under",
    "price": -110,
    "first_price": -110,
@@ -236,9 +180,9 @@
     }
    ],
    "pulled": null,
-   "price_final": false,
+   "price_final": true,
    "graded": null,
-   "rank": 2,
+   "rank": 1,
    "tier": "main",
    "game_id": 2026020227,
    "player": "N. Pionk",
@@ -267,6 +211,70 @@
    "thin": false,
    "games_used": 65,
    "games_this_season": 14
+  },
+  {
+   "id": "2026-11-01:2026020227:8476873:shots:1.5:under",
+   "price": -115,
+   "first_price": -115,
+   "first_price_at": "2026-11-01T11:30:01-05:00",
+   "worst_price": -115,
+   "p": 0.5694,
+   "breakeven": 0.5349,
+   "p_pct": 56,
+   "breakeven_pct": 53,
+   "state": "early",
+   "history": [
+    {
+     "at": "2026-11-01T11:30:01-05:00",
+     "text": "Early: lineup not confirmed"
+    },
+    {
+     "at": "2026-11-01T12:20:01-05:00",
+     "text": "Pulled: Hard Rock moved it to -135"
+    }
+   ],
+   "prices": [
+    {
+     "at": "2026-11-01T11:30:01-05:00",
+     "price": -115
+    }
+   ],
+   "pulled": {
+    "at": "2026-11-01T12:20:01-05:00",
+    "reason": "Hard Rock moved it to -135",
+    "if_bet": "Got -115? Still a good bet. Don't bet it at -135."
+   },
+   "price_final": false,
+   "graded": null,
+   "rank": null,
+   "tier": "main",
+   "game_id": 2026020227,
+   "player": "M. Jankowski",
+   "player_id": 8476873,
+   "team": "CAR",
+   "opp": "WPG",
+   "home": true,
+   "start": "2026-11-01T13:00:00-05:00",
+   "market": "shots",
+   "line": 1.5,
+   "side": "under",
+   "bet": "Under 1.5 shots on goal",
+   "price_at": "2026-11-01T11:30:01-05:00",
+   "gap_pct": 6.5,
+   "market_fair_pct": 57.0,
+   "n_books": 6,
+   "guard": {
+    "verdict": "agrees",
+    "ours_pct": 56.9,
+    "model_pct": 58.6
+   },
+   "settled": "early",
+   "settled_label": "Early",
+   "reason": "6 other books say 57.0%; Hard Rock's -115 only needs 53.5%. Our model agrees (our blend: 56.9%).",
+   "link": null,
+   "thin": false,
+   "games_used": 79,
+   "games_this_season": 11
   }
  ],
  "parlays": [],

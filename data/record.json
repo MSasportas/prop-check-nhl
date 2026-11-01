@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-11-01T11:30:01-05:00",
+ "generated_at": "2026-11-01T12:20:01-05:00",
  "summary": {
   "headline": {
    "w": 21,
@@ -66,7 +66,10 @@
      "result": null,
      "actual": null,
      "units": null,
-     "pulled": null,
+     "pulled": {
+      "at": "2026-11-01T12:20:01-05:00",
+      "reason": "Hard Rock moved it to -135"
+     },
      "legs": []
     },
     {
