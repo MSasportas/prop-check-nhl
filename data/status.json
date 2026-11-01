@@ -1,10 +1,10 @@
 {
  "ok": true,
  "slate_date": "2026-11-01",
- "started_at": "2026-11-01T15:00:01-05:00",
- "status_at": "2026-11-01T15:00:01-05:00",
- "finished_at": "2026-11-01T15:00:03-05:00",
- "last_ok_at": "2026-11-01T15:00:01-05:00",
+ "started_at": "2026-11-01T15:20:01-05:00",
+ "status_at": "2026-11-01T15:20:01-05:00",
+ "finished_at": "2026-11-01T15:20:03-05:00",
+ "last_ok_at": "2026-11-01T15:20:01-05:00",
  "failed_step": null,
  "steps": [
   {
@@ -30,12 +30,12 @@
   {
    "step": "lineup_history",
    "status": "ok",
-   "note": "2 team(s) changed"
+   "note": "1 team(s) changed"
   },
   {
    "step": "odds",
    "status": "ok",
-   "note": "no pull due"
+   "note": "1 game(s) priced"
   },
   {
    "step": "market_menu",
@@ -64,8 +64,8 @@
   },
   {
    "step": "shadow",
-   "status": "skipped",
-   "note": "nothing new"
+   "status": "ok",
+   "note": "39 line read(s) logged"
   },
   {
    "step": "gg_grade",
@@ -97,7 +97,7 @@
   },
   {
    "n": 2,
-   "left": 485
+   "left": 483
   },
   {
    "n": 3,
@@ -132,30 +132,32 @@
    "left": 500
   }
  ],
- "pool_total": 4481,
+ "pool_total": 4479,
  "allowance": 21.512,
  "tier": 4,
  "budget_today": 107,
- "budget_used_today": 15,
+ "budget_used_today": 17,
  "prices_state": "ok",
- "prices_at": "2026-11-01T14:50:00-05:00",
- "next_price_read_at": "2026-11-01T15:15:00-05:00",
+ "prices_at": "2026-11-01T15:20:01-05:00",
+ "next_price_read_at": "2026-11-01T16:30:00-05:00",
  "unmatched_names": [],
  "unknown_teams": [],
  "lineup_unmatched_names": [],
  "excluded_teams": [],
  "stats_through": "2026-10-31",
- "lineups_at": "2026-11-01T15:00:01-05:00",
- "lineups_note": "2 of 8 team line pages are dated today.",
+ "lineups_at": "2026-11-01T15:20:01-05:00",
+ "lineups_note": "3 of 8 team line pages are dated today.",
  "games_today": 5,
  "record_events": 111,
- "odds_notes": [],
+ "odds_notes": [
+  "key 1 refused (401)"
+ ],
  "runner": {
   "event": "workflow_dispatch",
-  "run_id": "41340344295",
-  "iteration": 6,
-  "chain_link": 136,
+  "run_id": "41344557476",
+  "iteration": 3,
+  "chain_link": 137,
   "chain_started_at": "2026-10-28T10:00:15-04:00",
-  "run_started_at": "2026-11-01T14:10:14-05:00"
+  "run_started_at": "2026-11-01T15:00:16-05:00"
  }
 }

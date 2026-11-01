@@ -1,26 +1,26 @@
 {
  "slate_date": "2026-11-01",
- "generated_at": "2026-11-01T15:00:01-05:00",
- "status_at": "2026-11-01T15:00:01-05:00",
+ "generated_at": "2026-11-01T15:20:01-05:00",
+ "status_at": "2026-11-01T15:20:01-05:00",
  "valid_until": "2026-11-02T05:00:00-05:00",
  "status": {
   "prices_state": "ok",
-  "prices_at": "2026-11-01T14:50:00-05:00",
-  "next_price_read_at": "2026-11-01T15:15:00-05:00",
+  "prices_at": "2026-11-01T15:20:01-05:00",
+  "next_price_read_at": "2026-11-01T16:30:00-05:00",
   "stats_built_at": "2026-11-01T01:20:01-05:00",
   "stats_through": "2026-10-31",
-  "lineups_at": "2026-11-01T15:00:01-05:00",
+  "lineups_at": "2026-11-01T15:20:01-05:00",
   "goalies_at": null,
-  "lineups_note": "2 of 8 team line pages are dated today.",
+  "lineups_note": "3 of 8 team line pages are dated today.",
   "lineups_state": "ok",
   "stats_state": "ok",
   "last_run": {
    "ok": true,
-   "at": "2026-11-01T15:00:01-05:00",
+   "at": "2026-11-01T15:20:01-05:00",
    "failed_step": null
   },
   "pool": {
-   "pulls_left": 4481,
+   "pulls_left": 4479,
    "keys": 10,
    "game_days_left": 28,
    "days_left": 30,
@@ -35,7 +35,7 @@
  "empty": {
   "code": "none_qualified",
   "text": "No picks yet today",
-  "sub": "55 lines read, none cleared both checks. Today's earlier pick is under Started. Next read at 3:15 PM."
+  "sub": "55 lines read, none cleared both checks. Today's earlier pick is under Started. Next read at 4:30 PM."
  },
  "games": [
   {
@@ -69,7 +69,7 @@
    "start": "2026-11-01T15:30:00-05:00",
    "lineups": {
     "away": "waiting",
-    "home": "waiting"
+    "home": "confirmed"
    },
    "goalies": {
     "away": {
