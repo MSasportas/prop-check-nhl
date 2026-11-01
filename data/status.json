@@ -1,10 +1,10 @@
 {
  "ok": true,
  "slate_date": "2026-10-31",
- "started_at": "2026-10-31T23:50:01-04:00",
- "status_at": "2026-10-31T23:50:01-04:00",
- "finished_at": "2026-10-31T23:50:02-04:00",
- "last_ok_at": "2026-10-31T23:50:01-04:00",
+ "started_at": "2026-11-01T00:00:01-04:00",
+ "status_at": "2026-11-01T00:00:01-04:00",
+ "finished_at": "2026-11-01T00:00:08-04:00",
+ "last_ok_at": "2026-11-01T00:00:01-04:00",
  "failed_step": null,
  "steps": [
   {
@@ -97,19 +97,19 @@
   },
   {
    "n": 2,
-   "left": 0
+   "left": 500
   },
   {
    "n": 3,
-   "left": 0
+   "left": 500
   },
   {
    "n": 4,
-   "left": 0
+   "left": 500
   },
   {
    "n": 5,
-   "left": 0
+   "left": 500
   },
   {
    "n": 6,
@@ -117,11 +117,11 @@
   },
   {
    "n": 7,
-   "left": 0
+   "left": 500
   },
   {
    "n": 8,
-   "left": 498
+   "left": 500
   },
   {
    "n": 9,
@@ -129,10 +129,10 @@
   },
   {
    "n": 10,
-   "left": 79
+   "left": 500
   }
  ],
- "pool_total": 1573,
+ "pool_total": 4496,
  "allowance": 141.2,
  "tier": 4,
  "budget_today": 1412,
@@ -162,7 +162,7 @@
  "runner": {
   "event": "workflow_dispatch",
   "run_id": "41268062447",
-  "iteration": 5,
+  "iteration": 6,
   "chain_link": 113,
   "chain_started_at": "2026-10-28T10:00:15-04:00",
   "run_started_at": "2026-10-31T23:10:14-04:00"
