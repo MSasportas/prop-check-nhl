@@ -1,13 +1,13 @@
 {
  "slate_date": "2026-10-31",
- "generated_at": "2026-10-31T22:40:01-04:00",
- "status_at": "2026-10-31T22:40:01-04:00",
+ "generated_at": "2026-10-31T23:10:01-04:00",
+ "status_at": "2026-10-31T23:10:01-04:00",
  "valid_until": "2026-11-01T05:00:00-05:00",
  "status": {
   "prices_state": "ok",
   "prices_at": "2026-10-31T21:20:01-04:00",
   "next_price_read_at": null,
-  "stats_built_at": "2026-10-31T22:30:01-04:00",
+  "stats_built_at": "2026-10-31T23:10:01-04:00",
   "stats_through": "2026-10-30",
   "lineups_at": "2026-10-31T21:30:14-04:00",
   "goalies_at": null,
@@ -16,7 +16,7 @@
   "stats_state": "ok",
   "last_run": {
    "ok": true,
-   "at": "2026-10-31T22:40:01-04:00",
+   "at": "2026-10-31T23:10:01-04:00",
    "failed_step": null
   },
   "pool": {
