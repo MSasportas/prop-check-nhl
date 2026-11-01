@@ -1,10 +1,10 @@
 {
  "ok": true,
  "slate_date": "2026-11-01",
- "started_at": "2026-11-01T16:50:00-05:00",
- "status_at": "2026-11-01T16:50:00-05:00",
- "finished_at": "2026-11-01T16:50:01-05:00",
- "last_ok_at": "2026-11-01T16:50:00-05:00",
+ "started_at": "2026-11-01T17:00:01-05:00",
+ "status_at": "2026-11-01T17:00:01-05:00",
+ "finished_at": "2026-11-01T17:00:01-05:00",
+ "last_ok_at": "2026-11-01T17:00:01-05:00",
  "failed_step": null,
  "steps": [
   {
@@ -29,8 +29,8 @@
   },
   {
    "step": "lineup_history",
-   "status": "skipped",
-   "note": "no change"
+   "status": "ok",
+   "note": "2 team(s) changed"
   },
   {
    "step": "odds",
@@ -142,18 +142,20 @@
  "next_price_read_at": "2026-11-01T17:15:00-05:00",
  "unmatched_names": [],
  "unknown_teams": [],
- "lineup_unmatched_names": [],
+ "lineup_unmatched_names": [
+  "Laurent Brossoit"
+ ],
  "excluded_teams": [],
  "stats_through": "2026-11-01",
- "lineups_at": "2026-11-01T16:50:00-05:00",
- "lineups_note": "4 of 8 team line pages are dated today.",
+ "lineups_at": "2026-11-01T17:00:01-05:00",
+ "lineups_note": "5 of 10 team line pages are dated today.",
  "games_today": 5,
  "record_events": 113,
  "odds_notes": [],
  "runner": {
   "event": "workflow_dispatch",
   "run_id": "41353184157",
-  "iteration": 2,
+  "iteration": 3,
   "chain_link": 139,
   "chain_started_at": "2026-10-28T10:00:15-04:00",
   "run_started_at": "2026-11-01T16:40:14-05:00"
