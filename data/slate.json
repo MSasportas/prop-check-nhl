@@ -1,7 +1,7 @@
 {
  "slate_date": "2026-11-01",
- "generated_at": "2026-11-01T12:30:00-05:00",
- "status_at": "2026-11-01T12:30:00-05:00",
+ "generated_at": "2026-11-01T12:40:00-05:00",
+ "status_at": "2026-11-01T12:40:00-05:00",
  "valid_until": "2026-11-02T05:00:00-05:00",
  "status": {
   "prices_state": "ok",
@@ -16,7 +16,7 @@
   "stats_state": "ok",
   "last_run": {
    "ok": true,
-   "at": "2026-11-01T12:30:00-05:00",
+   "at": "2026-11-01T12:40:00-05:00",
    "failed_step": null
   },
   "pool": {
@@ -46,7 +46,7 @@
    "goalies": {
     "away": {
      "name": "Stuart Skinner",
-     "status": "expected"
+     "status": "confirmed"
     },
     "home": {
      "name": "Pyotr Kochetkov",
@@ -204,8 +204,8 @@
     "ours_pct": 53.8,
     "model_pct": 50.9
    },
-   "settled": "lineup",
-   "settled_label": "Lineup confirmed",
+   "settled": "goalie",
+   "settled_label": "Goalie confirmed",
    "reason": "6 other books say 55.0%; Hard Rock's -110 only needs 52.4%. Our model agrees (our blend: 53.8%).",
    "link": null,
    "thin": false,
