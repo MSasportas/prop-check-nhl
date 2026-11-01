@@ -49,7 +49,7 @@ probability x Hard Rock decimal payout - 1, on unrounded numbers; every threshol
 | Odds pulls | Shots only at every tier. Pull A 1 PM (or 3h before first puck), **B 90 min before each game (not lineup-gated)**, **C 45 min before each game, every game** (tier floor 3 when the allowance is >= 3). About 3 credits per game. Started games are never pulled. Allowance = credits left / game days before keys reset on the 1st |
 | Safety | New picks stop by themselves if the Record reaches **-10 units** (`ops.safety_pause`), with the reason on the page; picks already shown are still looked after. Also no new picks while team stats are behind or Gap + Guard itself fails (a failed step, shown on the page). Never silent |
 | Research log | `data/paper/` (flags, vetoes, capped, pulls, closes, grades, `summary.json`) is kept as the **Gap + Guard research log**: every candidate including the vetoed, capped and close ones, with closing fair and CLV. It is internal, append-only (`guard_paper.py`; a breach restores it from HEAD and the cycle carries on) and is where picks come from, but it is not the Record |
-| Checkpoint | 2026-11-02: the DS reads the research log (CLV of measured gaps, graded results). Nothing switches off by itself except the -10 unit safety. A rule change goes through section 8 |
+| Checkpoint | 2026-11-02: **GO on the numbers read at the 2026-11-01 weekly review (item 30)**; the 2026-11-02 daily check only confirms no STOP fired on the Nov 1 slate. Nothing switches off by itself except the -10 unit safety. A rule change goes through section 8 |
 
 ## 5. How it runs
 - `scripts/run.py` is the only entry point; each run decides what's due: stats build, slate, odds pull A/B/C,
@@ -182,7 +182,7 @@ probability x Hard Rock decimal payout - 1, on unrounded numbers; every threshol
   Discord: PULLED lists each with its `if_bet` line ("Don't bet these now"); ✅ PRICE FINAL once per told pick; a pick first shown at
   the last read says "✅ Price final" in its NEW block. **Max 12 messages per ET day; FINAL pings only while < 9 sent** (replaces the 6/day
   wording above). `notified.json` gains `final`.
-- Tests: `python -m unittest discover -s tests`, 375 tests (2026-10-31) (`tests/test_live_picks.py` end to end; `tests/test_paper.py` research-log maths; `tests/fixtures/paper_oct19/` = real Oct 19 reads). Fixtures: `python3 fixtures/make_fixtures.py`.
+- Tests: `python -m unittest discover -s tests`, 375 tests (2026-11-01) (`tests/test_live_picks.py` end to end; `tests/test_paper.py` research-log maths; `tests/fixtures/paper_oct19/` = real Oct 19 reads). Fixtures: `python3 fixtures/make_fixtures.py`.
 
 - **Files:** `index.html` (page; reads `data/slate.json`, `data/record.json`, `data/rules.json`), `data/odds/<date>.json`
   (every price pulled: Hard Rock in `markets`, 9 other books in `others`; ~10x bigger: ~1.5 MB on a 16-game night, ~2.5-3 MB
@@ -244,7 +244,8 @@ probability x Hard Rock decimal payout - 1, on unrounded numbers; every threshol
 15. (2026-10-18: pull C now runs for every game at tier 3+ when the budget allows (live picks only at tier 2), so every shots line gets a close ~45 min out; the shadow log
     measures CLV on every line.) Closing-price check is weak: most picks get no price pull after they're shown (13 of 18 "flat"). Week 1: 3 moved
     toward us, 2 against, avg +0.5 pts toward us. Re-pricing every shown pick at C would cost credits; pool is 478
-    (allowance ~5.2/game), so not now. Revisit when keys reset Nov 1.
+    (allowance ~5.2/game), so not now. Revisit when keys reset Nov 1. **Closed 2026-11-01 weekly:** C runs on every game at tier 4, so 29 of 35
+    picks Oct 20-31 got a later 45-min read (the other 6 were first shown at it); pool 4,491 after the reset.
 
 16. **Market focus tickets (2026-10-18), in order.** (a) DONE 2026-10-18 (`scripts/odds.py` `markets_for`, tests updated, 221 pass; no QA browser pass needed, no page change): points no longer
     pulled; B pulls shots + saves at tier 3. Still open: re-price every shown pick (item 15). (b) Saves
@@ -445,9 +446,38 @@ probability x Hard Rock decimal payout - 1, on unrounded numbers; every threshol
       (c) saves: 28 goalies at both reads, 1 move >= 2 pts (Skinner above), too thin to test.
 29. **Empty-night wording + false post-game banner (found 2026-10-30 9 PM, Matt: "I got no plays"; FIXED 2026-10-31 daily check: (a) `engine._empty` all_started now says "No picks were posted tonight. N lines read across K games, none cleared both checks." (+ veto line), or "Tonight's N picks were pulled; see Pulled today." when every pick was pulled; (b) `stats.team_status` skips team-games dated on/after the slate date, so a finished game tonight no longer marks its teams "stats behind" or counts toward `too_far_behind`; QA fixture `allstartednone`. Text below is the original finding.)** Tonight's 3-game slate was fully read before puck (NJD@VGK B 4:30 / C 5:20, WPG@FLA B 5:30 / C 6:20, SEA@CGY B 6:30 / C 7:20; 59 lines, no team excluded, no failed step) and nothing cleared the +3.0% gap; the run was correct. Two page problems: (a) once every game has started the empty state says only "Every game has started. No picks were posted tonight." (code `all_started`), not the real reason ("59 lines read across 3 games, none cleared both checks", as the pre-game empty state does); (b) once NJD@VGK went FINAL its own game counted as "expected" team-games, so `status.excluded_teams`/the banner said "Not covered tonight: NJD, VGK (stats behind)" for a game that had been fully evaluated before puck (`stats.team_status` should ignore a team's game dated the slate date). Data point for the Sunday review, not a rule change: Rodrigues (NJD) UNDER 1.5 shots +120 showed a +11% gap vs 5 books but Pinnacle did not post him, so the Pinnacle-present rule blocked it (n=1; the DS to count how often Pinnacle-missing blocks an otherwise big gap before the Sharp looks).
 
+30. **Weekly review 2026-11-01 (DS read, slates Oct 20-31; Sharp rulings).**
+    - **Record:** 35 shown, all graded. Headline 21-10 (67.7% vs 50.9% avg break-even) +9.81u; pulled 3-1 +1.22u. By line: 1.5 under 10-4 +6.03, 2.5 under 9-3 +4.66,
+      1.5 over 1-2 -1.09, 2.5 over 1-1 +0.20, 3.5 none. Calibration: stated 50-55% hit 66.7% (n18); all buckets above stated except <50% (n7, 42.9% vs 47.8%); wins z +1.72 (noise).
+    - **Closing price:** Hard Rock's own price moved toward us 5, flat 20, against 4 (median 0; avg +0.78 pts driven by one pick). Books' median, our read to close: median 0,
+      mean -0.25 pts (moves >= 0.5 pt: flat 21, against 8). Logged CLV +4.41% mean, 29/29 positive, vs +4.91% gap at the read: **CLV is the gap still standing, not the
+      market coming to us (item 27 caveat holds).** The edge claim rests on results so far (n31) and Hard Rock lagging, not on line movement.
+    - **Volume:** 1,456 lines over 12 nights, 35 picks, 3 zero-pick nights (Oct 21, 25, 30; all 2-5 game slates). 79 near misses (gap +1.5 to +3.0%). Gaps >= +3% blocked:
+      price window 22, books < 4 17, no Pinnacle 13, Pinnacle sign 3; guard vetoed 2.
+    - **Nov 2 gates (item 21): GO.** Measured gaps 30 (exactly at the bar), graded 35, mean CLV +4.42% (80% LB +3.99%), 100% positive, picks on 75% of nights, population
+      slope +2.13 (t 6.2, 1,143 lines; DS definition: units won at Hard Rock's price regressed on gap EV vs the median, every 4+ book shots side -200..+120 at the close read,
+      W/L only; overs +1.75, unders +2.28). No STOP condition near (units +11.03, z +1.72). Veto clause unjudgeable (1 veto): **Sharp: the guard stays (item 24 "never drop
+      the guard"); the veto comparison is read again at >= 10 graded vetoes.**
+    - **Item 22 answered: bet when the pick shows.** At the shown price +11.03u on 35; waiting for the 45-min price +8.74u on 26 (9 picks would not have passed then; they went 6-3).
+      Hard Rock's price at 45 min was better 4, same 26, worse 3. The page already says "bet at this price or better"; no change.
+    - **3.5:** 182 sides, 6 with gap >= +3%, 0 passed, 0 legs; kill rule not evaluable. Offset refit still open (the bundle has raw odds only; model probs must be rebuilt first).
+    - **Points (item 28):** 6 flags 3-3 +0.30u, CLV +4.09%, 3 pulled. Far from both gates; keep running.
+    - **Item 29 (Pinnacle missing only):** 13 lines 6-7 -0.94u. No edge seen; Pinnacle stays required.
+    - **Sample verdicts (DS):** near-miss band 2-3% (25 lines 13-11), books_min 3 (1 line), Pinnacle-missing (13), +120 cap (12 lines 8-4): all too small; no value change.
+    - **Parlays (Sharp ruling, registered before any parlay is built or scored):** still off. The CLV caveat means the edge is unproven and a parlay multiplies it; a top-2 parlay
+      at our stated ~52% legs hits ~27%, against "picks hit". **Gate to offer 2-leg parlays** (top 2 headline legs, different games, same night, graded on the Record at the product of
+      the frozen prices): >= 75 graded headline legs, headline units > 0, wins z >= 0 vs stated chances, and mean CLV > 0. The DS checks it each weekly review; when met it is a
+      section 8 entry and a Builder + QA build. 3-leg parlays only after 2-leg ones have their own 30 graded.
+    - **Page (UX -> Builder -> QA SHIP WITH FIXES, fixed):** status strip drops "Odds keys: N days" when the pool is fine (it was cut off on every view; low pool still warns);
+      a null-price pick shows "No price"; "Our model agrees." stripped from the reason (the chance line says it); Backstage says "Hard Rock +x% vs books" / "at close +x%" (was gap / CLV);
+      tab bar near-opaque so cards don't show through; rank number spaced from the name. QA: 375 tests, 15 views at 380px, no overflow or JS errors.
+      Still open (minor): `allstartednone` fixture counts 3 games but lists 7 (engine wording "across K games" counts games with prices); fixtures lack optional
+      `record/resets.json` and `paper_watch/points/summary.json` (404s in the console, harmless); if the guard verdict were ever not "agrees", the stripped reason would lose that word.
+
 ## 8. Rule-change log
 | Date | Change | Why | Sample |
 |---|---|---|---|
+| 2026-11-01 (weekly; Sharp, DS, UX, Builder, QA SHIP WITH FIXES at 380px) | **No rule changed.** Nov 2 checkpoint read as GO (Gap + Guard stays live, guard kept despite an unjudgeable veto clause); parlay gate registered (item 30); page wording/readability fixes only | DS: every Nov 2 GO bar met, no STOP near; every candidate value change has n <= 25 against a 150 bar; CLV is the standing gap, so the edge is not proven enough to multiply into parlays | Item 30: 35 graded legs, 30 measured gaps, 1,456 lines |
 | 2026-10-29 (CEO, Matt's order) | **No rule changed.** Home Screen / app icon replaced with Matt's neon hooded hockey-player embroidery logo: `icons/apple-touch-icon.png` (180), `icon-192.png`, `icon-512.png`, `icon-maskable-512.png` (art inset to the 80% safe zone on black); links carry `?v=2` in `index.html` and `manifest.webmanifest`. Already-added Home Screen icons keep the old picture until removed and re-added. | Customer request | n/a |
 | 2026-10-28 (CEO, Matt's order; Builder, QA: 376 tests, Backstage at 380px) | **No live rule changed.** Goalie saves removed everywhere (watch track, saves code, tests, log, saves rows in the odds and shadow logs); player points added as a research-only watch track (Gap + Guard maths, lines any, offset 0), Backstage tab now shows points. Matt's second market is now points (research), shots stays the only live market | Matt: "stop pulling saves and replace them with points; let's see if we can find an edge on points". Saves: 4 nights, 0 flags, Hard Rock priced on the market | Item 28 (gates registered before any flag); item 25 stop note |
 | 2026-10-25 (weekly; Sharp, UX, Builder, QA SHIP at 380px) | **No rule changed.** Page readability only: Gap line into tap-to-expand, blend % hidden, one "already bet" line on pulled cards, not-covered banner only for unstarted games, long names wrap, one-line status strip ("Odds keys: N days"), "units"/"had N shots" wording, "too few to judge" once. Parlays stay off (item 27) | DS: 21 graded legs, 19 measured gaps: below 50/150 and Nov 2 sizes; UX: cards repeated numbers, pulled cards gave conflicting advice | Item 27 |
@@ -473,6 +503,7 @@ probability x Hard Rock decimal payout - 1, on unrounded numbers; every threshol
 | 2026-10-11 | v1.0 set (section 4) | First build: Sharp standard from the DS backtest (2024-25 fit, 2025-26 out of sample) and one live Hard Rock pull | Backtest only; 0 graded live legs |
 
 ## 9. Session log (newest first, one line each)
+- 2026-11-01 ~11:30 AM weekly team review: DS item 30 (35 graded all graded, 21-10 +9.81u headline, Nov 2 GO, CLV = standing gap, item 22: bet when shown); Sharp no rule change, guard kept, parlay gate registered; UX 8 findings -> Builder shipped 6 page fixes + 1 QA fix, QA SHIP WITH FIXES (375 tests, 15 views at 380px). Health: chain alive (link 131, 10:20 status, commits every 10 min), all sources ok, keys reset: pool 4,491 (key 1 still refused), tier 4, Oct 31 fully graded, record history guard ok (124 versions), no unmatched names or excluded teams.
 - 2026-11-01 ~8:30 AM Researcher run 17 (daily, shots): EE1-EE3 registered before testing (faceoff possession, team-level residual vs Hard Rock, opponent miss-inducement); 12 variants, none positive (best EE2r -5.4% n1,161), no lockbox look (still 2). Forward Q1b still over its bar at n367 +11.9% p .0015 CLV +3.5% (13 nights), but A read +19% n210 vs B/C +2% n157; new forward Q17a-c (Q1b by minutes to first goalie confirmation) start tonight. Nothing new for the Sharp.
 - 2026-10-31 1:45 PM daily check: chain alive (link 101, status 1:40 PM, all steps/sources ok). Pull A ran 10 AM (3h before the 1 PM games; 10 games today); B/C running per game; 2 picks shown today (CHI@BOS U2.5 -185, STL@DET U2.5 +100), both locked. Oct 30: 0 picks, nothing to grade; Record 98 events. Keys 1,386 (key 1 still refused), tier 4, reset tomorrow. Unmatched: Pettersson only; no excluded teams. Shipped item 29 (empty-night reason + no false "stats behind" for tonight's finished games; the latter could have blocked late-game picks on a staggered slate via `too_far_behind`): Builder -> QA SHIP WITH FIXES (all-pulled wording fixed), 375 tests, 380px Chromium on 8 fixtures, no overflow or JS errors. QA minors: `allstartednone` fixture says 3 games but lists 7; "Odds keys: N days" clipped in the strip on empty/nogames/statsbehind (old).
 - 2026-10-31 ~8:30 AM Researcher run 16 (daily, shots): DD1-DD4 registered before testing (referee crew x PP share, score-state role x moneyline, rebound environment, new head coach); 16 variants, none passes (best DD2r +3.3% n269 p .26), no lockbox look (still 2). Forward Q1b still over its bar at n322 +13.1% p < .001 CLV +3.4% (12 nights); Q16a-b only 7 bets so far. Nothing new for the Sharp. See research/LOG.md.

@@ -127,7 +127,8 @@ button{font:inherit;color:inherit;background:none;border:0;padding:0;margin:0;te
 .card[role=button]{cursor:pointer}
 .card[aria-expanded="true"]{background:rgba(255,255,255,.05)}
 .r1{display:flex;flex-wrap:wrap;align-items:baseline;column-gap:8px}
-.rank{font:400 26px/28px var(--mk);color:var(--accent);flex:none;min-width:14px}
+.rank{font:400 26px/28px var(--mk);color:var(--accent);flex:none;min-width:14px;margin-right:4px}
+.price.noprice{font-size:18px}
 .name{font:600 29px/28px var(--hand);letter-spacing:.01em;flex:1 1 auto;min-width:0;white-space:normal;overflow-wrap:anywhere}
 .meta{font-size:13px;line-height:16px;color:#cfd8d6;white-space:nowrap;flex:none}
 .own{color:var(--fg);border:2px solid var(--pink);border-radius:6px;padding:1px 6px;font-weight:700;letter-spacing:.02em}
@@ -209,7 +210,7 @@ button{font:inherit;color:inherit;background:none;border:0;padding:0;margin:0;te
 .foot p{margin:6px 0}
 
 /* bottom bar: marker words on a glass strip */
-.tabs{position:fixed;left:0;right:0;bottom:0;z-index:5;background:rgba(255,255,255,.12);-webkit-backdrop-filter:blur(16px) saturate(1.6);backdrop-filter:blur(16px) saturate(1.6);
+.tabs{position:fixed;left:0;right:0;bottom:0;z-index:5;background:rgba(20,20,24,.82);-webkit-backdrop-filter:blur(16px) saturate(1.6);backdrop-filter:blur(16px) saturate(1.6);
   border-top:1px solid rgba(255,255,255,.28);box-shadow:inset 0 1.5px 0 rgba(255,255,255,.25);padding-bottom:var(--sab)}
 .tabs .in{max-width:500px;margin:0 auto;display:flex;height:58px}
 .tab{flex:1;display:flex;align-items:center;justify-content:center;height:58px;color:var(--muted);font:400 19px/22px var(--mk);position:relative}
@@ -671,7 +672,7 @@ function pickCard(p, d, opts) {
     h('span', { class: 'meta' }, muNodes(mu, true).length ? muNodes(mu, true) : 'Game time not posted')));
   card.appendChild(h('div', { class: 'r2' },
     h('div', { class: 'bet', text: p.bet || 'Bet not posted' }),
-    h('div', { class: 'price', text: odds(p.price), 'data-pv': String(num(p.price) == null ? '' : Math.round(num(p.price))), 'data-pid': id })));
+    h('div', { class: 'price' + (num(p.price) == null ? ' noprice' : ''), text: num(p.price) == null ? 'No price' : odds(p.price), 'data-pv': String(num(p.price) == null ? '' : Math.round(num(p.price))), 'data-pid': id })));
 
   /* the price is frozen at the read that found the pick: say when, and that it is the price to bet */
   var stamp = h('div', { class: 'stamp' });
@@ -682,7 +683,7 @@ function pickCard(p, d, opts) {
   var pc = pctP(p), be = pctB(p), gd = isObj(p.guard) ? p.guard : {};
   card.appendChild(h('div', { class: 'chance' }, gd.verdict === 'agrees' ? 'Model agrees · ' : '', 'We say ', h('b', { text: pc || 'not posted' }), be ? ' · price needs ' + be : ''));
   var bar = chanceBar(p.p, p.breakeven); if (bar) card.appendChild(bar);
-  var rsn = str(p.reason).replace(/\s*\(our blend:\s*[\d.]+%\)/gi, '');   /* the % is already on the "We say" line */
+  var rsn = str(p.reason).replace(/\s*\(our blend:\s*[\d.]+%\)/gi, '').replace(/\s*Our model agrees\.?/gi, '');   /* the % is already on the "We say" line */
   if (rsn) card.appendChild(h('div', { class: 'reason', text: rsn }));
   var tp = (!isObj(p.graded) && !/^locked/.test(str(p.state))) ? toPuck(p.start || (d.games[p.game_id] && d.games[p.game_id].start)) : '';
   card.appendChild(h('div', { class: 'chips' },
@@ -777,7 +778,7 @@ function statusLineEl(s) {
   if (od && s.odds.low) bits.push(od);
   s.warn.forEach(function (w) { bits.push(w); });
   if (s.text) bits.push(s.text);
-  if (od && !s.odds.low) bits.push(od);
+  /* pool fine: days left live in the rules sheet; keeps the strip to one line (weekly 2026-11-01) */
   bits.forEach(function (b, i) { if (i) el.appendChild(node(' \u00b7 ')); el.appendChild(node(b)); });
   return el;
 }
@@ -1098,10 +1099,10 @@ function bsRow(x) {
   var l1 = h('div', { class: 'e1' }, x.state === 'pulled' ? h('span', { class: 'ptag', text: 'PULLED' }) : null,
     h('span', { class: 'pn', text: x.player || 'Player not named' }), ' ' + (x.bet || '').replace(/^(\w)(\w*)/, function (m, a, b) { return a + b.toLowerCase(); }));
   var l2 = [odds(x.price), str(x.game)];
-  if (num(x.gap_pct) != null) l2.push('gap ' + (x.gap_pct > 0 ? '+' : '') + x.gap_pct + '%');
+  if (num(x.gap_pct) != null) l2.push('Hard Rock ' + (x.gap_pct > 0 ? '+' : '') + x.gap_pct + '% vs books');
   if (x.kind === 'veto') l2.push('model vetoed');
   if (x.pulled) l2.push('pulled: ' + str(x.pulled.reason));
-  if (num(x.clv_pct) != null) l2.push('CLV ' + (x.clv_pct > 0 ? '+' : '') + x.clv_pct + '%');
+  if (num(x.clv_pct) != null) l2.push('at close ' + (x.clv_pct > 0 ? '+' : '') + x.clv_pct + '%');
   if (res && units(x.units, 2)) l2.push(units(x.units, 2));
   else if (!res && x.state !== 'pulled') l2.push(x.locked ? 'Awaiting result' : (x.settled || 'Early'));
   return h('div', { class: 'ent' }, tag, h('div', { class: 'bd' }, l1, h('div', { class: 'e2', text: l2.join(' · ') })));
@@ -1124,7 +1125,7 @@ function renderBackstage() {
     app.appendChild(h('div', { class: 'card empty', style: 'margin-top:8px' }, h('div', { class: 't', text: 'No points results yet.' })));
   }
   var sub = [n + ' graded' + (num(t.void) ? ', ' + t.void + ' void' : ''), '1 unit each at the flagged Hard Rock price'];
-  if (num(clv.n)) sub.push('avg CLV ' + (clv.mean > 0 ? '+' : '') + (100 * clv.mean).toFixed(1) + '% (' + clv.n + ')');
+  if (num(clv.n)) sub.push('avg at close ' + (clv.mean > 0 ? '+' : '') + (100 * clv.mean).toFixed(1) + '% (' + clv.n + ')');
   app.appendChild(h('div', { class: 'subline', text: sub.join(' · ') }));
   app.appendChild(h('p', { class: 'note', text: 'Goes live only after a big enough sample proves it (the team sets the bar). Until then it is just watched.' }));
   var tn = isObj(w.tonight) ? w.tonight : {}, rows = arr(tn.flags).concat(arr(tn.vetoes)).filter(isObj);
