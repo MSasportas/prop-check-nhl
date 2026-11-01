@@ -1,10 +1,10 @@
 {
  "ok": true,
  "slate_date": "2026-11-01",
- "started_at": "2026-11-01T14:30:01-05:00",
- "status_at": "2026-11-01T14:30:01-05:00",
- "finished_at": "2026-11-01T14:30:02-05:00",
- "last_ok_at": "2026-11-01T14:30:01-05:00",
+ "started_at": "2026-11-01T14:50:00-05:00",
+ "status_at": "2026-11-01T14:50:00-05:00",
+ "finished_at": "2026-11-01T14:50:01-05:00",
+ "last_ok_at": "2026-11-01T14:50:00-05:00",
  "failed_step": null,
  "steps": [
   {
@@ -24,8 +24,8 @@
   },
   {
    "step": "lineups",
-   "status": "ok",
-   "note": "4 of 4 team pages read"
+   "status": "skipped",
+   "note": "checked in the last 20 minutes"
   },
   {
    "step": "lineup_history",
@@ -65,7 +65,7 @@
   {
    "step": "shadow",
    "status": "ok",
-   "note": "39 line read(s) logged"
+   "note": "34 line read(s) logged"
   },
   {
    "step": "gg_grade",
@@ -97,7 +97,7 @@
   },
   {
    "n": 2,
-   "left": 487
+   "left": 485
   },
   {
    "n": 3,
@@ -132,14 +132,14 @@
    "left": 500
   }
  ],
- "pool_total": 4483,
+ "pool_total": 4481,
  "allowance": 21.512,
  "tier": 4,
  "budget_today": 107,
- "budget_used_today": 13,
+ "budget_used_today": 15,
  "prices_state": "ok",
- "prices_at": "2026-11-01T14:30:01-05:00",
- "next_price_read_at": "2026-11-01T14:45:00-05:00",
+ "prices_at": "2026-11-01T14:50:00-05:00",
+ "next_price_read_at": "2026-11-01T15:15:00-05:00",
  "unmatched_names": [],
  "unknown_teams": [],
  "lineup_unmatched_names": [],
@@ -153,7 +153,7 @@
  "runner": {
   "event": "workflow_dispatch",
   "run_id": "41340344295",
-  "iteration": 3,
+  "iteration": 5,
   "chain_link": 136,
   "chain_started_at": "2026-10-28T10:00:15-04:00",
   "run_started_at": "2026-11-01T14:10:14-05:00"
