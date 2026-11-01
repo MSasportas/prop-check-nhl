@@ -1,6 +1,64 @@
 {
  "nights": [
   {
+   "date": "2026-10-23",
+   "graded": true,
+   "w": 1,
+   "l": 0,
+   "units": 1.05,
+   "entries": [
+    {
+     "id": "2026-10-23:2026020166:8475184:shots:1.5:under",
+     "kind": "single",
+     "player": "C. Kreider",
+     "bet": "Under 1.5 shots on goal",
+     "market": "shots",
+     "team": "MTL",
+     "game": "MTL at CHI",
+     "price": 105,
+     "first_price": 105,
+     "last_price": 105,
+     "prices": [
+      {
+       "price": 105,
+       "at": "2026-10-23T18:30:01-04:00"
+      }
+     ],
+     "result": "W",
+     "actual": "had 1",
+     "units": 1.05,
+     "pulled": null,
+     "legs": []
+    },
+    {
+     "id": "2026-10-23:2026020167:8476455:shots:2.5:under",
+     "kind": "single",
+     "player": "G. Landeskog",
+     "bet": "Under 2.5 shots on goal",
+     "market": "shots",
+     "team": "COL",
+     "game": "TBL at COL",
+     "price": -180,
+     "first_price": -180,
+     "last_price": -180,
+     "prices": [
+      {
+       "price": -180,
+       "at": "2026-10-23T19:30:00-04:00"
+      }
+     ],
+     "result": "W",
+     "actual": "had 1",
+     "units": 0.5556,
+     "pulled": {
+      "at": "2026-10-23T20:20:00-04:00",
+      "reason": "Too few other books to check it against"
+     },
+     "legs": []
+    }
+   ]
+  },
+  {
    "date": "2026-10-22",
    "graded": true,
    "w": 3,
