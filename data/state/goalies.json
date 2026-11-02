@@ -3,7 +3,7 @@
  "teams": {
   "BOS": {
    "name": "Jeremy Swayman",
-   "status": "expected"
+   "status": "confirmed"
   },
   "VGK": {
    "name": "Carter Hart",
@@ -34,5 +34,5 @@
    "status": "expected"
   }
  },
- "checked_at": "2026-11-02T11:00:00-05:00"
+ "checked_at": "2026-11-02T11:20:00-05:00"
 }
