@@ -467,17 +467,25 @@ All features use games dated strictly before d (TV listings and the line's own e
 
 | id | date | rule (exact) | data | result | status |
 |---|---|---|---|---|---|
-| FF1 | 2026-11-02 | **Florida local bias, shots.** Hard Rock is a Florida book; retail money may lean on Panthers/Lightning overs. own = [his team is FLA or TBL]; oppfl = [opponent is FLA or TBL]. Terms c1*own + c2*oppfl (3 T). Fixed FF1r: UNDER on every FLA/TBL player's line (1 variant). 4 variants | shots45 | | open |
-| FF2 | 2026-11-02 | **National TV game.** From api-web schedule tvBroadcasts for game d: natus = [any broadcast with market "N", countryCode "US", network not "NHLN"] (ESPN/ABC/TNT/TBS/truTV-type showcase); natca = [any market "N", countryCode "CA"]. Terms c1*natus + c2*natca (3 T). Fixed FF2r: UNDER on every line in a US national-TV game (public-heavy showcase, overs shaded?) (1 variant). 4 variants | schedule + shots45 | | open |
-| FF3 | 2026-11-02 | **Penalty-kill burden.** shs = his SH TOI per game (minutes) over his last 10 games before d (skater/timeonice, >= 3 games, else 0). odraw = opponent's PP opportunities per game over its last 10 games before d (team/powerplay, >= 3, else league mean) minus the league mean PP opportunities per team-game before d (the opponent's PP-heavy nights put PK forwards/D on the bench-side of shot volume). Terms c1*shs + c2*shs*odraw (3 T). Fixed FF3r: UNDER when shs >= 1.5 and odraw >= +0.4 (1 variant). 4 variants | REST + shots45 | | open |
-| FF4 | 2026-11-02 | **Last-change matchup.** The home coach gets the last change and hunts the road team's top forwards with his shutdown pair. For forwards only: tf = etoi/60 - 16 (minutes; etoi = the production model's prior-only expected TOI on the line row), 0 for D. Terms c1*tf*[away] + c2*tf*[home] (3 T). Fixed FF4r: UNDER on road forwards with etoi >= 19 min (1 variant). 4 variants | shots45 | | open |
+| FF1 | 2026-11-02 | **Florida local bias, shots.** Hard Rock is a Florida book; retail money may lean on Panthers/Lightning overs. own = [his team is FLA or TBL]; oppfl = [opponent is FLA or TBL]. Terms c1*own + c2*oppfl (3 T). Fixed FF1r: UNDER on every FLA/TBL player's line (1 variant). 4 variants | shots45 | T=.01 -7.0% n274; .02 +25.1% n19; .03 +33.2% n10 (tiny n, Nov only). FF1r UNDER on FLA/TBL players -8.3% n679 [-14.7,-2.0], folds +2.1/-12.9/-6.5/-29.0. own weight -0.02..-0.04 (FLA/TBL lean under a hair), far below the hold | failed |
+| FF2 | 2026-11-02 | **National TV game.** From api-web schedule tvBroadcasts for game d: natus = [any broadcast with market "N", countryCode "US", network not "NHLN"] (ESPN/ABC/TNT/TBS/truTV-type showcase); natca = [any market "N", countryCode "CA"]. Terms c1*natus + c2*natca (3 T). Fixed FF2r: UNDER on every line in a US national-TV game (public-heavy showcase, overs shaded?) (1 variant). 4 variants | schedule + shots45 | T=.01 -11.0% n118; .02 -8.9% n97; .03 -4.6% n20. FF2r UNDER in US national-TV games -10.5% n1,184 [-15.4,-5.3], every fold negative. Weights ~0 | failed |
+| FF3 | 2026-11-02 | **Penalty-kill burden.** shs = his SH TOI per game (minutes) over his last 10 games before d (skater/timeonice, >= 3 games, else 0). odraw = opponent's PP opportunities per game over its last 10 games before d (team/powerplay, >= 3, else league mean) minus the league mean PP opportunities per team-game before d (the opponent's PP-heavy nights put PK forwards/D on the bench-side of shot volume). Terms c1*shs + c2*shs*odraw (3 T). Fixed FF3r: UNDER when shs >= 1.5 and odraw >= +0.4 (1 variant). 4 variants | REST + shots45 | T=.01 -9.8% n221; .02 -23.1% n46; .03 n2. FF3r UNDER (PK-heavy vs PP-drawing opponent) -14.3% n391 [-22.4,-6.0], every fold negative | failed |
+| FF4 | 2026-11-02 | **Last-change matchup.** The home coach gets the last change and hunts the road team's top forwards with his shutdown pair. For forwards only: tf = etoi/60 - 16 (minutes; etoi = the production model's prior-only expected TOI on the line row), 0 for D. Terms c1*tf*[away] + c2*tf*[home] (3 T). Fixed FF4r: UNDER on road forwards with etoi >= 19 min (1 variant). 4 variants | shots45 | T=.01 -9.1% n246; .02 -13.0% n124; .03 -16.4% n60. FF4r UNDER on road forwards etoi >= 19 -2.5% n1,059 [-7.3,+2.4], p .80, folds +4.1/-7.0/-5.9/+3.6. Road weight ~0; home top forwards lean over (+0.02..0.08) | failed |
 
 Forward (registered now; nights >= 2026-11-02 only, none seen):
 | id | date | rule (exact) | data | result | status |
 |---|---|---|---|---|---|
-| Q18a | 2026-11-02 | **Q1b unders on line 1.5 at the 1 PM read (A).** Every Q1b bet (exactly as score_fwd.py makes it) with side under, line 1.5, read A. 1 variant | data/shadow + data/odds | | forward, open |
-| Q18b | 2026-11-02 | Same at reads B or C. 1 variant | same | | forward, open |
+| Q18a | 2026-11-02 | **Q1b unders on line 1.5 at the 1 PM read (A).** Every Q1b bet (exactly as score_fwd.py makes it) with side under, line 1.5, read A. 1 variant | data/shadow + data/odds | 0 bets (start tonight) | forward, open |
+| Q18b | 2026-11-02 | Same at reads B or C. 1 variant | same | 0 bets (start tonight) | forward, open |
 Q18 bar: n >= 300 graded, ROI > 0, one-sided p < 0.05/36 = 0.0014 (34 + 2 forward variants), mean CLV > 0.
+
+Run 18 count: 16 variants tested (FF1-FF4 4 each). Expected false positives at 5%: ~0.8. Positives with n >= 300: none (best FF4r -2.5% n1,059;
+FF1 T=.02/.03 positive on n19/n10 only), so no placebo and no lockbox look. Cumulative historical: 448. Forward variants: 36 (Q18a-b added).
+Lockbox looks: still 2. Output: research/code/r18/ff18_results.txt.
+Forward re-score (14 nights Oct 19 - Nov 1): Q1b n381 +12.0% [+5,+18] p .0012 (20k) CLV +3.4%, still over its registered bar (.0033); Q1g
+(>= 4 books, EV >= 1%) n326 +14.3% [+6,+23] p .0029 (20k) CLV +3.4%, placebo 0/2000: meets its registered forward bar for the first time
+(not the strict .05/36 = .0014). Both: read A +19..23%, reads B/C +2..3% (p .34-.40). research/code/r18/check_q1.txt.
+
 
 ## Queued (not yet tested)
 | id | rule idea | data | status |

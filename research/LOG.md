@@ -1,5 +1,35 @@
 # LOG.md: Researcher runs (newest first)
 
+- 2026-11-02 ~8:45 AM ET (Researcher run 18, daily; SHOTS ON GOAL ONLY). **CANDIDATE FOR SHARP: forward Q1g (a stricter cut of Q1b, same caveat).**
+  - Rule (registered 2026-10-19, run 5, unchanged): at any Hard Rock read (1 PM A, 90-min B, 45-min C) with >= 4 other books, bet the Hard Rock
+    shots side whose EV vs the median of the other books' proportional no-vig fair is >= +1.0%, price -200 or better, first qualifying read
+    per side, before puck. n 326 graded (91 games, 14 nights Oct 19 - Nov 1), 186-140, +46.5u, ROI +14.3%, 90% CI +5.7..+22.6% (game-
+    clustered, 20k), one-sided p .0029 (registered bar .05/15 = .0033: met; strict .05/36 = .0014: not met), mean CLV +3.4%. Folds = nights:
+    13 of 14 positive (Oct 30 -14% n5); leave-one-night-out +11.7..+15.6%. Placebo: same lines random side -6.1% (0/2000 >= actual); random
+    326 of 3,285 priced sides -7.4% (0/2000). Walk-forward/lockbox: n/a (live-only, judged on the forward bar per RESEARCH.md).
+  - Caveat (decisive for the product): read A +22.7% n192, B +6.0% n103, C -10.4% n31; B/C together +2.2% n134, p .40. The product picks only
+    at B/C, so this adds nothing usable today beyond Q1b's open timing question. Unders +19.5% n265, overs -8.5% n61. Mean EV +3.2%: plan on
+    ~+3%, not +14%. Script research/code/r18/check_q1.py (QVAR=Q1g), output check_q1.txt.
+  - FF1 Florida local bias (FLA/TBL players): best T=.02 +25.1% n19 / T=.03 +33.2% n10 (Nov only, noise); FF1r UNDER on FLA/TBL players -8.3%
+    n679 [-14.7,-2.0]. Hard Rock does not shade the home teams' shots overs enough to matter.
+  - FF2 national TV game (ESPN/TNT-type US showcase; Canadian national): -4.6% n20 to -11.0% n118; FF2r UNDER in US national games -10.5%
+    n1,184, every fold negative. No showcase shading.
+  - FF3 penalty-kill burden (PK-heavy players vs opponents that draw lots of power plays): -9.8% n221 to -23.1% n46; FF3r UNDER -14.3% n391,
+    every fold negative.
+  - FF4 last-change matchup (road top forwards hunted by the home shutdown pair): -9.1% n246 to -16.4% n60; FF4r UNDER on road forwards
+    with expected TOI >= 19 min -2.5% n1,059 [-7.3,+2.4], p .80. The road effect is ~0; home top forwards lean over a hair.
+  - Forward re-score (all scorers, 14 nights Oct 19 - Nov 1; clone unshallowed): Q1a +6.0% n519 p .055 (bar not met); Q1b +12.0% n381
+    [+5,+18] p .0012 (20k) CLV +3.4%, still over its .0033 bar (Nov 1 +15.4% n14); Q1b by read A +19.1% n217 vs B/C +2.6% n164 (p .34);
+    unders +14.4% n310, overs +1.5% n71. Q1c +13.2% n270 p .0065; Q1g above; Q1h +15.4% n228 p .003; Q1k Pinnacle +9.2% n398 p .03 (CLV
+    +1.3%); Q1l +14.8% n228; Q1m +18.7% n47. Q6a/b/c +5.5% n208 / +5.2% n158 / +8.7% n294. Q8a-c -3.7% / -3.8% / +9.6%. Q9a-c +6.3% n157 /
+    +0.3% n87 / +10.9% n23. Q10 +6.4% n36. Q11a +9.1% n79, Q11b +14.9% n191 p .009. Q16a +12.0% n24, Q16b (flag 1 PM, bet at 90 min) +14.1%
+    n27. Q17a -21.6% n5, Q17b 0, Q17c +35.9% n9. Q2a/b 0 bets. New Q18a-b (Q1b unders on 1.5 at A vs B/C) start tonight, 0 bets.
+  16 historical variants (~0.8 false positives expected), all-time 448; forward 36. Lockbox looks: 2 (unchanged; next needs p < 0.0167).
+  **Verdict: nothing new passed in history; forward Q1g now meets its registered bar but lives at the 1 PM read like Q1b.** Florida bias,
+  national TV, penalty-kill load and last-change matchups are inside Hard Rock's price (448 variants with free data). The Sharp's question is
+  still timing: the gap is a 1 PM, under-side gap and the B/C reads the product uses are ~break-even (+2-3%, n 134-164).
+  Next: (1) Q16b to n 300 (does the 90-min price keep the 1 PM edge? +14.1% n27 so far); (2) Q18a-b forward; (3) register a forward test of
+    Q1b at A with the product's own guard (model must not disagree), to see whether the 1 PM gap survives the guard, before looking.
 - 2026-11-01 ~8:30 AM ET (Researcher run 17, daily; SHOTS ON GOAL ONLY). No key used, no historical odds pull. EE1-EE3 + forward Q17a-c registered
   and pushed (99edae1) before any test ran. Free NHL api-web play-by-play (with faceoffs) for all 945 games Oct 7 - Feb 28 fetched to scratch
   (r17/fetch17.py; lockbox not fetched). Script research/code/r17/ee17.py, output ee17_results.txt. 10,413 graded Nov-Feb lines.
