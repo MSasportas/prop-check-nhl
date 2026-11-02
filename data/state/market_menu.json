@@ -2,168 +2,168 @@
  "markets": {
   "alternate_spreads": {
    "first_seen": "2026-10-18",
-   "last_seen": "2026-10-26",
-   "last_update": "2026-10-26T16:59:58Z"
+   "last_seen": "2026-11-02",
+   "last_update": "2026-11-02T18:00:03Z"
   },
   "alternate_spreads_p1": {
    "first_seen": "2026-10-18",
-   "last_seen": "2026-10-26",
-   "last_update": "2026-10-26T16:59:56Z"
+   "last_seen": "2026-11-02",
+   "last_update": "2026-11-02T17:59:34Z"
   },
   "alternate_spreads_p2": {
    "first_seen": "2026-10-18",
-   "last_seen": "2026-10-26",
-   "last_update": "2026-10-26T16:59:56Z"
+   "last_seen": "2026-11-02",
+   "last_update": "2026-11-02T17:59:34Z"
   },
   "alternate_spreads_p3": {
    "first_seen": "2026-10-18",
-   "last_seen": "2026-10-26",
-   "last_update": "2026-10-26T16:59:56Z"
+   "last_seen": "2026-11-02",
+   "last_update": "2026-11-02T17:59:34Z"
   },
   "alternate_totals": {
    "first_seen": "2026-10-18",
-   "last_seen": "2026-10-26",
-   "last_update": "2026-10-26T16:59:58Z"
+   "last_seen": "2026-11-02",
+   "last_update": "2026-11-02T18:00:03Z"
   },
   "alternate_totals_p1": {
    "first_seen": "2026-10-18",
-   "last_seen": "2026-10-26",
-   "last_update": "2026-10-26T16:59:56Z"
+   "last_seen": "2026-11-02",
+   "last_update": "2026-11-02T17:59:34Z"
   },
   "alternate_totals_p2": {
    "first_seen": "2026-10-18",
-   "last_seen": "2026-10-26",
-   "last_update": "2026-10-26T16:59:56Z"
+   "last_seen": "2026-11-02",
+   "last_update": "2026-11-02T17:59:34Z"
   },
   "alternate_totals_p3": {
    "first_seen": "2026-10-18",
-   "last_seen": "2026-10-26",
-   "last_update": "2026-10-26T16:59:56Z"
+   "last_seen": "2026-11-02",
+   "last_update": "2026-11-02T17:59:34Z"
   },
   "btts": {
    "first_seen": "2026-10-18",
-   "last_seen": "2026-10-26",
-   "last_update": "2026-10-26T16:59:56Z"
+   "last_seen": "2026-11-02",
+   "last_update": "2026-11-02T17:59:34Z"
   },
   "h2h": {
    "first_seen": "2026-10-18",
-   "last_seen": "2026-10-26",
-   "last_update": "2026-10-26T16:59:58Z"
+   "last_seen": "2026-11-02",
+   "last_update": "2026-11-02T18:00:03Z"
   },
   "h2h_3_way_p1": {
    "first_seen": "2026-10-18",
-   "last_seen": "2026-10-26",
-   "last_update": "2026-10-26T16:59:56Z"
+   "last_seen": "2026-11-02",
+   "last_update": "2026-11-02T17:59:34Z"
   },
   "h2h_3_way_p2": {
    "first_seen": "2026-10-18",
-   "last_seen": "2026-10-26",
-   "last_update": "2026-10-26T16:59:56Z"
+   "last_seen": "2026-11-02",
+   "last_update": "2026-11-02T17:59:34Z"
   },
   "h2h_3_way_p3": {
    "first_seen": "2026-10-18",
-   "last_seen": "2026-10-26",
-   "last_update": "2026-10-26T16:59:56Z"
+   "last_seen": "2026-11-02",
+   "last_update": "2026-11-02T17:59:34Z"
   },
   "h2h_ot": {
    "first_seen": "2026-10-18",
-   "last_seen": "2026-10-26",
-   "last_update": "2026-10-26T16:59:58Z"
+   "last_seen": "2026-11-02",
+   "last_update": "2026-11-02T18:00:03Z"
   },
   "h2h_p1": {
    "first_seen": "2026-10-18",
-   "last_seen": "2026-10-26",
-   "last_update": "2026-10-26T16:59:56Z"
+   "last_seen": "2026-11-02",
+   "last_update": "2026-11-02T17:59:34Z"
   },
   "h2h_p2": {
    "first_seen": "2026-10-18",
-   "last_seen": "2026-10-26",
-   "last_update": "2026-10-26T16:59:56Z"
+   "last_seen": "2026-11-02",
+   "last_update": "2026-11-02T17:59:34Z"
   },
   "h2h_p3": {
    "first_seen": "2026-10-18",
-   "last_seen": "2026-10-26",
-   "last_update": "2026-10-26T16:59:56Z"
+   "last_seen": "2026-11-02",
+   "last_update": "2026-11-02T17:59:34Z"
   },
   "odd_even": {
    "first_seen": "2026-10-18",
-   "last_seen": "2026-10-26",
-   "last_update": "2026-10-26T16:59:56Z"
+   "last_seen": "2026-11-02",
+   "last_update": "2026-11-02T17:59:34Z"
   },
   "overtime": {
    "first_seen": "2026-10-18",
-   "last_seen": "2026-10-26",
-   "last_update": "2026-10-26T16:59:56Z"
+   "last_seen": "2026-11-02",
+   "last_update": "2026-11-02T17:59:34Z"
   },
   "player_assists": {
    "first_seen": "2026-10-18",
-   "last_seen": "2026-10-26",
-   "last_update": "2026-10-26T16:59:56Z"
+   "last_seen": "2026-11-02",
+   "last_update": "2026-11-02T17:59:34Z"
   },
   "player_goal_scorer_first": {
    "first_seen": "2026-10-18",
-   "last_seen": "2026-10-26",
-   "last_update": "2026-10-26T16:59:56Z"
+   "last_seen": "2026-11-02",
+   "last_update": "2026-11-02T17:59:34Z"
   },
   "player_goals": {
    "first_seen": "2026-10-18",
-   "last_seen": "2026-10-26",
-   "last_update": "2026-10-26T16:59:56Z"
+   "last_seen": "2026-11-02",
+   "last_update": "2026-11-02T17:59:34Z"
   },
   "player_goals_against": {
    "first_seen": "2026-10-18",
-   "last_seen": "2026-10-26",
-   "last_update": "2026-10-26T16:59:56Z"
+   "last_seen": "2026-11-02",
+   "last_update": "2026-11-02T17:59:34Z"
   },
   "player_goals_alternate": {
    "first_seen": "2026-10-18",
-   "last_seen": "2026-10-26",
-   "last_update": "2026-10-26T16:59:56Z"
+   "last_seen": "2026-11-02",
+   "last_update": "2026-11-02T17:59:34Z"
   },
   "player_points": {
    "first_seen": "2026-10-18",
-   "last_seen": "2026-10-26",
-   "last_update": "2026-10-26T16:59:56Z"
+   "last_seen": "2026-11-02",
+   "last_update": "2026-11-02T17:59:34Z"
   },
   "player_power_play_points": {
    "first_seen": "2026-10-18",
-   "last_seen": "2026-10-26",
-   "last_update": "2026-10-26T16:59:56Z"
+   "last_seen": "2026-11-02",
+   "last_update": "2026-11-02T17:59:34Z"
   },
   "player_shots_alternate": {
    "first_seen": "2026-10-18",
-   "last_seen": "2026-10-26",
-   "last_update": "2026-10-26T16:59:56Z"
+   "last_seen": "2026-11-02",
+   "last_update": "2026-11-02T17:59:34Z"
   },
   "player_shots_on_goal": {
    "first_seen": "2026-10-18",
-   "last_seen": "2026-10-26",
-   "last_update": "2026-10-26T16:59:56Z"
+   "last_seen": "2026-11-02",
+   "last_update": "2026-11-02T17:59:34Z"
   },
   "player_shutouts": {
    "first_seen": "2026-10-18",
-   "last_seen": "2026-10-26",
-   "last_update": "2026-10-26T16:59:56Z"
+   "last_seen": "2026-11-02",
+   "last_update": "2026-11-02T17:59:34Z"
   },
   "player_total_saves": {
    "first_seen": "2026-10-18",
-   "last_seen": "2026-10-26",
-   "last_update": "2026-10-26T16:59:56Z"
+   "last_seen": "2026-11-02",
+   "last_update": "2026-11-02T17:59:34Z"
   },
   "spreads": {
    "first_seen": "2026-10-18",
-   "last_seen": "2026-10-26",
-   "last_update": "2026-10-26T16:59:58Z"
+   "last_seen": "2026-11-02",
+   "last_update": "2026-11-02T18:00:03Z"
   },
   "team_totals": {
    "first_seen": "2026-10-18",
-   "last_seen": "2026-10-26",
-   "last_update": "2026-10-26T16:59:56Z"
+   "last_seen": "2026-11-02",
+   "last_update": "2026-11-02T17:59:34Z"
   },
   "totals": {
    "first_seen": "2026-10-18",
-   "last_seen": "2026-10-26",
-   "last_update": "2026-10-26T16:59:58Z"
+   "last_seen": "2026-11-02",
+   "last_update": "2026-11-02T18:00:03Z"
   }
  },
  "weeks": {
@@ -190,7 +190,15 @@
    "home": "NYR",
    "n": 33,
    "cost": 1
+  },
+  "2026-W45": {
+   "at": "2026-11-02T13:00:00-05:00",
+   "game_id": 2026020232,
+   "away": "VGK",
+   "home": "BOS",
+   "n": 33,
+   "cost": 1
   }
  },
- "last_try_at": "2026-10-26T13:00:00-04:00"
+ "last_try_at": "2026-11-02T13:00:00-05:00"
 }
