@@ -192,6 +192,7 @@ button{font:inherit;color:inherit;background:none;border:0;padding:0;margin:0;te
 .list .li .r{flex:none;white-space:nowrap;color:var(--muted)}
 .list .li .r b{font:400 17px/20px var(--mk);color:var(--fg)}
 .list .sub{display:block;font-size:12px;color:var(--warn)}
+.list .li.done{opacity:.6}
 .list .st{display:block;font-size:12px;line-height:16px;color:var(--muted);margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 
 /* empty + skeleton + error */
@@ -898,8 +899,10 @@ function renderTonight() {
     games.forEach(function (g) {
       var n = num(g.picks), bits = [(g.away && g.home) ? str(g.away) + ' at ' + str(g.home) : 'Game', fTime(g.start) || 'time not posted'];
       if (n != null) bits.push(n + (n === 1 ? ' pick' : ' picks'));
-      var subs = gameStatus(g);
-      x.appendChild(h('div', { class: 'li' }, h('span', { class: 'grow' }, bits.join(' · '),
+      var subs = gameStatus(g), done = g.reads_done === true && !g.started;
+      /* every read that can make a pick is in: say so quietly, so a 0-pick game reads as finished, not pending */
+      if (done) subs.push(n ? '\u2713 Checks done \u00B7 prices final' : '\u2713 Checks done \u00B7 no pick coming');
+      x.appendChild(h('div', { class: done ? 'li done' : 'li' }, h('span', { class: 'grow' }, bits.join(' · '),
         subs.map(function (t) { return h('span', { class: 'st', text: t }); }),
         g.excluded_reason ? h('span', { class: 'sub', text: 'not covered: ' + str(g.excluded_reason) }) : null)));
     });

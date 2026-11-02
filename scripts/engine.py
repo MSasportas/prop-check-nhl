@@ -401,6 +401,7 @@ def build_slate(inp, events, extra):
     open_picks = [p for p in picks if bucket(p) == "open"]
 
     games = []
+    done_ids = (getattr(inp, "facts", None) or {}).get("reads_done") or {}
     for g in sorted(inp.games.values(), key=lambda x: (x["start"], x["id"])):
         ex = [t for t in (g["away"], g["home"]) if t in inp.behind]
         lx, gx = {}, {}
@@ -412,6 +413,8 @@ def build_slate(inp, events, extra):
         games.append({"id": g["id"], "away": g["away"], "home": g["home"], "start": g["start"],
                       "lineups": lx, "goalies": gx,
                       "started": sched.started(g, now),
+                      # all of this game's pick reads are in: no new pick can come before puck (run.py facts)
+                      "reads_done": bool(done_ids.get(g["id"]) or done_ids.get(str(g["id"]))) and not sched.started(g, now),
                       "picks": sum(1 for p in picks if p["game_id"] == g["id"] and not p["pulled"]),
                       "excluded_reason": inp.behind[ex[0]] if ex else None, "excluded_teams": ex})
 

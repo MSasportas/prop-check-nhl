@@ -54,6 +54,7 @@
      "status": "confirmed"
     }
    },
+   "reads_done": false,
    "excluded_reason": null,
    "started": true
   },
@@ -77,6 +78,7 @@
      "status": "expected"
     }
    },
+   "reads_done": true,
    "excluded_reason": null,
    "started": true
   },
@@ -97,6 +99,7 @@
     },
     "home": null
    },
+   "reads_done": true,
    "excluded_reason": null,
    "started": true
   },
@@ -120,6 +123,7 @@
      "status": "expected"
     }
    },
+   "reads_done": false,
    "excluded_reason": null,
    "started": true
   },
@@ -143,6 +147,7 @@
      "status": "confirmed"
     }
    },
+   "reads_done": false,
    "excluded_reason": null,
    "started": true
   },
@@ -160,6 +165,7 @@
     "away": null,
     "home": null
    },
+   "reads_done": false,
    "excluded_reason": null,
    "started": true
   },
@@ -180,6 +186,7 @@
     },
     "home": null
    },
+   "reads_done": false,
    "excluded_reason": null,
    "started": true
   }

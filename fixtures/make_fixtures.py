@@ -78,6 +78,8 @@ GAME_LINEUPS = {
     "g5": {"away": "confirmed", "home": "waiting"}, "g6": {"away": "not_checked", "home": "not_checked"},
     "g7": {"away": "not_checked", "home": "not_checked"},
 }
+# games whose 90/45-minute reads are all in (no new pick can come): the game list says so quietly
+READS_DONE = {"g2", "g3"}
 GAME_GOALIES = {
     "g1": {"away": {"name": "Jeremy Swayman", "status": "confirmed"}, "home": {"name": "Ukko-Pekka Luukkonen", "status": "confirmed"}},
     "g2": {"away": {"name": "Sergei Bobrovsky", "status": "confirmed"}, "home": {"name": "Andrei Vasilevskiy", "status": "expected"}},
@@ -191,7 +193,7 @@ def base_slate():
         "empty": None,
         "games": [{"id": g[0], "away": g[1], "home": g[2], "start": t(g[3]), "picks": counts.get(g[0], 0),
                    "lineups": GAME_LINEUPS.get(g[0]), "goalies": GAME_GOALIES.get(g[0]),
-                   "excluded_reason": None} for g in GAMES],
+                   "reads_done": g[0] in READS_DONE, "excluded_reason": None} for g in GAMES],
         "picks": picks,
         "parlays": [],
         "parlays_note": "Parlays are not offered: there is no evidence for them yet.",

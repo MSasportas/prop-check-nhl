@@ -459,7 +459,18 @@ class Run:
             banners.insert(0, {"level": "warn", "text": "Part of the last update failed at %s (%s). Some of what is below may be older."
                                                         % (common.fmt_time(now), last_run["failed_step"])})
         unmatched = sorted({n for f in doc.get("fetches", []) for n in f.get("unmatched", [])})
+        # per game: every read that could make a pick is in (or its window closed), so no new pick can come. Only said
+        # when this run's Gap + Guard step looked at those reads (a failed step leaves them for the next run).
+        reads_done = {}
+        gg_ok = common.gap_guard_active(cfg, self.slate) and not any(
+            s["step"] == "gapguard" and s["status"] == "failed" for s in self.steps)
+        if plan and gg_ok and not (refused or no_keys or all_used_up):
+            tier_now = odds.eff_tier(plan, odds.paper_markets(cfg, self.slate))
+            for g in open_games:
+                if odds.shots_reads_done(now, g, tier_now, v, doc.get("fetches", [])):
+                    reads_done[g["id"]] = True
         return {
+            "reads_done": reads_done,
             "prices_state": ps, "prices_at": prices_at, "next_price_read_at": common.iso(nxt) if nxt else None,
             "stats_built_at": self.stats_built_at, "stats_through": self.stats_through,
             "stats_state": "behind" if (self.stats_missing or self.too_far_behind()) else "ok",

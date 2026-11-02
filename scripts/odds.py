@@ -637,6 +637,24 @@ def due_pulls(now, games, tier, v, fetched, live_markets, started, retry_min=30,
     return out
 
 
+def shots_reads_done(now, g, tier, v, fetches):
+    """True when no 90/45-minute shots read (the only reads that can make a pick) can still come for game `g`, so no new
+    pick is possible for it before puck. fetches: the odds file's reads (the same ones the Gap + Guard step reads).
+    Done = the 45-minute read returned shots with the other books (nothing is read after it), or the last read's window has
+    closed (pull_c_latest_min before puck; at tier 1, the 90-minute read is the last one). Tier 0 (no reads) = never done:
+    the page's key warning covers that day. Started games are not judged here (they are locked)."""
+    if tier is None or tier < 1:
+        return False
+    start = common.parse_iso(g["start"])
+    left = (start - now).total_seconds() / 60.0
+    last_due = start - timedelta(minutes=v["pull_c_min"] if tier >= 2 else v["pull_b_min"])
+    for f in fetches or []:
+        if f.get("game_id") == g["id"] and f.get("pull") in ("B", "C") and "others" in f and \
+                "shots" in (f.get("markets") or {}) and last_due <= common.parse_iso(f["at"]) <= now:
+            return True
+    return left < (v["pull_c_latest_min"] if tier >= 2 else v["pull_latest_min"])
+
+
 def next_read_at(now, games, tier, v, fetched, started, has_budget=True, lineups_ok=None, paper=False):
     """The next time a price read is expected (for the status sheet). None when none is coming."""
     if not games or not has_budget:
