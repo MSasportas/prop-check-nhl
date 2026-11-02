@@ -1,12 +1,12 @@
 {
  "slate_date": "2026-11-01",
- "generated_at": "2026-11-01T19:10:20-05:00",
- "status_at": "2026-11-01T19:10:20-05:00",
+ "generated_at": "2026-11-01T19:20:01-05:00",
+ "status_at": "2026-11-01T19:20:01-05:00",
  "valid_until": "2026-11-02T05:00:00-05:00",
  "status": {
   "prices_state": "ok",
-  "prices_at": "2026-11-01T18:30:00-05:00",
-  "next_price_read_at": "2026-11-01T19:15:00-05:00",
+  "prices_at": "2026-11-01T19:20:01-05:00",
+  "next_price_read_at": null,
   "stats_built_at": "2026-11-01T19:10:01-05:00",
   "stats_through": "2026-11-01",
   "lineups_at": "2026-11-01T18:10:00-05:00",
@@ -16,11 +16,11 @@
   "stats_state": "ok",
   "last_run": {
    "ok": true,
-   "at": "2026-11-01T19:10:20-05:00",
+   "at": "2026-11-01T19:20:01-05:00",
    "failed_step": null
   },
   "pool": {
-   "pulls_left": 4473,
+   "pulls_left": 4471,
    "keys": 10,
    "game_days_left": 28,
    "days_left": 30,
@@ -35,7 +35,7 @@
  "empty": {
   "code": "none_qualified",
   "text": "No picks yet today",
-  "sub": "86 lines read, none cleared both checks. Today's earlier pick is under Started. Next read at 7:15 PM."
+  "sub": "86 lines read, none cleared both checks. 1 had a gap but our model said no. Today's earlier pick is under Started."
  },
  "games": [
   {

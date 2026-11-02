@@ -2,7 +2,7 @@
  "version": 1,
  "note": "Gap + Guard research log. Every flag here is a pick on the page and in the Record; vetoed and capped rows are research only.",
  "market": "shots",
- "generated_at": "2026-11-01T19:10:20-05:00",
+ "generated_at": "2026-11-01T19:20:01-05:00",
  "slate": "2026-11-01",
  "active": true,
  "window": {
@@ -84,7 +84,42 @@
     "units": -1.0
    }
   ],
-  "vetoes": [],
+  "vetoes": [
+   {
+    "id": "2026-11-01:2026020231:8483445:3.5:over",
+    "kind": "veto",
+    "slate": "2026-11-01",
+    "game_id": 2026020231,
+    "player": "C. Gauthier",
+    "team": "ANA",
+    "opp": "OTT",
+    "game": "ANA vs OTT",
+    "start": "2026-11-01T20:00:00-05:00",
+    "side": "over",
+    "line": 3.5,
+    "bet": "OVER 3.5 shots",
+    "price": 100,
+    "gap_pct": 3.1,
+    "final_pct": 0.8,
+    "market_fair_pct": 51.5,
+    "final_p_pct": 50.4,
+    "n_books": 8,
+    "guard": "veto",
+    "cap": null,
+    "flagged_at": "2026-11-01T19:20:01-05:00",
+    "read_pull": "C",
+    "settled": "Early",
+    "frozen_settled": "Early",
+    "move30_pct": -0.6,
+    "pulled": null,
+    "locked": false,
+    "state": "open",
+    "close_fair_pct": 51.5,
+    "clv_pct": null,
+    "result": null,
+    "units": null
+   }
+  ],
   "capped": []
  },
  "nights": [
@@ -948,7 +983,7 @@
  ],
  "nov2": {
   "gaps_measured": 32,
-  "gaps_logged": 39,
+  "gaps_logged": 40,
   "graded_picks": 37,
   "w": 24,
   "l": 13,
