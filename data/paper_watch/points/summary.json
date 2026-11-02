@@ -2,7 +2,7 @@
  "version": 1,
  "note": "Behind the scenes: research only. Not picks, not on the Record, never sent to Discord.",
  "market": "points",
- "generated_at": "2026-11-02T17:20:01-05:00",
+ "generated_at": "2026-11-02T17:30:01-05:00",
  "slate": "2026-11-02",
  "active": true,
  "window": {
@@ -10,7 +10,42 @@
   "checkpoint": "2026-11-02"
  },
  "tonight": {
-  "flags": [],
+  "flags": [
+   {
+    "id": "2026-11-02:2026020232:8479987:0.5:over",
+    "kind": "flag",
+    "slate": "2026-11-02",
+    "game_id": 2026020232,
+    "player": "M. Geekie",
+    "team": "BOS",
+    "opp": "VGK",
+    "game": "BOS vs VGK",
+    "start": "2026-11-02T19:00:00-05:00",
+    "side": "over",
+    "line": 0.5,
+    "bet": "OVER 0.5 points",
+    "price": 100,
+    "gap_pct": 4.1,
+    "final_pct": 3.3,
+    "market_fair_pct": 52.0,
+    "final_p_pct": 51.7,
+    "n_books": 7,
+    "guard": "pass",
+    "cap": null,
+    "flagged_at": "2026-11-02T17:30:01-05:00",
+    "read_pull": "B",
+    "settled": "Lineup confirmed",
+    "frozen_settled": "Lineup confirmed",
+    "move30_pct": null,
+    "pulled": null,
+    "locked": false,
+    "state": "open",
+    "close_fair_pct": null,
+    "clv_pct": null,
+    "result": null,
+    "units": null
+   }
+  ],
   "vetoes": [],
   "capped": []
  },
@@ -252,7 +287,7 @@
  ],
  "nov2": {
   "gaps_measured": 6,
-  "gaps_logged": 6,
+  "gaps_logged": 7,
   "graded_picks": 6,
   "w": 3,
   "l": 3,
@@ -280,7 +315,7 @@
   "clv_passed_mean": 0.04094960328113647,
   "clv_vetoed_mean": null,
   "nights": 6,
-  "nights_with_flags": 3,
+  "nights_with_flags": 4,
   "population_slope": null,
   "checkpoint": "2026-11-02"
  }
