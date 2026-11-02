@@ -11,7 +11,7 @@
   },
   "FLA": {
    "name": "Jacob Markstrom",
-   "status": "expected"
+   "status": "confirmed"
   },
   "DET": {
    "name": "Daniil Tarasov",
@@ -34,5 +34,5 @@
    "status": "expected"
   }
  },
- "checked_at": "2026-11-02T10:30:00-05:00"
+ "checked_at": "2026-11-02T11:00:00-05:00"
 }
