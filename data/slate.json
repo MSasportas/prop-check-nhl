@@ -1,7 +1,7 @@
 {
  "slate_date": "2026-11-03",
- "generated_at": "2026-11-03T15:50:06-05:00",
- "status_at": "2026-11-03T15:50:06-05:00",
+ "generated_at": "2026-11-03T16:00:00-05:00",
+ "status_at": "2026-11-03T16:00:00-05:00",
  "valid_until": "2026-11-04T05:00:00-05:00",
  "status": {
   "prices_state": "ok",
@@ -9,14 +9,14 @@
   "next_price_read_at": "2026-11-03T17:30:00-05:00",
   "stats_built_at": "2026-11-03T00:10:01-05:00",
   "stats_through": "2026-11-02",
-  "lineups_at": null,
+  "lineups_at": "2026-11-03T16:00:00-05:00",
   "goalies_at": null,
-  "lineups_note": null,
-  "lineups_state": "not_yet",
+  "lineups_note": "6 of 16 team line pages are dated today.",
+  "lineups_state": "ok",
   "stats_state": "ok",
   "last_run": {
    "ok": true,
-   "at": "2026-11-03T15:50:06-05:00",
+   "at": "2026-11-03T16:00:00-05:00",
    "failed_step": null
   },
   "pool": {
@@ -44,8 +44,8 @@
    "home": "TOR",
    "start": "2026-11-03T19:00:00-05:00",
    "lineups": {
-    "away": "not_checked",
-    "home": "not_checked"
+    "away": "waiting",
+    "home": "waiting"
    },
    "goalies": {
     "away": {
@@ -69,8 +69,8 @@
    "home": "MTL",
    "start": "2026-11-03T19:00:00-05:00",
    "lineups": {
-    "away": "not_checked",
-    "home": "not_checked"
+    "away": "waiting",
+    "home": "confirmed"
    },
    "goalies": {
     "away": {
@@ -94,8 +94,8 @@
    "home": "TBL",
    "start": "2026-11-03T19:00:00-05:00",
    "lineups": {
-    "away": "not_checked",
-    "home": "not_checked"
+    "away": "confirmed",
+    "home": "waiting"
    },
    "goalies": {
     "away": {
@@ -119,8 +119,8 @@
    "home": "NYR",
    "start": "2026-11-03T19:00:00-05:00",
    "lineups": {
-    "away": "not_checked",
-    "home": "not_checked"
+    "away": "confirmed",
+    "home": "waiting"
    },
    "goalies": {
     "away": {
@@ -144,8 +144,8 @@
    "home": "PHI",
    "start": "2026-11-03T19:00:00-05:00",
    "lineups": {
-    "away": "not_checked",
-    "home": "not_checked"
+    "away": "waiting",
+    "home": "waiting"
    },
    "goalies": {
     "away": {
@@ -169,8 +169,8 @@
    "home": "PIT",
    "start": "2026-11-03T19:00:00-05:00",
    "lineups": {
-    "away": "not_checked",
-    "home": "not_checked"
+    "away": "confirmed",
+    "home": "confirmed"
    },
    "goalies": {
     "away": {
@@ -194,8 +194,8 @@
    "home": "WSH",
    "start": "2026-11-03T19:00:00-05:00",
    "lineups": {
-    "away": "not_checked",
-    "home": "not_checked"
+    "away": "waiting",
+    "home": "waiting"
    },
    "goalies": {
     "away": {
@@ -219,8 +219,8 @@
    "home": "CBJ",
    "start": "2026-11-03T19:00:00-05:00",
    "lineups": {
-    "away": "not_checked",
-    "home": "not_checked"
+    "away": "confirmed",
+    "home": "waiting"
    },
    "goalies": {
     "away": {
