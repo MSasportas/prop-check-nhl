@@ -1,194 +1,32 @@
 {
- "date": "2026-11-02",
+ "date": "2026-11-03",
  "plan": {
-  "allowance": 21.3578,
+  "allowance": 21.65,
   "tier": 4,
-  "budget_today": 85,
-  "pool_at_plan": 4357,
-  "games_left": 204,
-  "games_today": 4,
+  "budget_today": 238,
+  "pool_at_plan": 4330,
+  "games_left": 200,
+  "games_today": 11,
   "key_count": 10,
   "unknown_keys": 1,
-  "made_at": "2026-11-02T05:00:01-05:00"
+  "made_at": "2026-11-03T05:00:01-05:00"
  },
  "events": {
-  "2026020232": "01847028adef1eda81745cd36f240fc5",
-  "2026020233": "d5983dfd10f862eb0e497aa9a9e412f3",
-  "2026020234": "6c7ab45fd7ba80a0baccb7861cbe0fbe",
-  "2026020235": "8f768a5bd143ea549d68e5c1885023e6"
+  "2026020244": "13ced29ffb36afa9ac1436ef60bda139",
+  "2026020243": "b84cb3612b5d88f48e5ce81a79b84b96",
+  "2026020238": "f84f85e8c5fdd0a70594563b0041d706",
+  "2026020241": "6b7950389856112c2b25d0aa1c7cc072",
+  "2026020237": "371ac1fb21cf79abfd94499c6ee92b90",
+  "2026020240": "b21dae70cc11cc09837d7f99f1933197",
+  "2026020242": "ed17e925b2de887dcf682915348560d5",
+  "2026020236": "ec0cd2ebb977023698a5f16ca4de0e6c",
+  "2026020239": "71d674d1a6ac60893018bd115d42d624",
+  "2026020245": "f5dd1d8198a0f9c5cc65fe744ef3b1c8",
+  "2026020246": "8fe6b339f282707173f0bcff36f112e8"
  },
- "events_at": "2026-11-02T05:00:01-05:00",
+ "events_at": "2026-11-03T05:00:01-05:00",
  "unknown_teams": [],
- "done": {
-  "2026020232": [
-   {
-    "game_id": 2026020232,
-    "pull": "A",
-    "at": "2026-11-02T13:00:00-05:00",
-    "markets": [
-     "shots"
-    ],
-    "returned": [
-     "shots"
-    ],
-    "cost": 1
-   },
-   {
-    "game_id": 2026020232,
-    "pull": "B",
-    "at": "2026-11-02T17:30:01-05:00",
-    "markets": [
-     "points",
-     "shots"
-    ],
-    "returned": [
-     "points",
-     "shots"
-    ],
-    "cost": 2
-   },
-   {
-    "game_id": 2026020232,
-    "pull": "C",
-    "at": "2026-11-02T18:20:01-05:00",
-    "markets": [
-     "points",
-     "shots"
-    ],
-    "returned": [
-     "points",
-     "shots"
-    ],
-    "cost": 2
-   }
-  ],
-  "2026020233": [
-   {
-    "game_id": 2026020233,
-    "pull": "A",
-    "at": "2026-11-02T13:00:00-05:00",
-    "markets": [
-     "shots"
-    ],
-    "returned": [
-     "shots"
-    ],
-    "cost": 1
-   },
-   {
-    "game_id": 2026020233,
-    "pull": "B",
-    "at": "2026-11-02T17:30:01-05:00",
-    "markets": [
-     "points",
-     "shots"
-    ],
-    "returned": [
-     "points",
-     "shots"
-    ],
-    "cost": 2
-   },
-   {
-    "game_id": 2026020233,
-    "pull": "C",
-    "at": "2026-11-02T18:20:01-05:00",
-    "markets": [
-     "points",
-     "shots"
-    ],
-    "returned": [
-     "points",
-     "shots"
-    ],
-    "cost": 2
-   }
-  ],
-  "2026020234": [
-   {
-    "game_id": 2026020234,
-    "pull": "A",
-    "at": "2026-11-02T13:00:00-05:00",
-    "markets": [
-     "shots"
-    ],
-    "returned": [
-     "shots"
-    ],
-    "cost": 1
-   },
-   {
-    "game_id": 2026020234,
-    "pull": "B",
-    "at": "2026-11-02T18:30:00-05:00",
-    "markets": [
-     "points",
-     "shots"
-    ],
-    "returned": [
-     "points",
-     "shots"
-    ],
-    "cost": 2
-   },
-   {
-    "game_id": 2026020234,
-    "pull": "C",
-    "at": "2026-11-02T19:20:01-05:00",
-    "markets": [
-     "points",
-     "shots"
-    ],
-    "returned": [
-     "points",
-     "shots"
-    ],
-    "cost": 2
-   }
-  ],
-  "2026020235": [
-   {
-    "game_id": 2026020235,
-    "pull": "A",
-    "at": "2026-11-02T13:00:00-05:00",
-    "markets": [
-     "shots"
-    ],
-    "returned": [
-     "shots"
-    ],
-    "cost": 1
-   },
-   {
-    "game_id": 2026020235,
-    "pull": "B",
-    "at": "2026-11-02T19:30:00-05:00",
-    "markets": [
-     "points",
-     "shots"
-    ],
-    "returned": [
-     "points",
-     "shots"
-    ],
-    "cost": 2
-   },
-   {
-    "game_id": 2026020235,
-    "pull": "C",
-    "at": "2026-11-02T20:20:00-05:00",
-    "markets": [
-     "points",
-     "shots"
-    ],
-    "returned": [
-     "points",
-     "shots"
-    ],
-    "cost": 2
-   }
-  ]
- },
+ "done": {},
  "stage": null,
  "skipped": {},
  "last_fail_at": null,

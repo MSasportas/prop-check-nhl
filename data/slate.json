@@ -1,217 +1,320 @@
 {
- "slate_date": "2026-11-02",
- "generated_at": "2026-11-03T04:30:00-05:00",
- "status_at": "2026-11-03T04:30:00-05:00",
- "valid_until": "2026-11-03T05:00:00-05:00",
+ "slate_date": "2026-11-03",
+ "generated_at": "2026-11-03T05:00:01-05:00",
+ "status_at": "2026-11-03T05:00:01-05:00",
+ "valid_until": "2026-11-04T05:00:00-05:00",
  "status": {
-  "prices_state": "ok",
-  "prices_at": "2026-11-02T20:20:00-05:00",
-  "next_price_read_at": null,
+  "prices_state": "not_yet",
+  "prices_at": null,
+  "next_price_read_at": "2026-11-03T13:00:00-05:00",
   "stats_built_at": "2026-11-03T00:10:01-05:00",
   "stats_through": "2026-11-02",
-  "lineups_at": "2026-11-02T20:10:01-05:00",
+  "lineups_at": null,
   "goalies_at": null,
-  "lineups_note": "8 of 8 team line pages are dated today.",
-  "lineups_state": "ok",
+  "lineups_note": null,
+  "lineups_state": "not_yet",
   "stats_state": "ok",
   "last_run": {
    "ok": true,
-   "at": "2026-11-03T04:30:00-05:00",
+   "at": "2026-11-03T05:00:01-05:00",
    "failed_step": null
   },
   "pool": {
-   "pulls_left": 4336,
+   "pulls_left": 4330,
    "keys": 10,
-   "game_days_left": 27,
-   "days_left": 29,
+   "game_days_left": 26,
+   "days_left": 28,
    "low": false
   },
   "excluded_teams": [],
-  "lines_checked": 67,
-  "flag_reads": 4,
+  "lines_checked": 0,
+  "flag_reads": 0,
   "tier": 4
  },
  "banners": [],
  "empty": {
-  "code": "all_started",
-  "text": "Every game has started.",
-  "sub": "Tonight's picks are under Started."
+  "code": "not_yet",
+  "text": "No picks yet today",
+  "sub": "First read is due at 1:00 PM."
  },
  "games": [
   {
-   "id": 2026020232,
-   "away": "VGK",
-   "home": "BOS",
-   "start": "2026-11-02T19:00:00-05:00",
+   "id": 2026020236,
+   "away": "UTA",
+   "home": "TOR",
+   "start": "2026-11-03T19:00:00-05:00",
    "lineups": {
-    "away": "confirmed",
-    "home": "confirmed"
+    "away": "not_checked",
+    "home": "not_checked"
    },
    "goalies": {
     "away": {
-     "name": "Carter Hart",
-     "status": "confirmed"
+     "name": "Karel Vejmelka",
+     "status": "expected"
     },
     "home": {
-     "name": "Jeremy Swayman",
+     "name": "Sergei Bobrovsky",
      "status": "confirmed"
     }
    },
-   "started": true,
+   "started": false,
    "reads_done": false,
    "picks": 0,
    "excluded_reason": null,
    "excluded_teams": []
   },
   {
-   "id": 2026020233,
-   "away": "DET",
-   "home": "FLA",
-   "start": "2026-11-02T19:00:00-05:00",
+   "id": 2026020237,
+   "away": "WPG",
+   "home": "MTL",
+   "start": "2026-11-03T19:00:00-05:00",
    "lineups": {
-    "away": "confirmed",
-    "home": "confirmed"
+    "away": "not_checked",
+    "home": "not_checked"
+   },
+   "goalies": {
+    "away": {
+     "name": "Stuart Skinner",
+     "status": "expected"
+    },
+    "home": {
+     "name": "Jacob Fowler",
+     "status": "expected"
+    }
+   },
+   "started": false,
+   "reads_done": false,
+   "picks": 0,
+   "excluded_reason": null,
+   "excluded_teams": []
+  },
+  {
+   "id": 2026020238,
+   "away": "DET",
+   "home": "TBL",
+   "start": "2026-11-03T19:00:00-05:00",
+   "lineups": {
+    "away": "not_checked",
+    "home": "not_checked"
    },
    "goalies": {
     "away": {
      "name": "Daniil Tarasov",
-     "status": "confirmed"
+     "status": "expected"
     },
     "home": {
-     "name": "Jacob Markstrom",
-     "status": "confirmed"
+     "name": "Andrei Vasilevskiy",
+     "status": "expected"
     }
    },
-   "started": true,
+   "started": false,
    "reads_done": false,
    "picks": 0,
    "excluded_reason": null,
    "excluded_teams": []
   },
   {
-   "id": 2026020234,
+   "id": 2026020240,
+   "away": "STL",
+   "home": "NYR",
+   "start": "2026-11-03T19:00:00-05:00",
+   "lineups": {
+    "away": "not_checked",
+    "home": "not_checked"
+   },
+   "goalies": {
+    "away": {
+     "name": "Joel Hofer",
+     "status": "expected"
+    },
+    "home": {
+     "name": "Dylan Garand",
+     "status": "expected"
+    }
+   },
+   "started": false,
+   "reads_done": false,
+   "picks": 0,
+   "excluded_reason": null,
+   "excluded_teams": []
+  },
+  {
+   "id": 2026020241,
+   "away": "MIN",
+   "home": "PHI",
+   "start": "2026-11-03T19:00:00-05:00",
+   "lineups": {
+    "away": "not_checked",
+    "home": "not_checked"
+   },
+   "goalies": {
+    "away": {
+     "name": "Jesper Wallstedt",
+     "status": "expected"
+    },
+    "home": {
+     "name": "Dan Vladar",
+     "status": "expected"
+    }
+   },
+   "started": false,
+   "reads_done": false,
+   "picks": 0,
+   "excluded_reason": null,
+   "excluded_teams": []
+  },
+  {
+   "id": 2026020242,
+   "away": "VGK",
+   "home": "PIT",
+   "start": "2026-11-03T19:00:00-05:00",
+   "lineups": {
+    "away": "not_checked",
+    "home": "not_checked"
+   },
+   "goalies": {
+    "away": {
+     "name": "Carter Hart",
+     "status": "expected"
+    },
+    "home": {
+     "name": "Arturs Silovs",
+     "status": "expected"
+    }
+   },
+   "started": false,
+   "reads_done": false,
+   "picks": 0,
+   "excluded_reason": null,
+   "excluded_teams": []
+  },
+  {
+   "id": 2026020243,
+   "away": "DAL",
+   "home": "WSH",
+   "start": "2026-11-03T19:00:00-05:00",
+   "lineups": {
+    "away": "not_checked",
+    "home": "not_checked"
+   },
+   "goalies": {
+    "away": {
+     "name": "Jake Oettinger",
+     "status": "expected"
+    },
+    "home": {
+     "name": "Logan Thompson",
+     "status": "expected"
+    }
+   },
+   "started": false,
+   "reads_done": false,
+   "picks": 0,
+   "excluded_reason": null,
+   "excluded_teams": []
+  },
+  {
+   "id": 2026020244,
    "away": "COL",
-   "home": "CHI",
-   "start": "2026-11-02T20:00:00-05:00",
+   "home": "CBJ",
+   "start": "2026-11-03T19:00:00-05:00",
    "lineups": {
-    "away": "confirmed",
-    "home": "confirmed"
+    "away": "not_checked",
+    "home": "not_checked"
    },
    "goalies": {
     "away": {
-     "name": "Mackenzie Blackwood",
+     "name": "Scott Wedgewood",
      "status": "confirmed"
     },
     "home": {
-     "name": "Spencer Knight",
-     "status": "confirmed"
+     "name": "Jet Greaves",
+     "status": "expected"
     }
    },
-   "started": true,
+   "started": false,
    "reads_done": false,
    "picks": 0,
    "excluded_reason": null,
    "excluded_teams": []
   },
   {
-   "id": 2026020235,
-   "away": "CGY",
-   "home": "SJS",
-   "start": "2026-11-02T21:00:00-05:00",
+   "id": 2026020239,
+   "away": "EDM",
+   "home": "NJD",
+   "start": "2026-11-03T19:30:00-05:00",
    "lineups": {
-    "away": "confirmed",
-    "home": "confirmed"
+    "away": "not_checked",
+    "home": "not_checked"
    },
    "goalies": {
     "away": {
-     "name": "Dustin Wolf",
-     "status": "confirmed"
+     "name": "Matt Tomkins",
+     "status": "expected"
     },
     "home": {
-     "name": "Yaroslav Askarov",
-     "status": "confirmed"
+     "name": "Connor Hellebuyck",
+     "status": "expected"
     }
    },
-   "started": true,
+   "started": false,
    "reads_done": false,
-   "picks": 1,
+   "picks": 0,
+   "excluded_reason": null,
+   "excluded_teams": []
+  },
+  {
+   "id": 2026020245,
+   "away": "CAR",
+   "home": "NSH",
+   "start": "2026-11-03T20:00:00-05:00",
+   "lineups": {
+    "away": "not_checked",
+    "home": "not_checked"
+   },
+   "goalies": {
+    "away": {
+     "name": "Pyotr Kochetkov",
+     "status": "expected"
+    },
+    "home": {
+     "name": "Juuse Saros",
+     "status": "expected"
+    }
+   },
+   "started": false,
+   "reads_done": false,
+   "picks": 0,
+   "excluded_reason": null,
+   "excluded_teams": []
+  },
+  {
+   "id": 2026020246,
+   "away": "ANA",
+   "home": "VAN",
+   "start": "2026-11-03T21:00:00-05:00",
+   "lineups": {
+    "away": "not_checked",
+    "home": "not_checked"
+   },
+   "goalies": {
+    "away": {
+     "name": "Laurent Brossoit",
+     "status": "expected"
+    },
+    "home": {
+     "name": "Leevi Merilainen",
+     "status": "expected"
+    }
+   },
+   "started": false,
+   "reads_done": false,
+   "picks": 0,
    "excluded_reason": null,
    "excluded_teams": []
   }
  ],
- "picks": [
-  {
-   "id": "2026-11-02:2026020235:8477498:shots:1.5:over",
-   "price": 115,
-   "first_price": 115,
-   "first_price_at": "2026-11-02T19:30:00-05:00",
-   "worst_price": 115,
-   "p": 0.5152,
-   "breakeven": 0.4651,
-   "p_pct": 51,
-   "breakeven_pct": 47,
-   "state": "locked",
-   "history": [
-    {
-     "at": "2026-11-02T19:30:00-05:00",
-     "text": "Lineup confirmed"
-    },
-    {
-     "at": "2026-11-02T21:00:01-05:00",
-     "text": "Locked"
-    }
-   ],
-   "prices": [
-    {
-     "at": "2026-11-02T19:30:00-05:00",
-     "price": 115
-    }
-   ],
-   "pulled": null,
-   "price_final": false,
-   "graded": {
-    "result": "L",
-    "actual": "had 0",
-    "units": -1.0
-   },
-   "rank": null,
-   "tier": "main",
-   "game_id": 2026020235,
-   "player": "D. Nurse",
-   "player_id": 8477498,
-   "team": "SJS",
-   "opp": "CGY",
-   "home": true,
-   "start": "2026-11-02T21:00:00-05:00",
-   "market": "shots",
-   "line": 1.5,
-   "side": "over",
-   "bet": "Over 1.5 shots on goal",
-   "price_at": "2026-11-02T19:30:00-05:00",
-   "gap_pct": 6.3,
-   "market_fair_pct": 49.4,
-   "n_books": 6,
-   "guard": {
-    "verdict": "agrees",
-    "ours_pct": 51.5,
-    "model_pct": 58.1
-   },
-   "settled": "goalie",
-   "settled_label": "Goalie confirmed",
-   "reason": "6 other books say 49.4%; Hard Rock's +115 only needs 46.5%. Our model agrees (our blend: 51.5%).",
-   "link": null,
-   "links": {
-    "hardrock": {
-     "id": "9075094770182914461",
-     "url": "https://share.hardrock.bet/Pt0T/bet?deep_link_value=hardrock://betslip/9075094770182914461"
-    },
-    "draftkings": null
-   },
-   "thin": false,
-   "games_used": 96,
-   "games_this_season": 14
-  }
- ],
+ "picks": [],
  "parlays": [],
  "parlays_note": "Parlays are not offered: there is no evidence for them yet."
 }
