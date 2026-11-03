@@ -47,7 +47,7 @@
   },
   "STL": {
    "name": "Joel Hofer",
-   "status": "expected"
+   "status": "confirmed"
   },
   "WSH": {
    "name": "Logan Thompson",
@@ -90,5 +90,5 @@
    "status": "expected"
   }
  },
- "checked_at": "2026-11-03T12:00:01-05:00"
+ "checked_at": "2026-11-03T12:10:00-05:00"
 }
