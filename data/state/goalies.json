@@ -3,7 +3,7 @@
  "teams": {
   "PIT": {
    "name": "Arturs Silovs",
-   "status": "expected"
+   "status": "confirmed"
   },
   "VGK": {
    "name": "Adin Hill",
@@ -90,5 +90,5 @@
    "status": "expected"
   }
  },
- "checked_at": "2026-11-03T11:10:01-05:00"
+ "checked_at": "2026-11-03T11:20:01-05:00"
 }
