@@ -1,12 +1,12 @@
 {
  "slate_date": "2026-11-03",
- "generated_at": "2026-11-03T18:40:01-05:00",
- "status_at": "2026-11-03T18:40:01-05:00",
+ "generated_at": "2026-11-03T18:50:00-05:00",
+ "status_at": "2026-11-03T18:50:00-05:00",
  "valid_until": "2026-11-04T05:00:00-05:00",
  "status": {
   "prices_state": "ok",
-  "prices_at": "2026-11-03T18:30:01-05:00",
-  "next_price_read_at": "2026-11-03T18:45:00-05:00",
+  "prices_at": "2026-11-03T18:50:00-05:00",
+  "next_price_read_at": "2026-11-03T19:15:00-05:00",
   "stats_built_at": "2026-11-03T00:10:01-05:00",
   "stats_through": "2026-11-02",
   "lineups_at": "2026-11-03T18:30:01-05:00",
@@ -16,18 +16,18 @@
   "stats_state": "ok",
   "last_run": {
    "ok": true,
-   "at": "2026-11-03T18:40:01-05:00",
+   "at": "2026-11-03T18:50:00-05:00",
    "failed_step": null
   },
   "pool": {
-   "pulls_left": 4268,
+   "pulls_left": 4263,
    "keys": 10,
    "game_days_left": 26,
    "days_left": 28,
    "low": false
   },
   "excluded_teams": [],
-  "lines_checked": 180,
+  "lines_checked": 181,
   "flag_reads": 10,
   "tier": 4
  },
@@ -254,8 +254,8 @@
     }
    },
    "started": false,
-   "reads_done": false,
-   "picks": 0,
+   "reads_done": true,
+   "picks": 1,
    "excluded_reason": null,
    "excluded_teams": []
   },
@@ -444,6 +444,69 @@
    "games_this_season": 15
   },
   {
+   "id": "2026-11-03:2026020239:8481721:shots:1.5:over",
+   "price": -165,
+   "first_price": -165,
+   "first_price_at": "2026-11-03T18:50:00-05:00",
+   "worst_price": -165,
+   "p": 0.6491,
+   "breakeven": 0.6226,
+   "p_pct": 64,
+   "breakeven_pct": 62,
+   "state": "lineup",
+   "history": [
+    {
+     "at": "2026-11-03T18:50:00-05:00",
+     "text": "Lineup confirmed"
+    }
+   ],
+   "prices": [
+    {
+     "at": "2026-11-03T18:50:00-05:00",
+     "price": -165
+    }
+   ],
+   "pulled": null,
+   "price_final": true,
+   "graded": null,
+   "rank": 3,
+   "tier": "main",
+   "game_id": 2026020239,
+   "player": "A. Gritsyuk",
+   "player_id": 8481721,
+   "team": "NJD",
+   "opp": "EDM",
+   "home": true,
+   "start": "2026-11-03T19:30:00-05:00",
+   "market": "shots",
+   "line": 1.5,
+   "side": "over",
+   "bet": "Over 1.5 shots on goal",
+   "price_at": "2026-11-03T18:50:00-05:00",
+   "gap_pct": 3.7,
+   "market_fair_pct": 64.6,
+   "n_books": 5,
+   "guard": {
+    "verdict": "agrees",
+    "ours_pct": 64.9,
+    "model_pct": 64.4
+   },
+   "settled": "goalie",
+   "settled_label": "Goalie confirmed",
+   "reason": "5 other books say 64.6%; Hard Rock's -165 only needs 62.3%. Our model agrees (our blend: 64.9%).",
+   "link": "https://app.hardrock.bet/?deep_link_value=betslip/8753798447452258706",
+   "links": {
+    "hardrock": {
+     "id": "8753798447452258706",
+     "url": "https://share.hardrock.bet/Pt0T/bet?deep_link_value=hardrock://betslip/8753798447452258706"
+    },
+    "draftkings": null
+   },
+   "thin": false,
+   "games_used": 80,
+   "games_this_season": 14
+  },
+  {
    "id": "2026-11-03:2026020243:8480036:shots:1.5:under",
    "price": 125,
    "first_price": 125,
@@ -469,7 +532,7 @@
    "pulled": null,
    "price_final": true,
    "graded": null,
-   "rank": 3,
+   "rank": 4,
    "tier": "main",
    "game_id": 2026020243,
    "player": "M. Heiskanen",
@@ -535,7 +598,7 @@
    "pulled": null,
    "price_final": true,
    "graded": null,
-   "rank": 4,
+   "rank": 5,
    "tier": "main",
    "game_id": 2026020236,
    "player": "N. Schmaltz",
