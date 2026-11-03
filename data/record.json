@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-11-01T16:10:01-05:00",
+ "generated_at": "2026-11-02T19:30:00-05:00",
  "summary": {
   "headline": {
    "w": 21,
@@ -39,6 +39,38 @@
   ]
  },
  "nights": [
+  {
+   "date": "2026-11-02",
+   "graded": false,
+   "w": 0,
+   "l": 0,
+   "units": 0,
+   "entries": [
+    {
+     "id": "2026-11-02:2026020235:8477498:shots:1.5:over",
+     "kind": "single",
+     "player": "D. Nurse",
+     "bet": "Over 1.5 shots on goal",
+     "market": "shots",
+     "team": "SJS",
+     "game": "CGY at SJS",
+     "price": 115,
+     "first_price": 115,
+     "last_price": 115,
+     "prices": [
+      {
+       "price": 115,
+       "at": "2026-11-02T19:30:00-05:00"
+      }
+     ],
+     "result": null,
+     "actual": null,
+     "units": null,
+     "pulled": null,
+     "legs": []
+    }
+   ]
+  },
   {
    "date": "2026-11-01",
    "graded": true,
@@ -459,225 +491,6 @@
      "result": "W",
      "actual": "had 0",
      "units": 0.7143,
-     "pulled": null,
-     "legs": []
-    }
-   ]
-  },
-  {
-   "date": "2026-10-24",
-   "graded": true,
-   "w": 5,
-   "l": 3,
-   "units": 1.66,
-   "entries": [
-    {
-     "id": "2026-10-24:2026020172:8471675:shots:2.5:under",
-     "kind": "single",
-     "player": "S. Crosby",
-     "bet": "Under 2.5 shots on goal",
-     "market": "shots",
-     "team": "PIT",
-     "game": "NSH at PIT",
-     "price": -105,
-     "first_price": -105,
-     "last_price": -105,
-     "prices": [
-      {
-       "price": -105,
-       "at": "2026-10-24T17:30:00-04:00"
-      }
-     ],
-     "result": "W",
-     "actual": "had 0",
-     "units": 0.9524,
-     "pulled": null,
-     "legs": []
-    },
-    {
-     "id": "2026-10-24:2026020177:8478519:shots:1.5:under",
-     "kind": "single",
-     "player": "A. Cirelli",
-     "bet": "Under 1.5 shots on goal",
-     "market": "shots",
-     "team": "TBL",
-     "game": "TBL at UTA",
-     "price": -120,
-     "first_price": -120,
-     "last_price": -120,
-     "prices": [
-      {
-       "price": -120,
-       "at": "2026-10-24T19:30:00-04:00"
-      }
-     ],
-     "result": "L",
-     "actual": "had 2",
-     "units": -1.0,
-     "pulled": null,
-     "legs": []
-    },
-    {
-     "id": "2026-10-24:2026020179:8474586:shots:1.5:over",
-     "kind": "single",
-     "player": "J. Eberle",
-     "bet": "Over 1.5 shots on goal",
-     "market": "shots",
-     "team": "SEA",
-     "game": "MIN at SEA",
-     "price": -110,
-     "first_price": -110,
-     "last_price": -110,
-     "prices": [
-      {
-       "price": -110,
-       "at": "2026-10-24T20:30:00-04:00"
-      }
-     ],
-     "result": "W",
-     "actual": "had 2",
-     "units": 0.9091,
-     "pulled": null,
-     "legs": []
-    },
-    {
-     "id": "2026-10-24:2026020171:8482105:shots:2.5:under",
-     "kind": "single",
-     "player": "J. Sanderson",
-     "bet": "Under 2.5 shots on goal",
-     "market": "shots",
-     "team": "OTT",
-     "game": "NYR at OTT",
-     "price": -140,
-     "first_price": -140,
-     "last_price": -140,
-     "prices": [
-      {
-       "price": -140,
-       "at": "2026-10-24T17:30:00-04:00"
-      }
-     ],
-     "result": "W",
-     "actual": "had 2",
-     "units": 0.7143,
-     "pulled": {
-      "at": "2026-10-24T18:20:01-04:00",
-      "reason": "Hard Rock moved it to -180"
-     },
-     "legs": []
-    },
-    {
-     "id": "2026-10-24:2026020170:8482175:shots:2.5:under",
-     "kind": "single",
-     "player": "J. Peterka",
-     "bet": "Under 2.5 shots on goal",
-     "market": "shots",
-     "team": "BOS",
-     "game": "SJS at BOS",
-     "price": -145,
-     "first_price": -145,
-     "last_price": -145,
-     "prices": [
-      {
-       "price": -145,
-       "at": "2026-10-24T17:30:00-04:00"
-      }
-     ],
-     "result": "W",
-     "actual": "had 2",
-     "units": 0.6897,
-     "pulled": null,
-     "legs": []
-    },
-    {
-     "id": "2026-10-24:2026020173:8482097:shots:2.5:under",
-     "kind": "single",
-     "player": "J. Quinn",
-     "bet": "Under 2.5 shots on goal",
-     "market": "shots",
-     "team": "BUF",
-     "game": "BUF at WSH",
-     "price": 100,
-     "first_price": 100,
-     "last_price": 100,
-     "prices": [
-      {
-       "price": 100,
-       "at": "2026-10-24T17:30:00-04:00"
-      }
-     ],
-     "result": "L",
-     "actual": "had 3",
-     "units": -1.0,
-     "pulled": null,
-     "legs": []
-    },
-    {
-     "id": "2026-10-24:2026020175:8477402:shots:1.5:under",
-     "kind": "single",
-     "player": "P. Buchnevich",
-     "bet": "Under 1.5 shots on goal",
-     "market": "shots",
-     "team": "STL",
-     "game": "CAR at STL",
-     "price": -110,
-     "first_price": -110,
-     "last_price": -110,
-     "prices": [
-      {
-       "price": -110,
-       "at": "2026-10-24T17:30:00-04:00"
-      }
-     ],
-     "result": "W",
-     "actual": "had 0",
-     "units": 0.9091,
-     "pulled": null,
-     "legs": []
-    },
-    {
-     "id": "2026-10-24:2026020174:8484166:shots:2.5:over",
-     "kind": "single",
-     "player": "A. Fantilli",
-     "bet": "Over 2.5 shots on goal",
-     "market": "shots",
-     "team": "CBJ",
-     "game": "VGK at CBJ",
-     "price": 115,
-     "first_price": 115,
-     "last_price": 115,
-     "prices": [
-      {
-       "price": 115,
-       "at": "2026-10-24T18:20:01-04:00"
-      }
-     ],
-     "result": "L",
-     "actual": "had 2",
-     "units": -1.0,
-     "pulled": null,
-     "legs": []
-    },
-    {
-     "id": "2026-10-24:2026020171:8481604:shots:2.5:over",
-     "kind": "single",
-     "player": "P. Dorofeyev",
-     "bet": "Over 2.5 shots on goal",
-     "market": "shots",
-     "team": "NYR",
-     "game": "NYR at OTT",
-     "price": 120,
-     "first_price": 120,
-     "last_price": 120,
-     "prices": [
-      {
-       "price": 120,
-       "at": "2026-10-24T18:20:01-04:00"
-      }
-     ],
-     "result": "W",
-     "actual": "had 4",
-     "units": 1.2,
      "pulled": null,
      "legs": []
     }
