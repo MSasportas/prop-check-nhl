@@ -84,7 +84,9 @@ class B1KeysRefused(unittest.TestCase):
         self.assertGreater(plan["budget_today"], 0)
         self.assertEqual(self.s.status()["keys"], [{"n": 1, "left": 300}, {"n": 2, "left": 300}])   # as the feed reports
         self.assertEqual(sl["status"]["prices_state"], "ok")
-        self.assertEqual(self.s.status()["budget_used_today"], 2)              # two games, 1 market each
+        self.assertEqual(self.s.status()["budget_used_today"], 3)              # two games, 1 market each + 1 sides/totals call
+        led = common.read_json(self.s.path("state", "credits.json"))
+        self.assertEqual(sum(e["cost"] for e in led["spent"] if e["pull"] != "F"), 2)
 
     def test_429(self):
         self.mode = "429"

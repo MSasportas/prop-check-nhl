@@ -349,6 +349,33 @@ class Client:
         params = {"regions": ",".join(regions), "markets": "player_shots_on_goal", "oddsFormat": "american", "dateFormat": "iso"}
         return self._get("/events/%s/odds" % event_id, params, len(regions), slate, "P", game_id, flat_cost=len(regions))
 
+    def featured_odds(self, market_keys, slate):
+        """Sides and totals (h2h, spreads, totals) for EVERY game on the feed in one call, from Hard Rock + the other books
+        (request_books: one billed region). Tracking only (featured.py). Cost: markets returned x 1 region (~3).
+        Returns (list of events or None, cost). Fixtures: <dir>/featured.json; no file means (None, 0), no failure."""
+        books = request_books(self.cfg)
+        if self.pool.fixture:
+            js = self._fixture_json("featured.json")
+            if js is None:
+                return None, 0
+            js = json.loads(json.dumps(js))
+            keys = set()
+            for e in js:
+                e["bookmakers"] = [b for b in e.get("bookmakers", []) or [] if b.get("key") in books]
+                for b in e["bookmakers"]:
+                    b["markets"] = [m for m in b.get("markets", []) if m["key"] in market_keys]
+                    keys |= {m["key"] for m in b["markets"]}
+            cost = len(keys) * regions_billed(len(books))
+            if not self._fixture_spend(cost, slate, "F", None):
+                self.errors.append("no odds key with credits left")
+                return None, 0
+            SOURCE["ok"] += 1
+            return js, cost
+        params = {"regions": self.cfg["ops"]["odds_region"], "bookmakers": ",".join(books),
+                  "markets": ",".join(market_keys), "oddsFormat": "american", "dateFormat": "iso"}
+        js, cost = self._get("/odds", params, len(market_keys), slate, "F", None, flat_cost=len(market_keys))
+        return (js if isinstance(js, list) or js is None else []), cost
+
     def event_markets(self, event_id, away, home, slate, game_id):
         """Every market key the book lists for one game (the feed's event-markets endpoint, about 1 credit).
         Returns (payload or None, cost). With fixtures: <dir>/markets_<event>.json or markets.json; no file means

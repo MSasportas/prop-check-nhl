@@ -23,7 +23,7 @@ The aim is ROI, but a false edge costs Matt real money: the bar below never move
   `shots45_feat.jsonl` same plus features; `saves45_lines.jsonl`; `shots13_lines.jsonl`), `code/` (pull, build,
   walk-forward, lockbox, placebo scripts), `research/` (derived features), ledgers, `PLAN.md`, `results.md`.
   Add new historical pulls as a NEW tgz in research/data/ (never rewrite an old one). Never commit any key.
-- **Live 2026-27**: `data/odds/` (every Hard Rock read), `data/shadow/` (every line, open/close, model p, context,
+- **Live 2026-27**: `data/featured/` (sides + totals, Hard Rock + the same books, at each shots read, from 2026-11-03; tracked only), `data/odds/` (every Hard Rock read), `data/shadow/` (every line, open/close, model p, context,
   results), `data/state/lineup_history/`. This is the forward test that no history can replace.
 - **Free**: NHL APIs (api-web.nhle.com, api.nhle.com/stats/rest), MoneyPuck downloads (non-commercial, credit them).
 - **More historical odds** need a key Matt holds; it is not in GitHub secrets. Ask the CEO (a chat) for pulls.

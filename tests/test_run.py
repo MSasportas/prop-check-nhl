@@ -334,7 +334,9 @@ class NeverLeaksAKey(unittest.TestCase):
         st = self.s.status()
         self.assertEqual(st["keys"], [{"n": 1, "left": 0}, {"n": 2, "left": 41}])
         self.assertEqual(st["pool_total"], 41)
-        self.assertEqual(st["budget_used_today"], 2)
+        self.assertEqual(st["budget_used_today"], 3)                      # 2 shots reads + 1 sides/totals call (featured.py)
+        led = common.read_json(self.s.path("state", "credits.json"))
+        self.assertEqual(sum(e["cost"] for e in led["spent"] if e["pull"] != "F"), 2)
         doc = common.read_json(self.s.path("odds", "2026-10-11.json"))
         self.assertEqual(len(doc["fetches"]), 2)
 

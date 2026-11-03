@@ -11,7 +11,7 @@ The page updates through the day; each pick shows how settled it is (Early / Lin
 pulled picks stay visible with the reason. Dark, phone first (~380px). The Record is the scoreboard.
 
 **Customer facts (fixed):** Matt; Hard Rock Florida only; no leg worse than -200 (plus money fine); parlays 2-3 legs;
-markets are player shots on goal and goalie saves only (no sides, totals or other props); bets any time from morning to puck drop. **2026-10-28 (Matt): the second market is now PLAYER POINTS, not goalie saves, research-only until it shows an edge (item 28); shots stays the only live market.**
+markets are player shots on goal and goalie saves only (no sides, totals or other props); bets any time from morning to puck drop. **2026-10-28 (Matt): the second market is now PLAYER POINTS, not goalie saves, research-only until it shows an edge (item 28); shots stays the only live market.** **2026-11-03 (Matt): sides and totals (moneyline, puck line, game total) are TRACKED from the same books, research only, never picks (`data/featured/`, section 5).**
 **Fixed:** the Record. Every pick and parlay exactly as shown, graded after the game at the posted price,
 append-only, pulled picks kept and marked. Nothing edited or dropped. It is the only reporting Matt wants.
 **Come to Matt only for:** more odds keys, paying for something, a GitHub setting we can't reach. Exact taps, one
@@ -98,6 +98,13 @@ probability x Hard Rock decimal payout - 1, on unrounded numbers; every threshol
   retry next cycle). Tests: `PC_DISCORD_FIXTURE_URL` posts to a local server; in `PC_NOW`/`PC_DATA_DIR` mode nothing
   ever reaches Discord without it. Matt adds the secret: repo Settings > Secrets and variables > Actions > New
   repository secret, name `DISCORD_WEBHOOK`, value = the Discord channel webhook URL.
+- **Sides and totals tracking (2026-11-03, Matt: "track sides and totals from all the same books"):** soft step `featured` (`scripts/featured.py`, after `market_menu`).
+  Whenever a shots read (A, B or C) lands for an unstarted game without a snapshot, ONE bulk call (`odds.Client.featured_odds`, feed `/odds`, markets h2h,
+  spreads, totals, bookmakers = Hard Rock + `ops.consensus_books`, one billed region) snapshots every unstarted game on the slate: ~3 credits per call
+  whatever the game count (ledger pull `F`); games with the same start share a call (~9 calls on an 11-game night, ~25-30 credits). Skips when today's
+  budget would not cover the shots reads still due (3 per game ahead). File `data/featured/<slate>.json` {done ["gid:pull"], snaps [{at, pulls, missing,
+  cost, games {gid: {away, home, start, books {book: {market: {last_update, outcomes [{name, price, point}]}}}}}}]}. Never picks, the Record, the page,
+  Discord or status picks; a failure is a `warn`. Results: final scores from the NHL API at analysis time. Tests `tests/test_featured.py`.
 - **Checks done mark (2026-11-02, Matt):** each unstarted game in the page's game list gets `reads_done` (slate.json games[]) once no read that
   can make a pick is still coming: the 45-minute read returned shots with the other books (tier 2+; tier 1: the 90-minute read), or the last
   read's window closed (10 min before puck). Rule: `odds.shots_reads_done`; set in `run.py` facts only when Gap + Guard is active, keys can read
@@ -512,6 +519,7 @@ probability x Hard Rock decimal payout - 1, on unrounded numbers; every threshol
 | 2026-10-11 | v1.0 set (section 4) | First build: Sharp standard from the DS backtest (2024-25 fit, 2025-26 out of sample) and one live Hard Rock pull | Backtest only; 0 graded live legs |
 
 ## 9. Session log (newest first, one line each)
+- 2026-11-03 ~5:05 PM CEO (Matt: track sides and totals from the same books): built `featured` soft step (section 5), 389 tests pass (2 budget tests now count the extra call). Live from tonight's next cycle: A reads already taken + B/C reads. Check tomorrow: `data/featured/2026-11-03.json` has snaps with Hard Rock + Pinnacle for h2h/spreads/totals, ledger pull F ~3 each, no budget skip.
 - 2026-11-03 ~4:25 PM CEO (Matt: no cap, live tonight): v3.4 `max_price` null = no plus-money cap (paper.inside_gate, engine config check, rules sheet 'Plus money has no cap.', page fixtures regenerated). First push 6e1e2d0 had 1 stale-fixture test failing (version only, no runtime effect); fixed in the next commit, 386 pass. Rules sheet at 380px: no overflow, no [missing], no JS errors. Watch plus-money legs at the Sunday review.
 - 2026-11-03 ~4:10 PM CEO (Matt: brainstorm rules for more daily volume): `research/code/volume_grid.py` (descriptive, post-hoc, no guard). Matt said NO to 1 PM read picks; a started build was reverted before any commit. 90/45-min levers on Oct 19-Nov 2: cap +150 4.0/night 37-23 (+12 added 8-4); gap 2% 5.1/night but the added 2-3% band 15-14; 3 books, no-Pinnacle, per-line all no help. No rule changed.
 - 2026-11-03 1:45 PM daily check: chain alive (link 201, run 891 in progress, status 1:21 PM, data commit 1:30 PM, Pages builds success), all steps ok. Pull A ran 1 PM (11 games, 11 credits); page says No picks yet, next read 5:30 PM (correct). Nov 2: 1 pick (Nurse O1.5 +115) graded L; all 38 shown graded; Record 116 events, guard ok. Keys 4,319 (key 1 still refused), tier 4. Unmatched: Pettersson only; no excluded teams. `sources.dailyfaceoff` reads "failed" = one Daily Faceoff non-answer at 8:40 PM Nov 2 (last lineup check of the night); carried until today's first lineup read, page doesn't show it, no fix needed. No code change.
