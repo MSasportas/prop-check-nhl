@@ -1,7 +1,7 @@
 {
  "slate_date": "2026-11-02",
- "generated_at": "2026-11-02T20:20:00-05:00",
- "status_at": "2026-11-02T20:20:00-05:00",
+ "generated_at": "2026-11-02T20:40:01-05:00",
+ "status_at": "2026-11-02T20:40:01-05:00",
  "valid_until": "2026-11-03T05:00:00-05:00",
  "status": {
   "prices_state": "ok",
@@ -16,7 +16,7 @@
   "stats_state": "ok",
   "last_run": {
    "ok": true,
-   "at": "2026-11-02T20:20:00-05:00",
+   "at": "2026-11-02T20:40:01-05:00",
    "failed_step": null
   },
   "pool": {
@@ -188,6 +188,13 @@
    "settled_label": "Goalie confirmed",
    "reason": "6 other books say 49.4%; Hard Rock's +115 only needs 46.5%. Our model agrees (our blend: 51.5%).",
    "link": null,
+   "links": {
+    "hardrock": {
+     "id": "9075094770182914461",
+     "url": "https://share.hardrock.bet/Pt0T/bet?deep_link_value=hardrock://betslip/9075094770182914461"
+    },
+    "draftkings": null
+   },
    "thin": false,
    "games_used": 96,
    "games_this_season": 14
