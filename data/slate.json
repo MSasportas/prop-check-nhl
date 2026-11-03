@@ -1,7 +1,7 @@
 {
  "slate_date": "2026-11-02",
- "generated_at": "2026-11-02T20:40:01-05:00",
- "status_at": "2026-11-02T20:40:01-05:00",
+ "generated_at": "2026-11-02T21:00:01-05:00",
+ "status_at": "2026-11-02T21:00:01-05:00",
  "valid_until": "2026-11-03T05:00:00-05:00",
  "status": {
   "prices_state": "ok",
@@ -16,7 +16,7 @@
   "stats_state": "ok",
   "last_run": {
    "ok": true,
-   "at": "2026-11-02T20:40:01-05:00",
+   "at": "2026-11-02T21:00:01-05:00",
    "failed_step": null
   },
   "pool": {
@@ -32,7 +32,11 @@
   "tier": 4
  },
  "banners": [],
- "empty": null,
+ "empty": {
+  "code": "all_started",
+  "text": "Every game has started.",
+  "sub": "Tonight's picks are under Started."
+ },
  "games": [
   {
    "id": 2026020232,
@@ -128,8 +132,8 @@
      "status": "confirmed"
     }
    },
-   "started": false,
-   "reads_done": true,
+   "started": true,
+   "reads_done": false,
    "picks": 1,
    "excluded_reason": null,
    "excluded_teams": []
@@ -146,11 +150,15 @@
    "breakeven": 0.4651,
    "p_pct": 51,
    "breakeven_pct": 47,
-   "state": "lineup",
+   "state": "locked",
    "history": [
     {
      "at": "2026-11-02T19:30:00-05:00",
      "text": "Lineup confirmed"
+    },
+    {
+     "at": "2026-11-02T21:00:01-05:00",
+     "text": "Locked"
     }
    ],
    "prices": [
@@ -160,9 +168,9 @@
     }
    ],
    "pulled": null,
-   "price_final": true,
+   "price_final": false,
    "graded": null,
-   "rank": 1,
+   "rank": null,
    "tier": "main",
    "game_id": 2026020235,
    "player": "D. Nurse",
