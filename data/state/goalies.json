@@ -7,15 +7,15 @@
   },
   "VGK": {
    "name": "Adin Hill",
-   "status": "expected"
+   "status": "confirmed"
   },
   "TBL": {
    "name": "Andrei Vasilevskiy",
-   "status": "expected"
+   "status": "confirmed"
   },
   "DET": {
    "name": "John Gibson",
-   "status": "expected"
+   "status": "confirmed"
   },
   "PHI": {
    "name": "Dan Vladar",
@@ -31,7 +31,7 @@
   },
   "WPG": {
    "name": "Stuart Skinner",
-   "status": "expected"
+   "status": "confirmed"
   },
   "CBJ": {
    "name": "Cam Talbot",
@@ -90,5 +90,5 @@
    "status": "confirmed"
   }
  },
- "checked_at": "2026-11-03T14:10:02-05:00"
+ "checked_at": "2026-11-03T18:40:01-05:00"
 }

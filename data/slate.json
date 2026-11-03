@@ -1,7 +1,7 @@
 {
  "slate_date": "2026-11-03",
- "generated_at": "2026-11-03T18:30:01-05:00",
- "status_at": "2026-11-03T18:30:01-05:00",
+ "generated_at": "2026-11-03T18:40:01-05:00",
+ "status_at": "2026-11-03T18:40:01-05:00",
  "valid_until": "2026-11-04T05:00:00-05:00",
  "status": {
   "prices_state": "ok",
@@ -16,7 +16,7 @@
   "stats_state": "ok",
   "last_run": {
    "ok": true,
-   "at": "2026-11-03T18:30:01-05:00",
+   "at": "2026-11-03T18:40:01-05:00",
    "failed_step": null
   },
   "pool": {
@@ -71,7 +71,7 @@
    "goalies": {
     "away": {
      "name": "Stuart Skinner",
-     "status": "expected"
+     "status": "confirmed"
     },
     "home": {
      "name": "Jacob Fowler",
@@ -96,11 +96,11 @@
    "goalies": {
     "away": {
      "name": "John Gibson",
-     "status": "expected"
+     "status": "confirmed"
     },
     "home": {
      "name": "Andrei Vasilevskiy",
-     "status": "expected"
+     "status": "confirmed"
     }
    },
    "started": false,
@@ -171,7 +171,7 @@
    "goalies": {
     "away": {
      "name": "Adin Hill",
-     "status": "expected"
+     "status": "confirmed"
     },
     "home": {
      "name": "Arturs Silovs",
@@ -359,8 +359,8 @@
     "ours_pct": 51.8,
     "model_pct": 56.6
    },
-   "settled": "lineup",
-   "settled_label": "Lineup confirmed",
+   "settled": "goalie",
+   "settled_label": "Goalie confirmed",
    "reason": "8 other books say 51.0%; Hard Rock's +105 only needs 48.8%. Our model agrees (our blend: 51.8%).",
    "link": "https://app.hardrock.bet/?deep_link_value=betslip/7640693311535186313",
    "links": {
@@ -631,8 +631,8 @@
     "ours_pct": 48.3,
     "model_pct": 49.8
    },
-   "settled": "lineup",
-   "settled_label": "Lineup confirmed",
+   "settled": "goalie",
+   "settled_label": "Goalie confirmed",
    "reason": "8 other books say 48.3%; Hard Rock's +120 only needs 45.5%. Our model agrees (our blend: 48.3%).",
    "link": "https://app.hardrock.bet/?deep_link_value=betslip/3716503654145065376",
    "links": {
