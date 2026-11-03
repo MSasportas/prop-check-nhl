@@ -18,8 +18,8 @@
    "status": "expected"
   },
   "PHI": {
-   "name": "Joseph Woll",
-   "status": "expected"
+   "name": "Dan Vladar",
+   "status": "confirmed"
   },
   "MIN": {
    "name": "Jesper Wallstedt",
@@ -43,7 +43,7 @@
   },
   "NYR": {
    "name": "Dylan Garand",
-   "status": "expected"
+   "status": "confirmed"
   },
   "STL": {
    "name": "Joel Hofer",
@@ -51,7 +51,7 @@
   },
   "WSH": {
    "name": "Logan Thompson",
-   "status": "expected"
+   "status": "confirmed"
   },
   "DAL": {
    "name": "Jake Oettinger",
@@ -90,5 +90,5 @@
    "status": "expected"
   }
  },
- "checked_at": "2026-11-03T07:00:00-05:00"
+ "checked_at": "2026-11-03T10:40:01-05:00"
 }
