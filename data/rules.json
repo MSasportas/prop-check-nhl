@@ -1,6 +1,6 @@
 {
- "version": "3.3",
- "updated": "2026-10-23",
+ "version": "3.4",
+ "updated": "2026-11-03",
  "values": {
   "min_history": 10,
   "absence_games": 3,
@@ -31,7 +31,7 @@
     3.5
    ],
    "price_gate": -200,
-   "max_price": 120,
+   "max_price": null,
    "gap_ev": 0.03,
    "books_min": 4,
    "pin_ev_min": 0.0,
