@@ -85,8 +85,8 @@ def check_config(cfg):
         raise ConfigError("ops.gap_guard.thresholds is missing: %s" % ", ".join(miss))
     if abs(T["market_weight"] + T["model_weight"] - 1.0) > 1e-9:
         raise ConfigError("market_weight + model_weight must equal 1")
-    if T["price_gate"] >= 0 or T["max_price"] < 100:
-        raise ConfigError("price_gate must be negative and max_price +100 or longer")
+    if T["price_gate"] >= 0 or (T["max_price"] is not None and T["max_price"] < 100):
+        raise ConfigError("price_gate must be negative and max_price +100 or longer (or null: no cap)")
     for line in T["lines"]:
         if ("%g" % line) not in (T["offsets"] or {}):
             raise ConfigError("no frozen offset for the %g line" % line)

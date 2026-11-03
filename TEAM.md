@@ -28,7 +28,7 @@ Sharp (betting method, final call) · Data Scientist (data, model, samples, judg
 Builder (all code) · QA (tests every change before it goes live, real browser at 380px, hasn't seen the build).
 Rule changes: the Data Scientist names the sample first; the Sharp decides; log it in section 8.
 
-## 4. Current rules (v3.3, 2026-10-23; first slate 2026-10-20). Source of truth: `config/rules.json` (`ops.gap_guard`)
+## 4. Current rules (v3.4, 2026-11-03: no plus-money cap; first slate 2026-10-20). Source of truth: `config/rules.json` (`ops.gap_guard`)
 There is ONE rule: Gap + Guard. Hard Rock's price must beat the other books' middle price by a margin (the gap), and our
 model must not disagree (the guard). The v1.0 and v2.0 engines, the "previous" rules block, `rules_for`, the pause and the
 paper mode are gone; they are not options. History of why: section 7 items 17-21 and section 8. All EV% below = fair
@@ -37,7 +37,7 @@ probability x Hard Rock decimal payout - 1, on unrounded numbers; every threshol
 | Area | Rule |
 |---|---|
 | Markets | **Hard Rock shots on goal only, lines 1.5, 2.5 and 3.5 (3.5 live from 2026-10-23, Matt), over and under.** Everything else (points, goals, saves, 4.5+) is not picked. **Points run behind the scenes (watch track `points`, item 28, from slate 2026-10-28): same Gap + Guard maths, research only, Backstage tab, never the Record or Discord. Saves STOPPED 2026-10-28 (item 25)** |
-| Step 1: the gap | All of: Hard Rock EV vs the market fair >= **+3.0%**; >= **4 other books** priced the same player, line and side with both sides quoted (Pinnacle counts and must be one; each read fresh, hold 0-15%); **market fair = median** of the books' proportionally de-vigged fair chance (even count: mean of the middle two); Pinnacle present with both sides and Pinnacle-fair EV on Hard Rock's price >= 0.0% (sign check only); Hard Rock price -200 to +120 |
+| Step 1: the gap | All of: Hard Rock EV vs the market fair >= **+3.0%**; >= **4 other books** priced the same player, line and side with both sides quoted (Pinnacle counts and must be one; each read fresh, hold 0-15%); **market fair = median** of the books' proportionally de-vigged fair chance (even count: mean of the middle two); Pinnacle present with both sides and Pinnacle-fair EV on Hard Rock's price >= 0.0% (sign check only); Hard Rock price **-200 or better, no plus-money cap** (`max_price` null; was +120 until 2026-11-03) |
 | Step 2: the guard | final = 0.8 x market fair + 0.2 x (model chance + frozen offset on the over: 1.5 +0.0179, 2.5 +0.0158, 3.5 +0.017 PROVISIONAL (mean of the two measured, not yet refit; refit from the 2025-26 bundle, then the DS names the sample and the Sharp logs it); under = 1 - over). Passes iff final EV >= **+2.0%**. The model can only veto, never create. No model for the player = no pick. Offsets are frozen: changing them needs the DS to name the sample and the Sharp to log it in section 8 |
 | Which reads can pick | Only the 90-minute (B) and 45-minute (C) reads that carry `others` (the other books). The 1 PM (A) read is a baseline only. A read with no other books is skipped |
 | The pick | The **first passing read** makes the pick and **freezes its price** there. That price is shown on the page and in Discord and is what is graded: flat 1 unit, regulation + OT, void if no ice time. Later prices never change it (better or worse) |

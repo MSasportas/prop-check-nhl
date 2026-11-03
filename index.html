@@ -1234,7 +1234,7 @@ function slot(key, kind) {
 /* Sentences live here; every number comes from rules.json ("values", with the one rule under gap_guard). "{key|kind}" kinds:
    price, pct, pts (0.02 -> 2), num, text, list (an array: "1.5 and 2.5"); a key may be dotted (gap_guard.lines). There is ONE rule. */
 var RULES = [
-  'We bet only Hard Rock shots on goal at the {gap_guard.lines|list} lines, over or under, at {gap_guard.price_gate|price} or better and no longer than {gap_guard.max_price|price}.',
+  'We bet only Hard Rock shots on goal at the {gap_guard.lines|list} lines, over or under, at {gap_guard.price_gate|price} or better. Plus money has no cap.',
   "Step 1, the gap. At the 90 and 45 minute price reads we ask the other books. At least {gap_guard.books_min|num} of them (Pinnacle must be one) must price the same player and line, both sides. We take their margin out and use the middle chance. Hard Rock's price has to beat it by at least {gap_guard.gap_ev|pct}, and Pinnacle on its own must not say the price loses.",
   "Step 2, the guard. We blend {gap_guard.market_weight|pct} the other books' chance with {gap_guard.model_weight|pct} our model's chance. The blend still has to beat the price by at least {gap_guard.final_ev|pct}. The model can only say no: it never creates a pick.",
   'The first 90 or 45 minute read that passes both steps becomes the pick, and its price is frozen. That is the price shown here, in the alerts and graded on the Record. The 1 PM read only sets a baseline.',

@@ -12,7 +12,7 @@ Everything is in EV% = fair_prob x Hard Rock decimal payout - 1, on unrounded fl
     OTHER books priced the same player / line with both sides (Pinnacle is one of them); (c) market fair = median of those
     books' proportionally de-vigged fair probability for the side (even count: mean of the two middle values); (d) Pinnacle
     present with both sides AND Pinnacle's own fair EV on Hard Rock's price >= 0.0% (sign check only); (e) a line in thresholds.lines (1.5, 2.5, 3.5);
-    (f) Hard Rock price -200 .. +120. A book counts only if it returned fresh, two-sided prices with a sane hold
+    (f) Hard Rock price -200 or better, no plus-money cap (thresholds.max_price null; was +120 until 2026-11-03). A book counts only if it returned fresh, two-sided prices with a sane hold
     (shadow.other_lines: the same rule as the shadow log's consensus).
   STEP 2 (guard): final = market_weight x market_fair + model_weight x calibrated model chance for the side, where the
     calibrated model = raw model chance of the over + a FROZEN additive offset per line (config ops.gap_guard.thresholds.offsets;
@@ -122,6 +122,8 @@ def side_fair(fair_over, side):
 
 def inside_gate(price, T):
     d = odds.decimal(price)
+    if T.get("max_price") is None:                         # null = no plus-money cap (2026-11-03, Matt)
+        return odds.decimal(T["price_gate"]) - EPS <= d
     return odds.decimal(T["price_gate"]) - EPS <= d <= odds.decimal(T["max_price"]) + EPS
 
 

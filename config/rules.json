@@ -1,6 +1,6 @@
 {
- "version": "3.3",
- "updated": "2026-10-23",
+ "version": "3.4",
+ "updated": "2026-11-03",
  "effective_from": "2026-10-20",
  "_about": "EVERY rule value lives here. The engine reads this file; data/rules.json (what the page reads) is generated from it. There is ONE rule set: Gap + Guard (ops.gap_guard). Probabilities are 0-1, prices are American integers, times are Eastern.",
  "values": {
@@ -54,7 +54,7 @@
      3.5
     ],
     "price_gate": -200,
-    "max_price": 120,
+    "max_price": null,
     "gap_ev": 0.03,
     "books_min": 4,
     "pin_ev_min": 0.0,

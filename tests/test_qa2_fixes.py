@@ -346,7 +346,7 @@ class PageText(unittest.TestCase):
             cls.html = f.read()
 
     def test_m4_rules_sheet(self):
-        self.assertIn("at {gap_guard.price_gate|price} or better and no longer than {gap_guard.max_price|price}", self.html)
+        self.assertIn("at {gap_guard.price_gate|price} or better. Plus money has no cap.", self.html)
         self.assertIn("Parlays are not offered", self.html)
         self.assertNotIn("parlay_min_legs", self.html)
         self.assertNotIn("two or three legs", self.html)
