@@ -6,7 +6,7 @@
    "status": "expected"
   },
   "VGK": {
-   "name": "Carter Hart",
+   "name": "Adin Hill",
    "status": "expected"
   },
   "TBL": {
@@ -14,11 +14,11 @@
    "status": "expected"
   },
   "DET": {
-   "name": "Daniil Tarasov",
+   "name": "John Gibson",
    "status": "expected"
   },
   "PHI": {
-   "name": "Dan Vladar",
+   "name": "Joseph Woll",
    "status": "expected"
   },
   "MIN": {
@@ -30,7 +30,7 @@
    "status": "expected"
   },
   "WPG": {
-   "name": "Stuart Skinner",
+   "name": "Nico Daws",
    "status": "expected"
   },
   "CBJ": {
@@ -62,7 +62,7 @@
    "status": "confirmed"
   },
   "UTA": {
-   "name": "Karel Vejmelka",
+   "name": "Sebastian Cossa",
    "status": "expected"
   },
   "NJD": {
@@ -70,7 +70,7 @@
    "status": "expected"
   },
   "EDM": {
-   "name": "Matt Tomkins",
+   "name": "Tristan Jarry",
    "status": "expected"
   },
   "NSH": {
@@ -82,13 +82,13 @@
    "status": "expected"
   },
   "VAN": {
-   "name": "Leevi Merilainen",
+   "name": "Kevin Lankinen",
    "status": "expected"
   },
   "ANA": {
-   "name": "Laurent Brossoit",
+   "name": "Lukas Dostal",
    "status": "expected"
   }
  },
- "checked_at": "2026-11-03T05:00:01-05:00"
+ "checked_at": "2026-11-03T07:00:00-05:00"
 }

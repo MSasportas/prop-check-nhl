@@ -1,7 +1,7 @@
 {
  "slate_date": "2026-11-03",
- "generated_at": "2026-11-03T06:30:01-05:00",
- "status_at": "2026-11-03T06:30:01-05:00",
+ "generated_at": "2026-11-03T07:00:00-05:00",
+ "status_at": "2026-11-03T07:00:00-05:00",
  "valid_until": "2026-11-04T05:00:00-05:00",
  "status": {
   "prices_state": "not_yet",
@@ -16,7 +16,7 @@
   "stats_state": "ok",
   "last_run": {
    "ok": true,
-   "at": "2026-11-03T06:30:01-05:00",
+   "at": "2026-11-03T07:00:00-05:00",
    "failed_step": null
   },
   "pool": {
@@ -49,7 +49,7 @@
    },
    "goalies": {
     "away": {
-     "name": "Karel Vejmelka",
+     "name": "Sebastian Cossa",
      "status": "expected"
     },
     "home": {
@@ -74,7 +74,7 @@
    },
    "goalies": {
     "away": {
-     "name": "Stuart Skinner",
+     "name": "Nico Daws",
      "status": "expected"
     },
     "home": {
@@ -99,7 +99,7 @@
    },
    "goalies": {
     "away": {
-     "name": "Daniil Tarasov",
+     "name": "John Gibson",
      "status": "expected"
     },
     "home": {
@@ -153,7 +153,7 @@
      "status": "expected"
     },
     "home": {
-     "name": "Dan Vladar",
+     "name": "Joseph Woll",
      "status": "expected"
     }
    },
@@ -174,7 +174,7 @@
    },
    "goalies": {
     "away": {
-     "name": "Carter Hart",
+     "name": "Adin Hill",
      "status": "expected"
     },
     "home": {
@@ -249,7 +249,7 @@
    },
    "goalies": {
     "away": {
-     "name": "Matt Tomkins",
+     "name": "Tristan Jarry",
      "status": "expected"
     },
     "home": {
@@ -299,11 +299,11 @@
    },
    "goalies": {
     "away": {
-     "name": "Laurent Brossoit",
+     "name": "Lukas Dostal",
      "status": "expected"
     },
     "home": {
-     "name": "Leevi Merilainen",
+     "name": "Kevin Lankinen",
      "status": "expected"
     }
    },
