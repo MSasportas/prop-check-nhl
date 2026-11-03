@@ -71,7 +71,7 @@
   },
   "EDM": {
    "name": "Tristan Jarry",
-   "status": "expected"
+   "status": "confirmed"
   },
   "NSH": {
    "name": "Juuse Saros",
@@ -90,5 +90,5 @@
    "status": "expected"
   }
  },
- "checked_at": "2026-11-03T12:10:00-05:00"
+ "checked_at": "2026-11-03T12:20:03-05:00"
 }
