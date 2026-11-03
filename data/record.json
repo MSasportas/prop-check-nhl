@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-11-03T17:30:02-05:00",
+ "generated_at": "2026-11-03T18:20:00-05:00",
  "summary": {
   "headline": {
    "w": 21,
@@ -89,7 +89,10 @@
      "result": null,
      "actual": null,
      "units": null,
-     "pulled": null,
+     "pulled": {
+      "at": "2026-11-03T18:20:00-05:00",
+      "reason": "Hard Rock moved it to -115"
+     },
      "legs": []
     },
     {
@@ -130,6 +133,29 @@
       {
        "price": 125,
        "at": "2026-11-03T17:30:02-05:00"
+      }
+     ],
+     "result": null,
+     "actual": null,
+     "units": null,
+     "pulled": null,
+     "legs": []
+    },
+    {
+     "id": "2026-11-03:2026020236:8477951:shots:2.5:under",
+     "kind": "single",
+     "player": "N. Schmaltz",
+     "bet": "Under 2.5 shots on goal",
+     "market": "shots",
+     "team": "UTA",
+     "game": "UTA at TOR",
+     "price": -130,
+     "first_price": -130,
+     "last_price": -130,
+     "prices": [
+      {
+       "price": -130,
+       "at": "2026-11-03T18:20:00-05:00"
       }
      ],
      "result": null,
