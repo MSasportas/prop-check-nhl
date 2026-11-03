@@ -35,7 +35,7 @@
   },
   "CBJ": {
    "name": "Cam Talbot",
-   "status": "expected"
+   "status": "confirmed"
   },
   "COL": {
    "name": "Scott Wedgewood",
@@ -67,7 +67,7 @@
   },
   "NJD": {
    "name": "Connor Hellebuyck",
-   "status": "expected"
+   "status": "confirmed"
   },
   "EDM": {
    "name": "Tristan Jarry",
@@ -75,7 +75,7 @@
   },
   "NSH": {
    "name": "Juuse Saros",
-   "status": "expected"
+   "status": "confirmed"
   },
   "CAR": {
    "name": "Pyotr Kochetkov",
@@ -90,5 +90,5 @@
    "status": "expected"
   }
  },
- "checked_at": "2026-11-03T11:30:00-05:00"
+ "checked_at": "2026-11-03T11:40:01-05:00"
 }
