@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-11-03T12:09:22+00:00",
+ "generated_at": "2026-11-03T12:54:30+00:00",
  "nights": [
   "2026-10-19",
   "2026-10-20",
@@ -48592,7 +48592,39 @@
     ]
    },
    "stale_events": [],
-   "lineup_events": [],
+   "lineup_events": [
+    {
+     "at": "2026-10-19T18:40:00-04:00",
+     "team": "PHI",
+     "pid": 8483731,
+     "kind": "demotion",
+     "side": "under",
+     "note": "no Hard Rock line"
+    },
+    {
+     "at": "2026-10-19T18:40:00-04:00",
+     "team": "PHI",
+     "pid": 8478569,
+     "kind": "promotion",
+     "side": "over",
+     "note": "no Hard Rock line"
+    },
+    {
+     "at": "2026-10-19T20:50:01-04:00",
+     "team": "PIT",
+     "pid": 8476483,
+     "kind": "demotion",
+     "side": "under"
+    },
+    {
+     "at": "2026-10-19T20:50:01-04:00",
+     "team": "PIT",
+     "pid": 8482758,
+     "kind": "promotion",
+     "side": "over",
+     "note": "no Hard Rock line"
+    }
+   ],
    "shadow_shots_rows": 66,
    "shadow_shots_graded": 66
   },
@@ -49859,7 +49891,67 @@
      "line": 1.5
     }
    ],
-   "lineup_events": [],
+   "lineup_events": [
+    {
+     "at": "2026-10-20T18:00:00-04:00",
+     "team": "SJS",
+     "pid": 8478975,
+     "kind": "promotion",
+     "side": "over"
+    },
+    {
+     "at": "2026-10-20T18:00:00-04:00",
+     "team": "SJS",
+     "pid": 8475200,
+     "kind": "mate_out",
+     "side": "over",
+     "mate": 8477505,
+     "hr_min": 20.0
+    },
+    {
+     "at": "2026-10-20T18:00:00-04:00",
+     "team": "SJS",
+     "pid": 8484801,
+     "kind": "mate_out",
+     "side": "over",
+     "mate": 8477505,
+     "hr_min": 20.0
+    },
+    {
+     "at": "2026-10-20T18:00:00-04:00",
+     "team": "SJS",
+     "pid": 8484227,
+     "kind": "mate_out",
+     "side": "over",
+     "mate": 8477505
+    },
+    {
+     "at": "2026-10-20T18:00:00-04:00",
+     "team": "SJS",
+     "pid": 8475726,
+     "kind": "mate_out",
+     "side": "over",
+     "mate": 8477505,
+     "hr_min": 20.0
+    },
+    {
+     "at": "2026-10-20T18:00:00-04:00",
+     "team": "SJS",
+     "pid": 8486103,
+     "kind": "mate_out",
+     "side": "over",
+     "mate": 8477505,
+     "hr_min": 20.0
+    },
+    {
+     "at": "2026-10-20T18:00:00-04:00",
+     "team": "SJS",
+     "pid": 8478975,
+     "kind": "mate_out",
+     "side": "over",
+     "mate": 8477505
+    }
+   ],
    "shadow_shots_rows": 196,
    "shadow_shots_graded": 196
   },
@@ -52944,7 +53036,25 @@
      "line": 1.5
     }
    ],
-   "lineup_events": [],
+   "lineup_events": [
+    {
+     "at": "2026-10-24T18:40:01-04:00",
+     "team": "PIT",
+     "pid": 8482148,
+     "kind": "mate_out",
+     "side": "over",
+     "mate": 8471215,
+     "note": "no Hard Rock line"
+    },
+    {
+     "at": "2026-10-24T18:40:01-04:00",
+     "team": "PIT",
+     "pid": 8482758,
+     "kind": "mate_out",
+     "side": "over",
+     "mate": 8471215
+    }
+   ],
    "shadow_shots_rows": 209,
    "shadow_shots_graded": 209
   },
@@ -53235,7 +53345,30 @@
     ]
    },
    "stale_events": [],
-   "lineup_events": [],
+   "lineup_events": [
+    {
+     "at": "2026-10-25T19:50:01-04:00",
+     "team": "NSH",
+     "pid": 8484241,
+     "kind": "demotion",
+     "side": "under"
+    },
+    {
+     "at": "2026-10-25T19:50:01-04:00",
+     "team": "NSH",
+     "pid": 8477021,
+     "kind": "promotion",
+     "side": "over",
+     "note": "no Hard Rock line"
+    },
+    {
+     "at": "2026-10-25T19:50:01-04:00",
+     "team": "NSH",
+     "pid": 8476539,
+     "kind": "demotion",
+     "side": "under"
+    }
+   ],
    "shadow_shots_rows": 81,
    "shadow_shots_graded": 81
   },
@@ -53559,7 +53692,23 @@
      "line": 2.5
     }
    ],
-   "lineup_events": [],
+   "lineup_events": [
+    {
+     "at": "2026-10-26T18:50:00-04:00",
+     "team": "LAK",
+     "pid": 8475287,
+     "kind": "demotion",
+     "side": "under"
+    },
+    {
+     "at": "2026-10-26T18:50:00-04:00",
+     "team": "LAK",
+     "pid": 8483406,
+     "kind": "promotion",
+     "side": "over",
+     "note": "no Hard Rock line"
+    }
+   ],
    "shadow_shots_rows": 53,
    "shadow_shots_graded": 53
   },
@@ -54702,7 +54851,42 @@
      "line": 1.5
     }
    ],
-   "lineup_events": [],
+   "lineup_events": [
+    {
+     "at": "2026-10-27T18:40:00-04:00",
+     "team": "PHI",
+     "pid": 8483787,
+     "kind": "promotion",
+     "side": "over",
+     "note": "no Hard Rock line"
+    },
+    {
+     "at": "2026-10-27T18:40:00-04:00",
+     "team": "PHI",
+     "pid": 8478569,
+     "kind": "demotion",
+     "side": "under",
+     "note": "no Hard Rock line"
+    },
+    {
+     "at": "2026-10-27T19:40:01-04:00",
+     "team": "CAR",
+     "pid": 8480762,
+     "kind": "mate_out",
+     "side": "over",
+     "mate": 8475791,
+     "note": "no Hard Rock line"
+    },
+    {
+     "at": "2026-10-27T19:40:01-04:00",
+     "team": "CAR",
+     "pid": 8480829,
+     "kind": "mate_out",
+     "side": "over",
+     "mate": 8475791,
+     "note": "no Hard Rock line"
+    }
+   ],
    "shadow_shots_rows": 216,
    "shadow_shots_graded": 216
   },
@@ -56064,7 +56248,46 @@
     ]
    },
    "stale_events": [],
-   "lineup_events": [],
+   "lineup_events": [
+    {
+     "at": "2026-10-29T18:50:01-04:00",
+     "team": "TBL",
+     "pid": 8482201,
+     "kind": "demotion",
+     "side": "under"
+    },
+    {
+     "at": "2026-10-29T18:50:01-04:00",
+     "team": "TBL",
+     "pid": 8480995,
+     "kind": "promotion",
+     "side": "over",
+     "note": "no Hard Rock line"
+    },
+    {
+     "at": "2026-10-29T19:40:01-04:00",
+     "team": "NSH",
+     "pid": 8486189,
+     "kind": "demotion",
+     "side": "under",
+     "note": "no Hard Rock line"
+    },
+    {
+     "at": "2026-10-29T21:40:01-04:00",
+     "team": "LAK",
+     "pid": 8483406,
+     "kind": "demotion",
+     "side": "under"
+    },
+    {
+     "at": "2026-10-29T21:40:01-04:00",
+     "team": "LAK",
+     "pid": 8470621,
+     "kind": "promotion",
+     "side": "over",
+     "note": "no Hard Rock line"
+    }
+   ],
    "shadow_shots_rows": 191,
    "shadow_shots_graded": 191
   },
@@ -57268,7 +57491,74 @@
      "line": 1.5
     }
    ],
-   "lineup_events": [],
+   "lineup_events": [
+    {
+     "at": "2026-10-31T14:40:01-04:00",
+     "team": "LAK",
+     "pid": 8483406,
+     "kind": "promotion",
+     "side": "over",
+     "note": "no Hard Rock line"
+    },
+    {
+     "at": "2026-10-31T14:40:01-04:00",
+     "team": "LAK",
+     "pid": 8470621,
+     "kind": "promotion",
+     "side": "over",
+     "note": "no Hard Rock line"
+    },
+    {
+     "at": "2026-10-31T14:40:01-04:00",
+     "team": "LAK",
+     "pid": 8476979,
+     "kind": "mate_out",
+     "side": "over",
+     "mate": 8477960,
+     "note": "no Hard Rock line"
+    },
+    {
+     "at": "2026-10-31T14:40:01-04:00",
+     "team": "LAK",
+     "pid": 8482155,
+     "kind": "mate_out",
+     "side": "over",
+     "mate": 8477960,
+     "hr_min": 40.0
+    },
+    {
+     "at": "2026-10-31T14:40:01-04:00",
+     "team": "LAK",
+     "pid": 8482124,
+     "kind": "mate_out",
+     "side": "over",
+     "mate": 8477960,
+     "hr_min": 40.0
+    },
+    {
+     "at": "2026-10-31T14:40:01-04:00",
+     "team": "LAK",
+     "pid": 8478550,
+     "kind": "mate_out",
+     "side": "over",
+     "mate": 8477960,
+     "hr_min": 40.0
+    },
+    {
+     "at": "2026-10-31T18:50:00-04:00",
+     "team": "VAN",
+     "pid": 8481024,
+     "kind": "demotion",
+     "side": "under"
+    },
+    {
+     "at": "2026-10-31T18:50:00-04:00",
+     "team": "VAN",
+     "pid": 8483476,
+     "kind": "promotion",
+     "side": "over"
+    }
+   ],
    "shadow_shots_rows": 182,
    "shadow_shots_graded": 182
   },

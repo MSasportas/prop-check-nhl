@@ -1,5 +1,27 @@
 # LOG.md: Researcher runs (newest first)
 
+- 2026-11-03 ~8:15 AM ET (Researcher run 19, daily; SHOTS ON GOAL ONLY). No key used, no historical odds pull. GG1-GG3 + forward Q20a-b registered
+  and pushed (f4cbe9d) before any test ran. Free NHL api-web play-by-play for all 945 games Oct 7 - Feb 28 (r17/fetch17.py) and player
+  birth dates (r19/fetch19.py) fetched to scratch; lockbox not fetched. Script research/code/r19/gg19.py, output gg19_results.txt.
+  - GG1 extra-attacker shooter (his share of the team's 6-on-5 SOG) x chance of trailing (moneyline): -10.0% n83 to -14.9% n287; GG1r OVER
+    for big 6-on-5 shooters on underdogs (pw <= .40) -3.9% n283 p .75. The book already knows who gets the empty-net shots.
+  - GG2 overtime role (his share of team OT SOG) x chance of OT: -2.2% n267 to -10.0% n148; GG2r OVER for OT regulars in coin-flip games
+    -11.4% n716, every fold negative.
+  - GG3 age x back-to-back: -8.4% n448 to +10.6% n38 (Nov only); GG3r UNDER on 33+ year-olds on the second night +3.2% n294 [-7,+13] p .30,
+    folds +9.7/+9.3/-2.2/-10.6 (fading). Under n 300 and nowhere near a bar: no lockbox look.
+  - Forward re-score (run_all.sh, 15 nights Oct 19 - Nov 2; clone unshallowed): Q1a +5.5% n534 p .07; Q1b +11.0% n389 [+5,+18] p .0035
+    CLV +3.4%: after a flat Nov 2 it now just MISSES its registered bar (.0033); Q1g +13.2% n331 p .0045: misses again. Q1b read A +19.4%
+    n219 vs B/C +0.2% n170. Q1c +12.6% n276; Q1h +14.3% n232; Q1k Pinnacle +8.9% n410 (CLV +1.2%); Q1l +14.4% n234; Q1m +16.2% n48.
+    Q11a +6.9% n84, Q11b +15.1% n192. Q12 (Pinnacle gap at C) -14.7% n7. Q13 -73% n7; Q19 0 forward bets (all-night lookback -34% n15).
+    Q15a +14.9% n51, Q15b -19.2% n37. Q16a +15.4% n26, Q16b +15.5% n28. Q17a -21.6% n5, Q17c +2.4% n17. Q18a 0, Q18b 1 bet (lost).
+    Q2a/b 0 bets. New Q20a-b (Q1b at 1 PM with the product's own guard vs guard-vetoed) start tonight; seen-night code check (not a
+    result): guard passes +21.8% n167, vetoed +11.8% n52. Scorer research/code/r19/score_q20.py added to run_all.sh.
+  12 historical variants (~0.6 false positives expected), all-time 460; forward 38. Lockbox looks: 2 (unchanged; next needs p < 0.0167).
+  **Verdict: nothing passed; no candidate for the Sharp.** 6-on-5 deployment, OT deployment and age on back-to-backs are inside Hard Rock's
+  price. Q1b/Q1g slipped just under their bars; for the Nov 8 Sharp review: the 1 PM read still carries the whole edge (+19% n219), the
+  B/C reads the product bets are flat (+0.2% n170).
+  Next: (1) Q20a forward (does the 1 PM gap survive the product's guard?); (2) Q16b to n 300; (3) Q1b at A split by hours to puck
+    (early afternoon slate vs late west games), registered before looking.
 - 2026-11-02 ~8:45 AM ET (Researcher run 18, daily; SHOTS ON GOAL ONLY). **CANDIDATE FOR SHARP: forward Q1g (a stricter cut of Q1b, same caveat).**
   - Rule (registered 2026-10-19, run 5, unchanged): at any Hard Rock read (1 PM A, 90-min B, 45-min C) with >= 4 other books, bet the Hard Rock
     shots side whose EV vs the median of the other books' proportional no-vig fair is >= +1.0%, price -200 or better, first qualifying read

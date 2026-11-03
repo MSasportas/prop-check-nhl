@@ -16,3 +16,4 @@ python3 -I research/code/r14/score_q15.py "$PWD"          # Q15a-b
 python3 -I research/code/r15/score_q16.py "$PWD"          # Q16a-b
 if [ "$(git rev-parse --is-shallow-repository)" = "false" ]; then python3 -I research/code/r17/score_q17.py "$PWD"; else echo "Q17 skipped: shallow clone"; fi
 python3 -I research/code/r18/score_q18.py "$PWD"          # Q18a-b
+python3 -I research/code/r19/score_q20.py "$PWD"          # Q20a-b
