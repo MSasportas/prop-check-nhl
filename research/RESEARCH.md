@@ -30,6 +30,10 @@ The aim is ROI, but a false edge costs Matt real money: the bar below never move
   Prices: 10 credits per market per game snapshot (props); featured markets (h2h/totals/spreads) 10 per market per
   snapshot for ALL games at once.
 
+## Forward scoring (every run, first)
+`sh research/code/fwd/run_all.sh` re-scores EVERY registered forward idea (Q1-Q19) into research/fwd/. Deepen the clone first so Q17 runs.
+**Register a scorer there the same day you register a forward idea** (2026-11-03: Q12, Q13, Q19 had none). Points (Q14) is scored by the timer's points watch.
+
 ## Rules (contamination = failure)
 1. **Register first.** Before testing, add the hypothesis to HYPOTHESES.md (id, exact rule, data, metric) and commit.
 2. **No leakage.** Every input to a projection comes from data dated strictly before the game. No closing price,
