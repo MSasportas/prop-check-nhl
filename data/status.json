@@ -1,10 +1,10 @@
 {
  "ok": true,
  "slate_date": "2026-11-03",
- "started_at": "2026-11-03T13:00:05-05:00",
- "status_at": "2026-11-03T13:00:05-05:00",
- "finished_at": "2026-11-03T13:00:09-05:00",
- "last_ok_at": "2026-11-03T13:00:05-05:00",
+ "started_at": "2026-11-03T13:20:10-05:00",
+ "status_at": "2026-11-03T13:20:10-05:00",
+ "finished_at": "2026-11-03T13:20:11-05:00",
+ "last_ok_at": "2026-11-03T13:20:10-05:00",
  "failed_step": null,
  "steps": [
   {
@@ -35,7 +35,7 @@
   {
    "step": "odds",
    "status": "ok",
-   "note": "11 game(s) priced"
+   "note": "no pull due"
   },
   {
    "step": "market_menu",
@@ -64,8 +64,8 @@
   },
   {
    "step": "shadow",
-   "status": "ok",
-   "note": "196 line read(s) logged"
+   "status": "skipped",
+   "note": "nothing new"
   },
   {
    "step": "gg_grade",
@@ -151,11 +151,13 @@
  "lineups_note": null,
  "games_today": 11,
  "record_events": 116,
- "odds_notes": [],
+ "odds_notes": [
+  "key 1 refused (401)"
+ ],
  "runner": {
   "event": "workflow_dispatch",
   "run_id": "41684841267",
-  "iteration": 4,
+  "iteration": 6,
   "chain_link": 200,
   "chain_started_at": "2026-10-28T10:00:15-04:00",
   "run_started_at": "2026-11-03T12:30:27-05:00"
