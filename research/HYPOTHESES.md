@@ -487,6 +487,30 @@ Forward re-score (14 nights Oct 19 - Nov 1): Q1b n381 +12.0% [+5,+18] p .0012 (2
 (not the strict .05/36 = .0014). Both: read A +19..23%, reads B/C +2..3% (p .34-.40). research/code/r18/check_q1.txt.
 
 
+## Run 19 (Researcher, 2026-11-03). Registered before any of these were tested.
+No key used, no historical odds pull. Free data to scratch: api-web play-by-play (research/code/r17/fetch17.py, Oct 7 - Feb 28, lockbox not
+fetched), api-web player landing (birth dates, research/code/r19/fetch19.py), stats REST team list. Moneyline pw = median proportional no-vig
+h2h fair over the books in the h2h addon tgz, latest snapshot at or before puck - 45 min (0.5 if none). Common as runs 4/6-18: shots45_lines,
+every two-way Hard Rock line, proportional de-vig fair f, side price >= -200, 1u flat, regulation + OT, VOID = no bet, game-clustered
+bootstrap. Logistic = research/code/wf.py (fit on all months before the test month), bet the side with p - BE >= T, T in {.01, .02, .03}.
+Fixed rules report every Nov-Feb bet with folds. Placebo (shuffle within date x line, 200 times) for any variant positive Nov-Feb with
+n >= 300; lockbox (Mar 1+) only for such a frozen variant, once, needing one-sided p < 0.05/3 = 0.0167 (look #3).
+SOG from pbp = shot-on-goal + goal events, shootout excluded. situationCode digits = [away goalie, away skaters, home skaters, home goalie].
+All features use games dated strictly before d.
+
+| id | date | rule (exact) | data | result | status |
+|---|---|---|---|---|---|
+| GG1 | 2026-11-03 | **Extra-attacker shooter x chance of trailing late.** ea = his SOG taken with his own net empty (own goalie digit 0) over his team's last 40 games before d; eaT = the team's SOG with own net empty in those games; share = ea/eaT if eaT >= 10 else 0. trail = 0.5 - pw. Terms c1*share + c2*share*trail (6-on-5 shots are a late bonus only for the players the coach sends out, and only when the team trails; does the book price who gets them?) (3 T). Fixed GG1r: OVER when share >= 0.15 and pw <= 0.40 (1 variant). 4 variants | shots45 + pbp + h2h | | registered |
+| GG2 | 2026-11-03 | **Overtime role x chance of overtime.** ot = his SOG in OT periods over his team's 2025-26 games before d; otT = team OT SOG in those games; share = ot/otT if otT >= 8 else 0. close = 0.5 - abs(pw - 0.5). Terms c1*share + c2*share*close (3-on-3 OT is a shot bonus for the 4-6 players used; N5 tested closeness alone, not who plays OT) (3 T). Fixed GG2r: OVER when share >= 0.20 and abs(pw - 0.5) <= 0.06 (1 variant). 4 variants | same | | registered |
+| GG3 | 2026-11-03 | **Age x back-to-back.** age = years from his birth date (api-web landing) to d; b2b = his team played on d - 1 (pbp schedule). Terms c1*b2b*(age - 28) + c2*(age - 28) (older legs lose more on the second night; WF1 tested team B2B, not by age) (3 T). Fixed GG3r: UNDER on every player aged >= 33 whose team is on a B2B (1 variant). 4 variants | shots45 + pbp + landing | | registered |
+
+Forward (registered now; nights >= 2026-11-03 only, none seen):
+| id | date | rule (exact) | data | result | status |
+|---|---|---|---|---|---|
+| Q20a | 2026-11-03 | **Q1b at the 1 PM read with the product's own guard.** Every Q1b bet (exactly as score_fwd.py makes it) with read A, whose line's data/shadow row has open.pull == "A" and open.model_p_over not null. fair_side = (ev + 1) / decimal(price) (the median consensus fair Q1b used); model_side = model_p_over + offset[line] (config ops.gap_guard offsets: 1.5 .0179, 2.5 .0158, 3.5 .017) for the over, 1 - that for the under; final = 0.8*fair_side + 0.2*model_side; Q20a = bets with final*decimal(price) - 1 >= +0.02 (guard passes). 1 variant | data/odds + data/shadow | | forward, open |
+| Q20b | 2026-11-03 | Same, guard vetoes (final EV < +0.02). 1 variant | same | | forward, open |
+Q20 bar: n >= 300 graded, ROI > 0, one-sided p < 0.05/38 = 0.0013 (36 + 2 forward variants), mean CLV > 0. Scored by research/code/r19/score_q20.py.
+
 ## Queued (not yet tested)
 | id | rule idea | data | status |
 |---|---|---|---|
