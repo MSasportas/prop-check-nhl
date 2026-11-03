@@ -205,6 +205,10 @@ button{font:inherit;color:inherit;background:none;border:0;padding:0;margin:0;te
 .btn{display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:0 18px;border-radius:var(--hand-box);
   border:2px solid var(--accent);color:var(--accent);font:400 17px/20px var(--mk)}
 .btn.wide{width:100%}
+.betrow{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+.betrow .btn{flex:1 1 140px;min-width:0;text-decoration:none}
+.betrow .btn.hr{background:var(--accent);color:var(--bg,#111);border-color:var(--accent)}
+.betrow .btn.alt{border-color:var(--line);color:inherit}
 
 /* footer */
 .foot{margin-top:28px;padding-top:6px;border-top:1.5px dashed var(--line);font-size:12px;line-height:18px;color:var(--muted)}
@@ -692,6 +696,7 @@ function pickCard(p, d, opts) {
     (p.price_final && !/^locked/.test(str(p.state))) ? h('span', { class: 'chip ok' }, icon('check', 13), 'Price final') : null,
     tp ? h('span', { class: 'chip hollow', text: tp }) : null,
     (S.newIds[id] && !opts.noNew && !stale()) ? h('span', { class: 'chip new', text: 'New' }) : null));
+  var br = betRow(p); if (br) card.appendChild(br);
   var res = resultLine(p.graded, p.market || p.bet); if (res) card.insertBefore(res, card.firstChild);
 
   if (isOpen) {
@@ -711,6 +716,21 @@ function pickCard(p, d, opts) {
     card.appendChild(more);
   }
   return card;
+}
+/* Tap-to-bet buttons (2026-11-02): Hard Rock's share link opens the slip with this bet on it; DraftKings shows its own price.
+   Only for open picks on a fresh page, and only links to the two books' own hosts. */
+var HR_SLIP = 'https://share.hardrock.bet/Pt0T/bet?deep_link_value=hardrock://betslip/', DK_HOST = 'https://sportsbook.draftkings.com/';
+function slipUrl(u, prefix) { u = str(u); return (u.indexOf(prefix) === 0 && u.length < 600 && !/[\s<>"'\\]/.test(u)) ? u : null; }
+function betRow(p) {
+  if (p.pulled || isObj(p.graded) || !/^(early|lineup)$/.test(str(p.state)) || stale()) return null;
+  var lk = isObj(p.links) ? p.links : {}, hr = slipUrl(isObj(lk.hardrock) && lk.hardrock.url, HR_SLIP),
+      dk = isObj(lk.draftkings) ? lk.draftkings : {}, du = slipUrl(dk.url, DK_HOST);
+  if (!hr && !du) return null;
+  var stop = function (e) { e.stopPropagation(); };
+  var a = function (url, cls, text) { var x = h('a', { class: 'btn ' + cls, href: url, target: '_blank', rel: 'noopener noreferrer', text: text }); x.addEventListener('click', stop); x.addEventListener('keydown', stop); return x; };
+  return h('div', { class: 'betrow' },
+    hr ? a(hr, 'hr', 'Hard Rock' + (num(p.price) != null ? ' ' + odds(p.price) : '')) : null,
+    du ? a(du, 'alt', 'DraftKings' + (num(dk.price) != null ? ' ' + odds(dk.price) : '')) : null);
 }
 function pulledBar(pulled) {
   var at = isObj(pulled) ? fTime(pulled.at) : null, why = isObj(pulled) ? str(pulled.reason) : '';

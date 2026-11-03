@@ -167,7 +167,25 @@ def pick_line(p):
     gap_txt = ("Gap %+.1f%% vs market" % gap) if isinstance(gap, (int, float)) else "Gap vs market"
     lines = ["**%s %s  %s**" % (p["player"], _bet(p), common.fmt_price(p["price"])), when,
              "%s, we say %s%%, price needs %s%%" % (gap_txt, p["p_pct"], p["breakeven_pct"])]
+    bl = bet_buttons(p)
+    if bl:
+        lines.append(bl)
     return "\n".join(lines)
+
+
+def bet_buttons(p):
+    """Short tap-to-bet words, never a bare URL: '[Hard Rock +115](<url>) · [DraftKings -110](<url>)'.
+    <url> inside the brackets stops Discord from unfurling a preview. Only links that pass odds.safe_link."""
+    lk = p.get("links") or {}
+    out = []
+    hr = odds.safe_link((lk.get("hardrock") or {}).get("url"))
+    if hr and hr.startswith(odds.HR_SHARE):
+        out.append("[Hard Rock%s](<%s>)" % ((" " + common.fmt_price(p["price"])) if isinstance(p.get("price"), int) else "", hr))
+    dk = lk.get("draftkings") or {}
+    du = odds.safe_link(dk.get("url"))
+    if du and du.startswith(odds.DK_PREFIX):
+        out.append("[DraftKings%s](<%s>)" % ((" " + common.fmt_price(dk["price"])) if isinstance(dk.get("price"), int) else "", du))
+    return " · ".join(out)
 
 
 def _open(x, now):

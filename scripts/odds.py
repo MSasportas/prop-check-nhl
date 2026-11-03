@@ -723,11 +723,60 @@ def safe_link(x):
 
 _safe_link = safe_link
 
+# ---- bet-slip links (2026-11-02, Matt tested on his phone: the share format below fills the Hard Rock slip; the feed's own
+# app.hardrock.bet/?deep_link_value=betslip/<id> link only opened the app)
+LINK_OTHER_BOOKS = ("draftkings",)                       # other books whose outcome links are kept (shown as a second button)
+HR_SHARE = "https://share.hardrock.bet/Pt0T/bet?deep_link_value=hardrock://betslip/"
+_HR_ID = re.compile(r"betslip/(\d{6,24})(?!\d)")
+DK_PREFIX = "https://sportsbook.draftkings.com/"
+
+
+def hardrock_id(link):
+    """Hard Rock's selection id inside a feed link (the 19-digit number after betslip/), or None."""
+    m = _HR_ID.search(link) if isinstance(link, str) else None
+    return m.group(1) if m else None
+
+
+def hardrock_slip(ids):
+    """One Hard Rock link that opens the slip with these selection ids on it (one id = a single, several = a parlay)."""
+    ids = [i for i in (ids or []) if isinstance(i, str) and i.isdigit()]
+    return safe_link(HR_SHARE + ",".join(ids)) if ids else None
+
+
+def _dk_link(x):
+    return x if safe_link(x) and x.startswith(DK_PREFIX) else None
+
+
+def bet_links(doc, game_id, market, pid, line, side):
+    """The newest bet-slip links for one bet from today's odds reads: {"hardrock": {"id", "url"} | None,
+    "draftkings": {"url", "price"} | None}. Built from the feed, never invented: no link in the feed = None."""
+    out = {"hardrock": None, "draftkings": None}
+    for f in reversed((doc or {}).get("fetches") or []):
+        if f.get("game_id") != game_id:
+            continue
+        if out["hardrock"] is None:
+            for o in ((f.get("markets") or {}).get(market) or {}).get("outcomes") or []:
+                if o.get("pid") == pid and o.get("line") == line and o.get("side") == side:
+                    hid = hardrock_id(o.get("link"))
+                    if hid:
+                        out["hardrock"] = {"id": hid, "url": hardrock_slip([hid])}
+                    break
+        if out["draftkings"] is None:
+            for o in (((f.get("others") or {}).get("draftkings") or {}).get(market) or {}).get("outcomes") or []:
+                if o.get("pid") == pid and o.get("line") == line and o.get("side") == side:
+                    u = _dk_link(o.get("link"))
+                    if u:
+                        out["draftkings"] = {"url": u, "price": o.get("price")}
+                    break
+        if out["hardrock"] and out["draftkings"]:
+            break
+    return out
+
 
 def _outcome_rows(m, find, unmatched, links=False):
     """One market's feed outcomes -> our rows (over/under with a price only). find(name) -> player or None.
     unmatched: list that collects names no roster player matched (None = do not collect).
-    links: also keep the feed's bet-slip link for the outcome (Hard Rock only: other books' links are never stored)."""
+    links: also keep the feed's bet-slip link for the outcome (Hard Rock, and LINK_OTHER_BOOKS among the other books)."""
     rows = []
     for o in m.get("outcomes", []) or []:
         who = o.get("description") or ""
@@ -785,7 +834,8 @@ def normalize(payload, game, matcher, requested_keys, pull, at, cost, cfg, other
             bm = {}
             for m in b.get("markets", []) or []:
                 name = key_to_market.get(m.get("key"), m.get("key"))
-                bm[name] = {"last_update": m.get("last_update"), "outcomes": _outcome_rows(m, find, None)}
+                bm[name] = {"last_update": m.get("last_update"),
+                            "outcomes": _outcome_rows(m, find, None, links=wants_links(pull) and k in LINK_OTHER_BOOKS)}
             if bm:
                 oth[k] = bm
         out["others"] = oth

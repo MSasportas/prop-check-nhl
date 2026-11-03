@@ -120,9 +120,61 @@ class LinkEndToEnd(unittest.TestCase):
             for ft in doc["fetches"]:
                 for b, mk in (ft.get("others") or {}).items():
                     for m in mk.values():
+                        if b in odds.LINK_OTHER_BOOKS:
+                            continue
                         self.assertTrue(all("link" not in o for o in m["outcomes"]), "other books' links are never stored")
         finally:
             s.close()
+
+    def test_slate_gets_hard_rock_share_link_and_draftkings_link(self):
+        """2026-11-02: Matt confirmed share.hardrock.bet/Pt0T/bet?deep_link_value=hardrock://betslip/<id> fills the slip."""
+        s = Sim(pool=12)
+        try:
+            s.at("09:00")
+            s.read("13:02")
+            s.clock("17:00")
+            hr, oth = s.gg_lines("CAR", 1)
+            s.set_odds("CAR", "PHI", [hr], "2026-10-11T21:30:00Z", others={bk: [line] for bk, line in oth.items()})
+            f = os.path.join(s.w["odds"], "odds_car_phi.json")
+            js = json.load(open(f))
+            for b in js["bookmakers"]:
+                for m in b["markets"]:
+                    for i, o in enumerate(m["outcomes"]):
+                        if b["key"] == "hardrockbet":
+                            o["link"] = "https://app.hardrock.bet/?deep_link_value=betslip/90750947701829144%02d" % i
+                        elif b["key"] == "draftkings":
+                            o["link"] = "https://sportsbook.draftkings.com/event/123?outcomes=0QA%d" % i
+                        else:
+                            o["link"] = "https://other.example/%d" % i
+            json.dump(js, open(f, "w"))
+            sl = s.at("17:31")
+            pick = s.pick("CAR", 1, sl)
+            hrl = pick["links"]["hardrock"]
+            self.assertTrue(hrl["url"].startswith(odds.HR_SHARE + "90750947701829144"), hrl)
+            self.assertEqual(hrl["url"], odds.HR_SHARE + hrl["id"])
+            if "draftkings" in oth:
+                dk = pick["links"]["draftkings"]
+                self.assertTrue(dk["url"].startswith(odds.DK_PREFIX))
+                self.assertIsInstance(dk["price"], int)
+            line = notify.bet_buttons(pick)
+            self.assertIn("[Hard Rock %s](<%s>)" % (common.fmt_price(pick["price"]), hrl["url"]), line)
+            self.assertNotIn("other.example", json.dumps(pick))
+        finally:
+            s.close()
+
+
+class SlipFormat(unittest.TestCase):
+    def test_hard_rock_id_and_parlay(self):
+        self.assertEqual(odds.hardrock_id("https://app.hardrock.bet/?deep_link_value=betslip/9075094770182914461"), "9075094770182914461")
+        self.assertIsNone(odds.hardrock_id("https://app.hardrock.bet/"))
+        self.assertEqual(odds.hardrock_slip(["1", "22"]), odds.HR_SHARE + "1,22")
+        self.assertIsNone(odds.hardrock_slip(["x"]))
+
+    def test_buttons_never_show_a_foreign_host(self):
+        p = {"links": {"hardrock": {"url": "https://evil.example/x"}, "draftkings": {"url": "https://evil.example/y", "price": -110}}}
+        self.assertEqual(notify.bet_buttons(p), "")
+        p = {"links": {"hardrock": None, "draftkings": {"url": odds.DK_PREFIX + "event/1?outcomes=a", "price": -110}}}
+        self.assertEqual(notify.bet_buttons(p), "[DraftKings -110](<%sevent/1?outcomes=a>)" % odds.DK_PREFIX)
 
     def test_no_link_from_the_feed_means_no_link_on_the_pick(self):
         s = Sim(pool=12)

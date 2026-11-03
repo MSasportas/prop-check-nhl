@@ -292,6 +292,7 @@ class Run:
         self.inp = engine.Inputs(self.cfg, self.now, self.slate, self.season, self.games,
                                  self.store or stats.Store(), self.behind, view, self.lineup_state, people,
                                  self.load_events(), plan=day.get("plan"), odds_day=day)
+        self.inp.odds_doc = doc
         return self.inp
 
     def do_engine(self):
