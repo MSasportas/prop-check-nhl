@@ -1,10 +1,10 @@
 {
  "ok": true,
  "slate_date": "2026-11-03",
- "started_at": "2026-11-03T16:40:04-05:00",
- "status_at": "2026-11-03T16:40:04-05:00",
- "finished_at": "2026-11-03T16:40:07-05:00",
- "last_ok_at": "2026-11-03T16:40:04-05:00",
+ "started_at": "2026-11-03T16:50:02-05:00",
+ "status_at": "2026-11-03T16:50:02-05:00",
+ "finished_at": "2026-11-03T16:50:03-05:00",
+ "last_ok_at": "2026-11-03T16:50:02-05:00",
  "failed_step": null,
  "steps": [
   {
@@ -24,8 +24,8 @@
   },
   {
    "step": "lineups",
-   "status": "ok",
-   "note": "16 of 16 team pages read"
+   "status": "skipped",
+   "note": "checked in the last 20 minutes"
   },
   {
    "step": "lineup_history",
@@ -41,6 +41,11 @@
    "step": "market_menu",
    "status": "skipped",
    "note": "read this week"
+  },
+  {
+   "step": "featured",
+   "status": "ok",
+   "note": "sides/totals for 11 game(s), 10 book(s) max, 3 credit(s)"
   },
   {
    "step": "book_probe",
@@ -97,7 +102,7 @@
   },
   {
    "n": 2,
-   "left": 443
+   "left": 440
   },
   {
    "n": 3,
@@ -132,11 +137,11 @@
    "left": 500
   }
  ],
- "pool_total": 4319,
+ "pool_total": 4316,
  "allowance": 21.65,
  "tier": 4,
  "budget_today": 238,
- "budget_used_today": 11,
+ "budget_used_today": 14,
  "prices_state": "ok",
  "prices_at": "2026-11-03T13:00:05-05:00",
  "next_price_read_at": "2026-11-03T17:30:00-05:00",
@@ -155,7 +160,7 @@
  "runner": {
   "event": "workflow_dispatch",
   "run_id": "41720857841",
-  "iteration": 3,
+  "iteration": 4,
   "chain_link": 205,
   "chain_started_at": "2026-10-28T10:00:15-04:00",
   "run_started_at": "2026-11-03T16:20:46-05:00"
