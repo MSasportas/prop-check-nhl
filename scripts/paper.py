@@ -244,6 +244,9 @@ def fold(events):
     for e in events:
         it = items.setdefault(e["id"], {})
         it.setdefault(e["t"], e)
+    for it in items.values():                       # a "regrade" (did-not-play Void corrected) replaces the grade
+        if "regrade" in it and "grade" in it:
+            it["grade_first"], it["grade"] = it["grade"], it["regrade"]
     return items
 
 
@@ -511,6 +514,29 @@ class Paper:
                 units = odds.decimal(b["price"]) - 1.0 if w == "W" else (-1.0 if w == "L" else 0.0)
                 self.emit({"t": "grade", "id": i, "result": w, "units": units, "actual": res.get("actual"),
                            "price": b["price"]})
+        # corrections: a VOID whose shadow row was since corrected (the NHL box now shows ice time). Appended as a
+        # "regrade" event; the VOID line stays in the log (2026-11-04, Nov 3 McTavish points)
+        window = timedelta(hours=self.cfg["ops"].get("regrade_window_hours", 48))
+        fix = {}
+        for i, it in self.items.items():
+            b, gr = base_of(it), it.get("grade")
+            if not b or not gr or gr["result"] != "VOID" or "regrade" in it:
+                continue
+            start = common.parse_iso(b["start"])
+            if start is None or self.now > start + window + timedelta(hours=24):
+                continue
+            fix.setdefault(b["slate"], []).append((i, b))
+        for slate, rows in sorted(fix.items()):
+            doc = shadow.load(slate)
+            by = {shadow.key(r["game_id"], r["market"], r["pid"], r["line"]): r for r in doc["rows"]}
+            for i, b in rows:
+                res = (by.get(shadow.key(b["game_id"], MARKET, b["pid"], b["line"])) or {}).get("result") or {}
+                w = res.get(b["side"])
+                if not res.get("corrected") or w not in ("W", "L", "PUSH"):
+                    continue
+                units = odds.decimal(b["price"]) - 1.0 if w == "W" else (-1.0 if w == "L" else 0.0)
+                self.emit({"t": "regrade", "id": i, "result": w, "units": units, "actual": res.get("actual"),
+                           "price": b["price"], "was": "VOID: did not play"})
         return None
 
 

@@ -368,6 +368,64 @@ def fill_results(doc, now, cfg, sched_games, box_fn=None, deadline=None, budget=
     return n, notes
 
 
+def regrade_dnp(doc, now, cfg, sched_games, box_fn=None, budget=None):
+    """Correct a "did not play" Void the NHL box now shows with ice time (the box was read as final without his row).
+    Same rule as grade.py's Record correction: only within `regrade_window_hours` of puck, once per row; the old
+    result is kept under `result.corrected`. Returns rows corrected. (2026-11-04: Nov 3 STL@NYR and COL@CBJ were
+    read at 10:30 PM with no player rows, so every line in those two games was voided; e.g. McTavish played 18:55.)"""
+    box_fn = box_fn or (lambda gid: nhl.boxscore(gid, quick=True))
+    window = timedelta(hours=cfg["ops"].get("regrade_window_hours", 48))
+    hold = timedelta(hours=cfg["ops"]["grade_shot_check_hold_hours"])
+    by_game = {}
+    for r in doc["rows"]:
+        res = r.get("result") or {}
+        if res.get("note") == "did not play" and not res.get("corrected"):
+            by_game.setdefault(r["game_id"], []).append(r)
+    n, pbp_cache = 0, {}
+    for gid, rows in sorted(by_game.items()):
+        g = (sched_games or {}).get(str(gid)) or {}
+        start = common.parse_iso(g.get("start") or rows[0]["ctx"]["start"])
+        if start is None or now > start + window:
+            continue
+        if budget is not None and not nhl.cached("boxscore", gid):
+            if budget["fetch"] <= 0:
+                break
+            budget["fetch"] -= 1
+        box = box_fn(gid)
+        if not box or box.get("gameState") != "OFF" or box.get("gameScheduleState") in ("PPD", "CNCL"):
+            continue
+        parsed = grade.read_box(box)
+        if parsed is None:
+            continue
+        players, teams_ = parsed
+        for r in rows:
+            p = players.get(r["pid"])
+            if not grade.played(p):
+                continue
+            note = None
+            if r["market"] == "shots" and not grade.shots_trusted(gid, p["team"], teams_, pbp_cache):
+                if now < start + hold:
+                    continue
+                note = "team shot total did not match the player rows"
+            field = grade.FIELD.get(r["market"])
+            actual = p.get(field) if field else None
+            if actual is None:
+                continue
+            was = r["result"]
+            r["result"] = {"actual": actual, "over": grade.result_for("over", r["line"], actual),
+                           "under": grade.result_for("under", r["line"], actual), "toi": p.get("toi"),
+                           "at": common.iso(now), "corrected": {"was": "VOID: did not play", "at": was.get("at")}}
+            if note:
+                r["result"]["note"] = note
+            n += 1
+    return n
+
+
+def _has_dnp(doc):
+    return any((r.get("result") or {}).get("note") == "did not play" and not r["result"].get("corrected")
+               for r in doc.get("rows", []))
+
+
 # ---------------------------------------------------------------- the run.py step
 def step(now, slate, cfg, inp, sched_cache, games):
     """Called by run.py after odds, engine and grade. Returns a step result dict. Never raises (the caller
@@ -387,6 +445,9 @@ def step(now, slate, cfg, inp, sched_cache, games):
     graded, bad = fill_results(doc, now, cfg, sched_games, deadline=deadline, budget={"fetch": FETCH_CAP})
     if graded:
         notes.append("%d graded" % graded)
+    fixed = regrade_dnp(doc, now, cfg, sched_games, budget={"fetch": OLD_FETCH_CAP})
+    if fixed:
+        notes.append("%d did-not-play void(s) corrected" % fixed)
     notes += bad[:2]
     if doc["rows"] and serialize(doc) != before:
         doc["updated_at"] = common.iso(now)
@@ -401,15 +462,17 @@ def step(now, slate, cfg, inp, sched_cache, games):
             break
         old_slate = (d - timedelta(days=back)).isoformat()
         old = common.read_json(path(old_slate))
-        if not isinstance(old, dict) or not any(r.get("result") is None for r in old.get("rows", [])):
+        if not isinstance(old, dict) or not (any(r.get("result") is None for r in old.get("rows", []))
+                                             or _has_dnp(old)):
             continue
         old = load(old_slate)
         g2, bad2 = fill_results(old, now, cfg, sched_games, deadline=deadline, budget=old_budget)
-        if g2:
+        f2 = regrade_dnp(old, now, cfg, sched_games, budget=old_budget)
+        if g2 or f2:
             old["updated_at"] = common.iso(now)
             save(old)
             wrote += 1
-            notes.append("%s: %d graded" % (old_slate, g2))
+            notes.append("%s: %d graded, %d corrected" % (old_slate, g2, f2))
         notes += bad2[:1]
     if not notes:
         return {"status": "skipped", "note": "nothing new"}

@@ -578,6 +578,24 @@ class CloseAndGrade(Base):
         self.assertEqual((nov2["graded_picks"], nov2["w"], nov2["l"], nov2["void"]), (1, 1, 0, 1))
         self.assertAlmostEqual(nov2["units"], 1.0)
 
+    def test_corrected_did_not_play_void_is_regraded_once_and_counts(self):
+        g1 = [self.lines(101, "AAA", "Ann Aa", 1.5, 0.54)]
+        self.read(1, "B", "17:30", g1)
+        self.step("17:31")
+        self.shadow_result([(1, 101, 1.5, {"over": "VOID", "under": "VOID", "note": "did not play"}, None)])
+        self.step("23:30")
+        self.assertEqual(self.events("grade")[0]["result"], "VOID")
+        self.step("23:40")
+        self.assertEqual(self.events("regrade"), [], "an uncorrected VOID stays VOID")
+        self.shadow_result([(1, 101, 1.5, {"over": "W", "under": "L", "corrected": {"was": "VOID: did not play"}}, 3)])
+        self.step("23:50")
+        self.step("23:59")
+        rg = self.events("regrade")
+        self.assertEqual([(e["result"], round(e["units"], 4)) for e in rg], [("W", 1.0)])         # once, at +100
+        self.assertEqual(self.events("grade")[0]["result"], "VOID")                               # the VOID line stays
+        n = self.summary()["nov2"]
+        self.assertEqual((n["graded_picks"], n["w"], n["void"]), (1, 1, 0))
+
     def test_under_is_graded_on_the_under_result(self):
         c = self.lines(101, "AAA", "Ann Aa", 1.5, 0.56, side="under", hr=(100, -125))
         self.read(1, "B", "17:30", [c])

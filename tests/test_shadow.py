@@ -233,6 +233,28 @@ class ShadowUnits(unittest.TestCase):
         shadow.fill_results(doc, common.parse_iso("2026-10-11T21:45:00-04:00"), helpers.cfg(), sg, fn)
         self.assertEqual(doc["rows"][0]["result"]["over"], "VOID")
 
+    def test_did_not_play_void_corrected_when_the_box_shows_ice_time(self):
+        pid, gone = world.pid_of("CAR", 1), world.pid_of("CAR", 2)
+        mk = lambda p, line, market: {"game_id": CAR_PHI, "market": market, "pid": p, "line": line,
+                                      "ctx": {"start": "2026-10-11T19:00:00-04:00"},
+                                      "result": {"actual": None, "over": "VOID", "under": "VOID",
+                                                 "note": "did not play", "at": "2026-10-11T22:30:00-04:00"}}
+        doc = {"rows": [mk(pid, 0.5, "points"), mk(pid, 2.5, "shots"), mk(gone, 0.5, "points")]}
+        box = world.boxscore(CAR_PHI, "CAR", "PHI", {pid: (3, 0, 0)}, missing=(gone,))
+        sg = {str(CAR_PHI): {"start": "2026-10-11T19:00:00-04:00", "state": "OFF", "sched": "OK"}}
+        n = shadow.regrade_dnp(doc, common.parse_iso("2026-10-12T07:00:00-04:00"), helpers.cfg(), sg, lambda g: box)
+        self.assertEqual(n, 2)
+        r = doc["rows"]
+        self.assertEqual((r[0]["result"]["over"], r[0]["result"]["actual"]), ("L", 0))
+        self.assertEqual((r[1]["result"]["over"], r[1]["result"]["actual"]), ("W", 3))
+        self.assertEqual(r[0]["result"]["corrected"]["was"], "VOID: did not play")
+        self.assertEqual(r[2]["result"]["over"], "VOID")                     # really scratched: stays VOID
+        n = shadow.regrade_dnp(doc, common.parse_iso("2026-10-12T07:10:00-04:00"), helpers.cfg(), sg, lambda g: box)
+        self.assertEqual(n, 0)                                                # once
+        doc = {"rows": [mk(pid, 0.5, "points")]}
+        n = shadow.regrade_dnp(doc, common.parse_iso("2026-10-14T07:00:00-04:00"), helpers.cfg(), sg, lambda g: box)
+        self.assertEqual(n, 0, "outside the regrade window")
+
     def test_file_is_valid_json_one_row_per_line(self):
         pid = world.pid_of("CAR", 1)
         doc = {"date": world.SLATE, "version": 1, "note": shadow.NOTE, "rows": []}
