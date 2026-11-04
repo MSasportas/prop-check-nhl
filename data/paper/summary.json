@@ -2,7 +2,7 @@
  "version": 1,
  "note": "Gap + Guard research log. Every flag here is a pick on the page and in the Record; vetoed and capped rows are research only.",
  "market": "shots",
- "generated_at": "2026-11-03T19:00:00-05:00",
+ "generated_at": "2026-11-03T19:20:00-05:00",
  "slate": "2026-11-03",
  "active": true,
  "window": {
@@ -220,7 +220,42 @@
     "units": null
    }
   ],
-  "vetoes": [],
+  "vetoes": [
+   {
+    "id": "2026-11-03:2026020245:8482702:2.5:under",
+    "kind": "veto",
+    "slate": "2026-11-03",
+    "game_id": 2026020245,
+    "player": "L. Stankoven",
+    "team": "CAR",
+    "opp": "NSH",
+    "game": "CAR @ NSH",
+    "start": "2026-11-03T20:00:00-05:00",
+    "side": "under",
+    "line": 2.5,
+    "bet": "UNDER 2.5 shots",
+    "price": -125,
+    "gap_pct": 3.3,
+    "final_pct": 1.8,
+    "market_fair_pct": 57.4,
+    "final_p_pct": 56.5,
+    "n_books": 8,
+    "guard": "veto",
+    "cap": null,
+    "flagged_at": "2026-11-03T19:20:00-05:00",
+    "read_pull": "C",
+    "settled": "Early",
+    "frozen_settled": "Early",
+    "move30_pct": 0.2,
+    "pulled": null,
+    "locked": false,
+    "state": "open",
+    "close_fair_pct": 57.4,
+    "clv_pct": null,
+    "result": null,
+    "units": null
+   }
+  ],
   "capped": []
  },
  "nights": [
@@ -881,7 +916,7 @@
  ],
  "nov2": {
   "gaps_measured": 37,
-  "gaps_logged": 47,
+  "gaps_logged": 48,
   "graded_picks": 38,
   "w": 24,
   "l": 14,
