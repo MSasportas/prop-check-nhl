@@ -7,7 +7,7 @@
   },
   "OTT": {
    "name": "Samuel Ersson",
-   "status": "expected"
+   "status": "confirmed"
   },
   "FLA": {
    "name": "Jacob Markstrom",
@@ -34,5 +34,5 @@
    "status": "expected"
   }
  },
- "checked_at": "2026-11-04T11:10:01-05:00"
+ "checked_at": "2026-11-04T12:00:02-05:00"
 }
