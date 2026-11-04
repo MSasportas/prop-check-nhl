@@ -1,13 +1,13 @@
 {
  "slate_date": "2026-11-03",
- "generated_at": "2026-11-03T22:20:00-05:00",
- "status_at": "2026-11-03T22:20:00-05:00",
+ "generated_at": "2026-11-03T22:30:00-05:00",
+ "status_at": "2026-11-03T22:30:00-05:00",
  "valid_until": "2026-11-04T05:00:00-05:00",
  "status": {
   "prices_state": "ok",
   "prices_at": "2026-11-03T20:20:00-05:00",
   "next_price_read_at": null,
-  "stats_built_at": "2026-11-03T21:40:00-05:00",
+  "stats_built_at": "2026-11-03T22:30:00-05:00",
   "stats_through": "2026-11-02",
   "lineups_at": "2026-11-03T20:30:01-05:00",
   "goalies_at": null,
@@ -16,7 +16,7 @@
   "stats_state": "ok",
   "last_run": {
    "ok": true,
-   "at": "2026-11-03T22:20:00-05:00",
+   "at": "2026-11-03T22:30:00-05:00",
    "failed_step": null
   },
   "pool": {
@@ -348,7 +348,11 @@
     "if_bet": "Got +120? Still a good bet. Don't bet it at -115."
    },
    "price_final": false,
-   "graded": null,
+   "graded": {
+    "result": "W",
+    "actual": "had 1",
+    "units": 1.2
+   },
    "rank": null,
    "tier": "main",
    "game_id": 2026020242,
@@ -418,7 +422,11 @@
    ],
    "pulled": null,
    "price_final": false,
-   "graded": null,
+   "graded": {
+    "result": "L",
+    "actual": "had 3",
+    "units": -1.0
+   },
    "rank": null,
    "tier": "main",
    "game_id": 2026020236,
@@ -488,7 +496,11 @@
    ],
    "pulled": null,
    "price_final": false,
-   "graded": null,
+   "graded": {
+    "result": "VOID",
+    "actual": "did not play",
+    "units": 0.0
+   },
    "rank": null,
    "tier": "main",
    "game_id": 2026020240,
@@ -558,7 +570,11 @@
    ],
    "pulled": null,
    "price_final": false,
-   "graded": null,
+   "graded": {
+    "result": "W",
+    "actual": "had 2",
+    "units": 1.05
+   },
    "rank": null,
    "tier": "main",
    "game_id": 2026020242,

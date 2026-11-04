@@ -1,40 +1,40 @@
 {
- "generated_at": "2026-11-03T22:20:00-05:00",
+ "generated_at": "2026-11-03T22:30:00-05:00",
  "summary": {
   "headline": {
-   "w": 22,
-   "l": 12,
+   "w": 23,
+   "l": 13,
    "push": 0,
-   "void": 0,
-   "units": 9.06,
-   "hit_rate": 0.6471,
-   "needed": 0.5064,
-   "n": 34
+   "void": 1,
+   "units": 9.11,
+   "hit_rate": 0.6389,
+   "needed": 0.5076,
+   "n": 36
   },
   "rows": [
    {
     "key": "shots",
     "label": "Shots on goal",
-    "w": 22,
-    "l": 12,
+    "w": 23,
+    "l": 13,
     "push": 0,
-    "void": 0,
-    "units": 9.06,
-    "hit_rate": 0.6471,
-    "needed": 0.5064,
-    "n": 34
+    "void": 1,
+    "units": 9.11,
+    "hit_rate": 0.6389,
+    "needed": 0.5076,
+    "n": 36
    },
    {
     "key": "pulled",
     "label": "Pulled (not counted above)",
-    "w": 3,
+    "w": 4,
     "l": 2,
     "push": 0,
     "void": 0,
-    "units": 0.22,
-    "hit_rate": 0.6,
-    "needed": 0.5571,
-    "n": 5
+    "units": 1.42,
+    "hit_rate": 0.6667,
+    "needed": 0.54,
+    "n": 6
    }
   ]
  },
@@ -42,9 +42,9 @@
   {
    "date": "2026-11-03",
    "graded": false,
-   "w": 1,
-   "l": 0,
-   "units": 1.25,
+   "w": 2,
+   "l": 1,
+   "units": 1.3,
    "entries": [
     {
      "id": "2026-11-03:2026020242:8476483:shots:2.5:under",
@@ -63,9 +63,9 @@
        "at": "2026-11-03T17:30:02-05:00"
       }
      ],
-     "result": null,
-     "actual": null,
-     "units": null,
+     "result": "W",
+     "actual": "had 2",
+     "units": 1.05,
      "pulled": null,
      "legs": []
     },
@@ -109,9 +109,9 @@
        "at": "2026-11-03T17:30:02-05:00"
       }
      ],
-     "result": null,
-     "actual": null,
-     "units": null,
+     "result": "W",
+     "actual": "had 1",
+     "units": 1.2,
      "pulled": {
       "at": "2026-11-03T18:20:00-05:00",
       "reason": "Hard Rock moved it to -115"
@@ -158,9 +158,9 @@
        "at": "2026-11-03T17:30:02-05:00"
       }
      ],
-     "result": null,
-     "actual": null,
-     "units": null,
+     "result": "VOID",
+     "actual": "did not play",
+     "units": 0.0,
      "pulled": null,
      "legs": []
     },
@@ -227,9 +227,9 @@
        "at": "2026-11-03T18:20:00-05:00"
       }
      ],
-     "result": null,
-     "actual": null,
-     "units": null,
+     "result": "L",
+     "actual": "had 3",
+     "units": -1.0,
      "pulled": null,
      "legs": []
     }
