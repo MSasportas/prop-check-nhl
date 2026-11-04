@@ -1,11 +1,11 @@
 {
- "ok": false,
+ "ok": true,
  "slate_date": "2026-11-04",
- "started_at": "2026-11-04T05:30:01-05:00",
- "status_at": "2026-11-04T06:00:58-05:00",
- "finished_at": "2026-11-04T05:30:01-05:00",
- "last_ok_at": "2026-11-04T05:30:01-05:00",
- "failed_step": "push",
+ "started_at": "2026-11-04T06:01:57-05:00",
+ "status_at": "2026-11-04T06:01:57-05:00",
+ "finished_at": "2026-11-04T06:01:58-05:00",
+ "last_ok_at": "2026-11-04T06:01:57-05:00",
+ "failed_step": null,
  "steps": [
   {
    "step": "rules",
@@ -154,15 +154,15 @@
  "lineups_note": null,
  "games_today": 4,
  "record_events": 141,
- "odds_notes": [],
+ "odds_notes": [
+  "key 1 refused (401)"
+ ],
  "runner": {
   "event": "workflow_dispatch",
-  "run_id": "41814633494",
-  "iteration": 2,
-  "chain_link": 224,
+  "run_id": "41818114358",
+  "iteration": 1,
+  "chain_link": 225,
   "chain_started_at": "2026-10-28T10:00:15-04:00",
-  "run_started_at": "2026-11-04T05:30:36-05:00"
- },
- "failed_at": "2026-11-04T06:00:58-05:00",
- "note": "The run stopped before finishing. Files from the last good run are still in place."
+  "run_started_at": "2026-11-04T06:01:56-05:00"
+ }
 }

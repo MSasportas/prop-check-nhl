@@ -1,7 +1,7 @@
 {
  "slate_date": "2026-11-04",
- "generated_at": "2026-11-04T05:30:01-05:00",
- "status_at": "2026-11-04T06:00:58-05:00",
+ "generated_at": "2026-11-04T06:01:57-05:00",
+ "status_at": "2026-11-04T06:01:57-05:00",
  "valid_until": "2026-11-05T05:00:00-05:00",
  "status": {
   "prices_state": "not_yet",
@@ -15,9 +15,9 @@
   "lineups_state": "not_yet",
   "stats_state": "ok",
   "last_run": {
-   "ok": false,
-   "at": "2026-11-04T06:00:58-05:00",
-   "failed_step": "push"
+   "ok": true,
+   "at": "2026-11-04T06:01:57-05:00",
+   "failed_step": null
   },
   "pool": {
    "pulls_left": 4248,
@@ -31,12 +31,7 @@
   "flag_reads": 0,
   "tier": 4
  },
- "banners": [
-  {
-   "level": "stop",
-   "text": "The last update failed at 6:00 AM (push). Showing 5:30 AM data."
-  }
- ],
+ "banners": [],
  "empty": {
   "code": "not_yet",
   "text": "No picks yet today",
