@@ -2,39 +2,335 @@
  "generated_at": "2026-11-04T00:30:00-05:00",
  "summary": {
   "headline": {
-   "w": 25,
-   "l": 15,
+   "w": 29,
+   "l": 17,
    "push": 0,
    "void": 0,
-   "units": 9.41,
-   "hit_rate": 0.625,
-   "needed": 0.5057,
-   "n": 40
+   "units": 10.83,
+   "hit_rate": 0.6304,
+   "needed": 0.5102,
+   "n": 46
   },
   "rows": [
    {
     "key": "shots",
     "label": "Shots on goal",
-    "w": 25,
-    "l": 15,
+    "w": 29,
+    "l": 17,
     "push": 0,
     "void": 0,
-    "units": 9.41,
-    "hit_rate": 0.625,
-    "needed": 0.5057,
-    "n": 40
+    "units": 10.83,
+    "hit_rate": 0.6304,
+    "needed": 0.5102,
+    "n": 46
+   }
+  ],
+  "cuts": [
+   {
+    "key": "line",
+    "label": "By line",
+    "note": null,
+    "rows": [
+     {
+      "key": "over_1.5",
+      "label": "Over 1.5",
+      "w": 1,
+      "l": 4,
+      "push": 0,
+      "void": 0,
+      "units": -3.09,
+      "hit_rate": 0.2,
+      "needed": 0.5223,
+      "n": 5
+     },
+     {
+      "key": "over_2.5",
+      "label": "Over 2.5",
+      "w": 1,
+      "l": 1,
+      "push": 0,
+      "void": 0,
+      "units": 0.2,
+      "hit_rate": 0.5,
+      "needed": 0.4598,
+      "n": 2
+     },
+     {
+      "key": "under_1.5",
+      "label": "Under 1.5",
+      "w": 13,
+      "l": 8,
+      "push": 0,
+      "void": 0,
+      "units": 5.24,
+      "hit_rate": 0.619,
+      "needed": 0.4956,
+      "n": 21
+     },
+     {
+      "key": "under_2.5",
+      "label": "Under 2.5",
+      "w": 14,
+      "l": 4,
+      "push": 0,
+      "void": 0,
+      "units": 8.48,
+      "hit_rate": 0.7778,
+      "needed": 0.5295,
+      "n": 18
+     }
+    ]
    },
    {
-    "key": "pulled",
-    "label": "Pulled (not counted above)",
-    "w": 4,
+    "key": "edge",
+    "label": "By edge",
+    "note": "Our chance minus what the price needs, in points, when shown",
+    "rows": [
+     {
+      "key": "edge_lt2",
+      "label": "Under 2 pts",
+      "w": 6,
+      "l": 8,
+      "push": 0,
+      "void": 0,
+      "units": -1.87,
+      "hit_rate": 0.4286,
+      "needed": 0.4901,
+      "n": 14
+     },
+     {
+      "key": "edge_2_3",
+      "label": "2 to 3 pts",
+      "w": 12,
+      "l": 6,
+      "push": 0,
+      "void": 0,
+      "units": 5.6,
+      "hit_rate": 0.6667,
+      "needed": 0.5168,
+      "n": 18
+     },
+     {
+      "key": "edge_3_4",
+      "label": "3 to 4 pts",
+      "w": 8,
+      "l": 2,
+      "push": 0,
+      "void": 0,
+      "units": 5.43,
+      "hit_rate": 0.8,
+      "needed": 0.5245,
+      "n": 10
+     },
+     {
+      "key": "edge_4",
+      "label": "4 pts or more",
+      "w": 3,
+      "l": 1,
+      "push": 0,
+      "void": 0,
+      "units": 1.67,
+      "hit_rate": 0.75,
+      "needed": 0.515,
+      "n": 4
+     }
+    ]
+   },
+   {
+    "key": "settled",
+    "label": "By how settled when shown",
+    "note": "A Locked pick can't be bet, so it is not a row",
+    "rows": [
+     {
+      "key": "early",
+      "label": "Early",
+      "w": 9,
+      "l": 10,
+      "push": 0,
+      "void": 0,
+      "units": -1.28,
+      "hit_rate": 0.4737,
+      "needed": 0.5055,
+      "n": 19
+     },
+     {
+      "key": "lineup",
+      "label": "Lineup confirmed",
+      "w": 20,
+      "l": 7,
+      "push": 0,
+      "void": 0,
+      "units": 12.11,
+      "hit_rate": 0.7407,
+      "needed": 0.5135,
+      "n": 27
+     }
+    ]
+   },
+   {
+    "key": "price",
+    "label": "By price",
+    "note": "Hard Rock price at grading",
+    "rows": [
+     {
+      "key": "fav_big",
+      "label": "-200 to -150",
+      "w": 2,
+      "l": 1,
+      "push": 0,
+      "void": 0,
+      "units": 0.1,
+      "hit_rate": 0.6667,
+      "needed": 0.6382,
+      "n": 3
+     },
+     {
+      "key": "fav",
+      "label": "-149 to -101",
+      "w": 12,
+      "l": 6,
+      "push": 0,
+      "void": 0,
+      "units": 4.03,
+      "hit_rate": 0.6667,
+      "needed": 0.5418,
+      "n": 18
+     },
+     {
+      "key": "plus",
+      "label": "Even or plus money",
+      "w": 15,
+      "l": 10,
+      "push": 0,
+      "void": 0,
+      "units": 6.7,
+      "hit_rate": 0.6,
+      "needed": 0.4721,
+      "n": 25
+     }
+    ]
+   }
+  ],
+  "days": [
+   {
+    "date": "2026-11-03",
+    "w": 5,
+    "l": 3,
+    "push": 0,
+    "void": 0,
+    "units": 2.8,
+    "n": 8,
+    "graded": true
+   },
+   {
+    "date": "2026-11-02",
+    "w": 0,
+    "l": 1,
+    "push": 0,
+    "void": 0,
+    "units": -1.0,
+    "n": 1,
+    "graded": true
+   },
+   {
+    "date": "2026-11-01",
+    "w": 0,
     "l": 2,
     "push": 0,
     "void": 0,
-    "units": 1.42,
-    "hit_rate": 0.6667,
-    "needed": 0.54,
-    "n": 6
+    "units": -2.0,
+    "n": 2,
+    "graded": true
+   },
+   {
+    "date": "2026-10-31",
+    "w": 2,
+    "l": 2,
+    "push": 0,
+    "void": 0,
+    "units": -0.59,
+    "n": 4,
+    "graded": true
+   },
+   {
+    "date": "2026-10-29",
+    "w": 2,
+    "l": 0,
+    "push": 0,
+    "void": 0,
+    "units": 2.2,
+    "n": 2,
+    "graded": true
+   },
+   {
+    "date": "2026-10-28",
+    "w": 0,
+    "l": 1,
+    "push": 0,
+    "void": 0,
+    "units": -1.0,
+    "n": 1,
+    "graded": true
+   },
+   {
+    "date": "2026-10-27",
+    "w": 5,
+    "l": 1,
+    "push": 0,
+    "void": 0,
+    "units": 3.9,
+    "n": 6,
+    "graded": true
+   },
+   {
+    "date": "2026-10-26",
+    "w": 1,
+    "l": 0,
+    "push": 0,
+    "void": 0,
+    "units": 0.71,
+    "n": 1,
+    "graded": true
+   },
+   {
+    "date": "2026-10-24",
+    "w": 6,
+    "l": 3,
+    "push": 0,
+    "void": 0,
+    "units": 2.37,
+    "n": 9,
+    "graded": true
+   },
+   {
+    "date": "2026-10-23",
+    "w": 2,
+    "l": 0,
+    "push": 0,
+    "void": 0,
+    "units": 1.61,
+    "n": 2,
+    "graded": true
+   },
+   {
+    "date": "2026-10-22",
+    "w": 3,
+    "l": 2,
+    "push": 0,
+    "void": 0,
+    "units": 0.77,
+    "n": 5,
+    "graded": true
+   },
+   {
+    "date": "2026-10-20",
+    "w": 3,
+    "l": 2,
+    "push": 0,
+    "void": 0,
+    "units": 1.05,
+    "n": 5,
+    "graded": true
    }
   ]
  },
@@ -42,9 +338,9 @@
   {
    "date": "2026-11-03",
    "graded": true,
-   "w": 4,
+   "w": 5,
    "l": 3,
-   "units": 1.6,
+   "units": 2.8,
    "entries": [
     {
      "id": "2026-11-03:2026020242:8476483:shots:2.5:under",
@@ -271,8 +567,8 @@
    "date": "2026-11-01",
    "graded": true,
    "w": 0,
-   "l": 1,
-   "units": -1.0,
+   "l": 2,
+   "units": -2.0,
    "entries": [
     {
      "id": "2026-11-01:2026020227:8476873:shots:1.5:under",
