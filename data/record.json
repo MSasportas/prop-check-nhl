@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-11-03T19:00:00-05:00",
+ "generated_at": "2026-11-03T19:30:00-05:00",
  "summary": {
   "headline": {
    "w": 21,
@@ -70,6 +70,29 @@
      "legs": []
     },
     {
+     "id": "2026-11-03:2026020246:8481605:shots:1.5:under",
+     "kind": "single",
+     "player": "J. LaCombe",
+     "bet": "Under 1.5 shots on goal",
+     "market": "shots",
+     "team": "ANA",
+     "game": "ANA at VAN",
+     "price": 100,
+     "first_price": 100,
+     "last_price": 100,
+     "prices": [
+      {
+       "price": 100,
+       "at": "2026-11-03T19:30:00-05:00"
+      }
+     ],
+     "result": null,
+     "actual": null,
+     "units": null,
+     "pulled": null,
+     "legs": []
+    },
+    {
      "id": "2026-11-03:2026020242:8478403:shots:2.5:under",
      "kind": "single",
      "player": "J. Eichel",
@@ -93,6 +116,29 @@
       "at": "2026-11-03T18:20:00-05:00",
       "reason": "Hard Rock moved it to -115"
      },
+     "legs": []
+    },
+    {
+     "id": "2026-11-03:2026020246:8478444:shots:1.5:under",
+     "kind": "single",
+     "player": "B. Boeser",
+     "bet": "Under 1.5 shots on goal",
+     "market": "shots",
+     "team": "VAN",
+     "game": "ANA at VAN",
+     "price": 150,
+     "first_price": 150,
+     "last_price": 150,
+     "prices": [
+      {
+       "price": 150,
+       "at": "2026-11-03T19:30:00-05:00"
+      }
+     ],
+     "result": null,
+     "actual": null,
+     "units": null,
+     "pulled": null,
      "legs": []
     },
     {

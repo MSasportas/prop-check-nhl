@@ -1,12 +1,12 @@
 {
  "slate_date": "2026-11-03",
- "generated_at": "2026-11-03T19:20:00-05:00",
- "status_at": "2026-11-03T19:20:00-05:00",
+ "generated_at": "2026-11-03T19:30:00-05:00",
+ "status_at": "2026-11-03T19:30:00-05:00",
  "valid_until": "2026-11-04T05:00:00-05:00",
  "status": {
   "prices_state": "ok",
-  "prices_at": "2026-11-03T19:20:00-05:00",
-  "next_price_read_at": "2026-11-03T19:30:00-05:00",
+  "prices_at": "2026-11-03T19:30:00-05:00",
+  "next_price_read_at": "2026-11-03T20:15:00-05:00",
   "stats_built_at": "2026-11-03T00:10:01-05:00",
   "stats_through": "2026-11-02",
   "lineups_at": "2026-11-03T19:20:00-05:00",
@@ -16,19 +16,19 @@
   "stats_state": "ok",
   "last_run": {
    "ok": true,
-   "at": "2026-11-03T19:20:00-05:00",
+   "at": "2026-11-03T19:30:00-05:00",
    "failed_step": null
   },
   "pool": {
-   "pulls_left": 4258,
+   "pulls_left": 4253,
    "keys": 10,
    "game_days_left": 26,
    "days_left": 28,
    "low": false
   },
   "excluded_teams": [],
-  "lines_checked": 181,
-  "flag_reads": 10,
+  "lines_checked": 196,
+  "flag_reads": 11,
   "tier": 4
  },
  "banners": [],
@@ -253,8 +253,8 @@
      "status": "confirmed"
     }
    },
-   "started": false,
-   "reads_done": true,
+   "started": true,
+   "reads_done": false,
    "picks": 1,
    "excluded_reason": null,
    "excluded_teams": []
@@ -305,74 +305,143 @@
    },
    "started": false,
    "reads_done": false,
-   "picks": 0,
+   "picks": 2,
    "excluded_reason": null,
    "excluded_teams": []
   }
  ],
  "picks": [
   {
-   "id": "2026-11-03:2026020239:8481721:shots:1.5:over",
-   "price": -165,
-   "first_price": -165,
-   "first_price_at": "2026-11-03T18:50:00-05:00",
-   "worst_price": -165,
-   "p": 0.6491,
-   "breakeven": 0.6226,
-   "p_pct": 64,
-   "breakeven_pct": 62,
-   "state": "lineup",
+   "id": "2026-11-03:2026020246:8481605:shots:1.5:under",
+   "price": 100,
+   "first_price": 100,
+   "first_price_at": "2026-11-03T19:30:00-05:00",
+   "worst_price": 100,
+   "p": 0.523,
+   "breakeven": 0.5,
+   "p_pct": 52,
+   "breakeven_pct": 50,
+   "state": "early",
    "history": [
     {
-     "at": "2026-11-03T18:50:00-05:00",
-     "text": "Lineup confirmed"
+     "at": "2026-11-03T19:30:00-05:00",
+     "text": "Early: lineup not confirmed"
     }
    ],
    "prices": [
     {
-     "at": "2026-11-03T18:50:00-05:00",
-     "price": -165
+     "at": "2026-11-03T19:30:00-05:00",
+     "price": 100
     }
    ],
    "pulled": null,
-   "price_final": true,
+   "price_final": false,
    "graded": null,
    "rank": 1,
    "tier": "main",
-   "game_id": 2026020239,
-   "player": "A. Gritsyuk",
-   "player_id": 8481721,
-   "team": "NJD",
-   "opp": "EDM",
-   "home": true,
-   "start": "2026-11-03T19:30:00-05:00",
+   "game_id": 2026020246,
+   "player": "J. LaCombe",
+   "player_id": 8481605,
+   "team": "ANA",
+   "opp": "VAN",
+   "home": false,
+   "start": "2026-11-03T21:00:00-05:00",
    "market": "shots",
    "line": 1.5,
-   "side": "over",
-   "bet": "Over 1.5 shots on goal",
-   "price_at": "2026-11-03T18:50:00-05:00",
-   "gap_pct": 3.7,
-   "market_fair_pct": 64.6,
-   "n_books": 5,
+   "side": "under",
+   "bet": "Under 1.5 shots on goal",
+   "price_at": "2026-11-03T19:30:00-05:00",
+   "gap_pct": 4.6,
+   "market_fair_pct": 52.3,
+   "n_books": 7,
    "guard": {
     "verdict": "agrees",
-    "ours_pct": 64.9,
-    "model_pct": 64.4
+    "ours_pct": 52.3,
+    "model_pct": 54.0
    },
-   "settled": "goalie",
-   "settled_label": "Goalie confirmed",
-   "reason": "5 other books say 64.6%; Hard Rock's -165 only needs 62.3%. Our model agrees (our blend: 64.9%).",
-   "link": "https://app.hardrock.bet/?deep_link_value=betslip/8753798447452258706",
+   "settled": "early",
+   "settled_label": "Early",
+   "reason": "7 other books say 52.3%; Hard Rock's +100 only needs 50.0%. Our model agrees (our blend: 52.3%).",
+   "link": "https://app.hardrock.bet/?deep_link_value=betslip/5018713809955717541",
    "links": {
     "hardrock": {
-     "id": "8753798447452258706",
-     "url": "https://share.hardrock.bet/Pt0T/bet?deep_link_value=hardrock://betslip/8753798447452258706"
+     "id": "5018713809955717541",
+     "url": "https://share.hardrock.bet/Pt0T/bet?deep_link_value=hardrock://betslip/5018713809955717541"
     },
-    "draftkings": null
+    "draftkings": {
+     "url": "https://sportsbook.draftkings.com/?outcomes=0QA385268557%232347490100_15L42133Q11425790173Q20",
+     "price": -120
+    }
    },
    "thin": false,
-   "games_used": 80,
+   "games_used": 96,
    "games_this_season": 14
+  },
+  {
+   "id": "2026-11-03:2026020246:8478444:shots:1.5:under",
+   "price": 150,
+   "first_price": 150,
+   "first_price_at": "2026-11-03T19:30:00-05:00",
+   "worst_price": 150,
+   "p": 0.4146,
+   "breakeven": 0.4,
+   "p_pct": 41,
+   "breakeven_pct": 40,
+   "state": "early",
+   "history": [
+    {
+     "at": "2026-11-03T19:30:00-05:00",
+     "text": "Early: lineup not confirmed"
+    }
+   ],
+   "prices": [
+    {
+     "at": "2026-11-03T19:30:00-05:00",
+     "price": 150
+    }
+   ],
+   "pulled": null,
+   "price_final": false,
+   "graded": null,
+   "rank": 2,
+   "tier": "main",
+   "game_id": 2026020246,
+   "player": "B. Boeser",
+   "player_id": 8478444,
+   "team": "VAN",
+   "opp": "ANA",
+   "home": true,
+   "start": "2026-11-03T21:00:00-05:00",
+   "market": "shots",
+   "line": 1.5,
+   "side": "under",
+   "bet": "Under 1.5 shots on goal",
+   "price_at": "2026-11-03T19:30:00-05:00",
+   "gap_pct": 3.3,
+   "market_fair_pct": 41.3,
+   "n_books": 7,
+   "guard": {
+    "verdict": "agrees",
+    "ours_pct": 41.5,
+    "model_pct": 43.9
+   },
+   "settled": "early",
+   "settled_label": "Early",
+   "reason": "7 other books say 41.3%; Hard Rock's +150 only needs 40.0%. Our model agrees (our blend: 41.5%).",
+   "link": "https://app.hardrock.bet/?deep_link_value=betslip/1904059333285642672",
+   "links": {
+    "hardrock": {
+     "id": "1904059333285642672",
+     "url": "https://share.hardrock.bet/Pt0T/bet?deep_link_value=hardrock://betslip/1904059333285642672"
+    },
+    "draftkings": {
+     "url": "https://sportsbook.draftkings.com/?outcomes=0QA385268463%232347490085_15L42133Q11425790173Q20",
+     "price": 120
+    }
+   },
+   "thin": false,
+   "games_used": 91,
+   "games_this_season": 16
   },
   {
    "id": "2026-11-03:2026020242:8478403:shots:2.5:under",
@@ -726,6 +795,73 @@
    },
    "thin": false,
    "games_used": 91,
+   "games_this_season": 14
+  },
+  {
+   "id": "2026-11-03:2026020239:8481721:shots:1.5:over",
+   "price": -165,
+   "first_price": -165,
+   "first_price_at": "2026-11-03T18:50:00-05:00",
+   "worst_price": -165,
+   "p": 0.6491,
+   "breakeven": 0.6226,
+   "p_pct": 64,
+   "breakeven_pct": 62,
+   "state": "locked",
+   "history": [
+    {
+     "at": "2026-11-03T18:50:00-05:00",
+     "text": "Lineup confirmed"
+    },
+    {
+     "at": "2026-11-03T19:30:00-05:00",
+     "text": "Locked"
+    }
+   ],
+   "prices": [
+    {
+     "at": "2026-11-03T18:50:00-05:00",
+     "price": -165
+    }
+   ],
+   "pulled": null,
+   "price_final": false,
+   "graded": null,
+   "rank": null,
+   "tier": "main",
+   "game_id": 2026020239,
+   "player": "A. Gritsyuk",
+   "player_id": 8481721,
+   "team": "NJD",
+   "opp": "EDM",
+   "home": true,
+   "start": "2026-11-03T19:30:00-05:00",
+   "market": "shots",
+   "line": 1.5,
+   "side": "over",
+   "bet": "Over 1.5 shots on goal",
+   "price_at": "2026-11-03T18:50:00-05:00",
+   "gap_pct": 3.7,
+   "market_fair_pct": 64.6,
+   "n_books": 5,
+   "guard": {
+    "verdict": "agrees",
+    "ours_pct": 64.9,
+    "model_pct": 64.4
+   },
+   "settled": "goalie",
+   "settled_label": "Goalie confirmed",
+   "reason": "5 other books say 64.6%; Hard Rock's -165 only needs 62.3%. Our model agrees (our blend: 64.9%).",
+   "link": "https://app.hardrock.bet/?deep_link_value=betslip/8753798447452258706",
+   "links": {
+    "hardrock": {
+     "id": "8753798447452258706",
+     "url": "https://share.hardrock.bet/Pt0T/bet?deep_link_value=hardrock://betslip/8753798447452258706"
+    },
+    "draftkings": null
+   },
+   "thin": false,
+   "games_used": 80,
    "games_this_season": 14
   }
  ],
