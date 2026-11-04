@@ -15,6 +15,7 @@ from datetime import datetime, timedelta
 
 import common
 import goalies
+import lineup_history
 import lineups
 import model
 import names
@@ -381,7 +382,8 @@ def build_slate(inp, events, extra):
             "breakeven_pct": it["breakeven_pct"] if it.get("breakeven_pct") is not None else pct_round(it["breakeven"]),
             "state": it["state"], "history": hist,
             "prices": [{"at": p["at"], "price": p["price"]} for p in it["prices"]],
-            "pulled": {"at": it["pulled"]["at"], "reason": it["pulled"]["reason"], "if_bet": it["pulled"].get("if_bet")}
+            "pulled": {"at": it["pulled"]["at"], "reason": it["pulled"]["reason"], "if_bet": it["pulled"].get("if_bet"),
+                       "code": it["pulled"].get("code")}    # the page hides a scratch ("out") and stamps the rest TOO LATE
             if it["pulled"] else None,
             # the last price read (45 min before puck) is done: from here only a scratch can pull it
             "price_final": bool((live.get(i) or {}).get("final")) if record.is_open(it) else False,
@@ -414,7 +416,7 @@ def build_slate(inp, events, extra):
             lx[side] = "confirmed" if pg and pg.get("today") else ("waiting" if rec.get("checked_at") else "not_checked")
             gx[side] = (goalie_state.get("teams") or {}).get(g[side])
         games.append({"id": g["id"], "away": g["away"], "home": g["home"], "start": g["start"],
-                      "lineups": lx, "goalies": gx,
+                      "lineups": lx, "goalies": gx, "checks": game_checks(inp, g, lx, done_ids),
                       "started": sched.started(g, now),
                       # all of this game's pick reads are in: no new pick can come before puck (run.py facts)
                       "reads_done": bool(done_ids.get(g["id"]) or done_ids.get(str(g["id"]))) and not sched.started(g, now),
@@ -458,6 +460,45 @@ def build_slate(inp, events, extra):
             "parlays": [], "parlays_note": "Parlays are not offered: there is no evidence for them yet."}
 
 
+READ_PULLS = ("A", "B", "C")
+
+
+def game_checks(inp, g, lx, done_ids):
+    """Our checks on one game, for the page's Games tab (display only, never used to pick): the Hard Rock reads done
+    (pull + first time), the next read due, and when each team's Daily Faceoff lineup was first seen confirmed."""
+    try:
+        v, now = inp.cfg["values"], inp.now
+        doc = getattr(inp, "odds_doc", None) or {}
+        reads = {}
+        for f in doc.get("fetches") or []:
+            pl = f.get("pull")
+            if f.get("game_id") == g["id"] and f.get("book") and f.get("markets") and pl in READ_PULLS and f.get("at"):
+                if pl not in reads or f["at"] < reads[pl]:
+                    reads[pl] = f["at"]
+        start = common.parse_iso(g["start"])
+        due = {"A": odds.pull_times(inp.slate, list(inp.games.values()), v)["A"],
+               "B": start - timedelta(minutes=v["pull_b_min"]), "C": start - timedelta(minutes=v["pull_c_min"])}
+        nxt = None
+        done = bool(done_ids.get(g["id"]) or done_ids.get(str(g["id"])))
+        if not sched.started(g, now) and not done:
+            late = now - timedelta(minutes=15)              # a read due a moment ago runs on the next cycle
+            left = sorted((due[p], p) for p in READ_PULLS if p not in reads and due[p] >= late and due[p] < start)
+            if left:
+                nxt = {"pull": left[0][1], "at": common.iso(left[0][0])}
+        hist = (lineup_history.load(inp.slate).get("teams") or {})
+        lu = {}
+        for side in ("away", "home"):
+            t = hist.get(g[side]) or {}
+            at = t.get("first_today_at")
+            if not at and lx.get(side) == "confirmed":
+                at = ((inp.lineup_state.get("teams") or {}).get(g[side]) or {}).get("checked_at")
+            lu[side] = at if lx.get(side) == "confirmed" or at else None
+        return {"reads": [{"pull": p, "at": reads[p]} for p in sorted(reads, key=lambda p: reads[p])],
+                "next_read": nxt, "lineups_at": lu}
+    except Exception:                                       # display only: never costs the page its slate
+        return None
+
+
 def _fmt_day(iso_date):
     try:
         d = datetime.strptime(iso_date, "%Y-%m-%d")
@@ -485,12 +526,12 @@ def _empty(inp, status, picks, games, extra):
         shown = [p for p in picks if not p["pulled"]]
         if shown:
             return {"code": "all_started", "text": "Every game has started.",
-                    "sub": "Tonight's picks are under Started."}
+                    "sub": "Tonight's picks are on the Live tab."}
         if picks:
             n = len(picks)
             return {"code": "all_started", "text": "Every game has started.",
-                    "sub": ("Tonight's pick was pulled; see Pulled today." if n == 1
-                            else "Tonight's %d picks were pulled; see Pulled today." % n)}
+                    "sub": ("Tonight's pick came off the board before puck; see the Record." if n == 1
+                            else "Tonight's %d picks came off the board before puck; see the Record." % n)}
         parts = ["No picks were posted tonight."]
         reads = f.get("flag_reads") or {"games": 0, "lines": 0}
         if reads["games"]:
@@ -536,8 +577,8 @@ def _empty(inp, status, picks, games, extra):
     started_ids = {g["id"] for g in games if g["started"]}
     shown_started = [p for p in picks if not p["pulled"] and p["game_id"] in started_ids]
     if shown_started:
-        parts.append("Today's earlier pick is under Started." if len(shown_started) == 1
-                     else "Today's earlier picks are under Started.")
+        parts.append("Today's earlier pick is on the Live tab." if len(shown_started) == 1
+                     else "Today's earlier picks are on the Live tab.")
     if nxt:
         parts.append("Next read at %s." % common.fmt_time(nxt))
     waiting = nxt is not None or shown_started or any(not g["started"] for g in games)

@@ -136,6 +136,7 @@ class Pulled(unittest.TestCase):
     def check_pulled(self, sl, code, text):
         p = self.s.pick("CAR", 1, sl)
         self.assertEqual(p["pulled"]["reason"], text)
+        self.assertEqual(p["pulled"]["code"], code)                   # the page hides a scratch ("out"), stamps the rest TOO LATE
         self.assertEqual(p["price"], self.shown["price"])             # the price it was shown at stays on the page / Record
         ev = self.s.events()
         self.assertEqual([e["t"] for e in ev], ["shown", "pulled"])
@@ -194,7 +195,7 @@ class Pulled(unittest.TestCase):
         p = s.pick("CAR", 1, sl)
         self.assertEqual(p["pulled"]["reason"], "Hard Rock moved it to -220")
 
-    def test_a_pulled_pick_is_graded_at_its_shown_price_and_counted_under_pulled(self):
+    def test_a_pulled_pick_is_graded_at_its_shown_price_and_counted_in_the_headline(self):
         s = self.s
         s.read("18:16", cp=[s.gg_lines("CAR", 1, ev=-0.04)])
         s.at("19:05")
@@ -205,8 +206,11 @@ class Pulled(unittest.TestCase):
         self.assertEqual([(e["result"], e["price"]) for e in g], [("W", self.shown["price"])])
         rec = common.read_json(s.path("record.json"))
         rows = {r["key"]: r for r in rec["summary"]["rows"]}
-        self.assertEqual((rows["pulled"]["w"], rows["pulled"]["l"]), (1, 0))
-        self.assertEqual(rec["summary"]["headline"]["n"], 0)          # pulled picks are not in the headline
+        self.assertNotIn("pulled", rows)                              # no separate Pulled row (Matt 2026-11-04)
+        self.assertEqual((rows["shots"]["w"], rows["shots"]["l"]), (1, 0))
+        h = rec["summary"]["headline"]
+        self.assertEqual((h["w"], h["l"], h["n"]), (1, 0, 1))          # a pulled pick counts, at its shown price
+        self.assertAlmostEqual(h["units"], round(g[0]["units"], 2))
 
 
 # ---------------------------------------------------------------- caps, lock, grade
@@ -464,7 +468,7 @@ class Discord(unittest.TestCase):
             self.assertNotIn("PAPER", " ".join(texts).upper().replace("PAGE", ""))
             s.read("18:16", cp=[s.gg_lines("CAR", 1, ev=-0.04)])
             s.read("18:21", cp=[s.gg_lines("CAR", 1, ev=-0.04)])
-            pulled = [p["content"] for p in srv.posts if "PULLED" in p["content"]]
+            pulled = [p["content"] for p in srv.posts if "Too late:" in p["content"]]
             self.assertEqual(len(pulled), 1)
             self.assertIn("Hard Rock moved it to -220", pulled[0])
         finally:

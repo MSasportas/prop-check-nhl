@@ -39,6 +39,38 @@
  },
  "games": [
   {
+   "id": "g0",
+   "away": "NSH",
+   "home": "CHI",
+   "start": "2026-10-11T13:00:00-04:00",
+   "picks": 0,
+   "lineups": {
+    "away": "confirmed",
+    "home": "confirmed"
+   },
+   "goalies": {
+    "away": {
+     "name": "Juuse Saros",
+     "status": "confirmed"
+    },
+    "home": null
+   },
+   "reads_done": false,
+   "excluded_reason": null,
+   "started": false,
+   "checks": {
+    "reads": [],
+    "next_read": {
+     "pull": "A",
+     "at": "2026-10-11T13:00:00-04:00"
+    },
+    "lineups_at": {
+     "away": null,
+     "home": null
+    }
+   }
+  },
+  {
    "id": "g1",
    "away": "BOS",
    "home": "BUF",
@@ -60,7 +92,18 @@
    },
    "reads_done": false,
    "excluded_reason": null,
-   "started": false
+   "started": false,
+   "checks": {
+    "reads": [],
+    "next_read": {
+     "pull": "A",
+     "at": "2026-10-11T13:00:00-04:00"
+    },
+    "lineups_at": {
+     "away": null,
+     "home": null
+    }
+   }
   },
   {
    "id": "g2",
@@ -84,7 +127,18 @@
    },
    "reads_done": true,
    "excluded_reason": null,
-   "started": false
+   "started": false,
+   "checks": {
+    "reads": [],
+    "next_read": {
+     "pull": "A",
+     "at": "2026-10-11T13:00:00-04:00"
+    },
+    "lineups_at": {
+     "away": null,
+     "home": null
+    }
+   }
   },
   {
    "id": "g3",
@@ -105,7 +159,18 @@
    },
    "reads_done": true,
    "excluded_reason": null,
-   "started": false
+   "started": false,
+   "checks": {
+    "reads": [],
+    "next_read": {
+     "pull": "A",
+     "at": "2026-10-11T13:00:00-04:00"
+    },
+    "lineups_at": {
+     "away": null,
+     "home": null
+    }
+   }
   },
   {
    "id": "g4",
@@ -129,7 +194,18 @@
    },
    "reads_done": false,
    "excluded_reason": null,
-   "started": false
+   "started": false,
+   "checks": {
+    "reads": [],
+    "next_read": {
+     "pull": "A",
+     "at": "2026-10-11T13:00:00-04:00"
+    },
+    "lineups_at": {
+     "away": null,
+     "home": null
+    }
+   }
   },
   {
    "id": "g5",
@@ -153,7 +229,18 @@
    },
    "reads_done": false,
    "excluded_reason": null,
-   "started": false
+   "started": false,
+   "checks": {
+    "reads": [],
+    "next_read": {
+     "pull": "A",
+     "at": "2026-10-11T13:00:00-04:00"
+    },
+    "lineups_at": {
+     "away": null,
+     "home": null
+    }
+   }
   },
   {
    "id": "g6",
@@ -171,7 +258,18 @@
    },
    "reads_done": false,
    "excluded_reason": null,
-   "started": false
+   "started": false,
+   "checks": {
+    "reads": [],
+    "next_read": {
+     "pull": "A",
+     "at": "2026-10-11T13:00:00-04:00"
+    },
+    "lineups_at": {
+     "away": null,
+     "home": null
+    }
+   }
   },
   {
    "id": "g7",
@@ -192,7 +290,18 @@
    },
    "reads_done": false,
    "excluded_reason": null,
-   "started": false
+   "started": false,
+   "checks": {
+    "reads": [],
+    "next_read": {
+     "pull": "A",
+     "at": "2026-10-11T13:00:00-04:00"
+    },
+    "lineups_at": {
+     "away": null,
+     "home": null
+    }
+   }
   }
  ],
  "picks": [],

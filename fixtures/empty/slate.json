@@ -39,6 +39,44 @@
  },
  "games": [
   {
+   "id": "g0",
+   "away": "NSH",
+   "home": "CHI",
+   "start": "2026-10-11T13:00:00-04:00",
+   "picks": 0,
+   "lineups": {
+    "away": "confirmed",
+    "home": "confirmed"
+   },
+   "goalies": {
+    "away": {
+     "name": "Juuse Saros",
+     "status": "confirmed"
+    },
+    "home": null
+   },
+   "reads_done": false,
+   "excluded_reason": null,
+   "started": true,
+   "checks": {
+    "reads": [
+     {
+      "pull": "B",
+      "at": "2026-10-11T11:30:04-04:00"
+     },
+     {
+      "pull": "C",
+      "at": "2026-10-11T12:15:04-04:00"
+     }
+    ],
+    "next_read": null,
+    "lineups_at": {
+     "away": "2026-10-11T12:20:00-04:00",
+     "home": "2026-10-11T12:20:00-04:00"
+    }
+   }
+  },
+  {
    "id": "g1",
    "away": "BOS",
    "home": "BUF",
@@ -60,7 +98,28 @@
    },
    "reads_done": false,
    "excluded_reason": null,
-   "started": true
+   "started": true,
+   "checks": {
+    "reads": [
+     {
+      "pull": "A",
+      "at": "2026-10-11T13:00:04-04:00"
+     },
+     {
+      "pull": "B",
+      "at": "2026-10-11T15:30:04-04:00"
+     },
+     {
+      "pull": "C",
+      "at": "2026-10-11T16:15:04-04:00"
+     }
+    ],
+    "next_read": null,
+    "lineups_at": {
+     "away": "2026-10-11T16:20:00-04:00",
+     "home": "2026-10-11T16:20:00-04:00"
+    }
+   }
   },
   {
    "id": "g2",
@@ -84,7 +143,28 @@
    },
    "reads_done": true,
    "excluded_reason": null,
-   "started": false
+   "started": false,
+   "checks": {
+    "reads": [
+     {
+      "pull": "A",
+      "at": "2026-10-11T13:00:04-04:00"
+     },
+     {
+      "pull": "B",
+      "at": "2026-10-11T17:40:04-04:00"
+     },
+     {
+      "pull": "C",
+      "at": "2026-10-11T18:25:04-04:00"
+     }
+    ],
+    "next_read": null,
+    "lineups_at": {
+     "away": "2026-10-11T18:35:00-04:00",
+     "home": "2026-10-11T18:35:00-04:00"
+    }
+   }
   },
   {
    "id": "g3",
@@ -105,7 +185,28 @@
    },
    "reads_done": true,
    "excluded_reason": null,
-   "started": false
+   "started": false,
+   "checks": {
+    "reads": [
+     {
+      "pull": "A",
+      "at": "2026-10-11T13:00:04-04:00"
+     },
+     {
+      "pull": "B",
+      "at": "2026-10-11T17:40:04-04:00"
+     },
+     {
+      "pull": "C",
+      "at": "2026-10-11T18:25:04-04:00"
+     }
+    ],
+    "next_read": null,
+    "lineups_at": {
+     "away": null,
+     "home": "2026-10-11T18:35:00-04:00"
+    }
+   }
   },
   {
    "id": "g4",
@@ -129,7 +230,28 @@
    },
    "reads_done": false,
    "excluded_reason": null,
-   "started": false
+   "started": false,
+   "checks": {
+    "reads": [
+     {
+      "pull": "A",
+      "at": "2026-10-11T13:00:04-04:00"
+     },
+     {
+      "pull": "B",
+      "at": "2026-10-11T17:40:04-04:00"
+     },
+     {
+      "pull": "C",
+      "at": "2026-10-11T18:25:04-04:00"
+     }
+    ],
+    "next_read": null,
+    "lineups_at": {
+     "away": null,
+     "home": null
+    }
+   }
   },
   {
    "id": "g5",
@@ -153,7 +275,27 @@
    },
    "reads_done": false,
    "excluded_reason": null,
-   "started": false
+   "started": false,
+   "checks": {
+    "reads": [
+     {
+      "pull": "A",
+      "at": "2026-10-11T13:00:04-04:00"
+     },
+     {
+      "pull": "B",
+      "at": "2026-10-11T18:40:04-04:00"
+     }
+    ],
+    "next_read": {
+     "pull": "C",
+     "at": "2026-10-11T19:25:00-04:00"
+    },
+    "lineups_at": {
+     "away": "2026-10-11T18:35:00-04:00",
+     "home": null
+    }
+   }
   },
   {
    "id": "g6",
@@ -171,7 +313,23 @@
    },
    "reads_done": false,
    "excluded_reason": null,
-   "started": false
+   "started": false,
+   "checks": {
+    "reads": [
+     {
+      "pull": "A",
+      "at": "2026-10-11T13:00:04-04:00"
+     }
+    ],
+    "next_read": {
+     "pull": "B",
+     "at": "2026-10-11T20:40:00-04:00"
+    },
+    "lineups_at": {
+     "away": null,
+     "home": null
+    }
+   }
   },
   {
    "id": "g7",
@@ -192,7 +350,23 @@
    },
    "reads_done": false,
    "excluded_reason": null,
-   "started": false
+   "started": false,
+   "checks": {
+    "reads": [
+     {
+      "pull": "A",
+      "at": "2026-10-11T13:00:04-04:00"
+     }
+    ],
+    "next_read": {
+     "pull": "B",
+     "at": "2026-10-11T20:40:00-04:00"
+    },
+    "lineups_at": {
+     "away": null,
+     "home": null
+    }
+   }
   }
  ],
  "picks": [],

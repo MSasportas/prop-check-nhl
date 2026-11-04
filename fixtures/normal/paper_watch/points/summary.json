@@ -1,0 +1,31 @@
+{
+ "fixture": true,
+ "version": 1,
+ "market": "points",
+ "generated_at": "2026-10-11T18:52:00-04:00",
+ "slate": "2026-10-11",
+ "active": true,
+ "window": {
+  "live_from": "2026-10-28",
+  "checkpoint": "2026-11-02"
+ },
+ "tonight": {
+  "flags": [],
+  "vetoes": [],
+  "capped": []
+ },
+ "nights": [],
+ "nov2": {
+  "graded_picks": 12,
+  "w": 7,
+  "l": 5,
+  "void": 0,
+  "units": 2.65,
+  "clv_flags": {
+   "n": 12,
+   "mean": 0.0407,
+   "lb80": 0.0358,
+   "pos_share": 1.0
+  }
+ }
+}

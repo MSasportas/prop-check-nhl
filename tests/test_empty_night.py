@@ -58,14 +58,14 @@ class AllStartedEmpty(unittest.TestCase):
     def test_all_pulled_says_where_they_are(self):
         e = self.empty({"flag_reads": {"games": 3, "lines": 59}}, [_pick(True), _pick(True, 2)])
         self.assertEqual(e["code"], "all_started")
-        self.assertEqual(e["sub"], "Tonight's 2 picks were pulled; see Pulled today.")
+        self.assertEqual(e["sub"], "Tonight's 2 picks came off the board before puck; see the Record.")
         e = self.empty({"flag_reads": {"games": 3, "lines": 59}}, [_pick(True)])
-        self.assertEqual(e["sub"], "Tonight's pick was pulled; see Pulled today.")
+        self.assertEqual(e["sub"], "Tonight's pick came off the board before puck; see the Record.")
 
     def test_shown_picks_unchanged(self):
         e = self.empty({"flag_reads": {"games": 3, "lines": 59}}, [_pick(False), _pick(True)])
         self.assertEqual(e, {"code": "all_started", "text": "Every game has started.",
-                             "sub": "Tonight's picks are under Started."})
+                             "sub": "Tonight's picks are on the Live tab."})
 
 
 class TeamStatusSlateDate(unittest.TestCase):

@@ -1,0 +1,61 @@
+{
+ "fixture": true,
+ "slate_date": "2026-10-11",
+ "generated_at": "2026-10-11T15:10:00-04:00",
+ "games": [
+  {
+   "game_id": "g0",
+   "state": "OFF",
+   "schedule_state": "OK",
+   "period": 3,
+   "period_type": "REG",
+   "clock": "00:00",
+   "in_intermission": false,
+   "running": false,
+   "away": {
+    "abbrev": "NSH",
+    "score": 2,
+    "sog": 30
+   },
+   "home": {
+    "abbrev": "CHI",
+    "score": 1,
+    "sog": 24
+   },
+   "updated_at": "2026-10-11T15:10:00-04:00"
+  },
+  {
+   "game_id": "g1",
+   "state": "LIVE",
+   "schedule_state": "OK",
+   "period": 1,
+   "period_type": "REG",
+   "clock": "20:10",
+   "in_intermission": false,
+   "running": true,
+   "away": {
+    "abbrev": "BOS",
+    "score": 1,
+    "sog": 19
+   },
+   "home": {
+    "abbrev": "BUF",
+    "score": 1,
+    "sog": 15
+   },
+   "updated_at": "2026-10-11T15:10:00-04:00"
+  }
+ ],
+ "picks": {
+  "2026-10-11:g0:fors": {
+   "game_id": "g0",
+   "market": "shots",
+   "stat": 1
+  },
+  "2026-10-11:g1:past": {
+   "game_id": "g1",
+   "market": "shots",
+   "stat": 2
+  }
+ }
+}

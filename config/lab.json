@@ -1,0 +1,15 @@
+{
+ "note": "The page's Lab tab. Curated by the team: list ONLY ideas that passed their historical test and are now tracked on paper. Never a failed or dropped idea, never sides/totals. Each entry's numbers come live from its summary file (path relative to data/). Remove an entry when its track stops or goes live.",
+ "updated": "2026-11-04",
+ "tests": [
+  {
+   "id": "points",
+   "title": "Player points",
+   "rule": "The shots rule on player points: Hard Rock 3%+ better than 4+ other books (Pinnacle one), model agrees.",
+   "summary": "paper_watch/points/summary.json",
+   "stats": "nov2",
+   "need": 150,
+   "gate": "Live only at 150 graded, units up and beating the close, and when Matt says go."
+  }
+ ]
+}

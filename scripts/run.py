@@ -45,6 +45,7 @@ import engine      # noqa: E402
 import goalies     # noqa: E402
 import grade       # noqa: E402
 import lineup_history  # noqa: E402
+import live        # noqa: E402
 import lineups     # noqa: E402
 import market_menu  # noqa: E402
 import featured  # noqa: E402
@@ -60,8 +61,8 @@ import shadow      # noqa: E402
 import stats       # noqa: E402
 
 STEPS = ["rules", "schedule", "stats", "lineups", "lineup_history", "odds", "market_menu", "featured", "book_probe", "gapguard", "engine", "grade",
-         "shadow", "gg_grade", "slate", "record", "status"]
-SOFT = ("lineup_history", "market_menu", "featured", "book_probe", "shadow", "gg_grade")              # team logs: a failure is a "warn", never a failed run
+         "live", "shadow", "gg_grade", "slate", "record", "status"]
+SOFT = ("lineup_history", "market_menu", "featured", "book_probe", "live", "shadow", "gg_grade")              # team logs: a failure is a "warn", never a failed run
 
 
 def save_headshots(people):
@@ -356,6 +357,12 @@ class Run:
         if notes:
             note += "; " + "; ".join(notes[:3])
         return {"status": "ok" if n else "skipped", "note": note}
+
+    def do_live(self):
+        self.load_schedule()
+        if self.readonly:
+            return {"status": "skipped", "note": "read only"}
+        return live.step(self.now, self.slate, self.games, self.load_events())
 
     # ---- facts shared by slate.json and status.json
     def facts(self, last_run):
@@ -680,6 +687,7 @@ def run(only=None, dry_run=False):
     record_before = record.read_raw() if r.wants("slate") else None
     r.step("engine", r.do_engine)
     r.step("grade", r.do_grade)
+    r.soft_step("live", r.do_live)                          # page's Live tab, from the boxes grade just read (display only)
     r.soft_step("shadow", r.do_shadow)                      # after odds, engine and grade (TEAM.md item 17)
     r.soft_step("gg_grade", r.do_gg_grade)                  # the research log grades from the shadow results just written
     failed = r.failed_step()

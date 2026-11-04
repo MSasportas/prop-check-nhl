@@ -273,6 +273,14 @@ class TheRealReset(unittest.TestCase):
         self.addCleanup(shutil.rmtree, tmp, True)
         data = os.path.join(tmp, "data")
         shutil.copytree(os.path.join(REPO, "data"), data)
+        # the views as this code builds them from the shipped log (the shipped record.json may predate a summary change
+        # that the next timer run rebuilds; the log itself is never touched)
+        env0 = {k: v for k, v in os.environ.items() if k not in helpers.ENV and not k.startswith("PC_")}
+        r0 = subprocess.run([sys.executable, "-I", os.path.join(helpers.SCRIPTS, "run.py"), "--rebuild-record"],
+                            env=dict(env0, PC_DATA_DIR=data), capture_output=True, text=True, timeout=120)
+        self.assertEqual(r0.returncode, 0, r0.stdout + r0.stderr)
+        self.assertEqual(open(os.path.join(data, "record", "events.jsonl"), "rb").read(),
+                         open(os.path.join(REPO, "data", "record", "events.jsonl"), "rb").read())
         before = {k: open(os.path.join(data, k), "rb").read() for k in ("record.json", "record/events.jsonl", "record/resets.json")}
         w = __import__("world").build(os.path.join(tmp, "world"))
         os.makedirs(w["lineups"], exist_ok=True)

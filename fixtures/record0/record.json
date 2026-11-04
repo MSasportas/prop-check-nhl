@@ -12,7 +12,9 @@
    "needed": null,
    "n": 0
   },
-  "rows": []
+  "rows": [],
+  "cuts": [],
+  "days": []
  },
  "nights": [],
  "older": []

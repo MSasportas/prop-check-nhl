@@ -301,17 +301,19 @@ class RecordLog(unittest.TestCase):
               {"t": "graded", "id": "d", "at": "2026-10-11T22:00:00-04:00", "result": "L", "actual": 0, "actual_text": "had 0", "price": -110, "units": -1.0}]
         rec, months = record.build_views(ev, CFG)
         h = rec["summary"]["headline"]
-        self.assertEqual((h["w"], h["l"], h["push"], h["void"], h["n"]), (1, 1, 0, 1, 2))
-        self.assertAlmostEqual(h["units"], -0.17)                      # +0.8333 - 1.0; the pulled loss is not in here
-        self.assertEqual(h["hit_rate"], 0.5)
-        self.assertAlmostEqual(h["needed"], (120 / 220 + 150 / 250) / 2, places=4)
+        # every shown single counts, pulled ones too, at the price shown (Matt 2026-11-04); a void stays out of W-L
+        self.assertEqual((h["w"], h["l"], h["push"], h["void"], h["n"]), (1, 2, 0, 1, 3))
+        self.assertAlmostEqual(h["units"], -1.17)                      # +0.8333 - 1.0 - 1.0 (the pulled loss counts)
+        self.assertEqual(h["hit_rate"], 0.3333)
+        self.assertAlmostEqual(h["needed"], (120 / 220 + 150 / 250 + 110 / 210) / 3, places=4)
         rows = {r["key"]: r for r in rec["summary"]["rows"]}
-        self.assertEqual(sorted(rows), ["points", "pulled", "shots"])
-        self.assertEqual((rows["shots"]["w"], rows["shots"]["l"], rows["shots"]["label"]), (1, 1, "Shots on goal"))
+        self.assertEqual(sorted(rows), ["points", "shots"])           # no separate Pulled row any more
+        self.assertEqual((rows["shots"]["w"], rows["shots"]["l"], rows["shots"]["label"]), (1, 2, "Shots on goal"))
         self.assertEqual((rows["points"]["void"], rows["points"]["n"], rows["points"]["hit_rate"]), (1, 0, None))
-        self.assertEqual((rows["pulled"]["l"], rows["pulled"]["units"], rows["pulled"]["label"]), (1, -1.0, "Pulled (not counted above)"))
         n = rec["nights"][0]
-        self.assertEqual((n["date"], n["graded"], n["w"], n["l"], n["units"]), ("2026-10-11", True, 1, 1, -0.17))
+        self.assertEqual((n["date"], n["graded"], n["w"], n["l"], n["units"]), ("2026-10-11", True, 1, 2, -1.17))
+        self.assertEqual(rec["summary"]["days"], [{"date": "2026-10-11", "w": 1, "l": 2, "push": 0, "void": 1,
+                                                   "units": -1.17, "n": 4, "graded": True}])
         d = next(e for e in n["entries"] if e["id"] == "d")
         self.assertEqual(d["pulled"], {"at": "2026-10-11T18:41:00-04:00", "reason": "Scratched from the lineup"})
         self.assertEqual((d["result"], d["actual"], d["units"], d["price"]), ("L", "had 0", -1.0, -110))
@@ -444,13 +446,13 @@ class GradedDay(unittest.TestCase):
             # the Record
             rec = common.read_json(s.path("record.json"))
             h = rec["summary"]["headline"]
-            self.assertEqual((h["w"], h["l"], h["void"], h["n"]), (1, 0, 1, 1))
-            self.assertAlmostEqual(h["units"], round(g[ids["CAR"]]["units"], 2))
+            self.assertEqual((h["w"], h["l"], h["void"], h["n"]), (1, 1, 1, 2))     # PHI: pulled, still graded, counted
+            self.assertAlmostEqual(h["units"], round(g[ids["CAR"]]["units"] - 1.0, 2))
             rows = {r["key"]: r for r in rec["summary"]["rows"]}
-            self.assertEqual((rows["pulled"]["w"], rows["pulled"]["l"]), (0, 1))   # PHI: pulled, still graded, not in the headline
+            self.assertNotIn("pulled", rows)
             self.assertNotIn("parlays", rows)
             night = rec["nights"][0]
-            self.assertEqual((night["date"], night["graded"], night["w"], night["l"]), ("2026-10-11", True, 1, 0))
+            self.assertEqual((night["date"], night["graded"], night["w"], night["l"]), ("2026-10-11", True, 1, 1))
             self.assertEqual(len(night["entries"]), 3)
             self.assertEqual({e["kind"] for e in night["entries"]}, {"single"})
             # running again adds nothing, and the next morning starts a clean slate with the Record intact
@@ -492,6 +494,39 @@ class GradedDay(unittest.TestCase):
         finally:
             s.close()
 
+
+
+class RecordCuts(unittest.TestCase):
+    """The Record's cuts (summary only): line, edge, how settled when shown, price. Pulled singles count; voids stay out of W-L."""
+
+    def test_cuts(self):
+        def pick(i, line, side, price, p, b, state, pid):
+            e = shown(i, line=line, side=side, price=price, pid=pid)
+            e["pick"].update(p=p, breakeven=b, state=state)
+            return e
+        g = lambda i, r, price, u: {"t": "graded", "id": i, "at": "2026-10-11T22:00:00-04:00", "result": r, "actual": 3,
+                                    "actual_text": "had 3", "price": price, "units": u}
+        ev = [pick("a", 1.5, "under", 110, 0.50, 0.476, "early", 1), pick("b", 2.5, "over", -160, 0.65, 0.615, "lineup", 2),
+              pick("c", 1.5, "under", -120, 0.58, 0.545, "lineup", 3), pick("d", 3.5, "over", -110, 0.57, 0.524, "early", 4),
+              {"t": "pulled", "id": "c", "at": "2026-10-11T18:00:00-04:00", "reason": "Hard Rock moved the price", "code": "gap_gone"},
+              g("a", "W", 110, 1.1), g("b", "L", -160, -1.0), g("c", "W", -120, 0.8333), g("d", "VOID", -110, 0.0)]
+        rec, _ = record.build_views(ev, CFG)
+        cuts = {c["key"]: {r["key"]: r for r in c["rows"]} for c in rec["summary"]["cuts"]}
+        self.assertEqual(sorted(cuts), ["edge", "line", "price", "settled"])
+        self.assertEqual(sorted(cuts["line"]), ["over_2.5", "over_3.5", "under_1.5"])
+        self.assertEqual((cuts["line"]["under_1.5"]["w"], cuts["line"]["under_1.5"]["n"]), (2, 2))   # the pulled W counts
+        self.assertEqual((cuts["line"]["over_3.5"]["void"], cuts["line"]["over_3.5"]["n"]), (1, 0))  # void: no W-L
+        self.assertEqual(sorted(cuts["edge"]), ["edge_2_3", "edge_3_4", "edge_4"])                 # 2.4, 3.5, 3.5, 4.6 pts
+        self.assertEqual(cuts["edge"]["edge_3_4"]["w"] + cuts["edge"]["edge_3_4"]["l"], 2)
+        self.assertEqual((cuts["settled"]["early"]["w"], cuts["settled"]["lineup"]["w"], cuts["settled"]["lineup"]["l"]), (1, 1, 1))
+        self.assertEqual(sorted(cuts["price"]), ["fav", "fav_big", "plus"])
+        self.assertAlmostEqual(cuts["price"]["plus"]["units"], 1.1)
+        h = rec["summary"]["headline"]
+        self.assertEqual((h["w"], h["l"], h["void"]), (2, 1, 1))
+        # the entries themselves are what they always were (no new fields)
+        self.assertEqual(sorted(rec["nights"][0]["entries"][0]), sorted(
+            ["id", "kind", "player", "bet", "market", "team", "game", "price", "first_price", "last_price", "prices",
+             "result", "actual", "units", "pulled", "legs"]))
 
 if __name__ == "__main__":
     unittest.main()

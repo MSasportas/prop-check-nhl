@@ -229,6 +229,52 @@ def _row(key, label, entries, needed_of):
             "needed": round(sum(need) / len(need), 4) if need else None, "n": w + l}
 
 
+# Cuts of the Record (summary only; the entries and the log are untouched). Every shown single counts, pulled ones too
+# (Matt 2026-11-04), graded at the price it was graded at. Each band is (key, label, test).
+LINE_BANDS = [("%s_%s" % (s, l), "%s %s" % (s.capitalize(), l), (lambda s, l: lambda f: f["side"] == s and f["line"] == float(l))(s, l))
+              for s in ("over", "under") for l in ("1.5", "2.5", "3.5")]
+EDGE_BANDS = [("edge_lt2", "Under 2 pts", lambda f: f["edge"] < 2.0),
+              ("edge_2_3", "2 to 3 pts", lambda f: 2.0 <= f["edge"] < 3.0),
+              ("edge_3_4", "3 to 4 pts", lambda f: 3.0 <= f["edge"] < 4.0),
+              ("edge_4", "4 pts or more", lambda f: f["edge"] >= 4.0)]
+SETTLED_BANDS = [("early", "Early", lambda f: f["settled"] == "early"),
+                 ("lineup", "Lineup confirmed", lambda f: f["settled"] in ("lineup", "goalie"))]
+PRICE_BANDS = [("fav_big", "-200 to -150", lambda f: -200 <= f["price"] <= -150),
+               ("fav", "-149 to -101", lambda f: -150 < f["price"] <= -101),
+               ("plus", "Even or plus money", lambda f: f["price"] >= 100 or f["price"] == -100)]
+
+
+def _facts(e, it):
+    """What a cut needs about one shown single, from the pick as first shown (the price is frozen there)."""
+    sh = it["shown"]
+    p, b = sh.get("p"), sh.get("breakeven")
+    line = sh.get("line")
+    return {"side": sh.get("side"), "line": float(line) if isinstance(line, (int, float)) else None,
+            "edge": round(100.0 * (p - b), 2) if isinstance(p, (int, float)) and isinstance(b, (int, float)) else None,
+            "settled": sh.get("state"), "price": e["price"]}
+
+
+def cuts(rows, need):
+    """rows: [(entry, facts)] for every shown single. -> the Record's cuts, each {key, label, note, rows}; a band with
+    nothing graded is left out. A fact that is missing (an old pick) keeps that pick out of that one cut only."""
+    out = []
+    for key, label, note, bands, has in (
+            ("line", "By line", None, LINE_BANDS, lambda f: f["side"] in ("over", "under") and f["line"] is not None),
+            ("edge", "By edge", "Our chance minus what the price needs, in points, when shown", EDGE_BANDS,
+             lambda f: f["edge"] is not None),
+            ("settled", "By how settled when shown", "A Locked pick can't be bet, so it is not a row", SETTLED_BANDS,
+             lambda f: f["settled"] is not None),
+            ("price", "By price", "Hard Rock price at grading", PRICE_BANDS, lambda f: isinstance(f["price"], int))):
+        cut_rows = []
+        for bk, bl, test in bands:
+            sub = [e for e, f in rows if has(f) and test(f)]
+            if any(e["result"] in ("W", "L", "PUSH", "VOID") for e in sub):
+                cut_rows.append(_row(bk, bl, sub, need))
+        if cut_rows:
+            out.append({"key": key, "label": label, "note": note, "rows": cut_rows})
+    return out
+
+
 def build_views(events, cfg):
     """-> (record.json dict, {"2026-10": month dict, ...})."""
     items = fold(events)
@@ -240,14 +286,14 @@ def build_views(events, cfg):
     for d in sorted(by_night, reverse=True):
         its = sorted(by_night[d], key=lambda x: (x["kind"] != "single", x["shown"].get("rank") or 999, x["shown_at"], x["id"]))
         entries = [_entry(x, items) for x in its]
-        counted = [e for e in entries if e["kind"] == "single" and not e["pulled"]]
+        counted = [e for e in entries if e["kind"] == "single"]      # every shown single, pulled too (Matt 2026-11-04)
         nights.append({"date": d, "graded": all(e["result"] is not None for e in entries),
                        "w": sum(1 for e in counted if e["result"] == "W"),
                        "l": sum(1 for e in counted if e["result"] == "L"),
                        "units": round(sum(e["units"] or 0 for e in counted), 2), "entries": entries})
     every = [e for n in nights for e in n["entries"]]
     need = lambda e: odds.break_even(e["price"])
-    singles = [e for e in every if e["kind"] == "single" and not e["pulled"]]
+    singles = [e for e in every if e["kind"] == "single"]          # pulled singles count, at the price shown
     rows = []
     for key in cfg["ops"]["markets"]:
         sub = [e for e in singles if e.get("market") == key]
@@ -256,17 +302,21 @@ def build_views(events, cfg):
     par = [e for e in every if e["kind"] == "parlay" and not e["pulled"]]
     if any(e["result"] for e in par):
         rows.append(_row("parlays", "Parlays", par, need))
-    pulled = [e for e in every if e["pulled"]]
-    if any(e["result"] for e in pulled):
-        rows.append(_row("pulled", "Pulled (not counted above)", pulled, need))
     head = _row("headline", "Singles", singles, need)
     head.pop("key"); head.pop("label")
+    days = []
+    for n in nights:                                        # one row per night for the page's calendar
+        s = [e for e in n["entries"] if e["kind"] == "single"]
+        days.append({"date": n["date"], "w": n["w"], "l": n["l"],
+                     "push": sum(1 for e in s if e["result"] == "PUSH"), "void": sum(1 for e in s if e["result"] == "VOID"),
+                     "units": n["units"], "n": len(s), "graded": n["graded"]})
     keep = cfg["ops"]["record_nights"]
     months = {}
     for n in nights[keep:]:
         months.setdefault(n["date"][:7], {"nights": []})["nights"].append(n)
     rec = {"generated_at": events[-1]["at"] if events else None,
-           "summary": {"headline": head, "rows": rows},
+           "summary": {"headline": head, "rows": rows,
+                       "cuts": cuts([(e, _facts(e, items[e["id"]])) for e in singles], need), "days": days},
            "nights": nights[:keep],
            "older": ["record/%s.json" % m for m in sorted(months, reverse=True)]}
     return rec, months

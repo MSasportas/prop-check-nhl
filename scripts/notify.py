@@ -4,7 +4,7 @@ Sends (all plain text, one webhook post each):
   NEW PICK   one message per run for every open pick not told about before (max 8 blocks, then "+N more"): bold bet line,
              game, time, how settled it is, "Gap +X% vs market, we say Y%, price needs Z%", link, and "Bet only at this
              price or better". Parlays are not offered, so there is never a parlay block.
-  PULLED     one short message for picks he was told about that were pulled before puck drop, each with what it means
+  PULLED     one short message ("Too late: ...") for picks he was told about that were pulled before puck drop, each with what it means
              if he already bet it at the shown price (a Hard Rock bet can't be taken back)
   FINAL      one short message when the 45-minute read (the last price check) has passed for picks he was told about:
              from then on only a scratch can pull them. A pick first shown at that read says "Price final" in its NEW block
@@ -227,7 +227,7 @@ def build_pulled(slate, st, now):
             items.append(("picks", p["id"], line))
     if not items:
         return None
-    text = "❌ **PULLED. Don't bet these now:**\n" + "\n".join("• " + s for _, _, s in items[:MAX_LINES])
+    text = "❌ **Too late: Don't bet these now:**\n" + "\n".join("• " + s for _, _, s in items[:MAX_LINES])
     if len(items) > MAX_LINES:
         text += "\n+%d more pulled on the page" % (len(items) - MAX_LINES)
     return text + "\n" + PAGE, items

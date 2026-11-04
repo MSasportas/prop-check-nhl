@@ -79,8 +79,8 @@
    "date": "2026-10-04",
    "graded": true,
    "w": 3,
-   "l": 1,
-   "units": 1.16,
+   "l": 2,
+   "units": 0.16,
    "entries": [
     {
      "id": "2026-10-04:r0",
@@ -145,8 +145,8 @@
      "actual": "had 1",
      "units": -1.0,
      "pulled": {
-      "at": "2026-10-04T18:41:00-04:00",
-      "reason": "Scratched from the lineup"
+      "at": "2026-10-04T18:16:00-04:00",
+      "reason": "Hard Rock moved the price and the gap is gone"
      },
      "legs": []
     }

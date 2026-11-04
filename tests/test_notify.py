@@ -163,7 +163,7 @@ class T(unittest.TestCase):
         self.srv.posts.clear()
         notify.notify(slate([dict(a, pulled={"at": "x", "reason": "Hard Rock moved the price and the gap is gone"})]))
         t = self.texts()[0]
-        self.assertTrue(t.startswith("❌ **PULLED. Don't bet these now:**"))
+        self.assertTrue(t.startswith("❌ **Too late: Don't bet these now:**"))
         self.assertIn("P. Player1 OVER 2.5 shots -120 (Hard Rock moved the price and the gap is gone)", t.replace("Over", "OVER"))
 
     def test_started_pulled_graded_not_new(self):

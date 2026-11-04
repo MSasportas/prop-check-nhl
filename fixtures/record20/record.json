@@ -4,38 +4,242 @@
  "summary": {
   "headline": {
    "w": 13,
-   "l": 8,
+   "l": 9,
    "push": 1,
    "void": 0,
-   "units": 1.9,
-   "hit_rate": 0.619,
+   "units": 0.9,
+   "hit_rate": 0.5909,
    "needed": 0.59,
-   "n": 21
+   "n": 22
   },
   "rows": [
    {
     "key": "shots",
     "label": "Shots on goal",
     "w": 13,
-    "l": 8,
+    "l": 9,
     "push": 1,
     "void": 0,
-    "units": 1.9,
-    "hit_rate": 0.619,
+    "units": 0.9,
+    "hit_rate": 0.5909,
     "needed": 0.6,
-    "n": 21
+    "n": 22
+   }
+  ],
+  "cuts": [
+   {
+    "key": "line",
+    "label": "By line",
+    "note": null,
+    "rows": [
+     {
+      "key": "over_1.5",
+      "label": "Over 1.5",
+      "w": 6,
+      "l": 1,
+      "push": 0,
+      "void": 0,
+      "units": 3.84,
+      "hit_rate": 0.8571,
+      "needed": 0.5479,
+      "n": 7
+     },
+     {
+      "key": "over_2.5",
+      "label": "Over 2.5",
+      "w": 4,
+      "l": 8,
+      "push": 0,
+      "void": 0,
+      "units": -5.2,
+      "hit_rate": 0.3333,
+      "needed": 0.5772,
+      "n": 12
+     },
+     {
+      "key": "under_2.5",
+      "label": "Under 2.5",
+      "w": 4,
+      "l": 0,
+      "push": 0,
+      "void": 0,
+      "units": 3.17,
+      "hit_rate": 1.0,
+      "needed": 0.559,
+      "n": 4
+     }
+    ]
    },
    {
-    "key": "pulled",
-    "label": "Pulled (not counted above)",
-    "w": 0,
-    "l": 1,
+    "key": "edge",
+    "label": "By edge",
+    "note": "Our chance minus what the price needs, in points, when shown",
+    "rows": [
+     {
+      "key": "edge_lt2",
+      "label": "Under 2 pts",
+      "w": 4,
+      "l": 2,
+      "push": 1,
+      "void": 0,
+      "units": 1.47,
+      "hit_rate": 0.6667,
+      "needed": 0.551,
+      "n": 6
+     },
+     {
+      "key": "edge_2_3",
+      "label": "2 to 3 pts",
+      "w": 6,
+      "l": 2,
+      "push": 0,
+      "void": 0,
+      "units": 2.43,
+      "hit_rate": 0.75,
+      "needed": 0.5719,
+      "n": 8
+     },
+     {
+      "key": "edge_3_4",
+      "label": "3 to 4 pts",
+      "w": 2,
+      "l": 4,
+      "push": 0,
+      "void": 0,
+      "units": -2.69,
+      "hit_rate": 0.3333,
+      "needed": 0.5855,
+      "n": 6
+     },
+     {
+      "key": "edge_4",
+      "label": "4 pts or more",
+      "w": 2,
+      "l": 1,
+      "push": 0,
+      "void": 0,
+      "units": 0.6,
+      "hit_rate": 0.6667,
+      "needed": 0.5345,
+      "n": 3
+     }
+    ]
+   },
+   {
+    "key": "settled",
+    "label": "By how settled when shown",
+    "note": "A Locked pick can't be bet, so it is not a row",
+    "rows": [
+     {
+      "key": "early",
+      "label": "Early",
+      "w": 6,
+      "l": 4,
+      "push": 1,
+      "void": 0,
+      "units": 1.08,
+      "hit_rate": 0.6,
+      "needed": 0.5592,
+      "n": 10
+     },
+     {
+      "key": "lineup",
+      "label": "Lineup confirmed",
+      "w": 8,
+      "l": 5,
+      "push": 0,
+      "void": 0,
+      "units": 0.73,
+      "hit_rate": 0.6154,
+      "needed": 0.5697,
+      "n": 13
+     }
+    ]
+   },
+   {
+    "key": "price",
+    "label": "By price",
+    "note": "Hard Rock price at grading",
+    "rows": [
+     {
+      "key": "fav_big",
+      "label": "-200 to -150",
+      "w": 4,
+      "l": 3,
+      "push": 0,
+      "void": 0,
+      "units": -0.56,
+      "hit_rate": 0.5714,
+      "needed": 0.6227,
+      "n": 7
+     },
+     {
+      "key": "fav",
+      "label": "-149 to -101",
+      "w": 8,
+      "l": 4,
+      "push": 1,
+      "void": 0,
+      "units": 2.37,
+      "hit_rate": 0.6667,
+      "needed": 0.5553,
+      "n": 12
+     },
+     {
+      "key": "plus",
+      "label": "Even or plus money",
+      "w": 2,
+      "l": 2,
+      "push": 0,
+      "void": 0,
+      "units": 0.0,
+      "hit_rate": 0.5,
+      "needed": 0.4939,
+      "n": 4
+     }
+    ]
+   }
+  ],
+  "days": [
+   {
+    "date": "2026-10-11",
+    "w": 1,
+    "l": 0,
     "push": 0,
     "void": 0,
-    "units": -1.0,
-    "hit_rate": 0.0,
-    "needed": 0.6,
-    "n": 1
+    "units": 0.87,
+    "n": 4,
+    "graded": false
+   },
+   {
+    "date": "2026-10-10",
+    "w": 5,
+    "l": 3,
+    "push": 1,
+    "void": 0,
+    "units": 0.81,
+    "n": 9,
+    "graded": true
+   },
+   {
+    "date": "2026-10-09",
+    "w": 4,
+    "l": 3,
+    "push": 0,
+    "void": 0,
+    "units": -0.14,
+    "n": 7,
+    "graded": true
+   },
+   {
+    "date": "2026-10-08",
+    "w": 4,
+    "l": 3,
+    "push": 0,
+    "void": 0,
+    "units": 0.27,
+    "n": 7,
+    "graded": true
    }
   ]
  },
@@ -43,9 +247,9 @@
   {
    "date": "2026-10-11",
    "graded": false,
-   "w": 0,
+   "w": 1,
    "l": 0,
-   "units": 0.0,
+   "units": 0.87,
    "entries": [
     {
      "id": "2026-10-11:g5:mack",
@@ -85,6 +289,19 @@
      "units": null,
      "pulled": null,
      "legs": []
+    },
+    {
+     "id": "2026-10-11:g0:fors",
+     "kind": "single",
+     "player": "F. Forsberg",
+     "bet": "Under 2.5 shots on goal",
+     "price": -115,
+     "first_price": -115,
+     "result": "W",
+     "actual": "had 1",
+     "units": 0.87,
+     "pulled": null,
+     "legs": []
     }
    ]
   },
@@ -92,8 +309,8 @@
    "date": "2026-10-10",
    "graded": true,
    "w": 5,
-   "l": 2,
-   "units": 1.81,
+   "l": 3,
+   "units": 0.81,
    "entries": [
     {
      "id": "2026-10-10:r0",
@@ -210,8 +427,8 @@
      "actual": "had 1",
      "units": -1.0,
      "pulled": {
-      "at": "2026-10-10T18:41:00-04:00",
-      "reason": "Scratched from the lineup"
+      "at": "2026-10-10T18:16:00-04:00",
+      "reason": "Hard Rock moved the price and the gap is gone"
      },
      "legs": []
     }

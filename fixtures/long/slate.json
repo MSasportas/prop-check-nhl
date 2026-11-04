@@ -35,6 +35,44 @@
  "empty": null,
  "games": [
   {
+   "id": "g0",
+   "away": "NSH",
+   "home": "CHI",
+   "start": "2026-10-11T13:00:00-04:00",
+   "picks": 1,
+   "lineups": {
+    "away": "confirmed",
+    "home": "confirmed"
+   },
+   "goalies": {
+    "away": {
+     "name": "Juuse Saros",
+     "status": "confirmed"
+    },
+    "home": null
+   },
+   "reads_done": false,
+   "excluded_reason": null,
+   "started": true,
+   "checks": {
+    "reads": [
+     {
+      "pull": "B",
+      "at": "2026-10-11T11:30:04-04:00"
+     },
+     {
+      "pull": "C",
+      "at": "2026-10-11T12:15:04-04:00"
+     }
+    ],
+    "next_read": null,
+    "lineups_at": {
+     "away": "2026-10-11T12:20:00-04:00",
+     "home": "2026-10-11T12:20:00-04:00"
+    }
+   }
+  },
+  {
    "id": "g1",
    "away": "BOS",
    "home": "BUF",
@@ -56,7 +94,28 @@
    },
    "reads_done": false,
    "excluded_reason": null,
-   "started": true
+   "started": true,
+   "checks": {
+    "reads": [
+     {
+      "pull": "A",
+      "at": "2026-10-11T13:00:04-04:00"
+     },
+     {
+      "pull": "B",
+      "at": "2026-10-11T15:30:04-04:00"
+     },
+     {
+      "pull": "C",
+      "at": "2026-10-11T16:15:04-04:00"
+     }
+    ],
+    "next_read": null,
+    "lineups_at": {
+     "away": "2026-10-11T16:20:00-04:00",
+     "home": "2026-10-11T16:20:00-04:00"
+    }
+   }
   },
   {
    "id": "g2",
@@ -80,7 +139,28 @@
    },
    "reads_done": true,
    "excluded_reason": null,
-   "started": false
+   "started": false,
+   "checks": {
+    "reads": [
+     {
+      "pull": "A",
+      "at": "2026-10-11T13:00:04-04:00"
+     },
+     {
+      "pull": "B",
+      "at": "2026-10-11T17:40:04-04:00"
+     },
+     {
+      "pull": "C",
+      "at": "2026-10-11T18:25:04-04:00"
+     }
+    ],
+    "next_read": null,
+    "lineups_at": {
+     "away": "2026-10-11T18:35:00-04:00",
+     "home": "2026-10-11T18:35:00-04:00"
+    }
+   }
   },
   {
    "id": "g3",
@@ -101,7 +181,28 @@
    },
    "reads_done": true,
    "excluded_reason": null,
-   "started": false
+   "started": false,
+   "checks": {
+    "reads": [
+     {
+      "pull": "A",
+      "at": "2026-10-11T13:00:04-04:00"
+     },
+     {
+      "pull": "B",
+      "at": "2026-10-11T17:40:04-04:00"
+     },
+     {
+      "pull": "C",
+      "at": "2026-10-11T18:25:04-04:00"
+     }
+    ],
+    "next_read": null,
+    "lineups_at": {
+     "away": null,
+     "home": "2026-10-11T18:35:00-04:00"
+    }
+   }
   },
   {
    "id": "g4",
@@ -125,7 +226,28 @@
    },
    "reads_done": false,
    "excluded_reason": null,
-   "started": false
+   "started": false,
+   "checks": {
+    "reads": [
+     {
+      "pull": "A",
+      "at": "2026-10-11T13:00:04-04:00"
+     },
+     {
+      "pull": "B",
+      "at": "2026-10-11T17:40:04-04:00"
+     },
+     {
+      "pull": "C",
+      "at": "2026-10-11T18:25:04-04:00"
+     }
+    ],
+    "next_read": null,
+    "lineups_at": {
+     "away": null,
+     "home": null
+    }
+   }
   },
   {
    "id": "g5",
@@ -149,7 +271,27 @@
    },
    "reads_done": false,
    "excluded_reason": null,
-   "started": false
+   "started": false,
+   "checks": {
+    "reads": [
+     {
+      "pull": "A",
+      "at": "2026-10-11T13:00:04-04:00"
+     },
+     {
+      "pull": "B",
+      "at": "2026-10-11T18:40:04-04:00"
+     }
+    ],
+    "next_read": {
+     "pull": "C",
+     "at": "2026-10-11T19:25:00-04:00"
+    },
+    "lineups_at": {
+     "away": "2026-10-11T18:35:00-04:00",
+     "home": null
+    }
+   }
   },
   {
    "id": "g6",
@@ -167,7 +309,23 @@
    },
    "reads_done": false,
    "excluded_reason": null,
-   "started": false
+   "started": false,
+   "checks": {
+    "reads": [
+     {
+      "pull": "A",
+      "at": "2026-10-11T13:00:04-04:00"
+     }
+    ],
+    "next_read": {
+     "pull": "B",
+     "at": "2026-10-11T20:40:00-04:00"
+    },
+    "lineups_at": {
+     "away": null,
+     "home": null
+    }
+   }
   },
   {
    "id": "g7",
@@ -188,7 +346,23 @@
    },
    "reads_done": false,
    "excluded_reason": null,
-   "started": false
+   "started": false,
+   "checks": {
+    "reads": [
+     {
+      "pull": "A",
+      "at": "2026-10-11T13:00:04-04:00"
+     }
+    ],
+    "next_read": {
+     "pull": "B",
+     "at": "2026-10-11T20:40:00-04:00"
+    },
+    "lineups_at": {
+     "away": null,
+     "home": null
+    }
+   }
   }
  ],
  "picks": [
@@ -198,6 +372,7 @@
    "tier": "main",
    "game_id": "g5",
    "player": "J. Vanderbilt-Kowalski",
+   "player_id": 8477492,
    "team": "COL",
    "opp": "DAL",
    "home": false,
@@ -247,7 +422,14 @@
      "text": "Lineup confirmed"
     }
    ],
-   "pulled": null
+   "pulled": null,
+   "links": {
+    "hardrock": {
+     "id": "9000000000000077492",
+     "url": "https://share.hardrock.bet/Pt0T/bet?deep_link_value=hardrock://betslip/9000000000000077492"
+    },
+    "draftkings": null
+   }
   },
   {
    "id": "2026-10-11:g5:maka",
@@ -255,6 +437,7 @@
    "tier": "main",
    "game_id": "g5",
    "player": "C. Makar",
+   "player_id": 8480069,
    "team": "COL",
    "opp": "DAL",
    "home": false,
@@ -304,7 +487,14 @@
      "text": "Lineup confirmed"
     }
    ],
-   "pulled": null
+   "pulled": null,
+   "links": {
+    "hardrock": {
+     "id": "9000000000000080069",
+     "url": "https://share.hardrock.bet/Pt0T/bet?deep_link_value=hardrock://betslip/9000000000000080069"
+    },
+    "draftkings": null
+   }
   },
   {
    "id": "2026-10-11:g1:past",
@@ -312,6 +502,7 @@
    "tier": "main",
    "game_id": "g1",
    "player": "D. Pastrnak",
+   "player_id": 8477956,
    "team": "BOS",
    "opp": "BUF",
    "home": false,
@@ -365,7 +556,91 @@
      "text": "Locked"
     }
    ],
-   "pulled": null
+   "pulled": null,
+   "links": {
+    "hardrock": {
+     "id": "9000000000000077956",
+     "url": "https://share.hardrock.bet/Pt0T/bet?deep_link_value=hardrock://betslip/9000000000000077956"
+    },
+    "draftkings": null
+   }
+  },
+  {
+   "id": "2026-10-11:g0:fors",
+   "rank": null,
+   "tier": "main",
+   "game_id": "g0",
+   "player": "F. Forsberg",
+   "player_id": 8476887,
+   "team": "NSH",
+   "opp": "CHI",
+   "home": false,
+   "start": "2026-10-11T13:00:00-04:00",
+   "market": "shots",
+   "line": 2.5,
+   "side": "under",
+   "bet": "Under 2.5 shots on goal",
+   "price": -115,
+   "price_at": "2026-10-11T17:31:00-04:00",
+   "first_price": -115,
+   "first_price_at": "2026-10-11T17:31:00-04:00",
+   "worst_price": -115,
+   "prices": [
+    {
+     "at": "2026-10-11T17:31:00-04:00",
+     "price": -115
+    }
+   ],
+   "p": 0.568,
+   "breakeven": 0.5349,
+   "p_pct": 56,
+   "breakeven_pct": 53,
+   "gap_pct": 4.7,
+   "market_fair_pct": 56.0,
+   "n_books": 6,
+   "guard": {
+    "verdict": "agrees",
+    "ours_pct": 56.8,
+    "model_pct": 60.0
+   },
+   "settled": "lineup",
+   "settled_label": "Lineup confirmed",
+   "reason": "6 other books say 56.0%; Hard Rock's -115 only needs 53.5%. Our model agrees (our blend: 56.8%).",
+   "graded": {
+    "result": "W",
+    "actual": "had 1",
+    "units": 0.87
+   },
+   "state": "locked",
+   "thin": false,
+   "games_used": 61,
+   "games_this_season": 4,
+   "history": [
+    {
+     "at": "2026-10-11T17:31:00-04:00",
+     "text": "Early: lineup not confirmed"
+    },
+    {
+     "at": "2026-10-11T18:35:00-04:00",
+     "text": "Lineup confirmed"
+    },
+    {
+     "at": "2026-10-11T13:00:00-04:00",
+     "text": "Locked"
+    },
+    {
+     "at": "2026-10-11T13:00:00-04:00",
+     "text": "Locked"
+    }
+   ],
+   "pulled": null,
+   "links": {
+    "hardrock": {
+     "id": "9000000000000076887",
+     "url": "https://share.hardrock.bet/Pt0T/bet?deep_link_value=hardrock://betslip/9000000000000076887"
+    },
+    "draftkings": null
+   }
   },
   {
    "id": "2026-10-11:g3:jhug",
@@ -373,6 +648,7 @@
    "tier": "main",
    "game_id": "g3",
    "player": "J. Hughes",
+   "player_id": 8481559,
    "team": "NJD",
    "opp": "NYR",
    "home": true,
@@ -422,7 +698,14 @@
      "text": "Lineup confirmed"
     }
    ],
-   "pulled": null
+   "pulled": null,
+   "links": {
+    "hardrock": {
+     "id": "9000000000000081559",
+     "url": "https://share.hardrock.bet/Pt0T/bet?deep_link_value=hardrock://betslip/9000000000000081559"
+    },
+    "draftkings": null
+   }
   },
   {
    "id": "2026-10-11:g4:matt",
@@ -430,6 +713,7 @@
    "tier": "main",
    "game_id": "g4",
    "player": "A. Matthews",
+   "player_id": 8479318,
    "team": "TOR",
    "opp": "MTL",
    "home": false,
@@ -475,7 +759,14 @@
      "text": "Early: lineup not confirmed"
     }
    ],
-   "pulled": null
+   "pulled": null,
+   "links": {
+    "hardrock": {
+     "id": "9000000000000079318",
+     "url": "https://share.hardrock.bet/Pt0T/bet?deep_link_value=hardrock://betslip/9000000000000079318"
+    },
+    "draftkings": null
+   }
   },
   {
    "id": "2026-10-11:g2:rein",
@@ -483,6 +774,7 @@
    "tier": "main",
    "game_id": "g2",
    "player": "A. Konstantinopoulos-Wright",
+   "player_id": 8476460,
    "team": "FLA",
    "opp": "TBL",
    "home": false,
@@ -528,7 +820,14 @@
      "text": "Early: lineup not confirmed"
     }
    ],
-   "pulled": null
+   "pulled": null,
+   "links": {
+    "hardrock": {
+     "id": "9000000000000076460",
+     "url": "https://share.hardrock.bet/Pt0T/bet?deep_link_value=hardrock://betslip/9000000000000076460"
+    },
+    "draftkings": null
+   }
   },
   {
    "id": "2026-10-11:g2:kuch",
@@ -536,6 +835,7 @@
    "tier": "main",
    "game_id": "g2",
    "player": "N. Kucherov",
+   "player_id": 8476453,
    "team": "TBL",
    "opp": "FLA",
    "home": true,
@@ -581,7 +881,14 @@
      "text": "Early: lineup not confirmed"
     }
    ],
-   "pulled": null
+   "pulled": null,
+   "links": {
+    "hardrock": {
+     "id": "9000000000000076453",
+     "url": "https://share.hardrock.bet/Pt0T/bet?deep_link_value=hardrock://betslip/9000000000000076453"
+    },
+    "draftkings": null
+   }
   },
   {
    "id": "2026-10-11:g4:demi",
@@ -589,6 +896,7 @@
    "tier": "main",
    "game_id": "g4",
    "player": "I. Demidov",
+   "player_id": 8484980,
    "team": "MTL",
    "opp": "TOR",
    "home": true,
@@ -634,7 +942,14 @@
      "text": "Early: lineup not confirmed"
     }
    ],
-   "pulled": null
+   "pulled": null,
+   "links": {
+    "hardrock": {
+     "id": "9000000000000084980",
+     "url": "https://share.hardrock.bet/Pt0T/bet?deep_link_value=hardrock://betslip/9000000000000084980"
+    },
+    "draftkings": null
+   }
   },
   {
    "id": "2026-10-11:g3:ziba",
@@ -642,6 +957,7 @@
    "tier": "main",
    "game_id": "g3",
    "player": "M. Zibanejad",
+   "player_id": 8476459,
    "team": "NYR",
    "opp": "NJD",
    "home": false,
@@ -687,7 +1003,14 @@
      "text": "Early: lineup not confirmed"
     }
    ],
-   "pulled": null
+   "pulled": null,
+   "links": {
+    "hardrock": {
+     "id": "9000000000000076459",
+     "url": "https://share.hardrock.bet/Pt0T/bet?deep_link_value=hardrock://betslip/9000000000000076459"
+    },
+    "draftkings": null
+   }
   },
   {
    "id": "2026-10-11:g6:qhug",
@@ -695,6 +1018,7 @@
    "tier": "main",
    "game_id": "g6",
    "player": "Q. Hughes",
+   "player_id": 8480800,
    "team": "VAN",
    "opp": "EDM",
    "home": true,
@@ -740,7 +1064,14 @@
      "text": "Early: lineup not confirmed"
     }
    ],
-   "pulled": null
+   "pulled": null,
+   "links": {
+    "hardrock": {
+     "id": "9000000000000080800",
+     "url": "https://share.hardrock.bet/Pt0T/bet?deep_link_value=hardrock://betslip/9000000000000080800"
+    },
+    "draftkings": null
+   }
   },
   {
    "id": "2026-10-11:g1:thom",
@@ -748,6 +1079,7 @@
    "tier": "main",
    "game_id": "g1",
    "player": "T. Thompson",
+   "player_id": 8481526,
    "team": "BUF",
    "opp": "BOS",
    "home": true,
@@ -797,7 +1129,14 @@
      "text": "Locked: lineup was not confirmed"
     }
    ],
-   "pulled": null
+   "pulled": null,
+   "links": {
+    "hardrock": {
+     "id": "9000000000000081526",
+     "url": "https://share.hardrock.bet/Pt0T/bet?deep_link_value=hardrock://betslip/9000000000000081526"
+    },
+    "draftkings": null
+   }
   }
  ],
  "parlays": [],
