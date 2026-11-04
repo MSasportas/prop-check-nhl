@@ -1,10 +1,10 @@
 {
  "ok": true,
  "slate_date": "2026-11-03",
- "started_at": "2026-11-04T00:00:01-05:00",
- "status_at": "2026-11-04T00:00:01-05:00",
- "finished_at": "2026-11-04T00:00:03-05:00",
- "last_ok_at": "2026-11-04T00:00:01-05:00",
+ "started_at": "2026-11-04T00:30:00-05:00",
+ "status_at": "2026-11-04T00:30:00-05:00",
+ "finished_at": "2026-11-04T00:30:02-05:00",
+ "last_ok_at": "2026-11-04T00:30:00-05:00",
  "failed_step": null,
  "steps": [
   {
@@ -19,8 +19,8 @@
   },
   {
    "step": "stats",
-   "status": "ok",
-   "note": "1 window(s) read, 2 team-games still missing"
+   "status": "skipped",
+   "note": "waiting to retry"
   },
   {
    "step": "lineups",
@@ -65,17 +65,17 @@
   {
    "step": "grade",
    "status": "ok",
-   "note": "nothing to grade; 1 corrected; corrected 2026-11-03:2026020240:8481604:shots:2.5:under: W"
+   "note": "2 graded"
   },
   {
    "step": "shadow",
-   "status": "skipped",
-   "note": "nothing new"
+   "status": "ok",
+   "note": "35 graded"
   },
   {
    "step": "gg_grade",
    "status": "ok",
-   "note": "gap+guard: nothing new"
+   "note": "gap+guard: 2 grade"
   },
   {
    "step": "slate",
@@ -158,14 +158,14 @@
  "lineups_at": "2026-11-03T20:30:01-05:00",
  "lineups_note": "8 of 22 team line pages are dated today.",
  "games_today": 11,
- "record_events": 139,
+ "record_events": 141,
  "odds_notes": [],
  "runner": {
   "event": "workflow_dispatch",
-  "run_id": "41773567946",
+  "run_id": "41776527966",
   "iteration": 4,
-  "chain_link": 214,
+  "chain_link": 215,
   "chain_started_at": "2026-10-28T10:00:15-04:00",
-  "run_started_at": "2026-11-03T23:30:15-05:00"
+  "run_started_at": "2026-11-04T00:00:15-05:00"
  }
 }
