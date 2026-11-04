@@ -1,94 +1,38 @@
 {
- "date": "2026-11-03",
+ "date": "2026-11-04",
  "teams": {
-  "PIT": {
-   "name": "Arturs Silovs",
-   "status": "confirmed"
+  "BUF": {
+   "name": "Colten Ellis",
+   "status": "expected"
   },
-  "VGK": {
-   "name": "Adin Hill",
-   "status": "confirmed"
+  "OTT": {
+   "name": "Jonas Johansson",
+   "status": "expected"
   },
-  "TBL": {
-   "name": "Andrei Vasilevskiy",
-   "status": "confirmed"
+  "FLA": {
+   "name": "Jacob Markstrom",
+   "status": "expected"
   },
-  "DET": {
-   "name": "John Gibson",
-   "status": "confirmed"
+  "CHI": {
+   "name": "Spencer Knight",
+   "status": "expected"
   },
-  "PHI": {
-   "name": "Dan Vladar",
-   "status": "confirmed"
+  "SEA": {
+   "name": "Philipp Grubauer",
+   "status": "expected"
   },
-  "MIN": {
-   "name": "Jesper Wallstedt",
-   "status": "confirmed"
+  "CGY": {
+   "name": "Dustin Wolf",
+   "status": "expected"
   },
-  "MTL": {
-   "name": "Jacob Fowler",
-   "status": "confirmed"
+  "LAK": {
+   "name": "Darcy Kuemper",
+   "status": "expected"
   },
-  "WPG": {
-   "name": "Stuart Skinner",
-   "status": "confirmed"
-  },
-  "CBJ": {
-   "name": "Cam Talbot",
-   "status": "confirmed"
-  },
-  "COL": {
-   "name": "Scott Wedgewood",
-   "status": "confirmed"
-  },
-  "NYR": {
-   "name": "Dylan Garand",
-   "status": "confirmed"
-  },
-  "STL": {
-   "name": "Joel Hofer",
-   "status": "confirmed"
-  },
-  "WSH": {
-   "name": "Logan Thompson",
-   "status": "confirmed"
-  },
-  "DAL": {
-   "name": "Jake Oettinger",
-   "status": "confirmed"
-  },
-  "TOR": {
-   "name": "Sergei Bobrovsky",
-   "status": "confirmed"
-  },
-  "UTA": {
-   "name": "Sebastian Cossa",
-   "status": "confirmed"
-  },
-  "NJD": {
-   "name": "Connor Hellebuyck",
-   "status": "confirmed"
-  },
-  "EDM": {
-   "name": "Tristan Jarry",
-   "status": "confirmed"
-  },
-  "NSH": {
-   "name": "Juuse Saros",
-   "status": "confirmed"
-  },
-  "CAR": {
-   "name": "Pyotr Kochetkov",
-   "status": "confirmed"
-  },
-  "VAN": {
-   "name": "Kevin Lankinen",
-   "status": "confirmed"
-  },
-  "ANA": {
-   "name": "Laurent Brossoit",
-   "status": "confirmed"
+  "SJS": {
+   "name": "Yaroslav Askarov",
+   "status": "expected"
   }
  },
- "checked_at": "2026-11-03T20:50:00-05:00"
+ "checked_at": "2026-11-04T05:00:00-05:00"
 }
