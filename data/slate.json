@@ -1,7 +1,7 @@
 {
  "slate_date": "2026-11-03",
- "generated_at": "2026-11-03T20:50:00-05:00",
- "status_at": "2026-11-03T20:50:00-05:00",
+ "generated_at": "2026-11-03T21:00:01-05:00",
+ "status_at": "2026-11-03T21:00:01-05:00",
  "valid_until": "2026-11-04T05:00:00-05:00",
  "status": {
   "prices_state": "ok",
@@ -16,7 +16,7 @@
   "stats_state": "ok",
   "last_run": {
    "ok": true,
-   "at": "2026-11-03T20:50:00-05:00",
+   "at": "2026-11-03T21:00:01-05:00",
    "failed_step": null
   },
   "pool": {
@@ -32,7 +32,11 @@
   "tier": 4
  },
  "banners": [],
- "empty": null,
+ "empty": {
+  "code": "all_started",
+  "text": "Every game has started.",
+  "sub": "Tonight's picks are under Started."
+ },
  "games": [
   {
    "id": 2026020236,
@@ -303,146 +307,14 @@
      "status": "confirmed"
     }
    },
-   "started": false,
-   "reads_done": true,
+   "started": true,
+   "reads_done": false,
    "picks": 2,
    "excluded_reason": null,
    "excluded_teams": []
   }
  ],
  "picks": [
-  {
-   "id": "2026-11-03:2026020246:8481605:shots:1.5:under",
-   "price": 100,
-   "first_price": 100,
-   "first_price_at": "2026-11-03T19:30:00-05:00",
-   "worst_price": 100,
-   "p": 0.523,
-   "breakeven": 0.5,
-   "p_pct": 52,
-   "breakeven_pct": 50,
-   "state": "early",
-   "history": [
-    {
-     "at": "2026-11-03T19:30:00-05:00",
-     "text": "Early: lineup not confirmed"
-    }
-   ],
-   "prices": [
-    {
-     "at": "2026-11-03T19:30:00-05:00",
-     "price": 100
-    }
-   ],
-   "pulled": null,
-   "price_final": true,
-   "graded": null,
-   "rank": 1,
-   "tier": "main",
-   "game_id": 2026020246,
-   "player": "J. LaCombe",
-   "player_id": 8481605,
-   "team": "ANA",
-   "opp": "VAN",
-   "home": false,
-   "start": "2026-11-03T21:00:00-05:00",
-   "market": "shots",
-   "line": 1.5,
-   "side": "under",
-   "bet": "Under 1.5 shots on goal",
-   "price_at": "2026-11-03T19:30:00-05:00",
-   "gap_pct": 4.6,
-   "market_fair_pct": 52.3,
-   "n_books": 7,
-   "guard": {
-    "verdict": "agrees",
-    "ours_pct": 52.3,
-    "model_pct": 54.0
-   },
-   "settled": "early",
-   "settled_label": "Early",
-   "reason": "7 other books say 52.3%; Hard Rock's +100 only needs 50.0%. Our model agrees (our blend: 52.3%).",
-   "link": "https://app.hardrock.bet/?deep_link_value=betslip/5018713809955717541",
-   "links": {
-    "hardrock": {
-     "id": "5018713809955717541",
-     "url": "https://share.hardrock.bet/Pt0T/bet?deep_link_value=hardrock://betslip/5018713809955717541"
-    },
-    "draftkings": {
-     "url": "https://sportsbook.draftkings.com/?outcomes=0QA385268557%232347490100_15L42133Q11425790173Q20",
-     "price": -120
-    }
-   },
-   "thin": false,
-   "games_used": 96,
-   "games_this_season": 14
-  },
-  {
-   "id": "2026-11-03:2026020246:8478444:shots:1.5:under",
-   "price": 150,
-   "first_price": 150,
-   "first_price_at": "2026-11-03T19:30:00-05:00",
-   "worst_price": 150,
-   "p": 0.4146,
-   "breakeven": 0.4,
-   "p_pct": 41,
-   "breakeven_pct": 40,
-   "state": "early",
-   "history": [
-    {
-     "at": "2026-11-03T19:30:00-05:00",
-     "text": "Early: lineup not confirmed"
-    }
-   ],
-   "prices": [
-    {
-     "at": "2026-11-03T19:30:00-05:00",
-     "price": 150
-    }
-   ],
-   "pulled": null,
-   "price_final": true,
-   "graded": null,
-   "rank": 2,
-   "tier": "main",
-   "game_id": 2026020246,
-   "player": "B. Boeser",
-   "player_id": 8478444,
-   "team": "VAN",
-   "opp": "ANA",
-   "home": true,
-   "start": "2026-11-03T21:00:00-05:00",
-   "market": "shots",
-   "line": 1.5,
-   "side": "under",
-   "bet": "Under 1.5 shots on goal",
-   "price_at": "2026-11-03T19:30:00-05:00",
-   "gap_pct": 3.3,
-   "market_fair_pct": 41.3,
-   "n_books": 7,
-   "guard": {
-    "verdict": "agrees",
-    "ours_pct": 41.5,
-    "model_pct": 43.9
-   },
-   "settled": "early",
-   "settled_label": "Early",
-   "reason": "7 other books say 41.3%; Hard Rock's +150 only needs 40.0%. Our model agrees (our blend: 41.5%).",
-   "link": "https://app.hardrock.bet/?deep_link_value=betslip/1904059333285642672",
-   "links": {
-    "hardrock": {
-     "id": "1904059333285642672",
-     "url": "https://share.hardrock.bet/Pt0T/bet?deep_link_value=hardrock://betslip/1904059333285642672"
-    },
-    "draftkings": {
-     "url": "https://sportsbook.draftkings.com/?outcomes=0QA385268463%232347490085_15L42133Q11425790173Q20",
-     "price": 120
-    }
-   },
-   "thin": false,
-   "games_used": 91,
-   "games_this_season": 16
-  },
   {
    "id": "2026-11-03:2026020242:8478403:shots:2.5:under",
    "price": 120,
@@ -862,6 +734,146 @@
    },
    "thin": false,
    "games_used": 80,
+   "games_this_season": 14
+  },
+  {
+   "id": "2026-11-03:2026020246:8478444:shots:1.5:under",
+   "price": 150,
+   "first_price": 150,
+   "first_price_at": "2026-11-03T19:30:00-05:00",
+   "worst_price": 150,
+   "p": 0.4146,
+   "breakeven": 0.4,
+   "p_pct": 41,
+   "breakeven_pct": 40,
+   "state": "locked_unconfirmed",
+   "history": [
+    {
+     "at": "2026-11-03T19:30:00-05:00",
+     "text": "Early: lineup not confirmed"
+    },
+    {
+     "at": "2026-11-03T21:00:01-05:00",
+     "text": "Locked: lineup was not confirmed"
+    }
+   ],
+   "prices": [
+    {
+     "at": "2026-11-03T19:30:00-05:00",
+     "price": 150
+    }
+   ],
+   "pulled": null,
+   "price_final": false,
+   "graded": null,
+   "rank": null,
+   "tier": "main",
+   "game_id": 2026020246,
+   "player": "B. Boeser",
+   "player_id": 8478444,
+   "team": "VAN",
+   "opp": "ANA",
+   "home": true,
+   "start": "2026-11-03T21:00:00-05:00",
+   "market": "shots",
+   "line": 1.5,
+   "side": "under",
+   "bet": "Under 1.5 shots on goal",
+   "price_at": "2026-11-03T19:30:00-05:00",
+   "gap_pct": 3.3,
+   "market_fair_pct": 41.3,
+   "n_books": 7,
+   "guard": {
+    "verdict": "agrees",
+    "ours_pct": 41.5,
+    "model_pct": 43.9
+   },
+   "settled": "early",
+   "settled_label": "Early",
+   "reason": "7 other books say 41.3%; Hard Rock's +150 only needs 40.0%. Our model agrees (our blend: 41.5%).",
+   "link": "https://app.hardrock.bet/?deep_link_value=betslip/1904059333285642672",
+   "links": {
+    "hardrock": {
+     "id": "1904059333285642672",
+     "url": "https://share.hardrock.bet/Pt0T/bet?deep_link_value=hardrock://betslip/1904059333285642672"
+    },
+    "draftkings": {
+     "url": "https://sportsbook.draftkings.com/?outcomes=0QA385268463%232347490085_15L42133Q11425790173Q20",
+     "price": 120
+    }
+   },
+   "thin": false,
+   "games_used": 91,
+   "games_this_season": 16
+  },
+  {
+   "id": "2026-11-03:2026020246:8481605:shots:1.5:under",
+   "price": 100,
+   "first_price": 100,
+   "first_price_at": "2026-11-03T19:30:00-05:00",
+   "worst_price": 100,
+   "p": 0.523,
+   "breakeven": 0.5,
+   "p_pct": 52,
+   "breakeven_pct": 50,
+   "state": "locked_unconfirmed",
+   "history": [
+    {
+     "at": "2026-11-03T19:30:00-05:00",
+     "text": "Early: lineup not confirmed"
+    },
+    {
+     "at": "2026-11-03T21:00:01-05:00",
+     "text": "Locked: lineup was not confirmed"
+    }
+   ],
+   "prices": [
+    {
+     "at": "2026-11-03T19:30:00-05:00",
+     "price": 100
+    }
+   ],
+   "pulled": null,
+   "price_final": false,
+   "graded": null,
+   "rank": null,
+   "tier": "main",
+   "game_id": 2026020246,
+   "player": "J. LaCombe",
+   "player_id": 8481605,
+   "team": "ANA",
+   "opp": "VAN",
+   "home": false,
+   "start": "2026-11-03T21:00:00-05:00",
+   "market": "shots",
+   "line": 1.5,
+   "side": "under",
+   "bet": "Under 1.5 shots on goal",
+   "price_at": "2026-11-03T19:30:00-05:00",
+   "gap_pct": 4.6,
+   "market_fair_pct": 52.3,
+   "n_books": 7,
+   "guard": {
+    "verdict": "agrees",
+    "ours_pct": 52.3,
+    "model_pct": 54.0
+   },
+   "settled": "early",
+   "settled_label": "Early",
+   "reason": "7 other books say 52.3%; Hard Rock's +100 only needs 50.0%. Our model agrees (our blend: 52.3%).",
+   "link": "https://app.hardrock.bet/?deep_link_value=betslip/5018713809955717541",
+   "links": {
+    "hardrock": {
+     "id": "5018713809955717541",
+     "url": "https://share.hardrock.bet/Pt0T/bet?deep_link_value=hardrock://betslip/5018713809955717541"
+    },
+    "draftkings": {
+     "url": "https://sportsbook.draftkings.com/?outcomes=0QA385268557%232347490100_15L42133Q11425790173Q20",
+     "price": -120
+    }
+   },
+   "thin": false,
+   "games_used": 96,
    "games_this_season": 14
   }
  ],
