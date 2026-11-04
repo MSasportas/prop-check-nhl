@@ -1,7 +1,7 @@
 {
  "slate_date": "2026-11-03",
- "generated_at": "2026-11-03T22:30:00-05:00",
- "status_at": "2026-11-03T22:30:00-05:00",
+ "generated_at": "2026-11-03T22:40:00-05:00",
+ "status_at": "2026-11-03T22:40:00-05:00",
  "valid_until": "2026-11-04T05:00:00-05:00",
  "status": {
   "prices_state": "ok",
@@ -16,7 +16,7 @@
   "stats_state": "ok",
   "last_run": {
    "ok": true,
-   "at": "2026-11-03T22:30:00-05:00",
+   "at": "2026-11-03T22:40:00-05:00",
    "failed_step": null
   },
   "pool": {
@@ -384,10 +384,7 @@
      "id": "3716503654145065376",
      "url": "https://share.hardrock.bet/Pt0T/bet?deep_link_value=hardrock://betslip/3716503654145065376"
     },
-    "draftkings": {
-     "url": "https://sportsbook.draftkings.com/?outcomes=0QA385267771%232348564262_15L42133Q11542364575Q20",
-     "price": 100
-    }
+    "draftkings": null
    },
    "thin": false,
    "games_used": 90,
@@ -458,10 +455,7 @@
      "id": "2879263949822493086",
      "url": "https://share.hardrock.bet/Pt0T/bet?deep_link_value=hardrock://betslip/2879263949822493086"
     },
-    "draftkings": {
-     "url": "https://sportsbook.draftkings.com/?outcomes=0QA385263593%232347475706_15L42133Q11542364575Q20",
-     "price": -160
-    }
+    "draftkings": null
    },
    "thin": false,
    "games_used": 97,
@@ -532,10 +526,7 @@
      "id": "1497816924841705890",
      "url": "https://share.hardrock.bet/Pt0T/bet?deep_link_value=hardrock://betslip/1497816924841705890"
     },
-    "draftkings": {
-     "url": "https://sportsbook.draftkings.com/?outcomes=0QA385262719%232347472996_15L42133Q11542364575Q20",
-     "price": 100
-    }
+    "draftkings": null
    },
    "thin": false,
    "games_used": 97,
@@ -606,10 +597,7 @@
      "id": "7640693311535186313",
      "url": "https://share.hardrock.bet/Pt0T/bet?deep_link_value=hardrock://betslip/7640693311535186313"
     },
-    "draftkings": {
-     "url": "https://sportsbook.draftkings.com/?outcomes=0QA385267949%232347488620_15L42133Q11542364575Q20",
-     "price": -110
-    }
+    "draftkings": null
    },
    "thin": false,
    "games_used": 74,
@@ -680,10 +668,7 @@
      "id": "3095947180209471883",
      "url": "https://share.hardrock.bet/Pt0T/bet?deep_link_value=hardrock://betslip/3095947180209471883"
     },
-    "draftkings": {
-     "url": "https://sportsbook.draftkings.com/?outcomes=0QA385266017%232347482617_15L42133Q11425790173Q20",
-     "price": 110
-    }
+    "draftkings": null
    },
    "thin": false,
    "games_used": 91,
@@ -817,10 +802,7 @@
      "id": "1904059333285642672",
      "url": "https://share.hardrock.bet/Pt0T/bet?deep_link_value=hardrock://betslip/1904059333285642672"
     },
-    "draftkings": {
-     "url": "https://sportsbook.draftkings.com/?outcomes=0QA385268463%232347490085_15L42133Q11425790173Q20",
-     "price": 120
-    }
+    "draftkings": null
    },
    "thin": false,
    "games_used": 91,
@@ -887,10 +869,7 @@
      "id": "5018713809955717541",
      "url": "https://share.hardrock.bet/Pt0T/bet?deep_link_value=hardrock://betslip/5018713809955717541"
     },
-    "draftkings": {
-     "url": "https://sportsbook.draftkings.com/?outcomes=0QA385268557%232347490100_15L42133Q11425790173Q20",
-     "price": -120
-    }
+    "draftkings": null
    },
    "thin": false,
    "games_used": 96,
