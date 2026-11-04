@@ -1,10 +1,10 @@
 {
  "ok": true,
  "slate_date": "2026-11-03",
- "started_at": "2026-11-03T20:00:01-05:00",
- "status_at": "2026-11-03T20:00:01-05:00",
- "finished_at": "2026-11-03T20:00:03-05:00",
- "last_ok_at": "2026-11-03T20:00:01-05:00",
+ "started_at": "2026-11-03T20:20:00-05:00",
+ "status_at": "2026-11-03T20:20:00-05:00",
+ "finished_at": "2026-11-03T20:20:03-05:00",
+ "last_ok_at": "2026-11-03T20:20:00-05:00",
  "failed_step": null,
  "steps": [
   {
@@ -24,8 +24,8 @@
   },
   {
    "step": "lineups",
-   "status": "ok",
-   "note": "2 of 2 team pages read"
+   "status": "skipped",
+   "note": "checked in the last 20 minutes"
   },
   {
    "step": "lineup_history",
@@ -35,7 +35,7 @@
   {
    "step": "odds",
    "status": "ok",
-   "note": "no pull due"
+   "note": "1 game(s) priced"
   },
   {
    "step": "market_menu",
@@ -44,8 +44,8 @@
   },
   {
    "step": "featured",
-   "status": "skipped",
-   "note": "no new shots read to match"
+   "status": "ok",
+   "note": "sides/totals for 1 game(s), 10 book(s) max, 3 credit(s)"
   },
   {
    "step": "book_probe",
@@ -55,7 +55,7 @@
   {
    "step": "gapguard",
    "status": "ok",
-   "note": "gap+guard: nothing new"
+   "note": "gap+guard: 2 close"
   },
   {
    "step": "engine",
@@ -69,8 +69,8 @@
   },
   {
    "step": "shadow",
-   "status": "skipped",
-   "note": "nothing new"
+   "status": "ok",
+   "note": "32 line read(s) logged"
   },
   {
    "step": "gg_grade",
@@ -102,7 +102,7 @@
   },
   {
    "n": 2,
-   "left": 377
+   "left": 372
   },
   {
    "n": 3,
@@ -137,14 +137,14 @@
    "left": 500
   }
  ],
- "pool_total": 4253,
+ "pool_total": 4248,
  "allowance": 21.65,
  "tier": 4,
  "budget_today": 238,
- "budget_used_today": 77,
+ "budget_used_today": 82,
  "prices_state": "ok",
- "prices_at": "2026-11-03T19:30:00-05:00",
- "next_price_read_at": "2026-11-03T20:15:00-05:00",
+ "prices_at": "2026-11-03T20:20:00-05:00",
+ "next_price_read_at": null,
  "unmatched_names": [
   "Elias Pettersson"
  ],
@@ -162,10 +162,10 @@
  "odds_notes": [],
  "runner": {
   "event": "workflow_dispatch",
-  "run_id": "41746032083",
-  "iteration": 5,
-  "chain_link": 209,
+  "run_id": "41752146701",
+  "iteration": 2,
+  "chain_link": 210,
   "chain_started_at": "2026-10-28T10:00:15-04:00",
-  "run_started_at": "2026-11-03T19:20:14-05:00"
+  "run_started_at": "2026-11-03T20:10:14-05:00"
  }
 }
