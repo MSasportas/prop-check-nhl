@@ -518,6 +518,30 @@ still 2. Output: research/code/r19/gg19_results.txt.
 Forward re-score (15 nights Oct 19 - Nov 2): Q1b n389 +11.0% [+5,+18] p .0035 CLV +3.4%: now just MISSES its registered bar (.0033) after
 Nov 2; Q1g n331 +13.2% p .0045: also misses again. Q1b read A +19.4% n219, reads B/C +0.2% n170.
 
+## Run 20 (Researcher, 2026-11-04). Registered before any of these were tested.
+No key used, no historical odds pull. Free data to scratch: api-web play-by-play (research/code/r20/fetch20.py = r17/fetch17.py plus
+blockingPlayerId, Oct 7 - Feb 28, lockbox not fetched) and NHL stats REST skater summary per-game logs 2025-26 (research/code/r14/fetch14.py,
+Feb 28 cut-off). Common as runs 4/6-19: shots45_lines, every two-way Hard Rock line, proportional de-vig fair f, side price >= -200, 1u flat,
+regulation + OT, VOID = no bet, game-clustered bootstrap. Logistic = research/code/wf.py (fit on all months before the test month), bet the side
+with p - BE >= T, T in {.01, .02, .03}. Fixed rules report every Nov-Feb bet with folds. Placebo (shuffle within date x line, 200 times) for any
+variant positive Nov-Feb with n >= 300; lockbox (Mar 1+) only for such a frozen variant, once, needing one-sided p < 0.05/3 = 0.0167 (look #3).
+All features use games dated strictly before d. Attempts from pbp = shot-on-goal + goal + missed-shot + blocked-shot by the shooter, shootout
+excluded, all strengths.
+
+| id | date | rule (exact) | data | result | status |
+|---|---|---|---|---|---|
+| HH1 | 2026-11-04 | **Short last game (left early / benched).** From his skater per-game logs before d: last = his most recent game, required to be his team's most recent game (else lt = 1: returns are T1/Q10's job); avg10 = mean TOI of his up-to-10 games before `last` (>= 5, else lt = 1); lt = TOI(last) / avg10. Terms c1*[lt < 0.6] + c2*(min(lt, 1.5) - 1) (a player who left his last game hurt or was benched and dresses tonight plays normal minutes; does the book shade him down off that game? K5 used last-game SOG, AA1 only a d-1 TOI excess) (3 T). Fixed HH1r: OVER when lt < 0.6 and avg10 >= 12 min (1 variant). 4 variants | REST + shots45 | | registered |
+| HH2 | 2026-11-04 | **Shooting lanes: his blocked share x the opponent's blocking.** From pbp before d: bs = his blocked attempts / his attempts over his team's last 20 games (>= 20 attempts, else bs = league mean of eligible players before d); bsc = bs - that league mean. ob = the opponent's blocks / attempts it faced over its last 20 games (>= 5 games) minus the league team mean before d (0 if < 5). Terms c1*bsc + c2*bsc*ob (a shooter whose attempts get blocked a lot gains SOG vs a team that doesn't block and loses vs one that does; K11 tested opponent blocking x his volume, not his own blocked share) (3 T). Fixed HH2r: OVER when bs >= 0.30 and ob <= -0.03 (1 variant). 4 variants | pbp + shots45 | | registered |
+| HH3 | 2026-11-04 | **Opponent tightens after a blowout.** From pbp final scores (goals, shootout excluded) before d: oblow = [the opponent's most recent game, within 4 days before d, was a loss by 3+ goals]; osog = [the opponent allowed >= 35 SOG in that game]. Terms c1*oblow + c2*osog (the beaten coach demands defence next game; BB1 tested the player's OWN team after a bad loss) (3 T). Fixed HH3r: UNDER on every line vs an opponent coming off a 3+ goal loss (1 variant). 4 variants | pbp + shots45 | | registered |
+
+Forward (registered now; nights >= 2026-11-04 only, none seen):
+| id | date | rule (exact) | data | result | status |
+|---|---|---|---|---|---|
+| Q21a | 2026-11-04 | **Q1b at the 1 PM read, long lead.** Every Q1b bet (exactly as score_fwd.py makes it) with read A whose game's puck (shadow ctx.start) is >= 6.5 h after the read's `at` (a 1 PM read to a 7 PM ET puck is ~6 h, so this splits 7:30 PM-and-later games from the 7 PM-and-earlier block). 1 variant | data/odds + data/shadow | | forward, open |
+| Q21b | 2026-11-04 | Same, puck < 6.5 h after the read. 1 variant | same | | forward, open |
+Q21 bar: n >= 300 graded, ROI > 0, one-sided p < 0.05/40 = 0.00125 (38 + 2 forward variants), mean CLV > 0. Scored by research/code/r20/score_q21.py
+(added to run_all.sh).
+
 ## Queued (not yet tested)
 | id | rule idea | data | status |
 |---|---|---|---|
