@@ -1,7 +1,7 @@
 {
  "slate_date": "2026-11-03",
- "generated_at": "2026-11-03T18:50:00-05:00",
- "status_at": "2026-11-03T18:50:00-05:00",
+ "generated_at": "2026-11-03T19:00:00-05:00",
+ "status_at": "2026-11-03T19:00:00-05:00",
  "valid_until": "2026-11-04T05:00:00-05:00",
  "status": {
   "prices_state": "ok",
@@ -9,14 +9,14 @@
   "next_price_read_at": "2026-11-03T19:15:00-05:00",
   "stats_built_at": "2026-11-03T00:10:01-05:00",
   "stats_through": "2026-11-02",
-  "lineups_at": "2026-11-03T18:30:01-05:00",
+  "lineups_at": "2026-11-03T19:00:00-05:00",
   "goalies_at": null,
   "lineups_note": "8 of 22 team line pages are dated today.",
   "lineups_state": "ok",
   "stats_state": "ok",
   "last_run": {
    "ok": true,
-   "at": "2026-11-03T18:50:00-05:00",
+   "at": "2026-11-03T19:00:00-05:00",
    "failed_step": null
   },
   "pool": {
@@ -53,8 +53,8 @@
      "status": "confirmed"
     }
    },
-   "started": false,
-   "reads_done": true,
+   "started": true,
+   "reads_done": false,
    "picks": 1,
    "excluded_reason": null,
    "excluded_teams": []
@@ -78,8 +78,8 @@
      "status": "confirmed"
     }
    },
-   "started": false,
-   "reads_done": true,
+   "started": true,
+   "reads_done": false,
    "picks": 0,
    "excluded_reason": null,
    "excluded_teams": []
@@ -103,8 +103,8 @@
      "status": "confirmed"
     }
    },
-   "started": false,
-   "reads_done": true,
+   "started": true,
+   "reads_done": false,
    "picks": 0,
    "excluded_reason": null,
    "excluded_teams": []
@@ -128,8 +128,8 @@
      "status": "confirmed"
     }
    },
-   "started": false,
-   "reads_done": true,
+   "started": true,
+   "reads_done": false,
    "picks": 1,
    "excluded_reason": null,
    "excluded_teams": []
@@ -153,8 +153,8 @@
      "status": "confirmed"
     }
    },
-   "started": false,
-   "reads_done": true,
+   "started": true,
+   "reads_done": false,
    "picks": 0,
    "excluded_reason": null,
    "excluded_teams": []
@@ -178,8 +178,8 @@
      "status": "confirmed"
     }
    },
-   "started": false,
-   "reads_done": true,
+   "started": true,
+   "reads_done": false,
    "picks": 1,
    "excluded_reason": null,
    "excluded_teams": []
@@ -203,8 +203,8 @@
      "status": "confirmed"
     }
    },
-   "started": false,
-   "reads_done": true,
+   "started": true,
+   "reads_done": false,
    "picks": 1,
    "excluded_reason": null,
    "excluded_teams": []
@@ -228,8 +228,8 @@
      "status": "confirmed"
     }
    },
-   "started": false,
-   "reads_done": true,
+   "started": true,
+   "reads_done": false,
    "picks": 0,
    "excluded_reason": null,
    "excluded_teams": []
@@ -312,138 +312,6 @@
  ],
  "picks": [
   {
-   "id": "2026-11-03:2026020242:8476483:shots:2.5:under",
-   "price": 105,
-   "first_price": 105,
-   "first_price_at": "2026-11-03T17:30:02-05:00",
-   "worst_price": 105,
-   "p": 0.5181,
-   "breakeven": 0.4878,
-   "p_pct": 51,
-   "breakeven_pct": 49,
-   "state": "lineup",
-   "history": [
-    {
-     "at": "2026-11-03T17:30:02-05:00",
-     "text": "Lineup confirmed"
-    }
-   ],
-   "prices": [
-    {
-     "at": "2026-11-03T17:30:02-05:00",
-     "price": 105
-    }
-   ],
-   "pulled": null,
-   "price_final": true,
-   "graded": null,
-   "rank": 1,
-   "tier": "main",
-   "game_id": 2026020242,
-   "player": "R. Rakell",
-   "player_id": 8476483,
-   "team": "PIT",
-   "opp": "VGK",
-   "home": true,
-   "start": "2026-11-03T19:00:00-05:00",
-   "market": "shots",
-   "line": 2.5,
-   "side": "under",
-   "bet": "Under 2.5 shots on goal",
-   "price_at": "2026-11-03T17:30:02-05:00",
-   "gap_pct": 4.6,
-   "market_fair_pct": 51.0,
-   "n_books": 8,
-   "guard": {
-    "verdict": "agrees",
-    "ours_pct": 51.8,
-    "model_pct": 56.6
-   },
-   "settled": "goalie",
-   "settled_label": "Goalie confirmed",
-   "reason": "8 other books say 51.0%; Hard Rock's +105 only needs 48.8%. Our model agrees (our blend: 51.8%).",
-   "link": "https://app.hardrock.bet/?deep_link_value=betslip/7640693311535186313",
-   "links": {
-    "hardrock": {
-     "id": "7640693311535186313",
-     "url": "https://share.hardrock.bet/Pt0T/bet?deep_link_value=hardrock://betslip/7640693311535186313"
-    },
-    "draftkings": {
-     "url": "https://sportsbook.draftkings.com/?outcomes=0QA385267949%232347488620_15L42133Q11542364575Q20",
-     "price": -110
-    }
-   },
-   "thin": false,
-   "games_used": 74,
-   "games_this_season": 14
-  },
-  {
-   "id": "2026-11-03:2026020240:8481604:shots:2.5:under",
-   "price": 130,
-   "first_price": 130,
-   "first_price_at": "2026-11-03T17:30:02-05:00",
-   "worst_price": 130,
-   "p": 0.4614,
-   "breakeven": 0.4348,
-   "p_pct": 46,
-   "breakeven_pct": 43,
-   "state": "early",
-   "history": [
-    {
-     "at": "2026-11-03T17:30:02-05:00",
-     "text": "Early: lineup not confirmed"
-    }
-   ],
-   "prices": [
-    {
-     "at": "2026-11-03T17:30:02-05:00",
-     "price": 130
-    }
-   ],
-   "pulled": null,
-   "price_final": true,
-   "graded": null,
-   "rank": 2,
-   "tier": "main",
-   "game_id": 2026020240,
-   "player": "P. Dorofeyev",
-   "player_id": 8481604,
-   "team": "NYR",
-   "opp": "STL",
-   "home": true,
-   "start": "2026-11-03T19:00:00-05:00",
-   "market": "shots",
-   "line": 2.5,
-   "side": "under",
-   "bet": "Under 2.5 shots on goal",
-   "price_at": "2026-11-03T17:30:02-05:00",
-   "gap_pct": 5.3,
-   "market_fair_pct": 45.8,
-   "n_books": 7,
-   "guard": {
-    "verdict": "agrees",
-    "ours_pct": 46.1,
-    "model_pct": 49.1
-   },
-   "settled": "early",
-   "settled_label": "Early",
-   "reason": "7 other books say 45.8%; Hard Rock's +130 only needs 43.5%. Our model agrees (our blend: 46.1%).",
-   "link": "https://app.hardrock.bet/?deep_link_value=betslip/1497816924841705890",
-   "links": {
-    "hardrock": {
-     "id": "1497816924841705890",
-     "url": "https://share.hardrock.bet/Pt0T/bet?deep_link_value=hardrock://betslip/1497816924841705890"
-    },
-    "draftkings": {
-     "url": "https://sportsbook.draftkings.com/?outcomes=0QA385262719%232347472996_15L42133Q11542364575Q20",
-     "price": 100
-    }
-   },
-   "thin": false,
-   "games_used": 97,
-   "games_this_season": 15
-  },
-  {
    "id": "2026-11-03:2026020239:8481721:shots:1.5:over",
    "price": -165,
    "first_price": -165,
@@ -469,7 +337,7 @@
    "pulled": null,
    "price_final": true,
    "graded": null,
-   "rank": 3,
+   "rank": 1,
    "tier": "main",
    "game_id": 2026020239,
    "player": "A. Gritsyuk",
@@ -505,138 +373,6 @@
    "thin": false,
    "games_used": 80,
    "games_this_season": 14
-  },
-  {
-   "id": "2026-11-03:2026020243:8480036:shots:1.5:under",
-   "price": 125,
-   "first_price": 125,
-   "first_price_at": "2026-11-03T17:30:02-05:00",
-   "worst_price": 125,
-   "p": 0.4619,
-   "breakeven": 0.4444,
-   "p_pct": 46,
-   "breakeven_pct": 44,
-   "state": "early",
-   "history": [
-    {
-     "at": "2026-11-03T17:30:02-05:00",
-     "text": "Early: lineup not confirmed"
-    }
-   ],
-   "prices": [
-    {
-     "at": "2026-11-03T17:30:02-05:00",
-     "price": 125
-    }
-   ],
-   "pulled": null,
-   "price_final": true,
-   "graded": null,
-   "rank": 4,
-   "tier": "main",
-   "game_id": 2026020243,
-   "player": "M. Heiskanen",
-   "player_id": 8480036,
-   "team": "DAL",
-   "opp": "WSH",
-   "home": false,
-   "start": "2026-11-03T19:00:00-05:00",
-   "market": "shots",
-   "line": 1.5,
-   "side": "under",
-   "bet": "Under 1.5 shots on goal",
-   "price_at": "2026-11-03T17:30:02-05:00",
-   "gap_pct": 3.5,
-   "market_fair_pct": 46.0,
-   "n_books": 8,
-   "guard": {
-    "verdict": "agrees",
-    "ours_pct": 46.2,
-    "model_pct": 48.8
-   },
-   "settled": "early",
-   "settled_label": "Early",
-   "reason": "8 other books say 46.0%; Hard Rock's +125 only needs 44.4%. Our model agrees (our blend: 46.2%).",
-   "link": "https://app.hardrock.bet/?deep_link_value=betslip/3095947180209471883",
-   "links": {
-    "hardrock": {
-     "id": "3095947180209471883",
-     "url": "https://share.hardrock.bet/Pt0T/bet?deep_link_value=hardrock://betslip/3095947180209471883"
-    },
-    "draftkings": {
-     "url": "https://sportsbook.draftkings.com/?outcomes=0QA385266017%232347482617_15L42133Q11425790173Q20",
-     "price": 110
-    }
-   },
-   "thin": false,
-   "games_used": 91,
-   "games_this_season": 14
-  },
-  {
-   "id": "2026-11-03:2026020236:8477951:shots:2.5:under",
-   "price": -130,
-   "first_price": -130,
-   "first_price_at": "2026-11-03T18:20:00-05:00",
-   "worst_price": -130,
-   "p": 0.5767,
-   "breakeven": 0.5652,
-   "p_pct": 57,
-   "breakeven_pct": 57,
-   "state": "early",
-   "history": [
-    {
-     "at": "2026-11-03T18:20:00-05:00",
-     "text": "Early: lineup not confirmed"
-    }
-   ],
-   "prices": [
-    {
-     "at": "2026-11-03T18:20:00-05:00",
-     "price": -130
-    }
-   ],
-   "pulled": null,
-   "price_final": true,
-   "graded": null,
-   "rank": 5,
-   "tier": "main",
-   "game_id": 2026020236,
-   "player": "N. Schmaltz",
-   "player_id": 8477951,
-   "team": "UTA",
-   "opp": "TOR",
-   "home": false,
-   "start": "2026-11-03T19:00:00-05:00",
-   "market": "shots",
-   "line": 2.5,
-   "side": "under",
-   "bet": "Under 2.5 shots on goal",
-   "price_at": "2026-11-03T18:20:00-05:00",
-   "gap_pct": 4.5,
-   "market_fair_pct": 59.1,
-   "n_books": 8,
-   "guard": {
-    "verdict": "agrees",
-    "ours_pct": 57.7,
-    "model_pct": 53.6
-   },
-   "settled": "early",
-   "settled_label": "Early",
-   "reason": "8 other books say 59.1%; Hard Rock's -130 only needs 56.5%. Our model agrees (our blend: 57.7%).",
-   "link": "https://app.hardrock.bet/?deep_link_value=betslip/2879263949822493086",
-   "links": {
-    "hardrock": {
-     "id": "2879263949822493086",
-     "url": "https://share.hardrock.bet/Pt0T/bet?deep_link_value=hardrock://betslip/2879263949822493086"
-    },
-    "draftkings": {
-     "url": "https://sportsbook.draftkings.com/?outcomes=0QA385263593%232347475706_15L42133Q11542364575Q20",
-     "price": -160
-    }
-   },
-   "thin": false,
-   "games_used": 97,
-   "games_this_season": 15
   },
   {
    "id": "2026-11-03:2026020242:8478403:shots:2.5:under",
@@ -711,6 +447,286 @@
    "thin": false,
    "games_used": 90,
    "games_this_season": 16
+  },
+  {
+   "id": "2026-11-03:2026020236:8477951:shots:2.5:under",
+   "price": -130,
+   "first_price": -130,
+   "first_price_at": "2026-11-03T18:20:00-05:00",
+   "worst_price": -130,
+   "p": 0.5767,
+   "breakeven": 0.5652,
+   "p_pct": 57,
+   "breakeven_pct": 57,
+   "state": "locked_unconfirmed",
+   "history": [
+    {
+     "at": "2026-11-03T18:20:00-05:00",
+     "text": "Early: lineup not confirmed"
+    },
+    {
+     "at": "2026-11-03T19:00:00-05:00",
+     "text": "Locked: lineup was not confirmed"
+    }
+   ],
+   "prices": [
+    {
+     "at": "2026-11-03T18:20:00-05:00",
+     "price": -130
+    }
+   ],
+   "pulled": null,
+   "price_final": false,
+   "graded": null,
+   "rank": null,
+   "tier": "main",
+   "game_id": 2026020236,
+   "player": "N. Schmaltz",
+   "player_id": 8477951,
+   "team": "UTA",
+   "opp": "TOR",
+   "home": false,
+   "start": "2026-11-03T19:00:00-05:00",
+   "market": "shots",
+   "line": 2.5,
+   "side": "under",
+   "bet": "Under 2.5 shots on goal",
+   "price_at": "2026-11-03T18:20:00-05:00",
+   "gap_pct": 4.5,
+   "market_fair_pct": 59.1,
+   "n_books": 8,
+   "guard": {
+    "verdict": "agrees",
+    "ours_pct": 57.7,
+    "model_pct": 53.6
+   },
+   "settled": "early",
+   "settled_label": "Early",
+   "reason": "8 other books say 59.1%; Hard Rock's -130 only needs 56.5%. Our model agrees (our blend: 57.7%).",
+   "link": "https://app.hardrock.bet/?deep_link_value=betslip/2879263949822493086",
+   "links": {
+    "hardrock": {
+     "id": "2879263949822493086",
+     "url": "https://share.hardrock.bet/Pt0T/bet?deep_link_value=hardrock://betslip/2879263949822493086"
+    },
+    "draftkings": {
+     "url": "https://sportsbook.draftkings.com/?outcomes=0QA385263593%232347475706_15L42133Q11542364575Q20",
+     "price": -160
+    }
+   },
+   "thin": false,
+   "games_used": 97,
+   "games_this_season": 15
+  },
+  {
+   "id": "2026-11-03:2026020240:8481604:shots:2.5:under",
+   "price": 130,
+   "first_price": 130,
+   "first_price_at": "2026-11-03T17:30:02-05:00",
+   "worst_price": 130,
+   "p": 0.4614,
+   "breakeven": 0.4348,
+   "p_pct": 46,
+   "breakeven_pct": 43,
+   "state": "locked_unconfirmed",
+   "history": [
+    {
+     "at": "2026-11-03T17:30:02-05:00",
+     "text": "Early: lineup not confirmed"
+    },
+    {
+     "at": "2026-11-03T19:00:00-05:00",
+     "text": "Locked: lineup was not confirmed"
+    }
+   ],
+   "prices": [
+    {
+     "at": "2026-11-03T17:30:02-05:00",
+     "price": 130
+    }
+   ],
+   "pulled": null,
+   "price_final": false,
+   "graded": null,
+   "rank": null,
+   "tier": "main",
+   "game_id": 2026020240,
+   "player": "P. Dorofeyev",
+   "player_id": 8481604,
+   "team": "NYR",
+   "opp": "STL",
+   "home": true,
+   "start": "2026-11-03T19:00:00-05:00",
+   "market": "shots",
+   "line": 2.5,
+   "side": "under",
+   "bet": "Under 2.5 shots on goal",
+   "price_at": "2026-11-03T17:30:02-05:00",
+   "gap_pct": 5.3,
+   "market_fair_pct": 45.8,
+   "n_books": 7,
+   "guard": {
+    "verdict": "agrees",
+    "ours_pct": 46.1,
+    "model_pct": 49.1
+   },
+   "settled": "early",
+   "settled_label": "Early",
+   "reason": "7 other books say 45.8%; Hard Rock's +130 only needs 43.5%. Our model agrees (our blend: 46.1%).",
+   "link": "https://app.hardrock.bet/?deep_link_value=betslip/1497816924841705890",
+   "links": {
+    "hardrock": {
+     "id": "1497816924841705890",
+     "url": "https://share.hardrock.bet/Pt0T/bet?deep_link_value=hardrock://betslip/1497816924841705890"
+    },
+    "draftkings": {
+     "url": "https://sportsbook.draftkings.com/?outcomes=0QA385262719%232347472996_15L42133Q11542364575Q20",
+     "price": 100
+    }
+   },
+   "thin": false,
+   "games_used": 97,
+   "games_this_season": 15
+  },
+  {
+   "id": "2026-11-03:2026020242:8476483:shots:2.5:under",
+   "price": 105,
+   "first_price": 105,
+   "first_price_at": "2026-11-03T17:30:02-05:00",
+   "worst_price": 105,
+   "p": 0.5181,
+   "breakeven": 0.4878,
+   "p_pct": 51,
+   "breakeven_pct": 49,
+   "state": "locked",
+   "history": [
+    {
+     "at": "2026-11-03T17:30:02-05:00",
+     "text": "Lineup confirmed"
+    },
+    {
+     "at": "2026-11-03T19:00:00-05:00",
+     "text": "Locked"
+    }
+   ],
+   "prices": [
+    {
+     "at": "2026-11-03T17:30:02-05:00",
+     "price": 105
+    }
+   ],
+   "pulled": null,
+   "price_final": false,
+   "graded": null,
+   "rank": null,
+   "tier": "main",
+   "game_id": 2026020242,
+   "player": "R. Rakell",
+   "player_id": 8476483,
+   "team": "PIT",
+   "opp": "VGK",
+   "home": true,
+   "start": "2026-11-03T19:00:00-05:00",
+   "market": "shots",
+   "line": 2.5,
+   "side": "under",
+   "bet": "Under 2.5 shots on goal",
+   "price_at": "2026-11-03T17:30:02-05:00",
+   "gap_pct": 4.6,
+   "market_fair_pct": 51.0,
+   "n_books": 8,
+   "guard": {
+    "verdict": "agrees",
+    "ours_pct": 51.8,
+    "model_pct": 56.6
+   },
+   "settled": "goalie",
+   "settled_label": "Goalie confirmed",
+   "reason": "8 other books say 51.0%; Hard Rock's +105 only needs 48.8%. Our model agrees (our blend: 51.8%).",
+   "link": "https://app.hardrock.bet/?deep_link_value=betslip/7640693311535186313",
+   "links": {
+    "hardrock": {
+     "id": "7640693311535186313",
+     "url": "https://share.hardrock.bet/Pt0T/bet?deep_link_value=hardrock://betslip/7640693311535186313"
+    },
+    "draftkings": {
+     "url": "https://sportsbook.draftkings.com/?outcomes=0QA385267949%232347488620_15L42133Q11542364575Q20",
+     "price": -110
+    }
+   },
+   "thin": false,
+   "games_used": 74,
+   "games_this_season": 14
+  },
+  {
+   "id": "2026-11-03:2026020243:8480036:shots:1.5:under",
+   "price": 125,
+   "first_price": 125,
+   "first_price_at": "2026-11-03T17:30:02-05:00",
+   "worst_price": 125,
+   "p": 0.4619,
+   "breakeven": 0.4444,
+   "p_pct": 46,
+   "breakeven_pct": 44,
+   "state": "locked_unconfirmed",
+   "history": [
+    {
+     "at": "2026-11-03T17:30:02-05:00",
+     "text": "Early: lineup not confirmed"
+    },
+    {
+     "at": "2026-11-03T19:00:00-05:00",
+     "text": "Locked: lineup was not confirmed"
+    }
+   ],
+   "prices": [
+    {
+     "at": "2026-11-03T17:30:02-05:00",
+     "price": 125
+    }
+   ],
+   "pulled": null,
+   "price_final": false,
+   "graded": null,
+   "rank": null,
+   "tier": "main",
+   "game_id": 2026020243,
+   "player": "M. Heiskanen",
+   "player_id": 8480036,
+   "team": "DAL",
+   "opp": "WSH",
+   "home": false,
+   "start": "2026-11-03T19:00:00-05:00",
+   "market": "shots",
+   "line": 1.5,
+   "side": "under",
+   "bet": "Under 1.5 shots on goal",
+   "price_at": "2026-11-03T17:30:02-05:00",
+   "gap_pct": 3.5,
+   "market_fair_pct": 46.0,
+   "n_books": 8,
+   "guard": {
+    "verdict": "agrees",
+    "ours_pct": 46.2,
+    "model_pct": 48.8
+   },
+   "settled": "early",
+   "settled_label": "Early",
+   "reason": "8 other books say 46.0%; Hard Rock's +125 only needs 44.4%. Our model agrees (our blend: 46.2%).",
+   "link": "https://app.hardrock.bet/?deep_link_value=betslip/3095947180209471883",
+   "links": {
+    "hardrock": {
+     "id": "3095947180209471883",
+     "url": "https://share.hardrock.bet/Pt0T/bet?deep_link_value=hardrock://betslip/3095947180209471883"
+    },
+    "draftkings": {
+     "url": "https://sportsbook.draftkings.com/?outcomes=0QA385266017%232347482617_15L42133Q11425790173Q20",
+     "price": 110
+    }
+   },
+   "thin": false,
+   "games_used": 91,
+   "games_this_season": 14
   }
  ],
  "parlays": [],
