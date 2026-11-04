@@ -8,6 +8,9 @@ data/record/events.jsonl is the source of truth: one JSON object per line, only 
   pulled   with the reason shown
   locked   puck dropped
   graded   result, what happened, the graded price (worst price shown) and units
+  regraded a correction appended later, never an edit: ONLY a "did not play" VOID whose player the NHL box later shows
+           with ice time (the box was incomplete when first read). The VOID line stays in the log; the item takes
+           the new result and keeps the old one under graded.corrected. At most one per pick.
 
 data/record.json and data/record/YYYY-MM.json are views rebuilt from the log (`run.py --rebuild-record`
 does exactly that and nothing else). They contain no fact that is not in the log.
@@ -21,7 +24,7 @@ import os
 import common
 import odds
 
-EVENT_TYPES = ("shown", "price", "update", "state", "pulled", "locked", "graded")
+EVENT_TYPES = ("shown", "price", "update", "state", "pulled", "locked", "graded", "regraded")
 
 
 class RecordError(Exception):
@@ -125,7 +128,18 @@ def fold(events):
         elif t == "graded":
             if it["graded"] is None:
                 it["graded"] = {k: e.get(k) for k in ("at", "result", "actual", "actual_text", "price", "units", "legs", "note")}
+        elif t == "regraded":
+            g = it["graded"]
+            if g is not None and is_dnp_void(g) and not g.get("corrected"):
+                new = {k: e.get(k) for k in ("at", "result", "actual", "actual_text", "price", "units", "legs", "note")}
+                new["corrected"] = {"at": g["at"], "result": g["result"], "actual_text": g["actual_text"]}
+                it["graded"] = new
     return items
+
+
+def is_dnp_void(g):
+    """A single graded VOID because the box showed no ice time: the only grade a later read may correct."""
+    return bool(g) and g.get("result") == "VOID" and g.get("actual_text") == "did not play"
 
 
 def worst_price(item):

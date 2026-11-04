@@ -344,7 +344,10 @@ def fill_results(doc, now, cfg, sched_games, box_fn=None, deadline=None, budget=
                 continue
             players, teams_ = parsed
             p = players.get(r["pid"])
-            if p is None or p.get("toi") in (None, "00:00", "0:00"):
+            if not grade.played(p):
+                if now < start + timedelta(hours=cfg["ops"]["grade_shot_check_hold_hours"]) and \
+                        grade.dressed(gid, r["pid"], pbp_cache) is not False:
+                    continue                                 # same wait as grade.py (box may be incomplete)
                 r["result"] = {"actual": None, "over": "VOID", "under": "VOID", "note": "did not play", "at": at}
                 n += 1
                 continue

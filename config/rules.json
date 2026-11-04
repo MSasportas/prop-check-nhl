@@ -138,6 +138,7 @@
   "stats_retry_min": 10,
   "stats_lag_min": 10,
   "grade_shot_check_hold_hours": 24,
+  "regrade_window_hours": 48,
   "record_nights": 7,
   "pool_low_allowance": 2,
   "basic_cost_per_game": 2

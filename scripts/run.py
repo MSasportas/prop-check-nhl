@@ -328,7 +328,11 @@ class Run:
         self.events = self.events + new
         self.new_events += len(new)
         n = sum(1 for e in new if e["t"] == "graded")
+        c = sum(1 for e in new if e["t"] == "regraded")
         note = "%d graded" % n if n else "nothing to grade"
+        if c:
+            note += "; %d corrected" % c
+            n += c
         if notes:
             note += "; " + "; ".join(notes[:3])
         return {"status": "ok" if n else "skipped", "note": note}

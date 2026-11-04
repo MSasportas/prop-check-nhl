@@ -2,7 +2,11 @@
 
 For every game that has an ungraded pick: read the NHL boxscore. Only gameState "OFF" is final.
   shots -> player `sog`   points -> player `points`   (player fields never include the shootout)
-  not in the boxscore, or 00:00 ice time -> Void ("did not play")
+  not in the boxscore, or 00:00 ice time -> Void ("did not play"), but only once the play-by-play roster says he
+    was not dressed, or `grade_shot_check_hold_hours` after puck (2026-11-03: the box was read as OFF without
+    Dorofeyev's row, he had played 13:15, and the pick was voided by mistake)
+  a "did not play" Void is re-checked for `regrade_window_hours` after puck; if the box later shows ice time,
+    a `regraded` event is appended with the real result (the Void line stays in the log)
   game postponed or cancelled -> Void
   a whole-number tie with the line -> Push
 Graded at the worst price shown. A pick is graded once; running this again adds nothing.
@@ -60,6 +64,21 @@ def shots_trusted(game_id, team, teams, pbp_cache):
     return bool(pbp) and nhl.goalie_shots(pbp, team) == diff
 
 
+def dressed(game_id, pid, pbp_cache):
+    """True / False from the play-by-play roster (who dressed); None if it cannot be read."""
+    if game_id not in pbp_cache:
+        pbp_cache[game_id] = nhl.play_by_play(game_id)
+    pbp = pbp_cache[game_id]
+    spots = (pbp or {}).get("rosterSpots") if isinstance(pbp, dict) else None
+    if not spots:
+        return None
+    return any(r.get("playerId") == pid for r in spots)
+
+
+def played(p):
+    return p is not None and p.get("toi") not in (None, "00:00", "0:00")
+
+
 def grade(events, now, cfg, sched_games):
     """Returns (new events, notes). Appends nothing itself."""
     stake = cfg["values"]["stake"]
@@ -102,7 +121,12 @@ def grade(events, now, cfg, sched_games):
                 continue
             players, teams = parsed
             p = players.get(sh["player_id"])
-            if p is None or p.get("toi") in (None, "00:00", "0:00"):
+            if not played(p):
+                hold = timedelta(hours=cfg["ops"]["grade_shot_check_hold_hours"])
+                if now < start + hold and dressed(gid, sh["player_id"], pbp_cache) is not False:
+                    notes.append("player %s has no ice time in the %s box but may have dressed, waiting"
+                                 % (sh["player_id"], gid))
+                    continue
                 new += pre + [{"t": "graded", "id": it["id"], "at": at, "result": "VOID", "actual": None,
                                "actual_text": "did not play", "price": price, "units": 0.0}]
                 continue
@@ -124,6 +148,43 @@ def grade(events, now, cfg, sched_games):
             if note:
                 ev["note"] = note
             new += pre + [ev]
+
+    # corrections: a "did not play" Void whose player the box now shows with ice time
+    window = timedelta(hours=cfg["ops"].get("regrade_window_hours", 48))
+    hold = timedelta(hours=cfg["ops"]["grade_shot_check_hold_hours"])
+    for it in sorted(items.values(), key=lambda x: x["id"]):
+        g = it["graded"]
+        if it["kind"] != "single" or not record.is_dnp_void(g) or g.get("corrected"):
+            continue
+        sh = it["shown"]
+        start = common.parse_iso(sh["start"])
+        if start is None or now > start + window:
+            continue
+        gid = sh["game_id"]
+        box = nhl.boxscore(gid)
+        if not box or box.get("gameState") != "OFF" or box.get("gameScheduleState") in ("PPD", "CNCL"):
+            continue
+        parsed = read_box(box)
+        p = parsed[0].get(sh["player_id"]) if parsed else None
+        if not played(p):
+            continue
+        note = None
+        if sh["market"] == "shots" and not shots_trusted(gid, p["team"], parsed[1], pbp_cache):
+            if now < start + hold:
+                continue
+            note = "team shot total did not match the player rows"
+        actual = p.get(FIELD[sh["market"]])
+        if actual is None:
+            continue
+        res = result_for(sh["side"], sh["line"], actual)
+        price = g["price"]
+        ev = {"t": "regraded", "id": it["id"], "at": at, "result": res, "actual": actual,
+              "actual_text": "had %d (corrected)" % actual, "price": price,
+              "units": record.single_units(res, price, stake), "was": "VOID: did not play"}
+        if note:
+            ev["note"] = note
+        new.append(ev)
+        notes.append("corrected %s: %s" % (it["id"], res))
 
     # parlays: graded when every leg is graded
     items = record.fold(events + new)

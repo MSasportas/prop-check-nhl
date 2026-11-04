@@ -82,6 +82,7 @@ class GradeUnit(unittest.TestCase):
     def box(self, **kw):
         b = world.boxscore(G1, "CAR", "PHI", kw.pop("stats", {}), **kw)
         grade.nhl.boxscore = lambda gid: b
+        grade.nhl.play_by_play = lambda gid: world.roster_pbp(b)
         return b
 
     def test_win_loss_at_the_worst_price(self):
@@ -112,10 +113,55 @@ class GradeUnit(unittest.TestCase):
                 p["toi"] = "00:00"                                   # dressed, never took a shift
                 p["sog"] = 0
         b["awayTeam"]["sog"] -= 1
+        # the play-by-play roster says neither dressed: void now (a dressed player with no box row waits, below)
+        grade.nhl.play_by_play = lambda gid: {"rosterSpots": [{"playerId": 8480003, "teamId": 1}]}
         new, _ = grade.grade(ev, self.now, CFG, self.sched)
         g = {e["id"]: e for e in new if e["t"] == "graded"}
         for i in ("a", "b"):
             self.assertEqual((g[i]["result"], g[i]["units"], g[i]["actual_text"]), ("VOID", 0.0, "did not play"))
+
+    def test_missing_from_the_box_waits_unless_the_roster_says_scratched(self):
+        """2026-11-03: the box was OFF without Dorofeyev's row; he played 13:15. No void on the box alone."""
+        ev = [shown("a")]
+        self.box(missing=[8480001])
+        grade.nhl.play_by_play = lambda gid: None                    # roster unreadable: wait
+        new, notes = grade.grade(ev, self.now, CFG, self.sched)
+        self.assertEqual(new, [])
+        self.assertIn("may have dressed", notes[0])
+        grade.nhl.play_by_play = lambda gid: {"rosterSpots": [{"playerId": 8480001, "teamId": 1}]}
+        self.assertEqual(grade.grade(ev, self.now, CFG, self.sched)[0], [])   # dressed: wait
+        later = common.parse_iso("2026-10-12T19:30:00-04:00")       # past the 24h hold: void
+        new, _ = grade.grade(ev, later, CFG, self.sched)
+        self.assertEqual([e["actual_text"] for e in new if e["t"] == "graded"], ["did not play"])
+
+    def test_a_wrong_did_not_play_void_is_corrected_by_appending(self):
+        ev = [shown("a", side="under", price=130),
+              {"t": "locked", "id": "a", "at": "2026-10-11T19:00:00-04:00", "state": "locked_unconfirmed"},
+              {"t": "graded", "id": "a", "at": "2026-10-11T22:30:00-04:00", "result": "VOID", "actual": None,
+               "actual_text": "did not play", "price": 130, "units": 0.0}]
+        self.box(stats={8480001: (1, 0, 0)})                         # the box now has him: 1 shot
+        new, notes = grade.grade(ev, self.now, CFG, self.sched)
+        self.assertEqual(len(new), 1)
+        e = new[0]
+        self.assertEqual((e["t"], e["result"], e["actual"], e["price"], e["units"], e["actual_text"]),
+                         ("regraded", "W", 1, 130, 1.3, "had 1 (corrected)"))
+        it = record.fold(ev + new)["a"]
+        self.assertEqual((it["graded"]["result"], it["graded"]["units"]), ("W", 1.3))
+        self.assertEqual(it["graded"]["corrected"]["actual_text"], "did not play")
+        self.assertEqual(grade.grade(ev + new, self.now, CFG, self.sched), ([], []))   # corrected once
+        rec, _ = record.build_views(ev + new, CFG)
+        self.assertEqual((rec["summary"]["headline"]["w"], rec["summary"]["headline"]["void"]), (1, 0))
+        # outside the window nothing is read
+        grade.nhl.boxscore = lambda gid: self.fail("no box read after the window")
+        self.assertEqual(grade.grade(ev, common.parse_iso("2026-10-14T19:00:00-04:00"), CFG, self.sched), ([], []))
+
+    def test_regraded_only_corrects_a_did_not_play_void(self):
+        ev = [shown("a"),
+              {"t": "graded", "id": "a", "at": "x", "result": "L", "actual": 2, "actual_text": "had 2", "price": -120,
+               "units": -1.0},
+              {"t": "regraded", "id": "a", "at": "y", "result": "W", "actual": 3, "actual_text": "had 3", "price": -120,
+               "units": 0.83}]
+        self.assertEqual(record.fold(ev)["a"]["graded"]["result"], "L")
 
     def test_not_final_is_not_graded(self):
         ev = [shown("a")]

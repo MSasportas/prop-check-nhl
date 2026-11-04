@@ -121,8 +121,10 @@ class Sim:
         world.write(os.path.join(self.w["lineups"], teams.df_slug(team) + ".json"), world.df_page(team, updated_iso, **kw))
 
     def set_box(self, gid, away, home, stats_by_pid, **kw):
-        world.write(os.path.join(self.w["nhl"], "gamecenter_%s_boxscore.json" % gid),
-                    world.boxscore(gid, away, home, stats_by_pid, **kw))
+        box = world.boxscore(gid, away, home, stats_by_pid, **kw)
+        world.write(os.path.join(self.w["nhl"], "gamecenter_%s_boxscore.json" % gid), box)
+        pbp = os.path.join(self.w["nhl"], "gamecenter_%s_play-by-play.json" % gid)
+        world.write(pbp, world.roster_pbp(box))                     # who dressed = who has a box row
 
     # ---- model-aware prices
     def inputs(self):

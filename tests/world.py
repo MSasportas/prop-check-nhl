@@ -218,6 +218,19 @@ def boxscore(gid, away, home, stats_by_pid, state="OFF", missing=(), shootout=Fa
             "playerByGameStats": {"awayTeam": a, "homeTeam": h}}
 
 
+def roster_pbp(box):
+    """A play-by-play with only `rosterSpots`: everyone with a row in the boxscore dressed, nobody else."""
+    spots = []
+    for side in ("awayTeam", "homeTeam"):
+        tid = box[side]["id"]
+        for k, pos in (("forwards", "C"), ("defense", "D"), ("goalies", "G")):
+            for p in box["playerByGameStats"][side].get(k, []):
+                spots.append({"teamId": tid, "playerId": p["playerId"], "positionCode": pos})
+    return {"id": box["id"], "awayTeam": {"id": box["awayTeam"]["id"], "abbrev": box["awayTeam"]["abbrev"]},
+            "homeTeam": {"id": box["homeTeam"]["id"], "abbrev": box["homeTeam"]["abbrev"]},
+            "rosterSpots": spots, "plays": []}
+
+
 def df_page(team, updated_iso, out=(), gtd=(), missing=()):
     """A Daily Faceoff line-combination page (pageProps) for one team. out / gtd / missing: player indexes."""
     ps, rows = players(team), []
