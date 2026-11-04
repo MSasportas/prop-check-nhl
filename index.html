@@ -116,6 +116,9 @@ button{font:inherit;color:inherit;background:none;border:0;padding:0;margin:0;te
 .tagx{display:inline-flex;align-items:center;gap:3px;color:var(--fg2);white-space:nowrap}
 .tagx.ok{color:var(--good)}
 .tagx.new{color:var(--accent);font-weight:700;letter-spacing:.04em}
+.newlbl{position:absolute;top:-1px;right:-1px;padding:2px 7px 2px;border-radius:0 8px 0 6px;background:var(--accent);color:var(--on-accent);font:700 10.5px/14px var(--body);letter-spacing:.08em}
+.tile.isnew{border-color:var(--accent)}
+.tile.isnew .top{padding-right:30px}
 .tagx svg{flex:none}
 .own{display:inline-block;font:700 12px/16px var(--cond);letter-spacing:.06em;color:var(--fg);padding:0 4px;border:1px solid var(--line2);border-radius:3px;vertical-align:1px}
 /* settled track (segmented stepper, driven by the pick's real state): Early -> Lineup -> Locked */
@@ -789,6 +792,16 @@ function tilePrice(p) {
   return h('div', { class: 'row2' }, h('span', { class: 'bt', text: betShort(p) }),
     h('span', { class: 'pr' + (np ? ' noprice' : ''), text: np ? 'No price' : odds(p.price), title: np ? null : 'Hard Rock price' }));
 }
+/* NEW label: the open picks added in the most recent run that added picks (first_price_at within 10 min of the
+   newest), shown only when an older open pick is also on the board; plus anything new since this phone last looked. */
+function latestIds(d) {
+  var t = d.open.map(function (p) { return ms(p.first_price_at); }), mx = Math.max.apply(null, t.filter(function (x) { return x != null; }).concat([-Infinity]));
+  var out = {}, n = 0;
+  if (!isFinite(mx)) return out;
+  d.open.forEach(function (p, i) { if (t[i] != null && mx - t[i] <= 600000) { out[str(p.id)] = t[i]; n++; } });
+  return n < d.open.length ? out : {};
+}
+function isNewPick(id, d) { return !stale() && (S.newIds[id] || (d && latestIds(d)[id] != null)); }
 function pickCard(p, d, opts) {
   opts = opts || {};
   var mu = matchup(p, d.games), id = str(p.id), isOpen = !!S.expanded[id];
@@ -797,17 +810,20 @@ function pickCard(p, d, opts) {
   var ev = toggleBtnKeys(toggle); card.addEventListener('click', ev.click); card.addEventListener('keydown', ev.keydown);
 
   /* the tile: photo + name, bet + Hard Rock price, our chance vs what the price needs, how settled */
+  if (!opts.noNew && isNewPick(id, d)) {
+    var at = ms(p.first_price_at); card.classList.add('isnew');
+    card.appendChild(h('span', { class: 'newlbl', text: 'NEW', title: at != null ? 'Added ' + fStamp(p.first_price_at) : 'New since your last look' }));
+  }
   card.appendChild(tileTop(p));
   card.appendChild(tilePrice(p));
   card.appendChild(chanceVs(p));
   if (!isOpen) card.appendChild(h('div', { class: 'ft' },
     settledChip(p, true),
-    (p.price_final && !/^locked/.test(str(p.state))) ? h('span', { class: 'tagx ok' }, icon('check', 12), 'Price final') : null,
-    (S.newIds[id] && !opts.noNew && !stale()) ? h('span', { class: 'tagx new', text: 'NEW' }) : null));
+    (p.price_final && !/^locked/.test(str(p.state))) ? h('span', { class: 'tagx ok' }, icon('check', 12), 'Price final') : null));
   if (!isOpen) return card;
 
 
-  if (S.newIds[id] && !opts.noNew && !stale()) card.appendChild(h('div', { class: 'ft' }, h('span', { class: 'tagx new', text: 'NEW' })));
+  if (!opts.noNew && isNewPick(id, d) && ms(p.first_price_at) != null) card.appendChild(h('div', { class: 'ft' }, h('span', { class: 'tagx new', text: 'Added ' + fStamp(p.first_price_at) })));
   /* opened: the reason, the full settled track + Price final, the edge meter, when the price was read, the bet button */
   var x = h('div', { class: 'xp' });
   var pc = pctP(p), be = pctB(p), gd = isObj(p.guard) ? p.guard : {};
