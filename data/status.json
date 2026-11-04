@@ -1,10 +1,10 @@
 {
  "ok": true,
  "slate_date": "2026-11-03",
- "started_at": "2026-11-03T23:30:15-05:00",
- "status_at": "2026-11-03T23:30:15-05:00",
- "finished_at": "2026-11-03T23:30:16-05:00",
- "last_ok_at": "2026-11-03T23:30:15-05:00",
+ "started_at": "2026-11-03T23:50:01-05:00",
+ "status_at": "2026-11-03T23:50:01-05:00",
+ "finished_at": "2026-11-03T23:50:03-05:00",
+ "last_ok_at": "2026-11-03T23:50:01-05:00",
  "failed_step": null,
  "steps": [
   {
@@ -19,8 +19,8 @@
   },
   {
    "step": "stats",
-   "status": "skipped",
-   "note": "nothing new"
+   "status": "ok",
+   "note": "1 window(s) read, 2 team-games still missing"
   },
   {
    "step": "lineups",
@@ -154,16 +154,18 @@
   "Elias Pettersson"
  ],
  "excluded_teams": [],
- "stats_through": "2026-11-03",
+ "stats_through": "2026-11-02",
  "lineups_at": "2026-11-03T20:30:01-05:00",
  "lineups_note": "8 of 22 team line pages are dated today.",
  "games_today": 11,
  "record_events": 138,
- "odds_notes": [],
+ "odds_notes": [
+  "key 1 refused (401)"
+ ],
  "runner": {
   "event": "workflow_dispatch",
   "run_id": "41773567946",
-  "iteration": 1,
+  "iteration": 3,
   "chain_link": 214,
   "chain_started_at": "2026-10-28T10:00:15-04:00",
   "run_started_at": "2026-11-03T23:30:15-05:00"
