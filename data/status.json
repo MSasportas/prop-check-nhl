@@ -1,10 +1,10 @@
 {
  "ok": true,
  "slate_date": "2026-11-03",
- "started_at": "2026-11-03T19:30:00-05:00",
- "status_at": "2026-11-03T19:30:00-05:00",
- "finished_at": "2026-11-03T19:30:03-05:00",
- "last_ok_at": "2026-11-03T19:30:00-05:00",
+ "started_at": "2026-11-03T19:40:01-05:00",
+ "status_at": "2026-11-03T19:40:01-05:00",
+ "finished_at": "2026-11-03T19:40:03-05:00",
+ "last_ok_at": "2026-11-03T19:40:01-05:00",
  "failed_step": null,
  "steps": [
   {
@@ -24,18 +24,18 @@
   },
   {
    "step": "lineups",
-   "status": "skipped",
-   "note": "checked in the last 20 minutes"
+   "status": "ok",
+   "note": "4 of 4 team pages read"
   },
   {
    "step": "lineup_history",
-   "status": "skipped",
-   "note": "no change"
+   "status": "ok",
+   "note": "1 team(s) changed"
   },
   {
    "step": "odds",
    "status": "ok",
-   "note": "1 game(s) priced"
+   "note": "no pull due"
   },
   {
    "step": "market_menu",
@@ -44,8 +44,8 @@
   },
   {
    "step": "featured",
-   "status": "ok",
-   "note": "sides/totals for 2 game(s), 10 book(s) max, 3 credit(s)"
+   "status": "skipped",
+   "note": "no new shots read to match"
   },
   {
    "step": "book_probe",
@@ -55,12 +55,12 @@
   {
    "step": "gapguard",
    "status": "ok",
-   "note": "gap+guard: 2 flag"
+   "note": "gap+guard: nothing new"
   },
   {
    "step": "engine",
    "status": "ok",
-   "note": "3 new event(s), 2 newly shown"
+   "note": "no change"
   },
   {
    "step": "grade",
@@ -69,8 +69,8 @@
   },
   {
    "step": "shadow",
-   "status": "ok",
-   "note": "32 line read(s) logged"
+   "status": "skipped",
+   "note": "nothing new"
   },
   {
    "step": "gg_grade",
@@ -84,8 +84,8 @@
   },
   {
    "step": "record",
-   "status": "ok",
-   "note": "record.json"
+   "status": "skipped",
+   "note": "unchanged"
   }
  ],
  "sources": {
@@ -155,15 +155,17 @@
  ],
  "excluded_teams": [],
  "stats_through": "2026-11-02",
- "lineups_at": "2026-11-03T19:20:00-05:00",
+ "lineups_at": "2026-11-03T19:40:01-05:00",
  "lineups_note": "8 of 22 team line pages are dated today.",
  "games_today": 11,
  "record_events": 130,
- "odds_notes": [],
+ "odds_notes": [
+  "key 1 refused (401)"
+ ],
  "runner": {
   "event": "workflow_dispatch",
   "run_id": "41746032083",
-  "iteration": 2,
+  "iteration": 3,
   "chain_link": 209,
   "chain_started_at": "2026-10-28T10:00:15-04:00",
   "run_started_at": "2026-11-03T19:20:14-05:00"
