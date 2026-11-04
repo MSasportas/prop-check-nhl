@@ -1,5 +1,30 @@
 # LOG.md: Researcher runs (newest first)
 
+- 2026-11-04 ~8:30 AM ET (Researcher run 20, daily; SHOTS ON GOAL ONLY). No key used, no historical odds pull. HH1-HH3 + forward Q21a-b registered
+  and pushed (3e76dea) before any test ran. Free NHL api-web play-by-play with blocker ids (r20/fetch20.py, 945 games Oct 7 - Feb 28) and stats
+  REST skater per-game logs (r14/fetch14.py, Feb 28 cut-off) fetched to scratch; lockbox not fetched. Script research/code/r20/hh20.py, output
+  hh20_results.txt. 10,413 graded Nov-Feb lines.
+  - HH1 short last game (TOI < 60% of his norm, now playing): T=.01 -7.1% n295 to -23.1% n94 (all Nov); HH1r OVER -52% n8. Only 8 such lines
+    exist: players who leave early mostly miss the next game or get no Hard Rock line. Nothing to use.
+  - HH2 shooting lanes (his blocked share x opponent's blocking): -14.0% n203 to +23.6% n16 (Nov only); HH2r OVER for lane-blocked shooters vs
+    teams that don't block -6.7% n285 p .90, folds -26/+16/-4/-16. Inside the price.
+  - HH3 opponent off a 3+ goal loss: -8.3% n194 / -9.7% n128; HH3r UNDER -6.2% n1,973 [-9.8,-2.3], every fold negative. No tightening effect.
+  - Forward re-score (run_all.sh, 16 nights Oct 19 - Nov 3; clone unshallowed): Q1a +4.1% n621 p .11; Q1b +8.8% n461 [+3,+15] p .010 CLV
+    +3.4% (bar .0033: missed, slipping since Nov 2: Nov 3 72 bets -2.1u); Q1g +11.6% n390 p .0045 (missed); Q1c +9.9% n330 p .013 (n past 300,
+    p misses); Q1h +12.8% n277; Q1k Pinnacle +8.2% n458 (CLV +1.3%); Q1l +12.5% n266; Q1m +12.8% n55. Q1b read A +16.0% n265 vs B/C -0.8%
+    n196; unders +11.8% n375, overs -4.1% n86. Q6a/b/c +3.8% n270 / +2.0% n198 / +6.8% n376. Q8a-c -11.0% / +1.1% / +5.6%. Q9a-c +1.7% /
+    +0.7% / +12.7% n30. Q10 +6.4% n36. Q11a +5.7% n107, Q11b +12.0% n223. Q12 (>= 5% vs Pinnacle at C) 3-9 -6.0u n12. Q13 1-6 -5.1u n7.
+    Q15a +3.9% n87, Q15b -8.8% n55. Q16a +9.3% n64, Q16b (flag 1 PM, bet at 90 min) +0.9% n71. Q17a -8.2% n16, Q17c -0.6% n77. Q18a +2.8%
+    n17, Q18b -7.9% n13. Q19 forward 0-2. Q20a (1 PM + product guard) -6.8% n34, Q20b (guard vetoes) +18.1% n12: first night only.
+    Q2a/b 0 bets. New Q21a-b (Q1b at 1 PM split by hours to puck) start tonight; seen-night code check (not a result, registered before it
+    ran): puck >= 6.5 h after the 1 PM read +26.4% n148, < 6.5 h +2.9% n117.
+  12 historical variants (~0.6 false positives expected), all-time 472; forward 40. Lockbox looks: 2 (unchanged; next needs p < 0.0167).
+  **Verdict: nothing passed; no candidate for the Sharp.** Short last games, shooting lanes and post-blowout opponents are inside Hard Rock's
+  price. Forward: every Q1 cut now misses its bar; the edge keeps shrinking toward the 1 PM read on late games (seen, so only Q21 can say), and
+  the B/C reads the product bets are flat (-0.8% n196). Q16b (move the 1 PM flag to the 90-min price) is now +0.9% n71: the gap does not
+  survive to B so far.
+  Next: (1) Q21a forward (is the 1 PM gap a late-game gap?); (2) Q20a forward (does it survive the guard?); (3) a forward test of Q1b unders
+    at A by Hard Rock line age (minutes since Hard Rock last changed the price), registered before looking.
 - 2026-11-03 ~8:15 AM ET (Researcher run 19, daily; SHOTS ON GOAL ONLY). No key used, no historical odds pull. GG1-GG3 + forward Q20a-b registered
   and pushed (f4cbe9d) before any test ran. Free NHL api-web play-by-play for all 945 games Oct 7 - Feb 28 (r17/fetch17.py) and player
   birth dates (r19/fetch19.py) fetched to scratch; lockbox not fetched. Script research/code/r19/gg19.py, output gg19_results.txt.
