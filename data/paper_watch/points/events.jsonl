@@ -43,3 +43,5 @@
 {"t":"grade","id":"2026-11-03:2026020243:8479385:0.5:over","result":"W","units":1.0,"actual":3,"price":100,"at":"2026-11-03T22:20:00-05:00","v":1}
 {"t":"grade","id":"2026-11-03:2026020240:8482745:0.5:over","result":"VOID","units":0.0,"actual":null,"price":115,"at":"2026-11-03T22:30:00-05:00","v":1}
 {"t":"grade","id":"2026-11-03:2026020244:8482660:0.5:over","result":"VOID","units":0.0,"actual":null,"price":110,"at":"2026-11-03T22:30:00-05:00","v":1}
+{"t":"regrade","id":"2026-11-03:2026020240:8482745:0.5:over","result":"L","units":-1.0,"actual":0,"price":115,"was":"VOID: did not play","at":"2026-11-04T07:00:00-05:00","v":1}
+{"t":"regrade","id":"2026-11-03:2026020244:8482660:0.5:over","result":"W","units":1.1,"actual":1,"price":110,"was":"VOID: did not play","at":"2026-11-04T07:00:00-05:00","v":1}
