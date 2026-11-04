@@ -126,7 +126,7 @@ class LinkEndToEnd(unittest.TestCase):
         finally:
             s.close()
 
-    def test_slate_gets_hard_rock_share_link_and_draftkings_link(self):
+    def test_slate_gets_hard_rock_share_link_and_no_draftkings_link(self):
         """2026-11-02: Matt confirmed share.hardrock.bet/Pt0T/bet?deep_link_value=hardrock://betslip/<id> fills the slip."""
         s = Sim(pool=12)
         try:
@@ -152,11 +152,9 @@ class LinkEndToEnd(unittest.TestCase):
             hrl = pick["links"]["hardrock"]
             self.assertTrue(hrl["url"].startswith(odds.HR_SHARE + "90750947701829144"), hrl)
             self.assertEqual(hrl["url"], odds.HR_SHARE + hrl["id"])
-            if "draftkings" in oth:
-                dk = pick["links"]["draftkings"]
-                self.assertTrue(dk["url"].startswith(odds.DK_PREFIX))
-                self.assertIsInstance(dk["price"], int)
+            self.assertIsNone(pick["links"]["draftkings"])          # 2026-11-03: no DraftKings button (DK pays worse on our picks)
             line = notify.bet_buttons(pick)
+            self.assertNotIn("DraftKings", line)
             self.assertIn("[Hard Rock %s](<%s>)" % (common.fmt_price(pick["price"]), hrl["url"]), line)
             self.assertNotIn("other.example", json.dumps(pick))
         finally:

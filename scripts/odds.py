@@ -752,7 +752,8 @@ _safe_link = safe_link
 
 # ---- bet-slip links (2026-11-02, Matt tested on his phone: the share format below fills the Hard Rock slip; the feed's own
 # app.hardrock.bet/?deep_link_value=betslip/<id> link only opened the app)
-LINK_OTHER_BOOKS = ("draftkings",)                       # other books whose outcome links are kept (shown as a second button)
+LINK_OTHER_BOOKS = ()   # other books whose outcome links are kept. DraftKings removed 2026-11-03 (Matt): DK paid worse on all 34
+                        # of our graded picks it had (research/code/dk_same_rules.py), so its button was a worse-price trap
 HR_SHARE = "https://share.hardrock.bet/Pt0T/bet?deep_link_value=hardrock://betslip/"
 _HR_ID = re.compile(r"betslip/(\d{6,24})(?!\d)")
 DK_PREFIX = "https://sportsbook.draftkings.com/"
@@ -788,14 +789,14 @@ def bet_links(doc, game_id, market, pid, line, side):
                     if hid:
                         out["hardrock"] = {"id": hid, "url": hardrock_slip([hid])}
                     break
-        if out["draftkings"] is None:
+        if out["draftkings"] is None and "draftkings" in LINK_OTHER_BOOKS:
             for o in (((f.get("others") or {}).get("draftkings") or {}).get(market) or {}).get("outcomes") or []:
                 if o.get("pid") == pid and o.get("line") == line and o.get("side") == side:
                     u = _dk_link(o.get("link"))
                     if u:
                         out["draftkings"] = {"url": u, "price": o.get("price")}
                     break
-        if out["hardrock"] and out["draftkings"]:
+        if out["hardrock"] and (out["draftkings"] or "draftkings" not in LINK_OTHER_BOOKS):
             break
     return out
 
