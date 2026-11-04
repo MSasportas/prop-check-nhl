@@ -64,6 +64,25 @@ STEPS = ["rules", "schedule", "stats", "lineups", "lineup_history", "odds", "mar
 SOFT = ("lineup_history", "market_menu", "featured", "book_probe", "shadow", "gg_grade")              # team logs: a failure is a "warn", never a failed run
 
 
+def save_headshots(people):
+    """data/headshots.json: {NHL player id: NHL photo link}, from the roster reads. Display only, never
+    touches picks or the Record. Links are refreshed when the NHL changes them (new season, trade)."""
+    try:
+        path = common.dpath("headshots.json")
+        cur = common.read_json(path, {}) or {}
+        if not isinstance(cur, dict):
+            cur = {}
+        new = dict(cur)
+        for p in people or []:
+            u = p.get("headshot")
+            if p.get("id") is not None and isinstance(u, str) and u.startswith("https://assets.nhle.com/"):
+                new[str(p["id"])] = u
+        if new != cur:
+            common.write_json(path, dict(sorted(new.items())), pretty=False)
+    except Exception:   # photos are a nice-to-have; never fail a run over them
+        pass
+
+
 class Run:
     def __init__(self, cfg, now, only=None, dry_run=False, readonly=False):
         self.now, self.only, self.dry_run = now, only, dry_run
@@ -188,6 +207,7 @@ class Run:
             if ppl and not self.readonly:
                 saved["teams"][team] = ppl
                 common.write_json(path, saved, pretty=False)
+                save_headshots(ppl)
         ppl = list(ppl or [])
         self.load_stats()
         have = {p["id"] for p in ppl}

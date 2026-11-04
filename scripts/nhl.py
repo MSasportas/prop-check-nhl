@@ -94,8 +94,11 @@ def roster(team):
     try:
         for grp, pos in (("forwards", "F"), ("defensemen", "D"), ("goalies", "G")):
             for x in js.get(grp, []):
-                out.append({"id": x["id"], "first": x["firstName"]["default"], "last": x["lastName"]["default"],
-                            "team": team, "pos": pos})
+                row = {"id": x["id"], "first": x["firstName"]["default"], "last": x["lastName"]["default"],
+                       "team": team, "pos": pos}
+                if isinstance(x.get("headshot"), str) and x["headshot"].startswith("https://assets.nhle.com/"):
+                    row["headshot"] = x["headshot"]   # NHL's own photo link; the page shows it next to the pick
+                out.append(row)
     except (KeyError, TypeError):
         return None
     return out or None
