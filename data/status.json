@@ -1,10 +1,10 @@
 {
  "ok": true,
  "slate_date": "2026-11-03",
- "started_at": "2026-11-03T23:00:01-05:00",
- "status_at": "2026-11-03T23:00:01-05:00",
- "finished_at": "2026-11-03T23:00:05-05:00",
- "last_ok_at": "2026-11-03T23:00:01-05:00",
+ "started_at": "2026-11-03T23:10:01-05:00",
+ "status_at": "2026-11-03T23:10:01-05:00",
+ "finished_at": "2026-11-03T23:10:02-05:00",
+ "last_ok_at": "2026-11-03T23:10:01-05:00",
  "failed_step": null,
  "steps": [
   {
@@ -20,7 +20,7 @@
   {
    "step": "stats",
    "status": "ok",
-   "note": "1 window(s) read, 2 team-games still missing"
+   "note": "1 window(s) read"
   },
   {
    "step": "lineups",
@@ -69,13 +69,13 @@
   },
   {
    "step": "shadow",
-   "status": "skipped",
-   "note": "nothing new"
+   "status": "ok",
+   "note": "38 graded"
   },
   {
    "step": "gg_grade",
    "status": "ok",
-   "note": "gap+guard: nothing new"
+   "note": "gap+guard: 1 grade"
   },
   {
    "step": "slate",
@@ -154,7 +154,7 @@
   "Elias Pettersson"
  ],
  "excluded_teams": [],
- "stats_through": "2026-11-02",
+ "stats_through": "2026-11-03",
  "lineups_at": "2026-11-03T20:30:01-05:00",
  "lineups_note": "8 of 22 team line pages are dated today.",
  "games_today": 11,
@@ -163,7 +163,7 @@
  "runner": {
   "event": "workflow_dispatch",
   "run_id": "41768532151",
-  "iteration": 3,
+  "iteration": 4,
   "chain_link": 213,
   "chain_started_at": "2026-10-28T10:00:15-04:00",
   "run_started_at": "2026-11-03T22:40:17-05:00"
