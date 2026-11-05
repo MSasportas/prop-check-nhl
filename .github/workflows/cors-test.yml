@@ -4,40 +4,22 @@ jobs:
   probe:
     runs-on: ubuntu-latest
     steps:
-      - name: Compare ESPN box columns with the NHL box, same moment
+      - run: npm i -s playwright@1.47.2 && npx -y playwright@1.47.2 install --with-deps chromium >/dev/null 2>&1
+      - name: Real site, real ESPN, phone-sized browser
         run: |
-          python3 - <<'PY'
-          import json, urllib.request, unicodedata, re
-          def get(u):
-              with urllib.request.urlopen(urllib.request.Request(u, headers={"User-Agent": "Mozilla/5.0"}), timeout=20) as r: return json.load(r)
-          def key(n):
-              n = unicodedata.normalize("NFKD", n).encode("ascii", "ignore").decode().lower()
-              p = re.sub(r"[^a-z ]", "", n).split(); return (p[0][0] + " " + p[-1]) if p else n
-          sb = get("https://site.api.espn.com/apis/site/v2/sports/hockey/nhl/scoreboard")
-          nhl = get("https://api-web.nhle.com/v1/score/now")
-          print("ESPN abbrevs:", sorted({c["team"]["abbreviation"] for e in sb["events"] for c in e["competitions"][0]["competitors"]}))
-          for e in sb["events"]:
-              if e["status"]["type"]["state"] not in ("in", "post"): continue
-              ab = {c["team"]["abbreviation"] for c in e["competitions"][0]["competitors"]}
-              g = next((g for g in nhl["games"] if {g["awayTeam"]["abbrev"], g["homeTeam"]["abbrev"]} & ab), None)
-              if not g: print("no NHL match", ab); continue
-              es = get(f"https://site.api.espn.com/apis/site/v2/sports/hockey/nhl/summary?event={e['id']}")
-              nb = get(f"https://api-web.nhle.com/v1/gamecenter/{g['id']}/boxscore")
-              nsog = {}
-              for side in ("awayTeam", "homeTeam"):
-                  for grp in ("forwards", "defense"):
-                      for p in nb["playerByGameStats"][side][grp]: nsog[key(p["name"]["default"])] = p.get("sog")
-              agree = {"S": 0, "SOG": 0, "S+SM": 0}; n = 0; miss = []
-              for t in es["boxscore"]["players"]:
-                  for grp in t["statistics"]:
-                      lab = grp.get("labels") or grp.get("keys")
-                      if "S" not in lab: continue
-                      for a in grp["athletes"]:
-                          st = dict(zip(lab, a.get("stats", []))); k = key(a["athlete"]["displayName"])
-                          if k not in nsog: miss.append(a["athlete"]["displayName"]); continue
-                          n += 1; v = nsog[k]
-                          agree["S"] += str(v) == st.get("S"); agree["SOG"] += str(v) == st.get("SOG")
-                          try: agree["S+SM"] += v == int(st.get("S")) + int(st.get("SM"))
-                          except Exception: pass
-              print(e["shortName"], e["status"]["type"]["state"], "players matched", n, "agree", agree, "unmatched", miss[:5])
-          PY
+          sleep 150
+          cat > t.js <<'JS'
+          const { chromium, devices } = require('playwright');
+          (async () => { const b = await chromium.launch(); const ctx = await b.newContext({ ...devices['iPhone 13'] }); const pg = await ctx.newPage();
+            const espn = []; pg.on('response', r => { if (/espn\.com/.test(r.url())) espn.push(r.status() + ' ' + r.url().slice(0, 110)); });
+            pg.on('pageerror', e => console.log('PAGEERROR', e.message));
+            await pg.goto('https://msasportas.github.io/prop-check-nhl/?v=' + Date.now() + '#live', { waitUntil: 'networkidle' });
+            const has = await pg.evaluate(() => typeof espnPoll === 'function'); console.log('new code loaded:', has);
+            for (let i = 0; i < 2; i++) { await pg.waitForTimeout(35000);
+              console.log('t+' + (i + 1) * 35 + 's', await pg.evaluate(() => [...document.querySelectorAll('.lv')].map(x => x.innerText.replace(/\s+/g, ' ')).join(' || ') + ' ## ' + ((document.querySelector('.lvon') || {}).innerText || 'no live line') + ' ## ' + ((document.querySelector('.lvnote') || {}).innerText || ''))); }
+            console.log('ESPN calls:\n' + espn.join('\n'));
+            await pg.screenshot({ path: 'live.png' }); await b.close(); })();
+          JS
+          node t.js
+      - uses: actions/upload-artifact@v4
+        with: { name: shot, path: live.png, retention-days: 1 }
