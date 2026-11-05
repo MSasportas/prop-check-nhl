@@ -1,6 +1,153 @@
 {
  "nights": [
   {
+   "date": "2026-10-27",
+   "graded": true,
+   "w": 5,
+   "l": 1,
+   "units": 3.9,
+   "entries": [
+    {
+     "id": "2026-10-27:2026020194:8479314:shots:2.5:under",
+     "kind": "single",
+     "player": "M. Tkachuk",
+     "bet": "Under 2.5 shots on goal",
+     "market": "shots",
+     "team": "FLA",
+     "game": "FLA at WPG",
+     "price": 105,
+     "first_price": 105,
+     "last_price": 105,
+     "prices": [
+      {
+       "price": 105,
+       "at": "2026-10-27T18:30:00-04:00"
+      }
+     ],
+     "result": "W",
+     "actual": "had 1",
+     "units": 1.05,
+     "pulled": null,
+     "legs": []
+    },
+    {
+     "id": "2026-10-27:2026020197:8481605:shots:1.5:under",
+     "kind": "single",
+     "player": "J. LaCombe",
+     "bet": "Under 1.5 shots on goal",
+     "market": "shots",
+     "team": "ANA",
+     "game": "VAN at ANA",
+     "price": 120,
+     "first_price": 120,
+     "last_price": 120,
+     "prices": [
+      {
+       "price": 120,
+       "at": "2026-10-27T20:30:01-04:00"
+      }
+     ],
+     "result": "W",
+     "actual": "had 1",
+     "units": 1.2,
+     "pulled": null,
+     "legs": []
+    },
+    {
+     "id": "2026-10-27:2026020189:8476921:shots:1.5:under",
+     "kind": "single",
+     "player": "J. Martinook",
+     "bet": "Under 1.5 shots on goal",
+     "market": "shots",
+     "team": "CAR",
+     "game": "BOS at CAR",
+     "price": -110,
+     "first_price": -110,
+     "last_price": -110,
+     "prices": [
+      {
+       "price": -110,
+       "at": "2026-10-27T18:30:00-04:00"
+      }
+     ],
+     "result": "W",
+     "actual": "had 1",
+     "units": 0.9091,
+     "pulled": null,
+     "legs": []
+    },
+    {
+     "id": "2026-10-27:2026020197:8475798:shots:2.5:under",
+     "kind": "single",
+     "player": "M. Granlund",
+     "bet": "Under 2.5 shots on goal",
+     "market": "shots",
+     "team": "ANA",
+     "game": "VAN at ANA",
+     "price": -145,
+     "first_price": -145,
+     "last_price": -145,
+     "prices": [
+      {
+       "price": -145,
+       "at": "2026-10-27T20:30:01-04:00"
+      }
+     ],
+     "result": "W",
+     "actual": "had 2",
+     "units": 0.6897,
+     "pulled": null,
+     "legs": []
+    },
+    {
+     "id": "2026-10-27:2026020198:8476885:shots:1.5:over",
+     "kind": "single",
+     "player": "J. Trouba",
+     "bet": "Over 1.5 shots on goal",
+     "market": "shots",
+     "team": "SJS",
+     "game": "BUF at SJS",
+     "price": 105,
+     "first_price": 105,
+     "last_price": 105,
+     "prices": [
+      {
+       "price": 105,
+       "at": "2026-10-27T21:00:00-04:00"
+      }
+     ],
+     "result": "L",
+     "actual": "had 1",
+     "units": -1.0,
+     "pulled": null,
+     "legs": []
+    },
+    {
+     "id": "2026-10-27:2026020191:8480023:shots:1.5:under",
+     "kind": "single",
+     "player": "R. Thomas",
+     "bet": "Under 1.5 shots on goal",
+     "market": "shots",
+     "team": "STL",
+     "game": "MTL at STL",
+     "price": 105,
+     "first_price": 105,
+     "last_price": 105,
+     "prices": [
+      {
+       "price": 105,
+       "at": "2026-10-27T18:30:00-04:00"
+      }
+     ],
+     "result": "W",
+     "actual": "had 0",
+     "units": 1.05,
+     "pulled": null,
+     "legs": []
+    }
+   ]
+  },
+  {
    "date": "2026-10-26",
    "graded": true,
    "w": 1,

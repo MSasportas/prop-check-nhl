@@ -1,12 +1,12 @@
 {
  "slate_date": "2026-11-04",
- "generated_at": "2026-11-04T20:20:00-05:00",
- "status_at": "2026-11-04T20:20:00-05:00",
+ "generated_at": "2026-11-04T20:30:00-05:00",
+ "status_at": "2026-11-04T20:30:00-05:00",
  "valid_until": "2026-11-05T05:00:00-05:00",
  "status": {
   "prices_state": "ok",
-  "prices_at": "2026-11-04T18:50:01-05:00",
-  "next_price_read_at": "2026-11-04T20:30:00-05:00",
+  "prices_at": "2026-11-04T20:30:00-05:00",
+  "next_price_read_at": "2026-11-04T21:15:00-05:00",
   "stats_built_at": "2026-11-04T00:40:00-05:00",
   "stats_through": "2026-11-03",
   "lineups_at": "2026-11-04T20:20:00-05:00",
@@ -16,27 +16,23 @@
   "stats_state": "ok",
   "last_run": {
    "ok": true,
-   "at": "2026-11-04T20:20:00-05:00",
+   "at": "2026-11-04T20:30:00-05:00",
    "failed_step": null
   },
   "pool": {
-   "pulls_left": 4227,
+   "pulls_left": 4220,
    "keys": 10,
    "game_days_left": 25,
    "days_left": 27,
    "low": false
   },
   "excluded_teams": [],
-  "lines_checked": 35,
-  "flag_reads": 2,
+  "lines_checked": 71,
+  "flag_reads": 4,
   "tier": 4
  },
  "banners": [],
- "empty": {
-  "code": "none_qualified",
-  "text": "No picks yet today",
-  "sub": "35 lines read, none cleared both checks. Next read at 8:30 PM."
- },
+ "empty": null,
  "games": [
   {
    "id": 2026020247,
@@ -154,11 +150,15 @@
      {
       "pull": "A",
       "at": "2026-11-04T13:00:01-05:00"
+     },
+     {
+      "pull": "B",
+      "at": "2026-11-04T20:30:00-05:00"
      }
     ],
     "next_read": {
-     "pull": "B",
-     "at": "2026-11-04T20:30:00-05:00"
+     "pull": "C",
+     "at": "2026-11-04T21:15:00-05:00"
     },
     "lineups_at": {
      "away": null,
@@ -195,11 +195,15 @@
      {
       "pull": "A",
       "at": "2026-11-04T13:00:01-05:00"
+     },
+     {
+      "pull": "B",
+      "at": "2026-11-04T20:30:00-05:00"
      }
     ],
     "next_read": {
-     "pull": "B",
-     "at": "2026-11-04T20:30:00-05:00"
+     "pull": "C",
+     "at": "2026-11-04T21:15:00-05:00"
     },
     "lineups_at": {
      "away": null,
@@ -208,12 +212,76 @@
    },
    "started": false,
    "reads_done": false,
-   "picks": 0,
+   "picks": 1,
    "excluded_reason": null,
    "excluded_teams": []
   }
  ],
- "picks": [],
+ "picks": [
+  {
+   "id": "2026-11-04:2026020250:8482679:shots:2.5:over",
+   "price": 130,
+   "first_price": 130,
+   "first_price_at": "2026-11-04T20:30:00-05:00",
+   "worst_price": 130,
+   "p": 0.4555,
+   "breakeven": 0.4348,
+   "p_pct": 45,
+   "breakeven_pct": 43,
+   "state": "early",
+   "history": [
+    {
+     "at": "2026-11-04T20:30:00-05:00",
+     "text": "Early: lineup not confirmed"
+    }
+   ],
+   "prices": [
+    {
+     "at": "2026-11-04T20:30:00-05:00",
+     "price": 130
+    }
+   ],
+   "pulled": null,
+   "price_final": false,
+   "graded": null,
+   "rank": 1,
+   "tier": "main",
+   "game_id": 2026020250,
+   "player": "M. Coronato",
+   "player_id": 8482679,
+   "team": "CGY",
+   "opp": "SEA",
+   "home": false,
+   "start": "2026-11-04T22:00:00-05:00",
+   "market": "shots",
+   "line": 2.5,
+   "side": "over",
+   "bet": "Over 2.5 shots on goal",
+   "price_at": "2026-11-04T20:30:00-05:00",
+   "gap_pct": 5.9,
+   "market_fair_pct": 46.1,
+   "n_books": 8,
+   "guard": {
+    "verdict": "agrees",
+    "ours_pct": 45.6,
+    "model_pct": 41.9
+   },
+   "settled": "early",
+   "settled_label": "Early",
+   "reason": "8 other books say 46.1%; Hard Rock's +130 only needs 43.5%. Our model agrees (our blend: 45.5%).",
+   "link": "https://app.hardrock.bet/?deep_link_value=betslip/5735514675676840352",
+   "links": {
+    "hardrock": {
+     "id": "5735514675676840352",
+     "url": "https://share.hardrock.bet/Pt0T/bet?deep_link_value=hardrock://betslip/5735514675676840352"
+    },
+    "draftkings": null
+   },
+   "thin": false,
+   "games_used": 95,
+   "games_this_season": 15
+  }
+ ],
  "parlays": [],
  "parlays_note": "Parlays are not offered: there is no evidence for them yet."
 }
