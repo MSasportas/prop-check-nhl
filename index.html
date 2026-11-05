@@ -116,6 +116,7 @@ button{font:inherit;color:inherit;background:none;border:0;padding:0;margin:0;te
 .tagx{display:inline-flex;align-items:center;gap:3px;color:var(--fg2);white-space:nowrap}
 .tagx.ok{color:var(--good)}
 .tagx.new{color:var(--accent);font-weight:700;letter-spacing:.04em}
+.lvon{margin:-4px 0 10px;color:var(--muted);font-size:13px}
 .newlbl{position:absolute;top:-1px;right:-1px;padding:2px 7px 2px;border-radius:0 8px 0 6px;background:var(--accent);color:var(--on-accent);font:700 10.5px/14px var(--body);letter-spacing:.08em}
 .tile.isnew{border-color:var(--accent)}
 .tile.isnew .top{padding-right:30px}
@@ -647,7 +648,7 @@ function writeSeen() {
 function calcKey() {
   var d = S.slate ? split() : null, ls = Object.keys(S.labSum).map(function (k) { return k + (S.labSum[k] && S.labSum[k].generated_at); }).join();
   return JSON.stringify([S.loaded, S.loadErr, S.fetchFail, S.recordErr, S.slate && S.slate.generated_at, S.slate && S.slate.status_at, S.record && S.record.generated_at,
-    S.live && S.live.generated_at, ls, S.lab && S.lab.updated, S.view,
+    S.live && S.live.generated_at, S.espn && S.espn.at, ls, S.lab && S.lab.updated, S.view,
     S.rules && S.rules.version, S.rules && S.rules.updated, S.slate && expired(), S.slate && stale(),
     d ? d.started.length : 0, d ? d.board.length : 0, S.slate ? dayKey(now()) : 0, liveStale()]);
 }
@@ -1010,9 +1011,88 @@ function smallFoot() {
   return h('footer', { class: 'foot' }, h('p', { text: 'For adults 21+. Picks are estimates, not guarantees. Gambling problem? Call 1-888-ADMIT-IT.' }));
 }
 
+/* ---------- ESPN live feed (display only) ----------
+   While a game with a pick is on and the page is open, the phone reads ESPN's public scoreboard + box score every 30 s
+   (ESPN allows browser reads: Access-Control-Allow-Origin *). Tested 11/4/2026: ESPN "S" = NHL shots on goal for 72/72
+   skaters. It only paints the Live tab; grading and the Record still come from the NHL box in the 10-minute run, and
+   live.json stays the fallback when ESPN can't be read. */
+var ESPN = 'https://site.api.espn.com/apis/site/v2/sports/hockey/nhl/';
+var ESPN_ON = !FIX || Q.get('espn') === '1';
+var ESPN_EVERY = 30000, ESPN_FRESH_MIN = 3;
+var ESPN_TEAM = { LA: 'LAK', SJ: 'SJS', TB: 'TBL', NJ: 'NJD', UTAH: 'UTA', WAS: 'WSH', MON: 'MTL', CLB: 'CBJ', NAS: 'NSH', ARI: 'ARI' };
+S.espn = null;   /* {at, games: {nhl game id: live-game shape}, stats: {pick id: n}} */
+function espnTeam(a) { a = str(a).toUpperCase(); return ESPN_TEAM[a] || a; }
+function nameKey(n) {
+  var t = str(n).normalize('NFKD').replace(/[\u0300-\u036f]/g, '').toLowerCase().replace(/[^a-z. ]/g, ' ')
+    .replace(/\b(jr|sr|ii|iii|iv)\.?$/, '').trim().split(/[\s.]+/).filter(Boolean);
+  return t.length ? t[0][0] + ' ' + t[t.length - 1] : '';
+}
+function espnGameShape(ev, nhlId) {
+  var st = isObj(ev.status) ? ev.status : {}, ty = isObj(st.type) ? st.type : {}, c = arr(ev.competitions)[0] || {}, side = {};
+  arr(c.competitors).forEach(function (x) { if (isObj(x) && isObj(x.team)) side[x.homeAway] = { abbrev: espnTeam(x.team.abbreviation), score: x.score != null && x.score !== '' ? +x.score : null }; });
+  var per = num(st.period), state = ty.state === 'post' || ty.completed ? 'FINAL' : ty.state === 'in' ? 'LIVE' : 'PRE';
+  return { game_id: nhlId, state: state, period: per, period_type: per == null ? '' : per <= 3 ? 'REG' : (per >= 5 && !/OT/i.test(str(ty.shortDetail || ty.detail)) ? 'SO' : 'OT'),
+    clock: str(st.displayClock), in_intermission: /END_PERIOD|INTERMISSION/.test(str(ty.name)) && state === 'LIVE',
+    away: side.away || null, home: side.home || null, source: 'espn' };
+}
+function espnGet(u) {
+  return fetch(u, { cache: 'no-store', credentials: 'omit' }).then(function (r) { if (!r.ok) throw new Error('http ' + r.status); return r.json(); });
+}
+var espnBusy = false;
+function espnPoll() {
+  if (!ESPN_ON || espnBusy || document.hidden || !S.slate || expired() || !window.fetch) return;
+  var d = split(), want = d.started.filter(function (p) { return !isObj(p.graded) && !isFinalGame(liveGame(p.game_id, true)); });
+  if (!want.length) return;
+  espnBusy = true;
+  var day = str(S.slate.slate_date).replace(/-/g, ''), out = { at: now(), games: {}, stats: {} };
+  espnGet(ESPN + 'scoreboard' + (day ? '?dates=' + day : '')).then(function (sb) {
+    var evByPair = {};
+    arr(sb && sb.events).forEach(function (ev) {
+      var c = arr(ev && ev.competitions)[0], ab = {};
+      arr(c && c.competitors).forEach(function (x) { if (isObj(x) && isObj(x.team)) ab[x.homeAway] = espnTeam(x.team.abbreviation); });
+      if (ab.away && ab.home) evByPair[ab.away + '@' + ab.home] = ev;
+    });
+    var gids = {}, jobs = [];
+    want.forEach(function (p) { gids[p.game_id] = 1; });
+    Object.keys(gids).forEach(function (gid) {
+      var g = d.games[gid]; if (!g) return;
+      var ev = evByPair[str(g.away) + '@' + str(g.home)]; if (!ev) return;
+      var shape = espnGameShape(ev, g.id); out.games[gid] = shape;
+      if (shape.state === 'PRE') return;
+      jobs.push(espnGet(ESPN + 'summary?event=' + encodeURIComponent(str(ev.id))).then(function (sm) {
+        var tbl = {};
+        arr(sm && sm.boxscore && sm.boxscore.players).forEach(function (t) {
+          var team = espnTeam(t && t.team && t.team.abbreviation);
+          arr(t && t.statistics).forEach(function (grp) {
+            var lab = arr(grp.labels).length ? arr(grp.labels) : arr(grp.keys), ix = lab.indexOf('S');
+            if (ix < 0) return;
+            arr(grp.athletes).forEach(function (a) {
+              var v = a && arr(a.stats)[ix], k = team + '|' + nameKey(a && a.athlete && a.athlete.displayName);
+              if (v != null && /^\d+$/.test(String(v))) tbl[k] = tbl[k] == null ? +v : -1;   /* -1: two players share the key, don't guess */
+            });
+          });
+        });
+        want.forEach(function (p) {
+          if (String(p.game_id) !== String(gid) || str(p.market) !== 'shots') return;
+          var v = tbl[str(p.team).toUpperCase() + '|' + nameKey(p.player)];
+          if (v != null && v >= 0) out.stats[p.id] = v;
+        });
+      }, function () { /* this game's box not read; score and clock still show */ }));
+    });
+    return Promise.all(jobs);
+  }).then(function () {
+    if (Object.keys(out.games).length) { S.espn = out; maybeRender(); }
+  }, function () { /* ESPN unreachable: the 10-minute live.json carries on */ }).then(function () { espnBusy = false; });
+}
+function espnFresh() { return !!S.espn && now() - S.espn.at < ESPN_FRESH_MIN * 60000; }
+
 /* ---------- Live ---------- */
 function liveDoc() { var l = S.live; return (l && S.slate && l.slate_date === S.slate.slate_date) ? l : null; }
-function liveGame(gid) {
+function liveGame(gid, repoOnly) {
+  if (!repoOnly && espnFresh() && S.espn.games[gid]) {
+    var e = S.espn.games[gid], r = liveGame(gid, true);
+    if (!(r && isFinalGame(r) && !isFinalGame(e))) return e;   /* never let ESPN un-finish a game the NHL box calls final */
+  }
   var l = liveDoc(); if (!l) return null;
   var g = arr(l.games).filter(function (x) { return isObj(x) && String(x.game_id) === String(gid); });
   return g[0] || null;
@@ -1024,6 +1104,7 @@ function liveStale() {
   if (!S.slate || expired()) return false;
   var d = split(), on = d.started.some(function (p) { return !pickFinal(p); });
   if (!on) return false;
+  if (espnFresh()) return false;
   var l = liveDoc(); if (!l) return true;
   var g = ms(l.generated_at); return g == null || now() - g > LIVE_STALE_MIN * 60000;
 }
@@ -1047,8 +1128,9 @@ function gameLine(p, d) {
 function liveStat(p) {
   var g = isObj(p.graded) ? p.graded : null, m = g ? /^had (\d+)/.exec(str(g.actual)) : null;
   if (m) return +m[1];
-  var l = liveDoc(), x = l && isObj(l.picks) ? l.picks[p.id] : null;
-  return x && num(x.stat) != null ? x.stat : null;
+  var l = liveDoc(), x = l && isObj(l.picks) ? l.picks[p.id] : null, r = x && num(x.stat) != null ? x.stat : null;
+  var e = espnFresh() && S.espn.stats[p.id] != null ? S.espn.stats[p.id] : null;
+  return e == null ? r : r == null ? e : Math.max(e, r);   /* shots only go up: take the higher of the two reads */
 }
 /* shot tracker: an OVER x.5 needs ceil(line) (pips fill per shot, HIT when reached); an UNDER x.5 has floor(line) shots of
    room, the next one (red) loses it. Returns {pips, msg, stamp} */
@@ -1107,6 +1189,8 @@ function renderLive() {
   });
   var ut = uShort(Math.round(u * 100) / 100, 2);
   app.appendChild(h('div', { class: 'tonight' }, (w + l) ? ['Tonight ' + w + '-' + l + ' \u00b7 ', h('span', { class: signCls(u), text: ut })] : 'Tonight: no results yet'));
+  if (espnFresh() && d.started.some(function (p) { return !pickFinal(p); }))
+    app.appendChild(h('div', { class: 'lvon' }, h('span', { class: 'live' }), 'Live, updating every 30 sec \u00b7 ' + fStamp(new Date(S.espn.at).toISOString())));
   if (liveStale()) {
     var ld = liveDoc();
     app.appendChild(h('div', { class: 'lvnote', text: ld && fStamp(ld.generated_at) ? 'Live scores last updated ' + fStamp(ld.generated_at) + '.' : 'Live scores not read yet.' }));
@@ -1641,14 +1725,15 @@ function route() {
 window.addEventListener('popstate', route);
 window.addEventListener('hashchange', route);
 document.addEventListener('visibilitychange', function () {
-  if (document.hidden) writeSeen(); else load().then(schedule);
+  if (document.hidden) writeSeen(); else load().then(schedule).then(espnPoll);
 });
 window.addEventListener('pagehide', writeSeen);
 setInterval(function () { if (S.loaded && !document.hidden) maybeRender(); }, 30000);
+setInterval(function () { if (S.loaded) espnPoll(); }, ESPN_EVERY);
 
 S.view = viewFromHash();
 renderTabs();
-load().then(schedule);
+load().then(schedule).then(espnPoll);
 })();
 </script>
 </body>
