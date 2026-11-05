@@ -3,7 +3,7 @@
  "teams": {
   "NYR": {
    "name": "Dylan Garand",
-   "status": "expected"
+   "status": "confirmed"
   },
   "PHI": {
    "name": "Joseph Woll",
@@ -90,5 +90,5 @@
    "status": "expected"
   }
  },
- "checked_at": "2026-11-05T10:50:01-05:00"
+ "checked_at": "2026-11-05T11:00:01-05:00"
 }
