@@ -75,7 +75,7 @@
   },
   "EDM": {
    "name": "Matt Tomkins",
-   "status": "expected"
+   "status": "confirmed"
   },
   "ANA": {
    "name": "Laurent Brossoit",
@@ -90,5 +90,5 @@
    "status": "expected"
   }
  },
- "checked_at": "2026-11-05T14:30:01-05:00"
+ "checked_at": "2026-11-05T15:20:00-05:00"
 }
