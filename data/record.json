@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-11-05T18:20:01-05:00",
+ "generated_at": "2026-11-05T18:30:00-05:00",
  "summary": {
   "headline": {
    "w": 29,
@@ -219,7 +219,7 @@
     "push": 0,
     "void": 0,
     "units": 0,
-    "n": 3,
+    "n": 4,
     "graded": false
    },
    {
@@ -386,6 +386,29 @@
       "at": "2026-11-05T18:20:01-05:00",
       "reason": "Hard Rock moved it to +120"
      },
+     "legs": []
+    },
+    {
+     "id": "2026-11-05:2026020260:8477953:shots:1.5:under",
+     "kind": "single",
+     "player": "K. Kapanen",
+     "bet": "Under 1.5 shots on goal",
+     "market": "shots",
+     "team": "EDM",
+     "game": "ANA at EDM",
+     "price": 140,
+     "first_price": 140,
+     "last_price": 140,
+     "prices": [
+      {
+       "price": 140,
+       "at": "2026-11-05T18:30:00-05:00"
+      }
+     ],
+     "result": null,
+     "actual": null,
+     "units": null,
+     "pulled": null,
      "legs": []
     },
     {
