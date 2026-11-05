@@ -11,7 +11,7 @@ jobs:
           cat > t.js <<'JS'
           const { chromium, devices } = require('playwright');
           (async () => { const b = await chromium.launch(); const ctx = await b.newContext({ ...devices['iPhone 13'] }); const pg = await ctx.newPage();
-            const espn = []; pg.on('response', r => { if (/espn\.com/.test(r.url())) espn.push(r.status() + ' ' + r.url().slice(0, 110)); });
+            const espn = []; pg.on('request', r => { if (/espn/.test(r.url())) espn.push('REQ ' + r.url().slice(0, 110)); }); pg.on('response', r => { if (/espn/.test(r.url())) espn.push(r.status() + ' ' + r.url().slice(0, 110)); }); pg.on('requestfailed', r => { if (/espn/.test(r.url())) espn.push('FAILED ' + r.failure().errorText); }); pg.on('console', m => console.log('CONSOLE', m.type(), m.text().slice(0, 160)));
             pg.on('pageerror', e => console.log('PAGEERROR', e.message));
             await pg.goto('https://msasportas.github.io/prop-check-nhl/?v=' + Date.now() + '#live', { waitUntil: 'networkidle' });
             const has = (await pg.content()).includes('site.api.espn.com'); console.log('new code loaded:', has);
