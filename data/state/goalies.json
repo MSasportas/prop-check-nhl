@@ -18,7 +18,7 @@
    "status": "expected"
   },
   "NYI": {
-   "name": "Ilya Sorokin",
+   "name": "Semyon Varlamov",
    "status": "expected"
   },
   "CAR": {
@@ -90,5 +90,5 @@
    "status": "expected"
   }
  },
- "checked_at": "2026-11-05T07:00:00-05:00"
+ "checked_at": "2026-11-05T10:30:00-05:00"
 }
