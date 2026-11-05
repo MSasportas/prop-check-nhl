@@ -19,7 +19,7 @@
   },
   "SEA": {
    "name": "Joey Daccord",
-   "status": "expected"
+   "status": "confirmed"
   },
   "CGY": {
    "name": "Dustin Wolf",
@@ -34,5 +34,5 @@
    "status": "confirmed"
   }
  },
- "checked_at": "2026-11-04T19:10:15-05:00"
+ "checked_at": "2026-11-04T21:40:01-05:00"
 }
