@@ -51,7 +51,7 @@
   },
   "MTL": {
    "name": "Jakub Dobes",
-   "status": "expected"
+   "status": "confirmed"
   },
   "UTA": {
    "name": "Sebastian Cossa",
@@ -59,7 +59,7 @@
   },
   "CBJ": {
    "name": "Cam Talbot",
-   "status": "expected"
+   "status": "confirmed"
   },
   "DAL": {
    "name": "Jake Oettinger",
@@ -90,5 +90,5 @@
    "status": "expected"
   }
  },
- "checked_at": "2026-11-05T11:10:01-05:00"
+ "checked_at": "2026-11-05T11:20:01-05:00"
 }
