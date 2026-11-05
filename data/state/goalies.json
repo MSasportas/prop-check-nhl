@@ -62,8 +62,8 @@
    "status": "confirmed"
   },
   "DAL": {
-   "name": "Jake Oettinger",
-   "status": "expected"
+   "name": "Casey DeSmith",
+   "status": "confirmed"
   },
   "WPG": {
    "name": "Stuart Skinner",
@@ -90,5 +90,5 @@
    "status": "expected"
   }
  },
- "checked_at": "2026-11-05T12:20:00-05:00"
+ "checked_at": "2026-11-05T12:30:01-05:00"
 }
