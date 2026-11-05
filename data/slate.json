@@ -1,7 +1,7 @@
 {
  "slate_date": "2026-11-04",
- "generated_at": "2026-11-04T18:50:01-05:00",
- "status_at": "2026-11-04T18:50:01-05:00",
+ "generated_at": "2026-11-04T19:00:00-05:00",
+ "status_at": "2026-11-04T19:00:00-05:00",
  "valid_until": "2026-11-05T05:00:00-05:00",
  "status": {
   "prices_state": "ok",
@@ -9,14 +9,14 @@
   "next_price_read_at": "2026-11-04T20:30:00-05:00",
   "stats_built_at": "2026-11-04T00:40:00-05:00",
   "stats_through": "2026-11-03",
-  "lineups_at": "2026-11-04T18:40:01-05:00",
+  "lineups_at": "2026-11-04T19:00:00-05:00",
   "goalies_at": null,
-  "lineups_note": "3 of 4 team line pages are dated today.",
+  "lineups_note": "5 of 8 team line pages are dated today.",
   "lineups_state": "ok",
   "stats_state": "ok",
   "last_run": {
    "ok": true,
-   "at": "2026-11-04T18:50:01-05:00",
+   "at": "2026-11-04T19:00:00-05:00",
    "failed_step": null
   },
   "pool": {
@@ -136,8 +136,8 @@
    "home": "LAK",
    "start": "2026-11-04T22:00:00-05:00",
    "lineups": {
-    "away": "not_checked",
-    "home": "not_checked"
+    "away": "waiting",
+    "home": "confirmed"
    },
    "goalies": {
     "away": {
@@ -162,7 +162,7 @@
     },
     "lineups_at": {
      "away": null,
-     "home": null
+     "home": "2026-11-04T19:00:00-05:00"
     }
    },
    "started": false,
@@ -177,8 +177,8 @@
    "home": "SEA",
    "start": "2026-11-04T22:00:00-05:00",
    "lineups": {
-    "away": "not_checked",
-    "home": "not_checked"
+    "away": "waiting",
+    "home": "confirmed"
    },
    "goalies": {
     "away": {
@@ -203,7 +203,7 @@
     },
     "lineups_at": {
      "away": null,
-     "home": null
+     "home": "2026-11-04T19:00:00-05:00"
     }
    },
    "started": false,
