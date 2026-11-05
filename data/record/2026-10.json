@@ -1,6 +1,38 @@
 {
  "nights": [
   {
+   "date": "2026-10-28",
+   "graded": true,
+   "w": 0,
+   "l": 1,
+   "units": -1.0,
+   "entries": [
+    {
+     "id": "2026-10-28:2026020200:8477953:shots:1.5:under",
+     "kind": "single",
+     "player": "K. Kapanen",
+     "bet": "Under 1.5 shots on goal",
+     "market": "shots",
+     "team": "EDM",
+     "game": "CGY at EDM",
+     "price": 115,
+     "first_price": 115,
+     "last_price": 115,
+     "prices": [
+      {
+       "price": 115,
+       "at": "2026-10-28T19:00:01-04:00"
+      }
+     ],
+     "result": "L",
+     "actual": "had 2",
+     "units": -1.0,
+     "pulled": null,
+     "legs": []
+    }
+   ]
+  },
+  {
    "date": "2026-10-27",
    "graded": true,
    "w": 5,

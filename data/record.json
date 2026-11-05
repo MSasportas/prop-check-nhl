@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-11-05T01:20:00-05:00",
+ "generated_at": "2026-11-05T17:30:01-05:00",
  "summary": {
   "headline": {
    "w": 29,
@@ -213,6 +213,16 @@
   ],
   "days": [
    {
+    "date": "2026-11-05",
+    "w": 0,
+    "l": 0,
+    "push": 0,
+    "void": 0,
+    "units": 0,
+    "n": 3,
+    "graded": false
+   },
+   {
     "date": "2026-11-04",
     "w": 0,
     "l": 1,
@@ -345,6 +355,84 @@
   ]
  },
  "nights": [
+  {
+   "date": "2026-11-05",
+   "graded": false,
+   "w": 0,
+   "l": 0,
+   "units": 0,
+   "entries": [
+    {
+     "id": "2026-11-05:2026020257:8485395:shots:1.5:under",
+     "kind": "single",
+     "player": "J. Hagens",
+     "bet": "Under 1.5 shots on goal",
+     "market": "shots",
+     "team": "BOS",
+     "game": "BOS at PIT",
+     "price": 130,
+     "first_price": 130,
+     "last_price": 130,
+     "prices": [
+      {
+       "price": 130,
+       "at": "2026-11-05T17:30:01-05:00"
+      }
+     ],
+     "result": null,
+     "actual": null,
+     "units": null,
+     "pulled": null,
+     "legs": []
+    },
+    {
+     "id": "2026-11-05:2026020256:8478882:shots:1.5:under",
+     "kind": "single",
+     "player": "V. Gavrikov",
+     "bet": "Under 1.5 shots on goal",
+     "market": "shots",
+     "team": "NYR",
+     "game": "PHI at NYR",
+     "price": -120,
+     "first_price": -120,
+     "last_price": -120,
+     "prices": [
+      {
+       "price": -120,
+       "at": "2026-11-05T17:30:01-05:00"
+      }
+     ],
+     "result": null,
+     "actual": null,
+     "units": null,
+     "pulled": null,
+     "legs": []
+    },
+    {
+     "id": "2026-11-05:2026020253:8484390:shots:1.5:under",
+     "kind": "single",
+     "player": "R. Kantserov",
+     "bet": "Under 1.5 shots on goal",
+     "market": "shots",
+     "team": "CHI",
+     "game": "CHI at TBL",
+     "price": 115,
+     "first_price": 115,
+     "last_price": 115,
+     "prices": [
+      {
+       "price": 115,
+       "at": "2026-11-05T17:30:01-05:00"
+      }
+     ],
+     "result": null,
+     "actual": null,
+     "units": null,
+     "pulled": null,
+     "legs": []
+    }
+   ]
+  },
   {
    "date": "2026-11-04",
    "graded": true,
@@ -817,38 +905,6 @@
      "result": "W",
      "actual": "had 0",
      "units": 1.05,
-     "pulled": null,
-     "legs": []
-    }
-   ]
-  },
-  {
-   "date": "2026-10-28",
-   "graded": true,
-   "w": 0,
-   "l": 1,
-   "units": -1.0,
-   "entries": [
-    {
-     "id": "2026-10-28:2026020200:8477953:shots:1.5:under",
-     "kind": "single",
-     "player": "K. Kapanen",
-     "bet": "Under 1.5 shots on goal",
-     "market": "shots",
-     "team": "EDM",
-     "game": "CGY at EDM",
-     "price": 115,
-     "first_price": 115,
-     "last_price": 115,
-     "prices": [
-      {
-       "price": 115,
-       "at": "2026-10-28T19:00:01-04:00"
-      }
-     ],
-     "result": "L",
-     "actual": "had 2",
-     "units": -1.0,
      "pulled": null,
      "legs": []
     }
