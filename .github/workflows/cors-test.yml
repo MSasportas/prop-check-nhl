@@ -4,19 +4,20 @@ jobs:
   probe:
     runs-on: ubuntu-latest
     steps:
-      - run: npm i -s playwright@1.47.2 && npx -y playwright@1.47.2 install --with-deps chromium >/dev/null 2>&1
+      - run: npm i -s playwright@1.47.2 && npx -y playwright@1.47.2 install --with-deps chromium webkit >/dev/null 2>&1
       - run: |
-          for u in "scoreboard" "scoreboard?dates=20261104" "summary?event=401892647"; do echo "=== $u"; curl -sS -D - -o /dev/null -H "Origin: https://msasportas.github.io" "https://site.api.espn.com/apis/site/v2/sports/hockey/nhl/$u" | grep -i -E "^HTTP|access-control-allow-origin|cache-control"; done
+          U="https://site.api.espn.com/apis/site/v2/sports/hockey/nhl/scoreboard"
+          IPH="Mozilla/5.0 (iPhone; CPU iPhone OS 18_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/18.0 Mobile/15E148 Safari/604.1"
+          HL="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/129.0.0.0 Safari/537.36"
+          for ua in "$IPH" "$HL"; do echo "=== UA ${ua:0:40}"; curl -sS -D - -o /dev/null -H "Origin: https://msasportas.github.io" -H "Referer: https://msasportas.github.io/" -H "Sec-Fetch-Mode: cors" -H "Sec-Fetch-Site: cross-site" -H "Sec-Fetch-Dest: empty" -A "$ua" "$U" | grep -i -E "^HTTP|access-control-allow-origin|server|x-cache|akamai|vary"; done
+          echo "=== no Referer, iPhone UA"; curl -sS -D - -o /dev/null -H "Origin: https://msasportas.github.io" -A "$IPH" "$U" | grep -i -E "^HTTP|access-control-allow-origin"
+          echo "=== Referer only"; curl -sS -D - -o /dev/null -H "Origin: https://msasportas.github.io" -H "Referer: https://msasportas.github.io/prop-check-nhl/" "$U" | grep -i -E "^HTTP|access-control-allow-origin"
           cat > t.js <<'JS'
-          const { chromium } = require('playwright');
-          (async () => { const b = await chromium.launch(); const pg = await b.newPage();
-            pg.on('console', m => console.log('CONSOLE', m.text()));
-            await pg.goto('https://msasportas.github.io/prop-check-nhl/manifest.webmanifest');
-            const r = await pg.evaluate(async () => { const out = [];
-              for (const [u, o] of [['scoreboard', {}], ['scoreboard?dates=20261104', {}], ['scoreboard', { cache: 'no-store' }], ['scoreboard?dates=20261104', { cache: 'no-store', credentials: 'omit' }], ['summary?event=401892647', { cache: 'no-store', credentials: 'omit' }], ['summary?event=401892647', {}]]) {
-                try { const x = await fetch('https://site.api.espn.com/apis/site/v2/sports/hockey/nhl/' + u, o); out.push('OK ' + x.status + ' ' + u + ' ' + JSON.stringify(o)); }
-                catch (e) { out.push('FAIL ' + u + ' ' + JSON.stringify(o) + ' ' + e.message); } }
-              return out; });
-            console.log(r.join('\n')); await b.close(); })();
+          const pw = require('playwright');
+          (async () => { for (const [eng, ua] of [['chromium', 'Mozilla/5.0 (iPhone; CPU iPhone OS 18_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/18.0 Mobile/15E148 Safari/604.1'], ['webkit', null], ['chromium', null]]) {
+              const b = await pw[eng].launch(); const ctx = await b.newContext(ua ? { userAgent: ua } : {}); const pg = await ctx.newPage();
+              await pg.goto('https://msasportas.github.io/prop-check-nhl/manifest.webmanifest');
+              const r = await pg.evaluate(async () => { try { const x = await fetch('https://site.api.espn.com/apis/site/v2/sports/hockey/nhl/scoreboard'); const j = await x.json(); return 'OK ' + x.status + ' events ' + j.events.length; } catch (e) { return 'FAIL ' + e.message; } });
+              console.log('BROWSER', eng, ua ? 'iphone-ua' : 'default-ua', r); await b.close(); } })();
           JS
           node t.js
