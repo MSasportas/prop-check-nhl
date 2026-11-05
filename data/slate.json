@@ -1,12 +1,12 @@
 {
  "slate_date": "2026-11-04",
- "generated_at": "2026-11-04T21:00:01-05:00",
- "status_at": "2026-11-04T21:00:01-05:00",
+ "generated_at": "2026-11-04T21:20:00-05:00",
+ "status_at": "2026-11-04T21:20:00-05:00",
  "valid_until": "2026-11-05T05:00:00-05:00",
  "status": {
   "prices_state": "ok",
-  "prices_at": "2026-11-04T20:30:00-05:00",
-  "next_price_read_at": "2026-11-04T21:15:00-05:00",
+  "prices_at": "2026-11-04T21:20:00-05:00",
+  "next_price_read_at": null,
   "stats_built_at": "2026-11-04T00:40:00-05:00",
   "stats_through": "2026-11-03",
   "lineups_at": "2026-11-04T21:00:01-05:00",
@@ -16,11 +16,11 @@
   "stats_state": "ok",
   "last_run": {
    "ok": true,
-   "at": "2026-11-04T21:00:01-05:00",
+   "at": "2026-11-04T21:20:00-05:00",
    "failed_step": null
   },
   "pool": {
-   "pulls_left": 4220,
+   "pulls_left": 4213,
    "keys": 10,
    "game_days_left": 25,
    "days_left": 27,
@@ -32,7 +32,11 @@
   "tier": 4
  },
  "banners": [],
- "empty": null,
+ "empty": {
+  "code": "none_qualified",
+  "text": "No picks yet today",
+  "sub": "71 lines read, none cleared both checks."
+ },
  "games": [
   {
    "id": 2026020247,
@@ -154,19 +158,20 @@
      {
       "pull": "B",
       "at": "2026-11-04T20:30:00-05:00"
+     },
+     {
+      "pull": "C",
+      "at": "2026-11-04T21:20:00-05:00"
      }
     ],
-    "next_read": {
-     "pull": "C",
-     "at": "2026-11-04T21:15:00-05:00"
-    },
+    "next_read": null,
     "lineups_at": {
      "away": null,
      "home": "2026-11-04T19:00:00-05:00"
     }
    },
    "started": false,
-   "reads_done": false,
+   "reads_done": true,
    "picks": 0,
    "excluded_reason": null,
    "excluded_teams": []
@@ -199,20 +204,21 @@
      {
       "pull": "B",
       "at": "2026-11-04T20:30:00-05:00"
+     },
+     {
+      "pull": "C",
+      "at": "2026-11-04T21:20:00-05:00"
      }
     ],
-    "next_read": {
-     "pull": "C",
-     "at": "2026-11-04T21:15:00-05:00"
-    },
+    "next_read": null,
     "lineups_at": {
      "away": null,
      "home": "2026-11-04T19:00:00-05:00"
     }
    },
    "started": false,
-   "reads_done": false,
-   "picks": 1,
+   "reads_done": true,
+   "picks": 0,
    "excluded_reason": null,
    "excluded_teams": []
   }
@@ -233,6 +239,10 @@
     {
      "at": "2026-11-04T20:30:00-05:00",
      "text": "Early: lineup not confirmed"
+    },
+    {
+     "at": "2026-11-04T21:20:00-05:00",
+     "text": "Pulled: Hard Rock moved it to +105"
     }
    ],
    "prices": [
@@ -241,10 +251,15 @@
      "price": 130
     }
    ],
-   "pulled": null,
+   "pulled": {
+    "at": "2026-11-04T21:20:00-05:00",
+    "reason": "Hard Rock moved it to +105",
+    "if_bet": "Got +130? Still a good bet. Don't bet it at +105.",
+    "code": "gap_gone"
+   },
    "price_final": false,
    "graded": null,
-   "rank": 1,
+   "rank": null,
    "tier": "main",
    "game_id": 2026020250,
    "player": "M. Coronato",
