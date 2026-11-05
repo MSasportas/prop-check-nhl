@@ -7,14 +7,14 @@ jobs:
       - run: npm i -s playwright@1.47.2 && npx -y playwright@1.47.2 install --with-deps chromium >/dev/null 2>&1
       - name: Real site, real ESPN, phone-sized browser
         run: |
-          sleep 150
+          for i in $(seq 1 30); do n=$(curl -s "https://msasportas.github.io/prop-check-nhl/index.html?x=$RANDOM" | grep -c site.api.espn.com); echo "deploy check $i: $n"; [ "$n" -gt 0 ] && break; sleep 20; done
           cat > t.js <<'JS'
           const { chromium, devices } = require('playwright');
           (async () => { const b = await chromium.launch(); const ctx = await b.newContext({ ...devices['iPhone 13'] }); const pg = await ctx.newPage();
             const espn = []; pg.on('response', r => { if (/espn\.com/.test(r.url())) espn.push(r.status() + ' ' + r.url().slice(0, 110)); });
             pg.on('pageerror', e => console.log('PAGEERROR', e.message));
             await pg.goto('https://msasportas.github.io/prop-check-nhl/?v=' + Date.now() + '#live', { waitUntil: 'networkidle' });
-            const has = await pg.evaluate(() => typeof espnPoll === 'function'); console.log('new code loaded:', has);
+            const has = (await pg.content()).includes('site.api.espn.com'); console.log('new code loaded:', has);
             for (let i = 0; i < 2; i++) { await pg.waitForTimeout(35000);
               console.log('t+' + (i + 1) * 35 + 's', await pg.evaluate(() => [...document.querySelectorAll('.lv')].map(x => x.innerText.replace(/\s+/g, ' ')).join(' || ') + ' ## ' + ((document.querySelector('.lvon') || {}).innerText || 'no live line') + ' ## ' + ((document.querySelector('.lvnote') || {}).innerText || ''))); }
             console.log('ESPN calls:\n' + espn.join('\n'));
