@@ -1,10 +1,10 @@
 {
  "ok": true,
  "slate_date": "2026-11-05",
- "started_at": "2026-11-05T13:00:00-05:00",
- "status_at": "2026-11-05T13:00:00-05:00",
- "finished_at": "2026-11-05T13:00:32-05:00",
- "last_ok_at": "2026-11-05T13:00:00-05:00",
+ "started_at": "2026-11-05T13:30:01-05:00",
+ "status_at": "2026-11-05T13:30:01-05:00",
+ "finished_at": "2026-11-05T13:30:02-05:00",
+ "last_ok_at": "2026-11-05T13:30:01-05:00",
  "failed_step": null,
  "steps": [
   {
@@ -35,7 +35,7 @@
   {
    "step": "odds",
    "status": "ok",
-   "note": "11 game(s) priced"
+   "note": "no pull due"
   },
   {
    "step": "market_menu",
@@ -44,8 +44,8 @@
   },
   {
    "step": "featured",
-   "status": "ok",
-   "note": "sides/totals for 11 game(s), 10 book(s) max, 3 credit(s)"
+   "status": "skipped",
+   "note": "no new shots read to match"
   },
   {
    "step": "book_probe",
@@ -74,8 +74,8 @@
   },
   {
    "step": "shadow",
-   "status": "ok",
-   "note": "180 line read(s) logged"
+   "status": "skipped",
+   "note": "nothing new"
   },
   {
    "step": "gg_grade",
@@ -84,8 +84,8 @@
   },
   {
    "step": "slate",
-   "status": "ok",
-   "note": "0 open pick(s)"
+   "status": "skipped",
+   "note": "unchanged"
   },
   {
    "step": "record",
@@ -161,13 +161,15 @@
  "lineups_note": null,
  "games_today": 11,
  "record_events": 144,
- "odds_notes": [],
+ "odds_notes": [
+  "key 1 refused (401)"
+ ],
  "runner": {
   "event": "workflow_dispatch",
-  "run_id": "42075218101",
-  "iteration": 4,
-  "chain_link": 267,
+  "run_id": "42083217292",
+  "iteration": 2,
+  "chain_link": 268,
   "chain_started_at": "2026-10-28T10:00:15-04:00",
-  "run_started_at": "2026-11-05T12:30:16-05:00"
+  "run_started_at": "2026-11-05T13:20:16-05:00"
  }
 }
