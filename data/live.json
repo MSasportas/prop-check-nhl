@@ -1,6 +1,6 @@
 {
  "slate_date": "2026-11-04",
- "generated_at": "2026-11-04T23:40:01-05:00",
+ "generated_at": "2026-11-04T23:50:00-05:00",
  "games": [
   {
    "game_id": 2026020250,
@@ -8,20 +8,20 @@
    "schedule_state": "OK",
    "period": 2,
    "period_type": "REG",
-   "clock": "15:24",
+   "clock": "05:26",
    "in_intermission": true,
    "running": false,
    "away": {
     "abbrev": "CGY",
     "score": 1,
-    "sog": 19
+    "sog": 18
    },
    "home": {
     "abbrev": "SEA",
     "score": 1,
     "sog": 18
    },
-   "updated_at": "2026-11-04T23:40:01-05:00"
+   "updated_at": "2026-11-04T23:50:00-05:00"
   }
  ],
  "picks": {
