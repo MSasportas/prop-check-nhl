@@ -2,7 +2,7 @@
  "version": 1,
  "note": "Gap + Guard research log. Every flag here is a pick on the page and in the Record; vetoed and capped rows are research only.",
  "market": "shots",
- "generated_at": "2026-11-05T18:00:00-05:00",
+ "generated_at": "2026-11-05T18:20:01-05:00",
  "slate": "2026-11-05",
  "active": true,
  "window": {
@@ -37,11 +37,15 @@
     "settled": "Early",
     "frozen_settled": "Early",
     "move30_pct": -0.0,
-    "pulled": null,
+    "pulled": {
+     "reason": "Pinnacle disagrees",
+     "detail": "Pinnacle EV -1.7%",
+     "at": "2026-11-05T18:20:01-05:00"
+    },
     "locked": false,
-    "state": "open",
-    "close_fair_pct": null,
-    "clv_pct": null,
+    "state": "pulled",
+    "close_fair_pct": 47.1,
+    "clv_pct": 8.4,
     "result": null,
     "units": null
    },
@@ -74,8 +78,8 @@
     "pulled": null,
     "locked": false,
     "state": "open",
-    "close_fair_pct": null,
-    "clv_pct": null,
+    "close_fair_pct": 57.5,
+    "clv_pct": 5.4,
     "result": null,
     "units": null
    },
@@ -108,8 +112,8 @@
     "pulled": null,
     "locked": false,
     "state": "open",
-    "close_fair_pct": null,
-    "clv_pct": null,
+    "close_fair_pct": 49.5,
+    "clv_pct": 6.4,
     "result": null,
     "units": null
    }
@@ -144,8 +148,8 @@
     "pulled": null,
     "locked": false,
     "state": "open",
-    "close_fair_pct": null,
-    "clv_pct": null,
+    "close_fair_pct": 54.0,
+    "clv_pct": 3.1,
     "result": null,
     "units": null
    },
@@ -178,8 +182,8 @@
     "pulled": null,
     "locked": false,
     "state": "open",
-    "close_fair_pct": null,
-    "clv_pct": null,
+    "close_fair_pct": 45.3,
+    "clv_pct": 4.3,
     "result": null,
     "units": null
    }
@@ -954,7 +958,7 @@
   }
  ],
  "nov2": {
-  "gaps_measured": 40,
+  "gaps_measured": 45,
   "gaps_logged": 56,
   "graded_picks": 47,
   "w": 29,
@@ -963,25 +967,25 @@
   "units": 9.827189440532768,
   "wins_z": 1.136848284488699,
   "clv_gaps": {
-   "n": 40,
-   "mean": 0.04745258491746438,
-   "lb80": 0.043686853716514165,
+   "n": 45,
+   "mean": 0.04831748629671157,
+   "lb80": 0.044772198637114374,
    "pos_share": 1.0
   },
   "clv_flags": {
-   "n": 39,
-   "mean": 0.047464536927983025,
-   "lb80": 0.043681200252032,
+   "n": 42,
+   "mean": 0.048897984649081364,
+   "lb80": 0.04505266394742363,
    "pos_share": 1.0
   },
   "clv_vetoed": {
-   "n": 1,
-   "mean": 0.04698645650723732,
-   "lb80": 0.04698645650723732,
+   "n": 3,
+   "mean": 0.04019050936353463,
+   "lb80": 0.03478299482551902,
    "pos_share": 1.0
   },
-  "clv_passed_mean": 0.047464536927983025,
-  "clv_vetoed_mean": 0.04698645650723732,
+  "clv_passed_mean": 0.048897984649081364,
+  "clv_vetoed_mean": 0.04019050936353463,
   "nights": 17,
   "nights_with_flags": 14,
   "population_slope": null,
