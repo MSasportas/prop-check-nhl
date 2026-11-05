@@ -14,7 +14,7 @@
    "status": "expected"
   },
   "CHI": {
-   "name": "Spencer Knight",
+   "name": "Arvid Soderblom",
    "status": "expected"
   },
   "NYI": {
@@ -22,7 +22,7 @@
    "status": "expected"
   },
   "CAR": {
-   "name": "Pyotr Kochetkov",
+   "name": "Brandon Bussi",
    "status": "expected"
   },
   "DET": {
@@ -30,11 +30,11 @@
    "status": "expected"
   },
   "VGK": {
-   "name": "Adin Hill",
+   "name": "Carter Hart",
    "status": "expected"
   },
   "NJD": {
-   "name": "Connor Hellebuyck",
+   "name": "Jake Allen",
    "status": "expected"
   },
   "STL": {
@@ -54,7 +54,7 @@
    "status": "expected"
   },
   "UTA": {
-   "name": "Karel Vejmelka",
+   "name": "Sebastian Cossa",
    "status": "expected"
   },
   "CBJ": {
@@ -70,7 +70,7 @@
    "status": "expected"
   },
   "VAN": {
-   "name": "Kevin Lankinen",
+   "name": "Leevi Merilainen",
    "status": "expected"
   },
   "EDM": {
@@ -78,7 +78,7 @@
    "status": "expected"
   },
   "ANA": {
-   "name": "Laurent Brossoit",
+   "name": "Lukas Dostal",
    "status": "expected"
   },
   "COL": {
@@ -90,5 +90,5 @@
    "status": "expected"
   }
  },
- "checked_at": "2026-11-05T05:00:01-05:00"
+ "checked_at": "2026-11-05T07:00:00-05:00"
 }
