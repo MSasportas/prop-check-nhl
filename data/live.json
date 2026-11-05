@@ -1,10 +1,10 @@
 {
  "slate_date": "2026-11-04",
- "generated_at": "2026-11-05T00:40:01-05:00",
+ "generated_at": "2026-11-05T00:50:00-05:00",
  "games": [
   {
    "game_id": 2026020250,
-   "state": "OVER",
+   "state": "FINAL",
    "schedule_state": "OK",
    "period": 4,
    "period_type": "OT",
@@ -19,9 +19,9 @@
    "home": {
     "abbrev": "SEA",
     "score": 2,
-    "sog": 28
+    "sog": 29
    },
-   "updated_at": "2026-11-05T00:40:01-05:00"
+   "updated_at": "2026-11-05T00:50:00-05:00"
   }
  ],
  "picks": {
