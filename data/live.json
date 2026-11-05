@@ -1,16 +1,16 @@
 {
  "slate_date": "2026-11-04",
- "generated_at": "2026-11-05T00:20:00-05:00",
+ "generated_at": "2026-11-05T00:30:01-05:00",
  "games": [
   {
    "game_id": 2026020250,
-   "state": "LIVE",
+   "state": "CRIT",
    "schedule_state": "OK",
    "period": 3,
    "period_type": "REG",
-   "clock": "09:11",
+   "clock": "04:16",
    "in_intermission": false,
-   "running": false,
+   "running": true,
    "away": {
     "abbrev": "CGY",
     "score": 1,
@@ -19,9 +19,9 @@
    "home": {
     "abbrev": "SEA",
     "score": 1,
-    "sog": 25
+    "sog": 28
    },
-   "updated_at": "2026-11-05T00:20:00-05:00"
+   "updated_at": "2026-11-05T00:30:01-05:00"
   }
  ],
  "picks": {
