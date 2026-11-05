@@ -1,5 +1,29 @@
 # LOG.md: Researcher runs (newest first)
 
+- 2026-11-05 ~8:15 AM ET (Researcher run 21, daily; SHOTS ON GOAL ONLY). No key used, no historical odds pull. II1-II3 + forward Q22a-b registered
+  and pushed (573a981) before any test ran. Free NHL stats REST skater per-game logs (r14/fetch14.py, Feb 28 cut-off) fetched to scratch;
+  lockbox not fetched. Script research/code/r21/ii21.py, output ii21_results.txt. 10,413 graded Nov-Feb lines.
+  - II1 teammate return (a 2+ SOG/game teammate back after 2+ missed games; his own form inflated during the absence): -10.4% n290 to -2.2%
+    n26; II1r UNDER -12.1% n124. The book already prices the returner back in.
+  - II2 streakiness x form (streaky shooters' hot runs persist?): -10.5% n222, +19.0% n13 (noise); II2r OVER on streaky hot shooters -14.0%
+    n260 [-24,-4]. Hot streaks are priced; if anything they revert.
+  - II3 11 forwards / 7 D lineups (3.8% of lines): -6.6% n379 to -15.3% n77; II3r OVER on 16+ min forwards +4.0% n244 [-4,+13] p .22, folds
+    +4/-15/+13/+25. The only positive cell today, under n 300 and far from a bar: no lockbox look. Watch item only.
+  - Forward re-score (run_all.sh, 17 nights Oct 19 - Nov 4; clone unshallowed): Q1a +3.5% n637 p .16; Q1b +7.9% n474 [+2,+14] p .0135 CLV
+    +3.5% (bar .0033 missed; Nov 4 -3.4u n13; third straight slip); Q1g +10.8% n400 p .008 (missed); Q1c +8.5% n341 p .03; Q1h +11.3% n286;
+    Q1k Pinnacle +7.2% n470 (CLV +1.3%); Q1l +10.9% n273; Q1m +12.8% n55. Q1b read A +15.7% n274 vs B/C -2.8% n200; unders +10.5% n386,
+    overs -3.6% n88. Q6a/b/c +3.7% n281 / +0.4% n203 / +6.0% n389. Q8a-c -13.0% / -1.2% / +5.7%. Q9a-c -0.3% / +1.7% / +12.7% n30. Q10 +5.0%
+    n38. Q11a +5.7% n107, Q11b +9.8% n234. Q12 (>= 5% vs Pinnacle at C) -50% n12. Q13 2-6 n8. Q15a +4.9% n93, Q15b -16.4% n60. Q16a +7.2%
+    n72, Q16b (flag 1 PM, bet at 90 min) +0.2% n79. Q17a -2.5% n21, Q17c -5.5% n85. Q18a -7.3% n23, Q18b -25.2% n16. Q19 forward 1-2.
+    Q20a -7.4% n42, Q20b +27.1% n13. Q21a +15.7% n5, Q21b -5.4% n4 (first night). Q2a/b 0 bets. New Q22a-b (Q1b at 1 PM, Pinnacle agrees vs
+    disagrees) start tonight; seen-night code check (not a result): agrees +20.2% n143, disagrees +29.5% n27, no Pinnacle 105.
+    The queued "Hard Rock line age" idea was dropped before registration: the feed's last_update is just the poll time (median 0.5 min).
+  12 historical variants (~0.6 false positives expected), all-time 484; forward 42. Lockbox looks: 2 (unchanged; next needs p < 0.0167).
+  **Verdict: nothing passed; no candidate for the Sharp.** Returning teammates, streaky form and 11F/7D lineups are inside Hard Rock's price
+  (11F/7D forwards lean over a hair, n too small). Forward: Q1b keeps fading (+13.4% at n312 -> +7.9% at n474); what it has is still the
+  1 PM read only (+15.7% n274), and the B/C reads the product bets are now negative (-2.8% n200). Q16b (move the flag to 90 min) is flat.
+  Next: (1) Q22a-b forward (does Pinnacle agreement sort the 1 PM gap?); (2) a forward version of II3r (11F/7D from lineup_history at B/C,
+    registered before looking); (3) Q21a-b to size the late-game share of the 1 PM gap.
 - 2026-11-04 ~8:30 AM ET (Researcher run 20, daily; SHOTS ON GOAL ONLY). No key used, no historical odds pull. HH1-HH3 + forward Q21a-b registered
   and pushed (3e76dea) before any test ran. Free NHL api-web play-by-play with blocker ids (r20/fetch20.py, 945 games Oct 7 - Feb 28) and stats
   REST skater per-game logs (r14/fetch14.py, Feb 28 cut-off) fetched to scratch; lockbox not fetched. Script research/code/r20/hh20.py, output
