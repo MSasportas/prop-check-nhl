@@ -1,0 +1,39 @@
+name: cors-test (temporary)
+on: { push: { branches: [cors-test] } }
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Probe live sources from a browser's point of view
+        run: |
+          O="Origin: https://msasportas.github.io"
+          probe() { echo "=== $1"; curl -sS -m 20 -D - -o /tmp/body -H "$O" -A "Mozilla/5.0 (iPhone; CPU iPhone OS 17_0 like Mac OS X)" "$1" | grep -i -E "^HTTP|access-control|cache-control|age:" ; echo "bytes: $(wc -c </tmp/body)"; }
+          probe "https://site.api.espn.com/apis/site/v2/sports/hockey/nhl/scoreboard"
+          probe "https://site.web.api.espn.com/apis/site/v2/sports/hockey/nhl/scoreboard"
+          probe "https://api.sofascore.com/api/v1/sport/ice-hockey/events/live"
+          probe "https://www.sofascore.com/api/v1/sport/ice-hockey/events/live"
+          probe "https://api-web.nhle.com/v1/score/now"
+          curl -sS -m 20 "https://site.api.espn.com/apis/site/v2/sports/hockey/nhl/scoreboard" -o sb.json
+          python3 - <<'PY'
+          import json, urllib.request, time
+          sb = json.load(open("sb.json"))
+          live = None
+          for e in sb.get("events", []):
+              st = e["status"]["type"]
+              c = e["competitions"][0]["competitors"]
+              print(e["id"], e["shortName"], st["state"], e["status"].get("period"), e["status"].get("displayClock"), [(x["team"]["abbreviation"], x.get("score")) for x in c])
+              if st["state"] == "in" and live is None: live = e["id"]
+          if live:
+              for k in range(2):
+                  req = urllib.request.Request(f"https://site.api.espn.com/apis/site/v2/sports/hockey/nhl/summary?event={live}", headers={"Origin": "https://msasportas.github.io"})
+                  with urllib.request.urlopen(req, timeout=20) as r:
+                      print("summary ACAO:", r.headers.get("access-control-allow-origin"), "cache:", r.headers.get("cache-control"))
+                      d = json.load(r)
+                  print("clock", d["header"]["competitions"][0]["status"].get("displayClock"), "period", d["header"]["competitions"][0]["status"].get("period"))
+                  for t in d.get("boxscore", {}).get("players", [])[:1]:
+                      for grp in t["statistics"][:1]:
+                          print("labels", grp.get("labels") or grp.get("keys"))
+                          for a in grp["athletes"][:3]:
+                              print(a["athlete"]["displayName"], a["athlete"]["id"], a.get("stats"))
+                  if k == 0: time.sleep(45)
+          PY
