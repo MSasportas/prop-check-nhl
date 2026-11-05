@@ -549,6 +549,31 @@ Output: research/code/r20/hh20_results.txt.
 Forward re-score (16 nights Oct 19 - Nov 3): Q1b n461 +8.8% [+3,+15] p .010 CLV +3.4% (bar .0033 missed); Q1g n390 +11.6% p .0045 (missed);
 Q1b read A +16.0% n265 vs B/C -0.8% n196; unders +11.8% n375, overs -4.1% n86.
 
+## Run 21 (Researcher, 2026-11-05). Registered before any of these were tested.
+No key used, no historical odds pull. Free data to scratch: NHL stats REST skater summary per-game logs 2025-26 (research/code/r14/fetch14.py,
+Feb 28 cut-off; lockbox not fetched). Common as runs 4/6-20: shots45_lines, every two-way Hard Rock line, proportional de-vig fair f, side
+price >= -200, 1u flat, regulation + OT, VOID = no bet, game-clustered bootstrap. Logistic = research/code/wf.py (fit on all months before the
+test month), bet the side with p - BE >= T, T in {.01, .02, .03}. Fixed rules report every Nov-Feb bet with folds. Placebo (shuffle within
+date x line, 200 times) for any variant positive Nov-Feb with n >= 300; lockbox (Mar 1+) only for such a frozen variant, once, needing one-sided
+p < 0.05/3 = 0.0167 (look #3). Features use games dated strictly before d, except tonight's dressed lineup (II1 returner dresses, II3 11F/7D),
+which is treated as known at -45 exactly as R7/Y1 did (morning-skate/line-rush reports; stated look-ahead risk, small).
+
+| id | date | rule (exact) | data | result | status |
+|---|---|---|---|---|---|
+| II1 | 2026-11-05 | **Teammate return (his recent form was inflated by an absence).** Returner j = a teammate (same team in game d) who dresses in game d, missed his team's two most recent games before d, and had >= 10 earlier 2025-26 games for the team with SOG/game >= 2.0. ret = sum of returners' SOG/game. shb = his SOG/game in the team's games during j's current absence run (games his team played that j missed, most recent run, up to 10, he played >= 2) minus his SOG/game in his other 2025-26 games for the team before d (>= 5). Terms c1*ret + c2*ret*clip(shb, -2, 2) (R7 priced current absences; this is the reverse: the book may still price the inflated recent form when the shooter comes back) (3 T). Fixed II1r: UNDER when ret >= 2.0, shb >= +0.5 and the absence run >= 3 games (1 variant). 4 variants | REST + shots45 | | registered |
+| II2 | 2026-11-05 | **Streakiness x recent form.** From his 2025-26 per-game SOG before d (>= 15 games): ac = lag-1 autocorrelation of his game SOG (demeaned by his own prior mean); fm = mean SOG of his last 5 games minus his prior 2025-26 mean. Terms c1*fm + c2*ac*fm (K5 and K7 used form unconditionally; streaky shooters' form may persist and non-streaky shooters' may revert, more than the book assumes) (3 T). Fixed II2r: OVER when ac >= 0.15 and fm >= +0.8 (1 variant). 4 variants | REST + shots45 | | registered |
+| II3 | 2026-11-05 | **11 forwards / 7 defencemen.** nF, nD = forwards (C/L/R) and defencemen dressed by his team in game d (skater logs of game d). el = [nF == 11 and nD == 7]. Terms c1*el*[forward] + c2*el*[defenceman] (with 11F the top forwards double-shift and the D share minutes; Hard Rock may post the usual numbers) (3 T). Fixed II3r: OVER on forwards whose mean TOI over his last 10 games before d >= 16 min when el = 1 (1 variant). 4 variants | REST + shots45 | | registered |
+
+Forward (registered now; nights >= 2026-11-05 only, none seen):
+| id | date | rule (exact) | data | result | status |
+|---|---|---|---|---|---|
+| Q22a | 2026-11-05 | **Q1b at the 1 PM read, Pinnacle agrees.** Every Q1b bet (exactly as score_fwd.py makes it) with read A where Pinnacle has both sides of the same player/line in that A fetch (data/odds `others.pinnacle`), and the Hard Rock side's EV vs Pinnacle's proportional no-vig fair is >= 0. 1 variant | data/odds + research/fwd/scores.json | | forward, open |
+| Q22b | 2026-11-05 | Same, Pinnacle two-sided and EV vs Pinnacle < 0 (Pinnacle disagrees with the median). 1 variant | same | | forward, open |
+Q22 bar: n >= 300 graded, ROI > 0, one-sided p < 0.05/42 = 0.0012 (40 + 2 forward variants), mean CLV > 0. Scored by research/code/r21/score_q22.py
+(added to run_all.sh). Seen nights (Oct 19 - Nov 4) are printed as a descriptive code check, not a result.
+Note: the queued "Hard Rock line age at A" idea (run 20) is not measurable: the feed's `last_update` is the API's poll time (median 0.5 min
+before the read at every A fetch, 164 fetches), so it was dropped before registration.
+
 ## Queued (not yet tested)
 | id | rule idea | data | status |
 |---|---|---|---|
