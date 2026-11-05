@@ -4,36 +4,40 @@ jobs:
   probe:
     runs-on: ubuntu-latest
     steps:
-      - name: Probe live sources from a browser's point of view
+      - name: Compare ESPN box columns with the NHL box, same moment
         run: |
-          O="Origin: https://msasportas.github.io"
-          probe() { echo "=== $1"; curl -sS -m 20 -D - -o /tmp/body -H "$O" -A "Mozilla/5.0 (iPhone; CPU iPhone OS 17_0 like Mac OS X)" "$1" | grep -i -E "^HTTP|access-control|cache-control|age:" ; echo "bytes: $(wc -c </tmp/body)"; }
-          probe "https://site.api.espn.com/apis/site/v2/sports/hockey/nhl/scoreboard"
-          probe "https://site.web.api.espn.com/apis/site/v2/sports/hockey/nhl/scoreboard"
-          probe "https://api.sofascore.com/api/v1/sport/ice-hockey/events/live"
-          probe "https://www.sofascore.com/api/v1/sport/ice-hockey/events/live"
-          probe "https://api-web.nhle.com/v1/score/now"
-          curl -sS -m 20 "https://site.api.espn.com/apis/site/v2/sports/hockey/nhl/scoreboard" -o sb.json
           python3 - <<'PY'
-          import json, urllib.request, time
-          sb = json.load(open("sb.json"))
-          live = None
-          for e in sb.get("events", []):
-              st = e["status"]["type"]
-              c = e["competitions"][0]["competitors"]
-              print(e["id"], e["shortName"], st["state"], e["status"].get("period"), e["status"].get("displayClock"), [(x["team"]["abbreviation"], x.get("score")) for x in c])
-              if st["state"] == "in" and live is None: live = e["id"]
-          if live:
-              for k in range(2):
-                  req = urllib.request.Request(f"https://site.api.espn.com/apis/site/v2/sports/hockey/nhl/summary?event={live}", headers={"Origin": "https://msasportas.github.io"})
-                  with urllib.request.urlopen(req, timeout=20) as r:
-                      print("summary ACAO:", r.headers.get("access-control-allow-origin"), "cache:", r.headers.get("cache-control"))
-                      d = json.load(r)
-                  print("clock", d["header"]["competitions"][0]["status"].get("displayClock"), "period", d["header"]["competitions"][0]["status"].get("period"))
-                  for t in d.get("boxscore", {}).get("players", [])[:1]:
-                      for grp in t["statistics"][:1]:
-                          print("labels", grp.get("labels") or grp.get("keys"))
-                          for a in grp["athletes"][:3]:
-                              print(a["athlete"]["displayName"], a["athlete"]["id"], a.get("stats"))
-                  if k == 0: time.sleep(45)
+          import json, urllib.request, unicodedata, re
+          def get(u):
+              with urllib.request.urlopen(urllib.request.Request(u, headers={"User-Agent": "Mozilla/5.0"}), timeout=20) as r: return json.load(r)
+          def key(n):
+              n = unicodedata.normalize("NFKD", n).encode("ascii", "ignore").decode().lower()
+              p = re.sub(r"[^a-z ]", "", n).split(); return (p[0][0] + " " + p[-1]) if p else n
+          sb = get("https://site.api.espn.com/apis/site/v2/sports/hockey/nhl/scoreboard")
+          nhl = get("https://api-web.nhle.com/v1/score/now")
+          print("ESPN abbrevs:", sorted({c["team"]["abbreviation"] for e in sb["events"] for c in e["competitions"][0]["competitors"]}))
+          for e in sb["events"]:
+              if e["status"]["type"]["state"] not in ("in", "post"): continue
+              ab = {c["team"]["abbreviation"] for c in e["competitions"][0]["competitors"]}
+              g = next((g for g in nhl["games"] if {g["awayTeam"]["abbrev"], g["homeTeam"]["abbrev"]} & ab), None)
+              if not g: print("no NHL match", ab); continue
+              es = get(f"https://site.api.espn.com/apis/site/v2/sports/hockey/nhl/summary?event={e['id']}")
+              nb = get(f"https://api-web.nhle.com/v1/gamecenter/{g['id']}/boxscore")
+              nsog = {}
+              for side in ("awayTeam", "homeTeam"):
+                  for grp in ("forwards", "defense"):
+                      for p in nb["playerByGameStats"][side][grp]: nsog[key(p["name"]["default"])] = p.get("sog")
+              agree = {"S": 0, "SOG": 0, "S+SM": 0}; n = 0; miss = []
+              for t in es["boxscore"]["players"]:
+                  for grp in t["statistics"]:
+                      lab = grp.get("labels") or grp.get("keys")
+                      if "S" not in lab: continue
+                      for a in grp["athletes"]:
+                          st = dict(zip(lab, a.get("stats", []))); k = key(a["athlete"]["displayName"])
+                          if k not in nsog: miss.append(a["athlete"]["displayName"]); continue
+                          n += 1; v = nsog[k]
+                          agree["S"] += str(v) == st.get("S"); agree["SOG"] += str(v) == st.get("SOG")
+                          try: agree["S+SM"] += v == int(st.get("S")) + int(st.get("SM"))
+                          except Exception: pass
+              print(e["shortName"], e["status"]["type"]["state"], "players matched", n, "agree", agree, "unmatched", miss[:5])
           PY
