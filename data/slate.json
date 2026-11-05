@@ -1,7 +1,7 @@
 {
  "slate_date": "2026-11-04",
- "generated_at": "2026-11-04T21:50:00-05:00",
- "status_at": "2026-11-04T21:50:00-05:00",
+ "generated_at": "2026-11-04T22:00:00-05:00",
+ "status_at": "2026-11-04T22:00:00-05:00",
  "valid_until": "2026-11-05T05:00:00-05:00",
  "status": {
   "prices_state": "ok",
@@ -16,7 +16,7 @@
   "stats_state": "ok",
   "last_run": {
    "ok": true,
-   "at": "2026-11-04T21:50:00-05:00",
+   "at": "2026-11-04T22:00:00-05:00",
    "failed_step": null
   },
   "pool": {
@@ -33,9 +33,9 @@
  },
  "banners": [],
  "empty": {
-  "code": "none_qualified",
-  "text": "No picks yet today",
-  "sub": "71 lines read, none cleared both checks."
+  "code": "all_started",
+  "text": "Every game has started.",
+  "sub": "Tonight's pick came off the board before puck; see the Record."
  },
  "games": [
   {
@@ -170,8 +170,8 @@
      "home": "2026-11-04T19:00:00-05:00"
     }
    },
-   "started": false,
-   "reads_done": true,
+   "started": true,
+   "reads_done": false,
    "picks": 0,
    "excluded_reason": null,
    "excluded_teams": []
@@ -216,8 +216,8 @@
      "home": "2026-11-04T19:00:00-05:00"
     }
    },
-   "started": false,
-   "reads_done": true,
+   "started": true,
+   "reads_done": false,
    "picks": 0,
    "excluded_reason": null,
    "excluded_teams": []
