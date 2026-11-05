@@ -34,7 +34,7 @@
    "status": "expected"
   },
   "NJD": {
-   "name": "Jake Allen",
+   "name": "Connor Hellebuyck",
    "status": "expected"
   },
   "STL": {
@@ -50,7 +50,7 @@
    "status": "expected"
   },
   "MTL": {
-   "name": "Jacob Fowler",
+   "name": "Jakub Dobes",
    "status": "expected"
   },
   "UTA": {
@@ -67,7 +67,7 @@
   },
   "WPG": {
    "name": "Stuart Skinner",
-   "status": "expected"
+   "status": "confirmed"
   },
   "VAN": {
    "name": "Leevi Merilainen",
@@ -90,5 +90,5 @@
    "status": "expected"
   }
  },
- "checked_at": "2026-11-05T10:30:00-05:00"
+ "checked_at": "2026-11-05T10:50:01-05:00"
 }

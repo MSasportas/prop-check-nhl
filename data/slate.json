@@ -1,7 +1,7 @@
 {
  "slate_date": "2026-11-05",
- "generated_at": "2026-11-05T10:30:00-05:00",
- "status_at": "2026-11-05T10:30:00-05:00",
+ "generated_at": "2026-11-05T10:50:01-05:00",
+ "status_at": "2026-11-05T10:50:01-05:00",
  "valid_until": "2026-11-06T05:00:00-05:00",
  "status": {
   "prices_state": "not_yet",
@@ -16,7 +16,7 @@
   "stats_state": "ok",
   "last_run": {
    "ok": true,
-   "at": "2026-11-05T10:30:00-05:00",
+   "at": "2026-11-05T10:50:01-05:00",
    "failed_step": null
   },
   "pool": {
@@ -53,7 +53,7 @@
      "status": "expected"
     },
     "home": {
-     "name": "Jacob Fowler",
+     "name": "Jakub Dobes",
      "status": "expected"
     }
    },
@@ -161,7 +161,7 @@
      "status": "expected"
     },
     "home": {
-     "name": "Jake Allen",
+     "name": "Connor Hellebuyck",
      "status": "expected"
     }
    },
@@ -342,7 +342,7 @@
     },
     "home": {
      "name": "Stuart Skinner",
-     "status": "expected"
+     "status": "confirmed"
     }
    },
    "checks": {
