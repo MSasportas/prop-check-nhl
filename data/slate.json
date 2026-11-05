@@ -1,12 +1,12 @@
 {
  "slate_date": "2026-11-05",
- "generated_at": "2026-11-05T12:50:01-05:00",
- "status_at": "2026-11-05T12:50:01-05:00",
+ "generated_at": "2026-11-05T13:00:00-05:00",
+ "status_at": "2026-11-05T13:00:00-05:00",
  "valid_until": "2026-11-06T05:00:00-05:00",
  "status": {
-  "prices_state": "not_yet",
-  "prices_at": null,
-  "next_price_read_at": "2026-11-05T13:00:00-05:00",
+  "prices_state": "ok",
+  "prices_at": "2026-11-05T13:00:00-05:00",
+  "next_price_read_at": "2026-11-05T17:30:00-05:00",
   "stats_built_at": "2026-11-05T01:30:01-05:00",
   "stats_through": "2026-11-04",
   "lineups_at": null,
@@ -16,11 +16,11 @@
   "stats_state": "ok",
   "last_run": {
    "ok": true,
-   "at": "2026-11-05T12:50:01-05:00",
+   "at": "2026-11-05T13:00:00-05:00",
    "failed_step": null
   },
   "pool": {
-   "pulls_left": 4207,
+   "pulls_left": 4193,
    "keys": 10,
    "game_days_left": 24,
    "days_left": 26,
@@ -33,9 +33,9 @@
  },
  "banners": [],
  "empty": {
-  "code": "not_yet",
+  "code": "none_qualified",
   "text": "No picks yet today",
-  "sub": "First read is due at 1:00 PM."
+  "sub": "Picks come from the price read 90 minutes before each game. Next read at 5:30 PM."
  },
  "games": [
   {
@@ -58,10 +58,15 @@
     }
    },
    "checks": {
-    "reads": [],
+    "reads": [
+     {
+      "pull": "A",
+      "at": "2026-11-05T13:00:00-05:00"
+     }
+    ],
     "next_read": {
-     "pull": "A",
-     "at": "2026-11-05T13:00:00-05:00"
+     "pull": "B",
+     "at": "2026-11-05T17:30:00-05:00"
     },
     "lineups_at": {
      "away": null,
@@ -94,10 +99,15 @@
     }
    },
    "checks": {
-    "reads": [],
+    "reads": [
+     {
+      "pull": "A",
+      "at": "2026-11-05T13:00:00-05:00"
+     }
+    ],
     "next_read": {
-     "pull": "A",
-     "at": "2026-11-05T13:00:00-05:00"
+     "pull": "B",
+     "at": "2026-11-05T17:30:00-05:00"
     },
     "lineups_at": {
      "away": null,
@@ -130,10 +140,15 @@
     }
    },
    "checks": {
-    "reads": [],
+    "reads": [
+     {
+      "pull": "A",
+      "at": "2026-11-05T13:00:00-05:00"
+     }
+    ],
     "next_read": {
-     "pull": "A",
-     "at": "2026-11-05T13:00:00-05:00"
+     "pull": "B",
+     "at": "2026-11-05T17:30:00-05:00"
     },
     "lineups_at": {
      "away": null,
@@ -166,10 +181,15 @@
     }
    },
    "checks": {
-    "reads": [],
+    "reads": [
+     {
+      "pull": "A",
+      "at": "2026-11-05T13:00:00-05:00"
+     }
+    ],
     "next_read": {
-     "pull": "A",
-     "at": "2026-11-05T13:00:00-05:00"
+     "pull": "B",
+     "at": "2026-11-05T17:30:00-05:00"
     },
     "lineups_at": {
      "away": null,
@@ -202,10 +222,15 @@
     }
    },
    "checks": {
-    "reads": [],
+    "reads": [
+     {
+      "pull": "A",
+      "at": "2026-11-05T13:00:00-05:00"
+     }
+    ],
     "next_read": {
-     "pull": "A",
-     "at": "2026-11-05T13:00:00-05:00"
+     "pull": "B",
+     "at": "2026-11-05T17:30:00-05:00"
     },
     "lineups_at": {
      "away": null,
@@ -238,10 +263,15 @@
     }
    },
    "checks": {
-    "reads": [],
+    "reads": [
+     {
+      "pull": "A",
+      "at": "2026-11-05T13:00:00-05:00"
+     }
+    ],
     "next_read": {
-     "pull": "A",
-     "at": "2026-11-05T13:00:00-05:00"
+     "pull": "B",
+     "at": "2026-11-05T17:30:00-05:00"
     },
     "lineups_at": {
      "away": null,
@@ -274,10 +304,15 @@
     }
    },
    "checks": {
-    "reads": [],
+    "reads": [
+     {
+      "pull": "A",
+      "at": "2026-11-05T13:00:00-05:00"
+     }
+    ],
     "next_read": {
-     "pull": "A",
-     "at": "2026-11-05T13:00:00-05:00"
+     "pull": "B",
+     "at": "2026-11-05T17:30:00-05:00"
     },
     "lineups_at": {
      "away": null,
@@ -310,10 +345,15 @@
     }
    },
    "checks": {
-    "reads": [],
+    "reads": [
+     {
+      "pull": "A",
+      "at": "2026-11-05T13:00:00-05:00"
+     }
+    ],
     "next_read": {
-     "pull": "A",
-     "at": "2026-11-05T13:00:00-05:00"
+     "pull": "B",
+     "at": "2026-11-05T17:30:00-05:00"
     },
     "lineups_at": {
      "away": null,
@@ -346,10 +386,15 @@
     }
    },
    "checks": {
-    "reads": [],
+    "reads": [
+     {
+      "pull": "A",
+      "at": "2026-11-05T13:00:00-05:00"
+     }
+    ],
     "next_read": {
-     "pull": "A",
-     "at": "2026-11-05T13:00:00-05:00"
+     "pull": "B",
+     "at": "2026-11-05T17:30:00-05:00"
     },
     "lineups_at": {
      "away": null,
@@ -382,10 +427,15 @@
     }
    },
    "checks": {
-    "reads": [],
+    "reads": [
+     {
+      "pull": "A",
+      "at": "2026-11-05T13:00:00-05:00"
+     }
+    ],
     "next_read": {
-     "pull": "A",
-     "at": "2026-11-05T13:00:00-05:00"
+     "pull": "B",
+     "at": "2026-11-05T18:30:00-05:00"
     },
     "lineups_at": {
      "away": null,
@@ -418,10 +468,15 @@
     }
    },
    "checks": {
-    "reads": [],
+    "reads": [
+     {
+      "pull": "A",
+      "at": "2026-11-05T13:00:00-05:00"
+     }
+    ],
     "next_read": {
-     "pull": "A",
-     "at": "2026-11-05T13:00:00-05:00"
+     "pull": "B",
+     "at": "2026-11-05T20:00:00-05:00"
     },
     "lineups_at": {
      "away": null,
