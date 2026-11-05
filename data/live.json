@@ -1,6 +1,6 @@
 {
  "slate_date": "2026-11-04",
- "generated_at": "2026-11-05T00:10:18-05:00",
+ "generated_at": "2026-11-05T00:20:00-05:00",
  "games": [
   {
    "game_id": 2026020250,
@@ -8,27 +8,27 @@
    "schedule_state": "OK",
    "period": 3,
    "period_type": "REG",
-   "clock": "12:42",
+   "clock": "09:11",
    "in_intermission": false,
-   "running": true,
+   "running": false,
    "away": {
     "abbrev": "CGY",
     "score": 1,
-    "sog": 21
+    "sog": 25
    },
    "home": {
     "abbrev": "SEA",
     "score": 1,
-    "sog": 24
+    "sog": 25
    },
-   "updated_at": "2026-11-05T00:10:18-05:00"
+   "updated_at": "2026-11-05T00:20:00-05:00"
   }
  ],
  "picks": {
   "2026-11-04:2026020250:8482679:shots:2.5:over": {
    "game_id": 2026020250,
    "market": "shots",
-   "stat": 0
+   "stat": 1
   }
  }
 }
