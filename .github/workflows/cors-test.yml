@@ -5,21 +5,18 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - run: npm i -s playwright@1.47.2 && npx -y playwright@1.47.2 install --with-deps chromium >/dev/null 2>&1
-      - name: Real site, real ESPN, phone-sized browser
-        run: |
-          for i in $(seq 1 30); do n=$(curl -s "https://msasportas.github.io/prop-check-nhl/index.html?x=$RANDOM" | grep -c site.api.espn.com); echo "deploy check $i: $n"; [ "$n" -gt 0 ] && break; sleep 20; done
+      - run: |
+          for u in "scoreboard" "scoreboard?dates=20261104" "summary?event=401892647"; do echo "=== $u"; curl -sS -D - -o /dev/null -H "Origin: https://msasportas.github.io" "https://site.api.espn.com/apis/site/v2/sports/hockey/nhl/$u" | grep -i -E "^HTTP|access-control-allow-origin|cache-control"; done
           cat > t.js <<'JS'
-          const { chromium, devices } = require('playwright');
-          (async () => { const b = await chromium.launch(); const ctx = await b.newContext({ ...devices['iPhone 13'] }); const pg = await ctx.newPage();
-            const espn = []; pg.on('request', r => { if (/espn/.test(r.url())) espn.push('REQ ' + r.url().slice(0, 110)); }); pg.on('response', r => { if (/espn/.test(r.url())) espn.push(r.status() + ' ' + r.url().slice(0, 110)); }); pg.on('requestfailed', r => { if (/espn/.test(r.url())) espn.push('FAILED ' + r.failure().errorText); }); pg.on('console', m => console.log('CONSOLE', m.type(), m.text().slice(0, 160)));
-            pg.on('pageerror', e => console.log('PAGEERROR', e.message));
-            await pg.goto('https://msasportas.github.io/prop-check-nhl/?v=' + Date.now() + '#live', { waitUntil: 'networkidle' });
-            const has = (await pg.content()).includes('site.api.espn.com'); console.log('new code loaded:', has);
-            for (let i = 0; i < 2; i++) { await pg.waitForTimeout(35000);
-              console.log('t+' + (i + 1) * 35 + 's', await pg.evaluate(() => [...document.querySelectorAll('.lv')].map(x => x.innerText.replace(/\s+/g, ' ')).join(' || ') + ' ## ' + ((document.querySelector('.lvon') || {}).innerText || 'no live line') + ' ## ' + ((document.querySelector('.lvnote') || {}).innerText || ''))); }
-            console.log('ESPN calls:\n' + espn.join('\n'));
-            await pg.screenshot({ path: 'live.png' }); await b.close(); })();
+          const { chromium } = require('playwright');
+          (async () => { const b = await chromium.launch(); const pg = await b.newPage();
+            pg.on('console', m => console.log('CONSOLE', m.text()));
+            await pg.goto('https://msasportas.github.io/prop-check-nhl/manifest.webmanifest');
+            const r = await pg.evaluate(async () => { const out = [];
+              for (const [u, o] of [['scoreboard', {}], ['scoreboard?dates=20261104', {}], ['scoreboard', { cache: 'no-store' }], ['scoreboard?dates=20261104', { cache: 'no-store', credentials: 'omit' }], ['summary?event=401892647', { cache: 'no-store', credentials: 'omit' }], ['summary?event=401892647', {}]]) {
+                try { const x = await fetch('https://site.api.espn.com/apis/site/v2/sports/hockey/nhl/' + u, o); out.push('OK ' + x.status + ' ' + u + ' ' + JSON.stringify(o)); }
+                catch (e) { out.push('FAIL ' + u + ' ' + JSON.stringify(o) + ' ' + e.message); } }
+              return out; });
+            console.log(r.join('\n')); await b.close(); })();
           JS
           node t.js
-      - uses: actions/upload-artifact@v4
-        with: { name: shot, path: live.png, retention-days: 1 }
