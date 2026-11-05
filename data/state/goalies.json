@@ -11,11 +11,11 @@
   },
   "TBL": {
    "name": "Andrei Vasilevskiy",
-   "status": "expected"
+   "status": "confirmed"
   },
   "CHI": {
    "name": "Arvid Soderblom",
-   "status": "expected"
+   "status": "confirmed"
   },
   "NYI": {
    "name": "Semyon Varlamov",
@@ -27,15 +27,15 @@
   },
   "DET": {
    "name": "Daniil Tarasov",
-   "status": "expected"
+   "status": "confirmed"
   },
   "VGK": {
    "name": "Carter Hart",
-   "status": "expected"
+   "status": "confirmed"
   },
   "NJD": {
    "name": "Connor Hellebuyck",
-   "status": "expected"
+   "status": "confirmed"
   },
   "STL": {
    "name": "Jordan Binnington",
@@ -55,7 +55,7 @@
   },
   "UTA": {
    "name": "Sebastian Cossa",
-   "status": "expected"
+   "status": "confirmed"
   },
   "CBJ": {
    "name": "Cam Talbot",
@@ -71,7 +71,7 @@
   },
   "VAN": {
    "name": "Leevi Merilainen",
-   "status": "expected"
+   "status": "confirmed"
   },
   "EDM": {
    "name": "Matt Tomkins",
@@ -90,5 +90,5 @@
    "status": "expected"
   }
  },
- "checked_at": "2026-11-05T18:00:00-05:00"
+ "checked_at": "2026-11-05T18:40:00-05:00"
 }

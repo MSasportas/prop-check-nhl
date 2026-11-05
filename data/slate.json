@@ -1,7 +1,7 @@
 {
  "slate_date": "2026-11-05",
- "generated_at": "2026-11-05T18:30:00-05:00",
- "status_at": "2026-11-05T18:30:00-05:00",
+ "generated_at": "2026-11-05T18:40:00-05:00",
+ "status_at": "2026-11-05T18:40:00-05:00",
  "valid_until": "2026-11-06T05:00:00-05:00",
  "status": {
   "prices_state": "ok",
@@ -9,18 +9,18 @@
   "next_price_read_at": "2026-11-05T19:15:00-05:00",
   "stats_built_at": "2026-11-05T01:30:01-05:00",
   "stats_through": "2026-11-04",
-  "lineups_at": "2026-11-05T18:30:00-05:00",
+  "lineups_at": "2026-11-05T18:40:00-05:00",
   "goalies_at": null,
-  "lineups_note": "13 of 22 team line pages are dated today.",
+  "lineups_note": "14 of 22 team line pages are dated today.",
   "lineups_state": "ok",
   "stats_state": "ok",
   "last_run": {
    "ok": true,
-   "at": "2026-11-05T18:30:00-05:00",
+   "at": "2026-11-05T18:40:00-05:00",
    "failed_step": null
   },
   "pool": {
-   "pulls_left": 4149,
+   "pulls_left": 4146,
    "keys": 10,
    "game_days_left": 24,
    "days_left": 26,
@@ -40,13 +40,13 @@
    "home": "MTL",
    "start": "2026-11-05T19:00:00-05:00",
    "lineups": {
-    "away": "waiting",
+    "away": "confirmed",
     "home": "confirmed"
    },
    "goalies": {
     "away": {
      "name": "Sebastian Cossa",
-     "status": "expected"
+     "status": "confirmed"
     },
     "home": {
      "name": "Jakub Dobes",
@@ -70,7 +70,7 @@
     ],
     "next_read": null,
     "lineups_at": {
-     "away": null,
+     "away": "2026-11-05T18:40:00-05:00",
      "home": "2026-11-05T16:00:01-05:00"
     }
    },
@@ -92,11 +92,11 @@
    "goalies": {
     "away": {
      "name": "Carter Hart",
-     "status": "expected"
+     "status": "confirmed"
     },
     "home": {
      "name": "Daniil Tarasov",
-     "status": "expected"
+     "status": "confirmed"
     }
    },
    "checks": {
@@ -138,11 +138,11 @@
    "goalies": {
     "away": {
      "name": "Arvid Soderblom",
-     "status": "expected"
+     "status": "confirmed"
     },
     "home": {
      "name": "Andrei Vasilevskiy",
-     "status": "expected"
+     "status": "confirmed"
     }
    },
    "checks": {
@@ -188,7 +188,7 @@
     },
     "home": {
      "name": "Connor Hellebuyck",
-     "status": "expected"
+     "status": "confirmed"
     }
    },
    "checks": {
@@ -414,7 +414,7 @@
    "goalies": {
     "away": {
      "name": "Leevi Merilainen",
-     "status": "expected"
+     "status": "confirmed"
     },
     "home": {
      "name": "Stuart Skinner",
@@ -710,8 +710,8 @@
     "ours_pct": 49.2,
     "model_pct": 51.7
    },
-   "settled": "lineup",
-   "settled_label": "Lineup confirmed",
+   "settled": "goalie",
+   "settled_label": "Goalie confirmed",
    "reason": "8 other books say 49.0%; Hard Rock's +115 only needs 46.5%. Our model agrees (our blend: 49.2%).",
    "link": "https://app.hardrock.bet/?deep_link_value=betslip/3811016822459859359",
    "links": {
