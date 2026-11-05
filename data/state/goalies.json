@@ -19,7 +19,7 @@
   },
   "NYI": {
    "name": "Semyon Varlamov",
-   "status": "expected"
+   "status": "confirmed"
   },
   "CAR": {
    "name": "Brandon Bussi",
@@ -43,7 +43,7 @@
   },
   "PIT": {
    "name": "Arturs Silovs",
-   "status": "expected"
+   "status": "confirmed"
   },
   "BOS": {
    "name": "Jeremy Swayman",
@@ -90,5 +90,5 @@
    "status": "expected"
   }
  },
- "checked_at": "2026-11-05T11:00:01-05:00"
+ "checked_at": "2026-11-05T11:10:01-05:00"
 }
