@@ -1,7 +1,7 @@
 {
  "slate_date": "2026-11-05",
- "generated_at": "2026-11-05T21:20:01-05:00",
- "status_at": "2026-11-05T21:20:01-05:00",
+ "generated_at": "2026-11-05T21:30:01-05:00",
+ "status_at": "2026-11-05T21:30:01-05:00",
  "valid_until": "2026-11-06T05:00:00-05:00",
  "status": {
   "prices_state": "ok",
@@ -16,7 +16,7 @@
   "stats_state": "ok",
   "last_run": {
    "ok": true,
-   "at": "2026-11-05T21:20:01-05:00",
+   "at": "2026-11-05T21:30:01-05:00",
    "failed_step": null
   },
   "pool": {
@@ -32,7 +32,11 @@
   "tier": 4
  },
  "banners": [],
- "empty": null,
+ "empty": {
+  "code": "all_started",
+  "text": "Every game has started.",
+  "sub": "Tonight's picks are on the Live tab."
+ },
  "games": [
   {
    "id": 2026020251,
@@ -534,77 +538,14 @@
      "home": "2026-11-05T18:30:00-05:00"
     }
    },
-   "started": false,
-   "reads_done": true,
+   "started": true,
+   "reads_done": false,
    "picks": 1,
    "excluded_reason": null,
    "excluded_teams": []
   }
  ],
  "picks": [
-  {
-   "id": "2026-11-05:2026020261:8480039:shots:2.5:under",
-   "price": 105,
-   "first_price": 105,
-   "first_price_at": "2026-11-05T20:00:01-05:00",
-   "worst_price": 105,
-   "p": 0.5178,
-   "breakeven": 0.4878,
-   "p_pct": 51,
-   "breakeven_pct": 49,
-   "state": "lineup",
-   "history": [
-    {
-     "at": "2026-11-05T20:00:01-05:00",
-     "text": "Lineup confirmed"
-    }
-   ],
-   "prices": [
-    {
-     "at": "2026-11-05T20:00:01-05:00",
-     "price": 105
-    }
-   ],
-   "pulled": null,
-   "price_final": true,
-   "graded": null,
-   "rank": 1,
-   "tier": "main",
-   "game_id": 2026020261,
-   "player": "M. Necas",
-   "player_id": 8480039,
-   "team": "COL",
-   "opp": "NSH",
-   "home": true,
-   "start": "2026-11-05T21:30:00-05:00",
-   "market": "shots",
-   "line": 2.5,
-   "side": "under",
-   "bet": "Under 2.5 shots on goal",
-   "price_at": "2026-11-05T20:00:01-05:00",
-   "gap_pct": 4.1,
-   "market_fair_pct": 50.8,
-   "n_books": 8,
-   "guard": {
-    "verdict": "agrees",
-    "ours_pct": 51.8,
-    "model_pct": 57.4
-   },
-   "settled": "goalie",
-   "settled_label": "Goalie confirmed",
-   "reason": "8 other books say 50.8%; Hard Rock's +105 only needs 48.8%. Our model agrees (our blend: 51.8%).",
-   "link": "https://app.hardrock.bet/?deep_link_value=betslip/1205807252615856543",
-   "links": {
-    "hardrock": {
-     "id": "1205807252615856543",
-     "url": "https://share.hardrock.bet/Pt0T/bet?deep_link_value=hardrock://betslip/1205807252615856543"
-    },
-    "draftkings": null
-   },
-   "thin": false,
-   "games_used": 94,
-   "games_this_season": 16
-  },
   {
    "id": "2026-11-05:2026020257:8485395:shots:1.5:under",
    "price": 130,
@@ -1015,6 +956,73 @@
    },
    "thin": false,
    "games_used": 98,
+   "games_this_season": 16
+  },
+  {
+   "id": "2026-11-05:2026020261:8480039:shots:2.5:under",
+   "price": 105,
+   "first_price": 105,
+   "first_price_at": "2026-11-05T20:00:01-05:00",
+   "worst_price": 105,
+   "p": 0.5178,
+   "breakeven": 0.4878,
+   "p_pct": 51,
+   "breakeven_pct": 49,
+   "state": "locked",
+   "history": [
+    {
+     "at": "2026-11-05T20:00:01-05:00",
+     "text": "Lineup confirmed"
+    },
+    {
+     "at": "2026-11-05T21:30:01-05:00",
+     "text": "Locked"
+    }
+   ],
+   "prices": [
+    {
+     "at": "2026-11-05T20:00:01-05:00",
+     "price": 105
+    }
+   ],
+   "pulled": null,
+   "price_final": false,
+   "graded": null,
+   "rank": null,
+   "tier": "main",
+   "game_id": 2026020261,
+   "player": "M. Necas",
+   "player_id": 8480039,
+   "team": "COL",
+   "opp": "NSH",
+   "home": true,
+   "start": "2026-11-05T21:30:00-05:00",
+   "market": "shots",
+   "line": 2.5,
+   "side": "under",
+   "bet": "Under 2.5 shots on goal",
+   "price_at": "2026-11-05T20:00:01-05:00",
+   "gap_pct": 4.1,
+   "market_fair_pct": 50.8,
+   "n_books": 8,
+   "guard": {
+    "verdict": "agrees",
+    "ours_pct": 51.8,
+    "model_pct": 57.4
+   },
+   "settled": "goalie",
+   "settled_label": "Goalie confirmed",
+   "reason": "8 other books say 50.8%; Hard Rock's +105 only needs 48.8%. Our model agrees (our blend: 51.8%).",
+   "link": "https://app.hardrock.bet/?deep_link_value=betslip/1205807252615856543",
+   "links": {
+    "hardrock": {
+     "id": "1205807252615856543",
+     "url": "https://share.hardrock.bet/Pt0T/bet?deep_link_value=hardrock://betslip/1205807252615856543"
+    },
+    "draftkings": null
+   },
+   "thin": false,
+   "games_used": 94,
    "games_this_season": 16
   }
  ],
