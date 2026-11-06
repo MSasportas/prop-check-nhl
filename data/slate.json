@@ -1,26 +1,26 @@
 {
  "slate_date": "2026-11-05",
- "generated_at": "2026-11-05T20:30:01-05:00",
- "status_at": "2026-11-05T20:30:01-05:00",
+ "generated_at": "2026-11-05T20:50:01-05:00",
+ "status_at": "2026-11-05T20:50:01-05:00",
  "valid_until": "2026-11-06T05:00:00-05:00",
  "status": {
   "prices_state": "ok",
-  "prices_at": "2026-11-05T20:00:01-05:00",
-  "next_price_read_at": "2026-11-05T20:45:00-05:00",
+  "prices_at": "2026-11-05T20:50:01-05:00",
+  "next_price_read_at": null,
   "stats_built_at": "2026-11-05T01:30:01-05:00",
   "stats_through": "2026-11-04",
-  "lineups_at": "2026-11-05T20:30:01-05:00",
+  "lineups_at": "2026-11-05T20:50:01-05:00",
   "goalies_at": null,
   "lineups_note": "14 of 22 team line pages are dated today.",
   "lineups_state": "ok",
   "stats_state": "ok",
   "last_run": {
    "ok": true,
-   "at": "2026-11-05T20:30:01-05:00",
+   "at": "2026-11-05T20:50:01-05:00",
    "failed_step": null
   },
   "pool": {
-   "pulls_left": 4136,
+   "pulls_left": 4131,
    "keys": 10,
    "game_days_left": 24,
    "days_left": 26,
@@ -522,88 +522,26 @@
      {
       "pull": "B",
       "at": "2026-11-05T20:00:01-05:00"
+     },
+     {
+      "pull": "C",
+      "at": "2026-11-05T20:50:01-05:00"
      }
     ],
-    "next_read": {
-     "pull": "C",
-     "at": "2026-11-05T20:45:00-05:00"
-    },
+    "next_read": null,
     "lineups_at": {
      "away": null,
      "home": "2026-11-05T18:30:00-05:00"
     }
    },
    "started": false,
-   "reads_done": false,
-   "picks": 2,
+   "reads_done": true,
+   "picks": 1,
    "excluded_reason": null,
    "excluded_teams": []
   }
  ],
  "picks": [
-  {
-   "id": "2026-11-05:2026020261:8480069:shots:2.5:under",
-   "price": 125,
-   "first_price": 125,
-   "first_price_at": "2026-11-05T20:00:01-05:00",
-   "worst_price": 125,
-   "p": 0.4813,
-   "breakeven": 0.4444,
-   "p_pct": 48,
-   "breakeven_pct": 44,
-   "state": "lineup",
-   "history": [
-    {
-     "at": "2026-11-05T20:00:01-05:00",
-     "text": "Lineup confirmed"
-    }
-   ],
-   "prices": [
-    {
-     "at": "2026-11-05T20:00:01-05:00",
-     "price": 125
-    }
-   ],
-   "pulled": null,
-   "price_final": false,
-   "graded": null,
-   "rank": 1,
-   "tier": "main",
-   "game_id": 2026020261,
-   "player": "C. Makar",
-   "player_id": 8480069,
-   "team": "COL",
-   "opp": "NSH",
-   "home": true,
-   "start": "2026-11-05T21:30:00-05:00",
-   "market": "shots",
-   "line": 2.5,
-   "side": "under",
-   "bet": "Under 2.5 shots on goal",
-   "price_at": "2026-11-05T20:00:01-05:00",
-   "gap_pct": 7.4,
-   "market_fair_pct": 47.7,
-   "n_books": 7,
-   "guard": {
-    "verdict": "agrees",
-    "ours_pct": 48.1,
-    "model_pct": 51.3
-   },
-   "settled": "lineup",
-   "settled_label": "Lineup confirmed",
-   "reason": "7 other books say 47.7%; Hard Rock's +125 only needs 44.4%. Our model agrees (our blend: 48.1%).",
-   "link": "https://app.hardrock.bet/?deep_link_value=betslip/8735262879625904532",
-   "links": {
-    "hardrock": {
-     "id": "8735262879625904532",
-     "url": "https://share.hardrock.bet/Pt0T/bet?deep_link_value=hardrock://betslip/8735262879625904532"
-    },
-    "draftkings": null
-   },
-   "thin": false,
-   "games_used": 90,
-   "games_this_season": 15
-  },
   {
    "id": "2026-11-05:2026020261:8480039:shots:2.5:under",
    "price": 105,
@@ -628,9 +566,9 @@
     }
    ],
    "pulled": null,
-   "price_final": false,
+   "price_final": true,
    "graded": null,
-   "rank": 2,
+   "rank": 1,
    "tier": "main",
    "game_id": 2026020261,
    "player": "M. Necas",
@@ -738,6 +676,78 @@
    "thin": true,
    "games_used": 18,
    "games_this_season": 16
+  },
+  {
+   "id": "2026-11-05:2026020261:8480069:shots:2.5:under",
+   "price": 125,
+   "first_price": 125,
+   "first_price_at": "2026-11-05T20:00:01-05:00",
+   "worst_price": 125,
+   "p": 0.4813,
+   "breakeven": 0.4444,
+   "p_pct": 48,
+   "breakeven_pct": 44,
+   "state": "lineup",
+   "history": [
+    {
+     "at": "2026-11-05T20:00:01-05:00",
+     "text": "Lineup confirmed"
+    },
+    {
+     "at": "2026-11-05T20:50:01-05:00",
+     "text": "Pulled: Hard Rock moved it to -110"
+    }
+   ],
+   "prices": [
+    {
+     "at": "2026-11-05T20:00:01-05:00",
+     "price": 125
+    }
+   ],
+   "pulled": {
+    "at": "2026-11-05T20:50:01-05:00",
+    "reason": "Hard Rock moved it to -110",
+    "if_bet": "Got +125? Still a good bet. Don't bet it at -110.",
+    "code": "gap_gone"
+   },
+   "price_final": false,
+   "graded": null,
+   "rank": null,
+   "tier": "main",
+   "game_id": 2026020261,
+   "player": "C. Makar",
+   "player_id": 8480069,
+   "team": "COL",
+   "opp": "NSH",
+   "home": true,
+   "start": "2026-11-05T21:30:00-05:00",
+   "market": "shots",
+   "line": 2.5,
+   "side": "under",
+   "bet": "Under 2.5 shots on goal",
+   "price_at": "2026-11-05T20:00:01-05:00",
+   "gap_pct": 7.4,
+   "market_fair_pct": 47.7,
+   "n_books": 7,
+   "guard": {
+    "verdict": "agrees",
+    "ours_pct": 48.1,
+    "model_pct": 51.3
+   },
+   "settled": "lineup",
+   "settled_label": "Lineup confirmed",
+   "reason": "7 other books say 47.7%; Hard Rock's +125 only needs 44.4%. Our model agrees (our blend: 48.1%).",
+   "link": "https://app.hardrock.bet/?deep_link_value=betslip/8735262879625904532",
+   "links": {
+    "hardrock": {
+     "id": "8735262879625904532",
+     "url": "https://share.hardrock.bet/Pt0T/bet?deep_link_value=hardrock://betslip/8735262879625904532"
+    },
+    "draftkings": null
+   },
+   "thin": false,
+   "games_used": 90,
+   "games_this_season": 15
   },
   {
    "id": "2026-11-05:2026020253:8484390:shots:1.5:under",
