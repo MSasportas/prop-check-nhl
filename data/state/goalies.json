@@ -11,7 +11,7 @@
   },
   "MIN": {
    "name": "Jesper Wallstedt",
-   "status": "expected"
+   "status": "confirmed"
   },
   "SJS": {
    "name": "Yaroslav Askarov",
@@ -26,5 +26,5 @@
    "status": "expected"
   }
  },
- "checked_at": "2026-11-06T11:20:01-05:00"
+ "checked_at": "2026-11-06T11:50:00-05:00"
 }
