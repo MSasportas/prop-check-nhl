@@ -1,6 +1,6 @@
 {
  "slate_date": "2026-11-05",
- "generated_at": "2026-11-05T20:50:19-05:00",
+ "generated_at": "2026-11-05T21:00:00-05:00",
  "games": [
   {
    "game_id": 2026020253,
@@ -8,8 +8,8 @@
    "schedule_state": "OK",
    "period": 2,
    "period_type": "REG",
-   "clock": "01:18",
-   "in_intermission": false,
+   "clock": "09:37",
+   "in_intermission": true,
    "running": false,
    "away": {
     "abbrev": "CHI",
@@ -19,40 +19,40 @@
    "home": {
     "abbrev": "TBL",
     "score": 2,
-    "sog": 22
+    "sog": 24
    },
-   "updated_at": "2026-11-05T20:50:19-05:00"
+   "updated_at": "2026-11-05T21:00:00-05:00"
   },
   {
    "game_id": 2026020256,
    "state": "LIVE",
    "schedule_state": "OK",
-   "period": 2,
+   "period": 3,
    "period_type": "REG",
-   "clock": "03:55",
-   "in_intermission": true,
-   "running": false,
+   "clock": "16:50",
+   "in_intermission": false,
+   "running": true,
    "away": {
     "abbrev": "PHI",
     "score": 2,
-    "sog": 17
+    "sog": 19
    },
    "home": {
     "abbrev": "NYR",
     "score": 1,
     "sog": 18
    },
-   "updated_at": "2026-11-05T20:50:19-05:00"
+   "updated_at": "2026-11-05T21:00:00-05:00"
   },
   {
    "game_id": 2026020257,
    "state": "LIVE",
    "schedule_state": "OK",
-   "period": 2,
+   "period": 3,
    "period_type": "REG",
-   "clock": "05:18",
-   "in_intermission": true,
-   "running": false,
+   "clock": "18:18",
+   "in_intermission": false,
+   "running": true,
    "away": {
     "abbrev": "BOS",
     "score": 5,
@@ -63,7 +63,7 @@
     "score": 2,
     "sog": 15
    },
-   "updated_at": "2026-11-05T20:50:19-05:00"
+   "updated_at": "2026-11-05T21:00:00-05:00"
   },
   {
    "game_id": 2026020260,
@@ -71,8 +71,8 @@
    "schedule_state": "OK",
    "period": 1,
    "period_type": "REG",
-   "clock": "00:26",
-   "in_intermission": false,
+   "clock": "09:01",
+   "in_intermission": true,
    "running": false,
    "away": {
     "abbrev": "ANA",
@@ -81,10 +81,10 @@
    },
    "home": {
     "abbrev": "EDM",
-    "score": 0,
-    "sog": 7
+    "score": 1,
+    "sog": 8
    },
-   "updated_at": "2026-11-05T20:50:19-05:00"
+   "updated_at": "2026-11-05T21:00:00-05:00"
   }
  ],
  "picks": {
