@@ -3,7 +3,7 @@
  "teams": {
   "BUF": {
    "name": "Ukko-Pekka Luukkonen",
-   "status": "expected"
+   "status": "confirmed"
   },
   "CBJ": {
    "name": "Jet Greaves",
@@ -15,7 +15,7 @@
   },
   "SJS": {
    "name": "Yaroslav Askarov",
-   "status": "expected"
+   "status": "confirmed"
   },
   "CGY": {
    "name": "Dustin Wolf",
@@ -26,5 +26,5 @@
    "status": "expected"
   }
  },
- "checked_at": "2026-11-06T12:10:00-05:00"
+ "checked_at": "2026-11-06T13:10:01-05:00"
 }
