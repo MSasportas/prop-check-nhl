@@ -1,7 +1,7 @@
 {
  "slate_date": "2026-11-05",
- "generated_at": "2026-11-05T19:30:00-05:00",
- "status_at": "2026-11-05T19:30:00-05:00",
+ "generated_at": "2026-11-05T19:40:00-05:00",
+ "status_at": "2026-11-05T19:40:00-05:00",
  "valid_until": "2026-11-06T05:00:00-05:00",
  "status": {
   "prices_state": "ok",
@@ -16,7 +16,7 @@
   "stats_state": "ok",
   "last_run": {
    "ok": true,
-   "at": "2026-11-05T19:30:00-05:00",
+   "at": "2026-11-05T19:40:00-05:00",
    "failed_step": null
   },
   "pool": {
@@ -460,7 +460,7 @@
    "goalies": {
     "away": {
      "name": "Laurent Brossoit",
-     "status": "expected"
+     "status": "confirmed"
     },
     "home": {
      "name": "Matt Tomkins",
@@ -585,8 +585,8 @@
     "ours_pct": 44.5,
     "model_pct": 49.8
    },
-   "settled": "lineup",
-   "settled_label": "Lineup confirmed",
+   "settled": "goalie",
+   "settled_label": "Goalie confirmed",
    "reason": "7 other books say 43.7%; Hard Rock's +140 only needs 41.7%. Our model agrees (our blend: 44.5%).",
    "link": "https://app.hardrock.bet/?deep_link_value=betslip/4326654459825488276",
    "links": {
@@ -648,8 +648,8 @@
     "ours_pct": 43.4,
     "model_pct": 41.9
    },
-   "settled": "lineup",
-   "settled_label": "Lineup confirmed",
+   "settled": "goalie",
+   "settled_label": "Goalie confirmed",
    "reason": "7 other books say 44.2%; Hard Rock's +135 only needs 42.6%. Our model agrees (our blend: 43.4%).",
    "link": "https://app.hardrock.bet/?deep_link_value=betslip/5026260514439823772",
    "links": {
