@@ -1,28 +1,28 @@
 {
- "generated_at": "2026-11-05T22:20:00-05:00",
+ "generated_at": "2026-11-05T22:50:00-05:00",
  "summary": {
   "headline": {
    "w": 29,
-   "l": 20,
+   "l": 21,
    "push": 0,
    "void": 0,
-   "units": 7.83,
-   "hit_rate": 0.5918,
-   "needed": 0.5078,
-   "n": 49
+   "units": 6.83,
+   "hit_rate": 0.58,
+   "needed": 0.507,
+   "n": 50
   },
   "rows": [
    {
     "key": "shots",
     "label": "Shots on goal",
     "w": 29,
-    "l": 20,
+    "l": 21,
     "push": 0,
     "void": 0,
-    "units": 7.83,
-    "hit_rate": 0.5918,
-    "needed": 0.5078,
-    "n": 49
+    "units": 6.83,
+    "hit_rate": 0.58,
+    "needed": 0.507,
+    "n": 50
    }
   ],
   "cuts": [
@@ -59,13 +59,13 @@
       "key": "under_1.5",
       "label": "Under 1.5",
       "w": 13,
-      "l": 10,
+      "l": 11,
       "push": 0,
       "void": 0,
-      "units": 3.24,
-      "hit_rate": 0.5652,
-      "needed": 0.4951,
-      "n": 23
+      "units": 2.24,
+      "hit_rate": 0.5417,
+      "needed": 0.4938,
+      "n": 24
      },
      {
       "key": "under_2.5",
@@ -102,13 +102,13 @@
       "key": "edge_2_3",
       "label": "2 to 3 pts",
       "w": 12,
-      "l": 7,
+      "l": 8,
       "push": 0,
       "void": 0,
-      "units": 4.6,
-      "hit_rate": 0.6316,
-      "needed": 0.5125,
-      "n": 19
+      "units": 3.6,
+      "hit_rate": 0.6,
+      "needed": 0.5101,
+      "n": 20
      },
      {
       "key": "edge_3_4",
@@ -157,13 +157,13 @@
       "key": "lineup",
       "label": "Lineup confirmed",
       "w": 20,
-      "l": 8,
+      "l": 9,
       "push": 0,
       "void": 0,
-      "units": 11.11,
-      "hit_rate": 0.7143,
-      "needed": 0.5146,
-      "n": 28
+      "units": 10.11,
+      "hit_rate": 0.6897,
+      "needed": 0.5129,
+      "n": 29
      }
     ]
    },
@@ -200,13 +200,13 @@
       "key": "plus",
       "label": "Even or plus money",
       "w": 15,
-      "l": 12,
+      "l": 13,
       "push": 0,
       "void": 0,
-      "units": 4.7,
-      "hit_rate": 0.5556,
-      "needed": 0.4693,
-      "n": 27
+      "units": 3.7,
+      "hit_rate": 0.5357,
+      "needed": 0.4692,
+      "n": 28
      }
     ]
    }
@@ -215,10 +215,10 @@
    {
     "date": "2026-11-05",
     "w": 0,
-    "l": 2,
+    "l": 3,
     "push": 0,
     "void": 0,
-    "units": -2.0,
+    "units": -3.0,
     "n": 7,
     "graded": false
    },
@@ -359,8 +359,8 @@
    "date": "2026-11-05",
    "graded": false,
    "w": 0,
-   "l": 2,
-   "units": -2.0,
+   "l": 3,
+   "units": -3.0,
    "entries": [
     {
      "id": "2026-11-05:2026020257:8485395:shots:1.5:under",
@@ -523,9 +523,9 @@
        "at": "2026-11-05T17:30:01-05:00"
       }
      ],
-     "result": null,
-     "actual": null,
-     "units": null,
+     "result": "L",
+     "actual": "had 2",
+     "units": -1.0,
      "pulled": null,
      "legs": []
     }
