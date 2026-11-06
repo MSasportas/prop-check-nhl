@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-11-05T19:20:01-05:00",
+ "generated_at": "2026-11-05T20:00:01-05:00",
  "summary": {
   "headline": {
    "w": 29,
@@ -219,7 +219,7 @@
     "push": 0,
     "void": 0,
     "units": 0,
-    "n": 5,
+    "n": 7,
     "graded": false
    },
    {
@@ -412,6 +412,29 @@
      "legs": []
     },
     {
+     "id": "2026-11-05:2026020261:8480069:shots:2.5:under",
+     "kind": "single",
+     "player": "C. Makar",
+     "bet": "Under 2.5 shots on goal",
+     "market": "shots",
+     "team": "COL",
+     "game": "NSH at COL",
+     "price": 125,
+     "first_price": 125,
+     "last_price": 125,
+     "prices": [
+      {
+       "price": 125,
+       "at": "2026-11-05T20:00:01-05:00"
+      }
+     ],
+     "result": null,
+     "actual": null,
+     "units": null,
+     "pulled": null,
+     "legs": []
+    },
+    {
      "id": "2026-11-05:2026020256:8478882:shots:1.5:under",
      "kind": "single",
      "player": "V. Gavrikov",
@@ -449,6 +472,29 @@
       {
        "price": 135,
        "at": "2026-11-05T19:20:01-05:00"
+      }
+     ],
+     "result": null,
+     "actual": null,
+     "units": null,
+     "pulled": null,
+     "legs": []
+    },
+    {
+     "id": "2026-11-05:2026020261:8480039:shots:2.5:under",
+     "kind": "single",
+     "player": "M. Necas",
+     "bet": "Under 2.5 shots on goal",
+     "market": "shots",
+     "team": "COL",
+     "game": "NSH at COL",
+     "price": 105,
+     "first_price": 105,
+     "last_price": 105,
+     "prices": [
+      {
+       "price": 105,
+       "at": "2026-11-05T20:00:01-05:00"
       }
      ],
      "result": null,
