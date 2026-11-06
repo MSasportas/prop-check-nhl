@@ -2,7 +2,7 @@
  "version": 1,
  "note": "Gap + Guard research log. Every flag here is a pick on the page and in the Record; vetoed and capped rows are research only.",
  "market": "shots",
- "generated_at": "2026-11-05T19:00:00-05:00",
+ "generated_at": "2026-11-05T19:20:01-05:00",
  "slate": "2026-11-05",
  "active": true,
  "window": {
@@ -78,8 +78,8 @@
     "pulled": null,
     "locked": false,
     "state": "open",
-    "close_fair_pct": null,
-    "clv_pct": null,
+    "close_fair_pct": 43.6,
+    "clv_pct": 4.7,
     "result": null,
     "units": null
    },
@@ -150,12 +150,10 @@
     "clv_pct": 6.4,
     "result": null,
     "units": null
-   }
-  ],
-  "vetoes": [
+   },
    {
     "id": "2026-11-05:2026020260:8481617:1.5:under",
-    "kind": "veto",
+    "kind": "flag",
     "slate": "2026-11-05",
     "game_id": 2026020260,
     "player": "V. Podkolzin",
@@ -167,26 +165,28 @@
     "line": 1.5,
     "bet": "UNDER 1.5 shots",
     "price": 135,
-    "gap_pct": 3.7,
-    "final_pct": 1.8,
-    "market_fair_pct": 44.1,
-    "final_p_pct": 43.3,
-    "n_books": 6,
-    "guard": "veto",
+    "gap_pct": 4.0,
+    "final_pct": 2.0,
+    "market_fair_pct": 44.2,
+    "final_p_pct": 43.4,
+    "n_books": 7,
+    "guard": "pass",
     "cap": null,
-    "flagged_at": "2026-11-05T18:30:00-05:00",
-    "read_pull": "B",
+    "flagged_at": "2026-11-05T19:20:01-05:00",
+    "read_pull": "C",
     "settled": "Lineup confirmed",
     "frozen_settled": "Lineup confirmed",
-    "move30_pct": -0.4,
+    "move30_pct": 0.1,
     "pulled": null,
     "locked": false,
     "state": "open",
-    "close_fair_pct": null,
+    "close_fair_pct": 44.2,
     "clv_pct": null,
     "result": null,
     "units": null
-   },
+   }
+  ],
+  "vetoes": [
    {
     "id": "2026-11-05:2026020258:8477501:1.5:under",
     "kind": "veto",
@@ -1026,7 +1026,7 @@
   }
  ],
  "nov2": {
-  "gaps_measured": 45,
+  "gaps_measured": 46,
   "gaps_logged": 58,
   "graded_picks": 47,
   "w": 29,
@@ -1035,15 +1035,15 @@
   "units": 9.827189440532768,
   "wins_z": 1.136848284488699,
   "clv_gaps": {
-   "n": 45,
-   "mean": 0.04831748629671157,
-   "lb80": 0.044772198637114374,
+   "n": 46,
+   "mean": 0.04829865707197621,
+   "lb80": 0.04480349724500434,
    "pos_share": 1.0
   },
   "clv_flags": {
-   "n": 42,
-   "mean": 0.048897984649081364,
-   "lb80": 0.04505266394742363,
+   "n": 43,
+   "mean": 0.04886434179582098,
+   "lb80": 0.04523568753957094,
    "pos_share": 1.0
   },
   "clv_vetoed": {
@@ -1052,7 +1052,7 @@
    "lb80": 0.03478299482551902,
    "pos_share": 1.0
   },
-  "clv_passed_mean": 0.048897984649081364,
+  "clv_passed_mean": 0.04886434179582098,
   "clv_vetoed_mean": 0.04019050936353463,
   "nights": 17,
   "nights_with_flags": 14,

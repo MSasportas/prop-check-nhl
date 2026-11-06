@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-11-05T19:00:00-05:00",
+ "generated_at": "2026-11-05T19:20:01-05:00",
  "summary": {
   "headline": {
    "w": 29,
@@ -219,7 +219,7 @@
     "push": 0,
     "void": 0,
     "units": 0,
-    "n": 4,
+    "n": 5,
     "graded": false
    },
    {
@@ -426,6 +426,29 @@
       {
        "price": -120,
        "at": "2026-11-05T17:30:01-05:00"
+      }
+     ],
+     "result": null,
+     "actual": null,
+     "units": null,
+     "pulled": null,
+     "legs": []
+    },
+    {
+     "id": "2026-11-05:2026020260:8481617:shots:1.5:under",
+     "kind": "single",
+     "player": "V. Podkolzin",
+     "bet": "Under 1.5 shots on goal",
+     "market": "shots",
+     "team": "EDM",
+     "game": "ANA at EDM",
+     "price": 135,
+     "first_price": 135,
+     "last_price": 135,
+     "prices": [
+      {
+       "price": 135,
+       "at": "2026-11-05T19:20:01-05:00"
       }
      ],
      "result": null,
