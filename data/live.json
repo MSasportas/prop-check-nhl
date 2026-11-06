@@ -1,6 +1,6 @@
 {
  "slate_date": "2026-11-05",
- "generated_at": "2026-11-05T21:10:00-05:00",
+ "generated_at": "2026-11-05T21:20:01-05:00",
  "games": [
   {
    "game_id": 2026020253,
@@ -8,20 +8,20 @@
    "schedule_state": "OK",
    "period": 3,
    "period_type": "REG",
-   "clock": "20:00",
+   "clock": "15:59",
    "in_intermission": false,
    "running": false,
    "away": {
     "abbrev": "CHI",
     "score": 0,
-    "sog": 15
+    "sog": 17
    },
    "home": {
     "abbrev": "TBL",
-    "score": 2,
-    "sog": 24
+    "score": 3,
+    "sog": 26
    },
-   "updated_at": "2026-11-05T21:10:00-05:00"
+   "updated_at": "2026-11-05T21:20:01-05:00"
   },
   {
    "game_id": 2026020256,
@@ -29,20 +29,20 @@
    "schedule_state": "OK",
    "period": 3,
    "period_type": "REG",
-   "clock": "09:50",
+   "clock": "05:14",
    "in_intermission": false,
    "running": true,
    "away": {
     "abbrev": "PHI",
     "score": 2,
-    "sog": 21
+    "sog": 22
    },
    "home": {
     "abbrev": "NYR",
-    "score": 1,
-    "sog": 20
+    "score": 2,
+    "sog": 25
    },
-   "updated_at": "2026-11-05T21:10:00-05:00"
+   "updated_at": "2026-11-05T21:20:01-05:00"
   },
   {
    "game_id": 2026020257,
@@ -50,20 +50,20 @@
    "schedule_state": "OK",
    "period": 3,
    "period_type": "REG",
-   "clock": "13:05",
+   "clock": "06:26",
    "in_intermission": false,
    "running": false,
    "away": {
     "abbrev": "BOS",
-    "score": 5,
-    "sog": 21
+    "score": 6,
+    "sog": 24
    },
    "home": {
     "abbrev": "PIT",
     "score": 2,
-    "sog": 15
+    "sog": 18
    },
-   "updated_at": "2026-11-05T21:10:00-05:00"
+   "updated_at": "2026-11-05T21:20:01-05:00"
   },
   {
    "game_id": 2026020260,
@@ -71,20 +71,20 @@
    "schedule_state": "OK",
    "period": 2,
    "period_type": "REG",
-   "clock": "20:00",
+   "clock": "15:14",
    "in_intermission": false,
    "running": false,
    "away": {
     "abbrev": "ANA",
-    "score": 1,
-    "sog": 7
+    "score": 2,
+    "sog": 8
    },
    "home": {
     "abbrev": "EDM",
-    "score": 1,
-    "sog": 8
+    "score": 2,
+    "sog": 11
    },
-   "updated_at": "2026-11-05T21:10:00-05:00"
+   "updated_at": "2026-11-05T21:20:01-05:00"
   }
  ],
  "picks": {
