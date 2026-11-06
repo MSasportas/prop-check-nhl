@@ -1,27 +1,27 @@
 {
  "slate_date": "2026-11-05",
- "generated_at": "2026-11-05T21:50:00-05:00",
+ "generated_at": "2026-11-05T22:00:01-05:00",
  "games": [
   {
    "game_id": 2026020253,
-   "state": "CRIT",
+   "state": "FINAL",
    "schedule_state": "OK",
    "period": 3,
    "period_type": "REG",
-   "clock": "00:59",
+   "clock": "00:00",
    "in_intermission": false,
-   "running": true,
+   "running": false,
    "away": {
     "abbrev": "CHI",
-    "score": 0,
-    "sog": 24
+    "score": 1,
+    "sog": 25
    },
    "home": {
     "abbrev": "TBL",
     "score": 4,
     "sog": 35
    },
-   "updated_at": "2026-11-05T21:50:00-05:00"
+   "updated_at": "2026-11-05T22:00:01-05:00"
   },
   {
    "game_id": 2026020256,
@@ -42,7 +42,7 @@
     "score": 3,
     "sog": 28
    },
-   "updated_at": "2026-11-05T21:50:00-05:00"
+   "updated_at": "2026-11-05T22:00:01-05:00"
   },
   {
    "game_id": 2026020257,
@@ -63,7 +63,7 @@
     "score": 2,
     "sog": 18
    },
-   "updated_at": "2026-11-05T21:50:00-05:00"
+   "updated_at": "2026-11-05T22:00:01-05:00"
   },
   {
    "game_id": 2026020260,
@@ -71,7 +71,7 @@
    "schedule_state": "OK",
    "period": 2,
    "period_type": "REG",
-   "clock": "15:52",
+   "clock": "05:52",
    "in_intermission": true,
    "running": false,
    "away": {
@@ -84,7 +84,7 @@
     "score": 2,
     "sog": 17
    },
-   "updated_at": "2026-11-05T21:50:00-05:00"
+   "updated_at": "2026-11-05T22:00:01-05:00"
   },
   {
    "game_id": 2026020261,
@@ -92,7 +92,7 @@
    "schedule_state": "OK",
    "period": 1,
    "period_type": "REG",
-   "clock": "12:12",
+   "clock": "09:15",
    "in_intermission": false,
    "running": true,
    "away": {
@@ -102,17 +102,17 @@
    },
    "home": {
     "abbrev": "COL",
-    "score": 0,
-    "sog": 2
+    "score": 1,
+    "sog": 5
    },
-   "updated_at": "2026-11-05T21:50:00-05:00"
+   "updated_at": "2026-11-05T22:00:01-05:00"
   }
  ],
  "picks": {
   "2026-11-05:2026020253:8484390:shots:1.5:under": {
    "game_id": 2026020253,
    "market": "shots",
-   "stat": 1
+   "stat": 2
   },
   "2026-11-05:2026020256:8478882:shots:1.5:under": {
    "game_id": 2026020256,
@@ -137,7 +137,7 @@
   "2026-11-05:2026020261:8480039:shots:2.5:under": {
    "game_id": 2026020261,
    "market": "shots",
-   "stat": 1
+   "stat": 3
   },
   "2026-11-05:2026020261:8480069:shots:2.5:under": {
    "game_id": 2026020261,
