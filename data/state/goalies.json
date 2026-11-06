@@ -7,7 +7,7 @@
   },
   "CBJ": {
    "name": "Jet Greaves",
-   "status": "expected"
+   "status": "confirmed"
   },
   "MIN": {
    "name": "Jesper Wallstedt",
@@ -26,5 +26,5 @@
    "status": "expected"
   }
  },
- "checked_at": "2026-11-06T11:50:00-05:00"
+ "checked_at": "2026-11-06T12:10:00-05:00"
 }
