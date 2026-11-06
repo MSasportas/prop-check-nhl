@@ -1,10 +1,10 @@
 {
  "ok": true,
  "slate_date": "2026-11-05",
- "started_at": "2026-11-05T23:40:01-05:00",
- "status_at": "2026-11-05T23:40:01-05:00",
- "finished_at": "2026-11-05T23:40:03-05:00",
- "last_ok_at": "2026-11-05T23:40:01-05:00",
+ "started_at": "2026-11-05T23:50:01-05:00",
+ "status_at": "2026-11-05T23:50:01-05:00",
+ "finished_at": "2026-11-05T23:50:03-05:00",
+ "last_ok_at": "2026-11-05T23:50:01-05:00",
  "failed_step": null,
  "steps": [
   {
@@ -64,8 +64,8 @@
   },
   {
    "step": "grade",
-   "status": "skipped",
-   "note": "nothing to grade"
+   "status": "ok",
+   "note": "2 graded"
   },
   {
    "step": "live",
@@ -74,23 +74,23 @@
   },
   {
    "step": "shadow",
-   "status": "skipped",
-   "note": "nothing new"
+   "status": "ok",
+   "note": "36 graded"
   },
   {
    "step": "gg_grade",
    "status": "ok",
-   "note": "gap+guard: nothing new"
+   "note": "gap+guard: 2 grade"
   },
   {
    "step": "slate",
-   "status": "skipped",
-   "note": "unchanged"
+   "status": "ok",
+   "note": "0 open pick(s)"
   },
   {
    "step": "record",
-   "status": "skipped",
-   "note": "unchanged"
+   "status": "ok",
+   "note": "record.json"
   }
  ],
  "sources": {
@@ -164,14 +164,12 @@
  "lineups_at": "2026-11-05T21:20:01-05:00",
  "lineups_note": "14 of 22 team line pages are dated today.",
  "games_today": 11,
- "record_events": 161,
- "odds_notes": [
-  "key 1 refused (401)"
- ],
+ "record_events": 163,
+ "odds_notes": [],
  "runner": {
   "event": "workflow_dispatch",
   "run_id": "42161882627",
-  "iteration": 3,
+  "iteration": 4,
   "chain_link": 6,
   "chain_started_at": "2026-11-05T18:20:17-05:00",
   "run_started_at": "2026-11-05T23:20:18-05:00"
