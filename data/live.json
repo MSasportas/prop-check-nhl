@@ -1,6 +1,6 @@
 {
  "slate_date": "2026-11-05",
- "generated_at": "2026-11-05T22:30:16-05:00",
+ "generated_at": "2026-11-05T22:40:00-05:00",
  "games": [
   {
    "game_id": 2026020253,
@@ -21,7 +21,7 @@
     "score": 4,
     "sog": 35
    },
-   "updated_at": "2026-11-05T22:30:16-05:00"
+   "updated_at": "2026-11-05T22:40:00-05:00"
   },
   {
    "game_id": 2026020256,
@@ -67,13 +67,13 @@
   },
   {
    "game_id": 2026020260,
-   "state": "LIVE",
+   "state": "CRIT",
    "schedule_state": "OK",
    "period": 3,
    "period_type": "REG",
-   "clock": "05:17",
+   "clock": "00:44",
    "in_intermission": false,
-   "running": true,
+   "running": false,
    "away": {
     "abbrev": "ANA",
     "score": 5,
@@ -81,20 +81,20 @@
    },
    "home": {
     "abbrev": "EDM",
-    "score": 2,
-    "sog": 21
+    "score": 4,
+    "sog": 25
    },
-   "updated_at": "2026-11-05T22:30:16-05:00"
+   "updated_at": "2026-11-05T22:40:00-05:00"
   },
   {
    "game_id": 2026020261,
    "state": "LIVE",
    "schedule_state": "OK",
-   "period": 1,
+   "period": 2,
    "period_type": "REG",
-   "clock": "05:08",
-   "in_intermission": true,
-   "running": false,
+   "clock": "17:26",
+   "in_intermission": false,
+   "running": true,
    "away": {
     "abbrev": "NSH",
     "score": 2,
@@ -103,9 +103,9 @@
    "home": {
     "abbrev": "COL",
     "score": 1,
-    "sog": 11
+    "sog": 13
    },
-   "updated_at": "2026-11-05T22:30:16-05:00"
+   "updated_at": "2026-11-05T22:40:00-05:00"
   }
  ],
  "picks": {
@@ -127,7 +127,7 @@
   "2026-11-05:2026020260:8477953:shots:1.5:under": {
    "game_id": 2026020260,
    "market": "shots",
-   "stat": 1
+   "stat": 3
   },
   "2026-11-05:2026020260:8481617:shots:1.5:under": {
    "game_id": 2026020260,
