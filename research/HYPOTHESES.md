@@ -582,6 +582,28 @@ Output: research/code/r21/ii21_results.txt.
 Forward re-score (17 nights Oct 19 - Nov 4): Q1b n474 +7.9% [+2,+14] p .0135 CLV +3.5% (bar .0033 missed, Nov 4 -3.4u n13); Q1g n400
 +10.8% p .008 (missed); Q1b read A +15.7% n274 vs B/C -2.8% n200; unders +10.5% n386, overs -3.6% n88.
 
+## Run 22 (Researcher, 2026-11-06). Registered before any of these were tested.
+No key used, no historical odds pull. Free data to scratch: NHL stats REST skater summary per-game logs 2025-26 (research/code/r14/fetch14.py,
+Feb 28 cut-off; lockbox not fetched). Common as runs 4/6-21: shots45_lines, every two-way Hard Rock line, proportional de-vig fair f, side
+price >= -200, 1u flat, regulation + OT, VOID = no bet, game-clustered bootstrap. Logistic = research/code/wf.py (fit on all months before the
+test month), bet the side with p - BE >= T, T in {.01, .02, .03}. Fixed rules report every Nov-Feb bet with folds. Placebo (shuffle within
+date x line, 200 times) for any variant positive Nov-Feb with n >= 300; lockbox (Mar 1+) only for such a frozen variant, once, needing one-sided
+p < 0.05/3 = 0.0167 (look #3). Every feature uses games dated strictly before d (no tonight's-lineup inputs this run).
+
+| id | date | rule (exact) | data | result | status |
+|---|---|---|---|---|---|
+| JJ1 | 2026-11-06 | **Outlier-inflated average (mean vs median).** From his 2025-26 per-game SOG before d (>= 10 games, else terms 0): last 20 games; mm = mean - median; mx = (max - mean) / sqrt(max(mean, 0.5)). Terms c1*mm + c2*mx (a book or public anchored on the average over-rates a shooter whose average is held up by one or two big nights; K4 used variance, not skew) (3 T). Fixed JJ1r: UNDER when mm >= 0.5 (1 variant). 4 variants | REST + shots45 | | open |
+| JJ2 | 2026-11-06 | **Opponent possession (its shots FOR, not against).** Team SOG for a game = sum of its skaters' SOG (skater logs). opf = opponent's SOG-for/game over its last 20 games before d (>= 5, else 0) minus the league mean SOG-for/game over all team-games before d; tpf = same for his own team. Terms c1*opf + c2*opf*isD + c3*tpf (a high-possession opponent keeps the puck, so fewer shots for him; WF1/Z1/U3 used the opponent's shots AGAINST) (3 T). Fixed JJ2r: UNDER when opf >= +3.0 (1 variant). 4 variants | REST + shots45 | | open |
+| JJ3 | 2026-11-06 | **Retail "hit rate" vs tonight's line.** hr10 = share of his last 10 2025-26 games before d (>= 10, else terms 0) with SOG > tonight's line; dh = hr10 - f. Terms c1*dh + c2*dh*[hr10 >= 0.8 or hr10 <= 0.2] (prop apps show "8 of last 10"; the public may push overs on high hit rates and the book shade them; BB2 used runs vs his posted Hard Rock number, W2 goals) (3 T). Fixed JJ3r: UNDER when hr10 >= 0.8 (1 variant). 4 variants | REST + shots45 | | open |
+
+Forward (registered now; nights >= 2026-11-06 only, none seen):
+| id | date | rule (exact) | data | result | status |
+|---|---|---|---|---|---|
+| Q23a | 2026-11-06 | **II3r forward: 11F/7D teams' big-minute forwards OVER.** Every data/shadow shots row with ctx.pos F and ctx.toi_last5 >= 16.0 whose team's lineup in data/state/lineup_history as known at the row's `close` read (the `last` page if last_at <= close.at, else `first_today` if first_today_at <= close.at, else no bet) has groups f1-f4 with 11 players and d1-d4 with 7, the player among the forwards; OVER at the `close` Hard Rock price, over >= -200, graded on result.over. 1 variant | data/shadow + lineup_history | | forward, open |
+| Q23b | 2026-11-06 | Same, every forward on those teams (no TOI filter). 1 variant | same | | forward, open |
+Q23 bar: n >= 300 graded, ROI > 0, one-sided p < 0.05/44 = 0.0011 (42 + 2 forward variants). Scored by research/code/r22/score_q23.py
+(added to run_all.sh). Seen nights (Oct 12 - Nov 5) are printed as a descriptive code check, not a result.
+
 ## Queued (not yet tested)
 | id | rule idea | data | status |
 |---|---|---|---|
