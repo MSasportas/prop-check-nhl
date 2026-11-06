@@ -1,6 +1,6 @@
 {
  "slate_date": "2026-11-05",
- "generated_at": "2026-11-05T23:20:19-05:00",
+ "generated_at": "2026-11-05T23:30:01-05:00",
  "games": [
   {
    "game_id": 2026020253,
@@ -84,16 +84,16 @@
     "score": 4,
     "sog": 27
    },
-   "updated_at": "2026-11-05T23:20:19-05:00"
+   "updated_at": "2026-11-05T23:30:01-05:00"
   },
   {
    "game_id": 2026020261,
    "state": "LIVE",
    "schedule_state": "OK",
-   "period": 2,
+   "period": 3,
    "period_type": "REG",
-   "clock": "08:21",
-   "in_intermission": true,
+   "clock": "20:00",
+   "in_intermission": false,
    "running": false,
    "away": {
     "abbrev": "NSH",
@@ -105,7 +105,7 @@
     "score": 2,
     "sog": 20
    },
-   "updated_at": "2026-11-05T23:20:19-05:00"
+   "updated_at": "2026-11-05T23:30:01-05:00"
   }
  ],
  "picks": {
