@@ -1,7 +1,7 @@
 {
  "slate_date": "2026-11-05",
- "generated_at": "2026-11-05T18:50:00-05:00",
- "status_at": "2026-11-05T18:50:00-05:00",
+ "generated_at": "2026-11-05T19:00:00-05:00",
+ "status_at": "2026-11-05T19:00:00-05:00",
  "valid_until": "2026-11-06T05:00:00-05:00",
  "status": {
   "prices_state": "ok",
@@ -9,14 +9,14 @@
   "next_price_read_at": "2026-11-05T19:15:00-05:00",
   "stats_built_at": "2026-11-05T01:30:01-05:00",
   "stats_through": "2026-11-04",
-  "lineups_at": "2026-11-05T18:50:00-05:00",
+  "lineups_at": "2026-11-05T19:00:00-05:00",
   "goalies_at": null,
   "lineups_note": "14 of 22 team line pages are dated today.",
   "lineups_state": "ok",
   "stats_state": "ok",
   "last_run": {
    "ok": true,
-   "at": "2026-11-05T18:50:00-05:00",
+   "at": "2026-11-05T19:00:00-05:00",
    "failed_step": null
   },
   "pool": {
@@ -74,8 +74,8 @@
      "home": "2026-11-05T16:00:01-05:00"
     }
    },
-   "started": false,
-   "reads_done": true,
+   "started": true,
+   "reads_done": false,
    "picks": 0,
    "excluded_reason": null,
    "excluded_teams": []
@@ -120,8 +120,8 @@
      "home": "2026-11-05T16:00:01-05:00"
     }
    },
-   "started": false,
-   "reads_done": true,
+   "started": true,
+   "reads_done": false,
    "picks": 0,
    "excluded_reason": null,
    "excluded_teams": []
@@ -166,8 +166,8 @@
      "home": null
     }
    },
-   "started": false,
-   "reads_done": true,
+   "started": true,
+   "reads_done": false,
    "picks": 1,
    "excluded_reason": null,
    "excluded_teams": []
@@ -212,8 +212,8 @@
      "home": "2026-11-05T16:00:01-05:00"
     }
    },
-   "started": false,
-   "reads_done": true,
+   "started": true,
+   "reads_done": false,
    "picks": 0,
    "excluded_reason": null,
    "excluded_teams": []
@@ -258,8 +258,8 @@
      "home": null
     }
    },
-   "started": false,
-   "reads_done": true,
+   "started": true,
+   "reads_done": false,
    "picks": 0,
    "excluded_reason": null,
    "excluded_teams": []
@@ -304,8 +304,8 @@
      "home": "2026-11-05T16:00:01-05:00"
     }
    },
-   "started": false,
-   "reads_done": true,
+   "started": true,
+   "reads_done": false,
    "picks": 1,
    "excluded_reason": null,
    "excluded_teams": []
@@ -350,8 +350,8 @@
      "home": "2026-11-05T16:00:01-05:00"
     }
    },
-   "started": false,
-   "reads_done": true,
+   "started": true,
+   "reads_done": false,
    "picks": 0,
    "excluded_reason": null,
    "excluded_teams": []
@@ -396,8 +396,8 @@
      "home": null
     }
    },
-   "started": false,
-   "reads_done": true,
+   "started": true,
+   "reads_done": false,
    "picks": 0,
    "excluded_reason": null,
    "excluded_teams": []
@@ -442,8 +442,8 @@
      "home": "2026-11-05T16:00:01-05:00"
     }
    },
-   "started": false,
-   "reads_done": true,
+   "started": true,
+   "reads_done": false,
    "picks": 0,
    "excluded_reason": null,
    "excluded_teams": []
@@ -600,132 +600,6 @@
    "games_this_season": 16
   },
   {
-   "id": "2026-11-05:2026020256:8478882:shots:1.5:under",
-   "price": -120,
-   "first_price": -120,
-   "first_price_at": "2026-11-05T17:30:01-05:00",
-   "worst_price": -120,
-   "p": 0.5805,
-   "breakeven": 0.5455,
-   "p_pct": 58,
-   "breakeven_pct": 55,
-   "state": "lineup",
-   "history": [
-    {
-     "at": "2026-11-05T17:30:01-05:00",
-     "text": "Lineup confirmed"
-    }
-   ],
-   "prices": [
-    {
-     "at": "2026-11-05T17:30:01-05:00",
-     "price": -120
-    }
-   ],
-   "pulled": null,
-   "price_final": true,
-   "graded": null,
-   "rank": 2,
-   "tier": "main",
-   "game_id": 2026020256,
-   "player": "V. Gavrikov",
-   "player_id": 8478882,
-   "team": "NYR",
-   "opp": "PHI",
-   "home": true,
-   "start": "2026-11-05T19:00:00-05:00",
-   "market": "shots",
-   "line": 1.5,
-   "side": "under",
-   "bet": "Under 1.5 shots on goal",
-   "price_at": "2026-11-05T17:30:01-05:00",
-   "gap_pct": 5.2,
-   "market_fair_pct": 57.4,
-   "n_books": 6,
-   "guard": {
-    "verdict": "agrees",
-    "ours_pct": 58.1,
-    "model_pct": 62.5
-   },
-   "settled": "goalie",
-   "settled_label": "Goalie confirmed",
-   "reason": "6 other books say 57.4%; Hard Rock's -120 only needs 54.5%. Our model agrees (our blend: 58.1%).",
-   "link": "https://app.hardrock.bet/?deep_link_value=betslip/4047265703349322147",
-   "links": {
-    "hardrock": {
-     "id": "4047265703349322147",
-     "url": "https://share.hardrock.bet/Pt0T/bet?deep_link_value=hardrock://betslip/4047265703349322147"
-    },
-    "draftkings": null
-   },
-   "thin": false,
-   "games_used": 98,
-   "games_this_season": 16
-  },
-  {
-   "id": "2026-11-05:2026020253:8484390:shots:1.5:under",
-   "price": 115,
-   "first_price": 115,
-   "first_price_at": "2026-11-05T17:30:01-05:00",
-   "worst_price": 115,
-   "p": 0.4916,
-   "breakeven": 0.4651,
-   "p_pct": 49,
-   "breakeven_pct": 47,
-   "state": "lineup",
-   "history": [
-    {
-     "at": "2026-11-05T17:30:01-05:00",
-     "text": "Lineup confirmed"
-    }
-   ],
-   "prices": [
-    {
-     "at": "2026-11-05T17:30:01-05:00",
-     "price": 115
-    }
-   ],
-   "pulled": null,
-   "price_final": true,
-   "graded": null,
-   "rank": 3,
-   "tier": "main",
-   "game_id": 2026020253,
-   "player": "R. Kantserov",
-   "player_id": 8484390,
-   "team": "CHI",
-   "opp": "TBL",
-   "home": false,
-   "start": "2026-11-05T19:00:00-05:00",
-   "market": "shots",
-   "line": 1.5,
-   "side": "under",
-   "bet": "Under 1.5 shots on goal",
-   "price_at": "2026-11-05T17:30:01-05:00",
-   "gap_pct": 5.3,
-   "market_fair_pct": 49.0,
-   "n_books": 8,
-   "guard": {
-    "verdict": "agrees",
-    "ours_pct": 49.2,
-    "model_pct": 51.7
-   },
-   "settled": "goalie",
-   "settled_label": "Goalie confirmed",
-   "reason": "8 other books say 49.0%; Hard Rock's +115 only needs 46.5%. Our model agrees (our blend: 49.2%).",
-   "link": "https://app.hardrock.bet/?deep_link_value=betslip/3811016822459859359",
-   "links": {
-    "hardrock": {
-     "id": "3811016822459859359",
-     "url": "https://share.hardrock.bet/Pt0T/bet?deep_link_value=hardrock://betslip/3811016822459859359"
-    },
-    "draftkings": null
-   },
-   "thin": true,
-   "games_used": 16,
-   "games_this_season": 16
-  },
-  {
    "id": "2026-11-05:2026020257:8485395:shots:1.5:under",
    "price": 130,
    "first_price": 130,
@@ -795,6 +669,140 @@
    },
    "thin": true,
    "games_used": 18,
+   "games_this_season": 16
+  },
+  {
+   "id": "2026-11-05:2026020253:8484390:shots:1.5:under",
+   "price": 115,
+   "first_price": 115,
+   "first_price_at": "2026-11-05T17:30:01-05:00",
+   "worst_price": 115,
+   "p": 0.4916,
+   "breakeven": 0.4651,
+   "p_pct": 49,
+   "breakeven_pct": 47,
+   "state": "locked",
+   "history": [
+    {
+     "at": "2026-11-05T17:30:01-05:00",
+     "text": "Lineup confirmed"
+    },
+    {
+     "at": "2026-11-05T19:00:00-05:00",
+     "text": "Locked"
+    }
+   ],
+   "prices": [
+    {
+     "at": "2026-11-05T17:30:01-05:00",
+     "price": 115
+    }
+   ],
+   "pulled": null,
+   "price_final": false,
+   "graded": null,
+   "rank": null,
+   "tier": "main",
+   "game_id": 2026020253,
+   "player": "R. Kantserov",
+   "player_id": 8484390,
+   "team": "CHI",
+   "opp": "TBL",
+   "home": false,
+   "start": "2026-11-05T19:00:00-05:00",
+   "market": "shots",
+   "line": 1.5,
+   "side": "under",
+   "bet": "Under 1.5 shots on goal",
+   "price_at": "2026-11-05T17:30:01-05:00",
+   "gap_pct": 5.3,
+   "market_fair_pct": 49.0,
+   "n_books": 8,
+   "guard": {
+    "verdict": "agrees",
+    "ours_pct": 49.2,
+    "model_pct": 51.7
+   },
+   "settled": "goalie",
+   "settled_label": "Goalie confirmed",
+   "reason": "8 other books say 49.0%; Hard Rock's +115 only needs 46.5%. Our model agrees (our blend: 49.2%).",
+   "link": "https://app.hardrock.bet/?deep_link_value=betslip/3811016822459859359",
+   "links": {
+    "hardrock": {
+     "id": "3811016822459859359",
+     "url": "https://share.hardrock.bet/Pt0T/bet?deep_link_value=hardrock://betslip/3811016822459859359"
+    },
+    "draftkings": null
+   },
+   "thin": true,
+   "games_used": 16,
+   "games_this_season": 16
+  },
+  {
+   "id": "2026-11-05:2026020256:8478882:shots:1.5:under",
+   "price": -120,
+   "first_price": -120,
+   "first_price_at": "2026-11-05T17:30:01-05:00",
+   "worst_price": -120,
+   "p": 0.5805,
+   "breakeven": 0.5455,
+   "p_pct": 58,
+   "breakeven_pct": 55,
+   "state": "locked",
+   "history": [
+    {
+     "at": "2026-11-05T17:30:01-05:00",
+     "text": "Lineup confirmed"
+    },
+    {
+     "at": "2026-11-05T19:00:00-05:00",
+     "text": "Locked"
+    }
+   ],
+   "prices": [
+    {
+     "at": "2026-11-05T17:30:01-05:00",
+     "price": -120
+    }
+   ],
+   "pulled": null,
+   "price_final": false,
+   "graded": null,
+   "rank": null,
+   "tier": "main",
+   "game_id": 2026020256,
+   "player": "V. Gavrikov",
+   "player_id": 8478882,
+   "team": "NYR",
+   "opp": "PHI",
+   "home": true,
+   "start": "2026-11-05T19:00:00-05:00",
+   "market": "shots",
+   "line": 1.5,
+   "side": "under",
+   "bet": "Under 1.5 shots on goal",
+   "price_at": "2026-11-05T17:30:01-05:00",
+   "gap_pct": 5.2,
+   "market_fair_pct": 57.4,
+   "n_books": 6,
+   "guard": {
+    "verdict": "agrees",
+    "ours_pct": 58.1,
+    "model_pct": 62.5
+   },
+   "settled": "goalie",
+   "settled_label": "Goalie confirmed",
+   "reason": "6 other books say 57.4%; Hard Rock's -120 only needs 54.5%. Our model agrees (our blend: 58.1%).",
+   "link": "https://app.hardrock.bet/?deep_link_value=betslip/4047265703349322147",
+   "links": {
+    "hardrock": {
+     "id": "4047265703349322147",
+     "url": "https://share.hardrock.bet/Pt0T/bet?deep_link_value=hardrock://betslip/4047265703349322147"
+    },
+    "draftkings": null
+   },
+   "thin": false,
+   "games_used": 98,
    "games_this_season": 16
   }
  ],
