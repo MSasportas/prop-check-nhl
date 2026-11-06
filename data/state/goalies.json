@@ -1,94 +1,30 @@
 {
- "date": "2026-11-05",
+ "date": "2026-11-06",
  "teams": {
-  "NYR": {
-   "name": "Dylan Garand",
-   "status": "confirmed"
-  },
-  "PHI": {
-   "name": "Joseph Woll",
-   "status": "confirmed"
-  },
-  "TBL": {
-   "name": "Andrei Vasilevskiy",
-   "status": "confirmed"
-  },
-  "CHI": {
-   "name": "Arvid Soderblom",
-   "status": "confirmed"
-  },
-  "NYI": {
-   "name": "Semyon Varlamov",
-   "status": "confirmed"
-  },
-  "CAR": {
-   "name": "Brandon Bussi",
-   "status": "confirmed"
-  },
-  "DET": {
-   "name": "Daniil Tarasov",
-   "status": "confirmed"
-  },
-  "VGK": {
-   "name": "Carter Hart",
-   "status": "confirmed"
-  },
-  "NJD": {
-   "name": "Connor Hellebuyck",
-   "status": "confirmed"
-  },
-  "STL": {
-   "name": "Jordan Binnington",
-   "status": "confirmed"
-  },
-  "PIT": {
-   "name": "Arturs Silovs",
-   "status": "confirmed"
-  },
-  "BOS": {
-   "name": "Michael DiPietro",
-   "status": "confirmed"
-  },
-  "MTL": {
-   "name": "Jakub Dobes",
-   "status": "confirmed"
-  },
-  "UTA": {
-   "name": "Sebastian Cossa",
-   "status": "confirmed"
+  "BUF": {
+   "name": "Colten Ellis",
+   "status": "expected"
   },
   "CBJ": {
    "name": "Cam Talbot",
-   "status": "confirmed"
+   "status": "expected"
   },
-  "DAL": {
-   "name": "Casey DeSmith",
-   "status": "confirmed"
+  "MIN": {
+   "name": "Jesper Wallstedt",
+   "status": "expected"
   },
-  "WPG": {
-   "name": "Stuart Skinner",
-   "status": "confirmed"
+  "SJS": {
+   "name": "Yaroslav Askarov",
+   "status": "expected"
   },
-  "VAN": {
-   "name": "Leevi Merilainen",
-   "status": "confirmed"
-  },
-  "EDM": {
-   "name": "Matt Tomkins",
-   "status": "confirmed"
+  "CGY": {
+   "name": "Dustin Wolf",
+   "status": "expected"
   },
   "ANA": {
-   "name": "Laurent Brossoit",
-   "status": "confirmed"
-  },
-  "COL": {
-   "name": "Mackenzie Blackwood",
-   "status": "confirmed"
-  },
-  "NSH": {
-   "name": "Justus Annunen",
-   "status": "confirmed"
+   "name": "Lukas Dostal",
+   "status": "expected"
   }
  },
- "checked_at": "2026-11-05T21:10:00-05:00"
+ "checked_at": "2026-11-06T05:00:01-05:00"
 }
