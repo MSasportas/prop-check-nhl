@@ -1,15 +1,15 @@
 {
  "slate_date": "2026-11-05",
- "generated_at": "2026-11-05T20:00:46-05:00",
+ "generated_at": "2026-11-05T20:10:01-05:00",
  "games": [
   {
    "game_id": 2026020253,
    "state": "LIVE",
    "schedule_state": "OK",
-   "period": 1,
+   "period": 2,
    "period_type": "REG",
-   "clock": "03:51",
-   "in_intermission": true,
+   "clock": "18:14",
+   "in_intermission": false,
    "running": false,
    "away": {
     "abbrev": "CHI",
@@ -19,9 +19,9 @@
    "home": {
     "abbrev": "TBL",
     "score": 2,
-    "sog": 8
+    "sog": 10
    },
-   "updated_at": "2026-11-05T20:00:46-05:00"
+   "updated_at": "2026-11-05T20:10:01-05:00"
   },
   {
    "game_id": 2026020256,
@@ -29,62 +29,62 @@
    "schedule_state": "OK",
    "period": 2,
    "period_type": "REG",
-   "clock": "20:00",
+   "clock": "13:41",
    "in_intermission": false,
-   "running": false,
+   "running": true,
    "away": {
     "abbrev": "PHI",
     "score": 0,
-    "sog": 9
+    "sog": 14
    },
    "home": {
     "abbrev": "NYR",
     "score": 1,
-    "sog": 8
+    "sog": 12
    },
-   "updated_at": "2026-11-05T20:00:46-05:00"
+   "updated_at": "2026-11-05T20:10:01-05:00"
   },
   {
    "game_id": 2026020257,
    "state": "LIVE",
    "schedule_state": "OK",
-   "period": 1,
+   "period": 2,
    "period_type": "REG",
-   "clock": "04:46",
-   "in_intermission": true,
-   "running": false,
+   "clock": "17:42",
+   "in_intermission": false,
+   "running": true,
    "away": {
     "abbrev": "BOS",
     "score": 3,
-    "sog": 11
+    "sog": 13
    },
    "home": {
     "abbrev": "PIT",
     "score": 1,
-    "sog": 5
+    "sog": 6
    },
-   "updated_at": "2026-11-05T20:00:46-05:00"
+   "updated_at": "2026-11-05T20:10:01-05:00"
   },
   {
    "game_id": 2026020260,
-   "state": "PRE",
+   "state": "LIVE",
    "schedule_state": "OK",
-   "period": null,
-   "period_type": null,
-   "clock": null,
+   "period": 1,
+   "period_type": "REG",
+   "clock": "19:13",
    "in_intermission": false,
-   "running": false,
+   "running": true,
    "away": {
     "abbrev": "ANA",
-    "score": null,
+    "score": 0,
     "sog": null
    },
    "home": {
     "abbrev": "EDM",
-    "score": null,
+    "score": 0,
     "sog": null
    },
-   "updated_at": "2026-11-05T20:00:46-05:00"
+   "updated_at": "2026-11-05T20:10:01-05:00"
   }
  ],
  "picks": {
@@ -106,12 +106,12 @@
   "2026-11-05:2026020260:8477953:shots:1.5:under": {
    "game_id": 2026020260,
    "market": "shots",
-   "stat": null
+   "stat": 0
   },
   "2026-11-05:2026020260:8481617:shots:1.5:under": {
    "game_id": 2026020260,
    "market": "shots",
-   "stat": null
+   "stat": 0
   }
  }
 }
