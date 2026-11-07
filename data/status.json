@@ -1,10 +1,10 @@
 {
  "ok": true,
- "slate_date": "2026-11-06",
- "started_at": "2026-11-07T04:30:00-05:00",
- "status_at": "2026-11-07T04:30:00-05:00",
- "finished_at": "2026-11-07T04:30:01-05:00",
- "last_ok_at": "2026-11-07T04:30:00-05:00",
+ "slate_date": "2026-11-07",
+ "started_at": "2026-11-07T05:00:00-05:00",
+ "status_at": "2026-11-07T05:00:00-05:00",
+ "finished_at": "2026-11-07T05:00:07-05:00",
+ "last_ok_at": "2026-11-07T05:00:00-05:00",
  "failed_step": null,
  "steps": [
   {
@@ -15,7 +15,7 @@
   {
    "step": "schedule",
    "status": "ok",
-   "note": "3 game(s) today"
+   "note": "12 game(s) today"
   },
   {
    "step": "stats",
@@ -70,7 +70,7 @@
   {
    "step": "live",
    "status": "skipped",
-   "note": "no change"
+   "note": "no started game with a pick"
   },
   {
    "step": "shadow",
@@ -111,7 +111,7 @@
   },
   {
    "n": 3,
-   "left": 495
+   "left": 465
   },
   {
    "n": 4,
@@ -142,33 +142,32 @@
    "left": 500
   }
  ],
- "pool_total": 4084,
- "allowance": 23.6437,
+ "pool_total": 4054,
+ "allowance": 23.7076,
  "tier": 4,
- "budget_today": 70,
- "budget_used_today": 30,
- "prices_state": "ok",
- "prices_at": "2026-11-06T19:20:00-05:00",
- "next_price_read_at": null,
+ "budget_today": 284,
+ "budget_used_today": 0,
+ "prices_state": "not_yet",
+ "prices_at": null,
+ "next_price_read_at": "2026-11-07T09:30:00-05:00",
  "unmatched_names": [],
  "unknown_teams": [],
- "lineup_unmatched_names": [
-  "Jack Williams",
-  "Steven Lorentz"
- ],
+ "lineup_unmatched_names": [],
  "excluded_teams": [],
  "stats_through": "2026-11-06",
- "lineups_at": "2026-11-06T19:40:00-05:00",
- "lineups_note": "5 of 6 team line pages are dated today.",
- "games_today": 3,
+ "lineups_at": null,
+ "lineups_note": null,
+ "games_today": 12,
  "record_events": 171,
- "odds_notes": [],
+ "odds_notes": [
+  "key 1 refused (401)"
+ ],
  "runner": {
   "event": "workflow_dispatch",
-  "run_id": "42357815138",
+  "run_id": "42359983967",
   "iteration": 2,
-  "chain_link": 44,
+  "chain_link": 45,
   "chain_started_at": "2026-11-05T18:20:17-05:00",
-  "run_started_at": "2026-11-07T04:00:13-05:00"
+  "run_started_at": "2026-11-07T04:30:13-05:00"
  }
 }
