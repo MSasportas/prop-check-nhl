@@ -1,6 +1,6 @@
 {
  "slate_date": "2026-11-06",
- "generated_at": "2026-11-06T22:50:01-05:00",
+ "generated_at": "2026-11-06T23:00:00-05:00",
  "games": [
   {
    "game_id": 2026020263,
@@ -21,11 +21,11 @@
     "score": 4,
     "sog": 29
    },
-   "updated_at": "2026-11-06T22:50:01-05:00"
+   "updated_at": "2026-11-06T23:00:00-05:00"
   },
   {
    "game_id": 2026020264,
-   "state": "FINAL",
+   "state": "OFF",
    "schedule_state": "OK",
    "period": 3,
    "period_type": "REG",
@@ -42,7 +42,7 @@
     "score": 3,
     "sog": 21
    },
-   "updated_at": "2026-11-06T22:50:01-05:00"
+   "updated_at": "2026-11-06T23:00:00-05:00"
   }
  ],
  "picks": {
