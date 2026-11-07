@@ -6,7 +6,7 @@
    "status": "expected"
   },
   "FLA": {
-   "name": "Jacob Markstrom",
+   "name": "Akira Schmid",
    "status": "expected"
   },
   "NSH": {
@@ -38,11 +38,11 @@
    "status": "expected"
   },
   "NJD": {
-   "name": "Connor Hellebuyck",
+   "name": "Jake Allen",
    "status": "expected"
   },
   "OTT": {
-   "name": "Samuel Ersson",
+   "name": "Linus Ullmark",
    "status": "expected"
   },
   "UTA": {
@@ -70,7 +70,7 @@
    "status": "expected"
   },
   "SJS": {
-   "name": "Yaroslav Askarov",
+   "name": "Alex Nedeljkovic",
    "status": "expected"
   },
   "LAK": {
@@ -78,7 +78,7 @@
    "status": "expected"
   },
   "PIT": {
-   "name": "Arturs Silovs",
+   "name": "Sergei Murashov",
    "status": "expected"
   },
   "COL": {
@@ -94,9 +94,9 @@
    "status": "expected"
   },
   "VAN": {
-   "name": "Leevi Merilainen",
+   "name": "Kevin Lankinen",
    "status": "expected"
   }
  },
- "checked_at": "2026-11-07T05:00:00-05:00"
+ "checked_at": "2026-11-07T07:00:00-05:00"
 }
