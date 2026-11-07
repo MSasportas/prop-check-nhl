@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-11-06T18:30:01-05:00",
+ "generated_at": "2026-11-06T19:20:00-05:00",
  "summary": {
   "headline": {
    "w": 30,
@@ -219,7 +219,7 @@
     "push": 0,
     "void": 0,
     "units": 0,
-    "n": 1,
+    "n": 2,
     "graded": false
    },
    {
@@ -387,6 +387,29 @@
       {
        "price": 115,
        "at": "2026-11-06T18:30:01-05:00"
+      }
+     ],
+     "result": null,
+     "actual": null,
+     "units": null,
+     "pulled": null,
+     "legs": []
+    },
+    {
+     "id": "2026-11-06:2026020263:8483525:shots:1.5:over",
+     "kind": "single",
+     "player": "D. Yurov",
+     "bet": "Over 1.5 shots on goal",
+     "market": "shots",
+     "team": "MIN",
+     "game": "SJS at MIN",
+     "price": 125,
+     "first_price": 125,
+     "last_price": 125,
+     "prices": [
+      {
+       "price": 125,
+       "at": "2026-11-06T19:20:00-05:00"
       }
      ],
      "result": null,

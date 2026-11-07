@@ -1,12 +1,12 @@
 {
  "slate_date": "2026-11-06",
- "generated_at": "2026-11-06T19:10:01-05:00",
- "status_at": "2026-11-06T19:10:01-05:00",
+ "generated_at": "2026-11-06T19:20:00-05:00",
+ "status_at": "2026-11-06T19:20:00-05:00",
  "valid_until": "2026-11-07T05:00:00-05:00",
  "status": {
   "prices_state": "ok",
-  "prices_at": "2026-11-06T18:30:01-05:00",
-  "next_price_read_at": "2026-11-06T19:15:00-05:00",
+  "prices_at": "2026-11-06T19:20:00-05:00",
+  "next_price_read_at": null,
   "stats_built_at": "2026-11-06T00:50:01-05:00",
   "stats_through": "2026-11-05",
   "lineups_at": "2026-11-06T19:10:01-05:00",
@@ -16,11 +16,11 @@
   "stats_state": "ok",
   "last_run": {
    "ok": true,
-   "at": "2026-11-06T19:10:01-05:00",
+   "at": "2026-11-06T19:20:00-05:00",
    "failed_step": null
   },
   "pool": {
-   "pulls_left": 4091,
+   "pulls_left": 4084,
    "keys": 10,
    "game_days_left": 23,
    "days_left": 25,
@@ -108,20 +108,21 @@
      {
       "pull": "B",
       "at": "2026-11-06T18:30:01-05:00"
+     },
+     {
+      "pull": "C",
+      "at": "2026-11-06T19:20:00-05:00"
      }
     ],
-    "next_read": {
-     "pull": "C",
-     "at": "2026-11-06T19:15:00-05:00"
-    },
+    "next_read": null,
     "lineups_at": {
      "away": "2026-11-06T17:00:00-05:00",
      "home": null
     }
    },
    "started": false,
-   "reads_done": false,
-   "picks": 0,
+   "reads_done": true,
+   "picks": 1,
    "excluded_reason": null,
    "excluded_teams": []
   },
@@ -153,25 +154,89 @@
      {
       "pull": "B",
       "at": "2026-11-06T18:30:01-05:00"
+     },
+     {
+      "pull": "C",
+      "at": "2026-11-06T19:20:00-05:00"
      }
     ],
-    "next_read": {
-     "pull": "C",
-     "at": "2026-11-06T19:15:00-05:00"
-    },
+    "next_read": null,
     "lineups_at": {
      "away": "2026-11-06T17:00:00-05:00",
      "home": "2026-11-06T17:00:00-05:00"
     }
    },
    "started": false,
-   "reads_done": false,
+   "reads_done": true,
    "picks": 1,
    "excluded_reason": null,
    "excluded_teams": []
   }
  ],
  "picks": [
+  {
+   "id": "2026-11-06:2026020263:8483525:shots:1.5:over",
+   "price": 125,
+   "first_price": 125,
+   "first_price_at": "2026-11-06T19:20:00-05:00",
+   "worst_price": 125,
+   "p": 0.4685,
+   "breakeven": 0.4444,
+   "p_pct": 46,
+   "breakeven_pct": 44,
+   "state": "early",
+   "history": [
+    {
+     "at": "2026-11-06T19:20:00-05:00",
+     "text": "Early: lineup not confirmed"
+    }
+   ],
+   "prices": [
+    {
+     "at": "2026-11-06T19:20:00-05:00",
+     "price": 125
+    }
+   ],
+   "pulled": null,
+   "price_final": true,
+   "graded": null,
+   "rank": 1,
+   "tier": "main",
+   "game_id": 2026020263,
+   "player": "D. Yurov",
+   "player_id": 8483525,
+   "team": "MIN",
+   "opp": "SJS",
+   "home": true,
+   "start": "2026-11-06T20:00:00-05:00",
+   "market": "shots",
+   "line": 1.5,
+   "side": "over",
+   "bet": "Over 1.5 shots on goal",
+   "price_at": "2026-11-06T19:20:00-05:00",
+   "gap_pct": 5.9,
+   "market_fair_pct": 47.1,
+   "n_books": 6,
+   "guard": {
+    "verdict": "agrees",
+    "ours_pct": 46.9,
+    "model_pct": 44.1
+   },
+   "settled": "early",
+   "settled_label": "Early",
+   "reason": "6 other books say 47.1%; Hard Rock's +125 only needs 44.4%. Our model agrees (our blend: 46.9%).",
+   "link": "https://app.hardrock.bet/?deep_link_value=betslip/7096607404508447141",
+   "links": {
+    "hardrock": {
+     "id": "7096607404508447141",
+     "url": "https://share.hardrock.bet/Pt0T/bet?deep_link_value=hardrock://betslip/7096607404508447141"
+    },
+    "draftkings": null
+   },
+   "thin": false,
+   "games_used": 90,
+   "games_this_season": 17
+  },
   {
    "id": "2026-11-06:2026020264:8484762:shots:2.5:under",
    "price": 115,
@@ -196,9 +261,9 @@
     }
    ],
    "pulled": null,
-   "price_final": false,
+   "price_final": true,
    "graded": null,
-   "rank": 1,
+   "rank": 2,
    "tier": "main",
    "game_id": 2026020264,
    "player": "B. Sennecke",
