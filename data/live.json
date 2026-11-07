@@ -1,6 +1,6 @@
 {
  "slate_date": "2026-11-06",
- "generated_at": "2026-11-06T20:20:00-05:00",
+ "generated_at": "2026-11-06T20:30:01-05:00",
  "games": [
   {
    "game_id": 2026020263,
@@ -8,20 +8,20 @@
    "schedule_state": "OK",
    "period": 1,
    "period_type": "REG",
-   "clock": "12:58",
+   "clock": "09:23",
    "in_intermission": false,
-   "running": true,
+   "running": false,
    "away": {
     "abbrev": "SJS",
     "score": 0,
-    "sog": 1
+    "sog": 3
    },
    "home": {
     "abbrev": "MIN",
-    "score": 0,
-    "sog": 4
+    "score": 1,
+    "sog": 10
    },
-   "updated_at": "2026-11-06T20:20:00-05:00"
+   "updated_at": "2026-11-06T20:30:01-05:00"
   },
   {
    "game_id": 2026020264,
@@ -29,20 +29,20 @@
    "schedule_state": "OK",
    "period": 1,
    "period_type": "REG",
-   "clock": "15:03",
+   "clock": "10:46",
    "in_intermission": false,
-   "running": true,
+   "running": false,
    "away": {
     "abbrev": "ANA",
     "score": 1,
-    "sog": 3
+    "sog": 4
    },
    "home": {
     "abbrev": "CGY",
     "score": 1,
-    "sog": 3
+    "sog": 5
    },
-   "updated_at": "2026-11-06T20:20:00-05:00"
+   "updated_at": "2026-11-06T20:30:01-05:00"
   }
  ],
  "picks": {
