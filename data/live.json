@@ -1,16 +1,16 @@
 {
  "slate_date": "2026-11-06",
- "generated_at": "2026-11-06T21:00:00-05:00",
+ "generated_at": "2026-11-06T21:10:00-05:00",
  "games": [
   {
    "game_id": 2026020263,
    "state": "LIVE",
    "schedule_state": "OK",
-   "period": 1,
+   "period": 2,
    "period_type": "REG",
-   "clock": "03:56",
-   "in_intermission": true,
-   "running": false,
+   "clock": "16:45",
+   "in_intermission": false,
+   "running": true,
    "away": {
     "abbrev": "SJS",
     "score": 0,
@@ -21,16 +21,16 @@
     "score": 1,
     "sog": 11
    },
-   "updated_at": "2026-11-06T21:00:00-05:00"
+   "updated_at": "2026-11-06T21:10:00-05:00"
   },
   {
    "game_id": 2026020264,
    "state": "LIVE",
    "schedule_state": "OK",
-   "period": 1,
+   "period": 2,
    "period_type": "REG",
-   "clock": "07:10",
-   "in_intermission": true,
+   "clock": "19:17",
+   "in_intermission": false,
    "running": false,
    "away": {
     "abbrev": "ANA",
@@ -42,7 +42,7 @@
     "score": 3,
     "sog": 11
    },
-   "updated_at": "2026-11-06T21:00:00-05:00"
+   "updated_at": "2026-11-06T21:10:00-05:00"
   }
  ],
  "picks": {
