@@ -1,7 +1,7 @@
 {
  "slate_date": "2026-11-06",
- "generated_at": "2026-11-06T19:50:00-05:00",
- "status_at": "2026-11-06T19:50:00-05:00",
+ "generated_at": "2026-11-06T20:00:01-05:00",
+ "status_at": "2026-11-06T20:00:01-05:00",
  "valid_until": "2026-11-07T05:00:00-05:00",
  "status": {
   "prices_state": "ok",
@@ -16,7 +16,7 @@
   "stats_state": "ok",
   "last_run": {
    "ok": true,
-   "at": "2026-11-06T19:50:00-05:00",
+   "at": "2026-11-06T20:00:01-05:00",
    "failed_step": null
   },
   "pool": {
@@ -32,7 +32,11 @@
   "tier": 4
  },
  "banners": [],
- "empty": null,
+ "empty": {
+  "code": "all_started",
+  "text": "Every game has started.",
+  "sub": "Tonight's picks are on the Live tab."
+ },
  "games": [
   {
    "id": 2026020262,
@@ -120,8 +124,8 @@
      "home": null
     }
    },
-   "started": false,
-   "reads_done": true,
+   "started": true,
+   "reads_done": false,
    "picks": 1,
    "excluded_reason": null,
    "excluded_teams": []
@@ -166,8 +170,8 @@
      "home": "2026-11-06T17:00:00-05:00"
     }
    },
-   "started": false,
-   "reads_done": true,
+   "started": true,
+   "reads_done": false,
    "picks": 1,
    "excluded_reason": null,
    "excluded_teams": []
@@ -184,11 +188,15 @@
    "breakeven": 0.4444,
    "p_pct": 46,
    "breakeven_pct": 44,
-   "state": "early",
+   "state": "locked_unconfirmed",
    "history": [
     {
      "at": "2026-11-06T19:20:00-05:00",
      "text": "Early: lineup not confirmed"
+    },
+    {
+     "at": "2026-11-06T20:00:01-05:00",
+     "text": "Locked: lineup was not confirmed"
     }
    ],
    "prices": [
@@ -198,9 +206,9 @@
     }
    ],
    "pulled": null,
-   "price_final": true,
+   "price_final": false,
    "graded": null,
-   "rank": 1,
+   "rank": null,
    "tier": "main",
    "game_id": 2026020263,
    "player": "D. Yurov",
@@ -247,11 +255,15 @@
    "breakeven": 0.4651,
    "p_pct": 48,
    "breakeven_pct": 47,
-   "state": "lineup",
+   "state": "locked",
    "history": [
     {
      "at": "2026-11-06T18:30:01-05:00",
      "text": "Lineup confirmed"
+    },
+    {
+     "at": "2026-11-06T20:00:01-05:00",
+     "text": "Locked"
     }
    ],
    "prices": [
@@ -261,9 +273,9 @@
     }
    ],
    "pulled": null,
-   "price_final": true,
+   "price_final": false,
    "graded": null,
-   "rank": 2,
+   "rank": null,
    "tier": "main",
    "game_id": 2026020264,
    "player": "B. Sennecke",
